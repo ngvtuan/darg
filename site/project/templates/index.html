@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block body_block %}
+  <div class="centered">
+    <div><h1>Das Aktienregister</h1></div>
+    <div>
+      <a href="{% url "auth_login" %}" class="button">Login</a>
+      <a href="{% url "registration_register" %}" class="button">Register</a>
+    </div>
+  </div>
+{% endblock %}

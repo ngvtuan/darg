@@ -1,0 +1,20 @@
+{% load staticfiles %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Das Aktienregister</title>
+<link href="{% static "compiled/stylesheets/screen.css" %}" media="screen, projection" rel="stylesheet" type="text/css" />
+{# IE warning #}
+<!--[if lte IE 8]>
+  <link href="{% static "stylesheets/ie.css" %}" media="screen, projection" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+
+<body style="">
+{% block body_block %}
+
+{% endblock %}
+</body>
+</html>

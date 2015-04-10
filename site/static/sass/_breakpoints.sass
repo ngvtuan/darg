@@ -1,0 +1,86 @@
+
+@media only screen and (max-width: 960px)
+
+  body
+    .container
+      width: 780px
+
+    header
+      .container
+        .search-box
+          +zen-grid-item(5,4)
+          .auto-suggestions
+            width: +zen-grid-item-width(4.5)
+
+
+@media only screen and (max-width: 800px)
+
+  body
+    .container
+      width: 620px
+
+    header
+      .container
+        .search-box
+          span.glyphicon
+            &.el-icon-search
+              font-size: 24x
+            &.el-icon-remove
+              margin: 14px 0
+              padding: 20px 0
+          input
+            font-size: 16px
+            padding: 15px 0 16px 25px
+
+    #mask
+      .container
+        .mask-wrapper
+          .content-wrapper
+            .content, .map
+              +zen-clear
+              +zen-grid-item(8,1)
+              float: none
+            .map
+              padding-top: 2em
+
+@media only screen and (max-width: 640px)
+
+  body
+    .container
+      width: 480px
+
+    header
+      height: 180px
+      text-align: center
+      .container
+        .logo
+          +zen-grid-item(8,1)
+          float: none
+          margin-bottom: 10px
+        .search-box
+          +zen-grid-item(8,1)
+          float: none
+          .auto-suggestions
+            top: 156px  // FIXME
+            width: +zen-grid-item-width(6)
+
+    #mask header
+      text-align: left
+
+  body.body-flatpage header
+    height: 80px
+
+
+@media only screen and (max-width: 500px)
+
+  body .container
+    width: 400px
+
+@media screen and (orientation:portrait)
+  // ipad rotation adjustments
+  div .coordinates
+    display: none
+
+  div .immolink
+    width: 70% !important
+    margin-left: 15% !important

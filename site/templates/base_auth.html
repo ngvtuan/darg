@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block body_block %}
+  {% block header %}
+    <a href="{% url "auth_logout" %}" class="button">Logout</a>
+    {% if request.user.is_superuser %}
+    <a href="{% url 'admin:index' %}" class="button">Admin</a>
+    {% endif %}
+  {% endblock %}
+
+  <div class="centered">
+    <div><h1>{% trans "Welcome!" %}</h1></div>
+    <div>
+      <a href="{% url "auth_login" %}" class="button">Add Shareholder</a>
+    </div>
+    <div><h2>{% trans "Your Shareholders" %}</h2></div>
+  </div>
+
+  {% block footer %}
+  {% endblock %}
+
+{% endblock %}

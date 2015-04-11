@@ -29,19 +29,19 @@ html, body
   margin: 0px
   padding: 0px
 
-a
+a, button, input
   text-decoration: none
   color: $color-link
   cursor: pointer
-  &:active, &:focus, &:hover
-    color: $color-link-highlight
-
-.button
   font-size: 1.7em
   border: 1px solid $color-link
   padding: 0.1em
   padding-left: 0.3em
   padding-right: 0.3em
+  background-color: transparent
+  font-family: QuickSandLight
+  &:active, &:focus, &:hover
+    color: $color-link-highlight
 
 h1
   font-size: 3em
@@ -63,6 +63,9 @@ h5
 
 strong
   font-weight: bold
+
+p
+  font-size: 1.5em
 
 .container
   +zen-grid-container

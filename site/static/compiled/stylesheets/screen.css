@@ -223,23 +223,21 @@ html, body {
 }
 
 /* line 32, ../../sass/screen.sass */
-a {
+a, button, input {
   text-decoration: none;
   color: #666;
   cursor: pointer;
-}
-/* line 36, ../../sass/screen.sass */
-a:active, a:focus, a:hover {
-  color: #888;
-}
-
-/* line 39, ../../sass/screen.sass */
-.button {
   font-size: 1.7em;
   border: 1px solid #666;
   padding: 0.1em;
   padding-left: 0.3em;
   padding-right: 0.3em;
+  background-color: transparent;
+  font-family: QuickSandLight;
+}
+/* line 43, ../../sass/screen.sass */
+a:active, a:focus, a:hover, button:active, button:focus, button:hover, input:active, input:focus, input:hover {
+  color: #888;
 }
 
 /* line 46, ../../sass/screen.sass */
@@ -278,6 +276,11 @@ strong {
 }
 
 /* line 67, ../../sass/screen.sass */
+p {
+  font-size: 1.5em;
+}
+
+/* line 70, ../../sass/screen.sass */
 .container {
   width: 940px;
   margin: 0 auto;
@@ -292,7 +295,7 @@ strong {
   clear: both;
 }
 
-/* line 72, ../../sass/screen.sass */
+/* line 75, ../../sass/screen.sass */
 .centered {
   margin: auto;
   width: 400px;

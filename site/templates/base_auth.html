@@ -3,20 +3,31 @@
 
 {% block body_block %}
   {% block header %}
-    <a href="{% url "auth_logout" %}" class="button">Logout</a>
+  <div class="navbar">
+    <a href="{% url "auth_logout" %}" class="pull-right">Logout</a>
     {% if request.user.is_superuser %}
-    <a href="{% url 'admin:index' %}" class="button">Admin</a>
+    <a href="{% url 'admin:index' %}" class="pull-right">Admin</a>
     {% endif %}
+  </div>
   {% endblock %}
 
-  <div class="centered">
+  <div class="container" ng-controller="{% block ng_controller %}AppController{% endblock %}">
+    {% block content %}
     <div><h1>{% trans "Welcome!" %}</h1></div>
     <div>
       <a href="{% url "auth_login" %}" class="button">Add Shareholder</a>
     </div>
     <div><h2>{% trans "Your Shareholders" %}</h2></div>
+    {% verbatim %}
+        <div class="panel" ng-repeat="shareholder in shareholders">
+            <div class="clearfix">
+                <shareholder>{{ shareholder.user }} ({{ shareholder.number }}) - {{ shareholder.company }}</author>
+            </div>
+        </div>
+    {% endverbatim %}
+  {% endblock %}
   </div>
-
+  
   {% block footer %}
   {% endblock %}
 

@@ -224,65 +224,68 @@ html, body {
 
 /* line 32, ../../sass/screen.sass */
 a, button, input {
-  text-decoration: none;
   color: #666;
-  cursor: pointer;
-  font-size: 1.7em;
+  font-size: 1.5em;
   border: 1px solid #666;
   padding: 0.1em;
   padding-left: 0.3em;
   padding-right: 0.3em;
-  background-color: transparent;
-  font-family: QuickSandLight;
+  margin: 0.3em 0.3em 0.3em 0em;
+  display: inline-block;
 }
-/* line 43, ../../sass/screen.sass */
+/* line 41, ../../sass/screen.sass */
 a:active, a:focus, a:hover, button:active, button:focus, button:hover, input:active, input:focus, input:hover {
   color: #888;
 }
 
-/* line 46, ../../sass/screen.sass */
+/* line 44, ../../sass/screen.sass */
+label {
+  text-decoration: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 1.5em;
+  padding: 0.1em;
+  background-color: transparent;
+  font-family: QuickSandLight;
+}
+
+/* line 53, ../../sass/screen.sass */
 h1 {
   font-size: 3em;
   margin-bottom: 0.5em;
 }
 
-/* line 49, ../../sass/screen.sass */
+/* line 56, ../../sass/screen.sass */
 h2 {
   font-size: 2em;
   margin-bottom: 0.25em;
 }
 
-/* line 52, ../../sass/screen.sass */
+/* line 59, ../../sass/screen.sass */
 h3 {
   font-size: 1.5em;
   margin-bottom: 0.125em;
 }
 
-/* line 56, ../../sass/screen.sass */
+/* line 63, ../../sass/screen.sass */
 h4 {
   font-size: 1.25em;
   margin-bottom: 0.0625em;
 }
 
-/* line 60, ../../sass/screen.sass */
+/* line 67, ../../sass/screen.sass */
 h5 {
   font-size: 1.125em;
   margin-bottom: 0.03125;
 }
 
-/* line 64, ../../sass/screen.sass */
+/* line 71, ../../sass/screen.sass */
 strong {
   font-weight: bold;
 }
 
-/* line 67, ../../sass/screen.sass */
-p {
-  font-size: 1.5em;
-}
-
-/* line 70, ../../sass/screen.sass */
+/* line 76, ../../sass/screen.sass */
 .container {
-  width: 940px;
   margin: 0 auto;
 }
 /* line 45, ../../../../../../../var/lib/gems/1.8/gems/zen-grids-1.4/stylesheets/zen/_grids.scss */
@@ -295,7 +298,7 @@ p {
   clear: both;
 }
 
-/* line 75, ../../sass/screen.sass */
+/* line 82, ../../sass/screen.sass */
 .centered {
   margin: auto;
   width: 400px;
@@ -304,4 +307,19 @@ p {
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
+}
+
+/* line 91, ../../sass/screen.sass */
+.errorlist {
+  color: red;
+}
+
+/* line 97, ../../sass/screen.sass */
+.button-panel {
+  margin-top: 15px;
+}
+
+/* line 102, ../../sass/screen.sass */
+#auth .comment {
+  margin-top: 5em;
 }

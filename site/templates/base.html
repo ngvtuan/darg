@@ -5,15 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Das Aktienregister</title>
+<link rel="stylesheet" type="text/css" href="{% static "compiled/contrib/bootstrap/dist/css/bootstrap.css" %}">
 <link href="{% static "compiled/stylesheets/screen.css" %}" media="screen, projection" rel="stylesheet" type="text/css" />
 {# IE warning #}
 <!--[if lte IE 8]>
   <link href="{% static "stylesheets/ie.css" %}" media="screen, projection" rel="stylesheet" type="text/css" />
 <![endif]-->
 </head>
-
-<body style="">
+<body ng-app="{% block ng_app %}js.darg.app.static{% endblock %}">
 {% block body_block %}
 {% endblock %}
+<script src="{% static "compiled/contrib/underscore/underscore.js" %}"></script>
+<script src="{% static "compiled/contrib/angular/angular.js" %}"></script>
+<script src="{% static "compiled/contrib/angular-resource/angular-resource.js" %}"></script>
+<script src="{% static "compiled/javascript/script.js" %}"></script>
 </body>
 </html>

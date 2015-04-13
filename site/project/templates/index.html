@@ -3,8 +3,9 @@
 
 {% block body_block %}
   <div class="centered">
-    <div><h1>Das Aktienregister</h1></div>
-    <div>
+    <div><h1>{% trans "Das Aktienregister" %}</h1></div>
+    <div>{% trans "Administrate your shareholder data. Simple and efficient." %}</div>
+    <div class="button-panel">
       <a href="{% url "auth_login" %}" class="button">Login</a>
       <a href="{% url "registration_register" %}" class="button">Register</a>
     </div>

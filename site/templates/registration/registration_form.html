@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block body_block %}
-<div class="centered">
+<div class="centered" id="auth">
   <h1>{% trans "Register Here" %}</h1>
   <form method="post" action=".">
                 {% csrf_token %}
@@ -11,7 +11,7 @@
                 <input type="submit" value="Submit" />
   </form>
 
-  <p>{% trans "Already registered?" %} <a href="{% url 'auth_login' %}">{% trans "Login" %}</a>!</p>
+  <p class="comment">{% trans "Already registered?" %} <a href="{% url 'auth_login' %}">{% trans "Login" %}</a></p>
 
 </div>
 

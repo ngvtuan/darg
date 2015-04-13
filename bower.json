@@ -1,0 +1,11 @@
+{
+    "name": "darg.js",
+    "version": "1.0.0",
+    "dependencies": {
+        "angular": "",
+        "angular-resource": "",
+        "underscore": "",
+        "bootstrap": ""
+    },
+    "private": true
+}

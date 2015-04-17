@@ -1,20 +1,30 @@
 {% extends "base_auth.html" %}
 {% load i18n %}
 
+{% block ng_app %}js.darg.app.start{% endblock %}
+
 {% block content %}
-
-   <div><h1>{% trans "Welcome!" %}</h1></div>
-    <div>
-      <a href="{% url "auth_login" %}" class="button">Add Shareholder</a>
-    </div>
-    <div><h2>{% trans "Your Shareholders" %}</h2></div>
+<div ng_controller="StartController">
+  <h1>{% trans "Welcome" %} {{ request.user }}!</h1>
+  
+  <div id="add_company" ng-show="shareholders == []">
+    {% include "_add_company_form.html" %}
+  </div>
+  
+  <div id="add_shareholder" ng-hide="shareholders == []">
+      {% include "_add_shareholder_form.html" %}
+  </div>
+  
+  <div id="shareholder_list" ng-hide="shareholders == []"> 
+    <h2>{% trans "Your Shareholders for" %} {% verbatim %}{{ company }}{% endverbatim %}</h2>
+    
     {% verbatim %}
-        <div class="panel" ng-repeat="shareholder in shareholders">
-            <div class="clearfix">
-                <shareholder>{{ shareholder.user }} ({{ shareholder.number }}) - {{ shareholder.company }}</author>
-            </div>
-        </div>
+    <div class="panel" ng-repeat="shareholder in shareholders">
+      <div class="clearfix">
+        <shareholder>{{ shareholder.user }} ({{ shareholder.number }}) - {{ shareholder.company }}</author>
+      </div>
+    </div>
     {% endverbatim %}
-
- 
+  </div>
+</div> 
 {% endblock %}

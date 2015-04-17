@@ -40,6 +40,7 @@ INSTALLED_APPS = (
 
     'registration',
     'rest_framework',
+    'raven.contrib.django.raven_compat',
 
     'shareholder',
     'services',
@@ -124,3 +125,11 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'PAGE_SIZE': 1000,
 }
+# angular does want this
+APPEND_SLASH = False
+
+# --- Sentry
+RAVEN_CONFIG = {
+    'dsn': 'http://da49e25357134a48b97e9270622dd0cf:57c28c834d3d406b904257d05aca77ab@aggregator.ttg-dresden.de:9000/4',
+}
+

@@ -11,23 +11,11 @@
   </div>
   {% endblock %}
 
-  <div class="container" ng-controller="{% block ng_controller %}AppController{% endblock %}">
+  <div class="container">
     {% block content %}
-    <div><h1>{% trans "Welcome!" %}</h1></div>
-    <div>
-      <a href="{% url "auth_login" %}" class="button">Add Shareholder</a>
-    </div>
-    <div><h2>{% trans "Your Shareholders" %}</h2></div>
-    {% verbatim %}
-        <div class="panel" ng-repeat="shareholder in shareholders">
-            <div class="clearfix">
-                <shareholder>{{ shareholder.user }} ({{ shareholder.number }}) - {{ shareholder.company }}</author>
-            </div>
-        </div>
-    {% endverbatim %}
-  {% endblock %}
+    {% endblock %}
   </div>
-  
+ 
   {% block footer %}
   {% endblock %}
 

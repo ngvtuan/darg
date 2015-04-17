@@ -3,6 +3,7 @@
     "devDependencies": {
         "coffee-script": "",
         "grunt": "",
-        "grunt-contrib-coffee": ""
+        "grunt-contrib-coffee": "",
+        "grunt-contrib-watch": ""
     }
 }

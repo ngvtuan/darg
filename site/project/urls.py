@@ -3,10 +3,12 @@ from django.contrib import admin
 
 from rest_framework import routers
 
-from services.rest.views import ShareholderViewSet
+from services.rest.views import ShareholderViewSet, CompanyViewSet, UserViewSet
 
-router = routers.DefaultRouter()
-router.register(r'shareholders', ShareholderViewSet)
+router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'shareholders', ShareholderViewSet, base_name="shareholders")
+router.register(r'company', CompanyViewSet)
+router.register(r'user', UserViewSet, base_name="user")
 
 urlpatterns = [
     # Examples:

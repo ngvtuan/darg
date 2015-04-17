@@ -259,33 +259,35 @@ h1 {
 h2 {
   font-size: 2em;
   margin-bottom: 0.25em;
+  margin-top: 1.25em;
 }
 
-/* line 59, ../../sass/screen.sass */
+/* line 61, ../../sass/screen.sass */
 h3 {
   font-size: 1.5em;
   margin-bottom: 0.125em;
 }
 
-/* line 63, ../../sass/screen.sass */
+/* line 65, ../../sass/screen.sass */
 h4 {
   font-size: 1.25em;
   margin-bottom: 0.0625em;
 }
 
-/* line 67, ../../sass/screen.sass */
+/* line 69, ../../sass/screen.sass */
 h5 {
   font-size: 1.125em;
   margin-bottom: 0.03125;
 }
 
-/* line 71, ../../sass/screen.sass */
+/* line 73, ../../sass/screen.sass */
 strong {
   font-weight: bold;
 }
 
-/* line 76, ../../sass/screen.sass */
+/* line 78, ../../sass/screen.sass */
 .container {
+  width: 1000px;
   margin: 0 auto;
 }
 /* line 45, ../../../../../../../var/lib/gems/1.8/gems/zen-grids-1.4/stylesheets/zen/_grids.scss */
@@ -298,7 +300,7 @@ strong {
   clear: both;
 }
 
-/* line 82, ../../sass/screen.sass */
+/* line 83, ../../sass/screen.sass */
 .centered {
   margin: auto;
   width: 400px;
@@ -309,17 +311,17 @@ strong {
   transform: translateX(-50%) translateY(-50%);
 }
 
-/* line 91, ../../sass/screen.sass */
+/* line 92, ../../sass/screen.sass */
 .errorlist {
   color: red;
 }
 
-/* line 97, ../../sass/screen.sass */
+/* line 98, ../../sass/screen.sass */
 .button-panel {
   margin-top: 15px;
 }
 
-/* line 102, ../../sass/screen.sass */
+/* line 103, ../../sass/screen.sass */
 #auth .comment {
   margin-top: 5em;
 }

@@ -3,21 +3,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Das Aktienregister</title>
-<link rel="stylesheet" type="text/css" href="{% static "compiled/contrib/bootstrap/dist/css/bootstrap.css" %}">
-<link href="{% static "compiled/stylesheets/screen.css" %}" media="screen, projection" rel="stylesheet" type="text/css" />
-{# IE warning #}
-<!--[if lte IE 8]>
-  <link href="{% static "stylesheets/ie.css" %}" media="screen, projection" rel="stylesheet" type="text/css" />
-<![endif]-->
+  <meta charset="UTF-8">
+  <title>Das Aktienregister</title>
+  <link rel="stylesheet" type="text/css" href="{% static "compiled/contrib/bootstrap/dist/css/bootstrap.css" %}">
+  <link href="{% static "compiled/stylesheets/screen.css" %}" media="screen, projection" rel="stylesheet" type="text/css" />
+  {# IE warning #}
+  <!--[if lte IE 8]>
+    <link href="{% static "stylesheets/ie.css" %}" media="screen, projection" rel="stylesheet" type="text/css" />
+  <![endif]-->
 </head>
-<body ng-app="{% block ng_app %}js.darg.app.static{% endblock %}">
-{% block body_block %}
-{% endblock %}
-<script src="{% static "compiled/contrib/underscore/underscore.js" %}"></script>
-<script src="{% static "compiled/contrib/angular/angular.js" %}"></script>
-<script src="{% static "compiled/contrib/angular-resource/angular-resource.js" %}"></script>
-<script src="{% static "compiled/javascript/script.js" %}"></script>
+
+<body ng-app="{% block ng_app %}js.darg.app.base{% endblock %}">
+
+  {% block body_block %}
+  {% endblock %}
+
+  <script src="{% static "compiled/contrib/underscore/underscore.js" %}"></script>
+  <script src="{% static "compiled/contrib/angular/angular.js" %}"></script>
+  <script src="{% static "compiled/contrib/angular-resource/angular-resource.js" %}"></script>
+  <script src="{% static "compiled/javascript/script.js" %}"></script>
+
+  <!-- csrf protection for rest api -->
+  <script>
+  // Add the CSRF Token
+  var app = angular.module('js.darg.app.start'); // Not including a list of dependent modules (2nd parameter to `module`) "re-opens" the module for additional configuration
+  app.config(['$httpProvider', function($httpProvider) {
+     $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+  }]);
+  </script>
 </body>
 </html>

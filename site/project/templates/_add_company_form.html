@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% trans "Please enter your company name:" %}
+{% verbatim %}
+<div>
+  <form class="form-inline">
+    <div class="form-group block-level">
+      <input type="text" class="form-control" ng-model="company.name" placeholder="Name">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-default" ng-click="add_company()">{% endverbatim %}{% trans "Add Company" %}{% verbatim %}</button>
+    </div>
+  </form>
+</div>
+{% endverbatim %}

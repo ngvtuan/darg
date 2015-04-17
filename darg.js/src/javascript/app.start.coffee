@@ -1,15 +1,15 @@
 app = angular.module 'js.darg.app.start', ['js.darg.api',]
 
-app.controller 'StartController', ['$scope', '$http', 'Company', 'Shareholder', ($scope, $http, Company, Shareholder) ->
+app.controller 'StartController', ['$scope', '$http', 'Company', 'Shareholder', 'User', ($scope, $http, Company, Shareholder, User) ->
 
-    $scope.shareholders = Shareholder.query()
-    $scope.user = User.query(id=_settings.USER_ID)[0]
+    $scope.shareholders = Shareholder.query().results
+    $scope.user = User.query()
 
     $scope.newShareholder = new Shareholder()
 
-    //$http.get('/services/rest/shareholders').then (result) ->
-    //    angular.forEach result.data.results, (item) ->
-    //        $scope.shareholders.push item
+    #$http.get('/services/rest/shareholders').then (result) ->
+    #    angular.forEach result.data.results, (item) ->
+    #        $scope.shareholders.push item
 
 
 

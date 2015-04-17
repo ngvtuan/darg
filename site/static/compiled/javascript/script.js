@@ -19,6 +19,14 @@
     }
   ]);
 
+  app.factory('User', [
+    '$resource', function($resource) {
+      return $resource('/services/rest/user/:id', {
+        id: '@id'
+      });
+    }
+  ]);
+
 }).call(this);
 
 (function() {
@@ -27,15 +35,10 @@
   app = angular.module('js.darg.app.start', ['js.darg.api']);
 
   app.controller('StartController', [
-    '$scope', '$http', 'Company', 'Shareholder', function($scope, $http, Company, Shareholder) {
-      $scope.shareholders = [];
-      $scope.company = [];
+    '$scope', '$http', 'Company', 'Shareholder', 'User', function($scope, $http, Company, Shareholder, User) {
+      $scope.shareholders = Shareholder.query().results;
+      $scope.user = User.query();
       $scope.newShareholder = new Shareholder();
-      $http.get('/services/rest/shareholders').then(function(result) {
-        return angular.forEach(result.data.results, function(item) {
-          return $scope.shareholders.push(item);
-        });
-      });
       $scope.add_company = function() {
         return $scope.company.$save().then(function(result) {
           return $scope.companies.push(result);

@@ -346,7 +346,20 @@ strong {
   margin-top: 15px;
 }
 
-/* line 113, ../../sass/screen.sass */
+/* line 110, ../../sass/screen.sass */
+.leaf {
+  font-size: 2em;
+  position: inherit;
+  top: 1em;
+  right: 1em;
+}
+
+/* line 118, ../../sass/screen.sass */
 #auth .comment {
   margin-top: 5em;
+}
+
+/* line 123, ../../sass/screen.sass */
+div #add_shareholder {
+  margin-bottom: 1em;
 }

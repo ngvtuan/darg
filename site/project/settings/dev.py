@@ -17,4 +17,4 @@ TRACKING_ENABLED = False
 # for local dev use this...
 #NOSE_ARGS = ['--pdb', '-s', '--logging-level=WARNING']
 
-#INSTALLED_APPS = INSTALLED_APPS + ('rosetta', 'django_nose',)
+INSTALLED_APPS = INSTALLED_APPS + ('rosetta',) # 'django_nose',)

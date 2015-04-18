@@ -1,7 +1,8 @@
 # requirements for ci running
 selenium
 pyvirtualdisplay
-Django==1.7.7 # hack required by latest stable django_nose (remove after next django_nose release)
+#Django==1.7.7 # hack required by latest stable django_nose (remove after next django_nose release)
 #django_nose
-https://github.com/django-nose/django-nose/zipball/master
+#https://github.com/django-nose/django-nose/zipball/master
+git+git://github.com/jwhitlock/django-nose@178_fix_argparse_v2#egg=django-nose
 mock

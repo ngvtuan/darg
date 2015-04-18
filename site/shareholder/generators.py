@@ -1,10 +1,11 @@
 import random
 import hashlib
+import datetime
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
 
-from shareholder.models import Shareholder, Company
+from shareholder.models import Shareholder, Company, Position
 
 User = get_user_model()
 
@@ -22,6 +23,7 @@ class ShareholderGenerator(object):
 
         company = Company.objects.create(
             name = '{} A.B.'.format(word),
+            share_count = 3,
         )
 
         user = User.objects.create(
@@ -38,3 +40,21 @@ class ShareholderGenerator(object):
         )
 
         return shareholder
+
+class PositionGenerator(object):
+
+    def generate(self, **kwargs):
+        if kwargs.get('shareholder'):
+            buyer = kwargs.get('shareholder')
+        else:
+            buyer = ShareholderGenerator().generate()
+
+        position = Position.objects.create(
+            buyer=buyer,
+            bought_at=datetime.datetime.now().date(),
+            count = 3,
+            value = 3,
+        )
+
+        return position
+        

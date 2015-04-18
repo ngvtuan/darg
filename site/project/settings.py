@@ -111,6 +111,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+STATIC_ROOT = os.path.join(BASE_DIR, 'media', 'static')
 
 # --- REGISTRATION
 REGISTRATION_OPEN = True        # If True, users can register

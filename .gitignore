@@ -6,3 +6,4 @@ npm-debug.log
 db.sqlite3
 darg.js/node_modules/grunt-contrib-watch/
 site/static/.sass-cache/
+site/media/static/

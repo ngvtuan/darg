@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-18 01:40+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: project/templates/_add_company_form.html:3
+msgid "Please enter your company name:"
+msgstr ""
+
+#: project/templates/_add_company_form.html:11
+msgid "Add Company"
+msgstr ""
+
+#: project/templates/_add_position_form.html:3
+msgid "Please enter your position data:"
+msgstr ""
+
+#: project/templates/_add_position_form.html:15
+msgid "Add Position"
+msgstr ""
+
+#: project/templates/_add_shareholder_form.html:3
+msgid "Please enter your shareholder data:"
+msgstr ""
+
+#: project/templates/_add_shareholder_form.html:15
+msgid "Add Shareholder"
+msgstr ""
+
+#: project/templates/index.html:6
+msgid "Das Aktienregister"
+msgstr ""
+
+#: project/templates/index.html:7
+msgid "Administrate your shareholder data. </br>Simple and efficient."
+msgstr ""
+
+#: project/templates/log.html:15
+msgid "Your Transaction Log"
+msgstr ""
+
+#: project/templates/log.html:20 project/templates/positions.html:20
+msgid "Date"
+msgstr ""
+
+#: project/templates/log.html:21
+msgid "Action"
+msgstr ""
+
+#: project/templates/log.html:34
+msgid "No Log Entries yet."
+msgstr ""
+
+#: project/templates/positions.html:8
+msgid "Positions"
+msgstr ""
+
+#: project/templates/positions.html:15
+msgid "Your Positions"
+msgstr ""
+
+#: project/templates/positions.html:21
+msgid "Shareholder"
+msgstr ""
+
+#: project/templates/positions.html:22 project/templates/start.html:27
+#, python-format
+msgid "Shares (%%)"
+msgstr ""
+
+#: project/templates/positions.html:23
+msgid "Value"
+msgstr ""
+
+#: project/templates/positions.html:38
+msgid "No Postions yet."
+msgstr ""
+
+#: project/templates/shareholder.html:9
+msgid "Shareholder Details"
+msgstr ""
+
+#: project/templates/start.html:8
+msgid "Welcome"
+msgstr ""
+
+#: project/templates/start.html:19
+msgid "Your Shareholders for"
+msgstr ""
+
+#: project/templates/start.html:24
+msgid "Name"
+msgstr ""
+
+#: project/templates/start.html:25
+msgid "Shareholder Number"
+msgstr ""
+
+#: project/templates/start.html:26
+msgid "Email"
+msgstr ""

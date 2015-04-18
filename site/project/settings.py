@@ -93,7 +93,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'de'
 
 TIME_ZONE = 'UTC'
 
@@ -127,6 +127,9 @@ REST_FRAMEWORK = {
 }
 # angular does want this
 APPEND_SLASH = False
+
+# --- I18N
+LOCALE_PATHS = ('./i18n/locale/',)
 
 # --- Sentry
 RAVEN_CONFIG = {

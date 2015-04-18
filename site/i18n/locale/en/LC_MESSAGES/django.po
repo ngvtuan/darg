@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-18 01:40+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: templates/base_auth.html:8
+msgid "Admin"
+msgstr ""
+
+#: templates/base_auth.html:10
+msgid "Logout"
+msgstr ""
+
+#: templates/base_auth.html:11
+msgid "Log"
+msgstr ""
+
+#: templates/base_auth.html:12
+msgid "Positions"
+msgstr ""
+
+#: templates/base_auth.html:13
+msgid "Start"
+msgstr ""
+
+#: templates/base_auth.html:23
+msgid "The Share Register, 2015"
+msgstr ""
+
+#: templates/registration/login.html:10
+msgid "Log in"
+msgstr ""
+
+#: templates/registration/login.html:13
+msgid "Not  a member?"
+msgstr ""
+
+#: templates/registration/login.html:13
+msgid "Register"
+msgstr ""
+
+#: templates/registration/logout.html:6
+msgid "Logged Out"
+msgstr ""
+
+#: templates/registration/logout.html:7
+msgid "You are now logged out. Go to "
+msgstr ""
+
+#: templates/registration/registration_complete.html:6
+msgid "Registration Complete"
+msgstr ""
+
+#: templates/registration/registration_complete.html:7
+msgid "You are now registered. Start here:"
+msgstr ""
+
+#: templates/registration/registration_form.html:6
+msgid "Register Here"
+msgstr ""
+
+#: templates/registration/registration_form.html:14
+msgid "Already registered?"
+msgstr ""
+
+#: templates/registration/registration_form.html:14
+msgid "Login"
+msgstr ""

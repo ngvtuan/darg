@@ -1,0 +1,19 @@
+{% load i18n %}
+
+{% trans "Please enter your position data:" %}
+{% verbatim %}
+<div>
+  <form class="form-inline">
+    <div class="form-group block-level">
+      <input type="date" class="form-control" ng-model="newPosition.user.first_name" placeholder="Date">
+      <input type="text" class="form-control" ng-model="newPosition.user.last_name" placeholder="Buyer">
+      <input type="number" class="form-control" ng-model="newPosition.user.email" placeholder="Count" ng-maxlength="5">
+      <input type="number" class="form-control" ng-model="newPosition.number" placeholder="Value" ng-maxlength="10">
+      <input type="text" class="form-control" ng-model="newPosition.number" placeholder="Seller">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-default" ng-click="add_position()">{% endverbatim %}{% trans "Add Position" %}{% verbatim %}</button>
+    </div>
+  </form>
+</div>
+{% endverbatim %}

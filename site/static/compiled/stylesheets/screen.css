@@ -232,13 +232,14 @@ a, button, input {
   padding-right: 0.3em;
   margin: 0.3em 0.3em 0.3em 0em;
   display: inline-block;
+  background-color: transparent;
 }
-/* line 41, ../../sass/screen.sass */
+/* line 42, ../../sass/screen.sass */
 a:active, a:focus, a:hover, button:active, button:focus, button:hover, input:active, input:focus, input:hover {
   color: #888;
 }
 
-/* line 44, ../../sass/screen.sass */
+/* line 45, ../../sass/screen.sass */
 label {
   text-decoration: none;
   color: #666;
@@ -249,43 +250,43 @@ label {
   font-family: QuickSandLight;
 }
 
-/* line 53, ../../sass/screen.sass */
+/* line 54, ../../sass/screen.sass */
 h1 {
   font-size: 3em;
   margin-bottom: 0.5em;
 }
 
-/* line 56, ../../sass/screen.sass */
+/* line 57, ../../sass/screen.sass */
 h2 {
   font-size: 2em;
   margin-bottom: 1em;
   margin-top: 1.25em;
 }
 
-/* line 61, ../../sass/screen.sass */
+/* line 62, ../../sass/screen.sass */
 h3 {
   font-size: 1.5em;
   margin-bottom: 0.125em;
 }
 
-/* line 65, ../../sass/screen.sass */
+/* line 66, ../../sass/screen.sass */
 h4 {
   font-size: 1.25em;
   margin-bottom: 0.0625em;
 }
 
-/* line 69, ../../sass/screen.sass */
+/* line 70, ../../sass/screen.sass */
 h5 {
   font-size: 1.125em;
   margin-bottom: 0.03125;
 }
 
-/* line 73, ../../sass/screen.sass */
+/* line 74, ../../sass/screen.sass */
 strong {
   font-weight: bold;
 }
 
-/* line 78, ../../sass/screen.sass */
+/* line 79, ../../sass/screen.sass */
 .container {
   width: 1000px;
   margin: 0 auto;
@@ -300,7 +301,25 @@ strong {
   clear: both;
 }
 
-/* line 83, ../../sass/screen.sass */
+/* line 84, ../../sass/screen.sass */
+.footer {
+  clear: left;
+  float: left;
+  width: 37.5%;
+  margin-left: 0%;
+  margin-right: -37.5%;
+  padding-left: 10px;
+  padding-right: 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  height: 3em;
+  margin-top: 4em;
+}
+
+/* line 90, ../../sass/screen.sass */
 .centered {
   margin: auto;
   width: 400px;
@@ -311,17 +330,23 @@ strong {
   transform: translateX(-50%) translateY(-50%);
 }
 
-/* line 92, ../../sass/screen.sass */
+/* line 99, ../../sass/screen.sass */
 .errorlist {
   color: red;
 }
 
-/* line 98, ../../sass/screen.sass */
+/* line 102, ../../sass/screen.sass */
+.disable {
+  color: #ddd;
+  border: 1px solid #ddd;
+}
+
+/* line 108, ../../sass/screen.sass */
 .button-panel {
   margin-top: 15px;
 }
 
-/* line 103, ../../sass/screen.sass */
+/* line 113, ../../sass/screen.sass */
 #auth .comment {
   margin-top: 5em;
 }

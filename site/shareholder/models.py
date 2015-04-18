@@ -25,6 +25,7 @@ class Position(models.Model):
     count = models.IntegerField()
     bought_at = models.DateField()
     sold_at = models.DateField()
+    value = models.DecimalField(max_digits=8, decimal_places=4)
 
 class Company(models.Model):
 

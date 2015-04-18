@@ -1,0 +1,5 @@
+{% verbatim %}
+<p ng-repeat="(name, errs) in errors" class="alert alert-danger">
+  <strong>{{ name }}</strong>: {{ errs.join(', ') }}
+</p>
+{% endverbatim %}

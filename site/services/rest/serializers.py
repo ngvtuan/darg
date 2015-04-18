@@ -14,6 +14,16 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
         model = Company
         fields = ('pk', 'name')
 
+    def create(self, validated_data):
+
+        name = validated_data.get("name")
+        user = self.context.get("request").user
+
+        company, created = Company.objects.get_or_create(name=name)
+        operator, created = Operator.objects.get_or_create(company=company, user=user)
+
+        return company
+
 class OperatorSerializer(serializers.HyperlinkedModelSerializer):
     company = CompanySerializer(many=False, read_only=True)
 
@@ -35,7 +45,7 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Shareholder
-        fields = ('user', 'number', 'company')
+        fields = ('pk', 'user', 'number', 'company')
 
     def create(self, validated_data):
 

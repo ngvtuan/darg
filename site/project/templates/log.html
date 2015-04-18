@@ -1,0 +1,39 @@
+{% extends "base_auth.html" %}
+{% load i18n %}
+
+{% block ng_app %}js.darg.app.log{% endblock %}
+
+{% block content %}
+<div ng_controller="LogController">
+  {% verbatim %}
+  <p ng-repeat="(name, errs) in errors" class="alert alert-danger">
+    <strong>{{ name }}</strong>: {{ errs.join(', ') }}
+  </p>
+  {% endverbatim %}
+  
+  <div id="log_list" ng-hide="!log.length"> 
+    <h2>{% trans "Your Transaction Log" %}</h2>
+    <table class="table table-hover">
+      <caption></caption>
+      <thead>
+        <tr>
+          <th>{% trans "Date" %}</th>
+          <th>{% trans "Action" %}</th>
+      </thead
+      <tbody>
+      {% verbatim %}
+      <tr class="panel" ng-repeat="log in logs">
+        <td></td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+    {% endverbatim %}
+    <div class="panel" ng-show="!shareholders.length">
+      <div class="clearfix">
+        <em>{% trans "No Log Entries yet." %}</em>
+      </div>
+    </div>
+  </div>
+</div> 
+{% endblock %}

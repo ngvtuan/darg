@@ -34,9 +34,9 @@ class CompanyViewSet(viewsets.ModelViewSet):
         UserCanAddCompanyPermission,
     ]
 
-    def create(self, obj):
-        """Force author to the current user on save"""
-        operator = Operator.objects.create(user=self.request.user, company=obj)
+    def get_queryset(self):
+        user = self.request.user
+        return Company.objects.filter(operator__user=user)
 
         return super(CompanyViewSet, self).create(obj)
 

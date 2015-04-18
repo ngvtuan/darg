@@ -6,25 +6,44 @@
 {% block content %}
 <div ng_controller="StartController">
   <h1>{% trans "Welcome" %} {{ request.user }}!</h1>
-  
-  <div id="add_company" ng-show="shareholders == []">
+  {% include "_form_errors.html" %}
+  <div id="add_company" ng-show="!user.operator_set.length">
     {% include "_add_company_form.html" %}
   </div>
   
-  <div id="add_shareholder" ng-hide="shareholders == []">
+  <div id="add_shareholder" ng-hide="!user.operator_set.length">
       {% include "_add_shareholder_form.html" %}
   </div>
   
-  <div id="shareholder_list" ng-hide="shareholders == []"> 
-    <h2>{% trans "Your Shareholders for" %} {% verbatim %}{{ shareholders[0].company.name }}{% endverbatim %}</h2>
-    
-    {% verbatim %}
-    <div class="panel" ng-repeat="shareholder in shareholders">
+  <div id="shareholder_list" ng-hide="!user.operator_set.length"> 
+    <h2>{% trans "Your Shareholders for" %} {% verbatim %}{{ user.operator_set[0].company.name }}{% endverbatim %}</h2>
+    <table class="table table-hover">
+      <caption></caption>
+      <thead>
+        <tr>
+          <th>{% trans "Name" %}</th>
+          <th>{% trans "Shareholder Number" %}</th>
+          <th>{% trans "Email" %}</th>
+          <th>{% trans "Shares (%)" %}</th>
+      </thead
+      <tbody>
+      {% verbatim %}
+      <tr class="panel" ng-repeat="shareholder in shareholders" ng-click="goto_shareholder(shareholder.pk)">
+        <td>
+          {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
+        </td>
+        <td>{{ shareholder.number }}</td>
+        <td>{{ shareholder.user.email }}</td>
+        <td>XX (X%)</td>
+      </tr>
+      </tbody>
+    </table>
+    {% endverbatim %}
+    <div class="panel" ng-show="!shareholders.length">
       <div class="clearfix">
-        <shareholder>{{ shareholder.user.first_name }} {{ shareholder.user.last_name }}  ({{ shareholder.number }}) | {{ shareholder.user.email }}</shareholder>
+        <em>No Shareholders yet.</em>
       </div>
     </div>
-    {% endverbatim %}
   </div>
 </div> 
 {% endblock %}

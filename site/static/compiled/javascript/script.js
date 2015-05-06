@@ -67,6 +67,7 @@
     '$scope', '$http', 'Invitee', function($scope, $http, Invitee) {
       $scope.show_add_invitee = true;
       $scope.newInvitee = new Invitee();
+      $scope.errors = [];
       return $scope.add_invitee = function() {
         return $scope.newInvitee.$save().then(function(result) {
           return $scope.show_add_invitee = false;

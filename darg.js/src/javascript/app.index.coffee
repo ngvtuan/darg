@@ -3,6 +3,7 @@ app = angular.module 'js.darg.app.index', ['js.darg.api',]
 app.controller 'IndexController', ['$scope', '$http', 'Invitee', ($scope, $http, Invitee) ->
     $scope.show_add_invitee = true
     $scope.newInvitee = new Invitee()
+    $scope.errors = []
 
     $scope.add_invitee = ->
         $scope.newInvitee.$save().then (result) ->

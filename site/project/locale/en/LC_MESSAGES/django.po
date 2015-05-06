@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-18 01:40+0000\n"
+"POT-Creation-Date: 2015-05-06 21:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,35 +25,83 @@ msgstr ""
 msgid "Add Company"
 msgstr ""
 
+#: project/templates/_add_initial_position_form.html:3
+msgid "Please enter your initial share count and nominal value:"
+msgstr ""
+
+#: project/templates/_add_initial_position_form.html:12
+#: project/templates/_add_position_form.html:15
+msgid "Cancel"
+msgstr ""
+
+#: project/templates/_add_initial_position_form.html:13
+#: project/templates/_add_position_form.html:16
+msgid "Add Position"
+msgstr ""
+
 #: project/templates/_add_position_form.html:3
 msgid "Please enter your position data:"
 msgstr ""
 
-#: project/templates/_add_position_form.html:15
-msgid "Add Position"
-msgstr ""
-
-#: project/templates/_add_shareholder_form.html:3
-msgid "Please enter your shareholder data:"
-msgstr ""
-
-#: project/templates/_add_shareholder_form.html:15
+#: project/templates/_add_shareholder_form.html:14
 msgid "Add Shareholder"
 msgstr ""
 
-#: project/templates/index.html:6
+#: project/templates/index.html:8
 msgid "Das Aktienregister"
 msgstr ""
 
-#: project/templates/index.html:7
-msgid "Administrate your shareholder data. </br>Simple and efficient."
+#: project/templates/index.html:9
+msgid ""
+"Administrate your shareholder data. <br />Be compliant - simple and "
+"efficient."
+msgstr ""
+
+#: project/templates/index.html:10
+msgid ""
+"IMPORTANT: Excel does not fulfill legal requirements for a share register!"
+msgstr ""
+
+#: project/templates/index.html:12
+msgid "GAFI Standard compliant"
+msgstr ""
+
+#: project/templates/index.html:13
+msgid "Extensive data validation to ensure you cannot make a mistake"
+msgstr ""
+
+#: project/templates/index.html:14
+msgid ""
+"Share your data with financial authorities, your lawyer and law enforcment"
+msgstr ""
+
+#: project/templates/index.html:15
+msgid "Guarantees perfect audit trail"
+msgstr ""
+
+#: project/templates/index.html:18
+msgid ""
+"We are currently in private Beta. Please leave your email address to receive "
+"an invitation soon!"
+msgstr ""
+
+#: project/templates/index.html:30
+msgid "Your Email"
+msgstr ""
+
+#: project/templates/index.html:32
+msgid "Request Invitation"
+msgstr ""
+
+#: project/templates/index.html:36
+msgid "Thanks you. We will be back to you ASAP!"
 msgstr ""
 
 #: project/templates/log.html:15
 msgid "Your Transaction Log"
 msgstr ""
 
-#: project/templates/log.html:20 project/templates/positions.html:20
+#: project/templates/log.html:20
 msgid "Date"
 msgstr ""
 
@@ -65,51 +113,83 @@ msgstr ""
 msgid "No Log Entries yet."
 msgstr ""
 
-#: project/templates/positions.html:8
+#: project/templates/positions.html:8 project/templates/shareholder.html:16
 msgid "Positions"
 msgstr ""
 
-#: project/templates/positions.html:15
+#: project/templates/positions.html:9
+msgid "New Transaction"
+msgstr ""
+
+#: project/templates/positions.html:10
+msgid "Share Split"
+msgstr ""
+
+#: project/templates/positions.html:11
+msgid "Capital Change"
+msgstr ""
+
+#: project/templates/positions.html:18
 msgid "Your Positions"
 msgstr ""
 
-#: project/templates/positions.html:21
-msgid "Shareholder"
+#: project/templates/positions.html:23 project/templates/shareholder.html:21
+msgid "Buy Date"
 msgstr ""
 
-#: project/templates/positions.html:22 project/templates/start.html:27
-#, python-format
-msgid "Shares (%%)"
+#: project/templates/positions.html:24
+msgid "Sell Date"
 msgstr ""
 
-#: project/templates/positions.html:23
-msgid "Value"
+#: project/templates/positions.html:25 project/templates/shareholder.html:22
+msgid "Buyer"
 msgstr ""
 
-#: project/templates/positions.html:38
-msgid "No Postions yet."
+#: project/templates/positions.html:26 project/templates/shareholder.html:23
+msgid "Seller"
+msgstr ""
+
+#: project/templates/positions.html:27 project/templates/shareholder.html:24
+msgid "Shares"
+msgstr ""
+
+#: project/templates/positions.html:43 project/templates/shareholder.html:37
+msgid "No positions yet."
 msgstr ""
 
 #: project/templates/shareholder.html:9
-msgid "Shareholder Details"
+msgid "Shareholder Details:"
+msgstr ""
+
+#: project/templates/shareholder.html:11
+msgid "Data"
+msgstr ""
+
+#: project/templates/shareholder.html:12 project/templates/start.html:24
+msgid "Shareholder Number"
+msgstr ""
+
+#: project/templates/shareholder.html:13 project/templates/start.html:25
+msgid "Email"
+msgstr ""
+
+#: project/templates/shareholder.html:25
+msgid "Face Value"
 msgstr ""
 
 #: project/templates/start.html:8
 msgid "Welcome"
 msgstr ""
 
-#: project/templates/start.html:19
+#: project/templates/start.html:15
 msgid "Your Shareholders for"
 msgstr ""
 
-#: project/templates/start.html:24
+#: project/templates/start.html:23
 msgid "Name"
 msgstr ""
 
-#: project/templates/start.html:25
-msgid "Shareholder Number"
-msgstr ""
-
 #: project/templates/start.html:26
-msgid "Email"
+#, python-format
+msgid "Shares (%%)"
 msgstr ""

@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 
 from services.rest.serializers import ShareholderSerializer, CompanySerializer, UserSerializer, PositionSerializer
 from services.rest.permissions import UserCanAddCompanyPermission, \
@@ -58,9 +59,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class InviteeUpdateView(APIView):
     """ API endpoint to get user base info """
-    #permission_classes = [
-    #    UserCanAddInviteePermission,
-    #]
+    permission_classes = (AllowAny,)
 
     def post(self, request, format=None):
         

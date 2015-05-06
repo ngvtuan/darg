@@ -41,6 +41,8 @@ a, button, input
   background-color: transparent
   &:active, &:focus, &:hover
     color: $color-link-highlight
+p
+  margin: 0 0 10px
 
 label
   text-decoration: none
@@ -71,6 +73,13 @@ h5
   font-size: 1.125em
   margin-bottom: .03125
 
+ul, ol
+  list-style: inherit
+  padding: 1em
+
+li
+  padding-top: 0.6em
+
 strong
   font-weight: bold
 
@@ -90,7 +99,7 @@ strong
 .centered
   margin: auto
   width: 400px
-  height: 200px
+  height: 350px
   position: absolute
   top: 50%
   left: 50%
@@ -103,6 +112,11 @@ strong
   color: #ddd
   border: 1px solid #ddd
 
+.btn-focus
+  border: 1px solid $color-focus
+  color: $color-focus
+  font-weight: bold
+
 // ------- view spec
 // --- index
 .button-panel
@@ -112,7 +126,8 @@ strong
   position: inherit
   top: 1em
   right: 1em
-
+.bg-success
+  padding: 1em 
 // -- login
 #auth
   .comment

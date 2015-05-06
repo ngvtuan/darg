@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
 
-from shareholder.models import Shareholder, Company, Operator
+from shareholder.models import Shareholder, Company, Operator, Position
 from rest_framework import serializers
 
 from utils.user import make_username
@@ -31,10 +31,9 @@ class OperatorSerializer(serializers.HyperlinkedModelSerializer):
         model = Operator
         fields = ('id', 'company')
 
-
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     operator_set = OperatorSerializer(many=True, read_only=True)
-
+    
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email', 'operator_set',)
@@ -45,7 +44,7 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Shareholder
-        fields = ('pk', 'user', 'number', 'company')
+        fields = ('pk', 'user', 'number', 'company', 'share_percent', 'share_count',)
 
     def create(self, validated_data):
 
@@ -79,3 +78,11 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
         )
 
         return shareholder
+
+class PositionSerializer(serializers.HyperlinkedModelSerializer):
+    buyer = ShareholderSerializer(many=False)
+    seller = ShareholderSerializer(many=False)
+
+    class Meta:
+        model = Position
+        fields = ('pk', 'buyer', 'seller', 'bought_at', 'sold_at', 'count', 'value')

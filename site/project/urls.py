@@ -7,12 +7,14 @@ from django.conf.urls.static import static
 
 from rest_framework import routers
 
-from services.rest.views import ShareholderViewSet, CompanyViewSet, UserViewSet
+from services.rest.views import ShareholderViewSet, CompanyViewSet, UserViewSet, PositionViewSet, \
+    InviteeUpdateView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'shareholders', ShareholderViewSet, base_name="shareholders")
 router.register(r'company', CompanyViewSet)
 router.register(r'user', UserViewSet, base_name="user")
+router.register(r'position', PositionViewSet, base_name="position")
 
 js_info_dict = {
     'packages': ('project', 'shareholder', 'utils', 'services',),
@@ -31,6 +33,7 @@ urlpatterns = [
 
     # rest api
     url(r'^services/rest/', include(router.urls)),
+    url(r'^services/rest/invitee', InviteeUpdateView.as_view(), name='invitee'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # i18n

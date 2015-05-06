@@ -27,6 +27,22 @@
     }
   ]);
 
+  app.factory('Position', [
+    '$resource', function($resource) {
+      return $resource('/services/rest/position/:id', {
+        id: '@id'
+      });
+    }
+  ]);
+
+  app.factory('Invitee', [
+    '$resource', function($resource) {
+      return $resource('/services/rest/invitee/:id', {
+        id: '@id'
+      });
+    }
+  ]);
+
 }).call(this);
 
 (function() {
@@ -37,6 +53,75 @@
   app.controller('BaseController', [
     '$scope', '$http', function($scope, $http) {
       return this.scope.test = True;
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var app;
+
+  app = angular.module('js.darg.app.index', ['js.darg.api']);
+
+  app.controller('IndexController', [
+    '$scope', '$http', 'Invitee', function($scope, $http, Invitee) {
+      $scope.show_add_invitee = true;
+      $scope.newInvitee = new Invitee();
+      return $scope.add_invitee = function() {
+        return $scope.newInvitee.$save().then(function(result) {
+          return $scope.show_add_invitee = false;
+        }).then(function() {
+          return $scope.newInvitee = new Invitee();
+        }).then(function() {
+          return $scope.errors = null;
+        }, function(rejection) {
+          return $scope.errors = rejection.data;
+        });
+      };
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var app;
+
+  app = angular.module('js.darg.app.positions', ['js.darg.api']);
+
+  app.controller('PositionsController', [
+    '$scope', '$http', 'Position', function($scope, $http, Position) {
+      $scope.positions = [];
+      $scope.show_add_position = false;
+      $scope.newPosition = new Position();
+      $http.get('/services/rest/position').then(function(result) {
+        return angular.forEach(result.data.results, function(item) {
+          return $scope.positions.push(item);
+        });
+      });
+      return $scope.add_position = function() {
+        return $scope.newPosition.$save().then(function(result) {
+          return $scope.positions.push(result);
+        }).then(function() {
+          return $scope.newPosition = new Position();
+        }).then(function() {
+          return $scope.errors = null;
+        }, function(rejection) {
+          return $scope.errors = rejection.data;
+        });
+      };
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var app;
+
+  app = angular.module('js.darg.app.shareholder', ['js.darg.api']);
+
+  app.controller('ShareholderController', [
+    '$scope', '$http', function($scope, $http) {
+      return $scope.test = true;
     }
   ]);
 

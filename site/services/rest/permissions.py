@@ -25,3 +25,21 @@ class UserCanAddShareholderPermission(SafeMethodsOnlyPermission):
             # Either a list or a create, so no author
             can_add = True
         return can_add or super(UserCanAddShareholderPermission, self).has_object_permission(request, view, obj)
+
+class UserCanAddPositionPermission(SafeMethodsOnlyPermission):
+    """Allow everyone to add a company"""
+    def has_object_permission(self, request, view, obj=None):
+        can_add = False
+        if obj is None:
+            # Either a list or a create, so no author
+            can_add = True
+        return can_add or super(UserCanAddPositionPermission, self).has_object_permission(request, view, obj)
+
+class UserCanAddInviteePermission(SafeMethodsOnlyPermission):
+    """Allow everyone to add a company"""
+    def has_object_permission(self, request, view, obj=None):
+        can_add = False
+        if obj is None:
+            # Either a list or a create, so no author
+            can_add = True
+        return can_add or super(UserCanAddInviteePermission, self).has_object_permission(request, view, obj)

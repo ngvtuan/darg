@@ -1,14 +1,40 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block ng_app %}js.darg.app.index{% endblock %}
+
 {% block body_block %}
   <div class="centered">
     <div><h1>{% trans "Das Aktienregister" %}</h1></div>
-    <div>{% trans "Administrate your shareholder data. <br />Be compliant - simple and efficient." %}</div>
+    <!--<div>{% trans "Administrate your shareholder data. <br />Be compliant - simple and efficient." %}</div>-->
+    <div>{% trans "IMPORTANT: Excel does not fulfill legal requirements for a share register!" %}</div>
+      <ul>
+        <li>{% trans "GAFI Standard compliant" %}</li>
+        <li>{% trans "Extensive data validation to ensure you cannot make a mistake" %}</li>
+        <li>{% trans "Share your data with financial authorities, your lawyer and law enforcment" %}</li>
+        <li>{% trans "Guarantees perfect audit trail" %}</li>
+      </ul>
     <div class="button-panel">
-      <a href="{% url "auth_login" %}" class="button">Login</a>
-      <a href="{% url "registration_register" %}" class="button">Register</a>
+      {% trans "We are currently in private Beta. Please leave your email address to receive an invitation soon!" %}<br/><br/>
     </div>
+    <!--
+    <div class="button-panel">
+      <a href="{% url "auth_login" %}" >.</a>
+      <a href="{% url "registration_register" %}" >.</a>
+    </div>
+    -->
+    <div ng_controller="IndexController">{% verbatim %}
+      <form class="form-inline" ng-show="show_add_invitee == true">
+        <input type="text" class="form-control" ng-model="newInvitee.email" placeholder="{% endverbatim %}{% trans "Your Email" %}{% verbatim %}">
+        <button class="btn btn-default btn-focus" ng-click="add_invitee()">
+          {% endverbatim %}{% trans "Request Invitation" %}
+        </button>
+      </form>
+      <div class="bg-success" ng-hide="show_add_invitee == true">
+        {% trans "Thanks you. We will be back to you ASAP!" %}
+      </div>
+    </div>
+
     <div class="leaf"><span class="el-icon-leaf"></span></div>
   </div>
 {% endblock %}

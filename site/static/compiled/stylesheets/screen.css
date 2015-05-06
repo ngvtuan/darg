@@ -239,7 +239,12 @@ a:active, a:focus, a:hover, button:active, button:focus, button:hover, input:act
   color: #888;
 }
 
-/* line 45, ../../sass/screen.sass */
+/* line 44, ../../sass/screen.sass */
+p {
+  margin: 0 0 10px;
+}
+
+/* line 47, ../../sass/screen.sass */
 label {
   text-decoration: none;
   color: #666;
@@ -250,43 +255,54 @@ label {
   font-family: QuickSandLight;
 }
 
-/* line 54, ../../sass/screen.sass */
+/* line 56, ../../sass/screen.sass */
 h1 {
   font-size: 3em;
   margin-bottom: 0.5em;
 }
 
-/* line 57, ../../sass/screen.sass */
+/* line 59, ../../sass/screen.sass */
 h2 {
   font-size: 2em;
   margin-bottom: 1em;
   margin-top: 1.25em;
 }
 
-/* line 62, ../../sass/screen.sass */
+/* line 64, ../../sass/screen.sass */
 h3 {
   font-size: 1.5em;
   margin-bottom: 0.125em;
 }
 
-/* line 66, ../../sass/screen.sass */
+/* line 68, ../../sass/screen.sass */
 h4 {
   font-size: 1.25em;
   margin-bottom: 0.0625em;
 }
 
-/* line 70, ../../sass/screen.sass */
+/* line 72, ../../sass/screen.sass */
 h5 {
   font-size: 1.125em;
   margin-bottom: 0.03125;
 }
 
-/* line 74, ../../sass/screen.sass */
+/* line 76, ../../sass/screen.sass */
+ul, ol {
+  list-style: inherit;
+  padding: 1em;
+}
+
+/* line 80, ../../sass/screen.sass */
+li {
+  padding-top: 0.6em;
+}
+
+/* line 83, ../../sass/screen.sass */
 strong {
   font-weight: bold;
 }
 
-/* line 79, ../../sass/screen.sass */
+/* line 88, ../../sass/screen.sass */
 .container {
   width: 1000px;
   margin: 0 auto;
@@ -301,7 +317,7 @@ strong {
   clear: both;
 }
 
-/* line 84, ../../sass/screen.sass */
+/* line 93, ../../sass/screen.sass */
 .footer {
   clear: left;
   float: left;
@@ -319,34 +335,41 @@ strong {
   margin-top: 4em;
 }
 
-/* line 90, ../../sass/screen.sass */
+/* line 99, ../../sass/screen.sass */
 .centered {
   margin: auto;
   width: 400px;
-  height: 200px;
+  height: 350px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
 
-/* line 99, ../../sass/screen.sass */
+/* line 108, ../../sass/screen.sass */
 .errorlist {
   color: red;
 }
 
-/* line 102, ../../sass/screen.sass */
+/* line 111, ../../sass/screen.sass */
 .disable {
   color: #ddd;
   border: 1px solid #ddd;
 }
 
-/* line 108, ../../sass/screen.sass */
+/* line 115, ../../sass/screen.sass */
+.btn-focus {
+  border: 1px solid #1661ff;
+  color: #1661ff;
+  font-weight: bold;
+}
+
+/* line 122, ../../sass/screen.sass */
 .button-panel {
   margin-top: 15px;
 }
 
-/* line 110, ../../sass/screen.sass */
+/* line 124, ../../sass/screen.sass */
 .leaf {
   font-size: 2em;
   position: inherit;
@@ -354,12 +377,17 @@ strong {
   right: 1em;
 }
 
-/* line 118, ../../sass/screen.sass */
+/* line 129, ../../sass/screen.sass */
+.bg-success {
+  padding: 1em;
+}
+
+/* line 133, ../../sass/screen.sass */
 #auth .comment {
   margin-top: 5em;
 }
 
-/* line 123, ../../sass/screen.sass */
+/* line 138, ../../sass/screen.sass */
 div #add_shareholder {
   margin-bottom: 1em;
 }

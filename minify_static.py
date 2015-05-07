@@ -57,8 +57,8 @@ if __name__ == "__main__":
     # copy contrib javascripts
     print("Copying contrib javascripts...")
     copy_dir(
-        os.path.join(SOURCE_DIR, "javascripts", "contrib"),
-        os.path.join(OUTPUT_DIR, "javascripts", "contrib")
+        os.path.join(SOURCE_DIR, "javascript", "contrib"),
+        os.path.join(OUTPUT_DIR, "javascript", "contrib")
     )
 
     # copy contrib stylesheets

@@ -18,4 +18,9 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # for local dev use this...
 #NOSE_ARGS = ['--pdb', '-s', '--logging-level=WARNING']
 
-INSTALLED_APPS = INSTALLED_APPS + ('rosetta',) # 'django_nose',)
+INSTALLED_APPS = INSTALLED_APPS + ('rosetta', 'django_nose',)
+
+STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static', 'minified'),
+    os.path.join(BASE_DIR, 'static'),
+)

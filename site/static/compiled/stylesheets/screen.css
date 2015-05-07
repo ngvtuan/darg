@@ -238,13 +238,21 @@ a, button, input {
 a:active, a:focus, a:hover, button:active, button:focus, button:hover, input:active, input:focus, input:hover {
   color: #888;
 }
-
 /* line 44, ../../sass/screen.sass */
+a.regular, button.regular, input.regular {
+  font-size: 1em;
+  border: none;
+  padding: 0em;
+  margin: 0em;
+  text-decoration: underline;
+}
+
+/* line 51, ../../sass/screen.sass */
 p {
   margin: 0 0 10px;
 }
 
-/* line 47, ../../sass/screen.sass */
+/* line 54, ../../sass/screen.sass */
 label {
   text-decoration: none;
   color: #666;
@@ -255,59 +263,59 @@ label {
   font-family: QuickSandLight;
 }
 
-/* line 56, ../../sass/screen.sass */
+/* line 63, ../../sass/screen.sass */
 h1 {
   font-size: 3em;
   margin-bottom: 0.5em;
 }
 
-/* line 59, ../../sass/screen.sass */
+/* line 66, ../../sass/screen.sass */
 h2 {
   font-size: 2em;
   margin-bottom: 1em;
   margin-top: 1.25em;
 }
 
-/* line 64, ../../sass/screen.sass */
+/* line 71, ../../sass/screen.sass */
 h3 {
   font-size: 1.5em;
   margin-bottom: 0.125em;
 }
 
-/* line 68, ../../sass/screen.sass */
+/* line 75, ../../sass/screen.sass */
 h4 {
   font-size: 1.25em;
   margin-bottom: 0.0625em;
 }
 
-/* line 72, ../../sass/screen.sass */
+/* line 79, ../../sass/screen.sass */
 h5 {
   font-size: 1.125em;
   margin-bottom: 0.03125;
 }
 
-/* line 76, ../../sass/screen.sass */
+/* line 83, ../../sass/screen.sass */
 ul, ol {
   list-style: inherit;
   padding: 1em;
 }
 
-/* line 80, ../../sass/screen.sass */
+/* line 87, ../../sass/screen.sass */
 li {
   padding-top: 0.6em;
 }
 
-/* line 83, ../../sass/screen.sass */
+/* line 90, ../../sass/screen.sass */
 strong {
   font-weight: bold;
 }
 
-/* line 86, ../../sass/screen.sass */
+/* line 93, ../../sass/screen.sass */
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none;
 }
 
-/* line 92, ../../sass/screen.sass */
+/* line 99, ../../sass/screen.sass */
 .container {
   width: 1000px;
   margin: 0 auto;
@@ -322,7 +330,7 @@ strong {
   clear: both;
 }
 
-/* line 97, ../../sass/screen.sass */
+/* line 104, ../../sass/screen.sass */
 .footer {
   clear: left;
   float: left;
@@ -340,7 +348,7 @@ strong {
   margin-top: 4em;
 }
 
-/* line 103, ../../sass/screen.sass */
+/* line 110, ../../sass/screen.sass */
 .centered {
   margin: auto;
   width: 480px;
@@ -353,25 +361,25 @@ strong {
   padding: 2em;
 }
 
-/* line 114, ../../sass/screen.sass */
+/* line 121, ../../sass/screen.sass */
 .errorlist {
   color: red;
 }
 
-/* line 117, ../../sass/screen.sass */
+/* line 124, ../../sass/screen.sass */
 .disable {
   color: #ddd;
   border: 1px solid #ddd;
 }
 
-/* line 121, ../../sass/screen.sass */
+/* line 128, ../../sass/screen.sass */
 .btn-focus {
   border: 1px solid #1661ff;
   color: #1661ff;
   font-weight: bold;
 }
 
-/* line 128, ../../sass/screen.sass */
+/* line 135, ../../sass/screen.sass */
 .index_background {
   background-size: cover;
   background-image: url("/static/compiled/images/Zuerich_Boerse.jpg");
@@ -379,12 +387,12 @@ strong {
   height: 100%;
 }
 
-/* line 133, ../../sass/screen.sass */
+/* line 140, ../../sass/screen.sass */
 .button-panel {
   margin-top: 15px;
 }
 
-/* line 135, ../../sass/screen.sass */
+/* line 142, ../../sass/screen.sass */
 .leaf {
   font-size: 2em;
   position: inherit;
@@ -392,17 +400,17 @@ strong {
   right: 2.4em;
 }
 
-/* line 140, ../../sass/screen.sass */
+/* line 147, ../../sass/screen.sass */
 .bg-success {
   padding: 1em;
 }
 
-/* line 144, ../../sass/screen.sass */
+/* line 151, ../../sass/screen.sass */
 #auth .comment {
   margin-top: 5em;
 }
 
-/* line 149, ../../sass/screen.sass */
+/* line 156, ../../sass/screen.sass */
 div #add_shareholder {
   margin-bottom: 1em;
 }

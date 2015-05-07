@@ -69,7 +69,7 @@ if __name__ == "__main__":
     )
 
     # TODO: minify javascripts
-    js_source_dir = os.path.join(SOURCE_DIR, "javascripts")
+    js_source_dir = os.path.join(SOURCE_DIR, "javascript")
     for pathname in os.listdir(js_source_dir):
         path = os.path.join(js_source_dir, pathname)
         if os.path.isfile(path):
@@ -79,7 +79,7 @@ if __name__ == "__main__":
             # minify
             minified = jsmin.jsmin(content)
             # write minified output file
-            output_filepath = os.path.join(OUTPUT_DIR, "javascripts", pathname)
+            output_filepath = os.path.join(OUTPUT_DIR, "javascript", pathname)
             with open(output_filepath, 'w') as f:
                 f.write(minified)
 

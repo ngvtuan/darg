@@ -12,6 +12,7 @@ MANAGERS = ADMINS
 SESSION_COOKIE_NAME = 'vbnet-sessionid'
 
 TRACKING_ENABLED = False
+TRACKING_CODE = "UA-58468401-4"
 
 #TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # for local dev use this...

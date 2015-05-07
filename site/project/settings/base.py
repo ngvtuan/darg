@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'project.context_processors.tracking',
             ],
         },
     },
@@ -161,3 +162,6 @@ RAVEN_CONFIG = {
 # -- TEST RUNNEr
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
+# -- TRACKING
+TRACKING_ENABLED = not DEBUG
+TRACKING_CODE = "UA-58468401-3"

@@ -70,7 +70,10 @@
       $scope.errors = [];
       return $scope.add_invitee = function() {
         return $scope.newInvitee.$save().then(function(result) {
-          return $scope.show_add_invitee = false;
+          $scope.show_add_invitee = false;
+          if (!_.isUndefined(window.ga)) {
+            return ga('send', 'event', 'click', 'save_invitee_email' + abtest);
+          }
         }).then(function() {
           return $scope.newInvitee = new Invitee();
         }).then(function() {

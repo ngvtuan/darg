@@ -8,6 +8,9 @@ app.controller 'IndexController', ['$scope', '$http', 'Invitee', ($scope, $http,
     $scope.add_invitee = ->
         $scope.newInvitee.$save().then (result) ->
             $scope.show_add_invitee = false
+            # track form open
+            if !_.isUndefined(window.ga)
+                ga 'send', 'event', 'click', 'save_invitee_email' + abtest
         .then ->
             # Reset our editor to a new blank post
             $scope.newInvitee = new Invitee()

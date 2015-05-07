@@ -72,7 +72,7 @@
         return $scope.newInvitee.$save().then(function(result) {
           $scope.show_add_invitee = false;
           if (!_.isUndefined(window.ga)) {
-            return ga('send', 'event', 'click', 'save_invitee_email' + abtest);
+            return ga('send', 'event', 'click', 'save_invitee_email');
           }
         }).then(function() {
           return $scope.newInvitee = new Invitee();

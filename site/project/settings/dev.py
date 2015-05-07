@@ -11,10 +11,10 @@ MANAGERS = ADMINS
 
 SESSION_COOKIE_NAME = 'vbnet-sessionid'
 
-TRACKING_ENABLED = False
+TRACKING_ENABLED = True
 TRACKING_CODE = "UA-58468401-4"
 
-#TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # for local dev use this...
 #NOSE_ARGS = ['--pdb', '-s', '--logging-level=WARNING']
 

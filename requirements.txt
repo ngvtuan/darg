@@ -16,3 +16,4 @@ django-celery
 pytz
 celery
 kombu
+psycopg2

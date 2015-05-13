@@ -302,7 +302,12 @@ strong {
   font-weight: bold;
 }
 
-/* line 88, ../../sass/screen.sass */
+/* line 86, ../../sass/screen.sass */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none;
+}
+
+/* line 92, ../../sass/screen.sass */
 .container {
   width: 1000px;
   margin: 0 auto;
@@ -317,7 +322,7 @@ strong {
   clear: both;
 }
 
-/* line 93, ../../sass/screen.sass */
+/* line 97, ../../sass/screen.sass */
 .footer {
   clear: left;
   float: left;
@@ -335,7 +340,7 @@ strong {
   margin-top: 4em;
 }
 
-/* line 99, ../../sass/screen.sass */
+/* line 103, ../../sass/screen.sass */
 .centered {
   margin: auto;
   width: 400px;
@@ -346,30 +351,30 @@ strong {
   transform: translateX(-50%) translateY(-50%);
 }
 
-/* line 108, ../../sass/screen.sass */
+/* line 112, ../../sass/screen.sass */
 .errorlist {
   color: red;
 }
 
-/* line 111, ../../sass/screen.sass */
+/* line 115, ../../sass/screen.sass */
 .disable {
   color: #ddd;
   border: 1px solid #ddd;
 }
 
-/* line 115, ../../sass/screen.sass */
+/* line 119, ../../sass/screen.sass */
 .btn-focus {
   border: 1px solid #1661ff;
   color: #1661ff;
   font-weight: bold;
 }
 
-/* line 122, ../../sass/screen.sass */
+/* line 126, ../../sass/screen.sass */
 .button-panel {
   margin-top: 15px;
 }
 
-/* line 124, ../../sass/screen.sass */
+/* line 128, ../../sass/screen.sass */
 .leaf {
   font-size: 2em;
   position: inherit;
@@ -377,17 +382,17 @@ strong {
   right: 1em;
 }
 
-/* line 129, ../../sass/screen.sass */
+/* line 133, ../../sass/screen.sass */
 .bg-success {
   padding: 1em;
 }
 
-/* line 133, ../../sass/screen.sass */
+/* line 137, ../../sass/screen.sass */
 #auth .comment {
   margin-top: 5em;
 }
 
-/* line 138, ../../sass/screen.sass */
+/* line 142, ../../sass/screen.sass */
 div #add_shareholder {
   margin-bottom: 1em;
 }

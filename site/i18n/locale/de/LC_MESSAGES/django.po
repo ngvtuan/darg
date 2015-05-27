@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-06 21:01+0000\n"
+"POT-Creation-Date: 2015-05-27 23:07+0000\n"
 "PO-Revision-Date: 2015-04-18 10:09+0000\n"
 "Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,27 +23,23 @@ msgstr ""
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/base_auth.html:9
-msgid "Translate"
-msgstr ""
-
-#: templates/base_auth.html:12
+#: templates/base_auth.html:10
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base_auth.html:13
+#: templates/base_auth.html:11
 msgid "Log"
 msgstr "Log"
 
-#: templates/base_auth.html:14
+#: templates/base_auth.html:12
 msgid "Positions"
 msgstr "Positionen"
 
-#: templates/base_auth.html:15
+#: templates/base_auth.html:13
 msgid "Start"
 msgstr "Start"
 
-#: templates/base_auth.html:25
+#: templates/base_auth.html:23
 msgid "The Share Register, 2015"
 msgstr "Das Aktienregister, 2015"
 

@@ -43,5 +43,11 @@
       <div class="leaf"><span class="el-icon-leaf"></span></div>
     </div>
   </div>
+
+  <!-- public menu -->
+  <div>
+    {% trans "if you have credentials already:" %} <a href="{% url "auth_login" %}" title="Login">{% trans "Login" %}</a>
+  </div>
+
   {% include "_tracking.html" %}
 {% endblock %}

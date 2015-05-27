@@ -163,3 +163,8 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 # -- TRACKING
 TRACKING_ENABLED = not DEBUG
 TRACKING_CODE = ""
+
+try:
+    from project.settings.local import *
+except ImportError:
+    pass

@@ -1,11 +1,15 @@
 Requirements
 ==================
 
-..code-block::shell
-    npm install -g ember-cli
+..code-block::
+
+    pip install -r requirements.txt
     
-    
-    
-Aggregator
-================
-htauth aggregator:dargstark12
+
+Installation
+====================
+
+..code-block::
+
+    cd depploy
+    ./deploy.sh

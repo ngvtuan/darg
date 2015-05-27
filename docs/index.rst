@@ -1,6 +1,15 @@
 Requirements
 ==================
 
-..code-block::shell
+..code-block::
 
-    npm install -g ember-cli
+    pip install -r requirements.txt
+    
+
+Installation
+====================
+
+..code-block::
+
+    cd depploy
+    ./deploy.sh

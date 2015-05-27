@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ph(epz0s5@!x+ln%kftffier#o9%xszqpzn48^%(@ky9kqsmt#'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.das-aktienregister.ch', 'das-aktienregister.ch']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -114,14 +114,9 @@ CACHES = {
 }
 
 # -- EMAIL
-ADMINS = (
-    ("Jirka Schaefer", "jirka@tschitschereengreen.com"),
-    ("Tina Schaefer", "tina@tschitschereengreen.com"),
-)
+ADMINS = ()
 
-MANAGERS = ADMINS + (
-    (u"Tina Schäfer", "tina.schaefer@tschitschereengreen.com"),
-)
+MANAGERS = ADMINS + ()
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -157,7 +152,7 @@ LOCALE_PATHS = ('./i18n/locale/',)
 
 # --- Sentry
 RAVEN_CONFIG = {
-    'dsn': 'http://da49e25357134a48b97e9270622dd0cf:57c28c834d3d406b904257d05aca77ab@aggregator.ttg-dresden.de:9000/4',
+    'dsn': '',
 }
 
 # -- TEST RUNNEr
@@ -165,4 +160,4 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # -- TRACKING
 TRACKING_ENABLED = not DEBUG
-TRACKING_CODE = "UA-58468401-3"
+TRACKING_CODE = ""

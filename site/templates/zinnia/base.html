@@ -1,0 +1,96 @@
+{% extends "zinnia:zinnia/base.html" %}
+{% load zinnia i18n %}
+
+{% block link %}
+  <link rel="index" href="{% url 'zinnia:entry_archive_index' %}" />
+  <link rel="author" type="text/plain" href="{% url 'zinnia:humans' %}" />
+  <link rel="EditURI" type="application/rsd+xml" href="{% url 'zinnia:rsd' %}" />
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url 'zinnia:wlwmanifest' %}" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Das Aktienregister's Weblog" href="{% url 'zinnia:opensearch' %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS feed of latest entries" %}" href="{% url 'zinnia:entry_latest_feed' %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS feed of latest discussions" %}" href="{% url 'zinnia:discussion_latest_feed' %}" />
+  {% get_archives_entries "zinnia/tags/entries_archives_link.html" %}
+
+  {% include "_meta_tags.html" %}
+  {% include "_html_head_links.html" %}
+
+{% endblock link %}
+
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block sidebar %}
+<aside id="widget-comments" class="widget panel panel-default">
+  <div class="panel-heading">
+    {% trans "Recent comments" %}
+  </div>
+  {% get_recent_comments %}
+</aside>
+<aside id="widget-linkbacks" class="widget panel panel-default">
+  <div class="panel-heading">
+    {% trans "Recent linkbacks" %}
+  </div>
+  {% get_recent_linkbacks %}
+</aside>
+
+<aside id="widget-menu" class="widget panel panel-default">
+  <div class="panel-heading">
+    {% trans "Shortcuts" %}
+  </div>
+  <div>
+    {% url 'zinnia:category_list' as category_list_url %}
+    <a href="{{ category_list_url }}" title="{% trans "Category list" %}">
+      {% trans "Categories" %}
+    </a>
+  </div>
+  {% url 'zinnia:author_list' as author_list_url %}
+  <a href="{{ author_list_url }}" title="{% trans "Author list" %}">
+    {% trans "Authors" %}
+  </a>
+  {% url 'zinnia:tag_list' as tag_list_url %}
+  <a href="{{ tag_list_url }}" title="{% trans "Tag list" %}">
+   {% trans "Tags" %}
+  </a>
+  {% url 'zinnia:sitemap' as sitemap_url %}
+  <a href="{{ sitemap_url }}" title="{% trans "Sitemap" %}" class="sitemap">
+    {% trans "Sitemap" %}
+  </a>
+  <a href="{% url 'zinnia:entry_latest_feed' %}" title="{% trans "RSS Feed of latest entries" %}" class="feeds">
+    {% trans "RSS Feed" %}
+  </a>
+</aside>
+
+{% if user.is_authenticated %}
+<aside id="widget-tools" class="widget panel panel-danger">
+  <div class="panel-heading">
+    {% trans "Tools" %}
+  </div>
+  <ul class="list-group">
+    {% if perms.zinnia %}
+    <li class="list-group-item">
+      <a href="{% url 'admin:app_list' 'zinnia' %}" title="{% trans "Dashboard" %}">
+        <span class="glyphicon glyphicon-book"></span>
+        {% trans "Dashboard" %}
+      </a>
+    </li>
+    {% endif %}
+    {% if perms.zinnia.add_entry %}
+    <li class="list-group-item">
+      <a href="{% url 'admin:zinnia_entry_add' %}" title="{% trans "Post an entry" %}">
+        <span class="glyphicon glyphicon-pencil"></span>
+        {% trans "Post an entry" %}
+      </a>
+    </li>
+    {% endif %}
+    {% block admin-tools %}
+    {% endblock admin-tools %}
+    <li class="list-group-item">
+      <a href="{% url 'admin:logout' %}" title="{% trans "Log out" %}">
+        <span class="glyphicon glyphicon-off"></span>
+        {% trans "Log out" %}
+      </a>
+    </li>
+  </ul>
+</aside>
+{% endif %}
+{% endblock sidebar %}

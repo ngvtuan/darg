@@ -38,6 +38,10 @@ urlpatterns = [
 
     # i18n
     url(r'^jsi18n/$', javascript_catalog, js_info_dict),
+
+    # blog
+    url(r'^blog/', include('zinnia.urls', namespace='zinnia')),
+    url(r'^comments/', include('django_comments.urls')),
 ]
 
 # admin
@@ -53,8 +57,8 @@ if 'rosetta' in settings.INSTALLED_APPS:
     )
 
 # serving files
-#urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-#urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     urlpatterns += patterns('',

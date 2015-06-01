@@ -29,10 +29,10 @@ html, body
   margin: 0px
   padding: 0px
 
-a, button, input
+a, button, input[type=submit]
   color: $color-link
   font-size: 1.5em
-  border: 1px solid $color-link
+  border: 1px solid $color-black
   padding: 0.1em
   padding-left: 0.3em
   padding-right: 0.3em
@@ -47,13 +47,24 @@ a, button, input
     padding: 0em
     margin: 0em
     text-decoration: underline
-    
+
+input
+  display: inline-block
+  background-color: transparent  
+  font-size: 1.5em
+  border: 1px solid $color-black
+  color: $color-black
+  padding: 0.1em
+  padding-left: 0.3em
+  padding-right: 0.3em
+  margin: 0.3em 0.3em 0.3em 0em
+  display: inline-block
+
 p
   margin: 0 0 10px
 
 label
   text-decoration: none
-  color: $color-link
   cursor: pointer
   font-size: 1.5em
   padding: 0.1em
@@ -166,3 +177,50 @@ strong
 div
   #add_shareholder
     margin-bottom: 1em
+
+// -- blog
+.blog
+  .lead
+    font-size: 1em
+  .well
+    background-color: transparent
+    border: none
+    -webkit-box-shadow: none
+    box-shadow: none
+  .btn-primary
+    background-color: transparent
+    border: 1px solid $color-black
+    color: $color-link
+  .row
+    margin-top: 4em
+  .entry-tags
+    display: none
+  .entry-shorturl
+    display: none
+  .entry-footer
+    padding-left: 0px
+    span
+      display: none
+  .navbar-default
+    background-color: white
+  .navbar-brand
+    font-size: 2em
+  .navbar-header span
+    top: 0.8em
+    position: relative
+    left: -1.7em
+  a
+    border: none
+    font-size: 1em
+    &:active, &:focus, &:hover
+      color: $color-link
+      text-decoration: none
+  h2
+    margin-bottom: 0em
+  h2 a
+    padding: 0
+    margin: 0
+  p
+    margin: 0 0 0 0
+  small
+    font-size: 40%

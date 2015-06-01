@@ -223,8 +223,8 @@ html, body {
 }
 
 /* line 32, ../../sass/screen.sass */
-a, button, input {
-  color: #666;
+a, button, input[type=submit] {
+  color: #1661ff;
   font-size: 1.5em;
   border: 1px solid #666;
   padding: 0.1em;
@@ -235,11 +235,11 @@ a, button, input {
   background-color: transparent;
 }
 /* line 42, ../../sass/screen.sass */
-a:active, a:focus, a:hover, button:active, button:focus, button:hover, input:active, input:focus, input:hover {
+a:active, a:focus, a:hover, button:active, button:focus, button:hover, input[type=submit]:active, input[type=submit]:focus, input[type=submit]:hover {
   color: #888;
 }
 /* line 44, ../../sass/screen.sass */
-a.regular, button.regular, input.regular {
+a.regular, button.regular, input[type=submit].regular {
   font-size: 1em;
   border: none;
   padding: 0em;
@@ -248,14 +248,27 @@ a.regular, button.regular, input.regular {
 }
 
 /* line 51, ../../sass/screen.sass */
+input {
+  display: inline-block;
+  background-color: transparent;
+  font-size: 1.5em;
+  border: 1px solid #666;
+  color: #666;
+  padding: 0.1em;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  margin: 0.3em 0.3em 0.3em 0em;
+  display: inline-block;
+}
+
+/* line 63, ../../sass/screen.sass */
 p {
   margin: 0 0 10px;
 }
 
-/* line 54, ../../sass/screen.sass */
+/* line 66, ../../sass/screen.sass */
 label {
   text-decoration: none;
-  color: #666;
   cursor: pointer;
   font-size: 1.5em;
   padding: 0.1em;
@@ -263,59 +276,59 @@ label {
   font-family: QuickSandLight;
 }
 
-/* line 63, ../../sass/screen.sass */
+/* line 74, ../../sass/screen.sass */
 h1 {
   font-size: 3em;
   margin-bottom: 0.5em;
 }
 
-/* line 66, ../../sass/screen.sass */
+/* line 77, ../../sass/screen.sass */
 h2 {
   font-size: 2em;
   margin-bottom: 1em;
   margin-top: 1.25em;
 }
 
-/* line 71, ../../sass/screen.sass */
+/* line 82, ../../sass/screen.sass */
 h3 {
   font-size: 1.5em;
   margin-bottom: 0.125em;
 }
 
-/* line 75, ../../sass/screen.sass */
+/* line 86, ../../sass/screen.sass */
 h4 {
   font-size: 1.25em;
   margin-bottom: 0.0625em;
 }
 
-/* line 79, ../../sass/screen.sass */
+/* line 90, ../../sass/screen.sass */
 h5 {
   font-size: 1.125em;
   margin-bottom: 0.03125;
 }
 
-/* line 83, ../../sass/screen.sass */
+/* line 94, ../../sass/screen.sass */
 ul, ol {
   list-style: inherit;
   padding: 1em;
 }
 
-/* line 87, ../../sass/screen.sass */
+/* line 98, ../../sass/screen.sass */
 li {
   padding-top: 0.6em;
 }
 
-/* line 90, ../../sass/screen.sass */
+/* line 101, ../../sass/screen.sass */
 strong {
   font-weight: bold;
 }
 
-/* line 93, ../../sass/screen.sass */
+/* line 104, ../../sass/screen.sass */
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none;
 }
 
-/* line 99, ../../sass/screen.sass */
+/* line 110, ../../sass/screen.sass */
 .container {
   width: 1000px;
   margin: 0 auto;
@@ -330,7 +343,7 @@ strong {
   clear: both;
 }
 
-/* line 104, ../../sass/screen.sass */
+/* line 115, ../../sass/screen.sass */
 .footer {
   clear: left;
   float: left;
@@ -348,51 +361,52 @@ strong {
   margin-top: 4em;
 }
 
-/* line 110, ../../sass/screen.sass */
+/* line 121, ../../sass/screen.sass */
 .centered {
-  margin: auto;
-  width: 480px;
-  height: 580px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2em;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2em;
+  width: 480px;
+  height: 580px;
+  margin-top: -290px;
+  margin-left: -240px;
 }
 
-/* line 121, ../../sass/screen.sass */
+/* line 134, ../../sass/screen.sass */
 .errorlist {
   color: red;
 }
 
-/* line 124, ../../sass/screen.sass */
+/* line 137, ../../sass/screen.sass */
 .disable {
   color: #ddd;
   border: 1px solid #ddd;
 }
 
-/* line 128, ../../sass/screen.sass */
+/* line 141, ../../sass/screen.sass */
 .btn-focus {
   border: 1px solid #1661ff;
   color: #1661ff;
   font-weight: bold;
 }
 
-/* line 135, ../../sass/screen.sass */
+/* line 148, ../../sass/screen.sass */
 .index_background {
   background-size: cover;
   background-image: url("/static/compiled/images/Zuerich_Boerse.jpg");
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
-/* line 140, ../../sass/screen.sass */
+/* line 154, ../../sass/screen.sass */
 .button-panel {
   margin-top: 15px;
 }
 
-/* line 142, ../../sass/screen.sass */
+/* line 156, ../../sass/screen.sass */
 .leaf {
   font-size: 2em;
   position: inherit;
@@ -400,17 +414,109 @@ strong {
   right: 2.4em;
 }
 
-/* line 147, ../../sass/screen.sass */
+/* line 161, ../../sass/screen.sass */
 .bg-success {
   padding: 1em;
 }
 
-/* line 151, ../../sass/screen.sass */
+/* line 163, ../../sass/screen.sass */
+.pub_menu {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+/* line 167, ../../sass/screen.sass */
+.pub_menu a {
+  border: none;
+  color: white;
+  font-size: 1em;
+}
+
+/* line 173, ../../sass/screen.sass */
 #auth .comment {
   margin-top: 5em;
 }
 
-/* line 156, ../../sass/screen.sass */
+/* line 178, ../../sass/screen.sass */
 div #add_shareholder {
   margin-bottom: 1em;
+}
+
+/* line 183, ../../sass/screen.sass */
+.blog .lead {
+  font-size: 1em;
+}
+/* line 185, ../../sass/screen.sass */
+.blog .well {
+  background-color: transparent;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* line 190, ../../sass/screen.sass */
+.blog .btn-primary {
+  background-color: transparent;
+  border: 1px solid #666;
+  color: #1661ff;
+}
+/* line 194, ../../sass/screen.sass */
+.blog .row {
+  margin-top: 4em;
+}
+/* line 196, ../../sass/screen.sass */
+.blog .entry-tags {
+  display: none;
+}
+/* line 198, ../../sass/screen.sass */
+.blog .entry-shorturl {
+  display: none;
+}
+/* line 200, ../../sass/screen.sass */
+.blog .entry-footer {
+  padding-left: 0px;
+}
+/* line 202, ../../sass/screen.sass */
+.blog .entry-footer span {
+  display: none;
+}
+/* line 204, ../../sass/screen.sass */
+.blog .navbar-default {
+  background-color: white;
+}
+/* line 206, ../../sass/screen.sass */
+.blog .navbar-brand {
+  font-size: 2em;
+}
+/* line 208, ../../sass/screen.sass */
+.blog .navbar-header span {
+  top: 0.8em;
+  position: relative;
+  left: -1.7em;
+}
+/* line 212, ../../sass/screen.sass */
+.blog a {
+  border: none;
+  font-size: 1em;
+}
+/* line 215, ../../sass/screen.sass */
+.blog a:active, .blog a:focus, .blog a:hover {
+  color: #1661ff;
+  text-decoration: none;
+}
+/* line 218, ../../sass/screen.sass */
+.blog h2 {
+  margin-bottom: 0em;
+}
+/* line 220, ../../sass/screen.sass */
+.blog h2 a {
+  padding: 0;
+  margin: 0;
+}
+/* line 223, ../../sass/screen.sass */
+.blog p {
+  margin: 0 0 0 0;
+}
+/* line 225, ../../sass/screen.sass */
+.blog small {
+  font-size: 40%;
 }

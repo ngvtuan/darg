@@ -45,8 +45,9 @@
   </div>
 
   <!-- public menu -->
-  <div>
-    {% trans "if you have credentials already:" %} <a href="{% url "auth_login" %}" title="Login">{% trans "Login" %}</a>
+  <div class="pub_menu">
+    <a href="{% url "auth_login" %}" title="Login">{% trans "Login" %}</a>
+    <a href="/blog/" title="Blog">{% trans "Blog" %}</a>
   </div>
 
   {% include "_tracking.html" %}

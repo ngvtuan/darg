@@ -6,19 +6,7 @@
   <meta charset="UTF-8">
 
  {% include "_meta_tags.html" %}
-
-  <!-- styles -->
-  <link rel="stylesheet" type="text/css" href="{% static "compiled/contrib/bootstrap/dist/css/bootstrap.css" %}">
-  <link href="{% static "compiled/stylesheets/screen.css" %}" media="screen, projection" rel="stylesheet" type="text/css" />
-  {# IE warning #}
-  <!--[if lte IE 8]>
-    <link href="{% static "stylesheets/ie.css" %}" media="screen, projection" rel="stylesheet" type="text/css" />
-  <![endif]-->
-  <link rel="stylesheet" type="text/css" href="{% static "compiled/stylesheets/contrib/elusive-webfont.css" %}">
-
-  <!-- favicon -->
-  <link rel="shortcut icon" href="{% static "compiled/images/dasaktienregister.png" %}" type="image/x-icon"/>
-  <link rel="icon" href="{% static "compiled/images/dasaktienregister.png" %}" type="image/x-icon">
+ {% include "_html_head_links.html" %}
   
 </head>
 

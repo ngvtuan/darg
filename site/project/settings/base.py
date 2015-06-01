@@ -43,6 +43,14 @@ INSTALLED_APPS = (
     'rest_framework',
     'raven.contrib.django.raven_compat',
 
+    # -- zinnia
+    'django_comments',
+    'mptt',
+    'tagging',
+    'zinnia_bootstrap',
+    'zinnia',
+    # --
+
     'shareholder',
     'services',
     'project',
@@ -65,7 +73,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': ['templates',],
-        'APP_DIRS': True,
+        #'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -73,7 +81,12 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'project.context_processors.tracking',
+                'zinnia.context_processors.version',
             ],
+            'loaders': ('django.template.loaders.filesystem.Loader',
+                        'app_namespace.Loader',
+                        'django.template.loaders.app_directories.Loader',
+            ),
         },
     },
 ]
@@ -133,6 +146,9 @@ STATICFILES_DIRS = (
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'media', 'static')
 
+MEDIA_ROOT = 'media' # used also by zinnia for path inside static. is relative.
+MEDIA_URL = '/media/'
+
 # --- REGISTRATION
 REGISTRATION_OPEN = True        # If True, users can register
 ACCOUNT_ACTIVATION_DAYS = 7     # One-week activation window; you may, of course, use a different value.
@@ -163,6 +179,9 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 # -- TRACKING
 TRACKING_ENABLED = not DEBUG
 TRACKING_CODE = ""
+
+# -- BLOG
+ZINNIA_UPLOAD_TO = os.path.join(MEDIA_ROOT, 'blog')
 
 try:
     from project.settings.local import *

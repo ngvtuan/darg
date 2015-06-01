@@ -20,11 +20,6 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 INSTALLED_APPS = INSTALLED_APPS + ('rosetta', 'django_nose',)
 
-STATICFILES_DIRS = (
-#    os.path.join(BASE_DIR, 'static', 'minified'),
-    os.path.join(BASE_DIR, 'static'),
-)
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

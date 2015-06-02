@@ -182,7 +182,7 @@ TRACKING_CODE = ""
 
 # -- BLOG
 ZINNIA_UPLOAD_TO = os.path.join(MEDIA_ROOT, 'blog')
-ZINNIA_MARKUP_LANGUAGE = ['markdown', 'restructuredtext',]
+ZINNIA_MARKUP_LANGUAGE = 'restructuredtext'
 
 try:
     from project.settings.local import *

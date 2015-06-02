@@ -17,18 +17,22 @@
       <caption></caption>
       <thead>
         <tr>
-          <th>{% trans "Date" %}</th>
+          <th>{% trans "Buy Date" %}</th>
           <th>{% trans "Buyer" %}</th>
-          <th>{% trans "Shares (%)" %}</th>
-          <th>{% trans "Value" %}</th>
+          <th class="text-right">{% trans "Shares (%)" %}</th>
+          <th class="text-right">{% trans "Value" %}</th>
+          <th>{% trans "Sell Date" %}</th>
+          <th>{% trans "Seller" %}</th>
       </thead
       <tbody>
       {% verbatim %}
       <tr class="panel" ng-repeat="position in positions">
         <td>{{ position.bought_at | date : 'd.MM.yy' }}</td>
         <td>{{ position.buyer.user.first_name }} {{ position.buyer.user.last_name }}</td>
-        <td>{{ position.count }}</td>
-        <td>{{ position.value }}</td>
+        <td class="text-right">{{ position.count }}</td>
+        <td class="text-right">{{ position.value }}</td>
+        <td>{{ position.sold_at | date : 'd.MM.yy' }}</td>
+        <td>{{ position.seller.user.first_name }} {{ position.seller.user.last_name }}</td>
       </tr>
       </tbody>
     </table>

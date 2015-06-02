@@ -18,7 +18,7 @@ class Shareholder(models.Model):
         total = self.company.share_count
         count = sum(self.buyer.filter(sold_at__isnull=True).values_list('count', flat=True))
         if total:
-            return count / float(total)
+            return count / float(total) * 100
         return False
 
     def share_count(self):   

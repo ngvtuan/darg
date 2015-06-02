@@ -26,7 +26,7 @@ class ShareholderViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return Shareholder.objects.filter(company__operator__user=user)
+        return Shareholder.objects.filter(company__operator__user=user).distinct()
 
 
 class CompanyViewSet(viewsets.ModelViewSet):

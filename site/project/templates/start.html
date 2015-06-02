@@ -22,9 +22,9 @@
       <thead>
         <tr>
           <th>{% trans "Name" %}</th>
-          <th>{% trans "Shareholder Number" %}</th>
           <th>{% trans "Email" %}</th>
-          <th>{% trans "Shares (%)" %}</th>
+          <th class="text-right">{% trans "Shareholder Number" %}</th>
+          <th class="text-right">{% trans "Shares (%)" %}</th>
       </thead
       <tbody>
       {% verbatim %}
@@ -32,9 +32,9 @@
         <td>
           {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
         </td>
-        <td>{{ shareholder.number }}</td>
         <td>{{ shareholder.user.email }}</td>
-        <td>XX (X%)</td>
+        <td class="text-right">{{ shareholder.number }}</td>
+        <td class="text-right"><value ng-if="shareholder.share_count != '-'">{{ shareholder.share_count | number : 0}} ({{shareholder.share_percent | number : 1}}%)</value></td>
       </tr>
       </tbody>
     </table>

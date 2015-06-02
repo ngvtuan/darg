@@ -9,7 +9,11 @@ class CompanyAdmin(admin.ModelAdmin):
 class OperatorAdmin(admin.ModelAdmin):
     list_display = ('user', 'company')
     pass
+class PositionAdmin(admin.ModelAdmin):
+    list_display = ('bought_at', 'buyer', 'sold_at', 'seller', 'count', 'value')
+    pass
 
 admin.site.register(Shareholder, ShareholderAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Operator, OperatorAdmin)
+admin.site.register(Position, PositionAdmin)

@@ -82,7 +82,30 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
 class PositionSerializer(serializers.HyperlinkedModelSerializer):
     buyer = ShareholderSerializer(many=False)
     seller = ShareholderSerializer(many=False)
+    bought_at = serializers.DateTimeField() # e.g. 2015-06-02T23:00:00.000Z
 
     class Meta:
         model = Position
         fields = ('pk', 'buyer', 'seller', 'bought_at', 'sold_at', 'count', 'value')
+
+    def create(self, validated_data):
+        """ adding a new position and handling nested data """
+
+        # prepare data
+        user = self.context.get("request").user
+        company = user.operator_set.all()[0].company
+        buyer = Shareholder.objects.get(
+            company=company, 
+            user__email=validated_data.get("buyer").get("user").get("email")
+        )
+        
+        kwargs = {
+            "buyer": buyer,
+            "bought_at": validated_data.get("bought_at"),
+            "value": validated_data.get("value"),
+            "count": validated_data.get("count"),
+        }
+
+        position = Position.objects.create(**kwargs)
+
+        return position

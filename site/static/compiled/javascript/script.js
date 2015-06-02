@@ -95,11 +95,17 @@
   app.controller('PositionsController', [
     '$scope', '$http', 'Position', function($scope, $http, Position) {
       $scope.positions = [];
+      $scope.shareholders = [];
       $scope.show_add_position = false;
       $scope.newPosition = new Position();
       $http.get('/services/rest/position').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
           return $scope.positions.push(item);
+        });
+      });
+      $http.get('/services/rest/shareholders').then(function(result) {
+        return angular.forEach(result.data.results, function(item) {
+          return $scope.shareholders.push(item);
         });
       });
       return $scope.add_position = function() {

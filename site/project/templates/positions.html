@@ -18,15 +18,15 @@
       <thead>
         <tr>
           <th>{% trans "Date" %}</th>
-          <th>{% trans "Shareholder" %}</th>
+          <th>{% trans "Buyer" %}</th>
           <th>{% trans "Shares (%)" %}</th>
           <th>{% trans "Value" %}</th>
       </thead
       <tbody>
       {% verbatim %}
       <tr class="panel" ng-repeat="position in positions">
-        <td>{{ position.bought_at }}</td>
-        <td>{{ position.shareholder.user.first_name }} {{ position.shareholder.user.last_name }}</td>
+        <td>{{ position.bought_at | date : 'd.MM.yy' }}</td>
+        <td>{{ position.buyer.user.first_name }} {{ position.buyer.user.last_name }}</td>
         <td>{{ position.count }}</td>
         <td>{{ position.value }}</td>
       </tr>

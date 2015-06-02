@@ -5,11 +5,11 @@
 <div>
   <form class="form-inline">
     <div class="form-group block-level">
-      <input type="date" class="form-control" ng-model="newPosition.user.first_name" placeholder="Date">
-      <input type="text" class="form-control" ng-model="newPosition.user.last_name" placeholder="Buyer">
-      <input type="number" class="form-control" ng-model="newPosition.user.email" placeholder="Count" ng-maxlength="5">
-      <input type="number" class="form-control" ng-model="newPosition.number" placeholder="Value" ng-maxlength="10">
-      <input type="text" class="form-control" ng-model="newPosition.number" placeholder="Seller">
+      <input type="date" class="form-control" ng-model="newPosition.bought_at" placeholder="Date">
+      <select class="form-control" ng-model="newPosition.buyer" ng-options="shareholder as shareholder.user.email for shareholder in shareholders" placeholder="Buyer"></select>
+      <input type="number" class="form-control" ng-model="newPosition.count" placeholder="Count" ng-maxlength="5">
+      <input type="number" class="form-control" ng-model="newPosition.value" placeholder="Value" ng-maxlength="10">
+      <select type="email" class="form-control" ng-model="newPosition.seller" ng-options="shareholder as shareholder.user.email for shareholder in shareholders" placeholder="Seller"></select>
     </div>
     <div class="form-group">
       <button class="btn btn-default" ng-click="add_position()">{% endverbatim %}{% trans "Add Position" %}{% verbatim %}</button>

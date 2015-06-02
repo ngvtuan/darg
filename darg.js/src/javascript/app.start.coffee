@@ -3,8 +3,8 @@ app = angular.module 'js.darg.app.start', ['js.darg.api',]
 app.controller 'StartController', ['$scope', '$http', 'Company', 'Shareholder', 'User', ($scope, $http, Company, Shareholder, User) ->
 
     # from server
-    $scope.shareholders = [] #Shareholder.get().results
-    $scope.user = [] #User.get().results
+    $scope.shareholders = []
+    $scope.user = []
 
     # empty form data
     $scope.newShareholder = new Shareholder()

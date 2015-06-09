@@ -5,32 +5,60 @@ import datetime
 from django.conf import settings
 from django.contrib.auth import get_user_model
 
-from shareholder.models import Shareholder, Company, Position
+from shareholder.models import Shareholder, Company, Position, Operator
 
 User = get_user_model()
 
-class ShareholderGenerator(object):
+def _make_wordlist():
 
-    def generate(self, **kwargs):
+    words = [line.strip() for line in open('/usr/share/dict/american-english')]
+    return words
 
-        hash_user = hashlib.sha1()
+def _make_user():
 
-        words = [line.strip() for line in open('/usr/share/dict/american-english')]
-        word = random.choice(words)
+    words = _make_wordlist()
+    hash_user = hashlib.sha1()
+    hash_user.update(random.choice(words))
+    username = hash_user.hexdigest()
 
-        hash_user.update(random.choice(words))
-        username = hash_user.hexdigest()
+    user = User.objects.create(
+        is_active=True,
+        first_name = random.choice(words),
+        last_name = random.choice(words),
+        username = username,
+    )
+    return user
+
+class OperatorGenerator(object):
+
+    def generate(self):
+    
+        word = random.choice(_make_wordlist())
+        user = _make_user()
 
         company = Company.objects.create(
             name = '{} A.B.'.format(word),
             share_count = 3,
         )
 
-        user = User.objects.create(
-            is_active=True,
-            first_name = random.choice(words),
-            last_name = random.choice(words),
-            username = username,
+        operator = Operator.objects.create(
+            user=user,
+            company=company,
+        )
+
+        return operator
+
+class ShareholderGenerator(object):
+
+    def generate(self, **kwargs):
+
+        words = _make_wordlist()
+        word = random.choice(_make_wordlist())
+        user = _make_user()
+
+        company = Company.objects.create(
+            name = '{} A.B.'.format(word),
+            share_count = 3,
         )
 
         shareholder = Shareholder.objects.create(

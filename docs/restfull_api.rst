@@ -15,13 +15,11 @@ We are using `Token based authentication <http://www.django-rest-framework.org/a
 
 Please note that for authentication the header must be sent with any request. e.g.:
 
-.. code-block ::
-
     Authorization: Token 9944b09199c62bc22418ad846dd0e4bbdfc6ee4b
     
 Authentication can be tested and validated as follows:
 
-.. code-block ::
+.. code-block :: shell
 
     curl -X GET http://127.0.0.1:8000/api/example/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'
     
@@ -41,11 +39,11 @@ Resource Name: ``shareholders``
 
 To obtain the shareholder data for the authenticated user a simple GET call to this endpoint.
 
-``GET /services/rest/shareholders``
+    GET /services/rest/shareholders
 
 will return this payload
 
-.. code-block ::
+.. code-block :: json
 
     HTTP 200 OK
     Content-Type: application/json

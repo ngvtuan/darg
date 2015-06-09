@@ -37,8 +37,8 @@ urlpatterns = [
     url(r'^services/rest/company/add', AddCompanyView.as_view(), name='add_company'),
     url(r'^services/rest/', include(router.urls)),
     url(r'^services/rest/invitee', InviteeUpdateView.as_view(), name='invitee'),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api-token-auth/', views.obtain_auth_token), # allow to see token for the logged in user
+    #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^services/rest/api-token-auth/', views.obtain_auth_token), # allow to see token for the logged in user
 
     # i18n
     url(r'^jsi18n/$', javascript_catalog, js_info_dict),

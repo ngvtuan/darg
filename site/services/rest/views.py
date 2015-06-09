@@ -6,7 +6,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 
-from services.rest.serializers import ShareholderSerializer, CompanySerializer, UserSerializer, PositionSerializer
+from services.rest.serializers import ShareholderSerializer, CompanySerializer, UserSerializer, \
+    PositionSerializer, AddCompanySerializer
 from services.rest.permissions import UserCanAddCompanyPermission, \
     SafeMethodsOnlyPermission, UserCanAddShareholderPermission, UserCanAddPositionPermission,\
     UserCanAddInviteePermission
@@ -46,6 +47,21 @@ class CompanyViewSet(viewsets.ModelViewSet):
 
         return super(CompanyViewSet, self).create(obj)
 
+class AddCompanyView(APIView):
+    """ view to initially setup a company """
+
+    queryset = Company.objects.none()
+    permission_classes = [
+        UserCanAddCompanyPermission,
+    ] 
+    def post(self, request, format=None):
+        serializer = AddCompanySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class UserViewSet(viewsets.ModelViewSet):
     """ API endpoint to get user base info """
     serializer_class = UserSerializer
@@ -79,4 +95,4 @@ class PositionViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return Position.objects.filter(buyer__company__operator__user=user).order_by('bought_at')
+        return Position.objects.filter(buyer__company__operator__user=user).order_by('bought_at').order_by('-bought_at')

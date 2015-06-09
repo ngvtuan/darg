@@ -11,11 +11,9 @@
     }
   ]);
 
-  app.factory('Company', [
+  app.factory('CompanyAdd', [
     '$resource', function($resource) {
-      return $resource('/services/rest/company/:id', {
-        id: '@id'
-      });
+      return $resource('/services/rest/company/add/');
     }
   ]);
 
@@ -61,6 +59,19 @@
 (function() {
   var app;
 
+  app = angular.module('js.darg.app.company', ['js.darg.api']);
+
+  app.controller('CompanyController', [
+    '$scope', '$http', function($scope, $http) {
+      return $scope.test = true;
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var app;
+
   app = angular.module('js.darg.app.index', ['js.darg.api']);
 
   app.controller('IndexController', [
@@ -97,6 +108,7 @@
       $scope.positions = [];
       $scope.shareholders = [];
       $scope.show_add_position = false;
+      $scope.show_add_capital = false;
       $scope.newPosition = new Position();
       $http.get('/services/rest/position').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
@@ -108,7 +120,7 @@
           return $scope.shareholders.push(item);
         });
       });
-      return $scope.add_position = function() {
+      $scope.add_position = function() {
         return $scope.newPosition.$save().then(function(result) {
           return $scope.positions.push(result);
         }).then(function() {
@@ -118,6 +130,21 @@
         }, function(rejection) {
           return $scope.errors = rejection.data;
         });
+      };
+      $scope.show_add_position_form = function() {
+        $scope.show_add_position = true;
+        $scope.show_add_capital = false;
+        return $scope.newPosition = new Position();
+      };
+      $scope.show_add_capital_form = function() {
+        $scope.show_add_position = false;
+        $scope.show_add_capital = true;
+        return $scope.newPosition = new Position();
+      };
+      return $scope.hide_form = function() {
+        $scope.show_add_position = false;
+        $scope.show_add_capital = false;
+        return $scope.newPosition = new Position();
       };
     }
   ]);
@@ -143,11 +170,12 @@
   app = angular.module('js.darg.app.start', ['js.darg.api']);
 
   app.controller('StartController', [
-    '$scope', '$http', 'Company', 'Shareholder', 'User', function($scope, $http, Company, Shareholder, User) {
+    '$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', function($scope, $http, CompanyAdd, Shareholder, User) {
       $scope.shareholders = [];
       $scope.user = [];
+      $scope.show_add_shareholder = false;
       $scope.newShareholder = new Shareholder();
-      $scope.newCompany = new Company();
+      $scope.newCompany = new CompanyAdd();
       $http.get('/services/rest/shareholders').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
           return $scope.shareholders.push(item);
@@ -180,6 +208,12 @@
         }, function(rejection) {
           return $scope.errors = rejection.data;
         });
+      };
+      $scope.show_add_shareholder_form = function() {
+        return $scope.show_add_shareholder = true;
+      };
+      $scope.hide_form = function() {
+        return $scope.show_add_shareholder = false;
       };
       return $scope.goto_shareholder = function(shareholder_id) {
         return window.location = "/shareholder/" + shareholder_id + "/";

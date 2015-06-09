@@ -1,7 +1,7 @@
 Requirements
 ==================
 
-..code-block::
+.. code-block ::
 
     pip install -r requirements.txt
     
@@ -11,7 +11,7 @@ Installation
 
 We are using virtualenv, django 1.8+ and pip for puling dependencies. Currently we develop on Ubuntu and we also test for this environment.
 
-..code-block::
+.. code-block ::
 
     virtualenv .ve
     source .ve/bin/activate
@@ -21,7 +21,7 @@ We are using virtualenv, django 1.8+ and pip for puling dependencies. Currently 
 Dev Env
 =======================
 
-..code-block::
+.. code-block ::
 
     ./manage.py runserver 0.0.0.0:9000 --settings=project.settings.dev
 

@@ -8,3 +8,5 @@ darg.js/node_modules/grunt-contrib-watch/
 site/static/.sass-cache/
 site/media/static/
 site/media/*
+build/*
+src/*

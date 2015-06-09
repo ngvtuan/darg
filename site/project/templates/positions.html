@@ -7,8 +7,17 @@
 <div ng_controller="PositionsController">
   <h1>{% trans "Positions" %}</h1>
   {% include "_form_errors.html" %}
-  <div id="add_position">
+
+  <div class="panel">
+    <a class="btn align-left" href="" ng-click="show_add_position_form()">{% trans "Transfer Shares" %}</a> 
+    <a class="btn" href="" ng-click="show_add_capital_form()">{% trans "Increase Kapital" %}</a>
+  </div>
+
+  <div id="add_position" ng-hide="!show_add_position">
     {% include "_add_position_form.html" %}
+  </div>
+  <div id="add_capital" ng-hide="!show_add_capital">
+    {% include "_add_capital_form.html" %}
   </div>
   
   <div id="positions" ng-hide="!positions.length"> 
@@ -19,9 +28,8 @@
         <tr>
           <th>{% trans "Buy Date" %}</th>
           <th>{% trans "Buyer" %}</th>
-          <th class="text-right">{% trans "Shares (%)" %}</th>
-          <th class="text-right">{% trans "Value" %}</th>
-          <th>{% trans "Sell Date" %}</th>
+          <th class="text-right">{% trans "Share Count" %}</th>
+          <th class="text-right">{% trans "Price" %}</th>
           <th>{% trans "Seller" %}</th>
       </thead
       <tbody>
@@ -31,7 +39,6 @@
         <td>{{ position.buyer.user.first_name }} {{ position.buyer.user.last_name }}</td>
         <td class="text-right">{{ position.count }}</td>
         <td class="text-right">{{ position.value }}</td>
-        <td>{{ position.sold_at | date : 'd.MM.yy' }}</td>
         <td>{{ position.seller.user.first_name }} {{ position.seller.user.last_name }}</td>
       </tr>
       </tbody>

@@ -10,13 +10,24 @@
   <div id="add_company" ng-show="!user.operator_set.length">
     {% include "_add_company_form.html" %}
   </div>
-  
-  <div id="add_shareholder" ng-hide="!user.operator_set.length">
+
+  <div class="panel" ng-hide="!user.operator_set.length">
+    <a class="btn align-left" href="" ng-click="show_add_shareholder_form()">{% trans "Add Shareholder" %}</a>
+  </div>
+
+  <div id="add_shareholder" ng-hide="!user.operator_set.length  || !show_add_shareholder">
       {% include "_add_shareholder_form.html" %}
   </div>
   
   <div id="shareholder_list" ng-hide="!user.operator_set.length"> 
-    <h2>{% trans "Your Shareholders for" %} {% verbatim %}{{ user.operator_set[0].company.name }}{% endverbatim %}</h2>
+    <h2>
+    {% with user.operator_set.last as operator %}
+      {% trans "Your Shareholders for" %} {{ operator.company.name }}
+      <a href="{% url "company" operator.company.id %}" class="btn">
+        <span class="el-icon-cogs"></span>
+      </a>
+    {% endwith %}
+    </h2>
     <table class="table table-hover">
       <caption></caption>
       <thead>
@@ -28,11 +39,11 @@
       </thead
       <tbody>
       {% verbatim %}
-      <tr class="panel" ng-repeat="shareholder in shareholders" ng-click="goto_shareholder(shareholder.pk)">
+      <tr class="panel" ng-repeat="shareholder in shareholders" ng-click="goto_shareholder(shareholder.pk)" ng-mouseover="">
         <td>
           {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
         </td>
-        <td>{{ shareholder.user.email }}</td>
+        <td>{{ shareholder.user.email }}<a class="btn"><span class="el-icon-eye-open"></span></a></td>
         <td class="text-right">{{ shareholder.number }}</td>
         <td class="text-right"><value ng-if="shareholder.share_count != '-'">{{ shareholder.share_count | number : 0}} ({{shareholder.share_percent | number : 1}}%)</value></td>
       </tr>

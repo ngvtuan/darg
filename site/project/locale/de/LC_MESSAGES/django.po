@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-27 23:07+0000\n"
-"PO-Revision-Date: 2015-05-27 23:08+0000\n"
+"POT-Creation-Date: 2015-06-09 18:15+0000\n"
+"PO-Revision-Date: 2015-06-09 18:22+0000\n"
 "Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,11 +19,29 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
+#: project/templates/_add_capital_form.html:3
+#| msgid "Please enter your position data:"
+msgid "Please enter your capital increase data"
+msgstr "Bitte geben Sie die Daten die Kapitalerhöhung an:"
+
+#: project/templates/_add_capital_form.html:13
+#: project/templates/_add_initial_position_form.html:12
+#: project/templates/_add_position_form.html:19
+#: project/templates/_add_shareholder_form.html:15
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: project/templates/_add_capital_form.html:14
+#: project/templates/_add_initial_position_form.html:13
+#: project/templates/_add_position_form.html:20
+msgid "Add Position"
+msgstr "Position hinzufügen"
+
 #: project/templates/_add_company_form.html:3
 msgid "Please enter your company name:"
 msgstr "Bitte geben Sie ihren Firmennamen ein"
 
-#: project/templates/_add_company_form.html:11
+#: project/templates/_add_company_form.html:13
 msgid "Add Company"
 msgstr "Unternehmen hinzufügen"
 
@@ -31,25 +49,26 @@ msgstr "Unternehmen hinzufügen"
 msgid "Please enter your initial share count and nominal value:"
 msgstr "Bitte geben Sie die Daten für eine Position an:"
 
-#: project/templates/_add_initial_position_form.html:12
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: project/templates/_add_initial_position_form.html:13
-#: project/templates/_add_position_form.html:15
-msgid "Add Position"
-msgstr "Position hinzufügen"
-
 #: project/templates/_add_position_form.html:3
 msgid "Please enter your position data:"
 msgstr "Bitte geben Sie die Daten fuer eine Position an:"
 
+#: project/templates/_add_position_form.html:10
+#: project/templates/positions.html:30
+msgid "Buyer"
+msgstr "Käufer"
+
+#: project/templates/_add_position_form.html:15
+#: project/templates/positions.html:33
+msgid "Seller"
+msgstr "Verkäufer"
+
 #: project/templates/_add_shareholder_form.html:3
-#| msgid "Please enter your position data:"
 msgid "Please enter your shareholder data:"
 msgstr "Bitte geben Sie die Aktionärsdaten ein:"
 
-#: project/templates/_add_shareholder_form.html:15
+#: project/templates/_add_shareholder_form.html:16
+#: project/templates/start.html:15
 msgid "Add Shareholder"
 msgstr "Aktionär hinzufügen"
 
@@ -115,18 +134,18 @@ msgid "Thanks you. We will be back to you ASAP!"
 msgstr "Besten Dank! Wir melden uns umgehend."
 
 #: project/templates/index.html:49
-msgid "if you have credentials already:"
-msgstr "Falls Sie schon ein Login haben:"
-
-#: project/templates/index.html:49
 msgid "Login"
 msgstr "Login"
+
+#: project/templates/index.html:50
+msgid "Blog"
+msgstr "Blog"
 
 #: project/templates/log.html:15
 msgid "Your Transaction Log"
 msgstr "Ihre Transaktionen"
 
-#: project/templates/log.html:20 project/templates/positions.html:20
+#: project/templates/log.html:20
 msgid "Date"
 msgstr "Datum"
 
@@ -142,76 +161,104 @@ msgstr "Noch keine Einträge"
 msgid "Positions"
 msgstr "Positionen"
 
-#: project/templates/positions.html:15
+#: project/templates/positions.html:12
+msgid "Transfer Shares"
+msgstr "Aktien übertragen"
+
+#: project/templates/positions.html:13
+msgid "Increase Kapital"
+msgstr "Kapitalerhöhung"
+
+#: project/templates/positions.html:24
 msgid "Your Positions"
 msgstr "Ihre Positionen"
 
-#: project/templates/positions.html:21
-msgid "Shareholder"
-msgstr "Aktionär"
+#: project/templates/positions.html:29
+msgid "Buy Date"
+msgstr "Kaufdatum"
 
-#: project/templates/positions.html:22 project/templates/start.html:27
-#, python-format
-msgid "Shares (%%)"
-msgstr "Aktien (%%)"
+#: project/templates/positions.html:31
+#| msgid "Share Split"
+msgid "Share Count"
+msgstr "Anzahl Aktien"
 
-#: project/templates/positions.html:23
-#| msgid "Face Value"
-msgid "Value"
-msgstr "Nennwert"
+#: project/templates/positions.html:32
+msgid "Price"
+msgstr "Preis"
 
-#: project/templates/positions.html:38
+#: project/templates/positions.html:49
 msgid "No Postions yet."
 msgstr "Noch keine Positionen."
 
 #: project/templates/shareholder.html:9
-#| msgid "Shareholder Details:"
 msgid "Shareholder Details"
 msgstr "Aktionärsdetails"
+
+#: project/templates/shareholder.html:13
+#| msgid "Shareholder Details"
+msgid "Shareholder Data"
+msgstr "Aktionärsdetails"
+
+#: project/templates/shareholder.html:14
+#| msgid "Shareholder Number"
+msgid "Shareholder Name"
+msgstr "Name des Aktionärs"
+
+#: project/templates/shareholder.html:15
+#| msgid "Shareholder Details"
+msgid "Shareholder Email"
+msgstr "Email des Aktionärs"
+
+#: project/templates/shareholder.html:16
+msgid "Shares"
+msgstr "Aktien"
+
+#: project/templates/shareholder.html:17
+msgid "Value of all shares according to last transaction"
+msgstr "Wert aller Aktien zum Preis der letzten Transaktion"
 
 #: project/templates/start.html:8
 msgid "Welcome"
 msgstr "Willkommen"
 
-#: project/templates/start.html:19
+#: project/templates/start.html:25
 msgid "Your Shareholders for"
 msgstr "Ihre Aktionärsliste für"
 
-#: project/templates/start.html:24
+#: project/templates/start.html:35
 msgid "Name"
 msgstr "Name"
 
-#: project/templates/start.html:25
+#: project/templates/start.html:36
+msgid "Email"
+msgstr "Email"
+
+#: project/templates/start.html:37
 msgid "Shareholder Number"
 msgstr "Aktieninhabernummer"
 
-#: project/templates/start.html:26
-msgid "Email"
-msgstr "Email"
+#: project/templates/start.html:38
+#, python-format
+msgid "Shares (%%)"
+msgstr "Aktien (%%)"
+
+#~ msgid "if you have credentials already:"
+#~ msgstr "Falls Sie schon ein Login haben:"
+
+#~ msgid "Shareholder"
+#~ msgstr "Aktionär"
+
+#~ msgid "Value"
+#~ msgstr "Nennwert"
 
 #~ msgid "New Transaction"
 #~ msgstr "Neue Transaktion"
 
-#~ msgid "Share Split"
-#~ msgstr "Aktien Split"
-
 #~ msgid "Capital Change"
 #~ msgstr "Kapitaländerung"
 
-#~ msgid "Buy Date"
-#~ msgstr "Kaufdatum"
-
 #~ msgid "Sell Date"
 #~ msgstr "Verkaufdatum"
-
-#~ msgid "Buyer"
-#~ msgstr "Käufer"
-
-#~ msgid "Seller"
-#~ msgstr "Verkäufer"
-
-#~ msgid "Shares"
-#~ msgstr "Aktien"
 
 #~ msgid "No positions yet."
 #~ msgstr "Noch keine Positionen"

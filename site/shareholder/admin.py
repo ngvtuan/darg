@@ -10,7 +10,7 @@ class OperatorAdmin(admin.ModelAdmin):
     list_display = ('user', 'company')
     pass
 class PositionAdmin(admin.ModelAdmin):
-    list_display = ('bought_at', 'buyer', 'sold_at', 'seller', 'count', 'value')
+    list_display = ('bought_at', 'buyer', 'seller', 'count', 'value')
     pass
 
 admin.site.register(Shareholder, ShareholderAdmin)

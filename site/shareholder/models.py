@@ -13,19 +13,29 @@ class Shareholder(models.Model):
 
     def share_percent(self):
         """ returns percentage of shares owned compared to corps total shares """
-        if not self.buyer.filter(sold_at__isnull=True).count():
-            return '-'
         total = self.company.share_count
-        count = sum(self.buyer.filter(sold_at__isnull=True).values_list('count', flat=True))
+        count = sum(self.buyer.all().values_list('count', flat=True)) - \
+            sum(self.seller.all().values_list('count', flat=True))
         if total:
             return count / float(total) * 100
         return False
 
     def share_count(self):   
         """ total count of shares for shareholder  """
-        if not self.buyer.filter(sold_at__isnull=True).count():
-            return '-'       
-        return sum(self.buyer.filter(sold_at__isnull=True).values_list('count', flat=True))
+        return sum(self.buyer.all().values_list('count', flat=True)) - \
+            sum(self.seller.all().values_list('count', flat=True))
+
+    def share_value(self):
+        """ calculate the total values of all shares for this shareholder """
+        share_count = self.share_count()
+        if share_count == 0:
+            return 0
+
+        #last payed price
+        position = Position.objects.filter(buyer__company=self.company).latest('bought_at')
+        return share_count * position.value
+
+        
 
 class Operator(models.Model):
 
@@ -42,7 +52,6 @@ class Position(models.Model):
     seller = models.ForeignKey('Shareholder', blank=True, null=True, related_name="seller")
     count = models.IntegerField()
     bought_at = models.DateField()
-    sold_at = models.DateField(blank=True, null=True)
     value = models.DecimalField(max_digits=8, decimal_places=4, blank=True, null=True)
 
 class Company(models.Model):

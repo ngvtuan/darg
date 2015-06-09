@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 from rest_framework import routers
 
 from services.rest.views import ShareholderViewSet, CompanyViewSet, UserViewSet, PositionViewSet, \
-    InviteeUpdateView
+    InviteeUpdateView, AddCompanyView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'shareholders', ShareholderViewSet, base_name="shareholders")
@@ -27,11 +27,13 @@ urlpatterns = [
     url(r'^positions/$', 'shareholder.views.positions', name='positions'),
     url(r'^log/$', 'shareholder.views.log', name='log'),
     url(r'^shareholder/(?P<shareholder_id>[0-9]+)/$', 'shareholder.views.shareholder', name='shareholder'),
+    url(r'^company/(?P<company_id>[0-9]+)/$', 'company.views.company', name='company'),
 
     # auth
     url(r'^accounts/', include('registration.backends.simple.urls')),
 
     # rest api
+    url(r'^services/rest/company/add', AddCompanyView.as_view(), name='add_company'),
     url(r'^services/rest/', include(router.urls)),
     url(r'^services/rest/invitee', InviteeUpdateView.as_view(), name='invitee'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),

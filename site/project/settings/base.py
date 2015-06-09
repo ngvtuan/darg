@@ -53,7 +53,9 @@ INSTALLED_APPS = (
 
     'shareholder',
     'services',
+    'company',
     'project',
+
 )
 
 MIDDLEWARE_CLASSES = (

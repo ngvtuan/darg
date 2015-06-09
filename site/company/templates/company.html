@@ -1,0 +1,34 @@
+{% extends "base_auth.html" %}
+{% load i18n %}
+
+{% block ng_app %}js.darg.app.company{% endblock %}
+
+{% block content %}
+<div ng_controller="CompanyController">
+
+  <h1>{% trans "Company Details for" %} {{ company.name }}</h1>
+
+  {% include "_form_errors.html" %}
+ 
+  <h2>{% trans "Data" %}</h2>
+  <table class="table table-striped">
+    <tr>
+      <td>{% trans "Company Name" %}:</td><td> {{ company.name }}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Company Share Count" %}:</td><td> {{ company.share_count }}</td>
+    </tr>
+  </table>
+
+  {% if company.operator_set.exists %}
+    <h2>{% trans "Administrators" %}</h2>
+
+    <table class="table table-striped">
+    {% for operator in company.operator_set.all %}
+      <tr><td>{{ operator.user.first_name }} {{ operator.user.last_name }} {{operator.user.email}}</td></tr>
+    {% endfor %}
+    </table>
+  {% endif %}
+ 
+</div> 
+{% endblock %}

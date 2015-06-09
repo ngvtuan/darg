@@ -1,14 +1,16 @@
 app = angular.module 'js.darg.app.start', ['js.darg.api',]
 
-app.controller 'StartController', ['$scope', '$http', 'Company', 'Shareholder', 'User', ($scope, $http, Company, Shareholder, User) ->
+app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', ($scope, $http, CompanyAdd, Shareholder, User) ->
 
     # from server
     $scope.shareholders = []
     $scope.user = []
 
+    $scope.show_add_shareholder = false
+
     # empty form data
     $scope.newShareholder = new Shareholder()
-    $scope.newCompany = new Company()
+    $scope.newCompany = new CompanyAdd()
 
     $http.get('/services/rest/shareholders').then (result) ->
         angular.forEach result.data.results, (item) ->
@@ -42,6 +44,12 @@ app.controller 'StartController', ['$scope', '$http', 'Company', 'Shareholder', 
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
+
+    $scope.show_add_shareholder_form = ->
+        $scope.show_add_shareholder = true
+
+    $scope.hide_form = ->
+        $scope.show_add_shareholder = false
 
     $scope.goto_shareholder = (shareholder_id) ->
         window.location = "/shareholder/"+shareholder_id+"/"

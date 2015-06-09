@@ -4,8 +4,8 @@ app.factory 'Shareholder', ['$resource', ($resource) ->
     $resource '/services/rest/shareholders/:id', id: '@id'
 ]
 
-app.factory 'Company', ['$resource', ($resource) ->
-    $resource '/services/rest/company/:id', id: '@id'
+app.factory 'CompanyAdd', ['$resource', ($resource) ->
+    $resource '/services/rest/company/add/'
 ]
 
 app.factory 'User', ['$resource', ($resource) ->

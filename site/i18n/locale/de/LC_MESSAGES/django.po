@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-27 23:07+0000\n"
-"PO-Revision-Date: 2015-04-18 10:09+0000\n"
+"POT-Creation-Date: 2015-06-09 18:15+0000\n"
+"PO-Revision-Date: 2015-06-09 18:20+0000\n"
 "Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,6 +18,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
+
+#: company/templates/company.html:9
+msgid "Company Details for"
+msgstr "Unternehmensdaten für"
+
+#: company/templates/company.html:13
+msgid "Data"
+msgstr "Daten"
+
+#: company/templates/company.html:14
+msgid "Company Name"
+msgstr "Name des Unternehmens"
+
+#: company/templates/company.html:15
+msgid "Company Share Count"
+msgstr "Anzahl der Aktien des Unternehmens"
+
+#: company/templates/company.html:17
+msgid "Administrators"
+msgstr "Administratoren"
 
 #: templates/base_auth.html:8
 msgid "Admin"
@@ -82,3 +102,93 @@ msgstr "Bereits registriert?"
 #: templates/registration/registration_form.html:14
 msgid "Login"
 msgstr "Login"
+
+#: templates/zinnia/base.html:10
+msgid "RSS feed of latest entries"
+msgstr "RSS Feed der neuesten Beiträge"
+
+#: templates/zinnia/base.html:11
+msgid "RSS feed of latest discussions"
+msgstr "RSS Feed der neuesten Kommentare"
+
+#: templates/zinnia/base.html:25
+msgid "Recent comments"
+msgstr "Neue Kommentare"
+
+#: templates/zinnia/base.html:31
+msgid "Recent linkbacks"
+msgstr "Neue Linkbacks"
+
+#: templates/zinnia/base.html:38
+msgid "Shortcuts"
+msgstr "Verweise"
+
+#: templates/zinnia/base.html:42
+msgid "Category list"
+msgstr "Kategorien"
+
+#: templates/zinnia/base.html:43
+msgid "Categories"
+msgstr "Kategorien"
+
+#: templates/zinnia/base.html:47
+msgid "Author list"
+msgstr "Authoren"
+
+#: templates/zinnia/base.html:48
+msgid "Authors"
+msgstr "Authoren"
+
+#: templates/zinnia/base.html:51
+msgid "Tag list"
+msgstr "Tags"
+
+#: templates/zinnia/base.html:52
+msgid "Tags"
+msgstr "Tags"
+
+#: templates/zinnia/base.html:55 templates/zinnia/base.html.py:56
+#: templates/zinnia/skeleton.html:79 templates/zinnia/skeleton.html.py:80
+msgid "Sitemap"
+msgstr "Sitemap"
+
+#: templates/zinnia/base.html:58
+msgid "RSS Feed of latest entries"
+msgstr "RSS Feed der letzten Artikel"
+
+#: templates/zinnia/base.html:59
+msgid "RSS Feed"
+msgstr "RSS Feed"
+
+#: templates/zinnia/base.html:66
+msgid "Tools"
+msgstr "Werkzeuge"
+
+#: templates/zinnia/base.html:71 templates/zinnia/base.html.py:73
+msgid "Dashboard"
+msgstr "Übersicht"
+
+#: templates/zinnia/base.html:79 templates/zinnia/base.html.py:81
+msgid "Post an entry"
+msgstr "Artikel verfassen"
+
+#: templates/zinnia/base.html:88 templates/zinnia/base.html.py:90
+#| msgid "Log in"
+msgid "Log out"
+msgstr "Logout"
+
+#: templates/zinnia/skeleton.html:9
+msgid "Alles ueber Aktienregister."
+msgstr "Alles über Das Aktienregister"
+
+#: templates/zinnia/skeleton.html:54 templates/zinnia/skeleton.html.py:86
+msgid "Search"
+msgstr "Suche"
+
+#: templates/zinnia/skeleton.html:71
+msgid "Useful links"
+msgstr "Links"
+
+#: templates/zinnia/skeleton.html:74 templates/zinnia/skeleton.html.py:75
+msgid "Weblog index"
+msgstr "Blog Start"

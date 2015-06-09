@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-27 23:07+0000\n"
+"POT-Creation-Date: 2015-06-09 18:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,26 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: company/templates/company.html:9
+msgid "Company Details for"
+msgstr ""
+
+#: company/templates/company.html:13
+msgid "Data"
+msgstr ""
+
+#: company/templates/company.html:14
+msgid "Company Name"
+msgstr ""
+
+#: company/templates/company.html:15
+msgid "Company Share Count"
+msgstr ""
+
+#: company/templates/company.html:17
+msgid "Administrators"
+msgstr ""
 
 #: templates/base_auth.html:8
 msgid "Admin"
@@ -79,4 +99,93 @@ msgstr ""
 
 #: templates/registration/registration_form.html:14
 msgid "Login"
+msgstr ""
+
+#: templates/zinnia/base.html:10
+msgid "RSS feed of latest entries"
+msgstr ""
+
+#: templates/zinnia/base.html:11
+msgid "RSS feed of latest discussions"
+msgstr ""
+
+#: templates/zinnia/base.html:25
+msgid "Recent comments"
+msgstr ""
+
+#: templates/zinnia/base.html:31
+msgid "Recent linkbacks"
+msgstr ""
+
+#: templates/zinnia/base.html:38
+msgid "Shortcuts"
+msgstr ""
+
+#: templates/zinnia/base.html:42
+msgid "Category list"
+msgstr ""
+
+#: templates/zinnia/base.html:43
+msgid "Categories"
+msgstr ""
+
+#: templates/zinnia/base.html:47
+msgid "Author list"
+msgstr ""
+
+#: templates/zinnia/base.html:48
+msgid "Authors"
+msgstr ""
+
+#: templates/zinnia/base.html:51
+msgid "Tag list"
+msgstr ""
+
+#: templates/zinnia/base.html:52
+msgid "Tags"
+msgstr ""
+
+#: templates/zinnia/base.html:55 templates/zinnia/base.html.py:56
+#: templates/zinnia/skeleton.html:79 templates/zinnia/skeleton.html.py:80
+msgid "Sitemap"
+msgstr ""
+
+#: templates/zinnia/base.html:58
+msgid "RSS Feed of latest entries"
+msgstr ""
+
+#: templates/zinnia/base.html:59
+msgid "RSS Feed"
+msgstr ""
+
+#: templates/zinnia/base.html:66
+msgid "Tools"
+msgstr ""
+
+#: templates/zinnia/base.html:71 templates/zinnia/base.html.py:73
+msgid "Dashboard"
+msgstr ""
+
+#: templates/zinnia/base.html:79 templates/zinnia/base.html.py:81
+msgid "Post an entry"
+msgstr ""
+
+#: templates/zinnia/base.html:88 templates/zinnia/base.html.py:90
+msgid "Log out"
+msgstr ""
+
+#: templates/zinnia/skeleton.html:9
+msgid "Alles ueber Aktienregister."
+msgstr ""
+
+#: templates/zinnia/skeleton.html:54 templates/zinnia/skeleton.html.py:86
+msgid "Search"
+msgstr ""
+
+#: templates/zinnia/skeleton.html:71
+msgid "Useful links"
+msgstr ""
+
+#: templates/zinnia/skeleton.html:74 templates/zinnia/skeleton.html.py:75
+msgid "Weblog index"
 msgstr ""

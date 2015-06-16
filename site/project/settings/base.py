@@ -123,6 +123,47 @@ USE_L10N = True
 
 USE_TZ = True
 
+# -- LOGGING
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root' : {
+        'handlers': ['console', 'sentry',],
+        'level': 'WARNING',
+        'formatter': 'verbose',
+    },
+    'formatters': {
+        'simple': {
+            'format': '%(asctime)s %(levelname)s %(message)s'
+        },
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'console':{
+            'level': 'WARNING',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'sentry': {
+            'level': 'WARNING',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'ERROR',
+        },
+        'celery': {
+            'level': 'WARNING',
+            'handlers': ['sentry', 'console',],
+            'propagate': False,
+        },
+    },
+}
+
 # -- CACHE
 CACHES = {
     'default': {

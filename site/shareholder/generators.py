@@ -27,6 +27,10 @@ def _make_user():
         last_name = random.choice(words),
         username = username,
     )
+
+    user.set_password('test')
+    user.save()
+
     return user
 
 class UserGenerator(object):
@@ -40,10 +44,10 @@ class UserGenerator(object):
 
 class OperatorGenerator(object):
 
-    def generate(self):
+    def generate(self, **kwargs):
     
         word = random.choice(_make_wordlist())
-        user = _make_user()
+        user = kwargs.get("user") or _make_user()
 
         company = Company.objects.create(
             name = '{} A.B.'.format(word),

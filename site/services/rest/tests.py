@@ -2,8 +2,11 @@ from rest_framework.test import APIClient
 from rest_framework import status
 
 from django.test import TestCase
+from django.contrib.auth import get_user_model
 
-from shareholder.generators import OperatorGenerator
+User = get_user_model()
+
+from shareholder.generators import OperatorGenerator, UserGenerator
 
 # Create your tests here.
 class ShareholderTestCase(TestCase):
@@ -61,3 +64,20 @@ class ShareholderTestCase(TestCase):
         response = self.client.get('/services/rest/shareholders', **{'HTTP_AUTHORIZATION': 'Token {}'.format(token.key), 'format': 'json'})
 
         self.assertEqual(response.data.get('results'), [])
+
+    def test_add_shareholder_for_existing_user_account(self):
+
+        operator = OperatorGenerator().generate()
+        user= operator.user
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        data = {"user":{"first_name":"Mike","last_name":"Hildebrand","email":"mike.hildebrand@darg.com"},"number":"1000"}
+        response = self.client.post('/services/rest/shareholders', data, 
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(user.auth_token.key), 'format': 'json'})
+
+        self.assertNotEqual(response.data.get('pk'), None)
+        self.assertTrue(isinstance(response.data.get('user'), dict))
+        self.assertEqual(response.data.get('number'), u'1000')
+        self.assertEqual(User.objects.filter(email=user.email).count(), 1)

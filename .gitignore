@@ -10,3 +10,4 @@ site/media/static/
 site/media/*
 build/*
 src/*
+site/project/settings/dev_local.py

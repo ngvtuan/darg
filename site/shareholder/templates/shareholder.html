@@ -1,0 +1,35 @@
+{% extends "base_auth.html" %}
+{% load i18n %}
+
+{% block ng_app %}js.darg.app.shareholder{% endblock %}
+
+{% block content %}
+<div ng_controller="ShareholderController">
+
+  <h1>{% trans "Shareholder Details" %}</h1>
+
+  {% include "_form_errors.html" %}
+
+  <h2>{% trans "Shareholder Data" %}</h2>
+  <table class="table table-striped">
+    <tr>
+    <tr>
+      <td>{% trans "Shareholder Name" %}:</td>
+      <td>{{ shareholder.user.first_name }} {{ shareholder.user.last_name }}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Shareholder Email" %}:</td>
+      <td>{{ shareholder.user.email }}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Shares" %}:</td>
+      <td>{{ shareholder.share_count }} ({{ shareholder.share_percent }}%)</td>
+    </tr>
+    <tr>
+      <td>{% trans "Value of all shares according to last transaction" %}:</td>
+      <td>{{ shareholder.share_value }}</td>
+    </tr>
+  </table>
+
+</div>
+{% endblock %}

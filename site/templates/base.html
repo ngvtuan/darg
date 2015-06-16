@@ -29,5 +29,8 @@
      $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
   }]);
   </script>
+
+  {% include "_tracking.html" %}
+
 </body>
 </html>

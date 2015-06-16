@@ -29,6 +29,15 @@ def _make_user():
     )
     return user
 
+class UserGenerator(object):
+    """ generate plain user """
+
+    def generate(self):
+        word = random.choice(_make_wordlist())
+        user = _make_user()
+
+        return user
+
 class OperatorGenerator(object):
 
     def generate(self):

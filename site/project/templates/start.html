@@ -20,7 +20,6 @@
   </div>
   {% if user.operator_set.exists %}
     {% for operator in user.operator_set.all %}
-      <!-- manages companies -->
       <div id="shareholder_list" ng-hide="!user.operator_set.length"> 
         <h2>
           {% trans "Your Shareholders for" %} {{ operator.company.name }}

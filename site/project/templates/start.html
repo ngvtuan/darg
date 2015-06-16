@@ -18,43 +18,45 @@
   <div id="add_shareholder" ng-hide="!user.operator_set.length  || !show_add_shareholder">
       {% include "_add_shareholder_form.html" %}
   </div>
-  
-  <div id="shareholder_list" ng-hide="!user.operator_set.length"> 
-    <h2>
-    {% with user.operator_set.last as operator %}
-      {% trans "Your Shareholders for" %} {{ operator.company.name }}
-      <a href="{% url "company" operator.company.id %}" class="btn">
-        <span class="el-icon-cogs"></span>
-      </a>
-    {% endwith %}
-    </h2>
-    <table class="table table-hover">
-      <caption></caption>
-      <thead>
-        <tr>
-          <th>{% trans "Name" %}</th>
-          <th>{% trans "Email" %}</th>
-          <th class="text-right">{% trans "Shareholder Number" %}</th>
-          <th class="text-right">{% trans "Shares (%)" %}</th>
-      </thead
-      <tbody>
-      {% verbatim %}
-      <tr class="panel" ng-repeat="shareholder in shareholders" ng-click="goto_shareholder(shareholder.pk)" ng-mouseover="">
-        <td>
-          {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
-        </td>
-        <td>{{ shareholder.user.email }}<a class="btn"><span class="el-icon-eye-open"></span></a></td>
-        <td class="text-right">{{ shareholder.number }}</td>
-        <td class="text-right"><value ng-if="shareholder.share_count != '-'">{{ shareholder.share_count | number : 0}} ({{shareholder.share_percent | number : 1}}%)</value></td>
-      </tr>
-      </tbody>
-    </table>
-    {% endverbatim %}
-    <div class="panel" ng-show="!shareholders.length">
-      <div class="clearfix">
-        <em>No Shareholders yet.</em>
+  {% if user.operator_set.exists %}
+    {% for operator in user.operator_set.all %}
+      <!-- manages companies -->
+      <div id="shareholder_list" ng-hide="!user.operator_set.length"> 
+        <h2>
+          {% trans "Your Shareholders for" %} {{ operator.company.name }}
+          <a href="{% url "company" operator.company.id %}" class="btn">
+            <span class="el-icon-cogs"></span>
+          </a>
+        </h2>
+        <table class="table table-hover">
+          <caption></caption>
+          <thead>
+            <tr>
+              <th>{% trans "Name" %}</th>
+              <th>{% trans "Email" %}</th>
+              <th class="text-right">{% trans "Shareholder Number" %}</th>
+              <th class="text-right">{% trans "Shares (%)" %}</th>
+          </thead
+          <tbody>
+          {% verbatim %}
+          <tr class="panel" ng-repeat="shareholder in shareholders" ng-click="goto_shareholder(shareholder.pk)" ng-mouseover="">
+            <td>
+              {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
+            </td>
+            <td>{{ shareholder.user.email }}<a class="btn"><span class="el-icon-eye-open"></span></a></td>
+            <td class="text-right">{{ shareholder.number }}</td>
+            <td class="text-right"><value ng-if="shareholder.share_count != '-'">{{ shareholder.share_count | number : 0}} ({{shareholder.share_percent | number : 1}}%)</value></td>
+          </tr>
+          </tbody>
+        </table>
+        {% endverbatim %}
+        <div class="panel" ng-show="!shareholders.length">
+          <div class="clearfix">
+            <em>No Shareholders yet.</em>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    {% endfor %}
+  {% endif %}
 </div> 
 {% endblock %}

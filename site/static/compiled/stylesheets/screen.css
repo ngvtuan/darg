@@ -234,10 +234,6 @@ a, button, input[type=submit] {
   display: inline-block;
   background-color: transparent;
 }
-/* line 42, ../../sass/screen.sass */
-a:active, a:focus, a:hover, button:active, button:focus, button:hover, input[type=submit]:active, input[type=submit]:focus, input[type=submit]:hover {
-  color: #888;
-}
 /* line 44, ../../sass/screen.sass */
 a.regular, button.regular, input[type=submit].regular {
   font-size: 1em;
@@ -359,9 +355,10 @@ strong {
   word-wrap: break-word;
   height: 3em;
   margin-top: 4em;
+  padding-left: 0em;
 }
 
-/* line 121, ../../sass/screen.sass */
+/* line 122, ../../sass/screen.sass */
 .centered {
   background: rgba(255, 255, 255, 0.95);
   padding: 2em;
@@ -374,25 +371,36 @@ strong {
   margin-left: -240px;
 }
 
-/* line 134, ../../sass/screen.sass */
+/* line 135, ../../sass/screen.sass */
 .errorlist {
   color: red;
 }
 
-/* line 137, ../../sass/screen.sass */
+/* line 138, ../../sass/screen.sass */
 .disable {
   color: #ddd;
   border: 1px solid #ddd;
 }
 
-/* line 141, ../../sass/screen.sass */
+/* line 142, ../../sass/screen.sass */
+.btn {
+  font-size: 1em;
+}
+
+/* line 146, ../../sass/screen.sass */
 .btn-focus {
   border: 1px solid #1661ff;
   color: #1661ff;
   font-weight: bold;
 }
 
-/* line 148, ../../sass/screen.sass */
+/* line 152, ../../sass/screen.sass */
+.align-left {
+  padding-left: 0em;
+  margin-left: 0em;
+}
+
+/* line 158, ../../sass/screen.sass */
 .index_background {
   background-size: cover;
   background-image: url("/static/compiled/images/Zuerich_Boerse.jpg");
@@ -401,12 +409,12 @@ strong {
   position: relative;
 }
 
-/* line 154, ../../sass/screen.sass */
+/* line 164, ../../sass/screen.sass */
 .button-panel {
   margin-top: 15px;
 }
 
-/* line 156, ../../sass/screen.sass */
+/* line 166, ../../sass/screen.sass */
 .leaf {
   font-size: 2em;
   position: inherit;
@@ -414,109 +422,132 @@ strong {
   right: 2.4em;
 }
 
-/* line 161, ../../sass/screen.sass */
+/* line 171, ../../sass/screen.sass */
 .bg-success {
   padding: 1em;
 }
 
-/* line 163, ../../sass/screen.sass */
+/* line 173, ../../sass/screen.sass */
 .pub_menu {
   position: absolute;
   top: 1em;
   right: 1em;
 }
-/* line 167, ../../sass/screen.sass */
+/* line 177, ../../sass/screen.sass */
 .pub_menu a {
   border: none;
   color: white;
   font-size: 1em;
 }
 
-/* line 173, ../../sass/screen.sass */
+/* line 183, ../../sass/screen.sass */
 #auth .comment {
   margin-top: 5em;
 }
+/* line 185, ../../sass/screen.sass */
+#auth input {
+  display: block;
+}
 
-/* line 178, ../../sass/screen.sass */
+/* line 189, ../../sass/screen.sass */
 div #add_shareholder {
   margin-bottom: 1em;
 }
 
-/* line 183, ../../sass/screen.sass */
+/* line 192, ../../sass/screen.sass */
+div #shareholder_list h2 a {
+  padding: 0em;
+  font-size: 50%;
+}
+
+/* line 196, ../../sass/screen.sass */
+div #shareholder_list table a {
+  padding: 0em;
+  padding-left: 1em;
+  visibility: hidden;
+  margin: 0em;
+}
+
+/* line 202, ../../sass/screen.sass */
+div #shareholder_list table tr:hover a {
+  visibility: visible;
+}
+
+/* line 211, ../../sass/screen.sass */
 .blog .lead {
   font-size: 1em;
 }
-/* line 185, ../../sass/screen.sass */
+/* line 213, ../../sass/screen.sass */
 .blog .well {
   background-color: transparent;
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 190, ../../sass/screen.sass */
+/* line 218, ../../sass/screen.sass */
 .blog .btn-primary {
   background-color: transparent;
   border: 1px solid #666;
   color: #1661ff;
 }
-/* line 194, ../../sass/screen.sass */
+/* line 222, ../../sass/screen.sass */
 .blog .row {
   margin-top: 4em;
 }
-/* line 196, ../../sass/screen.sass */
+/* line 224, ../../sass/screen.sass */
 .blog .entry-tags {
   display: none;
 }
-/* line 198, ../../sass/screen.sass */
+/* line 226, ../../sass/screen.sass */
 .blog .entry-shorturl {
   display: none;
 }
-/* line 200, ../../sass/screen.sass */
+/* line 228, ../../sass/screen.sass */
 .blog .entry-footer {
   padding-left: 0px;
 }
-/* line 202, ../../sass/screen.sass */
+/* line 230, ../../sass/screen.sass */
 .blog .entry-footer span {
   display: none;
 }
-/* line 204, ../../sass/screen.sass */
+/* line 232, ../../sass/screen.sass */
 .blog .navbar-default {
   background-color: white;
 }
-/* line 206, ../../sass/screen.sass */
+/* line 234, ../../sass/screen.sass */
 .blog .navbar-brand {
   font-size: 2em;
 }
-/* line 208, ../../sass/screen.sass */
+/* line 236, ../../sass/screen.sass */
 .blog .navbar-header span {
   top: 0.8em;
   position: relative;
   left: -1.7em;
 }
-/* line 212, ../../sass/screen.sass */
+/* line 240, ../../sass/screen.sass */
 .blog a {
   border: none;
   font-size: 1em;
 }
-/* line 215, ../../sass/screen.sass */
+/* line 243, ../../sass/screen.sass */
 .blog a:active, .blog a:focus, .blog a:hover {
   color: #1661ff;
   text-decoration: none;
 }
-/* line 218, ../../sass/screen.sass */
+/* line 246, ../../sass/screen.sass */
 .blog h2 {
   margin-bottom: 0em;
 }
-/* line 220, ../../sass/screen.sass */
+/* line 248, ../../sass/screen.sass */
 .blog h2 a {
   padding: 0;
   margin: 0;
 }
-/* line 223, ../../sass/screen.sass */
+/* line 251, ../../sass/screen.sass */
 .blog p {
   margin: 0 0 0 0;
 }
-/* line 225, ../../sass/screen.sass */
+/* line 253, ../../sass/screen.sass */
 .blog small {
   font-size: 40%;
 }

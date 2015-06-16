@@ -9,10 +9,10 @@ MANAGERS = ADMINS
 # needed to send build screenshot of FE tests
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-SESSION_COOKIE_NAME = 'vbnet-sessionid'
+SESSION_COOKIE_NAME = 'darg-sessionid'
 
 TRACKING_ENABLED = True
-TRACKING_CODE = ""
+TRACKING_CODE = ''
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # for local dev use this...
@@ -26,3 +26,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+try:
+    from .dev_local import *
+except ImportError:
+    pass

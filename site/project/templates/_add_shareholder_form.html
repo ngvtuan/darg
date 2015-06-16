@@ -5,14 +5,15 @@
 <div>
   <form class="form-inline">
     <div class="form-group block-level">
-      <input type="text" class="form-control" ng-model="newShareholder.user.first_name" placeholder="First Name">
-      <input type="text" class="form-control" ng-model="newShareholder.user.last_name" placeholder="Last Name">
-      <input type="email" class="form-control" ng-model="newShareholder.user.email" placeholder="Email">
-      <input type="text" class="form-control" ng-model="newShareholder.number" placeholder="Shareholder Number">
+      <input type="text" class="form-control" ng-model="newShareholder.user.first_name" placeholder="First Name"/>
+      <input type="text" class="form-control" ng-model="newShareholder.user.last_name" placeholder="Last Name"/>
+      <input type="email" class="form-control" ng-model="newShareholder.user.email" placeholder="Email"/>
+      <input type="text" class="form-control" ng-model="newShareholder.number" placeholder="Shareholder Number"/>
       <input type="hidden" class="form-control" ng-model="newShareholder.company.id" value="{{user.company[0].id}}"/>
     </div>
     <div class="form-group">
-      <button class="btn btn-default" ng-click="add_shareholder()">{% endverbatim %}{% trans "Add Shareholder" %}{% verbatim %}</button>
+      <button class="btn btn-default" ng-click="hide_form()">{% endverbatim %}{% trans "Cancel" %}{% verbatim %}</button>
+      <button class="btn btn-focus" ng-click="add_shareholder()">{% endverbatim %}{% trans "Add Shareholder" %}{% verbatim %}</button>
     </div>
   </form>
 </div>

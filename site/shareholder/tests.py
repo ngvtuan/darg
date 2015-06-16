@@ -26,4 +26,4 @@ class ShareholderTestCase(TestCase):
 
         res = shareholder.share_percent()
 
-        self.assertEqual(res, 1.0)
+        self.assertEqual(res, 100.0)

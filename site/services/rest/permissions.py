@@ -11,6 +11,7 @@ class SafeMethodsOnlyPermission(permissions.BasePermission):
 class UserCanAddCompanyPermission(SafeMethodsOnlyPermission):
     """Allow everyone which is not a shareholder nor an operator yet to add a company"""
     def has_object_permission(self, request, view, obj=None):
+
         can_add = False
         if obj is None:
             # Either a list or a create, so no author

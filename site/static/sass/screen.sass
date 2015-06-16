@@ -39,8 +39,8 @@ a, button, input[type=submit]
   margin: 0.3em 0.3em 0.3em 0em
   display: inline-block
   background-color: transparent
-  &:active, &:focus, &:hover
-    color: $color-link-highlight
+  //&:active, &:focus, &:hover
+  //  color: $color-link-highlight
   &.regular
     font-size: 1em
     border: none
@@ -117,6 +117,7 @@ strong
   +zen-grid-item(3, 1)
   height: 3em
   margin-top: 4em 
+  padding-left: 0em
 
 .centered
   background: rgba(255, 255, 255, 0.95)
@@ -138,10 +139,19 @@ strong
   color: #ddd
   border: 1px solid #ddd
 
+.btn
+  font-size: 1em
+
+// highlight the recommended button amongst buttons
 .btn-focus
   border: 1px solid $color-focus
   color: $color-focus
   font-weight: bold
+
+// to remove all left spacing
+.align-left
+  padding-left: 0em
+  margin-left: 0em
 
 // ------- view spec
 // --- index
@@ -172,11 +182,29 @@ strong
 #auth
   .comment
     margin-top: 5em
+  input
+    display: block
 
 // --  start
-div
-  #add_shareholder
-    margin-bottom: 1em
+div #add_shareholder
+  margin-bottom: 1em
+
+div #shareholder_list h2 a
+  padding: 0em
+  font-size: 50%
+
+div #shareholder_list table a
+  padding: 0em
+  padding-left: 1em
+  visibility: hidden
+  margin: 0em
+
+div #shareholder_list table tr:hover a
+  visibility: visible
+
+// -- positions
+
+
 
 // -- blog
 .blog

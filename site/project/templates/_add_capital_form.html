@@ -1,0 +1,18 @@
+{% load i18n %}
+
+{% trans "Please enter your capital increase data" %}
+{% verbatim %}
+<div>
+  <form class="form-inline">
+    <div class="form-group block-level">
+      <input type="date" class="form-control" ng-model="newPosition.bought_at" placeholder="Date" required>
+      <input type="number" class="form-control" ng-model="newPosition.count" placeholder="Count" ng-maxlength="5">
+      <input type="number" class="form-control" ng-model="newPosition.value" placeholder="Payed Price" ng-maxlength="10">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-default" ng-click="hide_form()">{% endverbatim %}{% trans "Cancel" %}{% verbatim %}</button>
+      <button class="btn btn-focus" ng-click="add_position()">{% endverbatim %}{% trans "Add Position" %}{% verbatim %}</button>
+    </div>
+  </form>
+</div>
+{% endverbatim %}

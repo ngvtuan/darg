@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-27 23:07+0000\n"
+"POT-Creation-Date: 2015-06-09 18:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: project/templates/_add_capital_form.html:3
+msgid "Please enter your capital increase data"
+msgstr ""
+
+#: project/templates/_add_capital_form.html:13
+#: project/templates/_add_initial_position_form.html:12
+#: project/templates/_add_position_form.html:19
+#: project/templates/_add_shareholder_form.html:15
+msgid "Cancel"
+msgstr ""
+
+#: project/templates/_add_capital_form.html:14
+#: project/templates/_add_initial_position_form.html:13
+#: project/templates/_add_position_form.html:20
+msgid "Add Position"
+msgstr ""
+
 #: project/templates/_add_company_form.html:3
 msgid "Please enter your company name:"
 msgstr ""
 
-#: project/templates/_add_company_form.html:11
+#: project/templates/_add_company_form.html:13
 msgid "Add Company"
 msgstr ""
 
@@ -29,24 +46,26 @@ msgstr ""
 msgid "Please enter your initial share count and nominal value:"
 msgstr ""
 
-#: project/templates/_add_initial_position_form.html:12
-msgid "Cancel"
-msgstr ""
-
-#: project/templates/_add_initial_position_form.html:13
-#: project/templates/_add_position_form.html:15
-msgid "Add Position"
-msgstr ""
-
 #: project/templates/_add_position_form.html:3
 msgid "Please enter your position data:"
+msgstr ""
+
+#: project/templates/_add_position_form.html:10
+#: project/templates/positions.html:30
+msgid "Buyer"
+msgstr ""
+
+#: project/templates/_add_position_form.html:15
+#: project/templates/positions.html:33
+msgid "Seller"
 msgstr ""
 
 #: project/templates/_add_shareholder_form.html:3
 msgid "Please enter your shareholder data:"
 msgstr ""
 
-#: project/templates/_add_shareholder_form.html:15
+#: project/templates/_add_shareholder_form.html:16
+#: project/templates/start.html:15
 msgid "Add Shareholder"
 msgstr ""
 
@@ -101,18 +120,18 @@ msgid "Thanks you. We will be back to you ASAP!"
 msgstr ""
 
 #: project/templates/index.html:49
-msgid "if you have credentials already:"
+msgid "Login"
 msgstr ""
 
-#: project/templates/index.html:49
-msgid "Login"
+#: project/templates/index.html:50
+msgid "Blog"
 msgstr ""
 
 #: project/templates/log.html:15
 msgid "Your Transaction Log"
 msgstr ""
 
-#: project/templates/log.html:20 project/templates/positions.html:20
+#: project/templates/log.html:20
 msgid "Date"
 msgstr ""
 
@@ -128,24 +147,31 @@ msgstr ""
 msgid "Positions"
 msgstr ""
 
-#: project/templates/positions.html:15
+#: project/templates/positions.html:12
+msgid "Transfer Shares"
+msgstr ""
+
+#: project/templates/positions.html:13
+msgid "Increase Kapital"
+msgstr ""
+
+#: project/templates/positions.html:24
 msgid "Your Positions"
 msgstr ""
 
-#: project/templates/positions.html:21
-msgid "Shareholder"
+#: project/templates/positions.html:29
+msgid "Buy Date"
 msgstr ""
 
-#: project/templates/positions.html:22 project/templates/start.html:27
-#, python-format
-msgid "Shares (%%)"
+#: project/templates/positions.html:31
+msgid "Share Count"
 msgstr ""
 
-#: project/templates/positions.html:23
-msgid "Value"
+#: project/templates/positions.html:32
+msgid "Price"
 msgstr ""
 
-#: project/templates/positions.html:38
+#: project/templates/positions.html:49
 msgid "No Postions yet."
 msgstr ""
 
@@ -153,22 +179,47 @@ msgstr ""
 msgid "Shareholder Details"
 msgstr ""
 
+#: project/templates/shareholder.html:13
+msgid "Shareholder Data"
+msgstr ""
+
+#: project/templates/shareholder.html:14
+msgid "Shareholder Name"
+msgstr ""
+
+#: project/templates/shareholder.html:15
+msgid "Shareholder Email"
+msgstr ""
+
+#: project/templates/shareholder.html:16
+msgid "Shares"
+msgstr ""
+
+#: project/templates/shareholder.html:17
+msgid "Value of all shares according to last transaction"
+msgstr ""
+
 #: project/templates/start.html:8
 msgid "Welcome"
 msgstr ""
 
-#: project/templates/start.html:19
+#: project/templates/start.html:25
 msgid "Your Shareholders for"
 msgstr ""
 
-#: project/templates/start.html:24
+#: project/templates/start.html:35
 msgid "Name"
 msgstr ""
 
-#: project/templates/start.html:25
+#: project/templates/start.html:36
+msgid "Email"
+msgstr ""
+
+#: project/templates/start.html:37
 msgid "Shareholder Number"
 msgstr ""
 
-#: project/templates/start.html:26
-msgid "Email"
+#: project/templates/start.html:38
+#, python-format
+msgid "Shares (%%)"
 msgstr ""

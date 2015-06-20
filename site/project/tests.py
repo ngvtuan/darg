@@ -33,6 +33,19 @@ def _add_company_to_user_via_rest(user):
     
     return False
 
+class IndexTestCase(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_index_content(self):
+
+        response = self.client.get("/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue("social_links" in response.content)
+        self.assertTrue("twitter" in response.content)
+
 class TrackingTestCase(TestCase):
 
     def setUp(self):

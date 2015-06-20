@@ -33,6 +33,19 @@ def _add_company_to_user_via_rest(user):
     
     return False
 
+class IndexTestCase(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_index_content(self):
+
+        response = self.client.get("/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue("social_links" in response.content)
+        self.assertTrue("twitter" in response.content)
+
 class TrackingTestCase(TestCase):
 
     def setUp(self):
@@ -76,7 +89,7 @@ class TrackingTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue("UA-58468401-4" in response.content) # tracking code here
         self.assertTrue("Willkommen" in response.content) # has welcome
-        self.assertTrue("manages companies" in response.content) # has shareholder list yet, but not shown by angular
+        self.assertTrue("shareholder_list" in response.content) # has shareholder list yet, but not shown by angular
 
     def test_start_nonauthorized(self):
 

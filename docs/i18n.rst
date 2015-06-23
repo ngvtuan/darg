@@ -1,3 +1,11 @@
+I18N
+===============
+
+
+Translations
+------------------------
+
+
 makemessage runs then with command
 
 ::

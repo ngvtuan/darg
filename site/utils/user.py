@@ -16,4 +16,4 @@ def make_username(first_name, last_name, email):
         email = "{}_{}".format(email, randint(0,1000))
         return make_username(first_name, last_name, email)
 
-    return username
+    return username[0:29]

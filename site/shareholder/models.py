@@ -1,12 +1,41 @@
 from django.db import models
 from django.conf import settings
 
+class Country(models.Model):
+    """Model for countries"""
+    iso_code = models.CharField(max_length = 2, primary_key = True)
+    name = models.CharField(max_length = 45, blank = False)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Countries"
+        ordering = ["name", "iso_code"]
+
+
+class UserProfile(models.Model):
+
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    street = models.TextField()
+    city = models.TextField()
+    province = models.TextField(blank = False, null=True)
+    postal_code = models.TextField()
+    country = models.ForeignKey(Country, blank = False)
+
+    def __unicode__(self):
+        return "%s, %s %s" % (self.city, self.province,
+                              str(self.country))
+
+    class Meta:
+        verbose_name_plural = "Addresses"
 
 class Shareholder(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     company = models.ForeignKey('Company')
     number = models.CharField(max_length=255)
+    # security = models.ForeignKey(Security) # company specific security type
 
     def __str__(self):
         return u"{} {} ({})".format(self.user.first_name, self.user.last_name, self.number)

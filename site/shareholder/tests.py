@@ -1,3 +1,5 @@
+import datetime
+
 from django.test import TestCase
 from django.test.client import Client
 
@@ -26,7 +28,8 @@ class UserProfileTestCase(TestCase):
 
         UserProfile.objects.create(user=UserGenerator().generate(),
             province='some province', street='some street', postal_code='some postal code',
-            city='some city', country=Country.objects.create(iso_code='de', name='Germ'))
+            city='some city', country=Country.objects.create(iso_code='de', name='Germ'),
+            birthday=datetime.datetime.now())
 
         qs = UserProfile.objects.all()
         profile = qs[0]

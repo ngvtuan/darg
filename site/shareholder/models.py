@@ -17,11 +17,14 @@ class Country(models.Model):
 class UserProfile(models.Model):
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    street = models.TextField()
-    city = models.TextField()
-    province = models.TextField(blank = False, null=True)
-    postal_code = models.TextField()
+    street = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    province = models.CharField(max_length=255, blank = False, null=True)
+    postal_code = models.CharField(max_length=255)
     country = models.ForeignKey(Country, blank = False)
+
+    company_name = models.CharField(max_length=255, blank = False, null=True)
+    birthday = models.DateField()
 
     def __unicode__(self):
         return "%s, %s %s" % (self.city, self.province,

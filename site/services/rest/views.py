@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 
 from services.rest.serializers import ShareholderSerializer, CompanySerializer, UserSerializer, \
-    PositionSerializer, AddCompanySerializer
+    PositionSerializer, AddCompanySerializer, UserWithEmailOnlySerializer
 from services.rest.permissions import UserCanAddCompanyPermission, \
     SafeMethodsOnlyPermission, UserCanAddShareholderPermission, UserCanAddPositionPermission,\
     UserCanAddInviteePermission
@@ -79,7 +79,7 @@ class InviteeUpdateView(APIView):
 
     def post(self, request, format=None):
         
-        serializer = UserSerializer(data=request.DATA)
+        serializer = UserWithEmailOnlySerializer(data=request.DATA)
         if serializer.is_valid():
             serializer.save(username=serializer.validated_data['email'])
             return Response(serializer.data, status=status.HTTP_201_CREATED)

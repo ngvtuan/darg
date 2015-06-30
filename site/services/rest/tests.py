@@ -19,7 +19,7 @@ class ShareholderTestCase(TestCase):
         # Using the standard RequestFactory API to create a form POST request
         response = self.client.post('/services/rest/invitee/', {"email":"kk@ll.de"}, format='json')
 
-        self.assertEqual(response.data, {'first_name': u'', 'last_name': u'', 'email': u'kk@ll.de', 'operator_set': []})
+        self.assertEqual(response.data, {'email': u'kk@ll.de'})
 
     def test_invitee_invalid_email(self):
 
@@ -66,6 +66,10 @@ class ShareholderTestCase(TestCase):
         self.assertEqual(response.data.get('results'), [])
 
     def test_add_shareholder_for_existing_user_account(self):
+        """ 
+        test to add a shareholder for an existing user account. means shareholder
+        was added for another or same company already. means we don't add another user object 
+        """
 
         operator = OperatorGenerator().generate()
         user= operator.user
@@ -73,7 +77,25 @@ class ShareholderTestCase(TestCase):
         logged_in = self.client.login(username=user.username, password='test')
         self.assertTrue(logged_in)
 
-        data = {"user":{"first_name":"Mike","last_name":"Hildebrand","email":"mike.hildebrand@darg.com"},"number":"1000"}
+        data = {"user":
+                    {
+                    "first_name":"Mike",
+                    "last_name":"Hildebrand",
+                    "email":"mike.hildebrand@darg.com",
+                    "userprofile": 
+                        {
+                        "company_name": "TestCorp",
+                        "street": "somestreet",
+                        "postal_code": "1252",
+                        "province": "walter",
+                        "city": "some city",
+                        "country": {"iso_code": "de", "name": "Germany"},
+                        "birthday": "2002-12-01",
+                        }
+                    },
+                "number":"1000"}
+
+
         response = self.client.post('/services/rest/shareholders', data, 
             **{'HTTP_AUTHORIZATION': 'Token {}'.format(user.auth_token.key), 'format': 'json'})
 

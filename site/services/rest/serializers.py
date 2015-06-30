@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 
-from shareholder.models import Shareholder, Company, Operator, Position
+from shareholder.models import Shareholder, Company, Operator, Position, UserProfile, Country
 from services.rest.validators import DependedFieldsValidator
 from rest_framework import serializers
 
@@ -60,12 +60,34 @@ class OperatorSerializer(serializers.HyperlinkedModelSerializer):
         model = Operator
         fields = ('id', 'company')
 
+class CountrySerializer(serializers.HyperlinkedModelSerializer):
+    """ list of countries selectable """
+
+    class Meta:
+        model = Country
+        fields = ('iso_code', 'name')
+
+class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
+    """ serialize additional user data """
+    country = CountrySerializer(many=False)
+
+    class Meta:
+        model = UserProfile
+        fields = ('street', 'city', 'province', 'postal_code', 'country', 'birthday', 'company_name')
+
+class UserWithEmailOnlySerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('email',)
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     operator_set = OperatorSerializer(many=True, read_only=True)
+    userprofile = UserProfileSerializer(many=False)
     
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'operator_set',)
+        fields = ('first_name', 'last_name', 'email', 'operator_set', 'userprofile')
 
 class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
     user = UserSerializer(many=False)

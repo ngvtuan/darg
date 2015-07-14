@@ -1,10 +1,11 @@
 from django.db import models
 from django.conf import settings
 
+
 class Country(models.Model):
     """Model for countries"""
-    iso_code = models.CharField(max_length = 2, primary_key = True)
-    name = models.CharField(max_length = 45, blank = False)
+    iso_code = models.CharField(max_length=2, primary_key=True)
+    name = models.CharField(max_length=45, blank=False)
 
     def __unicode__(self):
         return self.name
@@ -19,11 +20,11 @@ class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
-    province = models.CharField(max_length=255, blank = False, null=True)
+    province = models.CharField(max_length=255, blank=False, null=True)
     postal_code = models.CharField(max_length=255)
-    country = models.ForeignKey(Country, blank = False)
+    country = models.ForeignKey(Country, blank=False)
 
-    company_name = models.CharField(max_length=255, blank = False, null=True)
+    company_name = models.CharField(max_length=255, blank=False, null=True)
     birthday = models.DateField()
 
     def __unicode__(self):
@@ -33,6 +34,7 @@ class UserProfile(models.Model):
     class Meta:
         verbose_name_plural = "Addresses"
 
+
 class Shareholder(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -41,10 +43,12 @@ class Shareholder(models.Model):
     # security = models.ForeignKey(Security) # company specific security type
 
     def __str__(self):
-        return u"{} {} ({})".format(self.user.first_name, self.user.last_name, self.number)
+        return u"{} {} ({})".format(
+            self.user.first_name, self.user.last_name, self.number)
 
     def share_percent(self):
-        """ returns percentage of shares owned compared to corps total shares """
+        """ returns percentage of shares owned compared to corps
+        total shares """
         total = self.company.share_count
         count = sum(self.buyer.all().values_list('count', flat=True)) - \
             sum(self.seller.all().values_list('count', flat=True))
@@ -52,7 +56,7 @@ class Shareholder(models.Model):
             return count / float(total) * 100
         return False
 
-    def share_count(self):   
+    def share_count(self):
         """ total count of shares for shareholder  """
         return sum(self.buyer.all().values_list('count', flat=True)) - \
             sum(self.seller.all().values_list('count', flat=True))
@@ -63,11 +67,11 @@ class Shareholder(models.Model):
         if share_count == 0:
             return 0
 
-        #last payed price
-        position = Position.objects.filter(buyer__company=self.company).latest('bought_at')
+        # last payed price
+        position = Position.objects.filter(buyer__company=self.company).latest(
+            'bought_at')
         return share_count * position.value
 
-        
 
 class Operator(models.Model):
 
@@ -78,13 +82,17 @@ class Operator(models.Model):
     def __str__(self):
         return u"{} {}".format(self.user.first_name, self.user.last_name)
 
+
 class Position(models.Model):
 
     buyer = models.ForeignKey('Shareholder', related_name="buyer")
-    seller = models.ForeignKey('Shareholder', blank=True, null=True, related_name="seller")
+    seller = models.ForeignKey('Shareholder', blank=True, null=True,
+                               related_name="seller")
     count = models.IntegerField()
     bought_at = models.DateField()
-    value = models.DecimalField(max_digits=8, decimal_places=4, blank=True, null=True)
+    value = models.DecimalField(max_digits=8, decimal_places=4, blank=True,
+                                null=True)
+
 
 class Company(models.Model):
 
@@ -102,6 +110,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):

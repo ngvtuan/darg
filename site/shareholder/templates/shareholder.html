@@ -22,6 +22,22 @@
       <td>{{ shareholder.user.email }}</td>
     </tr>
     <tr>
+      <td>{% trans "Shareholder Company Name" %}:</td>
+      <td>{{ shareholder.user.userprofile.company_name }}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Address" %}:</td>
+      <td>{{ shareholder.user.userprofile.street }} <br/>
+          {{ shareholder.user.userprofile.postal_code }} {{ shareholder.user.userprofile.city }}<br/>
+          {{ shareholder.user.userprofile.province }}<br/>
+          {{ shareholder.user.userprofile.country.name }}
+      </td>
+    </tr>
+    <tr>
+      <td>{% trans "Shareholder Birthday" %}:</td>
+      <td>{{ shareholder.user.userprofile.birthday }}</td>
+    </tr>
+    <tr>
       <td>{% trans "Shares" %}:</td>
       <td>{{ shareholder.share_count }} ({{ shareholder.share_percent }}%)</td>
     </tr>

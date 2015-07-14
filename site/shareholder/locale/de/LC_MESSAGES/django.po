@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-14 22:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: shareholder/templates/shareholder.html:9
+msgid "Shareholder Details"
+msgstr "Aktionaersdetails"
+
+#: shareholder/templates/shareholder.html:13
+msgid "Shareholder Data"
+msgstr "Aktionaersdaten"
+
+#: shareholder/templates/shareholder.html:17
+msgid "Shareholder Name"
+msgstr "Name"
+
+#: shareholder/templates/shareholder.html:21
+msgid "Shareholder Email"
+msgstr "Email"
+
+#: shareholder/templates/shareholder.html:25
+msgid "Shareholder Company Name"
+msgstr "Name des Unternehmens"
+
+#: shareholder/templates/shareholder.html:29
+msgid "Address"
+msgstr "Adresse"
+
+#: shareholder/templates/shareholder.html:37
+msgid "Shareholder Birthday"
+msgstr "Geburstag"
+
+#: shareholder/templates/shareholder.html:41
+msgid "Shares"
+msgstr "Aktien"
+
+#: shareholder/templates/shareholder.html:45
+msgid "Value of all shares according to last transaction"
+msgstr "Wert der Aktion basierend auf der letzten Transaktion"

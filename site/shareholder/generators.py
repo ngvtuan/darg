@@ -5,7 +5,7 @@ import datetime
 from django.conf import settings
 from django.contrib.auth import get_user_model
 
-from shareholder.models import Shareholder, Company, Position, Operator
+from shareholder.models import Shareholder, Company, Position, Operator, UserProfile, Country
 
 User = get_user_model()
 
@@ -26,6 +26,19 @@ def _make_user():
         first_name = random.choice(words),
         last_name = random.choice(words),
         username = username,
+    )
+
+    country, created = Country.objects.get_or_create(iso_code="de", defaults={"name":"Germany", "iso_code": "de"})
+
+    profile = UserProfile.objects.create(
+        user=user,
+        country=country,
+        street="Some Street",
+        city="SomeCity",
+        province="Some Province",
+        postal_code="12345",
+        birthday=datetime.datetime.now(),
+        company_name="SomeCorp"
     )
 
     user.set_password('test')

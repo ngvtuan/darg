@@ -2,7 +2,7 @@ import datetime
 
 from django.test import TestCase
 from django.test.client import Client
-
+from django.core.urlresolvers import reverse
 from django.test.client import RequestFactory
 
 from shareholder.models import *
@@ -26,18 +26,15 @@ class UserProfileTestCase(TestCase):
 
     def test_model(self):
 
-        UserProfile.objects.create(user=UserGenerator().generate(),
-            province='some province', street='some street', postal_code='some postal code',
-            city='some city', country=Country.objects.create(iso_code='de', name='Germ'),
-            birthday=datetime.datetime.now())
+        user=UserGenerator().generate()
 
         qs = UserProfile.objects.all()
         profile = qs[0]
 
         self.assertEqual(qs.count(), 1)
         self.assertEqual(profile.country.iso_code, 'de')
-        self.assertEqual(profile.country.name, 'Germ') 
-        self.assertEqual(profile.province, 'some province')
+        self.assertEqual(profile.country.name, 'Germany') 
+        self.assertEqual(profile.province, 'Some Province')
 
 class ShareholderTestCase(TestCase):
 
@@ -51,6 +48,20 @@ class ShareholderTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue("Das Akt" in response.content)
+
+    def test_shareholder_detail(self):
+        """ test detail view for shareholder """
+
+        shareholder = ShareholderGenerator().generate()
+
+        response = self.client.login(username=shareholder.user.username, password="test")
+        self.assertTrue(response)
+
+        response = self.client.get(reverse("shareholder", args=(shareholder.id,)))
+
+        self.assertTrue(shareholder.user.userprofile.company_name in response.content)
+        self.assertTrue(shareholder.user.userprofile.street in response.content)
+        
 
     def test_share_percent(self):
         shareholder = ShareholderGenerator().generate()

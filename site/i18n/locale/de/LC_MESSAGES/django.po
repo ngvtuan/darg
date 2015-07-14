@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 18:15+0000\n"
+"POT-Creation-Date: 2015-07-14 22:21+0000\n"
 "PO-Revision-Date: 2015-06-09 18:20+0000\n"
 "Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,15 +27,15 @@ msgstr "Unternehmensdaten für"
 msgid "Data"
 msgstr "Daten"
 
-#: company/templates/company.html:14
+#: company/templates/company.html:16
 msgid "Company Name"
 msgstr "Name des Unternehmens"
 
-#: company/templates/company.html:15
+#: company/templates/company.html:19
 msgid "Company Share Count"
 msgstr "Anzahl der Aktien des Unternehmens"
 
-#: company/templates/company.html:17
+#: company/templates/company.html:24
 msgid "Administrators"
 msgstr "Administratoren"
 
@@ -173,7 +173,6 @@ msgid "Post an entry"
 msgstr "Artikel verfassen"
 
 #: templates/zinnia/base.html:88 templates/zinnia/base.html.py:90
-#| msgid "Log in"
 msgid "Log out"
 msgstr "Logout"
 

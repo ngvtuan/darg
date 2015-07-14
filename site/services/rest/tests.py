@@ -89,7 +89,7 @@ class ShareholderTestCase(TestCase):
                     "postal_code": "1252",
                     "province": "walter",
                     "city": "some city",
-                    "country": {"iso_code": "de", "name": "Germany"},
+                    "country": {"iso_code": "dx", "name": "Germany"},
                     "birthday": "2002-12-01",
                 }
             },
@@ -110,11 +110,11 @@ class ShareholderTestCase(TestCase):
         user = User.objects.get(email="mike.hildebrand@darg.com")
         userprofile = UserProfile.objects.latest('id')
         self.assertEqual(user.userprofile, userprofile)
-        self.assertEqual(user.userprofile.country.iso_code, 'de')
+        self.assertEqual(user.userprofile.country.iso_code, 'dx')
 
         # check response
         self.assertEqual(len(response.data.get('user').get('userprofile')), 7)
         self.assertEqual(response.data.get('user').get('userprofile').get('company_name'),
                          'TestCorp')
         self.assertEqual(response.data.get('user').get('userprofile').get('country')
-                         .get('iso_code'), 'de')
+                         .get('iso_code'), 'dx')

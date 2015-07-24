@@ -4,19 +4,36 @@
 {% block ng_app %}js.darg.app.company{% endblock %}
 
 {% block content %}
+
+<!-- required for angular API call -->
+<script>var company_id = {{ company.id}}</script>
+
 <div ng_controller="CompanyController">
 
-  <h1>{% trans "Company Details for" %} {{ company.name }}</h1>
+  <h1>{% trans "Company Details for" %} {% verbatim %}{{ company.name }}{% endverbatim %}</h1>
 
   {% include "_form_errors.html" %}
- 
+  
   <h2>{% trans "Data" %}</h2>
   <table class="table table-striped">
     <tr>
-      <td>{% trans "Company Name" %}:</td><td> {{ company.name }}</td>
+      <td>{% trans "Company Name" %}:</td>
+      <td>{% verbatim %}<span editable-text="company.name" onaftersave="edit_company()">{{ company.name || 'empty' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}</td>
     </tr>
     <tr>
-      <td>{% trans "Company Share Count" %}:</td><td> {{ company.share_count }}</td>
+      <td>{% trans "Company Share Count" %}:</td>
+      <td>{% verbatim %}<span editable-text="company.share_count" onaftersave="edit_company()">{{ company.share_count }} <span class="el-icon-pencil"></span></span>{% endverbatim %}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Company Headquarter Country" %}:</td>
+      <td>
+      {% verbatim %}
+        <span editable-select="company.country" onaftersave="edit_company()" e-ng-options="c as c.name for c in countries">
+          {{ company.country.name || 'empty' }} 
+          <span class="el-icon-pencil"></span>
+        </span>
+      {% endverbatim %}
+      </td>
     </tr>
   </table>
 

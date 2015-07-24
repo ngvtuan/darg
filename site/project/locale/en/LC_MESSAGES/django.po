@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 18:15+0000\n"
+"POT-Creation-Date: 2015-07-23 22:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,14 +22,12 @@ msgid "Please enter your capital increase data"
 msgstr ""
 
 #: project/templates/_add_capital_form.html:13
-#: project/templates/_add_initial_position_form.html:12
 #: project/templates/_add_position_form.html:19
 #: project/templates/_add_shareholder_form.html:15
 msgid "Cancel"
 msgstr ""
 
 #: project/templates/_add_capital_form.html:14
-#: project/templates/_add_initial_position_form.html:13
 #: project/templates/_add_position_form.html:20
 msgid "Add Position"
 msgstr ""
@@ -40,10 +38,6 @@ msgstr ""
 
 #: project/templates/_add_company_form.html:13
 msgid "Add Company"
-msgstr ""
-
-#: project/templates/_add_initial_position_form.html:3
-msgid "Please enter your initial share count and nominal value:"
 msgstr ""
 
 #: project/templates/_add_position_form.html:3
@@ -119,11 +113,11 @@ msgstr ""
 msgid "Thanks you. We will be back to you ASAP!"
 msgstr ""
 
-#: project/templates/index.html:49
+#: project/templates/index.html:54
 msgid "Login"
 msgstr ""
 
-#: project/templates/index.html:50
+#: project/templates/index.html:55
 msgid "Blog"
 msgstr ""
 
@@ -175,30 +169,6 @@ msgstr ""
 msgid "No Postions yet."
 msgstr ""
 
-#: project/templates/shareholder.html:9
-msgid "Shareholder Details"
-msgstr ""
-
-#: project/templates/shareholder.html:13
-msgid "Shareholder Data"
-msgstr ""
-
-#: project/templates/shareholder.html:14
-msgid "Shareholder Name"
-msgstr ""
-
-#: project/templates/shareholder.html:15
-msgid "Shareholder Email"
-msgstr ""
-
-#: project/templates/shareholder.html:16
-msgid "Shares"
-msgstr ""
-
-#: project/templates/shareholder.html:17
-msgid "Value of all shares according to last transaction"
-msgstr ""
-
 #: project/templates/start.html:8
 msgid "Welcome"
 msgstr ""
@@ -207,19 +177,23 @@ msgstr ""
 msgid "Your Shareholders for"
 msgstr ""
 
-#: project/templates/start.html:35
+#: project/templates/start.html:34
 msgid "Name"
 msgstr ""
 
-#: project/templates/start.html:36
+#: project/templates/start.html:35
 msgid "Email"
 msgstr ""
 
-#: project/templates/start.html:37
+#: project/templates/start.html:36
 msgid "Shareholder Number"
 msgstr ""
 
-#: project/templates/start.html:38
+#: project/templates/start.html:37
 #, python-format
 msgid "Shares (%%)"
+msgstr ""
+
+#: project/templates/start.html:42
+msgid "Gafi Validation failed"
 msgstr ""

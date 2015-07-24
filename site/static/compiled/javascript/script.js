@@ -17,6 +17,30 @@
     }
   ]);
 
+  app.factory('Company', [
+    '$resource', function($resource) {
+      return $resource('/services/rest/company/:id', {
+        id: '@pk'
+      }, {
+        update: {
+          method: 'PUT'
+        }
+      });
+    }
+  ]);
+
+  app.factory('Country', [
+    '$resource', function($resource) {
+      return $resource('/services/rest/country/:id', {
+        id: '@pk'
+      }, {
+        update: {
+          method: 'PUT'
+        }
+      });
+    }
+  ]);
+
   app.factory('User', [
     '$resource', function($resource) {
       return $resource('/services/rest/user/:id', {
@@ -59,13 +83,41 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.company', ['js.darg.api']);
+  app = angular.module('js.darg.app.company', ['js.darg.api', 'xeditable']);
 
   app.controller('CompanyController', [
-    '$scope', '$http', function($scope, $http) {
-      return $scope.test = true;
+    '$scope', '$http', 'Company', 'Country', function($scope, $http, Company, Country) {
+      $http.get('/services/rest/company/' + company_id).then(function(result) {
+        $scope.company = new Company(result.data);
+        return $http.get($scope.company.country).then(function(result1) {
+          return $scope.company.country = result1.data;
+        });
+      });
+      $http.get('/services/rest/country').then(function(result) {
+        return $scope.countries = result.data.results;
+      });
+      return $scope.edit_company = function() {
+        $scope.company.country = $scope.company.country.url;
+        return $scope.company.$update().then(function(result) {
+          $scope.company = new Company(result);
+          $http.get($scope.company.country).then(function(result1) {
+            return $scope.company.country = result1.data;
+          });
+          return console.log($scope.company);
+        }).then(function() {
+          return void 0;
+        }).then(function() {
+          return $scope.errors = null;
+        }, function(rejection) {
+          return $scope.errors = rejection.data;
+        });
+      };
     }
   ]);
+
+  app.run(function(editableOptions) {
+    editableOptions.theme = 'bs3';
+  });
 
 }).call(this);
 

@@ -8,6 +8,14 @@ app.factory 'CompanyAdd', ['$resource', ($resource) ->
     $resource '/services/rest/company/add/'
 ]
 
+app.factory 'Company', ['$resource', ($resource) ->
+    $resource('/services/rest/company/:id', {id: '@pk'} , update: method: 'PUT')
+]
+
+app.factory 'Country', ['$resource', ($resource) ->
+    $resource('/services/rest/country/:id', {id: '@pk'} , update: method: 'PUT')
+]
+
 app.factory 'User', ['$resource', ($resource) ->
     $resource '/services/rest/user/:id', id: '@id'
 ]

@@ -7,11 +7,11 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 
 from services.rest.serializers import ShareholderSerializer, CompanySerializer, UserSerializer, \
-    PositionSerializer, AddCompanySerializer
+    PositionSerializer, AddCompanySerializer, UserWithEmailOnlySerializer, CountrySerializer
 from services.rest.permissions import UserCanAddCompanyPermission, \
     SafeMethodsOnlyPermission, UserCanAddShareholderPermission, UserCanAddPositionPermission,\
-    UserCanAddInviteePermission
-from shareholder.models import Shareholder, Company, Operator, Position
+    UserCanAddInviteePermission, UserCanEditCompanyPermission
+from shareholder.models import Shareholder, Company, Operator, Position, Country
 
 User = get_user_model()
 
@@ -30,6 +30,8 @@ class ShareholderViewSet(viewsets.ModelViewSet):
         return Shareholder.objects.filter(company__operator__user=user).distinct()
 
 
+
+
 class CompanyViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -38,7 +40,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
     permission_classes = [
-        UserCanAddCompanyPermission,
+        UserCanEditCompanyPermission,
     ]
 
     def get_queryset(self):
@@ -73,13 +75,24 @@ class UserViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return User.objects.filter(id = user.id)
 
+class CountryViewSet(viewsets.ModelViewSet):
+    """ API endpoint to get user base info """
+    serializer_class = CountrySerializer
+    permission_classes = [
+        SafeMethodsOnlyPermission,
+    ]
+
+    def get_queryset(self):
+        users = Country.objects.all()
+        return users
+
 class InviteeUpdateView(APIView):
     """ API endpoint to get user base info """
     permission_classes = (AllowAny,)
 
     def post(self, request, format=None):
         
-        serializer = UserSerializer(data=request.DATA)
+        serializer = UserWithEmailOnlySerializer(data=request.DATA)
         if serializer.is_valid():
             serializer.save(username=serializer.validated_data['email'])
             return Response(serializer.data, status=status.HTTP_201_CREATED)

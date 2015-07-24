@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 18:15+0000\n"
-"PO-Revision-Date: 2015-06-09 18:22+0000\n"
+"POT-Creation-Date: 2015-07-23 22:28+0000\n"
+"PO-Revision-Date: 2015-07-23 22:30+0000\n"
 "Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -20,19 +20,16 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
 #: project/templates/_add_capital_form.html:3
-#| msgid "Please enter your position data:"
 msgid "Please enter your capital increase data"
 msgstr "Bitte geben Sie die Daten die Kapitalerhöhung an:"
 
 #: project/templates/_add_capital_form.html:13
-#: project/templates/_add_initial_position_form.html:12
 #: project/templates/_add_position_form.html:19
 #: project/templates/_add_shareholder_form.html:15
 msgid "Cancel"
 msgstr "Abbrechen"
 
 #: project/templates/_add_capital_form.html:14
-#: project/templates/_add_initial_position_form.html:13
 #: project/templates/_add_position_form.html:20
 msgid "Add Position"
 msgstr "Position hinzufügen"
@@ -44,10 +41,6 @@ msgstr "Bitte geben Sie ihren Firmennamen ein"
 #: project/templates/_add_company_form.html:13
 msgid "Add Company"
 msgstr "Unternehmen hinzufügen"
-
-#: project/templates/_add_initial_position_form.html:3
-msgid "Please enter your initial share count and nominal value:"
-msgstr "Bitte geben Sie die Daten für eine Position an:"
 
 #: project/templates/_add_position_form.html:3
 msgid "Please enter your position data:"
@@ -133,11 +126,11 @@ msgstr "Einladung anfragen"
 msgid "Thanks you. We will be back to you ASAP!"
 msgstr "Besten Dank! Wir melden uns umgehend."
 
-#: project/templates/index.html:49
+#: project/templates/index.html:54
 msgid "Login"
 msgstr "Login"
 
-#: project/templates/index.html:50
+#: project/templates/index.html:55
 msgid "Blog"
 msgstr "Blog"
 
@@ -178,7 +171,6 @@ msgid "Buy Date"
 msgstr "Kaufdatum"
 
 #: project/templates/positions.html:31
-#| msgid "Share Split"
 msgid "Share Count"
 msgstr "Anzahl Aktien"
 
@@ -190,33 +182,6 @@ msgstr "Preis"
 msgid "No Postions yet."
 msgstr "Noch keine Positionen."
 
-#: project/templates/shareholder.html:9
-msgid "Shareholder Details"
-msgstr "Aktionärsdetails"
-
-#: project/templates/shareholder.html:13
-#| msgid "Shareholder Details"
-msgid "Shareholder Data"
-msgstr "Aktionärsdetails"
-
-#: project/templates/shareholder.html:14
-#| msgid "Shareholder Number"
-msgid "Shareholder Name"
-msgstr "Name des Aktionärs"
-
-#: project/templates/shareholder.html:15
-#| msgid "Shareholder Details"
-msgid "Shareholder Email"
-msgstr "Email des Aktionärs"
-
-#: project/templates/shareholder.html:16
-msgid "Shares"
-msgstr "Aktien"
-
-#: project/templates/shareholder.html:17
-msgid "Value of all shares according to last transaction"
-msgstr "Wert aller Aktien zum Preis der letzten Transaktion"
-
 #: project/templates/start.html:8
 msgid "Welcome"
 msgstr "Willkommen"
@@ -225,22 +190,47 @@ msgstr "Willkommen"
 msgid "Your Shareholders for"
 msgstr "Ihre Aktionärsliste für"
 
-#: project/templates/start.html:35
+#: project/templates/start.html:34
 msgid "Name"
 msgstr "Name"
 
-#: project/templates/start.html:36
+#: project/templates/start.html:35
 msgid "Email"
 msgstr "Email"
 
-#: project/templates/start.html:37
+#: project/templates/start.html:36
 msgid "Shareholder Number"
 msgstr "Aktieninhabernummer"
 
-#: project/templates/start.html:38
+#: project/templates/start.html:37
 #, python-format
 msgid "Shares (%%)"
 msgstr "Aktien (%%)"
+
+#: project/templates/start.html:42
+msgid "Gafi Validation failed"
+msgstr "GAFI-FATF Validierung fehlgeschlagen"
+
+#~ msgid "Please enter your initial share count and nominal value:"
+#~ msgstr "Bitte geben Sie die Daten für eine Position an:"
+
+#~ msgid "Shareholder Details"
+#~ msgstr "Aktionärsdetails"
+
+#~ msgid "Shareholder Data"
+#~ msgstr "Aktionärsdetails"
+
+#~ msgid "Shareholder Name"
+#~ msgstr "Name des Aktionärs"
+
+#~ msgid "Shareholder Email"
+#~ msgstr "Email des Aktionärs"
+
+#~ msgid "Shares"
+#~ msgstr "Aktien"
+
+#~ msgid "Value of all shares according to last transaction"
+#~ msgstr "Wert aller Aktien zum Preis der letzten Transaktion"
 
 #~ msgid "if you have credentials already:"
 #~ msgstr "Falls Sie schon ein Login haben:"

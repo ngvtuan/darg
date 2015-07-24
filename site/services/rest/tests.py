@@ -6,7 +6,6 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-from shareholder.models import UserProfile
 from shareholder.generators import OperatorGenerator
 
 
@@ -83,15 +82,6 @@ class ShareholderTestCase(TestCase):
                 "first_name": "Mike",
                 "last_name": "Hildebrand",
                 "email": "mike.hildebrand@darg.com",
-                "userprofile": {
-                    "company_name": "TestCorp",
-                    "street": "somestreet",
-                    "postal_code": "1252",
-                    "province": "walter",
-                    "city": "some city",
-                    "country": {"iso_code": "dx", "name": "Germany"},
-                    "birthday": "2002-12-01",
-                }
             },
             "number": "1000"}
 
@@ -108,13 +98,3 @@ class ShareholderTestCase(TestCase):
 
         # check proper db status
         user = User.objects.get(email="mike.hildebrand@darg.com")
-        userprofile = UserProfile.objects.latest('id')
-        self.assertEqual(user.userprofile, userprofile)
-        self.assertEqual(user.userprofile.country.iso_code, 'dx')
-
-        # check response
-        self.assertEqual(len(response.data.get('user').get('userprofile')), 7)
-        self.assertEqual(response.data.get('user').get('userprofile').get('company_name'),
-                         'TestCorp')
-        self.assertEqual(response.data.get('user').get('userprofile').get('country')
-                         .get('iso_code'), 'dx')

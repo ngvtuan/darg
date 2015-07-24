@@ -11,10 +11,22 @@
   {% include "_form_errors.html" %}
 
   <h2>{% trans "Shareholder Data" %}</h2>
+
+  {% if not shareholder.validate_gafi.is_valid %}
+  <div class="alert alert-warning alert-dismissible"  role="alert">
+    {% for error in shareholder.validate_gafi.errors %}
+    <div>{{ error }}</div>
+    {% endfor %}
+    <div> {% trans "Please request the shareholder to complete his data." %}</div>
+  </div>
+  {% endif %}
+
   <table class="table table-striped">
     <tr>
     <tr>
-      <td>{% trans "Shareholder Name" %}:</td>
+      <td>
+        {% trans "Shareholder Name" %}:
+      </td>
       <td>{{ shareholder.user.first_name }} {{ shareholder.user.last_name }}</td>
     </tr>
     <tr>

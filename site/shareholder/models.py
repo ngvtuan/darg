@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.translation import ugettext as _
 
 
 class Country(models.Model):
@@ -17,7 +18,7 @@ class Country(models.Model):
 
 class UserProfile(models.Model):
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, blank=True, null=True)
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     province = models.CharField(max_length=255, blank=False, null=True)
@@ -72,6 +73,41 @@ class Shareholder(models.Model):
             'bought_at')
         return share_count * position.value
 
+    def validate_gafi(self):
+        """ returns dict with indication if all data is correct to match swiss fatf gafi
+        regulations """
+        result = {"is_valid": True, "errors": []}
+
+        # applies only for swiss corps
+        if not self.company.country or self.company.country.iso_code.lower() != 'ch':
+            return result
+
+        # missing profile leads to global warning
+        if not hasattr(self.user, 'userprofile'):
+            result['is_valid'] = False
+            result['errors'].append(_("Missing all data required for #GAFI."))
+            return result
+
+        if not (self.user.first_name and self.user.last_name) or not \
+                self.user.userprofile.company_name:
+            result['is_valid'] = False
+            result['errors'].append(_('Shareholder first name, last name or company name missing.'))
+
+        if not self.user.userprofile.birthday:
+            result['is_valid'] = False
+            result['errors'].append(_('Shareholder birthday missing.'))
+
+        if not self.user.userprofile.country:
+            result['is_valid'] = False
+            result['errors'].append(_('Shareholder origin/country missing.'))
+
+        if not self.user.userprofile.city or not self.user.userprofile.postal_code or not \
+                self.user.userprofile.street:
+            result['is_valid'] = False
+            result['errors'].append(_('Shareholder address or address details missing.'))
+
+        return result
+
 
 class Operator(models.Model):
 
@@ -98,10 +134,14 @@ class Company(models.Model):
 
     name = models.CharField(max_length=255)
     share_count = models.IntegerField(blank=True, null=True)
+    country = models.ForeignKey(Country, null=True, blank=False, help_text=_("Headquarter location"))
 
     def __str__(self):
         return u"{}".format(self.name)
 
+    def shareholder_count(self):
+        """ total count of active Shareholders """
+        return Position.objects.filter(buyer__company=self, seller__isnull=True).count()
 
 # --------- SIGNALS ----------
 # must be inside a file which is imported by django on startup

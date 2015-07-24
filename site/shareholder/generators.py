@@ -2,17 +2,18 @@ import random
 import hashlib
 import datetime
 
-from django.conf import settings
 from django.contrib.auth import get_user_model
 
 from shareholder.models import Shareholder, Company, Position, Operator, UserProfile, Country
 
 User = get_user_model()
 
+
 def _make_wordlist():
 
     words = [line.strip() for line in open('/usr/share/dict/american-english')]
     return words
+
 
 def _make_user():
 
@@ -23,14 +24,14 @@ def _make_user():
 
     user = User.objects.create(
         is_active=True,
-        first_name = random.choice(words),
-        last_name = random.choice(words),
-        username = username,
+        first_name=random.choice(words),
+        last_name=random.choice(words),
+        username=username,
     )
 
-    country, created = Country.objects.get_or_create(iso_code="de", defaults={"name":"Germany", "iso_code": "de"})
+    country, created = Country.objects.get_or_create(iso_code="de", defaults={"name": "Germany", "iso_code": "de"})
 
-    profile = UserProfile.objects.create(
+    UserProfile.objects.create(
         user=user,
         country=country,
         street="Some Street",
@@ -46,25 +47,34 @@ def _make_user():
 
     return user
 
+
+class CountryGenerator(object):
+
+    def generate(self):
+        country, created = Country.objects.get_or_create(iso_code="de", defaults={"name": "Germany", "iso_code": "de"})
+        return country
+
+
 class UserGenerator(object):
     """ generate plain user """
 
     def generate(self):
-        word = random.choice(_make_wordlist())
         user = _make_user()
 
         return user
 
+
 class OperatorGenerator(object):
 
     def generate(self, **kwargs):
-    
+
         word = random.choice(_make_wordlist())
         user = kwargs.get("user") or _make_user()
 
         company = Company.objects.create(
-            name = '{} A.B.'.format(word),
-            share_count = 3,
+            name='{} A.B.'.format(word),
+            share_count=3,
+            country=CountryGenerator().generate()
         )
 
         operator = Operator.objects.create(
@@ -73,6 +83,7 @@ class OperatorGenerator(object):
         )
 
         return operator
+
 
 class ShareholderGenerator(object):
 
@@ -83,8 +94,9 @@ class ShareholderGenerator(object):
         user = _make_user()
 
         company = Company.objects.create(
-            name = '{} A.B.'.format(word),
-            share_count = 3,
+            name='{} A.B.'.format(word),
+            share_count=3,
+            country=CountryGenerator().generate(),
         )
 
         shareholder = Shareholder.objects.create(
@@ -94,6 +106,7 @@ class ShareholderGenerator(object):
         )
 
         return shareholder
+
 
 class PositionGenerator(object):
 
@@ -106,9 +119,8 @@ class PositionGenerator(object):
         position = Position.objects.create(
             buyer=buyer,
             bought_at=datetime.datetime.now().date(),
-            count = 3,
-            value = 3,
+            count=3,
+            value=3,
         )
 
         return position
-        

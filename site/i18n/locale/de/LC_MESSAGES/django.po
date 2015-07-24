@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 22:21+0000\n"
-"PO-Revision-Date: 2015-06-09 18:20+0000\n"
+"POT-Creation-Date: 2015-07-23 22:28+0000\n"
+"PO-Revision-Date: 2015-07-23 22:29+0000\n"
 "Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,23 +19,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
-#: company/templates/company.html:9
+#: company/templates/company.html:13
 msgid "Company Details for"
 msgstr "Unternehmensdaten für"
 
-#: company/templates/company.html:13
+#: company/templates/company.html:17
 msgid "Data"
 msgstr "Daten"
 
-#: company/templates/company.html:16
+#: company/templates/company.html:20
 msgid "Company Name"
 msgstr "Name des Unternehmens"
 
-#: company/templates/company.html:19
+#: company/templates/company.html:24
 msgid "Company Share Count"
 msgstr "Anzahl der Aktien des Unternehmens"
 
-#: company/templates/company.html:24
+#: company/templates/company.html:28
+#| msgid "Company Share Count"
+msgid "Company Headquarter Country"
+msgstr "Land des Unternehmenssitzes"
+
+#: company/templates/company.html:41
 msgid "Administrators"
 msgstr "Administratoren"
 

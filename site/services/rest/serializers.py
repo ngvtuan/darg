@@ -13,14 +13,40 @@ from utils.user import make_username
 
 User = get_user_model()
 
+class CountrySerializer(serializers.HyperlinkedModelSerializer):
+    """ list of countries selectable """
+
+    class Meta:
+        model = Country
+        fields = ('url', 'iso_code', 'name')
+
+    """
+    def update(self, instance, validated_data):
+        country_data = validated_data.pop('country')
+
+        country = Country.objects.get(iso_code=country_data.get('iso_code'))
+
+        instance.country = country
+        instance.save()
+
+        return instance
+    """
 
 class CompanySerializer(serializers.HyperlinkedModelSerializer):
 
+    country = serializers.HyperlinkedRelatedField(
+        view_name='country-detail', 
+        required=False, 
+        allow_null=True, 
+        queryset=Country.objects.all(),
+    )
+
     class Meta:
         model = Company
-        fields = ('pk', 'name')
-
-    def create(self, validated_data):
+        fields = ('pk', 'name', 'share_count', 'country', 'url', 'shareholder_count')
+    
+    """
+    def update(self, validated_data):
 
         name = validated_data.get("name")
         user = self.context.get("request").user
@@ -29,7 +55,7 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
         operator, created = Operator.objects.get_or_create(company=company, user=user)
 
         return company
-
+    """
 
 class AddCompanySerializer(serializers.Serializer):
 
@@ -67,18 +93,9 @@ class OperatorSerializer(serializers.HyperlinkedModelSerializer):
         model = Operator
         fields = ('id', 'company')
 
-
-class CountrySerializer(serializers.HyperlinkedModelSerializer):
-    """ list of countries selectable """
-
-    class Meta:
-        model = Country
-        fields = ('iso_code', 'name')
-
-
 class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
     """ serialize additional user data """
-    country = CountrySerializer(many=False)
+    #country = CountrySerializer(many=False)
 
     class Meta:
         model = UserProfile
@@ -94,7 +111,7 @@ class UserWithEmailOnlySerializer(serializers.HyperlinkedModelSerializer):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     operator_set = OperatorSerializer(many=True, read_only=True)
-    userprofile = UserProfileSerializer(many=False)
+    userprofile = UserProfileSerializer(many=False, read_only=True)
 
     class Meta:
         model = User
@@ -128,7 +145,10 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Shareholder
-        fields = ('pk', 'user', 'number', 'company', 'share_percent', 'share_count', 'share_value')
+        fields = (
+            'pk', 'user', 'number', 'company', 'share_percent', 'share_count', 
+            'share_value', 'validate_gafi',
+        )
 
     def create(self, validated_data):
 
@@ -146,14 +166,14 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
         )
 
         # save user/-profile
-        profile_data = validated_data.get("user").get("userprofile")
-        country_data = profile_data.get("country")
-        country, created = Country.objects.get_or_create(
-            iso_code=country_data.get("iso_code"),
-            defaults={
-                "name": country_data.get("name"),
-                "iso_code": country_data.get("iso_code"),
-            })
+        #profile_data = validated_data.get("user").get("userprofile")
+        #country_data = profile_data.get("country")
+        #country, created = Country.objects.get_or_create(
+        #    iso_code=country_data.get("iso_code"),
+        #    defaults={
+        #        "name": country_data.get("name"),
+        #        "iso_code": country_data.get("iso_code"),
+        #    })
         shareholder_user, created = User.objects.get_or_create(
             email=validated_data.get("user").get("email"),
             defaults={
@@ -162,6 +182,7 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
                 "last_name": validated_data.get("user").get("last_name"),
             })
 
+        """
         profile, created = UserProfile.objects.get_or_create(
             user=shareholder_user,
             defaults={
@@ -174,6 +195,7 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
                 "birthday": profile_data.get("birthday"),
                 "user": shareholder_user,
             })
+        """
 
         if not created:
             if not shareholder_user.first_name:

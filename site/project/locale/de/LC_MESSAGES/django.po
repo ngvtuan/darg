@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 22:21+0000\n"
-"PO-Revision-Date: 2015-06-09 18:22+0000\n"
+"POT-Creation-Date: 2015-07-23 22:28+0000\n"
+"PO-Revision-Date: 2015-07-23 22:30+0000\n"
 "Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -82,14 +82,14 @@ msgid ""
 "IMPORTANT: Excel does not fulfill legal requirements for a share register!"
 msgstr ""
 "Das Verwalten der Aktionäre mit Excel genügt ab 2016 nicht mehr den "
-"gesetzlichen Anforderungen in der Schweiz. <strong>\"Das Aktienregister\"</"
-"strong> stellt sicher:"
+"gesetzlichen Anforderungen in der Schweiz. <strong>\"Das "
+"Aktienregister\"</strong> stellt sicher:"
 
 #: project/templates/index.html:15
 msgid "GAFI Standard compliant"
 msgstr ""
-"Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" class="
-"\"regular\">GAFI Standards</a>"
+"Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" "
+"class=\"regular\">GAFI Standards</a>"
 
 #: project/templates/index.html:16
 msgid "Extensive data validation to ensure you cannot make a mistake"
@@ -108,8 +108,8 @@ msgstr "Garantiert den Audit Trail"
 
 #: project/templates/index.html:21
 msgid ""
-"We are currently in private Beta. Please leave your email address to receive "
-"an invitation soon!"
+"We are currently in private Beta. Please leave your email address to receive"
+" an invitation soon!"
 msgstr ""
 "Wir sind aktuell in geschlossender Beta. Bitte hinterlassen Sie ihre Email, "
 "um eine Einladung zu erhalten."
@@ -207,21 +207,22 @@ msgstr "Aktieninhabernummer"
 msgid "Shares (%%)"
 msgstr "Aktien (%%)"
 
+#: project/templates/start.html:42
+msgid "Gafi Validation failed"
+msgstr "GAFI-FATF Validierung fehlgeschlagen"
+
 #~ msgid "Please enter your initial share count and nominal value:"
 #~ msgstr "Bitte geben Sie die Daten für eine Position an:"
 
 #~ msgid "Shareholder Details"
 #~ msgstr "Aktionärsdetails"
 
-#~| msgid "Shareholder Details"
 #~ msgid "Shareholder Data"
 #~ msgstr "Aktionärsdetails"
 
-#~| msgid "Shareholder Number"
 #~ msgid "Shareholder Name"
 #~ msgstr "Name des Aktionärs"
 
-#~| msgid "Shareholder Details"
 #~ msgid "Shareholder Email"
 #~ msgstr "Email des Aktionärs"
 

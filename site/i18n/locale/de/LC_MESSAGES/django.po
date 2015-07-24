@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 18:15+0000\n"
-"PO-Revision-Date: 2015-06-09 18:20+0000\n"
+"POT-Creation-Date: 2015-07-23 22:28+0000\n"
+"PO-Revision-Date: 2015-07-23 22:29+0000\n"
 "Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,23 +19,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
-#: company/templates/company.html:9
+#: company/templates/company.html:13
 msgid "Company Details for"
 msgstr "Unternehmensdaten für"
 
-#: company/templates/company.html:13
+#: company/templates/company.html:17
 msgid "Data"
 msgstr "Daten"
 
-#: company/templates/company.html:14
+#: company/templates/company.html:20
 msgid "Company Name"
 msgstr "Name des Unternehmens"
 
-#: company/templates/company.html:15
+#: company/templates/company.html:24
 msgid "Company Share Count"
 msgstr "Anzahl der Aktien des Unternehmens"
 
-#: company/templates/company.html:17
+#: company/templates/company.html:28
+#| msgid "Company Share Count"
+msgid "Company Headquarter Country"
+msgstr "Land des Unternehmenssitzes"
+
+#: company/templates/company.html:41
 msgid "Administrators"
 msgstr "Administratoren"
 
@@ -173,7 +178,6 @@ msgid "Post an entry"
 msgstr "Artikel verfassen"
 
 #: templates/zinnia/base.html:88 templates/zinnia/base.html.py:90
-#| msgid "Log in"
 msgid "Log out"
 msgstr "Logout"
 

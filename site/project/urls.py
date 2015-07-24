@@ -9,13 +9,14 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 
 from services.rest.views import ShareholderViewSet, CompanyViewSet, UserViewSet, PositionViewSet, \
-    InviteeUpdateView, AddCompanyView
+    InviteeUpdateView, AddCompanyView, CountryViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'shareholders', ShareholderViewSet, base_name="shareholders")
 router.register(r'company', CompanyViewSet)
 router.register(r'user', UserViewSet, base_name="user")
 router.register(r'position', PositionViewSet, base_name="position")
+router.register(r'country', CountryViewSet, base_name="country")
 
 js_info_dict = {
     'packages': ('project', 'shareholder', 'utils', 'services',),
@@ -37,8 +38,8 @@ urlpatterns = [
     url(r'^services/rest/company/add', AddCompanyView.as_view(), name='add_company'),
     url(r'^services/rest/', include(router.urls)),
     url(r'^services/rest/invitee', InviteeUpdateView.as_view(), name='invitee'),
-    #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^services/rest/api-token-auth/', views.obtain_auth_token), # allow to see token for the logged in user
+    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^services/rest/api-token-auth/', views.obtain_auth_token),  # allow to see token for the logged in user
 
     # i18n
     url(r'^jsi18n/$', javascript_catalog, js_info_dict),
@@ -50,13 +51,15 @@ urlpatterns = [
 
 # admin
 admin_url = settings.DEBUG and r'^admin/' or r'^__adm/'
-urlpatterns += patterns('',
+urlpatterns += patterns(
+    '',
     url(admin_url, include(admin.site.urls)),
 )
 
 # rosetta
 if 'rosetta' in settings.INSTALLED_APPS:
-    urlpatterns += patterns('',
+    urlpatterns += patterns(
+        '',
         url(r'^rosetta/', include('rosetta.urls')),
     )
 
@@ -65,7 +68,8 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
-    urlpatterns += patterns('',
+    urlpatterns += patterns(
+        '',
         (r'^_403/$', TemplateView.as_view(template_name="403.html")),
         (r'^_404/$', TemplateView.as_view(template_name="404.html")),
         (r'^_500/$', TemplateView.as_view(template_name="500.html")),

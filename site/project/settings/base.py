@@ -27,7 +27,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['www.das-aktienregister.ch']
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -75,8 +74,8 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates',],
-        #'APP_DIRS': True,
+        'DIRS': ['templates'],
+        # 'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -86,9 +85,10 @@ TEMPLATES = [
                 'project.context_processors.tracking',
                 'zinnia.context_processors.version',
             ],
-            'loaders': ('django.template.loaders.filesystem.Loader',
-                        'app_namespace.Loader',
-                        'django.template.loaders.app_directories.Loader',
+            'loaders': (
+                'django.template.loaders.filesystem.Loader',
+                'app_namespace.Loader',
+                'django.template.loaders.app_directories.Loader',
             ),
         },
     },
@@ -128,8 +128,8 @@ USE_TZ = True
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
-    'root' : {
-        'handlers': ['console', 'sentry',],
+    'root': {
+        'handlers': ['console', 'sentry'],
         'level': 'WARNING',
         'formatter': 'verbose',
     },
@@ -142,7 +142,7 @@ LOGGING = {
         },
     },
     'handlers': {
-        'console':{
+        'console': {
             'level': 'WARNING',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
@@ -158,7 +158,7 @@ LOGGING = {
         },
         'celery': {
             'level': 'WARNING',
-            'handlers': ['sentry', 'console',],
+            'handlers': ['sentry', 'console'],
             'propagate': False,
         },
     },
@@ -185,12 +185,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    #os.path.join(BASE_DIR, 'static', 'minified'),
+    # os.path.join(BASE_DIR, 'static', 'minified'),
     os.path.join(BASE_DIR, 'static'),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'media', 'static')
 
-MEDIA_ROOT = 'media' # used also by zinnia for path inside static. is relative.
+MEDIA_ROOT = 'media'  # used also by zinnia for path inside static. is relative.
 MEDIA_URL = '/media/'
 
 # --- REGISTRATION
@@ -214,7 +214,8 @@ REST_FRAMEWORK = {
 APPEND_SLASH = False
 
 # --- I18N
-LOCALE_PATHS = ('./i18n/locale/',)
+# add here for app module dirs to show up under 'project' filter in rosetta
+LOCALE_PATHS = ('./i18n/locale/', './shareholder/locale/',  './services/locale/', )
 
 # --- Sentry
 RAVEN_CONFIG = {

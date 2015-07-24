@@ -39,7 +39,7 @@
           <tbody>
           {% verbatim %}
           <tr class="panel" ng-repeat="shareholder in shareholders" ng-click="goto_shareholder(shareholder.pk)" ng-mouseover="">
-            <td>
+            <td><span class="el-icon-exclamation-sign" ng-hide="shareholder.validate_gafi.is_valid" data-toggle="tooltip" title="{% endverbatim %}{% trans "Gafi Validation failed" %}{% verbatim %}"></span>
               {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
             </td>
             <td>{{ shareholder.user.email }}<a class="btn"><span class="el-icon-eye-open"></span></a></td>

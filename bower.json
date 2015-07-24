@@ -5,7 +5,8 @@
         "angular": "",
         "angular-resource": "",
         "underscore": "",
-        "bootstrap": ""
+        "bootstrap": "",
+        "angular-xeditable": ""
     },
     "private": true
 }

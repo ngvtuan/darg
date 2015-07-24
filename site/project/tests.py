@@ -3,9 +3,9 @@ from django.test import TestCase
 from django.test.client import Client
 
 from rest_framework.test import APIClient
-from rest_framework import status
 
-from shareholder.generators import UserGenerator, OperatorGenerator
+from shareholder.generators import UserGenerator
+
 
 def _add_company_to_user_via_rest(user):
 
@@ -23,15 +23,16 @@ def _add_company_to_user_via_rest(user):
             'face_value':2
         },
         **{
-            'HTTP_AUTHORIZATION': 'Token {}'.format(token.key), 
-            'format': 'json', 
+            'HTTP_AUTHORIZATION': 'Token {}'.format(token.key),
+            'format': 'json',
         }
     )
 
-    if response.status_code in [200,201]:
+    if response.status_code in [200, 201]:
         return True
-    
+
     return False
+
 
 class IndexTestCase(TestCase):
 
@@ -45,6 +46,11 @@ class IndexTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue("social_links" in response.content)
         self.assertTrue("twitter" in response.content)
+        self.assertTrue("bootstrap.min.js" in response.content)
+        self.assertTrue("xeditable.min.js" in response.content)
+        self.assertTrue("xeditable.css" in response.content)
+        self.assertTrue("last css in" in response.content)
+
 
 class TrackingTestCase(TestCase):
 

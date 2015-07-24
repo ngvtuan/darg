@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 18:15+0000\n"
+"POT-Creation-Date: 2015-07-23 22:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: company/templates/company.html:9
+#: company/templates/company.html:13
 msgid "Company Details for"
 msgstr ""
 
-#: company/templates/company.html:13
+#: company/templates/company.html:17
 msgid "Data"
 msgstr ""
 
-#: company/templates/company.html:14
+#: company/templates/company.html:20
 msgid "Company Name"
 msgstr ""
 
-#: company/templates/company.html:15
+#: company/templates/company.html:24
 msgid "Company Share Count"
 msgstr ""
 
-#: company/templates/company.html:17
+#: company/templates/company.html:28
+msgid "Company Headquarter Country"
+msgstr ""
+
+#: company/templates/company.html:41
 msgid "Administrators"
 msgstr ""
 

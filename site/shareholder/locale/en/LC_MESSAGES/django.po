@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-23 22:28+0000\n"
+"POT-Creation-Date: 2015-07-25 20:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: shareholder/models.py:87
+#: shareholder/models.py:88
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:93
+#: shareholder/models.py:94
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:97
+#: shareholder/models.py:98
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:101
+#: shareholder/models.py:102
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:106
+#: shareholder/models.py:107
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:136
+#: shareholder/models.py:137
 msgid "Headquarter location"
 msgstr ""
 

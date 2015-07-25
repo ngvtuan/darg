@@ -23,13 +23,15 @@ js_info_dict = {
 }
 
 urlpatterns = [
-    # Examples:
+    # web views
     url(r'^$', 'project.views.index', name='index'),
     url(r'^start/$', 'project.views.start', name='start'),
     url(r'^positions/$', 'shareholder.views.positions', name='positions'),
     url(r'^log/$', 'shareholder.views.log', name='log'),
     url(r'^shareholder/(?P<shareholder_id>[0-9]+)/$', 'shareholder.views.shareholder', name='shareholder'),
     url(r'^company/(?P<company_id>[0-9]+)/$', 'company.views.company', name='company'),
+    url(r'^company/(?P<company_id>[0-9]+)/download/csv$', 'project.views.captable_csv', name='captable_csv'),
+    url(r'^company/(?P<company_id>[0-9]+)/download/pdf$', 'project.views.captable_pdf', name='captable_pdf'),
 
     # auth
     url(r'^accounts/', include('registration.backends.simple.urls')),

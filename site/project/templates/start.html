@@ -54,6 +54,15 @@
             <em>No Shareholders yet.</em>
           </div>
         </div>
+        <div class="captable_context_actions" ng-hide="!shareholders.length">
+          {% trans "Download active Shareholders as" %}
+          <a href="{% url "captable_pdf" company_id=operator.company.id %}" title="{% trans "Download active Shareholders as PDF" %}" class="btn btn-inline">
+            {% trans "PDF" %}
+          </a> | 
+          <a href="{% url "captable_csv" company_id=operator.company.id %}" title="{% trans "Download active Shareholders as CSV" %}" class="btn btn-inline">
+            {% trans "CSV" %}
+          </a>
+        </div>
       </div>
     {% endfor %}
   {% endif %}

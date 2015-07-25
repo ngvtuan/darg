@@ -143,6 +143,14 @@ class Company(models.Model):
         """ total count of active Shareholders """
         return Position.objects.filter(buyer__company=self, seller__isnull=True).count()
 
+    def get_active_shareholders(self):
+        """ returns list of all active shareholders """
+        shareholder_list = []
+        for shareholder in self.shareholder_set.all().order_by('number'):
+            if shareholder.share_count() > 0:
+                shareholder_list.append(shareholder)
+        return shareholder_list
+
 # --------- SIGNALS ----------
 # must be inside a file which is imported by django on startup
 

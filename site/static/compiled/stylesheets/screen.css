@@ -391,29 +391,37 @@ strong {
 }
 
 /* line 150, ../../sass/screen.sass */
+.btn-inline {
+  border: none;
+  margin: 0em;
+  padding: 0em;
+  vertical-align: inherit;
+}
+
+/* line 157, ../../sass/screen.sass */
 .btn-focus {
   border: 1px solid #1661ff;
   color: #1661ff;
   font-weight: bold;
 }
 
-/* line 156, ../../sass/screen.sass */
+/* line 163, ../../sass/screen.sass */
 .align-left {
   padding-left: 0em;
   margin-left: 0em;
 }
 
-/* line 161, ../../sass/screen.sass */
+/* line 168, ../../sass/screen.sass */
 .editable-click, a.editable-click {
   color: #666;
   border: none;
 }
-/* line 164, ../../sass/screen.sass */
+/* line 171, ../../sass/screen.sass */
 .editable-click span, a.editable-click span {
   font-size: 0.6em;
 }
 
-/* line 168, ../../sass/screen.sass */
+/* line 175, ../../sass/screen.sass */
 .index_background {
   background-size: cover;
   background-image: url("/static/compiled/images/Zuerich_Boerse.jpg");
@@ -422,12 +430,12 @@ strong {
   position: relative;
 }
 
-/* line 174, ../../sass/screen.sass */
+/* line 181, ../../sass/screen.sass */
 .button-panel {
   margin-top: 15px;
 }
 
-/* line 176, ../../sass/screen.sass */
+/* line 183, ../../sass/screen.sass */
 .leaf {
   font-size: 2em;
   position: inherit;
@@ -435,59 +443,59 @@ strong {
   right: 2.4em;
 }
 
-/* line 181, ../../sass/screen.sass */
+/* line 188, ../../sass/screen.sass */
 .bg-success {
   padding: 1em;
 }
 
-/* line 183, ../../sass/screen.sass */
+/* line 190, ../../sass/screen.sass */
 .pub_menu, .social_links {
   position: absolute;
   top: 1em;
   right: 1em;
 }
-/* line 187, ../../sass/screen.sass */
+/* line 194, ../../sass/screen.sass */
 .pub_menu a, .social_links a {
   border: none;
   color: white;
   font-size: 1em;
 }
-/* line 191, ../../sass/screen.sass */
+/* line 198, ../../sass/screen.sass */
 .pub_menu a:hover, .social_links a:hover {
   text-decoration: none;
 }
 
-/* line 194, ../../sass/screen.sass */
+/* line 201, ../../sass/screen.sass */
 .social_links {
   bottom: 1em;
   top: auto;
 }
-/* line 198, ../../sass/screen.sass */
+/* line 205, ../../sass/screen.sass */
 .social_links a {
   font-size: 2em;
 }
 
-/* line 203, ../../sass/screen.sass */
+/* line 210, ../../sass/screen.sass */
 #auth .comment {
   margin-top: 5em;
 }
-/* line 205, ../../sass/screen.sass */
+/* line 212, ../../sass/screen.sass */
 #auth input {
   display: block;
 }
 
-/* line 209, ../../sass/screen.sass */
+/* line 216, ../../sass/screen.sass */
 div #add_shareholder {
   margin-bottom: 1em;
 }
 
-/* line 212, ../../sass/screen.sass */
+/* line 219, ../../sass/screen.sass */
 div #shareholder_list h2 a {
   padding: 0em;
   font-size: 50%;
 }
 
-/* line 216, ../../sass/screen.sass */
+/* line 223, ../../sass/screen.sass */
 div #shareholder_list table a {
   padding: 0em;
   padding-left: 1em;
@@ -495,86 +503,91 @@ div #shareholder_list table a {
   margin: 0em;
 }
 
-/* line 222, ../../sass/screen.sass */
+/* line 229, ../../sass/screen.sass */
 div #shareholder_list table tr:hover a {
   visibility: visible;
 }
 
-/* line 231, ../../sass/screen.sass */
+/* line 232, ../../sass/screen.sass */
+div.captable_context_actions {
+  text-align: right;
+}
+
+/* line 241, ../../sass/screen.sass */
 .blog .lead {
   font-size: 1em;
 }
-/* line 233, ../../sass/screen.sass */
+/* line 243, ../../sass/screen.sass */
 .blog .well {
   background-color: transparent;
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 238, ../../sass/screen.sass */
+/* line 248, ../../sass/screen.sass */
 .blog .btn-primary {
   background-color: transparent;
   border: 1px solid #666;
   color: #1661ff;
 }
-/* line 242, ../../sass/screen.sass */
+/* line 252, ../../sass/screen.sass */
 .blog .row {
   margin-top: 4em;
 }
-/* line 244, ../../sass/screen.sass */
+/* line 254, ../../sass/screen.sass */
 .blog .entry-tags {
   display: none;
 }
-/* line 246, ../../sass/screen.sass */
+/* line 256, ../../sass/screen.sass */
 .blog .entry-shorturl {
   display: none;
 }
-/* line 248, ../../sass/screen.sass */
+/* line 258, ../../sass/screen.sass */
 .blog .entry-footer {
   padding-left: 0px;
 }
-/* line 250, ../../sass/screen.sass */
+/* line 260, ../../sass/screen.sass */
 .blog .entry-footer span {
   display: none;
 }
-/* line 252, ../../sass/screen.sass */
+/* line 262, ../../sass/screen.sass */
 .blog .navbar-default {
   background-color: white;
 }
-/* line 254, ../../sass/screen.sass */
+/* line 264, ../../sass/screen.sass */
 .blog .navbar-brand {
   font-size: 2em;
 }
-/* line 256, ../../sass/screen.sass */
+/* line 266, ../../sass/screen.sass */
 .blog .navbar-header span {
   top: 0.8em;
   position: relative;
   left: -1.7em;
 }
-/* line 260, ../../sass/screen.sass */
+/* line 270, ../../sass/screen.sass */
 .blog a {
   border: none;
   font-size: 1em;
 }
-/* line 263, ../../sass/screen.sass */
+/* line 273, ../../sass/screen.sass */
 .blog a:active, .blog a:focus, .blog a:hover {
   color: #1661ff;
   text-decoration: none;
 }
-/* line 266, ../../sass/screen.sass */
+/* line 276, ../../sass/screen.sass */
 .blog h2 {
   margin-bottom: 0em;
 }
-/* line 268, ../../sass/screen.sass */
+/* line 278, ../../sass/screen.sass */
 .blog h2 a {
   padding: 0;
   margin: 0;
 }
-/* line 271, ../../sass/screen.sass */
+/* line 281, ../../sass/screen.sass */
 .blog p {
   margin: 0 0 0 0;
 }
-/* line 273, ../../sass/screen.sass */
+/* line 283, ../../sass/screen.sass */
 .blog small {
   font-size: 40%;
 }

@@ -48,6 +48,26 @@ def _make_user():
     return user
 
 
+class CompanyGenerator(object):
+
+    def generate(self, **kwargs):
+
+        word = random.choice(_make_wordlist())
+        name = kwargs.get('name') or '{} A.B.'.format(word)
+        share_count = kwargs.get('share_count') or 3
+        country = kwargs.get('country') or CountryGenerator().generate()
+
+        kwargs2 = {
+            "name": name,
+            "share_count": share_count,
+            "country": country,
+        }
+
+        company = Company.objects.create(**kwargs2)
+
+        return company
+
+
 class CountryGenerator(object):
 
     def generate(self):
@@ -93,11 +113,14 @@ class ShareholderGenerator(object):
         word = random.choice(_make_wordlist())
         user = _make_user()
 
-        company = Company.objects.create(
-            name='{} A.B.'.format(word),
-            share_count=3,
-            country=CountryGenerator().generate(),
-        )
+        if kwargs.get('company'):
+            company = kwargs.get('company')
+        else:
+            company = Company.objects.create(
+                name='{} A.B.'.format(word),
+                share_count=3,
+                country=CountryGenerator().generate(),
+            )
 
         shareholder = Shareholder.objects.create(
             user=user,
@@ -111,16 +134,20 @@ class ShareholderGenerator(object):
 class PositionGenerator(object):
 
     def generate(self, **kwargs):
-        if kwargs.get('shareholder'):
-            buyer = kwargs.get('shareholder')
-        else:
-            buyer = ShareholderGenerator().generate()
+        buyer = kwargs.get('buyer') or ShareholderGenerator().generate()
+        seller = kwargs.get('seller') or None
+        count = kwargs.get('count') or 3
+        value = kwargs.get('value') or 2
 
-        position = Position.objects.create(
-            buyer=buyer,
-            bought_at=datetime.datetime.now().date(),
-            count=3,
-            value=3,
-        )
+        kwargs2 = {
+            "buyer": buyer,
+            "bought_at": datetime.datetime.now().date(),
+            "count": count,
+            "value": value,
+        }
+        if seller:
+            kwargs2.update({"seller": seller})
+
+        position = Position.objects.create(**kwargs2)
 
         return position

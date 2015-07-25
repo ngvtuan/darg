@@ -110,21 +110,14 @@ class ShareholderGenerator(object):
     def generate(self, **kwargs):
 
         words = _make_wordlist()
-        word = random.choice(_make_wordlist())
-        user = _make_user()
 
-        if kwargs.get('company'):
-            company = kwargs.get('company')
-        else:
-            company = Company.objects.create(
-                name='{} A.B.'.format(word),
-                share_count=3,
-                country=CountryGenerator().generate(),
-            )
+        number = kwargs.get('number') or random.choice(words)+"234543"
+        user = kwargs.get('user') or _make_user()
+        company = kwargs.get('company') or CompanyGenerator().generate()
 
         shareholder = Shareholder.objects.create(
             user=user,
-            number=random.choice(words)+"234543",
+            number=number,
             company=company,
         )
 

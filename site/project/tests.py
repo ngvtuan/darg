@@ -125,8 +125,8 @@ class DownloadTestCase(TestCase):
         # data
         company = CompanyGenerator().generate()
         shareholder_list = []
-        for x in range(0, 5):
-            shareholder_list.append(ShareholderGenerator().generate(company=company, number=x))
+        for x in range(1, 6):  # don't statt with 0, Generators 'if' will fail
+            shareholder_list.append(ShareholderGenerator().generate(company=company, number=str(x)))
 
         # initial share creation
         PositionGenerator().generate(buyer=shareholder_list[0], count=1000, value=10)

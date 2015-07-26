@@ -91,11 +91,12 @@ class OperatorGenerator(object):
         word = random.choice(_make_wordlist())
         user = kwargs.get("user") or _make_user()
 
-        company = Company.objects.create(
-            name='{} A.B.'.format(word),
-            share_count=3,
-            country=CountryGenerator().generate()
-        )
+        company = kwargs.get("company") or \
+            Company.objects.create(
+                name='{} A.B.'.format(word),
+                share_count=3,
+                country=CountryGenerator().generate()
+            )
 
         operator = Operator.objects.create(
             user=user,

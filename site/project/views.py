@@ -2,12 +2,12 @@ import csv
 import time
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 
-from shareholder.models import Company
+from shareholder.models import Company, Operator
 from utils.pdf import render_to_pdf
 
 
@@ -25,8 +25,12 @@ def start(request):
 
 
 @login_required
-def captable_csv(requesti, company_id):
+def captable_csv(request, company_id):
     """ returns csv with active shareholders """
+
+    # perm check
+    if not Operator.objects.filter(user=request.user, company__id=company_id).exists():
+        return HttpResponseForbidden()
 
     company = get_object_or_404(Company, id=company_id)
 
@@ -52,6 +56,10 @@ def captable_csv(requesti, company_id):
 
 @login_required
 def captable_pdf(request, company_id):
+
+    # perm check
+    if not Operator.objects.filter(user=request.user, company__id=company_id).exists():
+        return HttpResponseForbidden()
 
     company = get_object_or_404(Company, id=company_id)
 

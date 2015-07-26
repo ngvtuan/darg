@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='company',
             name='country',
-            field=models.ForeignKey(default=0, to='shareholder.Country', help_text='Headquarter location'),
+            field=models.ForeignKey(to='shareholder.Country', help_text='Headquarter location', null=True),
             preserve_default=False,
         ),
         migrations.AlterField(

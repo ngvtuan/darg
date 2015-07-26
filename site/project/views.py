@@ -44,7 +44,7 @@ def captable_csv(requesti, company_id):
             shareholder.user.first_name,
             shareholder.user.email,
             shareholder.share_count(),
-            "{:.2f}".format(shareholder.share_percent())
+            shareholder.share_percent()
         ])
 
     return response

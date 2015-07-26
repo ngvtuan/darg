@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-23 22:28+0000\n"
+"POT-Creation-Date: 2015-07-25 20:19+0000\n"
 "PO-Revision-Date: 2015-07-23 23:04+0000\n"
 "Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,29 +19,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
-#: shareholder/models.py:87
+#: shareholder/models.py:88
 msgid "Missing all data required for #GAFI."
 msgstr "Alle Daten für GAFI-FATF fehlen."
 
-#: shareholder/models.py:93
+#: shareholder/models.py:94
 msgid "Shareholder first name, last name or company name missing."
-msgstr ""
-"Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
+msgstr "Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
 
-#: shareholder/models.py:97
-#| msgid "Shareholder Birthday"
+#: shareholder/models.py:98
 msgid "Shareholder birthday missing."
 msgstr "Geburstag"
 
-#: shareholder/models.py:101
+#: shareholder/models.py:102
 msgid "Shareholder origin/country missing."
 msgstr "Land des Aktionärs fehlt."
 
-#: shareholder/models.py:106
+#: shareholder/models.py:107
 msgid "Shareholder address or address details missing."
 msgstr "Adresse oder Adressdetails des Aktionärs fehlen."
 
-#: shareholder/models.py:136
+#: shareholder/models.py:137
 msgid "Headquarter location"
 msgstr "Ort des Unternehmensstammsitzes"
 

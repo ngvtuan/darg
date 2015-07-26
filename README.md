@@ -1,11 +1,15 @@
 Das Aktienregister.
 ==========================
 
-[![Build Status](https://semaphoreci.com/api/v1/projects/377697aa-3cb5-4458-9e05-321115975157/403062/badge.svg)](https://semaphoreci.com/vbnet/daeg)
+Develop: [![Build Status](https://semaphoreci.com/api/v1/projects/e5b958e0-838d-4565-b8f5-4bea164a65ee/435885/badge.svg)](https://semaphoreci.com/vbnet/aktienregister)  
+
+CapTable
+===========================
+This app provides an easy to user interface to have a simple CapTable (no options, ESOP etc for now). Means enter company data, enter shareholders, have transactions for shareholders, print CapTable, edit company core data, enter capital increases. Supports a single asset type for now (named/registered share OR bearer share).
 
 GAFI Standards
 ===========================
-This application is especially made to fullfil the new [GAFI Standard](http://www.fatf-gafi.org/) for money laundering in Switzerland.
+This application is especially made to fullfil the new [GAFI Standard](http://www.fatf-gafi.org/) for money laundering in Switzerland. Applies only to companies if they choose their companies location defined in Switzerland.
 
 Licence
 -------------------------

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-23 22:28+0000\n"
-"PO-Revision-Date: 2015-07-23 22:30+0000\n"
+"POT-Creation-Date: 2015-07-25 20:19+0000\n"
+"PO-Revision-Date: 2015-07-25 20:20+0000\n"
 "Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -210,6 +210,26 @@ msgstr "Aktien (%%)"
 #: project/templates/start.html:42
 msgid "Gafi Validation failed"
 msgstr "GAFI-FATF Validierung fehlgeschlagen"
+
+#: project/templates/start.html:58
+msgid "Download active Shareholders as"
+msgstr "Download Liste der aktiven Aktionäre als"
+
+#: project/templates/start.html:59
+msgid "Download active Shareholders as PDF"
+msgstr "Download Liste der aktiven Aktionäre als PDF"
+
+#: project/templates/start.html:60
+msgid "PDF"
+msgstr "PDF"
+
+#: project/templates/start.html:62
+msgid "Download active Shareholders as CSV"
+msgstr "Download Liste der aktiven Aktionäre als CSV"
+
+#: project/templates/start.html:63
+msgid "CSV"
+msgstr "CSV"
 
 #~ msgid "Please enter your initial share count and nominal value:"
 #~ msgstr "Bitte geben Sie die Daten für eine Position an:"

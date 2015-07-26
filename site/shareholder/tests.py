@@ -108,8 +108,8 @@ class ShareholderTestCase(TestCase):
 
     def test_share_percent(self):
         shareholder = ShareholderGenerator().generate()
-        PositionGenerator().generate(shareholder=shareholder)
+        PositionGenerator().generate(buyer=shareholder)
 
         res = shareholder.share_percent()
 
-        self.assertEqual(res, 100.0)
+        self.assertEqual(res, '100.00')

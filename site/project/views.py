@@ -1,12 +1,14 @@
 import csv
 import time
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 
 from shareholder.models import Company
+from utils.pdf import render_to_pdf
 
 
 def index(request):
@@ -51,6 +53,19 @@ def captable_csv(requesti, company_id):
 @login_required
 def captable_pdf(request, company_id):
 
-    response = ""
+    company = get_object_or_404(Company, id=company_id)
+
+    response = render_to_pdf(
+        'active_shareholder_captable.pdf.html',
+        {
+            'pagesize': 'A4',
+            'company': company,
+        }
+    )
+
+    # Create the HttpResponse object with the appropriate CSV header. if not DEBUG
+    if not settings.DEBUG:
+        response['Content-Disposition'] = 'attachment; filename="{}_captable_{}.pdf"'.format(
+            time.strftime("%Y-%m-%d"), company.name)
 
     return response

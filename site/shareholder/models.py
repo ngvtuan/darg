@@ -54,7 +54,7 @@ class Shareholder(models.Model):
         count = sum(self.buyer.all().values_list('count', flat=True)) - \
             sum(self.seller.all().values_list('count', flat=True))
         if total:
-            return count / float(total) * 100
+            return "{:.2f}".format(count / float(total) * 100)
         return False
 
     def share_count(self):

@@ -16,6 +16,8 @@ django-celery
 pytz
 celery
 kombu
+#reportlab
+xhtml2pdf
 #-- zinnia reqs
 django-mptt>=0.5.1
 django-tagging>=0.3.6
@@ -29,4 +31,4 @@ git+https://github.com/Fantomas42/django-blog-zinnia.git@develop#egg=django-blog
 Pillow
 django-app-namespace-template-loader
 zinnia-theme-bootstrap
-#-- end 
+#-- end blog

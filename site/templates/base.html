@@ -1,13 +1,16 @@
 {% load staticfiles %}
 {% load i18n %}
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
   <meta charset="UTF-8">
 
  {% include "_meta_tags.html" %}
  {% include "_html_head_links.html" %}
-  
+
+ {% block inline_styles %}
+ {% endblock %}
+
 </head>
 <body ng-app="{% block ng_app %}js.darg.app.base{% endblock %}" ng-cloak>
 

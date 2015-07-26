@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block inline_styles %}
+<style>
+    @page {
+        size: a4 landscape;
+        @frame header_frame {           /* Static Frame */
+            -pdf-frame-content: header_content;
+            left: 50pt; top: 50pt; height: 60pt; margin-right:50pt
+        }
+        @frame content_frame {          /* Content Frame */
+            left: 50pt; top: 121pt; height: 430pt; width:100%; margin-right:50pt
+        }
+        @frame footer_frame {           /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            left: 50pt; top: 552pt; height: 20pt; margin-right:50pt
+        }
+
+    }
+
+    .heading {
+        font-size: 14pt;
+    }
+
+    .text-right {
+        font-align: right;
+    }
+</style>
+{% endblock %}
+
+{% block body_block %}
+  {% block content %}
+
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content">
+      {% trans "Your Shareholders for" %} 
+      <h2 class="heading">{{ company.name }}</h2>
+    </div>
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content">{% trans "Das Aktienregister" %} - page <pdf:pagenumber>
+        of <pdf:pagecount>
+    </div>
+
+    <!-- HTML Content -->
+    <table class="table table-hover">
+      <thead><tr><th align="left">{% trans "Name" %}</th><th align="left">{% trans "Email" %}</th><th align="right">{% trans "Shareholder Number" %}</th><th align="right">{% trans "Shares (%)" %}</th></tr></thead>
+      </table>
+        {% for shareholder in company.get_active_shareholders %}
+        <table>
+          <tr class="panel"><td>{{ shareholder.user.first_name }} {{ shareholder.user.last_name }}</td><td>{{ shareholder.user.email }}</td><td align="right">{{ shareholder.number }}</td><td align="right">{{ shareholder.share_count }} ({{shareholder.share_percent }})</td></tr>
+        </table>
+        {% endfor %}
+  {% endblock %}
+{% endblock %}

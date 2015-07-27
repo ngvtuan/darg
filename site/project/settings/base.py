@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'services',
     'company',
     'project',
+    'utils',
 
 )
 

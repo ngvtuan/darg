@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 20:19+0000\n"
-"PO-Revision-Date: 2015-07-25 20:20+0000\n"
+"POT-Creation-Date: 2015-07-29 19:26+0000\n"
+"PO-Revision-Date: 2015-07-29 19:27+0000\n"
 "Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -65,9 +65,36 @@ msgstr "Bitte geben Sie die Aktionärsdaten ein:"
 msgid "Add Shareholder"
 msgstr "Aktionär hinzufügen"
 
+#: project/templates/active_shareholder_captable.pdf.html:37
+#: project/templates/start.html:25
+msgid "Your Shareholders for"
+msgstr "Ihre Aktionärsliste für"
+
+#: project/templates/active_shareholder_captable.pdf.html:42
 #: project/templates/index.html:11
 msgid "Das Aktienregister"
 msgstr "Das Aktienregister"
+
+#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/start.html:34
+msgid "Name"
+msgstr "Name"
+
+#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/start.html:35
+msgid "Email"
+msgstr "Email"
+
+#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/start.html:36
+msgid "Shareholder Number"
+msgstr "Aktieninhabernummer"
+
+#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/start.html:37
+#, python-format
+msgid "Shares (%%)"
+msgstr "Aktien (%%)"
 
 #: project/templates/index.html:12
 msgid ""
@@ -86,25 +113,21 @@ msgstr ""
 "Aktienregister\"</strong> stellt sicher:"
 
 #: project/templates/index.html:15
-msgid "GAFI Standard compliant"
-msgstr ""
-"Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" "
-"class=\"regular\">GAFI Standards</a>"
+#| msgid "Shareholder Details"
+msgid "Rapid Shareholder documentation"
+msgstr "Effiziente Erfassung der Aktionäre"
 
 #: project/templates/index.html:16
-msgid "Extensive data validation to ensure you cannot make a mistake"
-msgstr "Umfangreiche Datenvalidierung  - Garantiert korrekte Daten"
+msgid "Audit trail proof transaction recording"
+msgstr "Audit Trail sichere Transaktions-Dokumentation"
 
 #: project/templates/index.html:17
-msgid ""
-"Share your data with financial authorities, your lawyer and law enforcment"
-msgstr ""
-"Teilen Sie ihre Daten mit den Steuerbehörden, Ihren Anwälten und anderen "
-"Partnern"
+msgid "Easy CapTable printout for General Meetings"
+msgstr "Ausdruck der CapTable als PDF"
 
 #: project/templates/index.html:18
-msgid "Guarantees perfect audit trail"
-msgstr "Garantiert den Audit Trail"
+msgid "Easy data export via CSV"
+msgstr "Datenexport als CSV für Excel etc."
 
 #: project/templates/index.html:21
 msgid ""
@@ -186,27 +209,6 @@ msgstr "Noch keine Positionen."
 msgid "Welcome"
 msgstr "Willkommen"
 
-#: project/templates/start.html:25
-msgid "Your Shareholders for"
-msgstr "Ihre Aktionärsliste für"
-
-#: project/templates/start.html:34
-msgid "Name"
-msgstr "Name"
-
-#: project/templates/start.html:35
-msgid "Email"
-msgstr "Email"
-
-#: project/templates/start.html:36
-msgid "Shareholder Number"
-msgstr "Aktieninhabernummer"
-
-#: project/templates/start.html:37
-#, python-format
-msgid "Shares (%%)"
-msgstr "Aktien (%%)"
-
 #: project/templates/start.html:42
 msgid "Gafi Validation failed"
 msgstr "GAFI-FATF Validierung fehlgeschlagen"
@@ -231,11 +233,25 @@ msgstr "Download Liste der aktiven Aktionäre als CSV"
 msgid "CSV"
 msgstr "CSV"
 
+#~ msgid "GAFI Standard compliant"
+#~ msgstr ""
+#~ "Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" "
+#~ "class=\"regular\">GAFI Standards</a>"
+
+#~ msgid "Extensive data validation to ensure you cannot make a mistake"
+#~ msgstr "Umfangreiche Datenvalidierung  - Garantiert korrekte Daten"
+
+#~ msgid ""
+#~ "Share your data with financial authorities, your lawyer and law enforcment"
+#~ msgstr ""
+#~ "Teilen Sie ihre Daten mit den Steuerbehörden, Ihren Anwälten und anderen "
+#~ "Partnern"
+
+#~ msgid "Guarantees perfect audit trail"
+#~ msgstr "Garantiert den Audit Trail"
+
 #~ msgid "Please enter your initial share count and nominal value:"
 #~ msgstr "Bitte geben Sie die Daten für eine Position an:"
-
-#~ msgid "Shareholder Details"
-#~ msgstr "Aktionärsdetails"
 
 #~ msgid "Shareholder Data"
 #~ msgstr "Aktionärsdetails"

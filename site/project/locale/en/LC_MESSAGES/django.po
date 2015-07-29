@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 20:19+0000\n"
+"POT-Creation-Date: 2015-07-29 19:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,8 +63,35 @@ msgstr ""
 msgid "Add Shareholder"
 msgstr ""
 
+#: project/templates/active_shareholder_captable.pdf.html:37
+#: project/templates/start.html:25
+msgid "Your Shareholders for"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:42
 #: project/templates/index.html:11
 msgid "Das Aktienregister"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/start.html:34
+msgid "Name"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/start.html:35
+msgid "Email"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/start.html:36
+msgid "Shareholder Number"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/start.html:37
+#, python-format
+msgid "Shares (%%)"
 msgstr ""
 
 #: project/templates/index.html:12
@@ -79,20 +106,19 @@ msgid ""
 msgstr ""
 
 #: project/templates/index.html:15
-msgid "GAFI Standard compliant"
+msgid "Rapid Shareholder documentation"
 msgstr ""
 
 #: project/templates/index.html:16
-msgid "Extensive data validation to ensure you cannot make a mistake"
+msgid "Audit trail proof transaction recording"
 msgstr ""
 
 #: project/templates/index.html:17
-msgid ""
-"Share your data with financial authorities, your lawyer and law enforcment"
+msgid "Easy CapTable printout for General Meetings"
 msgstr ""
 
 #: project/templates/index.html:18
-msgid "Guarantees perfect audit trail"
+msgid "Easy data export via CSV"
 msgstr ""
 
 #: project/templates/index.html:21
@@ -171,27 +197,6 @@ msgstr ""
 
 #: project/templates/start.html:8
 msgid "Welcome"
-msgstr ""
-
-#: project/templates/start.html:25
-msgid "Your Shareholders for"
-msgstr ""
-
-#: project/templates/start.html:34
-msgid "Name"
-msgstr ""
-
-#: project/templates/start.html:35
-msgid "Email"
-msgstr ""
-
-#: project/templates/start.html:36
-msgid "Shareholder Number"
-msgstr ""
-
-#: project/templates/start.html:37
-#, python-format
-msgid "Shares (%%)"
 msgstr ""
 
 #: project/templates/start.html:42

@@ -42,7 +42,7 @@
 
     <table class="table table-striped">
     {% for operator in company.operator_set.all %}
-      <tr><td>{{ operator.user.first_name }} {{ operator.user.last_name }} {{operator.user.email}}</td></tr>
+      <tr><td>{{ operator.user.first_name }} {{ operator.user.last_name }} </td><td>{{operator.user.email}}</td></tr>
     {% endfor %}
     </table>
   {% endif %}

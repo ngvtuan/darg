@@ -3,6 +3,9 @@ Requirements
 
 .. code-block :: shell
 
+    aptitude install python-virtualenv
+    virtualenv .ve
+    source ./ve/bin/activate
     pip install -r requirements.txt
     
 
@@ -23,6 +26,7 @@ Dev Env
 
 .. code-block :: shell
 
+    pip install -r requirements_ci.txt
     ./manage.py runserver 0.0.0.0:9000 --settings=project.settings.dev
 
 to use dev env settings for better development/debugging.

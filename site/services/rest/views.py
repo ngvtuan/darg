@@ -92,7 +92,7 @@ class InviteeUpdateView(APIView):
 
     def post(self, request, format=None):
         
-        serializer = UserWithEmailOnlySerializer(data=request.DATA)
+        serializer = UserWithEmailOnlySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(username=serializer.validated_data['email'])
             return Response(serializer.data, status=status.HTTP_201_CREATED)

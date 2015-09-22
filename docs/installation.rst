@@ -3,6 +3,9 @@ Requirements
 
 .. code-block :: shell
 
+    aptitude install python-virtualenv
+    virtualenv .ve
+    source ./ve/bin/activate
     pip install -r requirements.txt
     
 

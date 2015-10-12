@@ -20,6 +20,30 @@ We are using virtualenv, django 1.8+ and pip for puling dependencies. Currently 
     source .ve/bin/activate
     cd deploy
     ./deploy.sh
+    
+JavaScript/NodeJs/Angular/Grunt:
+
+.. code-block :: shell
+
+    source .ve/bin/activate
+    curl -sL https://deb.nodesource.com/setup | sudo bash -
+    sudo apt-get install nodejs
+    sudo apt-get install build-essential
+    sudo npm install -g grunt-cli bower
+    # inside darg.js dir:
+    # where package.json file is:
+    sudo npm install
+    # where bowser.json is:
+    bower install
+    # in dir where gruntfile is to compile assets
+    grunt
+    
+run grunt watch to autcompile assets:
+
+.. code-block :: shell
+
+    grunt
+    
 
 Dev Env
 =======================

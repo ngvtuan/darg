@@ -1,0 +1,27 @@
+{% load i18n %}
+
+{% trans "Please enter your Option data:" %}
+{% verbatim %}
+<div>
+  <form class="form-inline">
+    <div class="form-group block-level">
+      <input type="date" class="form-control" ng-model="newOptionTransaction.bought_at" placeholder="Date">
+      <select class="form-control" ng-model="newOptionTransaction.buyer" ng-options="shareholder as shareholder.user.email for shareholder in shareholders" placeholder="Buyer">
+        <option value='' disabled>{% endverbatim %}{% trans "Buyer" %}{% verbatim %}</option>
+      </select>
+      <select class="form-control" ng-model="newOptionTransaction.option_plan" ng-options="optionplan.url as optionplan.title for optionplan in option_plans" placeholder="Option Plan">
+        <option value='' disabled>{% endverbatim %}{% trans "Option Plan" %}{% verbatim %}</option>
+      </select>
+      <input type="number" class="form-control" ng-model="newOptionTransaction.count" placeholder="Share Count" ng-maxlength="5">
+      <select type="email" class="form-control" ng-model="newOptionTransaction.seller" ng-options="shareholder as shareholder.user.email for shareholder in shareholders" placeholder="Seller">
+        <option value='' disabled>{% endverbatim %}{% trans "Seller" %}{% verbatim %}</option>
+      </select>
+      <input type="number" class="form-control" ng-model="newOptionTransaction.vesting_months" placeholder="Vesting Period (months)" ng-maxlength="5">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-default" ng-click="hide_form()">{% endverbatim %}{% trans "Cancel" %}{% verbatim %}</button>
+      <button class="btn btn-focus" ng-click="add_option_transaction()">{% endverbatim %}{% trans "Add Option" %}{% verbatim %}</button>
+    </div>
+  </form>
+</div>
+{% endverbatim %}

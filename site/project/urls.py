@@ -9,7 +9,8 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 
 from services.rest.views import ShareholderViewSet, CompanyViewSet, UserViewSet, PositionViewSet, \
-    InviteeUpdateView, AddCompanyView, CountryViewSet
+    InviteeUpdateView, AddCompanyView, CountryViewSet, OptionPlanViewSet, \
+    SecurityViewSet, OptionTransactionViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'shareholders', ShareholderViewSet, base_name="shareholders")
@@ -17,6 +18,10 @@ router.register(r'company', CompanyViewSet)
 router.register(r'user', UserViewSet, base_name="user")
 router.register(r'position', PositionViewSet, base_name="position")
 router.register(r'country', CountryViewSet, base_name="country")
+router.register(r'optionplan', OptionPlanViewSet, base_name="optionplan")
+router.register(r'optiontransaction', OptionTransactionViewSet,
+                base_name="optiontransaction")
+router.register(r'security', SecurityViewSet, base_name="security")
 
 js_info_dict = {
     'packages': ('project', 'shareholder', 'utils', 'services',),
@@ -28,20 +33,32 @@ urlpatterns = [
     url(r'^start/$', 'project.views.start', name='start'),
     url(r'^positions/$', 'shareholder.views.positions', name='positions'),
     url(r'^log/$', 'shareholder.views.log', name='log'),
-    url(r'^shareholder/(?P<shareholder_id>[0-9]+)/$', 'shareholder.views.shareholder', name='shareholder'),
-    url(r'^company/(?P<company_id>[0-9]+)/$', 'company.views.company', name='company'),
-    url(r'^company/(?P<company_id>[0-9]+)/download/csv$', 'project.views.captable_csv', name='captable_csv'),
-    url(r'^company/(?P<company_id>[0-9]+)/download/pdf$', 'project.views.captable_pdf', name='captable_pdf'),
+    url(r'^shareholder/(?P<shareholder_id>[0-9]+)/$',
+        'shareholder.views.shareholder', name='shareholder'),
+
+    url(r'^company/(?P<company_id>[0-9]+)/$', 'company.views.company',
+        name='company'),
+    url(r'^company/(?P<company_id>[0-9]+)/download/csv$',
+        'project.views.captable_csv', name='captable_csv'),
+    url(r'^company/(?P<company_id>[0-9]+)/download/pdf$',
+        'project.views.captable_pdf', name='captable_pdf'),
+    url(r'^options/$', 'shareholder.views.options', name='options'),
+    url(r'^optionsplan/(?P<optionsplan_id>[0-9]+)/$',
+        'shareholder.views.optionsplan', name='optionplan'),
 
     # auth
     url(r'^accounts/', include('registration.backends.simple.urls')),
 
     # rest api
-    url(r'^services/rest/company/add', AddCompanyView.as_view(), name='add_company'),
+    url(r'^services/rest/company/add', AddCompanyView.as_view(),
+        name='add_company'),
     url(r'^services/rest/', include(router.urls)),
-    url(r'^services/rest/invitee', InviteeUpdateView.as_view(), name='invitee'),
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^services/rest/api-token-auth/', views.obtain_auth_token),  # allow to see token for the logged in user
+    url(r'^services/rest/invitee', InviteeUpdateView.as_view(),
+        name='invitee'),
+    # url(r'^api-auth/', include('rest_framework.urls',
+    #    namespace='rest_framework')),
+    url(r'^services/rest/api-token-auth/',
+        views.obtain_auth_token),  # allow to see token for the logged in user
 
     # i18n
     url(r'^jsi18n/$', javascript_catalog, js_info_dict),

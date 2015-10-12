@@ -12,6 +12,12 @@ def positions(request):
     return HttpResponse(template.render(context))
 
 @login_required
+def options(request):
+    template = loader.get_template('options.html')
+    context = RequestContext(request, {})
+    return HttpResponse(template.render(context))
+
+@login_required
 def log(request):
     template = loader.get_template('log.html')
     context = RequestContext(request, {})
@@ -22,4 +28,11 @@ def shareholder(request, shareholder_id):
     template = loader.get_template('shareholder.html')
     shareholder = get_object_or_404(Shareholder, id=int(shareholder_id))
     context = RequestContext(request, {'shareholder': shareholder})
+    return HttpResponse(template.render(context))
+
+
+@login_required
+def optionsplan(request, optionsplan_id):
+    template = loader.get_template('optionsplan.html')
+    context = RequestContext(request, {})
     return HttpResponse(template.render(context))

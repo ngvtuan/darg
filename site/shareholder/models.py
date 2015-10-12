@@ -1,5 +1,8 @@
+from decimal import Decimal
+
 from django.db import models
 from django.conf import settings
+from django.core.validators import MinValueValidator
 from django.utils.translation import ugettext as _
 
 
@@ -18,7 +21,8 @@ class Country(models.Model):
 
 class UserProfile(models.Model):
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, blank=True, null=True)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, blank=True, null=True)
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     province = models.CharField(max_length=255, blank=False, null=True)
@@ -74,12 +78,13 @@ class Shareholder(models.Model):
         return share_count * position.value
 
     def validate_gafi(self):
-        """ returns dict with indication if all data is correct to match swiss fatf gafi
-        regulations """
+        """ returns dict with indication if all data is correct to match
+        swiss fatf gafi regulations """
         result = {"is_valid": True, "errors": []}
 
         # applies only for swiss corps
-        if not self.company.country or self.company.country.iso_code.lower() != 'ch':
+        if (not self.company.country or
+        self.company.country.iso_code.lower() != 'ch'):
             return result
 
         # missing profile leads to global warning
@@ -91,7 +96,8 @@ class Shareholder(models.Model):
         if not (self.user.first_name and self.user.last_name) or not \
                 self.user.userprofile.company_name:
             result['is_valid'] = False
-            result['errors'].append(_('Shareholder first name, last name or company name missing.'))
+            result['errors'].append(_(
+                'Shareholder first name, last name or company name missing.'))
 
         if not self.user.userprofile.birthday:
             result['is_valid'] = False
@@ -104,7 +110,8 @@ class Shareholder(models.Model):
         if not self.user.userprofile.city or not self.user.userprofile.postal_code or not \
                 self.user.userprofile.street:
             result['is_valid'] = False
-            result['errors'].append(_('Shareholder address or address details missing.'))
+            result['errors'].append(_(
+                'Shareholder address or address details missing.'))
 
         return result
 
@@ -113,7 +120,7 @@ class Operator(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     company = models.ForeignKey('Company')
-    share_count = models.IntegerField(blank=True, null=True)
+    share_count = models.PositiveIntegerField(blank=True, null=True)
 
     def __str__(self):
         return u"{} {}".format(self.user.first_name, self.user.last_name)
@@ -124,24 +131,72 @@ class Position(models.Model):
     buyer = models.ForeignKey('Shareholder', related_name="buyer")
     seller = models.ForeignKey('Shareholder', blank=True, null=True,
                                related_name="seller")
-    count = models.IntegerField()
+    count = models.PositiveIntegerField()
     bought_at = models.DateField()
     value = models.DecimalField(max_digits=8, decimal_places=4, blank=True,
                                 null=True)
 
 
+class Security(models.Model):
+    SECURITY_TITLES = (
+        ('P', 'Preferred Stock'),
+        ('C', 'Common Stock'),
+        # ('O', 'Option'),
+        # ('W', 'Warrant'),
+        # ('V', 'Convertible Instrument'),
+    )
+    title = models.CharField(max_length=1, choices=SECURITY_TITLES)
+
+    def __str__(self):
+        return u"{}".format(self.get_title_display())
+
+
+class OptionPlan(models.Model):
+    """ Approved chunk of option (approved by board) """
+    company = models.ForeignKey('Company')
+    board_approved_at = models.DateField()
+    title = models.CharField(max_length=255)
+    security = models.ForeignKey('Security')
+    exercise_price = models.DecimalField(
+        max_digits=8, decimal_places=4,
+        blank=True,
+        null=True,
+        validators=[MinValueValidator(Decimal('0.01'))]
+        )
+    count = models.PositiveIntegerField(
+        help_text=_("Number of shares approved"))
+    comment = models.TextField(blank=True, null=True)
+    pdf_file = models.FileField(blank=True, null=True)
+
+    def __str__(self):
+        return u"{}".format(self.title)
+
+
+class OptionTransaction(models.Model):
+    """ Transfer of options from someone to anyone """
+    bought_at = models.DateField()
+    buyer = models.ForeignKey('Shareholder', related_name="option_buyer")
+    option_plan = models.ForeignKey('OptionPlan')
+    count = models.PositiveIntegerField()
+    seller = models.ForeignKey('Shareholder', blank=True, null=True,
+                               related_name="option_seller")
+    vesting_months = models.PositiveIntegerField(blank=True, null=True)
+
+
 class Company(models.Model):
 
     name = models.CharField(max_length=255)
-    share_count = models.IntegerField(blank=True, null=True)
-    country = models.ForeignKey(Country, null=True, blank=False, help_text=_("Headquarter location"))
+    share_count = models.PositiveIntegerField(blank=True, null=True)
+    country = models.ForeignKey(
+        Country, null=True, blank=False, help_text=_("Headquarter location"))
 
     def __str__(self):
         return u"{}".format(self.name)
 
     def shareholder_count(self):
         """ total count of active Shareholders """
-        return Position.objects.filter(buyer__company=self, seller__isnull=True).count()
+        return Position.objects.filter(
+            buyer__company=self, seller__isnull=True).count()
 
     def get_active_shareholders(self):
         """ returns list of all active shareholders """

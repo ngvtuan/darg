@@ -7,13 +7,17 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 
 from services.rest.serializers import ShareholderSerializer, CompanySerializer, UserSerializer, \
-    PositionSerializer, AddCompanySerializer, UserWithEmailOnlySerializer, CountrySerializer
+    PositionSerializer, AddCompanySerializer, UserWithEmailOnlySerializer, CountrySerializer, \
+    OptionPlanSerializer, OptionTransactionSerializer, SecuritySerializer
 from services.rest.permissions import UserCanAddCompanyPermission, \
     SafeMethodsOnlyPermission, UserCanAddShareholderPermission, UserCanAddPositionPermission,\
-    UserCanAddInviteePermission, UserCanEditCompanyPermission
-from shareholder.models import Shareholder, Company, Operator, Position, Country
+    UserCanEditCompanyPermission, UserCanAddOptionPlanPermission, \
+    UserCanAddOptionTransactionPermission
+from shareholder.models import Shareholder, Company, Position, Country, OptionPlan, \
+    OptionTransaction, Security
 
 User = get_user_model()
+
 
 class ShareholderViewSet(viewsets.ModelViewSet):
     """
@@ -27,9 +31,8 @@ class ShareholderViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return Shareholder.objects.filter(company__operator__user=user).distinct()
-
-
+        return Shareholder.objects.filter(company__operator__user=user)\
+            .distinct()
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
@@ -47,7 +50,6 @@ class CompanyViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return Company.objects.filter(operator__user=user)
 
-        return super(CompanyViewSet, self).create(obj)
 
 class AddCompanyView(APIView):
     """ view to initially setup a company """
@@ -55,7 +57,8 @@ class AddCompanyView(APIView):
     queryset = Company.objects.none()
     permission_classes = [
         UserCanAddCompanyPermission,
-    ] 
+    ]
+
     def post(self, request, format=None):
         serializer = AddCompanySerializer(data=request.data)
         if serializer.is_valid() and request.user.is_authenticated():
@@ -73,7 +76,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return User.objects.filter(id = user.id)
+        return User.objects.filter(id=user.id)
+
 
 class CountryViewSet(viewsets.ModelViewSet):
     """ API endpoint to get user base info """
@@ -86,12 +90,13 @@ class CountryViewSet(viewsets.ModelViewSet):
         users = Country.objects.all()
         return users
 
+
 class InviteeUpdateView(APIView):
     """ API endpoint to get user base info """
     permission_classes = (AllowAny,)
 
     def post(self, request, format=None):
-        
+
         serializer = UserWithEmailOnlySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(username=serializer.validated_data['email'])
@@ -100,7 +105,7 @@ class InviteeUpdateView(APIView):
 
 
 class PositionViewSet(viewsets.ModelViewSet):
-    """ API endpoint to get user base info """
+    """ API endpoint to get positions """
     serializer_class = PositionSerializer
     permission_classes = [
         UserCanAddPositionPermission,
@@ -108,4 +113,41 @@ class PositionViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return Position.objects.filter(buyer__company__operator__user=user).order_by('bought_at').order_by('-bought_at')
+        return Position.objects.filter(buyer__company__operator__user=user)\
+            .order_by('bought_at').order_by('-bought_at')
+
+
+class SecurityViewSet(viewsets.ModelViewSet):
+    """ API endpoint to get options """
+    serializer_class = SecuritySerializer
+    permission_classes = [
+        SafeMethodsOnlyPermission,
+    ]
+
+    def get_queryset(self):
+        return Security.objects.all()
+
+
+class OptionPlanViewSet(viewsets.ModelViewSet):
+    """ API endpoint to get options """
+    serializer_class = OptionPlanSerializer
+    permission_classes = [
+        UserCanAddOptionPlanPermission,
+    ]
+
+    def get_queryset(self):
+        user = self.request.user
+        return OptionPlan.objects.filter(company__operator__user=user)
+
+
+class OptionTransactionViewSet(viewsets.ModelViewSet):
+    """ API endpoint to get options """
+    serializer_class = OptionTransactionSerializer
+    permission_classes = [
+        UserCanAddOptionTransactionPermission,
+    ]
+
+    def get_queryset(self):
+        user = self.request.user
+        return OptionTransaction.objects.filter(
+            option_plan__company__operator__user=user)

@@ -4,9 +4,23 @@ import datetime
 
 from django.contrib.auth import get_user_model
 
-from shareholder.models import Shareholder, Company, Position, Operator, UserProfile, Country
+from shareholder.models import Shareholder, Company, Position, Operator, \
+    UserProfile, Country, Security
 
 User = get_user_model()
+
+DEFAULT_TEST_DATA = {
+    'password': 'test',
+    'username': 'testusername',
+    'date': '1.1.2016',
+    'title': '2016 OptionsPlan',
+    'exercise_price': '2.05',
+    'share_count': '156',
+    'comment': '2345',
+    'security': 'Preferred Stock',
+    'count': '2222',
+    'vesting_period': 3,
+}
 
 
 def _make_wordlist():
@@ -20,16 +34,19 @@ def _make_user():
     words = _make_wordlist()
     hash_user = hashlib.sha1()
     hash_user.update(random.choice(words))
-    username = hash_user.hexdigest()
+    username = hash_user.hexdigest()[0:25]
+    email = "{}@{}".format(username, 'example.com')
 
     user = User.objects.create(
         is_active=True,
         first_name=random.choice(words),
         last_name=random.choice(words),
         username=username,
+        email=email,
     )
 
-    country, created = Country.objects.get_or_create(iso_code="de", defaults={"name": "Germany", "iso_code": "de"})
+    country, created = Country.objects.get_or_create(
+        iso_code="de", defaults={"name": "Germany", "iso_code": "de"})
 
     UserProfile.objects.create(
         user=user,
@@ -42,7 +59,7 @@ def _make_user():
         company_name="SomeCorp"
     )
 
-    user.set_password('test')
+    user.set_password(DEFAULT_TEST_DATA.get('password'))
     user.save()
 
     return user
@@ -71,7 +88,8 @@ class CompanyGenerator(object):
 class CountryGenerator(object):
 
     def generate(self):
-        country, created = Country.objects.get_or_create(iso_code="de", defaults={"name": "Germany", "iso_code": "de"})
+        country, created = Country.objects.get_or_create(
+            iso_code="de", defaults={"name": "Germany", "iso_code": "de"})
         return country
 
 
@@ -145,3 +163,13 @@ class PositionGenerator(object):
         position = Position.objects.create(**kwargs2)
 
         return position
+
+
+class TwoInitialSecuritiesGenerator(object):
+
+    def generate(self, **kwargs):
+
+        s1 = Security.objects.create(title='P')
+        s2 = Security.objects.create(title='C')
+        
+        return (s1, s2)

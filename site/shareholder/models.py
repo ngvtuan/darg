@@ -135,6 +135,8 @@ class Position(models.Model):
     bought_at = models.DateField()
     value = models.DecimalField(max_digits=8, decimal_places=4, blank=True,
                                 null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Security(models.Model):
@@ -167,6 +169,8 @@ class OptionPlan(models.Model):
         help_text=_("Number of shares approved"))
     comment = models.TextField(blank=True, null=True)
     pdf_file = models.FileField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return u"{}".format(self.title)
@@ -181,6 +185,8 @@ class OptionTransaction(models.Model):
     seller = models.ForeignKey('Shareholder', blank=True, null=True,
                                related_name="option_seller")
     vesting_months = models.PositiveIntegerField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Company(models.Model):

@@ -1,63 +1,48 @@
 {% extends "base_auth.html" %}
 {% load i18n %}
 
-{% block ng_app %}js.darg.app.company{% endblock %}
+{% block ng_app %}js.darg.app.optionplan{% endblock %}
 
 {% block content %}
 
 <!-- required for angular API call -->
-<script>var company_id = {{ company.id}}</script>
+<script>var optionplan_id = {{ optionplan.id}}</script>
 
-<div ng_controller="CompanyController">
+<div ng_controller="OptionPlanController">
 
-  <h1>{% trans "Company Details for" %} {% verbatim %}{{ company.name }}{% endverbatim %}</h1>
+  <h1>{% trans "Option plan details for" %} {% verbatim %}{{ optionplan.title }}{% endverbatim %}</h1>
 
   {% include "_form_errors.html" %}
   
   <h2>{% trans "Data" %}</h2>
   <table class="table table-striped">
     <tr>
-      <td>{% trans "Company Name" %}:</td>
-      <td>{% verbatim %}<span editable-text="company.name" onaftersave="edit_company()">{{ company.name || 'empty' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}</td>
+      <td>{% trans "Board approval date" %}:</td>
+      <td>{% verbatim %}<span editable-text="optionplan.board_approved_at" onaftersave="edit_board_approved_at()">{{ optionplan.board_approved_at }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
     </tr>
     <tr>
-      <td>{% trans "Company Share Count" %}:</td>
-      <td>{% verbatim %}<span editable-text="company.share_count" onaftersave="edit_company()">{{ company.share_count }} <span class="el-icon-pencil"></span></span>{% endverbatim %}</td>
+      <td>{% trans "Exercise Price" %}:</td>
+      <td>{% verbatim %}<span editable-text="optionplan.exercise_price" onaftersave="edit_exercise_price()()">{{ optionplan.exercise_price }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
     </tr>
     <tr>
-      <td>{% trans "Company Headquarter Country" %}:</td>
+      <td>{% trans "Share count" %}:</td>
+      <td>{% verbatim %}<span editable-text="optionplan.count" onaftersave="edit_county()">{{ optionplan.count }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Comment" %}:</td>
+      <td>{% verbatim %}<span editable-text="optionplan.comment" onaftersave="edit_comment()">{{ optionplan.comment }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Security Type" %}:</td>
       <td>
       {% verbatim %}
-        <span editable-select="company.country" onaftersave="edit_company()" e-ng-options="c as c.name for c in countries">
-          {{ company.country.name || 'empty' }} 
-          <span class="el-icon-pencil"></span>
+        <span editable-select="optionplan.security" onaftersave="edit_security()" e-ng-options="c.title as c.readable_title for c in securities">
+          {{ optionplan.security.readable_title || 'empty' }} 
+          <!--<span class="el-icon-pencil"></span>-->
         </span>
       {% endverbatim %}
       </td>
     </tr>
   </table>
-
-  {% if company.operator_set.exists %}
-    <h2>{% trans "Administrators" %}</h2>
-
-    <table class="table table-striped">
-    {% for operator in company.operator_set.all %}
-      <tr><td>{{ operator.user.first_name }} {{ operator.user.last_name }} </td><td>{{operator.user.email}}</td></tr>
-    {% endfor %}
-    </table>
-
-  {% endif %}
- 
-  {% if company.optionplan_set.exists %}
-    <h2>{% trans "Option Plans" %}</h2>
-
-    <table class="table table-striped">
-    {% for optionplan in company.optionplan_set.all %}
-      <tr><td>{% trans "Options Plan Name" %}</td><td><a href="{% url "optionplan" optionplan.pk %}" title="{% trans "Edit Option Plan" %}" class="btn align-left">{{ optionplan.title }}</a></td></tr>
-    {% endfor %}
-    </table>
-
-  {% endif %}  
-    
 </div> 
 {% endblock %}

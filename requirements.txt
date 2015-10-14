@@ -32,3 +32,4 @@ Pillow
 django-app-namespace-template-loader
 zinnia-theme-bootstrap
 #-- end blog
+ipdbplugin

@@ -162,6 +162,16 @@ LOGGING = {
             'handlers': ['sentry', 'console'],
             'propagate': False,
         },
+        'selenium': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'easyprocess': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+            'propagate': False,
+        },
     },
 }
 

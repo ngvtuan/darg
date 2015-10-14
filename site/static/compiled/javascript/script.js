@@ -247,6 +247,47 @@
 (function() {
   var app;
 
+  app = angular.module('js.darg.app.optionplan', ['js.darg.api', 'xeditable']);
+
+  app.controller('OptionPlanController', [
+    '$scope', '$http', 'OptionPlan', function($scope, $http, OptionPlan) {
+      $http.get('/services/rest/optionplan/' + optionplan_id).then(function(result) {
+        $scope.optionplan = new OptionPlan(result.data);
+        return $http.get($scope.optionplan.security).then(function(result1) {
+          return $scope.optionplan.security = result1.data;
+        });
+      });
+      $http.get('/services/rest/security').then(function(result) {
+        return $scope.securities = result.data.results;
+      });
+      return $scope.edit_company = function() {
+        $scope.company.country = $scope.company.country.url;
+        return $scope.company.$update().then(function(result) {
+          $scope.company = new Company(result);
+          $http.get($scope.company.country).then(function(result1) {
+            return $scope.company.country = result1.data;
+          });
+          return console.log($scope.company);
+        }).then(function() {
+          return void 0;
+        }).then(function() {
+          return $scope.errors = null;
+        }, function(rejection) {
+          return $scope.errors = rejection.data;
+        });
+      };
+    }
+  ]);
+
+  app.run(function(editableOptions) {
+    editableOptions.theme = 'bs3';
+  });
+
+}).call(this);
+
+(function() {
+  var app;
+
   app = angular.module('js.darg.app.positions', ['js.darg.api']);
 
   app.controller('PositionsController', [

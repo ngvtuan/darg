@@ -17,6 +17,13 @@ We are using virtualenv, django 1.8+ and pip for puling dependencies. Currently 
     source .ve/bin/activate
     cd deploy
     ./deploy.sh
+    
+tests will also require:
+
+.. code-block :: shell
+
+    aptitude install wamerican
+    
 
 Dev Env
 =======================

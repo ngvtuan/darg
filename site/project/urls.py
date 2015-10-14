@@ -2,6 +2,7 @@ from django.conf.urls import include, url, patterns
 from django.contrib import admin
 from django.views.i18n import javascript_catalog
 from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -29,7 +30,8 @@ js_info_dict = {
 
 urlpatterns = [
     # web views
-    url(r'^$', 'project.views.index', name='index'),
+    url(r'^$', RedirectView.as_view(url='accounts/register/', permanent=True),
+        name='index'),
     url(r'^start/$', 'project.views.start', name='start'),
     url(r'^positions/$', 'shareholder.views.positions', name='positions'),
     url(r'^log/$', 'shareholder.views.log', name='log'),

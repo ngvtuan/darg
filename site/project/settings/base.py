@@ -27,7 +27,7 @@ SECRET_KEY = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.das-aktienregister.ch']
+ALLOWED_HOSTS = ['app.das-aktienregister.ch',]
 
 # Application definition
 

@@ -1,3 +1,5 @@
+import unittest
+
 from django.test import TestCase
 from django.test.client import Client
 from django.core.urlresolvers import reverse
@@ -133,18 +135,18 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
 
     def setUp(self):
         TwoInitialSecuritiesGenerator().generate()
+        self.operator = OperatorGenerator().generate()
+        self.buyer = ShareholderGenerator().generate(company=self.operator.company)
+        self.seller = ShareholderGenerator().generate(company=self.operator.company)
 
     def tearDown(self):
         Security.objects.all().delete()
 
     def test_base_use_case(self):
         """ means: create a option plan and move options for users """
-        operator = OperatorGenerator().generate()
-        buyer = ShareholderGenerator().generate(company=operator.company)
-        seller = ShareholderGenerator().generate(company=operator.company)
 
         try:
-            app = page.OptionsPage(self.selenium, self.live_server_url, operator.user)
+            app = page.OptionsPage(self.selenium, self.live_server_url, self.operator.user)
             app.click_open_create_option_plan()
 
             self.assertTrue(app.is_option_plan_form_open())
@@ -156,12 +158,12 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
             self.assertTrue(app.is_option_plan_displayed())
 
             app.click_open_transfer_option()
-            app.enter_transfer_option_data(buyer=buyer, seller=seller)
+            app.enter_transfer_option_data(buyer=self.buyer, seller=self.seller)
             app.click_save_transfer_option()
 
             self.assertTrue(app.is_no_errors_displayed())
             self.assertTrue(app.is_transfer_option_shown(
-                buyer=buyer, seller=seller
+                buyer=self.buyer, seller=self.seller
             ))
         except Exception, e:
             self._handle_exception(e)
@@ -170,35 +172,53 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
         """ test that options transfer form is working properly
         if there is no buyer selected """
 
-        app = page.OptionsPage(self.selenium, self.live_server_url)
+        app = page.OptionsPage(self.selenium, self.live_server_url, self.operator.user)
         app.prepare_optionplan_fixtures()
 
         self.assertTrue(app.is_option_plan_displayed())
 
         app.click_open_transfer_option()
-        app.enter_transfer_option_data(buyer=None)
+        app.enter_transfer_option_data(seller=self.seller)
         app.click_save_transfer_option()
 
         self.assertFalse(app.is_no_errors_displayed())
 
     def test_base_use_case_no_seller(self):
-        pass
+        """ test that options transfer form is working properly
+        if there is no seller selected """
 
+        app = page.OptionsPage(self.selenium, self.live_server_url, self.operator.user)
+        app.prepare_optionplan_fixtures()
+
+        self.assertTrue(app.is_option_plan_displayed())
+
+        app.click_open_transfer_option()
+        app.enter_transfer_option_data(buyer=self.buyer)
+        app.click_save_transfer_option()
+
+        self.assertFalse(app.is_no_errors_displayed())
+
+    @unittest.skip('not implemented')
     def test_base_use_case_no_count(self):
         pass
 
+    @unittest.skip('not implemented')
     def test_base_use_case_no_bouth_at(self):
         pass
 
+    @unittest.skip('not implemented')
     def test_base_use_case_no_option_pan(self):
         pass
 
+    @unittest.skip('not implemented')
     def test_base_use_case_same_buyer_seller(self):
         pass
 
+    @unittest.skip('not implemented')
     def test_base_use_case_negative_count(self):
         pass
 
+    @unittest.skip('not implemented')
     def test_base_use_case_negative_Vesting(self):
         pass
 

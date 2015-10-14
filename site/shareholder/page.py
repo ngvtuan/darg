@@ -92,15 +92,22 @@ class OptionsPage(BasePage):
         inputs[1].send_keys(DEFAULT_TEST_DATA.get('count'))
         inputs[2].send_keys(DEFAULT_TEST_DATA.get('vesting_period'))
 
-        select_input = [
-            kwargs.get('buyer').user.email,
-            DEFAULT_TEST_DATA.get('title'),
-            kwargs.get('seller').user.email
-        ]
+        buyer = kwargs.get('buyer')
+        seller = kwargs.get('seller')
+
+        select_input = []
+        if buyer:
+            select_input.extend([buyer.user.email])
+        else:
+            select_input.extend([''])
+        select_input.extend([DEFAULT_TEST_DATA.get('title')])
+        if seller:
+            select_input.extend([seller.user.email])
 
         for key, select in enumerate(selects):
             select = Select(select)
-            select.select_by_visible_text(select_input[key])
+            if key < len(select_input) and select_input[key] != '':
+                select.select_by_visible_text(select_input[key])
 
     # -- CLICKs
     def click_open_create_option_plan(self):
@@ -158,4 +165,7 @@ class OptionsPage(BasePage):
     # --  aggregations of logic
     def prepare_optionplan_fixtures(self):
         """ setup options plan """
-        pass
+        self.click_open_create_option_plan()
+
+        self.enter_option_plan_form_data()
+        self.click_save_option_plan_form()

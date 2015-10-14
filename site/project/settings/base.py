@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+VERSION = '..1'
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -160,6 +162,16 @@ LOGGING = {
         'celery': {
             'level': 'WARNING',
             'handlers': ['sentry', 'console'],
+            'propagate': False,
+        },
+        'selenium': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'easyprocess': {
+            'level': 'WARNING',
+            'handlers': ['console'],
             'propagate': False,
         },
     },

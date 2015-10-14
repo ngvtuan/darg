@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from shareholder.models import Shareholder, Company, Operator, Position, UserProfile, Country
+from shareholder.models import Shareholder, Company, Operator, Position, \
+    UserProfile, Country, OptionPlan, OptionTransaction, Security
 
 
 class ShareholderAdmin(admin.ModelAdmin):
@@ -30,9 +31,24 @@ class CountryAdmin(admin.ModelAdmin):
     list_display = ('iso_code',)
     pass
 
+class SecurityAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    pass
+
+class OptionTransactionAdmin(admin.ModelAdmin):
+    list_display = ('bought_at', 'buyer', 'seller',)
+    pass
+
+class OptionPlanAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    pass
+
 admin.site.register(Shareholder, ShareholderAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Operator, OperatorAdmin)
 admin.site.register(Position, PositionAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Country, CountryAdmin)
+admin.site.register(Security, SecurityAdmin)
+admin.site.register(OptionPlan, OptionPlanAdmin)
+admin.site.register(OptionTransaction, OptionTransactionAdmin)

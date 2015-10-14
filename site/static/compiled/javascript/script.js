@@ -57,6 +57,22 @@
     }
   ]);
 
+  app.factory('OptionPlan', [
+    '$resource', function($resource) {
+      return $resource('/services/rest/optionplan/:id', {
+        id: '@id'
+      });
+    }
+  ]);
+
+  app.factory('OptionTransaction', [
+    '$resource', function($resource) {
+      return $resource('/services/rest/optiontransaction/:id', {
+        id: '@id'
+      });
+    }
+  ]);
+
   app.factory('Invitee', [
     '$resource', function($resource) {
       return $resource('/services/rest/invitee/:id', {
@@ -147,6 +163,125 @@
       };
     }
   ]);
+
+}).call(this);
+
+(function() {
+  var app;
+
+  app = angular.module('js.darg.app.options', ['js.darg.api']);
+
+  app.controller('OptionsController', [
+    '$scope', '$http', 'OptionPlan', 'OptionTransaction', function($scope, $http, OptionPlan, OptionTransaction) {
+      $scope.option_plans = [];
+      $scope.securities = [];
+      $scope.shareholders = [];
+      $scope.show_add_option_transaction = false;
+      $scope.show_add_option_plan = false;
+      $scope.newOptionPlan = new OptionPlan();
+      $http.get('/services/rest/optionplan').then(function(result) {
+        return angular.forEach(result.data.results, function(item) {
+          return $scope.option_plans.push(item);
+        });
+      });
+      $http.get('/services/rest/security').then(function(result) {
+        return angular.forEach(result.data.results, function(item) {
+          return $scope.securities.push(item);
+        });
+      });
+      $http.get('/services/rest/shareholders').then(function(result) {
+        return angular.forEach(result.data.results, function(item) {
+          return $scope.shareholders.push(item);
+        });
+      });
+      $scope.add_option_plan = function() {
+        return $scope.newOptionPlan.$save().then(function(result) {
+          return $scope.option_plans.push(result);
+        }).then(function() {
+          $scope.newOptionPlan = new OptionPlan();
+          return $scope.show_add_option_plan = false;
+        }).then(function() {
+          return $scope.errors = null;
+        }, function(rejection) {
+          return $scope.errors = rejection.data;
+        });
+      };
+      $scope.add_option_transaction = function() {
+        return $scope.newOptionTransaction.$save().then(function(result) {
+          $scope.option_plans = [];
+          return $http.get('/services/rest/optionplan').then(function(result) {
+            return angular.forEach(result.data.results, function(item) {
+              return $scope.option_plans.push(item);
+            });
+          });
+        }).then(function() {
+          $scope.newOptionTransaction = new OptionPlan();
+          return $scope.show_add_option_transaction = false;
+        }).then(function() {
+          return $scope.errors = null;
+        }, function(rejection) {
+          return $scope.errors = rejection.data;
+        });
+      };
+      $scope.show_add_option_plan_form = function() {
+        $scope.show_add_option_plan = true;
+        $scope.show_add_option_transaction = false;
+        return $scope.newOptionPlan = new OptionPlan();
+      };
+      $scope.show_add_option_transaction_form = function() {
+        $scope.show_add_option_transaction = true;
+        $scope.show_add_option_plan = false;
+        return $scope.newOptionTransaction = new OptionTransaction();
+      };
+      return $scope.hide_form = function() {
+        $scope.show_add_option_plan = false;
+        $scope.show_add_option_transaction = false;
+        $scope.newOptionPlan = new OptionPlan();
+        return $scope.newOptionTransaction = new OptionTransaction();
+      };
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var app;
+
+  app = angular.module('js.darg.app.optionplan', ['js.darg.api', 'xeditable']);
+
+  app.controller('OptionPlanController', [
+    '$scope', '$http', 'OptionPlan', function($scope, $http, OptionPlan) {
+      $http.get('/services/rest/optionplan/' + optionplan_id).then(function(result) {
+        $scope.optionplan = new OptionPlan(result.data);
+        return $http.get($scope.optionplan.security).then(function(result1) {
+          return $scope.optionplan.security = result1.data;
+        });
+      });
+      $http.get('/services/rest/security').then(function(result) {
+        return $scope.securities = result.data.results;
+      });
+      return $scope.edit_company = function() {
+        $scope.company.country = $scope.company.country.url;
+        return $scope.company.$update().then(function(result) {
+          $scope.company = new Company(result);
+          $http.get($scope.company.country).then(function(result1) {
+            return $scope.company.country = result1.data;
+          });
+          return console.log($scope.company);
+        }).then(function() {
+          return void 0;
+        }).then(function() {
+          return $scope.errors = null;
+        }, function(rejection) {
+          return $scope.errors = rejection.data;
+        });
+      };
+    }
+  ]);
+
+  app.run(function(editableOptions) {
+    editableOptions.theme = 'bs3';
+  });
 
 }).call(this);
 

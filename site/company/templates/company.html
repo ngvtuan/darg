@@ -45,7 +45,19 @@
       <tr><td>{{ operator.user.first_name }} {{ operator.user.last_name }} </td><td>{{operator.user.email}}</td></tr>
     {% endfor %}
     </table>
+
   {% endif %}
  
+  {% if company.optionplan_set.exists %}
+    <h2>{% trans "Option Plans" %}</h2>
+
+    <table class="table table-striped">
+    {% for optionplan in company.optionplan_set.all %}
+      <tr><td>{% trans "Options Plan Name" %}</td><td><a href="{% url "optionplan" optionplan.pk %}" title="{% trans "Edit Option Plan" %}" class="btn align-left">{{ optionplan.title }}</a></td></tr>
+    {% endfor %}
+    </table>
+
+  {% endif %}  
+    
 </div> 
 {% endblock %}

@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<div class="navbar">
+  {% if request.user.is_superuser %}
+  <a href="{% url 'admin:index' %}" class="pull-right">{% trans "Admin" %}</a>
+  {% endif %}
+  <a href="{% url "auth_logout" %}" class="pull-right">{% trans "Logout" %}</a>
+  <a href="{% url "options" %}" class="pull-right">{% trans "Options" %}</a>
+  <!-- <a href="{% url "log" %}" class="pull-right">{% trans "Log" %}</a> -->
+  <a href="{% url "positions" %}" class="pull-right">{% trans "Positions" %}</a>
+  <a href="{% url "start" %}" class="pull-right">{% trans "Start" %}</a>
+</div>

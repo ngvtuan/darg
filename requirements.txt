@@ -33,3 +33,4 @@ django-app-namespace-template-loader
 zinnia-theme-bootstrap
 docutils
 #-- end blog
+ipdbplugin

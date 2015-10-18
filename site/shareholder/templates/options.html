@@ -1,0 +1,61 @@
+{% extends "base_auth.html" %}
+{% load i18n %}
+
+{% block ng_app %}js.darg.app.options{% endblock %}
+
+{% block content %}
+<div ng_controller="OptionsController">
+  <h1>{% trans "Options" %}</h1>
+  {% include "_form_errors.html" %}
+
+  <div class="panel">
+    <a class="btn align-left" href="" ng-click="show_add_option_transaction_form()">{% trans "Transfer Option" %}</a> 
+    <a class="btn align-left" href="" ng-click="show_add_option_plan_form()">{% trans "Grant New Option Plan" %}</a>
+  </div>
+
+  <div id="add_option_transaction" ng-hide="!show_add_option_transaction">
+    {% include "_add_option_transaction_form.html" %}
+  </div>
+  <div id="add_option_plan" ng-hide="!show_add_option_plan">
+    {% include "_add_option_plan_form.html" %}
+  </div>
+  
+  {% verbatim %}
+  <div id="options" ng-hide="!option_plans.length" ng-repeat="option_plan in option_plans">
+    {% endverbatim %}
+    <h2>
+      {% trans "Optionplan" %}: {% verbatim %}{{ option_plan.title }}{% endverbatim %} {% trans "for" %} {% verbatim %}{{ option_plan.security.readable_title }}{% endverbatim %}
+      <a href="/optionsplan/{% verbatim %}{{ option_plan.pk }}{% endverbatim %}/" class="el-icon-cogs-wrapper btn">
+         <span class="el-icon-cogs"></span>
+      </a>
+    </h2>
+    <table class="table table-hover">
+      <caption></caption>
+      <thead>
+        <tr>
+          <th>{% trans "Grant Date" %}</th>
+          <th>{% trans "Receipient" %}</th>
+          <th class="text-right">{% trans "Share Count" %}</th>
+          <th class="text-right">{% trans "Exercise Price" %}</th>
+          <th>{% trans "Issuer" %}</th>
+      </thead
+      <tbody>
+      {% verbatim %}
+      <tr class="panel" ng-repeat="option_transaction in option_plan.optiontransaction_set">
+        <td>{{ option_transaction.bought_at | date : 'd.MM.yy' }}</td>
+        <td>{{ option_transaction.buyer.user.first_name }} {{ option_transaction.buyer.user.last_name }}</td>
+        <td class="text-right">{{ option_transaction.count }}</td>
+        <td class="text-right">{{ option_plan.exercise_price }}</td>
+        <td>{{ option_transaction.seller.user.first_name }} {{ option_transaction.seller.user.last_name }}</td>
+      </tr>
+      </tbody>
+    </table>
+    {% endverbatim %}
+    <div class="panel" ng-show="!option_plans.length">
+      <div class="clearfix">
+        <em>{% trans "No options yet." %}</em>
+      </div>
+    </div>
+  </div>
+</div> 
+{% endblock %}

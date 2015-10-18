@@ -1,0 +1,48 @@
+{% extends "base_auth.html" %}
+{% load i18n %}
+
+{% block ng_app %}js.darg.app.optionplan{% endblock %}
+
+{% block content %}
+
+<!-- required for angular API call -->
+<script>var optionplan_id = {{ optionplan.id}}</script>
+
+<div ng_controller="OptionPlanController">
+
+  <h1>{% trans "Option plan details for" %} {% verbatim %}{{ optionplan.title }}{% endverbatim %}</h1>
+
+  {% include "_form_errors.html" %}
+  
+  <h2>{% trans "Data" %}</h2>
+  <table class="table table-striped">
+    <tr>
+      <td>{% trans "Board approval date" %}:</td>
+      <td>{% verbatim %}<span editable-text="optionplan.board_approved_at" onaftersave="edit_board_approved_at()">{{ optionplan.board_approved_at }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Exercise Price" %}:</td>
+      <td>{% verbatim %}<span editable-text="optionplan.exercise_price" onaftersave="edit_exercise_price()()">{{ optionplan.exercise_price }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Share count" %}:</td>
+      <td>{% verbatim %}<span editable-text="optionplan.count" onaftersave="edit_county()">{{ optionplan.count }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Comment" %}:</td>
+      <td>{% verbatim %}<span editable-text="optionplan.comment" onaftersave="edit_comment()">{{ optionplan.comment }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Security Type" %}:</td>
+      <td>
+      {% verbatim %}
+        <span editable-select="optionplan.security" onaftersave="edit_security()" e-ng-options="c.title as c.readable_title for c in securities">
+          {{ optionplan.security.readable_title || 'empty' }} 
+          <!--<span class="el-icon-pencil"></span>-->
+        </span>
+      {% endverbatim %}
+      </td>
+    </tr>
+  </table>
+</div> 
+{% endblock %}

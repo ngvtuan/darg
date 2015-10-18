@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 SESSION_COOKIE_NAME = 'darg-sessionid'
 
 TRACKING_ENABLED = True
-TRACKING_CODE = ''
+TRACKING_CODE = 'UA-58468401-4'  # used by test
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # for local dev use this...

@@ -24,6 +24,14 @@ app.factory 'Position', ['$resource', ($resource) ->
     $resource '/services/rest/position/:id', id: '@id'
 ]
 
+app.factory 'OptionPlan', ['$resource', ($resource) ->
+    $resource '/services/rest/optionplan/:id', id: '@id'
+]
+
+app.factory 'OptionTransaction', ['$resource', ($resource) ->
+    $resource '/services/rest/optiontransaction/:id', id: '@id'
+]
+
 app.factory 'Invitee', ['$resource', ($resource) ->
     $resource '/services/rest/invitee/:id', id: '@id'
 ]

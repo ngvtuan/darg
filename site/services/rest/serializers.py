@@ -1,7 +1,7 @@
 import datetime
 
 from django.contrib.auth import get_user_model
-# from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _
 from django.utils.text import slugify
 from django.core.mail import mail_managers
 from rest_framework import serializers
@@ -154,6 +154,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
 
+        if not validated_data.get('user').get('email'):
+            raise ValidationError(_('Email missing'))
+
         if validated_data.get('user').get('userprofile'):
             userprofile_data = validated_data.pop('userprofile')
             userprofile = UserProfile.objects.create(**userprofile_data)
@@ -194,11 +197,25 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
         # FIXME: assuming one company per user
         company = user.operator_set.all()[0].company
 
+        if not validated_data.get('user').get('email'):
+            raise ValidationError(_('Email missing'))
+
+        if not validated_data.get('user').get('first_name'):
+            raise ValidationError(_('First Name missing'))
+
+        if not validated_data.get('user').get('last_name'):
+            raise ValidationError(_('Last Name missing'))
+
+        if company.shareholder_set.filter(
+            number=validated_data.get('number')
+        ).exists():
+            raise ValidationError(_('Shareholder Number must be unique'))
+
         # get unique username
         username = make_username(
-            validated_data.get("user").get("first_name"),
-            validated_data.get("user").get("last_name"),
-            validated_data.get("user").get("email")
+            validated_data.get("user").get("first_name") or '',
+            validated_data.get("user").get("last_name") or '',
+            validated_data.get("user").get("email") or ''
         )
 
         # save user/-profile

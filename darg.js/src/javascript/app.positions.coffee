@@ -3,6 +3,7 @@ app = angular.module 'js.darg.app.positions', ['js.darg.api',]
 app.controller 'PositionsController', ['$scope', '$http', 'Position', ($scope, $http, Position) ->
     $scope.positions = []
     $scope.shareholders = []
+    $scope.securities = []
 
     $scope.show_add_position = false
     $scope.show_add_capital = false
@@ -15,6 +16,10 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', ($scope, $
     $http.get('/services/rest/shareholders').then (result) ->
         angular.forEach result.data.results, (item) ->
             $scope.shareholders.push item
+
+    $http.get('/services/rest/security').then (result) ->
+        angular.forEach result.data.results, (item) ->
+            $scope.securities.push item
 
     $scope.add_position = ->
         $scope.newPosition.$save().then (result) ->

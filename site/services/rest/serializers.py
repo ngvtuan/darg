@@ -294,8 +294,8 @@ class SecuritySerializer(serializers.HyperlinkedModelSerializer):
 
 
 class OptionTransactionSerializer(serializers.HyperlinkedModelSerializer):
-    buyer = ShareholderSerializer(many=False, required=False)
-    seller = ShareholderSerializer(many=False, required=False)
+    buyer = ShareholderSerializer(many=False, required=True)
+    seller = ShareholderSerializer(many=False, required=True)
     bought_at = serializers.DateTimeField()  # e.g. 2015-06-02T23:00:00.000Z
 
     class Meta:
@@ -335,7 +335,7 @@ class OptionTransactionSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
-    security = SecuritySerializer(many=False, required=False)
+    security = SecuritySerializer(many=False, required=True)
     optiontransaction_set = OptionTransactionSerializer(many=True,
                                                         read_only=True)
     board_approved_at = serializers.DateTimeField()

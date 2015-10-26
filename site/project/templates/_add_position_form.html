@@ -9,6 +9,9 @@
       <select class="form-control" ng-model="newPosition.buyer" ng-options="shareholder as shareholder.user.email for shareholder in shareholders" placeholder="Buyer">
         <option value='' disabled>{% endverbatim %}{% trans "Buyer" %}{% verbatim %}</option>
       </select>
+      <select class="form-control" ng-model="newPosition.security" ng-options="security as security.readable_title for security in securities" placeholder="Security">
+        <option value='' disabled>{% endverbatim %}{% trans "Security" %}{% verbatim %}</option>
+      </select>
       <input type="number" class="form-control" ng-model="newPosition.count" placeholder="Count" ng-maxlength="5">
       <input type="number" class="form-control" ng-model="newPosition.value" placeholder="Payed Price" ng-maxlength="10">
       <select type="email" class="form-control" ng-model="newPosition.seller" ng-options="shareholder as shareholder.user.email for shareholder in shareholders" placeholder="Seller">

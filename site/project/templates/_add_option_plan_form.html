@@ -8,6 +8,8 @@
       <input type="date" class="form-control" ng-model="newOptionPlan.board_approved_at" placeholder="Board Approval Date">
       <input type="text" class="form-control" ng-model="newOptionPlan.title" placeholder="Title" ng-maxlength="255">
       <select class="form-control" ng-model="newOptionPlan.security" ng-options="security as security.readable_title for security in securities" placeholder="Underlying Asset">
+        <option value='' disabled>{% endverbatim %}{% trans "Security" %}{% verbatim %}</option>
+      </select> 
       <input type="number" class="form-control" ng-model="newOptionPlan.exercise_price" placeholder="Exercise Price" ng-maxlength="10">
       <input type="number" class="form-control" ng-model="newOptionPlan.count" placeholder="Share Count" ng-maxlength="5">
       <input type="text" class="form-control" ng-model="newOptionPlan.comment" placeholder="Comment" ng-maxlength="255">

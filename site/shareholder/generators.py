@@ -85,6 +85,15 @@ class CompanyGenerator(object):
         return company
 
 
+class SecurityGenerator(object):
+
+    def generate(self, **kwargs):
+        company = CompanyGenerator().generate()
+        s1 = Security.objects.create(title='P', company=company, count=1)
+
+        return s1
+
+
 class CountryGenerator(object):
 
     def generate(self):
@@ -156,6 +165,7 @@ class PositionGenerator(object):
             "bought_at": datetime.datetime.now().date(),
             "count": count,
             "value": value,
+            "security": SecurityGenerator().generate()
         }
         if seller:
             kwargs2.update({"seller": seller})
@@ -168,8 +178,8 @@ class PositionGenerator(object):
 class TwoInitialSecuritiesGenerator(object):
 
     def generate(self, **kwargs):
+        company = CompanyGenerator().generate()
+        s1 = Security.objects.create(title='P', company=company, count=1)
+        s2 = Security.objects.create(title='C', company=company, count=2)
 
-        s1 = Security.objects.create(title='P')
-        s2 = Security.objects.create(title='C')
-        
         return (s1, s2)

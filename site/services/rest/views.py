@@ -125,7 +125,8 @@ class SecurityViewSet(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
-        return Security.objects.all()
+        user = self.request.user
+        return Security.objects.filter(company__operator__user=user)
 
 
 class OptionPlanViewSet(viewsets.ModelViewSet):

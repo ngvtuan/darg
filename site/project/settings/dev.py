@@ -2,7 +2,6 @@ from .base import *
 from kombu import Exchange, Queue
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 MANAGERS = ADMINS
 

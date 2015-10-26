@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-VERSION = '0.0.15'
+VERSION = '0.1.1'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
@@ -246,6 +246,7 @@ TRACKING_CODE = ""
 
 # -- BLOG
 ZINNIA_UPLOAD_TO = os.path.join(MEDIA_ROOT, 'blog')
+ZINNIA_MARKUP_LANGUAGE = 'restructuredtext'
 
 try:
     from project.settings.local import *

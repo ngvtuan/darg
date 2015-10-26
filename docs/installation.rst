@@ -21,6 +21,12 @@ We are using virtualenv, django 1.8+ and pip for puling dependencies. Currently 
     cd deploy
     ./deploy.sh
     
+tests will also require:
+
+.. code-block :: shell
+
+    aptitude install wamerican
+
 JavaScript/NodeJs/Angular/Grunt:
 
 .. code-block :: shell
@@ -43,7 +49,6 @@ run grunt watch to autcompile assets:
 .. code-block :: shell
 
     grunt
-    
 
 Dev Env
 =======================

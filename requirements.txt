@@ -31,5 +31,6 @@ git+https://github.com/Fantomas42/django-blog-zinnia.git@develop#egg=django-blog
 Pillow
 django-app-namespace-template-loader
 zinnia-theme-bootstrap
+docutils
 #-- end blog
 ipdbplugin

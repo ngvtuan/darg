@@ -49,7 +49,7 @@ class ShareholderTestCase(TestCase):
 
     def test_index(self):
 
-        response = self.client.get("/")
+        response = self.client.get("/", follow=True)
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue("Das Akt" in response.content)

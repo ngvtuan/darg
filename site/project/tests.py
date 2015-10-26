@@ -43,11 +43,9 @@ class IndexTestCase(TestCase):
 
     def test_index_content(self):
 
-        response = self.client.get("/")
+        response = self.client.get("/", follow=True)
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue("social_links" in response.content)
-        self.assertTrue("twitter" in response.content)
         self.assertTrue("bootstrap.min.js" in response.content)
         self.assertTrue("xeditable.min.js" in response.content)
         self.assertTrue("xeditable.css" in response.content)
@@ -61,7 +59,7 @@ class TrackingTestCase(TestCase):
 
     def test_tracking_for_debug_mode(self):
 
-        response = self.client.get("/")
+        response = self.client.get("/", follow=True)
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue("UA-58468401-4" in response.content)

@@ -294,6 +294,7 @@
     '$scope', '$http', 'Position', function($scope, $http, Position) {
       $scope.positions = [];
       $scope.shareholders = [];
+      $scope.securities = [];
       $scope.show_add_position = false;
       $scope.show_add_capital = false;
       $scope.newPosition = new Position();
@@ -305,6 +306,11 @@
       $http.get('/services/rest/shareholders').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
           return $scope.shareholders.push(item);
+        });
+      });
+      $http.get('/services/rest/security').then(function(result) {
+        return angular.forEach(result.data.results, function(item) {
+          return $scope.securities.push(item);
         });
       });
       $scope.add_position = function() {

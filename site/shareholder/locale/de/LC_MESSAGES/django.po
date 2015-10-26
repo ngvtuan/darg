@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 01:49+0000\n"
-"PO-Revision-Date: 2015-10-26 01:54+0000\n"
-"Last-Translator: Jirka Schaefer <jirka@tschitschereengreen.com>\n"
+"POT-Creation-Date: 2015-10-26 04:16+0000\n"
+"PO-Revision-Date: 2015-10-26 04:18+0000\n"
+"Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,34 +19,34 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
-#: shareholder/models.py:93
+#: shareholder/models.py:27
+msgid "Headquarter location"
+msgstr "Ort des Unternehmensstammsitzes"
+
+#: shareholder/models.py:118
 msgid "Missing all data required for #GAFI."
 msgstr "Alle Daten für GAFI-FATF fehlen."
 
-#: shareholder/models.py:100
+#: shareholder/models.py:125
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 "Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
 
-#: shareholder/models.py:104
+#: shareholder/models.py:129
 msgid "Shareholder birthday missing."
 msgstr "Geburstag"
 
-#: shareholder/models.py:108
+#: shareholder/models.py:133
 msgid "Shareholder origin/country missing."
 msgstr "Land des Aktionärs fehlt."
 
-#: shareholder/models.py:114
+#: shareholder/models.py:139
 msgid "Shareholder address or address details missing."
 msgstr "Adresse oder Adressdetails des Aktionärs fehlen."
 
-#: shareholder/models.py:169
+#: shareholder/models.py:197
 msgid "Number of shares approved"
 msgstr "Anzahl der genehmigten Aktien"
-
-#: shareholder/models.py:197
-msgid "Headquarter location"
-msgstr "Ort des Unternehmensstammsitzes"
 
 #: shareholder/templates/options.html:8
 msgid "Options"
@@ -77,7 +77,7 @@ msgid "Receipient"
 msgstr "Empfänger"
 
 #: shareholder/templates/options.html:38
-#: shareholder/templates/positions.html:31
+#: shareholder/templates/positions.html:32
 msgid "Share Count"
 msgstr "Anzahl Aktien"
 
@@ -142,15 +142,20 @@ msgstr "Kaufdatum"
 msgid "Buyer"
 msgstr "Käufer"
 
-#: shareholder/templates/positions.html:32
+#: shareholder/templates/positions.html:31
+#| msgid "Security Type"
+msgid "Security"
+msgstr "Aktienart"
+
+#: shareholder/templates/positions.html:33
 msgid "Price"
 msgstr "Preis"
 
-#: shareholder/templates/positions.html:33
+#: shareholder/templates/positions.html:34
 msgid "Seller"
 msgstr "Verkäufer"
 
-#: shareholder/templates/positions.html:49
+#: shareholder/templates/positions.html:51
 msgid "No Postions yet."
 msgstr "Noch keine Transaktionen"
 

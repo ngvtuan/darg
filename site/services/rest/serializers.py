@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib.auth import get_user_model
+# from django.utils.translation import ugettext as _
 from django.utils.text import slugify
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
@@ -77,6 +78,11 @@ class AddCompanySerializer(serializers.Serializer):
             share_count=validated_data.get("count"),
             name=validated_data.get("name")
         )
+        security = Security.objects.create(
+            title="P",
+            count=validated_data.get("count"),
+            company=company,
+        )
         companyuser = User.objects.create(
             username=make_username('Company', 'itself', company.name),
             first_name='Company', last_name='itself',
@@ -87,11 +93,23 @@ class AddCompanySerializer(serializers.Serializer):
         Position.objects.create(
             bought_at=datetime.datetime.now(),
             buyer=shareholder, count=validated_data.get("count"),
-            value=validated_data.get("face_value")
+            value=validated_data.get("face_value"),
+            security=security,
         )
         Operator.objects.create(user=user, company=company)
 
         return validated_data
+
+
+class SecuritySerializer(serializers.HyperlinkedModelSerializer):
+    readable_title = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Security
+        fields = ('pk', 'readable_title', 'title')
+
+    def get_readable_title(self, obj):
+        return obj.get_title_display()
 
 
 class OperatorSerializer(serializers.HyperlinkedModelSerializer):
@@ -231,11 +249,14 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
 class PositionSerializer(serializers.HyperlinkedModelSerializer):
     buyer = ShareholderSerializer(many=False, required=False)
     seller = ShareholderSerializer(many=False, required=False)
+    security = SecuritySerializer(many=False, required=True)
     bought_at = serializers.DateTimeField()  # e.g. 2015-06-02T23:00:00.000Z
 
     class Meta:
         model = Position
-        fields = ('pk', 'buyer', 'seller', 'bought_at', 'count', 'value')
+        fields = (
+            'pk', 'buyer', 'seller', 'bought_at', 'count', 'value',
+            'security')
         validators = [DependedFieldsValidator(fields=('seller', 'buyer'))]
 
     def create(self, validated_data):
@@ -270,11 +291,17 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer):
                 validated_data.get("count")
             company.save()
 
+        security = Security.objects.get(
+            company=company,
+            title=validated_data.get('security').get('title')
+        )
+
         kwargs.update({
             "buyer": buyer,
             "bought_at": validated_data.get("bought_at"),
             "value": validated_data.get("value"),
             "count": validated_data.get("count"),
+            "security": security,
         })
 
         position = Position.objects.create(**kwargs)
@@ -282,20 +309,9 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer):
         return position
 
 
-class SecuritySerializer(serializers.HyperlinkedModelSerializer):
-    readable_title = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Security
-        fields = ('pk', 'readable_title', 'title')
-
-    def get_readable_title(self, obj):
-        return obj.get_title_display()
-
-
 class OptionTransactionSerializer(serializers.HyperlinkedModelSerializer):
-    buyer = ShareholderSerializer(many=False, required=False)
-    seller = ShareholderSerializer(many=False, required=False)
+    buyer = ShareholderSerializer(many=False, required=True)
+    seller = ShareholderSerializer(many=False, required=True)
     bought_at = serializers.DateTimeField()  # e.g. 2015-06-02T23:00:00.000Z
 
     class Meta:
@@ -335,7 +351,7 @@ class OptionTransactionSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
-    security = SecuritySerializer(many=False, required=False)
+    security = SecuritySerializer(many=False, required=True)
     optiontransaction_set = OptionTransactionSerializer(many=True,
                                                         read_only=True)
     board_approved_at = serializers.DateTimeField()
@@ -343,7 +359,8 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = OptionPlan
         fields = ('pk', 'title', 'security', 'optiontransaction_set',
-                  'exercise_price', 'count', 'comment', 'board_approved_at', 'url')
+                  'exercise_price', 'count', 'comment', 'board_approved_at',
+                  'url')
 
     def create(self, validated_data):
 

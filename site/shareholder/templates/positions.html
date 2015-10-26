@@ -28,6 +28,7 @@
         <tr>
           <th>{% trans "Buy Date" %}</th>
           <th>{% trans "Buyer" %}</th>
+          <th>{% trans "Security" %}</th>
           <th class="text-right">{% trans "Share Count" %}</th>
           <th class="text-right">{% trans "Price" %}</th>
           <th>{% trans "Seller" %}</th>
@@ -37,6 +38,7 @@
       <tr class="panel" ng-repeat="position in positions">
         <td>{{ position.bought_at | date : 'd.MM.yy' }}</td>
         <td>{{ position.buyer.user.first_name }} {{ position.buyer.user.last_name }}</td>
+        <td>{{ position.security.readable_title }}</td>
         <td class="text-right">{{ position.count }}</td>
         <td class="text-right">{{ position.value }}</td>
         <td>{{ position.seller.user.first_name }} {{ position.seller.user.last_name }}</td>

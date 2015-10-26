@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 01:49+0000\n"
-"PO-Revision-Date: 2015-10-26 01:56+0000\n"
-"Last-Translator: Jirka Schaefer <jirka@tschitschereengreen.com>\n"
+"POT-Creation-Date: 2015-10-26 04:16+0000\n"
+"PO-Revision-Date: 2015-10-26 04:18+0000\n"
+"Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,16 +23,22 @@ msgstr ""
 msgid "Please enter your capital increase data"
 msgstr "Bitte geben Sie die Daten die Kapitalerhöhung an:"
 
-#: project/templates/_add_capital_form.html:13
-#: project/templates/_add_option_plan_form.html:16
+#: project/templates/_add_capital_form.html:12
+#: project/templates/_add_option_plan_form.html:11
+#: project/templates/_add_position_form.html:13
+msgid "Security"
+msgstr "Aktienart"
+
+#: project/templates/_add_capital_form.html:16
+#: project/templates/_add_option_plan_form.html:18
 #: project/templates/_add_option_transaction_form.html:22
-#: project/templates/_add_position_form.html:19
+#: project/templates/_add_position_form.html:22
 #: project/templates/_add_shareholder_form.html:15
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: project/templates/_add_capital_form.html:14
-#: project/templates/_add_position_form.html:20
+#: project/templates/_add_capital_form.html:17
+#: project/templates/_add_position_form.html:23
 msgid "Add Position"
 msgstr "Position hinzufügen"
 
@@ -45,24 +51,21 @@ msgid "Add Company"
 msgstr "Unternehmen hinzufügen"
 
 #: project/templates/_add_option_plan_form.html:3
-#| msgid "Please enter your position data:"
 msgid "Please enter your option plan data:"
 msgstr "Bitte geben Sie die Daten für den Optionsplan an:"
 
-#: project/templates/_add_option_plan_form.html:17
+#: project/templates/_add_option_plan_form.html:19
 #: project/templates/_add_option_transaction_form.html:23
-#| msgid "Add Position"
 msgid "Add Option"
 msgstr "Option hinzufügen"
 
-#: project/templates/_add_option_plan_form.html:20
+#: project/templates/_add_option_plan_form.html:22
 msgid "Approved Option Plan PDF can be uploaded later in Plan's Edit Form"
 msgstr ""
 "Das PDF für den Optionsplan kann später in der Detailansicht für den "
 "Optionsplan hochgeladen werden."
 
 #: project/templates/_add_option_transaction_form.html:3
-#| msgid "Please enter your position data:"
 msgid "Please enter your Option data:"
 msgstr "Bitte geben Sie die Daten für die Option an:"
 
@@ -76,7 +79,7 @@ msgid "Option Plan"
 msgstr "Optionsplan"
 
 #: project/templates/_add_option_transaction_form.html:17
-#: project/templates/_add_position_form.html:15
+#: project/templates/_add_position_form.html:18
 msgid "Seller"
 msgstr "Verkäufer"
 

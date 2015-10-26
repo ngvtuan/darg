@@ -19,6 +19,30 @@ class Country(models.Model):
         ordering = ["name", "iso_code"]
 
 
+class Company(models.Model):
+
+    name = models.CharField(max_length=255)
+    share_count = models.PositiveIntegerField(blank=True, null=True)
+    country = models.ForeignKey(
+        Country, null=True, blank=False, help_text=_("Headquarter location"))
+
+    def __str__(self):
+        return u"{}".format(self.name)
+
+    def shareholder_count(self):
+        """ total count of active Shareholders """
+        return Position.objects.filter(
+            buyer__company=self, seller__isnull=True).count()
+
+    def get_active_shareholders(self):
+        """ returns list of all active shareholders """
+        shareholder_list = []
+        for shareholder in self.shareholder_set.all().order_by('number'):
+            if shareholder.share_count() > 0:
+                shareholder_list.append(shareholder)
+        return shareholder_list
+
+
 class UserProfile(models.Model):
 
     user = models.OneToOneField(
@@ -45,7 +69,6 @@ class Shareholder(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     company = models.ForeignKey('Company')
     number = models.CharField(max_length=255)
-    # security = models.ForeignKey(Security) # company specific security type
 
     def __str__(self):
         return u"{} {} ({})".format(
@@ -83,8 +106,10 @@ class Shareholder(models.Model):
         result = {"is_valid": True, "errors": []}
 
         # applies only for swiss corps
-        if (not self.company.country or
-        self.company.country.iso_code.lower() != 'ch'):
+        if (
+            not self.company.country or
+            self.company.country.iso_code.lower() != 'ch'
+        ):
             return result
 
         # missing profile leads to global warning
@@ -126,19 +151,6 @@ class Operator(models.Model):
         return u"{} {}".format(self.user.first_name, self.user.last_name)
 
 
-class Position(models.Model):
-
-    buyer = models.ForeignKey('Shareholder', related_name="buyer")
-    seller = models.ForeignKey('Shareholder', blank=True, null=True,
-                               related_name="seller")
-    count = models.PositiveIntegerField()
-    bought_at = models.DateField()
-    value = models.DecimalField(max_digits=8, decimal_places=4, blank=True,
-                                null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-
 class Security(models.Model):
     SECURITY_TITLES = (
         ('P', 'Preferred Stock'),
@@ -148,9 +160,25 @@ class Security(models.Model):
         # ('V', 'Convertible Instrument'),
     )
     title = models.CharField(max_length=1, choices=SECURITY_TITLES)
+    company = models.ForeignKey(Company)
+    count = models.PositiveIntegerField()
 
     def __str__(self):
         return u"{}".format(self.get_title_display())
+
+
+class Position(models.Model):
+
+    buyer = models.ForeignKey('Shareholder', related_name="buyer")
+    seller = models.ForeignKey('Shareholder', blank=True, null=True,
+                               related_name="seller")
+    security = models.ForeignKey(Security)
+    count = models.PositiveIntegerField()
+    bought_at = models.DateField()
+    value = models.DecimalField(max_digits=8, decimal_places=4, blank=True,
+                                null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class OptionPlan(models.Model):
@@ -188,29 +216,6 @@ class OptionTransaction(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
-class Company(models.Model):
-
-    name = models.CharField(max_length=255)
-    share_count = models.PositiveIntegerField(blank=True, null=True)
-    country = models.ForeignKey(
-        Country, null=True, blank=False, help_text=_("Headquarter location"))
-
-    def __str__(self):
-        return u"{}".format(self.name)
-
-    def shareholder_count(self):
-        """ total count of active Shareholders """
-        return Position.objects.filter(
-            buyer__company=self, seller__isnull=True).count()
-
-    def get_active_shareholders(self):
-        """ returns list of all active shareholders """
-        shareholder_list = []
-        for shareholder in self.shareholder_set.all().order_by('number'):
-            if shareholder.share_count() > 0:
-                shareholder_list.append(shareholder)
-        return shareholder_list
 
 # --------- SIGNALS ----------
 # must be inside a file which is imported by django on startup

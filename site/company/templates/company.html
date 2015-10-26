@@ -37,6 +37,19 @@
     </tr>
   </table>
 
+  <!-- SECURITIES -->
+  {% if company.security_set.exists %}
+    <h2>{% trans "Securities" %}</h2>
+    <table class="table table-striped">
+    {% for security in company.security_set.all %}
+       <tr><td>{{ security.title}} </td><td>{{security.count}}</td></tr>
+    {% endfor %}
+    </table>
+    <!-- <a href="" title="">{% trans "Add Security" %}</a>-->
+    {% trans 'Please contact us at our <a href="mailto:jirka.schaefer@das-aktienregister.ch">customer service desk</a> for getting more security types added' %}
+  {% endif %}
+
+  <!-- ADMINS -->
   {% if company.operator_set.exists %}
     <h2>{% trans "Administrators" %}</h2>
 
@@ -48,6 +61,7 @@
 
   {% endif %}
  
+  <!-- OPTIONS -->
   {% if company.optionplan_set.exists %}
     <h2>{% trans "Option Plans" %}</h2>
 

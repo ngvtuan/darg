@@ -111,7 +111,9 @@ class OptionsPage(BasePage):
 
     # -- CLICKs
     def click_open_create_option_plan(self):
-        el = self.driver.find_element_by_link_text("Grant New Option Plan")
+        time.sleep(2)
+        el = self.driver.find_element_by_link_text(
+            "Neuen Optionsplan erstellen")
         el.click()
 
     def click_save_option_plan_form(self):
@@ -121,7 +123,7 @@ class OptionsPage(BasePage):
         button.click()
 
     def click_open_transfer_option(self):
-        el = self.driver.find_element_by_link_text("Transfer Option")
+        el = self.driver.find_element_by_link_text(u"Optionen \xfcbertragen")
         el.click()
 
     def click_save_transfer_option(self):
@@ -143,7 +145,7 @@ class OptionsPage(BasePage):
 
     def is_option_plan_displayed(self):
         h2s = self.driver.find_elements_by_tag_name('h2')
-        string = "Optionplan: {} for {}".format(
+        string = u"Optionsplan: {} f\xfcr {}".format(
             DEFAULT_TEST_DATA.get('title'),
             DEFAULT_TEST_DATA.get('security'))
         for h2 in h2s:

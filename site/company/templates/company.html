@@ -42,7 +42,7 @@
     <h2>{% trans "Securities" %}</h2>
     <table class="table table-striped">
     {% for security in company.security_set.all %}
-       <tr><td>{{ security.title}} </td><td>{{security.count}}</td></tr>
+       <tr><td>{{ security.get_title_display}} </td><td>{{security.count}}</td></tr>
     {% endfor %}
     </table>
     <!-- <a href="" title="">{% trans "Add Security" %}</a>-->

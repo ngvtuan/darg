@@ -3,6 +3,7 @@ import datetime
 from django.contrib.auth import get_user_model
 # from django.utils.translation import ugettext as _
 from django.utils.text import slugify
+from django.core.mail import mail_managers
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
@@ -97,6 +98,11 @@ class AddCompanySerializer(serializers.Serializer):
             security=security,
         )
         Operator.objects.create(user=user, company=company)
+
+        mail_managers(
+            'new user signed up',
+            'user {} signed up for company {}'.format(user, company)
+        )
 
         return validated_data
 
@@ -373,7 +379,8 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
             "company": company,
             "board_approved_at": validated_data.get("board_approved_at"),
             "title": validated_data.get("title"),
-            "security": Security.objects.get(company=company,
+            "security": Security.objects.get(
+                company=company,
                 title=validated_data.get("security").items()[0][1]),
             "count": validated_data.get("count"),
             "exercise_price": validated_data.get("exercise_price"),

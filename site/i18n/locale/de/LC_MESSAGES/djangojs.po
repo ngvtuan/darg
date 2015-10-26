@@ -9,19 +9,20 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-09 18:15+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-10-26 01:51+0000\n"
+"Last-Translator: Jirka Schaefer <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.7.6\n"
 
 #: static/admin/js/SelectFilter2.js:45
 #, c-format
 msgid "Available %s"
-msgstr ""
+msgstr "Verfügbar %s"
 
 #: static/admin/js/SelectFilter2.js:46
 #, c-format
@@ -166,8 +167,8 @@ msgstr ""
 
 #: static/admin/js/calendar.js:8
 msgid ""
-"January February March April May June July August September October November "
-"December"
+"January February March April May June July August September October November"
+" December"
 msgstr ""
 
 #: static/admin/js/calendar.js:9
@@ -177,8 +178,8 @@ msgstr ""
 #: static/admin/js/collapse.js:8 static/admin/js/collapse.js.c:19
 #: static/admin/js/collapse.min.js:1
 msgid "Show"
-msgstr ""
+msgstr "Anzeigen"
 
 #: static/admin/js/collapse.js:16 static/admin/js/collapse.min.js:1
 msgid "Hide"
-msgstr ""
+msgstr "Verstecken"

@@ -2,20 +2,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 19:26+0000\n"
-"PO-Revision-Date: 2015-07-29 19:27+0000\n"
-"Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
+"POT-Creation-Date: 2015-10-26 01:49+0000\n"
+"PO-Revision-Date: 2015-10-26 01:56+0000\n"
+"Last-Translator: Jirka Schaefer <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
@@ -24,6 +24,8 @@ msgid "Please enter your capital increase data"
 msgstr "Bitte geben Sie die Daten die Kapitalerhöhung an:"
 
 #: project/templates/_add_capital_form.html:13
+#: project/templates/_add_option_plan_form.html:16
+#: project/templates/_add_option_transaction_form.html:22
 #: project/templates/_add_position_form.html:19
 #: project/templates/_add_shareholder_form.html:15
 msgid "Cancel"
@@ -42,19 +44,45 @@ msgstr "Bitte geben Sie ihren Firmennamen ein"
 msgid "Add Company"
 msgstr "Unternehmen hinzufügen"
 
-#: project/templates/_add_position_form.html:3
-msgid "Please enter your position data:"
-msgstr "Bitte geben Sie die Daten fuer eine Position an:"
+#: project/templates/_add_option_plan_form.html:3
+#| msgid "Please enter your position data:"
+msgid "Please enter your option plan data:"
+msgstr "Bitte geben Sie die Daten für den Optionsplan an:"
 
+#: project/templates/_add_option_plan_form.html:17
+#: project/templates/_add_option_transaction_form.html:23
+#| msgid "Add Position"
+msgid "Add Option"
+msgstr "Option hinzufügen"
+
+#: project/templates/_add_option_plan_form.html:20
+msgid "Approved Option Plan PDF can be uploaded later in Plan's Edit Form"
+msgstr ""
+"Das PDF für den Optionsplan kann später in der Detailansicht für den "
+"Optionsplan hochgeladen werden."
+
+#: project/templates/_add_option_transaction_form.html:3
+#| msgid "Please enter your position data:"
+msgid "Please enter your Option data:"
+msgstr "Bitte geben Sie die Daten für die Option an:"
+
+#: project/templates/_add_option_transaction_form.html:10
 #: project/templates/_add_position_form.html:10
-#: project/templates/positions.html:30
 msgid "Buyer"
 msgstr "Käufer"
 
+#: project/templates/_add_option_transaction_form.html:13
+msgid "Option Plan"
+msgstr "Optionsplan"
+
+#: project/templates/_add_option_transaction_form.html:17
 #: project/templates/_add_position_form.html:15
-#: project/templates/positions.html:33
 msgid "Seller"
 msgstr "Verkäufer"
+
+#: project/templates/_add_position_form.html:3
+msgid "Please enter your position data:"
+msgstr "Bitte geben Sie die Daten fuer eine Position an:"
 
 #: project/templates/_add_shareholder_form.html:3
 msgid "Please enter your shareholder data:"
@@ -113,7 +141,6 @@ msgstr ""
 "Aktienregister\"</strong> stellt sicher:"
 
 #: project/templates/index.html:15
-#| msgid "Shareholder Details"
 msgid "Rapid Shareholder documentation"
 msgstr "Effiziente Erfassung der Aktionäre"
 
@@ -173,38 +200,6 @@ msgstr "Aktion"
 msgid "No Log Entries yet."
 msgstr "Noch keine Einträge"
 
-#: project/templates/positions.html:8
-msgid "Positions"
-msgstr "Positionen"
-
-#: project/templates/positions.html:12
-msgid "Transfer Shares"
-msgstr "Aktien übertragen"
-
-#: project/templates/positions.html:13
-msgid "Increase Kapital"
-msgstr "Kapitalerhöhung"
-
-#: project/templates/positions.html:24
-msgid "Your Positions"
-msgstr "Ihre Positionen"
-
-#: project/templates/positions.html:29
-msgid "Buy Date"
-msgstr "Kaufdatum"
-
-#: project/templates/positions.html:31
-msgid "Share Count"
-msgstr "Anzahl Aktien"
-
-#: project/templates/positions.html:32
-msgid "Price"
-msgstr "Preis"
-
-#: project/templates/positions.html:49
-msgid "No Postions yet."
-msgstr "Noch keine Positionen."
-
 #: project/templates/start.html:8
 msgid "Welcome"
 msgstr "Willkommen"
@@ -232,6 +227,30 @@ msgstr "Download Liste der aktiven Aktionäre als CSV"
 #: project/templates/start.html:63
 msgid "CSV"
 msgstr "CSV"
+
+#~ msgid "Positions"
+#~ msgstr "Transaktionen"
+
+#~ msgid "Transfer Shares"
+#~ msgstr "Aktien übertragen"
+
+#~ msgid "Increase Kapital"
+#~ msgstr "Kapitalerhöhung"
+
+#~ msgid "Your Positions"
+#~ msgstr "Ihre Transaktionen"
+
+#~ msgid "Buy Date"
+#~ msgstr "Kaufdatum"
+
+#~ msgid "Share Count"
+#~ msgstr "Anzahl Aktien"
+
+#~ msgid "Price"
+#~ msgstr "Preis"
+
+#~ msgid "No Postions yet."
+#~ msgstr "Noch keine Transaktionen."
 
 #~ msgid "GAFI Standard compliant"
 #~ msgstr ""

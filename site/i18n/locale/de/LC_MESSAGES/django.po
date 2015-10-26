@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 19:25+0000\n"
-"PO-Revision-Date: 2015-07-23 22:29+0000\n"
-"Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
+"POT-Creation-Date: 2015-10-26 01:49+0000\n"
+"PO-Revision-Date: 2015-10-26 01:50+0000\n"
+"Last-Translator: Jirka Schaefer <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
@@ -43,29 +43,46 @@ msgstr "Land des Unternehmenssitzes"
 msgid "Administrators"
 msgstr "Administratoren"
 
-#: templates/base_auth.html:8
+#: company/templates/company.html:52
+msgid "Option Plans"
+msgstr "Optionsplan"
+
+#: company/templates/company.html:56
+msgid "Options Plan Name"
+msgstr "Name des Optionsplanes"
+
+#: company/templates/company.html:56
+msgid "Edit Option Plan"
+msgstr "Optionsplan editieren"
+
+#: templates/base_auth.html:15
+msgid "The Share Register, 2015"
+msgstr "Das Aktienregister, 2015"
+
+#: templates/menu.html:5
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/base_auth.html:10
+#: templates/menu.html:7
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base_auth.html:11
+#: templates/menu.html:8
+#| msgid "Positions"
+msgid "Options"
+msgstr "Transaktionen"
+
+#: templates/menu.html:9
 msgid "Log"
 msgstr "Log"
 
-#: templates/base_auth.html:12
+#: templates/menu.html:10
 msgid "Positions"
-msgstr "Positionen"
+msgstr "Transaktionen"
 
-#: templates/base_auth.html:13
+#: templates/menu.html:11
 msgid "Start"
 msgstr "Start"
-
-#: templates/base_auth.html:23
-msgid "The Share Register, 2015"
-msgstr "Das Aktienregister, 2015"
 
 #: templates/registration/login.html:10
 msgid "Log in"

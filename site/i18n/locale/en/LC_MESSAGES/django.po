@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 19:25+0000\n"
+"POT-Creation-Date: 2015-10-26 01:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,28 +41,44 @@ msgstr ""
 msgid "Administrators"
 msgstr ""
 
-#: templates/base_auth.html:8
+#: company/templates/company.html:52
+msgid "Option Plans"
+msgstr ""
+
+#: company/templates/company.html:56
+msgid "Options Plan Name"
+msgstr ""
+
+#: company/templates/company.html:56
+msgid "Edit Option Plan"
+msgstr ""
+
+#: templates/base_auth.html:15
+msgid "The Share Register, 2015"
+msgstr ""
+
+#: templates/menu.html:5
 msgid "Admin"
 msgstr ""
 
-#: templates/base_auth.html:10
+#: templates/menu.html:7
 msgid "Logout"
 msgstr ""
 
-#: templates/base_auth.html:11
+#: templates/menu.html:8
+msgid "Options"
+msgstr ""
+
+#: templates/menu.html:9
 msgid "Log"
 msgstr ""
 
-#: templates/base_auth.html:12
+#: templates/menu.html:10
 msgid "Positions"
 msgstr ""
 
-#: templates/base_auth.html:13
+#: templates/menu.html:11
 msgid "Start"
-msgstr ""
-
-#: templates/base_auth.html:23
-msgid "The Share Register, 2015"
 msgstr ""
 
 #: templates/registration/login.html:10

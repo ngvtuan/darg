@@ -188,7 +188,7 @@ CACHES = {
 # -- EMAIL
 ADMINS = ()
 SERVER_EMAIL = 'no-reply@das-aktienregister.ch'
-EMAIL_SUBJECT_PREFIX¶ = 'darg'
+EMAIL_SUBJECT_PREFIX = 'darg'
 
 MANAGERS = ADMINS + ()
 

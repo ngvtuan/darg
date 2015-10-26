@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-26 01:49+0000\n"
-"PO-Revision-Date: 2015-10-26 01:50+0000\n"
+"PO-Revision-Date: 2015-10-26 02:06+0000\n"
 "Last-Translator: Jirka Schaefer <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,7 @@ msgstr "Logout"
 #: templates/menu.html:8
 #| msgid "Positions"
 msgid "Options"
-msgstr "Transaktionen"
+msgstr "Optionen"
 
 #: templates/menu.html:9
 msgid "Log"

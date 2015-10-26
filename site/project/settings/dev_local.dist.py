@@ -4,7 +4,7 @@ DATABASES = {
         'NAME': 'darg',
         'USER': 'darg',
         'PASSWORD': 'darg',
-        'HOST': ''
+        'HOST': 'localhost'
     }
 }
 SITE_ID = 3

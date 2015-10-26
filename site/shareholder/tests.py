@@ -134,10 +134,12 @@ class ShareholderTestCase(TestCase):
 class OptionsFunctionalTestCase(BaseSeleniumTestCase):
 
     def setUp(self):
-        TwoInitialSecuritiesGenerator().generate()
         self.operator = OperatorGenerator().generate()
-        self.buyer = ShareholderGenerator().generate(company=self.operator.company)
-        self.seller = ShareholderGenerator().generate(company=self.operator.company)
+        TwoInitialSecuritiesGenerator().generate(company=self.operator.company)
+        self.buyer = ShareholderGenerator().generate(
+            company=self.operator.company)
+        self.seller = ShareholderGenerator().generate(
+            company=self.operator.company)
 
     def tearDown(self):
         Security.objects.all().delete()
@@ -146,7 +148,8 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
         """ means: create a option plan and move options for users """
 
         try:
-            app = page.OptionsPage(self.selenium, self.live_server_url, self.operator.user)
+            app = page.OptionsPage(
+                self.selenium, self.live_server_url, self.operator.user)
             app.click_open_create_option_plan()
 
             self.assertTrue(app.is_option_plan_form_open())
@@ -158,7 +161,8 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
             self.assertTrue(app.is_option_plan_displayed())
 
             app.click_open_transfer_option()
-            app.enter_transfer_option_data(buyer=self.buyer, seller=self.seller)
+            app.enter_transfer_option_data(
+                buyer=self.buyer, seller=self.seller)
             app.click_save_transfer_option()
 
             self.assertTrue(app.is_no_errors_displayed())
@@ -172,7 +176,8 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
         """ test that options transfer form is working properly
         if there is no buyer selected """
 
-        app = page.OptionsPage(self.selenium, self.live_server_url, self.operator.user)
+        app = page.OptionsPage(
+            self.selenium, self.live_server_url, self.operator.user)
         app.prepare_optionplan_fixtures()
 
         self.assertTrue(app.is_option_plan_displayed())
@@ -187,7 +192,8 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
         """ test that options transfer form is working properly
         if there is no seller selected """
 
-        app = page.OptionsPage(self.selenium, self.live_server_url, self.operator.user)
+        app = page.OptionsPage(
+            self.selenium, self.live_server_url, self.operator.user)
         app.prepare_optionplan_fixtures()
 
         self.assertTrue(app.is_option_plan_displayed())
@@ -221,5 +227,3 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
     @unittest.skip('not implemented')
     def test_base_use_case_negative_Vesting(self):
         pass
-
-

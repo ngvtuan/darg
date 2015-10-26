@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 01:49+0000\n"
+"POT-Creation-Date: 2015-10-26 04:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,16 +21,22 @@ msgstr ""
 msgid "Please enter your capital increase data"
 msgstr ""
 
-#: project/templates/_add_capital_form.html:13
-#: project/templates/_add_option_plan_form.html:16
+#: project/templates/_add_capital_form.html:12
+#: project/templates/_add_option_plan_form.html:11
+#: project/templates/_add_position_form.html:13
+msgid "Security"
+msgstr ""
+
+#: project/templates/_add_capital_form.html:16
+#: project/templates/_add_option_plan_form.html:18
 #: project/templates/_add_option_transaction_form.html:22
-#: project/templates/_add_position_form.html:19
+#: project/templates/_add_position_form.html:22
 #: project/templates/_add_shareholder_form.html:15
 msgid "Cancel"
 msgstr ""
 
-#: project/templates/_add_capital_form.html:14
-#: project/templates/_add_position_form.html:20
+#: project/templates/_add_capital_form.html:17
+#: project/templates/_add_position_form.html:23
 msgid "Add Position"
 msgstr ""
 
@@ -46,12 +52,12 @@ msgstr ""
 msgid "Please enter your option plan data:"
 msgstr ""
 
-#: project/templates/_add_option_plan_form.html:17
+#: project/templates/_add_option_plan_form.html:19
 #: project/templates/_add_option_transaction_form.html:23
 msgid "Add Option"
 msgstr ""
 
-#: project/templates/_add_option_plan_form.html:20
+#: project/templates/_add_option_plan_form.html:22
 msgid "Approved Option Plan PDF can be uploaded later in Plan's Edit Form"
 msgstr ""
 
@@ -69,7 +75,7 @@ msgid "Option Plan"
 msgstr ""
 
 #: project/templates/_add_option_transaction_form.html:17
-#: project/templates/_add_position_form.html:15
+#: project/templates/_add_position_form.html:18
 msgid "Seller"
 msgstr ""
 

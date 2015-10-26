@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 01:49+0000\n"
+"POT-Creation-Date: 2015-10-26 04:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,32 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: shareholder/models.py:93
+#: shareholder/models.py:27
+msgid "Headquarter location"
+msgstr ""
+
+#: shareholder/models.py:118
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:100
+#: shareholder/models.py:125
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:104
+#: shareholder/models.py:129
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:108
+#: shareholder/models.py:133
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:114
+#: shareholder/models.py:139
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:169
-msgid "Number of shares approved"
-msgstr ""
-
 #: shareholder/models.py:197
-msgid "Headquarter location"
+msgid "Number of shares approved"
 msgstr ""
 
 #: shareholder/templates/options.html:8
@@ -74,7 +74,7 @@ msgid "Receipient"
 msgstr ""
 
 #: shareholder/templates/options.html:38
-#: shareholder/templates/positions.html:31
+#: shareholder/templates/positions.html:32
 msgid "Share Count"
 msgstr ""
 
@@ -139,15 +139,19 @@ msgstr ""
 msgid "Buyer"
 msgstr ""
 
-#: shareholder/templates/positions.html:32
-msgid "Price"
+#: shareholder/templates/positions.html:31
+msgid "Security"
 msgstr ""
 
 #: shareholder/templates/positions.html:33
+msgid "Price"
+msgstr ""
+
+#: shareholder/templates/positions.html:34
 msgid "Seller"
 msgstr ""
 
-#: shareholder/templates/positions.html:49
+#: shareholder/templates/positions.html:51
 msgid "No Postions yet."
 msgstr ""
 

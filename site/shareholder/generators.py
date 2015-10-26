@@ -178,7 +178,10 @@ class PositionGenerator(object):
 class TwoInitialSecuritiesGenerator(object):
 
     def generate(self, **kwargs):
-        company = CompanyGenerator().generate()
+        if kwargs.get('company'):
+            company = kwargs.get('company')
+        else:
+            company = CompanyGenerator().generate()
         s1 = Security.objects.create(title='P', company=company, count=1)
         s2 = Security.objects.create(title='C', company=company, count=2)
 

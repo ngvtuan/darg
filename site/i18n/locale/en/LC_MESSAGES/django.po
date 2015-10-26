@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 01:49+0000\n"
+"POT-Creation-Date: 2015-10-26 04:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,19 +37,33 @@ msgstr ""
 msgid "Company Headquarter Country"
 msgstr ""
 
-#: company/templates/company.html:41
+#: company/templates/company.html:42
+msgid "Securities"
+msgstr ""
+
+#: company/templates/company.html:48
+msgid "Add Security"
+msgstr ""
+
+#: company/templates/company.html:49
+msgid ""
+"Please contact us at our <a href=\"mailto:jirka.schaefer@das-aktienregister."
+"ch\">customer service desk</a> for getting more security types added"
+msgstr ""
+
+#: company/templates/company.html:54
 msgid "Administrators"
 msgstr ""
 
-#: company/templates/company.html:52
+#: company/templates/company.html:66
 msgid "Option Plans"
 msgstr ""
 
-#: company/templates/company.html:56
+#: company/templates/company.html:70
 msgid "Options Plan Name"
 msgstr ""
 
-#: company/templates/company.html:56
+#: company/templates/company.html:70
 msgid "Edit Option Plan"
 msgstr ""
 

@@ -373,7 +373,7 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
             "company": company,
             "board_approved_at": validated_data.get("board_approved_at"),
             "title": validated_data.get("title"),
-            "security": Security.objects.get(
+            "security": Security.objects.get(company=company,
                 title=validated_data.get("security").items()[0][1]),
             "count": validated_data.get("count"),
             "exercise_price": validated_data.get("exercise_price"),

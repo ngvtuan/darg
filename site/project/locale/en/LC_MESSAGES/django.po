@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 04:16+0000\n"
+"POT-Creation-Date: 2015-10-26 06:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,7 @@ msgstr ""
 #: project/templates/_add_capital_form.html:12
 #: project/templates/_add_option_plan_form.html:11
 #: project/templates/_add_position_form.html:13
+#: project/templates/active_shareholder_captable.pdf.html:48
 msgid "Security"
 msgstr ""
 

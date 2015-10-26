@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 04:16+0000\n"
+"POT-Creation-Date: 2015-10-26 06:20+0000\n"
 "PO-Revision-Date: 2015-10-26 04:18+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
@@ -26,6 +26,7 @@ msgstr "Bitte geben Sie die Daten die Kapitalerhöhung an:"
 #: project/templates/_add_capital_form.html:12
 #: project/templates/_add_option_plan_form.html:11
 #: project/templates/_add_position_form.html:13
+#: project/templates/active_shareholder_captable.pdf.html:48
 msgid "Security"
 msgstr "Aktienart"
 
@@ -140,8 +141,8 @@ msgid ""
 "IMPORTANT: Excel does not fulfill legal requirements for a share register!"
 msgstr ""
 "Das Verwalten der Aktionäre mit Excel genügt ab 2016 nicht mehr den "
-"gesetzlichen Anforderungen in der Schweiz. <strong>\"Das "
-"Aktienregister\"</strong> stellt sicher:"
+"gesetzlichen Anforderungen in der Schweiz. <strong>\"Das Aktienregister\"</"
+"strong> stellt sicher:"
 
 #: project/templates/index.html:15
 msgid "Rapid Shareholder documentation"
@@ -161,8 +162,8 @@ msgstr "Datenexport als CSV für Excel etc."
 
 #: project/templates/index.html:21
 msgid ""
-"We are currently in private Beta. Please leave your email address to receive"
-" an invitation soon!"
+"We are currently in private Beta. Please leave your email address to receive "
+"an invitation soon!"
 msgstr ""
 "Wir sind aktuell in geschlossender Beta. Bitte hinterlassen Sie ihre Email, "
 "um eine Einladung zu erhalten."
@@ -257,8 +258,8 @@ msgstr "CSV"
 
 #~ msgid "GAFI Standard compliant"
 #~ msgstr ""
-#~ "Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" "
-#~ "class=\"regular\">GAFI Standards</a>"
+#~ "Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" class="
+#~ "\"regular\">GAFI Standards</a>"
 
 #~ msgid "Extensive data validation to ensure you cannot make a mistake"
 #~ msgstr "Umfangreiche Datenvalidierung  - Garantiert korrekte Daten"

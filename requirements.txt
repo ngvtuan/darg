@@ -1,6 +1,6 @@
-Django
+Django==1.8.4
 django-registration-redux
-djangorestframework
+djangorestframework==3.2.3
 raven
 cssmin==0.2.0
 jsmin==2.0.11
@@ -16,7 +16,6 @@ django-celery
 pytz
 celery
 kombu
-#reportlab
 xhtml2pdf
 #-- zinnia reqs
 django-mptt>=0.5.1
@@ -26,7 +25,6 @@ mots-vides>=2015.2.6
 django-contrib-comments>=1.6
 pyparsing
 django-xmlrpc
-#django-blog-zinnia
 git+https://github.com/Fantomas42/django-blog-zinnia.git@develop#egg=django-blog-zinnia
 Pillow
 django-app-namespace-template-loader

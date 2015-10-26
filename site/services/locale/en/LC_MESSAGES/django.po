@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 04:16+0000\n"
+"POT-Creation-Date: 2015-10-26 06:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,22 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: services/rest/serializers.py:158 services/rest/serializers.py:201
+msgid "Email missing"
+msgstr ""
+
+#: services/rest/serializers.py:204
+msgid "First Name missing"
+msgstr ""
+
+#: services/rest/serializers.py:207
+msgid "Last Name missing"
+msgstr ""
+
+#: services/rest/serializers.py:212
+msgid "Shareholder Number must be unique"
+msgstr ""
 
 #: services/rest/validators.py:9
 #, python-brace-format

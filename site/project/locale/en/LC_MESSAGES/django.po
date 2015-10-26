@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 19:26+0000\n"
+"POT-Creation-Date: 2015-10-26 01:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,8 @@ msgid "Please enter your capital increase data"
 msgstr ""
 
 #: project/templates/_add_capital_form.html:13
+#: project/templates/_add_option_plan_form.html:16
+#: project/templates/_add_option_transaction_form.html:22
 #: project/templates/_add_position_form.html:19
 #: project/templates/_add_shareholder_form.html:15
 msgid "Cancel"
@@ -40,18 +42,39 @@ msgstr ""
 msgid "Add Company"
 msgstr ""
 
-#: project/templates/_add_position_form.html:3
-msgid "Please enter your position data:"
+#: project/templates/_add_option_plan_form.html:3
+msgid "Please enter your option plan data:"
 msgstr ""
 
+#: project/templates/_add_option_plan_form.html:17
+#: project/templates/_add_option_transaction_form.html:23
+msgid "Add Option"
+msgstr ""
+
+#: project/templates/_add_option_plan_form.html:20
+msgid "Approved Option Plan PDF can be uploaded later in Plan's Edit Form"
+msgstr ""
+
+#: project/templates/_add_option_transaction_form.html:3
+msgid "Please enter your Option data:"
+msgstr ""
+
+#: project/templates/_add_option_transaction_form.html:10
 #: project/templates/_add_position_form.html:10
-#: project/templates/positions.html:30
 msgid "Buyer"
 msgstr ""
 
+#: project/templates/_add_option_transaction_form.html:13
+msgid "Option Plan"
+msgstr ""
+
+#: project/templates/_add_option_transaction_form.html:17
 #: project/templates/_add_position_form.html:15
-#: project/templates/positions.html:33
 msgid "Seller"
+msgstr ""
+
+#: project/templates/_add_position_form.html:3
+msgid "Please enter your position data:"
 msgstr ""
 
 #: project/templates/_add_shareholder_form.html:3
@@ -161,38 +184,6 @@ msgstr ""
 
 #: project/templates/log.html:34
 msgid "No Log Entries yet."
-msgstr ""
-
-#: project/templates/positions.html:8
-msgid "Positions"
-msgstr ""
-
-#: project/templates/positions.html:12
-msgid "Transfer Shares"
-msgstr ""
-
-#: project/templates/positions.html:13
-msgid "Increase Kapital"
-msgstr ""
-
-#: project/templates/positions.html:24
-msgid "Your Positions"
-msgstr ""
-
-#: project/templates/positions.html:29
-msgid "Buy Date"
-msgstr ""
-
-#: project/templates/positions.html:31
-msgid "Share Count"
-msgstr ""
-
-#: project/templates/positions.html:32
-msgid "Price"
-msgstr ""
-
-#: project/templates/positions.html:49
-msgid "No Postions yet."
 msgstr ""
 
 #: project/templates/start.html:8

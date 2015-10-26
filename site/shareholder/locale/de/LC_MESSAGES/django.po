@@ -8,40 +8,151 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 19:26+0000\n"
-"PO-Revision-Date: 2015-07-23 23:04+0000\n"
-"Last-Translator:   <jirka.schaefer@tschitschereengreen.com>\n"
+"POT-Creation-Date: 2015-10-26 01:49+0000\n"
+"PO-Revision-Date: 2015-10-26 01:54+0000\n"
+"Last-Translator: Jirka Schaefer <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
-#: shareholder/models.py:88
+#: shareholder/models.py:93
 msgid "Missing all data required for #GAFI."
 msgstr "Alle Daten für GAFI-FATF fehlen."
 
-#: shareholder/models.py:94
+#: shareholder/models.py:100
 msgid "Shareholder first name, last name or company name missing."
-msgstr "Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
+msgstr ""
+"Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
 
-#: shareholder/models.py:98
+#: shareholder/models.py:104
 msgid "Shareholder birthday missing."
 msgstr "Geburstag"
 
-#: shareholder/models.py:102
+#: shareholder/models.py:108
 msgid "Shareholder origin/country missing."
 msgstr "Land des Aktionärs fehlt."
 
-#: shareholder/models.py:107
+#: shareholder/models.py:114
 msgid "Shareholder address or address details missing."
 msgstr "Adresse oder Adressdetails des Aktionärs fehlen."
 
-#: shareholder/models.py:137
+#: shareholder/models.py:169
+msgid "Number of shares approved"
+msgstr "Anzahl der genehmigten Aktien"
+
+#: shareholder/models.py:197
 msgid "Headquarter location"
 msgstr "Ort des Unternehmensstammsitzes"
+
+#: shareholder/templates/options.html:8
+msgid "Options"
+msgstr "Optionen"
+
+#: shareholder/templates/options.html:12
+msgid "Transfer Option"
+msgstr "Optionen übertragen"
+
+#: shareholder/templates/options.html:13
+msgid "Grant New Option Plan"
+msgstr "Neuen Optionsplan erstellen"
+
+#: shareholder/templates/options.html:27
+msgid "Optionplan"
+msgstr "Optionsplan"
+
+#: shareholder/templates/options.html:27
+msgid "for"
+msgstr "für"
+
+#: shareholder/templates/options.html:36
+msgid "Grant Date"
+msgstr "Datum der Genehmigung"
+
+#: shareholder/templates/options.html:37
+msgid "Receipient"
+msgstr "Empfänger"
+
+#: shareholder/templates/options.html:38
+#: shareholder/templates/positions.html:31
+msgid "Share Count"
+msgstr "Anzahl Aktien"
+
+#: shareholder/templates/options.html:39
+#: shareholder/templates/optionsplan.html:24
+msgid "Exercise Price"
+msgstr "Ausübungspreis"
+
+#: shareholder/templates/options.html:40
+msgid "Issuer"
+msgstr "Herausgeber"
+
+#: shareholder/templates/options.html:56
+msgid "No options yet."
+msgstr "Noch keine Optionen"
+
+#: shareholder/templates/optionsplan.html:13
+msgid "Option plan details for"
+msgstr "Optionsplan-Details für"
+
+#: shareholder/templates/optionsplan.html:17
+msgid "Data"
+msgstr "Daten"
+
+#: shareholder/templates/optionsplan.html:20
+msgid "Board approval date"
+msgstr "Genehmigungsdatum durch das Board"
+
+#: shareholder/templates/optionsplan.html:28
+msgid "Share count"
+msgstr "Anzahl Aktien"
+
+#: shareholder/templates/optionsplan.html:32
+msgid "Comment"
+msgstr "Kommentar"
+
+#: shareholder/templates/optionsplan.html:36
+msgid "Security Type"
+msgstr "Wertpapiertyp"
+
+#: shareholder/templates/positions.html:8
+msgid "Positions"
+msgstr "Transaktionen"
+
+#: shareholder/templates/positions.html:12
+msgid "Transfer Shares"
+msgstr "Aktien übertragen"
+
+#: shareholder/templates/positions.html:13
+msgid "Increase Kapital"
+msgstr "Kapital erhöhen"
+
+#: shareholder/templates/positions.html:24
+msgid "Your Positions"
+msgstr "Ihre Transaktionen"
+
+#: shareholder/templates/positions.html:29
+msgid "Buy Date"
+msgstr "Kaufdatum"
+
+#: shareholder/templates/positions.html:30
+msgid "Buyer"
+msgstr "Käufer"
+
+#: shareholder/templates/positions.html:32
+msgid "Price"
+msgstr "Preis"
+
+#: shareholder/templates/positions.html:33
+msgid "Seller"
+msgstr "Verkäufer"
+
+#: shareholder/templates/positions.html:49
+msgid "No Postions yet."
+msgstr "Noch keine Transaktionen"
 
 #: shareholder/templates/shareholder.html:9
 msgid "Shareholder Details"

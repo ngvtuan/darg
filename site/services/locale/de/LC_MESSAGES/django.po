@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 06:20+0000\n"
-"PO-Revision-Date: 2015-10-26 06:22+0000\n"
+"POT-Creation-Date: 2015-11-14 23:41+0000\n"
+"PO-Revision-Date: 2015-11-14 23:42+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -35,6 +35,10 @@ msgstr "Bitte geben Sie eine gültigen Nachnamen ein."
 msgid "Shareholder Number must be unique"
 msgstr ""
 "Diese Aktionärsnummer wird bereits verwendet. Bitte wählen Sie eine andere."
+
+#: services/rest/serializers.py:392
+msgid "Not a pdf file."
+msgstr "Falsches Dateiformat. Nur PDF ist erlaubt."
 
 #: services/rest/validators.py:9
 #, python-brace-format

@@ -22,6 +22,9 @@ DATABASES = {
     }
 }
 
+# -- SENDFILE for downloads
+SENDFILE_BACKEND = 'sendfile.backends.development'
+
 try:
     from .dev_local import *
 except ImportError:

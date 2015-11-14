@@ -247,34 +247,59 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.optionplan', ['js.darg.api', 'xeditable']);
+  app = angular.module('js.darg.app.optionplan', ['js.darg.api', 'xeditable', 'ngFileUpload']);
 
   app.controller('OptionPlanController', [
-    '$scope', '$http', 'OptionPlan', function($scope, $http, OptionPlan) {
+    '$scope', '$http', 'OptionPlan', 'Upload', '$timeout', function($scope, $http, OptionPlan, Upload, $timeout) {
+      $scope.file = null;
+      $scope.pdf_upload_success = false;
+      $scope.pdf_upload_errors = false;
       $http.get('/services/rest/optionplan/' + optionplan_id).then(function(result) {
-        $scope.optionplan = new OptionPlan(result.data);
-        return $http.get($scope.optionplan.security).then(function(result1) {
-          return $scope.optionplan.security = result1.data;
-        });
+        return $scope.optionplan = new OptionPlan(result.data);
       });
       $http.get('/services/rest/security').then(function(result) {
         return $scope.securities = result.data.results;
       });
-      return $scope.edit_company = function() {
-        $scope.company.country = $scope.company.country.url;
-        return $scope.company.$update().then(function(result) {
-          $scope.company = new Company(result);
-          $http.get($scope.company.country).then(function(result1) {
-            return $scope.company.country = result1.data;
-          });
-          return console.log($scope.company);
-        }).then(function() {
-          return void 0;
-        }).then(function() {
-          return $scope.errors = null;
-        }, function(rejection) {
-          return $scope.errors = rejection.data;
-        });
+      $scope.$watch('files', function() {
+        $scope.upload($scope.files);
+      });
+      $scope.$watch('file', function() {
+        if ($scope.file !== null) {
+          $scope.files = [$scope.file];
+        }
+      });
+      $scope.log = '';
+      return $scope.upload = function(files) {
+        var file, i, payload;
+        if (files && files.length) {
+          i = 0;
+          while (i < files.length) {
+            file = files[i];
+            if (!file.$error) {
+              payload = $scope.optionplan;
+              payload.pdf_file = file;
+              Upload.upload({
+                url: '/services/rest/optionplan/' + optionplan_id + '/upload',
+                data: payload,
+                objectKey: '.k'
+              }).then((function(response) {
+                $timeout(function() {
+                  $scope.optionplan = response.data;
+                  $scope.pdf_upload_success = true;
+                  $scope.pdf_upload_errors = false;
+                });
+                return $timeout(function() {
+                  return $scope.pdf_upload_success = false;
+                }, 3000);
+              }), (function(response) {
+                return $timeout(function() {
+                  return $scope.pdf_upload_errors = response.data;
+                });
+              }), function(evt) {});
+              return;
+            }
+          }
+        }
       };
     }
   ]);

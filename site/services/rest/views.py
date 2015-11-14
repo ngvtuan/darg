@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
+from rest_framework.decorators import detail_route
 
 from services.rest.serializers import ShareholderSerializer, CompanySerializer, UserSerializer, \
     PositionSerializer, AddCompanySerializer, UserWithEmailOnlySerializer, CountrySerializer, \
@@ -133,12 +134,32 @@ class OptionPlanViewSet(viewsets.ModelViewSet):
     """ API endpoint to get options """
     serializer_class = OptionPlanSerializer
     permission_classes = [
-        UserCanAddOptionPlanPermission,
+        #UserCanAddOptionPlanPermission,
     ]
 
     def get_queryset(self):
         user = self.request.user
         return OptionPlan.objects.filter(company__operator__user=user)
+
+    # FIXME add perms like that to decor. permission_classes=[IsAdminOrIsSelf]
+    @detail_route(methods=['post'])
+    def upload(self, request, pk=None):
+        op = self.get_object()
+        # modify data
+        serializer = OptionPlanSerializer(data=request.data)
+        # add file to serializer
+        if serializer.is_valid():
+            op.pdf_file = request.FILES['pdf_file']
+            op.save()
+            op.generate_pdf_file_preview()
+            return Response(OptionPlanSerializer(
+                op,
+                context={'request': request}).data,
+                status=status.HTTP_201_CREATED)
+        else:
+            return Response(
+                serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST)
 
 
 class OptionTransactionViewSet(viewsets.ModelViewSet):

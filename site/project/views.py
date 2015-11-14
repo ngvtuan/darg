@@ -23,7 +23,6 @@ def start(request):
     context = RequestContext(request, {})
     return HttpResponse(template.render(context))
 
-
 @login_required
 def captable_csv(request, company_id):
     """ returns csv with active shareholders """

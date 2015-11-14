@@ -377,13 +377,19 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
     security = SecuritySerializer(many=False, required=True)
     optiontransaction_set = OptionTransactionSerializer(many=True,
                                                         read_only=True)
-    board_approved_at = serializers.DateTimeField()
+    board_approved_at = serializers.DateField()
 
     class Meta:
         model = OptionPlan
         fields = ('pk', 'title', 'security', 'optiontransaction_set',
                   'exercise_price', 'count', 'comment', 'board_approved_at',
-                  'url')
+                  'url', 'pdf_file', 'pdf_file_preview_url', 'pdf_file_url')
+
+    def validate_pdf_file(self, value):
+        if value.content_type == 'application/pdf':
+            return value
+        else:
+            raise serializers.ValidationError(_("Not a pdf file."))
 
     def create(self, validated_data):
 

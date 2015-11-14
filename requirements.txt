@@ -32,3 +32,5 @@ zinnia-theme-bootstrap
 docutils
 #-- end blog
 ipdbplugin
+wand
+django-sendfile

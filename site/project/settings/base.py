@@ -248,6 +248,9 @@ TRACKING_CODE = ""
 ZINNIA_UPLOAD_TO = os.path.join(MEDIA_ROOT, 'blog')
 ZINNIA_MARKUP_LANGUAGE = 'restructuredtext'
 
+# -- SENDFILE for downloads
+SENDFILE_BACKEND = 'sendfile.backends.nginx'
+
 try:
     from project.settings.local import *
 except ImportError:

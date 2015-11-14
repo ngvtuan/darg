@@ -6,7 +6,8 @@
         "angular-resource": "",
         "underscore": "",
         "bootstrap": "",
-        "angular-xeditable": ""
+        "angular-xeditable": "",
+        "ng-file-upload": ""
     },
     "private": true
 }

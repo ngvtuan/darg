@@ -222,12 +222,16 @@ class OptionPlan(models.Model):
             img.save(filename=self.pdf_file_preview_path())
 
     def pdf_file_preview_path(self):
+        if not self.pdf_file:
+            return None
         s = self.pdf_file.file.name.split(".")
         s = s[:-1]
         s.extend(['png'])
         return ".".join(s)
 
     def pdf_file_preview_url(self):
+        if not self.pdf_file:
+            return None
         s = self.pdf_file.url.split(".")
         s = s[:-1]
         s.extend(['png'])

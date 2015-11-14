@@ -33,4 +33,4 @@ docutils
 #-- end blog
 ipdbplugin
 wand
-python-magic
+django-sendfile

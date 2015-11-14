@@ -383,7 +383,7 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
         model = OptionPlan
         fields = ('pk', 'title', 'security', 'optiontransaction_set',
                   'exercise_price', 'count', 'comment', 'board_approved_at',
-                  'url', 'pdf_file', 'pdf_file_preview_url')
+                  'url', 'pdf_file', 'pdf_file_preview_url', 'pdf_file_url')
 
     def validate_pdf_file(self, value):
         if value.content_type == 'application/pdf':

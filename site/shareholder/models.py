@@ -185,7 +185,8 @@ class Position(models.Model):
 
 def get_option_plan_upload_path(instance, filename):
     return os.path.join(
-      "private", "optionplan", "%d" % instance.id, filename)
+        "private", "optionplan", "%d" % instance.id, filename)
+
 
 class OptionPlan(models.Model):
     """ Approved chunk of option (approved by board) """
@@ -202,7 +203,8 @@ class OptionPlan(models.Model):
     count = models.PositiveIntegerField(
         help_text=_("Number of shares approved"))
     comment = models.TextField(blank=True, null=True)
-    pdf_file = models.FileField(blank=True, null=True,
+    pdf_file = models.FileField(
+        blank=True, null=True,
         upload_to=get_option_plan_upload_path,)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -215,9 +217,9 @@ class OptionPlan(models.Model):
         from wand.image import Image
         # Converting first page into JPG
         with Image(filename=self.pdf_file.file.name+"[0]") as img:
-             width, height = img.size
-             # img.resize(300, int(300/float(width)*float(height)))
-             img.save(filename=self.pdf_file_preview_path())
+            width, height = img.size
+            # img.resize(300, int(300/float(width)*float(height)))
+            img.save(filename=self.pdf_file_preview_path())
 
     def pdf_file_preview_path(self):
         s = self.pdf_file.file.name.split(".")
@@ -230,7 +232,10 @@ class OptionPlan(models.Model):
         s = s[:-1]
         s.extend(['png'])
         return ".".join(s)
-    
+
+    def pdf_file_url(self):
+        return "/optionsplan/{}/download/pdf/".format(self.pk)
+
 
 class OptionTransaction(models.Model):
     """ Transfer of options from someone to anyone """

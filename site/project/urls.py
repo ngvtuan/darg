@@ -47,6 +47,9 @@ urlpatterns = [
     url(r'^options/$', 'shareholder.views.options', name='options'),
     url(r'^optionsplan/(?P<optionsplan_id>[0-9]+)/$',
         'shareholder.views.optionsplan', name='optionplan'),
+    url(r'^optionsplan/(?P<optionsplan_id>[0-9]+)/download/pdf/$',
+        'shareholder.views.optionsplan_download_pdf',
+        name='optionplan_download_pdf'),
 
     # auth
     url(r'^accounts/', include('registration.backends.simple.urls')),

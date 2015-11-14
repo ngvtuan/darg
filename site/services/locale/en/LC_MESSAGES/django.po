@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 06:20+0000\n"
+"POT-Creation-Date: 2015-11-14 23:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,10 @@ msgstr ""
 
 #: services/rest/serializers.py:212
 msgid "Shareholder Number must be unique"
+msgstr ""
+
+#: services/rest/serializers.py:392
+msgid "Not a pdf file."
 msgstr ""
 
 #: services/rest/validators.py:9

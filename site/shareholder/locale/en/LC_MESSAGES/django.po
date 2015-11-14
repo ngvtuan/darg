@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 06:20+0000\n"
+"POT-Creation-Date: 2015-11-14 23:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: shareholder/models.py:27
+#: shareholder/models.py:30
 msgid "Headquarter location"
 msgstr ""
 
-#: shareholder/models.py:118
+#: shareholder/models.py:121
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:125
+#: shareholder/models.py:128
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:129
+#: shareholder/models.py:132
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:133
+#: shareholder/models.py:136
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:139
+#: shareholder/models.py:142
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:197
+#: shareholder/models.py:205
 msgid "Number of shares approved"
 msgstr ""
 
@@ -113,6 +113,14 @@ msgstr ""
 
 #: shareholder/templates/optionsplan.html:36
 msgid "Security Type"
+msgstr ""
+
+#: shareholder/templates/optionsplan.html:49
+msgid "PDF of approved option plan"
+msgstr ""
+
+#: shareholder/templates/optionsplan.html:63
+msgid "Upload success"
 msgstr ""
 
 #: shareholder/templates/positions.html:8
@@ -193,4 +201,8 @@ msgstr ""
 
 #: shareholder/templates/shareholder.html:57
 msgid "Value of all shares according to last transaction"
+msgstr ""
+
+#: shareholder/views.py:56 shareholder/views.py:65
+msgid "Permission denied"
 msgstr ""

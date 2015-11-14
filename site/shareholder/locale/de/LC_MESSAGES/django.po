@@ -8,42 +8,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 06:20+0000\n"
-"PO-Revision-Date: 2015-10-26 04:45+0000\n"
+"POT-Creation-Date: 2015-11-14 23:41+0000\n"
+"PO-Revision-Date: 2015-11-14 23:42+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
-#: shareholder/models.py:27
+#: shareholder/models.py:30
 msgid "Headquarter location"
 msgstr "Ort des Unternehmensstammsitzes"
 
-#: shareholder/models.py:118
+#: shareholder/models.py:121
 msgid "Missing all data required for #GAFI."
 msgstr "Alle Daten für GAFI-FATF fehlen."
 
-#: shareholder/models.py:125
+#: shareholder/models.py:128
 msgid "Shareholder first name, last name or company name missing."
-msgstr "Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
+msgstr ""
+"Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
 
-#: shareholder/models.py:129
+#: shareholder/models.py:132
 msgid "Shareholder birthday missing."
 msgstr "Geburstag"
 
-#: shareholder/models.py:133
+#: shareholder/models.py:136
 msgid "Shareholder origin/country missing."
 msgstr "Land des Aktionärs fehlt."
 
-#: shareholder/models.py:139
+#: shareholder/models.py:142
 msgid "Shareholder address or address details missing."
 msgstr "Adresse oder Adressdetails des Aktionärs fehlen."
 
-#: shareholder/models.py:197
+#: shareholder/models.py:205
 msgid "Number of shares approved"
 msgstr "Anzahl der genehmigten Aktien"
 
@@ -116,6 +117,14 @@ msgstr "Kommentar"
 #: shareholder/templates/optionsplan.html:36
 msgid "Security Type"
 msgstr "Wertpapiertyp"
+
+#: shareholder/templates/optionsplan.html:49
+msgid "PDF of approved option plan"
+msgstr "PDF des genehmigten Optionsplanes"
+
+#: shareholder/templates/optionsplan.html:63
+msgid "Upload success"
+msgstr "Hochladen erfolgreich."
 
 #: shareholder/templates/positions.html:8
 msgid "Positions"
@@ -196,3 +205,7 @@ msgstr "Aktien"
 #: shareholder/templates/shareholder.html:57
 msgid "Value of all shares according to last transaction"
 msgstr "Wert der Aktien basierend auf der letzten Transaktion"
+
+#: shareholder/views.py:56 shareholder/views.py:65
+msgid "Permission denied"
+msgstr "Zugriff verweigert."

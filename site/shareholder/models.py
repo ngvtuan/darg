@@ -1,4 +1,5 @@
 import os
+import time
 
 from decimal import Decimal
 
@@ -232,7 +233,8 @@ class OptionPlan(models.Model):
     def pdf_file_preview_url(self):
         if not self.pdf_file:
             return None
-        return "/optionsplan/{}/download/img/".format(self.pk)
+        # needs timestamp to trigger reload
+        return "/optionsplan/{}/download/img/?t={}".format(self.pk, time.time())
 
     def pdf_file_url(self):
         if not self.pdf_file:

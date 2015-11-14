@@ -54,3 +54,12 @@ def optionsplan_download_pdf(request, optionsplan_id):
         return sendfile(request, optionplan.pdf_file.path)
     else:
         return HttpResponseForbidden(_("Permission denied"))
+
+
+@login_required
+def optionsplan_download_img(request, optionsplan_id):
+    optionplan = OptionPlan.objects.get(id=optionsplan_id)
+    if optionplan.company.operator_set.filter(user=request.user).exists():
+        return sendfile(request, optionplan.pdf_file_preview_path())
+    else:
+        return HttpResponseForbidden(_("Permission denied"))

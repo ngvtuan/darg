@@ -232,12 +232,11 @@ class OptionPlan(models.Model):
     def pdf_file_preview_url(self):
         if not self.pdf_file:
             return None
-        s = self.pdf_file.url.split(".")
-        s = s[:-1]
-        s.extend(['png'])
-        return ".".join(s)
+        return "/optionsplan/{}/download/img/".format(self.pk)
 
     def pdf_file_url(self):
+        if not self.pdf_file:
+            return None
         return "/optionsplan/{}/download/pdf/".format(self.pk)
 
 

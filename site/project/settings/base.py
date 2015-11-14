@@ -250,6 +250,8 @@ ZINNIA_MARKUP_LANGUAGE = 'restructuredtext'
 
 # -- SENDFILE for downloads
 SENDFILE_BACKEND = 'sendfile.backends.nginx'
+SENDFILE_ROOT = os.path.join(MEDIA_ROOT, 'private')
+SENDFILE_URL = "/media/private"
 
 try:
     from project.settings.local import *

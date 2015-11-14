@@ -1,3 +1,5 @@
+import os
+
 from decimal import Decimal
 
 from django.db import models
@@ -181,6 +183,10 @@ class Position(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
+def get_option_plan_upload_path(instance, filename):
+    return os.path.join(
+      "private", "optionplan", "%d" % instance.id, filename)
+
 class OptionPlan(models.Model):
     """ Approved chunk of option (approved by board) """
     company = models.ForeignKey('Company')
@@ -196,13 +202,35 @@ class OptionPlan(models.Model):
     count = models.PositiveIntegerField(
         help_text=_("Number of shares approved"))
     comment = models.TextField(blank=True, null=True)
-    pdf_file = models.FileField(blank=True, null=True)
+    pdf_file = models.FileField(blank=True, null=True,
+        upload_to=get_option_plan_upload_path,)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return u"{}".format(self.title)
 
+    def generate_pdf_file_preview(self):
+        """ generates preview png in same place """
+        from wand.image import Image
+        # Converting first page into JPG
+        with Image(filename=self.pdf_file.file.name+"[0]") as img:
+             width, height = img.size
+             # img.resize(300, int(300/float(width)*float(height)))
+             img.save(filename=self.pdf_file_preview_path())
+
+    def pdf_file_preview_path(self):
+        s = self.pdf_file.file.name.split(".")
+        s = s[:-1]
+        s.extend(['png'])
+        return ".".join(s)
+
+    def pdf_file_preview_url(self):
+        s = self.pdf_file.url.split(".")
+        s = s[:-1]
+        s.extend(['png'])
+        return ".".join(s)
+    
 
 class OptionTransaction(models.Model):
     """ Transfer of options from someone to anyone """

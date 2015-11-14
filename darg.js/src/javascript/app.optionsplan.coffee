@@ -1,36 +1,53 @@
-app = angular.module 'js.darg.app.optionplan', ['js.darg.api', 'xeditable']
+app = angular.module 'js.darg.app.optionplan', ['js.darg.api', 'xeditable', 'ngFileUpload']
 
-app.controller 'OptionPlanController', ['$scope', '$http', 'OptionPlan', ($scope, $http, OptionPlan) ->
+app.controller 'OptionPlanController', ['$scope', '$http', 'OptionPlan', 'Upload', '$timeout', ($scope, $http, OptionPlan, Upload, $timeout) ->
+
+    $scope.file = null
+    $scope.pdf_upload_success = false
+    $scope.pdf_upload_errors = false
 
     $http.get('/services/rest/optionplan/' + optionplan_id).then (result) ->
         $scope.optionplan = new OptionPlan(result.data)
-        $http.get($scope.optionplan.security).then (result1) ->
-            $scope.optionplan.security = result1.data
 
     $http.get('/services/rest/security').then (result) ->
         $scope.securities = result.data.results
 
-    # ATTENTION: django eats a url, angular eats an object.
-    # hence needs conversion
-    $scope.edit_company = () ->
-        $scope.company.country = $scope.company.country.url
-        $scope.company.$update().then (result) ->
-            $scope.company = new Company(result)
-            # refetch country data
-            $http.get($scope.company.country).then (result1) ->
-                $scope.company.country = result1.data
+    $scope.$watch 'files', ->
+      $scope.upload $scope.files
+      return
+    $scope.$watch 'file', ->
+      if $scope.file != null
+        $scope.files = [ $scope.file ]
+      return
+    $scope.log = ''
 
-            console.log($scope.company)
-        .then ->
-            # Reset our editor to a new blank post
-            #$scope.company = new Company()
-            undefined
-        .then ->
-            # Clear any errors
-            $scope.errors = null
-        , (rejection) ->
-            $scope.errors = rejection.data 
-
+    $scope.upload = (files) ->
+      if files and files.length
+        i = 0
+        while i < files.length
+          file = files[i]
+          if !file.$error
+            # prepare data
+            payload = $scope.optionplan
+            payload.pdf_file = file
+            Upload.upload(
+              url: '/services/rest/optionplan/'+optionplan_id+'/upload'
+              data: payload
+              objectKey: '.k').then ((response) ->
+                $timeout ->
+                  $scope.optionplan = response.data
+                  $scope.pdf_upload_success = true
+                  $scope.pdf_upload_errors = false
+                  return
+                $timeout(() ->
+                  $scope.pdf_upload_success = false
+                , 3000)
+              ), ((response) ->
+                $timeout ->
+                  $scope.pdf_upload_errors = response.data
+              ), (evt) ->
+                return
+              return
 ]
 
 app.run (editableOptions) ->

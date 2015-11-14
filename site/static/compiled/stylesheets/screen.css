@@ -525,81 +525,86 @@ div.captable_context_actions {
   text-align: right;
 }
 
-/* line 249, ../../sass/screen.sass */
+/* line 247, ../../sass/screen.sass */
+div#optionplan .pdf_upload_preview {
+  border: 1px solid gray;
+}
+
+/* line 253, ../../sass/screen.sass */
 .blog .lead {
   font-size: 1em;
 }
-/* line 251, ../../sass/screen.sass */
+/* line 255, ../../sass/screen.sass */
 .blog .well {
   background-color: transparent;
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 256, ../../sass/screen.sass */
+/* line 260, ../../sass/screen.sass */
 .blog .btn-primary {
   background-color: transparent;
   border: 1px solid #666666;
   color: #1661ff;
 }
-/* line 260, ../../sass/screen.sass */
+/* line 264, ../../sass/screen.sass */
 .blog .row {
   margin-top: 4em;
 }
-/* line 262, ../../sass/screen.sass */
+/* line 266, ../../sass/screen.sass */
 .blog .entry-tags {
   display: none;
 }
-/* line 264, ../../sass/screen.sass */
+/* line 268, ../../sass/screen.sass */
 .blog .entry-shorturl {
   display: none;
 }
-/* line 266, ../../sass/screen.sass */
+/* line 270, ../../sass/screen.sass */
 .blog .entry-footer {
   padding-left: 0px;
 }
-/* line 268, ../../sass/screen.sass */
+/* line 272, ../../sass/screen.sass */
 .blog .entry-footer span {
   display: none;
 }
-/* line 270, ../../sass/screen.sass */
+/* line 274, ../../sass/screen.sass */
 .blog .navbar-default {
   background-color: white;
 }
-/* line 272, ../../sass/screen.sass */
+/* line 276, ../../sass/screen.sass */
 .blog .navbar-brand {
   font-size: 2em;
 }
-/* line 274, ../../sass/screen.sass */
+/* line 278, ../../sass/screen.sass */
 .blog .navbar-header span {
   top: 0.8em;
   position: relative;
   left: -1.7em;
 }
-/* line 278, ../../sass/screen.sass */
+/* line 282, ../../sass/screen.sass */
 .blog a {
   border: none;
   font-size: 1em;
 }
-/* line 281, ../../sass/screen.sass */
+/* line 285, ../../sass/screen.sass */
 .blog a:active, .blog a:focus, .blog a:hover {
   color: #1661ff;
   text-decoration: none;
 }
-/* line 284, ../../sass/screen.sass */
+/* line 288, ../../sass/screen.sass */
 .blog h2 {
   margin-bottom: 0em;
 }
-/* line 286, ../../sass/screen.sass */
+/* line 290, ../../sass/screen.sass */
 .blog h2 a {
   padding: 0;
   margin: 0;
 }
-/* line 289, ../../sass/screen.sass */
+/* line 293, ../../sass/screen.sass */
 .blog p {
   margin: 0 0 0 0;
 }
-/* line 291, ../../sass/screen.sass */
+/* line 295, ../../sass/screen.sass */
 .blog small {
   font-size: 40%;
 }

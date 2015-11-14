@@ -8,7 +8,7 @@
 <!-- required for angular API call -->
 <script>var optionplan_id = {{ optionplan.id}}</script>
 
-<div ng_controller="OptionPlanController">
+<div ng_controller="OptionPlanController" id="optionplan">
 
   <h1>{% trans "Option plan details for" %} {% verbatim %}{{ optionplan.title }}{% endverbatim %}</h1>
 
@@ -44,5 +44,32 @@
       </td>
     </tr>
   </table>
+
+  <!-- pdf file -->
+  <h2>{% trans "PDF of approved option plan" %}</h2>
+    <div>
+      {% verbatim %}
+      <a ng-show="optionplan.pdf_file" href="{{ optionplan.pdf_file }}" title="Download">
+        <img src="{{ optionplan.pdf_file_preview_url }}" alt="" ng-show="optionplan.pdf_file_preview_url" width="300" class="option-plan-preview"/>
+      </a>
+    </div>
+    <div>
+      <a ng-show="optionplan.pdf_file" href="{{ optionplan.pdf_file }}" title="Download">
+        Download
+      </a>
+      <button class="button" ngf-select ng-model="file" ngf-multiple="false">Upload File</button>
+    </div>
+    <p ng-show="pdf_upload_success" class="alert alert-success pdf_upload_success" ng-cloak>
+      {% endverbatim %}{% trans "Upload success" %}{% verbatim %}
+    </p>
+    <p ng-repeat="(name, errs) in pdf_upload_errors" class="alert alert-danger" ng-cloak>
+      <strong>{{ errs[0] }}</strong>
+    </p>
+    <!--<div>
+      Upload Log:
+      <pre>{{log}}</pre>
+    </div>-->
+  {% endverbatim %}
+<!-- end controller -->
 </div> 
 {% endblock %}

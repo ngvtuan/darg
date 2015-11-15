@@ -255,7 +255,8 @@
       $scope.pdf_upload_success = false;
       $scope.pdf_upload_errors = false;
       $http.get('/services/rest/optionplan/' + optionplan_id).then(function(result) {
-        return $scope.optionplan = new OptionPlan(result.data);
+        $scope.optionplan = new OptionPlan(result.data);
+        return $scope.optionplan.board_approved_at = new Date($scope.optionplan.board_approved_at);
       });
       $http.get('/services/rest/security').then(function(result) {
         return $scope.securities = result.data.results;

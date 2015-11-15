@@ -5,7 +5,7 @@
 <div>
   <form class="form-inline">
     <div class="form-group block-level">
-      <input type="date" class="form-control" ng-model="newOptionPlan.board_approved_at" placeholder="Board Approval Date">
+      <input type="date" class="form-control" ng-model="newOptionPlan.board_approved_at" placeholder="Board Approval Date" data-date-format="yyyy-mm-dd" validatedateformat calendar>
       <input type="text" class="form-control" ng-model="newOptionPlan.title" placeholder="Title" ng-maxlength="255">
       <select class="form-control" ng-model="newOptionPlan.security" ng-options="security as security.readable_title for security in securities" placeholder="Underlying Asset">
         <option value='' disabled>{% endverbatim %}{% trans "Security" %}{% verbatim %}</option>

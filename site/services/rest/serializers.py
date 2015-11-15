@@ -377,7 +377,7 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
     security = SecuritySerializer(many=False, required=True)
     optiontransaction_set = OptionTransactionSerializer(many=True,
                                                         read_only=True)
-    board_approved_at = serializers.DateField()
+    board_approved_at = serializers.DateTimeField()
 
     class Meta:
         model = OptionPlan

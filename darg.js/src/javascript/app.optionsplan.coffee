@@ -8,6 +8,7 @@ app.controller 'OptionPlanController', ['$scope', '$http', 'OptionPlan', 'Upload
 
     $http.get('/services/rest/optionplan/' + optionplan_id).then (result) ->
         $scope.optionplan = new OptionPlan(result.data)
+        $scope.optionplan.board_approved_at = new Date($scope.optionplan.board_approved_at)
 
     $http.get('/services/rest/security').then (result) ->
         $scope.securities = result.data.results

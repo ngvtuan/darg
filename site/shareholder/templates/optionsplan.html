@@ -49,12 +49,12 @@
   <h2>{% trans "PDF of approved option plan" %}</h2>
     <div>
       {% verbatim %}
-      <a ng-show="optionplan.pdf_file" href="{{ optionplan.pdf_file_url }}" title="Download">
-        <img src="{{ optionplan.pdf_file_preview_url }}" alt="" ng-show="optionplan.pdf_file_preview_url" width="300" class="option-plan-preview"/>
+      <a ng-show="optionplan.pdf_file" ng-href="{{ optionplan.pdf_file_url }}" title="Download">
+        <img ng-src="{{ optionplan.pdf_file_preview_url }}" alt="" ng-show="optionplan.pdf_file_preview_url" width="300" class="option-plan-preview"/>
       </a>
     </div>
     <div>
-      <a ng-show="optionplan.pdf_file" href="{{ optionplan.pdf_file_url }}" title="Download">
+      <a ng-show="optionplan.pdf_file" ng-href="{{ optionplan.pdf_file_url }}" title="Download">
         Download
       </a>
       <button class="button" ngf-select ng-model="file" ngf-multiple="false">Upload File</button>

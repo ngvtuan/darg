@@ -12,7 +12,7 @@ from services.rest.serializers import ShareholderSerializer, CompanySerializer, 
     OptionPlanSerializer, OptionTransactionSerializer, SecuritySerializer
 from services.rest.permissions import UserCanAddCompanyPermission, \
     SafeMethodsOnlyPermission, UserCanAddShareholderPermission, UserCanAddPositionPermission,\
-    UserCanEditCompanyPermission, UserCanAddOptionPlanPermission, \
+    UserCanEditCompanyPermission, \
     UserCanAddOptionTransactionPermission
 from shareholder.models import Shareholder, Company, Position, Country, OptionPlan, \
     OptionTransaction, Security
@@ -134,7 +134,7 @@ class OptionPlanViewSet(viewsets.ModelViewSet):
     """ API endpoint to get options """
     serializer_class = OptionPlanSerializer
     permission_classes = [
-        #UserCanAddOptionPlanPermission,
+        # UserCanAddOptionPlanPermission,
     ]
 
     def get_queryset(self):

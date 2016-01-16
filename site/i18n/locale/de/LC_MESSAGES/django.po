@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-14 23:41+0000\n"
-"PO-Revision-Date: 2015-10-26 04:17+0000\n"
+"POT-Creation-Date: 2016-01-16 04:25+0000\n"
+"PO-Revision-Date: 2016-01-16 04:34+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
@@ -49,8 +49,9 @@ msgstr "Aktienklasse hinzufügen"
 
 #: company/templates/company.html:49
 msgid ""
-"Please contact us at our <a href=\"mailto:jirka.schaefer@das-aktienregister."
-"ch\">customer service desk</a> for getting more security types added"
+"Please contact us at our <a href=\"mailto:jirka.schaefer@das-"
+"aktienregister.ch\">customer service desk</a> for getting more security "
+"types added"
 msgstr ""
 "Bitte kontaktieren Sie unseren <a href=\"mailto:jirka.schaefer@das-"
 "aktienregister.ch\">Kunden-Support</a> um mehr Aktienarten hinzuzufügen."
@@ -72,6 +73,19 @@ msgid "Edit Option Plan"
 msgstr "Optionsplan editieren"
 
 #: templates/base_auth.html:15
+#: templates/registration/password_reset_form.html:4
+#: templates/registration/password_reset_form.html:10
+#: templates/registration/password_reset_form.html:30
+msgid "Reset password"
+msgstr "Passwort zurücksetzen"
+
+#: templates/base_auth.html:16
+#: templates/registration/password_change_form.html:4
+#: templates/registration/password_change_form.html:10
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: templates/base_auth.html:19
 msgid "The Share Register, 2015"
 msgstr "Das Aktienregister, 2015"
 
@@ -103,13 +117,21 @@ msgstr "Start"
 msgid "Log in"
 msgstr "Login"
 
-#: templates/registration/login.html:13
+#: templates/registration/login.html:14
 msgid "Not  a member?"
 msgstr "Noch nicht registriert?"
 
-#: templates/registration/login.html:13
+#: templates/registration/login.html:15
 msgid "Register"
 msgstr "Registrieren"
+
+#: templates/registration/login.html:17
+msgid "Password lost?"
+msgstr "Passwort vergessen?"
+
+#: templates/registration/login.html:18
+msgid "Reset Password"
+msgstr "Passwort zurücksetzen"
 
 #: templates/registration/logout.html:6
 msgid "Logged Out"
@@ -118,6 +140,116 @@ msgstr "Ausgeloggt"
 #: templates/registration/logout.html:7
 msgid "You are now logged out. Go to "
 msgstr "Sie sind jetzt ausgeloggt. Gehen Sie zu"
+
+#: templates/registration/password_change_done.html:9
+msgid "Password successfully changed!"
+msgstr "Passwort erfolgreich geändert"
+
+#: templates/registration/password_change_done.html:12
+msgid "You changed your password. Resume here:"
+msgstr "Sie haben Ihr Passwort geändert. Hier geht's weiter:"
+
+#: templates/registration/password_reset_complete.html:4
+msgid "Password reset complete"
+msgstr "Passwort zurücksetzen erfolgreich"
+
+#: templates/registration/password_reset_complete.html:10
+msgid "Your password reset is complete"
+msgstr "Passwort zurücksetzen ist beendet"
+
+#: templates/registration/password_reset_complete.html:13
+msgid "Your password has been reset!"
+msgstr "Ihr Passwort wurde zurückgesetzt!"
+
+#: templates/registration/password_reset_complete.html:14
+msgid "You may now"
+msgstr "Sie können jetzt"
+
+#: templates/registration/password_reset_complete.html:14
+#| msgid "Log in"
+msgid "log in"
+msgstr "Login"
+
+#: templates/registration/password_reset_confirm.html:4
+#: templates/registration/password_reset_confirm.html:13
+msgid "Confirm password reset"
+msgstr "Passwort zurücksetzen bestätigen"
+
+#: templates/registration/password_reset_confirm.html:15
+msgid "Enter your new password below to reset your password:"
+msgstr "Geben Sie Ihr neues Passwort ein:"
+
+#: templates/registration/password_reset_confirm.html:29
+msgid "Set password"
+msgstr "Passwort speichern"
+
+#: templates/registration/password_reset_confirm.html:37
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+"Der Link zum Passwort-zurücksetzen ist nicht gültig. Wahrscheinlich wurde er"
+" bereits benutzt. Bitte fragen Sie diesen erneut an."
+
+#: templates/registration/password_reset_done.html:4
+#: templates/registration/password_reset_done.html:10
+msgid "Password reset"
+msgstr "Passwort zurücksetzen"
+
+#: templates/registration/password_reset_done.html:13
+msgid ""
+"\n"
+"    We have sent you an email with a link to reset your password.  Please check\n"
+"    your email and click the link to continue.\n"
+"    "
+msgstr ""
+"\n"
+"Wir haben Ihnen eine Email mit einem Link zum Zurücksetzen Ihres Passwortes gesendet. Bitte öffnen Sie Ihre Email und klicken Sie diesen Link."
+
+#: templates/registration/password_reset_email.html:4
+msgid "Greetings"
+msgstr "Mit besten Grüssen"
+
+#: templates/registration/password_reset_email.html:6
+#, python-format
+msgid ""
+"\n"
+"You are receiving this email because you (or someone pretending to be you)\n"
+"requested that your password be reset on the %(domain)s site.  If you do not\n"
+"wish to reset your password, please ignore this message.\n"
+msgstr ""
+"\n"
+"Sie erhalten diese Email da Sie (oder jemand der vorgibt Sie zu sein) das Zurücksetzen des Passworts auf der Seite %(domain)s angefragt haben. Falls Sie dies nicht waren, ignorieren Sie bitte diese Email.\n"
+
+#: templates/registration/password_reset_email.html:12
+msgid ""
+"\n"
+"To reset your password, please click the following link, or copy and paste it\n"
+"into your web browser:\n"
+msgstr ""
+"\n"
+"Um ihr Passwort zurückzusetzen, klicken Sie bitte den folgenden Link oder kopieren Sie diesen in die Adress-Leiste Ihres Browsers:\n"
+
+#: templates/registration/password_reset_email.html:19
+msgid "Your username, in case you've forgotten:"
+msgstr "Ihr Nutzername, falls Sie Ihn vergessen haben:"
+
+#: templates/registration/password_reset_email.html:22
+msgid "Best regards"
+msgstr "Mit besten Grüssen"
+
+#: templates/registration/password_reset_email.html:23
+msgid "Management"
+msgstr "Team"
+
+#: templates/registration/password_reset_form.html:13
+msgid ""
+"\n"
+"    Forgot your password?  Enter your email in the form below and we'll send you instructions for creating a new one.\n"
+"    "
+msgstr ""
+"\n"
+"Sie haben Ihr Passwort vergessen? Geben Sie Ihre Email in das Formular unten ein. Wir senden Ihnen genauere Instruktionen für die Erstellung eines neuen zu."
 
 #: templates/registration/registration_complete.html:6
 msgid "Registration Complete"

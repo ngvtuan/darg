@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-14 23:41+0000\n"
+"POT-Creation-Date: 2016-01-16 04:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,6 +68,19 @@ msgid "Edit Option Plan"
 msgstr ""
 
 #: templates/base_auth.html:15
+#: templates/registration/password_reset_form.html:4
+#: templates/registration/password_reset_form.html:10
+#: templates/registration/password_reset_form.html:30
+msgid "Reset password"
+msgstr ""
+
+#: templates/base_auth.html:16
+#: templates/registration/password_change_form.html:4
+#: templates/registration/password_change_form.html:10
+msgid "Change password"
+msgstr ""
+
+#: templates/base_auth.html:19
 msgid "The Share Register, 2015"
 msgstr ""
 
@@ -99,12 +112,20 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: templates/registration/login.html:13
+#: templates/registration/login.html:14
 msgid "Not  a member?"
 msgstr ""
 
-#: templates/registration/login.html:13
+#: templates/registration/login.html:15
 msgid "Register"
+msgstr ""
+
+#: templates/registration/login.html:17
+msgid "Password lost?"
+msgstr ""
+
+#: templates/registration/login.html:18
+msgid "Reset Password"
 msgstr ""
 
 #: templates/registration/logout.html:6
@@ -113,6 +134,109 @@ msgstr ""
 
 #: templates/registration/logout.html:7
 msgid "You are now logged out. Go to "
+msgstr ""
+
+#: templates/registration/password_change_done.html:9
+msgid "Password successfully changed!"
+msgstr ""
+
+#: templates/registration/password_change_done.html:12
+msgid "You changed your password. Resume here:"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:4
+msgid "Password reset complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:10
+msgid "Your password reset is complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:13
+msgid "Your password has been reset!"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:14
+msgid "You may now"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:14
+msgid "log in"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:4
+#: templates/registration/password_reset_confirm.html:13
+msgid "Confirm password reset"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:15
+msgid "Enter your new password below to reset your password:"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:29
+msgid "Set password"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:37
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: templates/registration/password_reset_done.html:4
+#: templates/registration/password_reset_done.html:10
+msgid "Password reset"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:13
+msgid ""
+"\n"
+"    We have sent you an email with a link to reset your password.  Please "
+"check\n"
+"    your email and click the link to continue.\n"
+"    "
+msgstr ""
+
+#: templates/registration/password_reset_email.html:4
+msgid "Greetings"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:6
+#, python-format
+msgid ""
+"\n"
+"You are receiving this email because you (or someone pretending to be you)\n"
+"requested that your password be reset on the %(domain)s site.  If you do "
+"not\n"
+"wish to reset your password, please ignore this message.\n"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:12
+msgid ""
+"\n"
+"To reset your password, please click the following link, or copy and paste "
+"it\n"
+"into your web browser:\n"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:19
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:22
+msgid "Best regards"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:23
+msgid "Management"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:13
+msgid ""
+"\n"
+"    Forgot your password?  Enter your email in the form below and we'll send "
+"you instructions for creating a new one.\n"
+"    "
 msgstr ""
 
 #: templates/registration/registration_complete.html:6

@@ -9,9 +9,13 @@
   <div class="container">
     {% block content %}
     {% endblock %}
- 
+
   {% block footer %}
   <footer class="footer">
+    <a href="{% url "auth_password_change" %}" title="{% trans "Reset password" %}" class="btn-inline">
+      {% trans "Change password" %}
+    </a>
+    |
     {% trans "The Share Register, 2015" %} {{VERSION}}
   </footer>
   {% endblock %}

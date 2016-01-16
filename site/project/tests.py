@@ -68,16 +68,17 @@ class TrackingTestCase(TestCase):
 
         user = UserGenerator().generate()
 
-        is_loggedin = self.client.login(username=user.username, password='test')
+        is_loggedin = self.client.login(
+            username=user.username, password='test')
 
         self.assertTrue(is_loggedin)
 
         response = self.client.get(reverse('start'), follow=True)
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue("UA-58468401-4" in response.content)      # tracking code here
-        self.assertTrue("Willkommen" in response.content)         # has welcome
-        self.assertFalse("shareholder_list" in response.content)  # but has not shareholder list yet
+        self.assertTrue("UA-58468401-4" in response.content)
+        self.assertTrue("Willkommen" in response.content)
+        self.assertFalse("shareholder_list" in response.content)
         # self.assertTrue('download/pdf' in response.content)
         # self.assertTrue('download/csv' in response.content)
 
@@ -88,22 +89,24 @@ class TrackingTestCase(TestCase):
         is_operator_added = _add_company_to_user_via_rest(user)
         self.assertTrue(is_operator_added)
 
-        is_loggedin = self.client.login(username=user.username, password='test')
+        is_loggedin = self.client.login(
+            username=user.username, password='test')
 
         self.assertTrue(is_loggedin)
 
         response = self.client.get(reverse('start'), follow=True)
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue("UA-58468401-4" in response.content)  # tracking code here
-        self.assertTrue("Willkommen" in response.content)  # has welcome
-        self.assertTrue("shareholder_list" in response.content)  # has shareholder list yet, but not shown by angular
+        self.assertTrue("UA-58468401-4" in response.content)
+        self.assertTrue("Willkommen" in response.content)
+        self.assertTrue("shareholder_list" in response.content)
 
     def test_start_nonauthorized(self):
 
         user = UserGenerator().generate()
 
-        is_loggedin = self.client.login(username=user.username, password='invalid_pw')
+        is_loggedin = self.client.login(
+            username=user.username, password='invalid_pw')
 
         self.assertFalse(is_loggedin)
 

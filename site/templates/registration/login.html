@@ -10,6 +10,12 @@
     <button>{% trans "Log in" %}</button>
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
-  <!--<p class="comment">{% trans "Not  a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a></p>-->
+  <p class="comment">
+    {% trans "Not  a member?" %}
+    <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>
+    <br />
+    {% trans "Password lost?" %}
+    <a href="{% url 'auth_password_reset' %}" class="btn-inline">{% trans "Reset Password" %}</a>
+  </p>
 </div>
 {% endblock %}

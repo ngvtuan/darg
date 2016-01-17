@@ -1,9 +1,12 @@
 import datetime
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext as _
 from django.utils.text import slugify
 from django.core.mail import mail_managers
+from django.core.mail import send_mail
+
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
@@ -164,6 +167,14 @@ class OperatorSerializer(serializers.HyperlinkedModelSerializer):
             raise ValidationError({'company': _(
                 'You cannot edit this company'
             )})
+
+        # notify
+        send_mail(
+            _('You were added as administrator for {}').format(company.name),
+            _('Dear,\n\nyou have been granted edit privileges for this company on the share register\n\nKind regards\n\nYour Das-Aktienregister Team'),
+            settings.SERVER_EMAIL,
+            [user.email], fail_silently=False)
+
         return Operator.objects.create(user=user, company=company)
 
 

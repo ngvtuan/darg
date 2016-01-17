@@ -159,6 +159,11 @@ class OperatorSerializer(serializers.HyperlinkedModelSerializer):
                 'application. Please ask the user to register first.'
             )})
         company = validated_data.get('company')
+        myself = self.context.get("request").user
+        if not myself.operator_set.filter(company=company):
+            raise ValidationError({'company': _(
+                'You cannot edit this company'
+            )})
         return Operator.objects.create(user=user, company=company)
 
 

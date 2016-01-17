@@ -54,7 +54,7 @@
   {% if company.operator_set.exists %}
     <h2>
       {% trans "Administrators" %}
-      <a ng-click="toggle_add_operator_form()" title="{% trans "add operator" %}" class="btn-inline" ng-hide="show_add_operator_form">
+      <a ng-click="toggle_add_operator_form()" title="{% trans "add operator" %}" class="btn-inline toggle-add-operator-form" ng-hide="show_add_operator_form">
         +
       </a>
     </h2>
@@ -62,7 +62,7 @@
     {% include "_add_operator_form.html" %}
 
     {% verbatim %}
-    <table class="table table-striped">
+    <table class="table table-striped operators">
       <tr ng-repeat="operator in operators">
         <td>
           {{ operator.user.first_name }} {{ operator.user.last_name }}
@@ -71,7 +71,7 @@
           {{operator.user.email}}
         </td>
         <td>
-          <span ng-hide="operator.is_myself" ng-click="delete_operator(operator.id)">
+          <span ng-hide="operator.is_myself" ng-click="delete_operator(operator.id)" class="remove-operator">
             <span class="el-icon-remove-circle"></span>
           </span>
         </td>

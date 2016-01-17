@@ -2,8 +2,8 @@
 
 <div class="navbar">
   {% if request.user.is_superuser %}
-  <a href="{% url 'admin:index' %}" class="pull-right">{% trans "Admin" %}</a>
-  <a href="/rosetta/" class="pull-right">{% trans "I18N" %}</a>
+  <a href="{% url 'admin:index' %}" class="pull-right" target="_blank">{% trans "Admin" %}</a>
+  <a href="/rosetta/" class="pull-right" target="_blank">{% trans "I18N" %}</a>
   {% endif %}
   <a href="{% url "auth_logout" %}" class="pull-right">{% trans "Logout" %}</a>
   <a href="{% url "options" %}" class="pull-right">{% trans "Options" %}</a>

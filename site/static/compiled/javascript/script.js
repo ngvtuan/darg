@@ -57,6 +57,14 @@
     }
   ]);
 
+  app.factory('Operator', [
+    '$resource', function($resource) {
+      return $resource('/services/rest/operators/:id', {
+        id: '@id'
+      });
+    }
+  ]);
+
   app.factory('OptionPlan', [
     '$resource', function($resource) {
       return $resource('/services/rest/optionplan/:id', {
@@ -102,7 +110,12 @@
   app = angular.module('js.darg.app.company', ['js.darg.api', 'xeditable']);
 
   app.controller('CompanyController', [
-    '$scope', '$http', 'Company', 'Country', function($scope, $http, Company, Country) {
+    '$scope', '$http', 'Company', 'Country', 'Operator', function($scope, $http, Company, Country, Operator) {
+      $scope.operators = [];
+      $scope.company = null;
+      $scope.errors = null;
+      $scope.show_add_operator_form = false;
+      $scope.newOperator = new Operator();
       $http.get('/services/rest/company/' + company_id).then(function(result) {
         $scope.company = new Company(result.data);
         return $http.get($scope.company.country).then(function(result1) {
@@ -112,14 +125,44 @@
       $http.get('/services/rest/country').then(function(result) {
         return $scope.countries = result.data.results;
       });
+      $http.get('/services/rest/operators').then(function(result) {
+        return $scope.operators = result.data.results;
+      });
+      $scope.toggle_add_operator_form = function() {
+        if ($scope.show_add_operator_form) {
+          return $scope.show_add_operator_form = false;
+        } else {
+          return $scope.show_add_operator_form = true;
+        }
+      };
+      $scope.delete_operator = function(pk) {
+        return $http["delete"]('/services/rest/operators/' + pk).then(function() {
+          return $http.get('/services/rest/operators').then(function(result) {
+            return $scope.operators = result.data.results;
+          });
+        });
+      };
+      $scope.add_operator = function() {
+        $scope.newOperator.company = $scope.company.url;
+        return $scope.newOperator.$save().then(function(result) {
+          return $http.get('/services/rest/operators').then(function(result) {
+            return $scope.operators = result.data.results;
+          });
+        }).then(function() {
+          return $scope.newOperator = new Operator();
+        }).then(function() {
+          return $scope.errors = null;
+        }, function(rejection) {
+          return $scope.errors = rejection.data;
+        });
+      };
       return $scope.edit_company = function() {
         $scope.company.country = $scope.company.country.url;
         return $scope.company.$update().then(function(result) {
           $scope.company = new Company(result);
-          $http.get($scope.company.country).then(function(result1) {
+          return $http.get($scope.company.country).then(function(result1) {
             return $scope.company.country = result1.data;
           });
-          return console.log($scope.company);
         }).then(function() {
           return void 0;
         }).then(function() {

@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-16 04:25+0000\n"
-"PO-Revision-Date: 2016-01-16 04:34+0000\n"
-"Last-Translator:   <jirka@tschitschereengreen.com>\n"
+"POT-Creation-Date: 2016-01-17 07:37+0000\n"
+"PO-Revision-Date: 2016-01-17 07:40+0000\n"
+"Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,6 +18,20 @@ msgstr ""
 "Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
+
+#: company/templates/_add_operator_form.html:4
+msgid "To add a new operator enter the email of a registered user"
+msgstr ""
+"Fügen Sie die Email eines bereits registrierten Nutzers ein, um diesen als "
+"Administrator für dieses Unternehmen anzulegen."
+
+#: company/templates/_add_operator_form.html:13
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: company/templates/_add_operator_form.html:14
+msgid "Add Operator"
+msgstr "Administrator hinzufügen"
 
 #: company/templates/company.html:13
 msgid "Company Details for"
@@ -44,31 +58,30 @@ msgid "Securities"
 msgstr "Aktienart"
 
 #: company/templates/company.html:48
-msgid "Add Security"
-msgstr "Aktienklasse hinzufügen"
+msgid "Please contact us at our"
+msgstr "Bitte kontaktieren Sie uns unter"
 
-#: company/templates/company.html:49
-msgid ""
-"Please contact us at our <a href=\"mailto:jirka.schaefer@das-"
-"aktienregister.ch\">customer service desk</a> for getting more security "
-"types added"
-msgstr ""
-"Bitte kontaktieren Sie unseren <a href=\"mailto:jirka.schaefer@das-"
-"aktienregister.ch\">Kunden-Support</a> um mehr Aktienarten hinzuzufügen."
+#: company/templates/company.html:50
+msgid "for getting more security types added"
+msgstr "um mehr Wertpapierarten zu erhalten."
 
-#: company/templates/company.html:54
+#: company/templates/company.html:56
 msgid "Administrators"
 msgstr "Administratoren"
 
-#: company/templates/company.html:66
+#: company/templates/company.html:57
+msgid "add operator"
+msgstr "Administrator hinzufügen"
+
+#: company/templates/company.html:86
 msgid "Option Plans"
 msgstr "Optionsplan"
 
-#: company/templates/company.html:70
+#: company/templates/company.html:90
 msgid "Options Plan Name"
 msgstr "Name des Optionsplanes"
 
-#: company/templates/company.html:70
+#: company/templates/company.html:90
 msgid "Edit Option Plan"
 msgstr "Optionsplan editieren"
 
@@ -166,7 +179,6 @@ msgid "You may now"
 msgstr "Sie können jetzt"
 
 #: templates/registration/password_reset_complete.html:14
-#| msgid "Log in"
 msgid "log in"
 msgstr "Login"
 
@@ -359,3 +371,14 @@ msgstr "Links"
 #: templates/zinnia/skeleton.html:74 templates/zinnia/skeleton.html.py:75
 msgid "Weblog index"
 msgstr "Blog Start"
+
+#~ msgid "Add Security"
+#~ msgstr "Aktienklasse hinzufügen"
+
+#~ msgid ""
+#~ "Please contact us at our <a href=\"mailto:jirka.schaefer@das-"
+#~ "aktienregister.ch\">customer service desk</a> for getting more security "
+#~ "types added"
+#~ msgstr ""
+#~ "Bitte kontaktieren Sie unseren <a href=\"mailto:jirka.schaefer@das-"
+#~ "aktienregister.ch\">Kunden-Support</a> um mehr Aktienarten hinzuzufügen."

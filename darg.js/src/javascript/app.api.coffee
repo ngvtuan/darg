@@ -24,6 +24,10 @@ app.factory 'Position', ['$resource', ($resource) ->
     $resource '/services/rest/position/:id', id: '@id'
 ]
 
+app.factory 'Operator', ['$resource', ($resource) ->
+    $resource '/services/rest/operators/:id', id: '@id'
+]
+
 app.factory 'OptionPlan', ['$resource', ($resource) ->
     $resource '/services/rest/optionplan/:id', id: '@id'
 ]

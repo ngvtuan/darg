@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-16 04:25+0000\n"
+"POT-Creation-Date: 2016-01-17 07:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: services/rest/serializers.py:158 services/rest/serializers.py:201
+#: services/rest/serializers.py:158
+msgid ""
+"User not yet registered with this application. Please ask the user to "
+"register first."
+msgstr ""
+
+#: services/rest/serializers.py:184 services/rest/serializers.py:227
 msgid "Email missing"
 msgstr ""
 
-#: services/rest/serializers.py:204
+#: services/rest/serializers.py:230
 msgid "First Name missing"
 msgstr ""
 
-#: services/rest/serializers.py:207
+#: services/rest/serializers.py:233
 msgid "Last Name missing"
 msgstr ""
 
-#: services/rest/serializers.py:212
+#: services/rest/serializers.py:238
 msgid "Shareholder Number must be unique"
 msgstr ""
 
-#: services/rest/serializers.py:392
+#: services/rest/serializers.py:418
 msgid "Not a pdf file."
 msgstr ""
 

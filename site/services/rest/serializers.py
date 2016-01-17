@@ -50,19 +50,6 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
         fields = ('pk', 'name', 'share_count', 'country', 'url',
                   'shareholder_count')
 
-    """
-    def update(self, validated_data):
-
-        name = validated_data.get("name")
-        user = self.context.get("request").user
-
-        company, created = Company.objects.get_or_create(name=name)
-        operator, created = Operator.objects.get_or_create(company=company,
-                                                           user=user)
-
-        return company
-    """
-
 
 class AddCompanySerializer(serializers.Serializer):
 
@@ -118,14 +105,6 @@ class SecuritySerializer(serializers.HyperlinkedModelSerializer):
         return obj.get_title_display()
 
 
-class OperatorSerializer(serializers.HyperlinkedModelSerializer):
-    company = CompanySerializer(many=False, read_only=True)
-
-    class Meta:
-        model = Operator
-        fields = ('id', 'company')
-
-
 class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
     """ serialize additional user data """
     # country = CountrySerializer(many=False)
@@ -134,6 +113,53 @@ class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
         model = UserProfile
         fields = ('street', 'city', 'province', 'postal_code', 'country',
                   'birthday', 'company_name')
+
+
+class UserWithEmailOnlySerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name')
+        read_only_fields = ('first_name', 'last_name',)
+
+
+class OperatorSerializer(serializers.HyperlinkedModelSerializer):
+    # company = CompanySerializer(many=False, read_only=True)
+    company = serializers.HyperlinkedRelatedField(
+        many=False,
+        read_only=False,
+        view_name='company-detail',
+        queryset=Company.objects.all(),
+    )
+    is_myself = serializers.SerializerMethodField()
+    user = UserWithEmailOnlySerializer()
+
+    class Meta:
+        model = Operator
+        fields = (
+            'id',
+            'company',
+            'is_myself',
+            'user',
+        )
+
+    def get_is_myself(self, obj):
+        return obj.user == self.context.get("request").user
+
+    def create(self, validated_data):
+        """ create new operator """
+        if User.objects.filter(
+            email=validated_data.get('user').get('email')
+        ).exists():
+            user = User.objects.get(
+                email=validated_data.get('user').get('email'))
+        else:
+            raise ValidationError({'email': _(
+                'User not yet registered with this '
+                'application. Please ask the user to register first.'
+            )})
+        company = validated_data.get('company')
+        return Operator.objects.create(user=user, company=company)
 
 
 class UserWithEmailOnlySerializer(serializers.HyperlinkedModelSerializer):

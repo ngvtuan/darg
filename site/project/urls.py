@@ -11,10 +11,11 @@ from rest_framework.authtoken import views
 
 from services.rest.views import ShareholderViewSet, CompanyViewSet, UserViewSet, PositionViewSet, \
     InviteeUpdateView, AddCompanyView, CountryViewSet, OptionPlanViewSet, \
-    SecurityViewSet, OptionTransactionViewSet
+    SecurityViewSet, OptionTransactionViewSet, OperatorViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'shareholders', ShareholderViewSet, base_name="shareholders")
+router.register(r'operators', OperatorViewSet, base_name="operators")
 router.register(r'company', CompanyViewSet)
 router.register(r'user', UserViewSet, base_name="user")
 router.register(r'position', PositionViewSet, base_name="position")

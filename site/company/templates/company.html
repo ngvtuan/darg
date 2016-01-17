@@ -8,12 +8,12 @@
 <!-- required for angular API call -->
 <script>var company_id = {{ company.id}}</script>
 
-<div ng_controller="CompanyController">
+<div ng_controller="CompanyController" id="company">
 
   <h1>{% trans "Company Details for" %} {% verbatim %}{{ company.name }}{% endverbatim %}</h1>
 
   {% include "_form_errors.html" %}
-  
+
   <h2>{% trans "Data" %}</h2>
   <table class="table table-striped">
     <tr>
@@ -29,7 +29,7 @@
       <td>
       {% verbatim %}
         <span editable-select="company.country" onaftersave="edit_company()" e-ng-options="c as c.name for c in countries">
-          {{ company.country.name || 'empty' }} 
+          {{ company.country.name || 'empty' }}
           <span class="el-icon-pencil"></span>
         </span>
       {% endverbatim %}
@@ -45,22 +45,42 @@
        <tr><td>{{ security.get_title_display}} </td><td>{{security.count}}</td></tr>
     {% endfor %}
     </table>
-    <!-- <a href="" title="">{% trans "Add Security" %}</a>-->
-    {% trans 'Please contact us at our <a href="mailto:jirka.schaefer@das-aktienregister.ch">customer service desk</a> for getting more security types added' %}
+    {% trans 'Please contact us at our' %}
+    <a href="mailto:jirka.schaefer@das-aktienregister.ch" class="btn-inline">customer service desk</a>
+    {% trans 'for getting more security types added' %}
   {% endif %}
 
   <!-- ADMINS -->
   {% if company.operator_set.exists %}
-    <h2>{% trans "Administrators" %}</h2>
+    <h2>
+      {% trans "Administrators" %}
+      <a ng-click="toggle_add_operator_form()" title="{% trans "add operator" %}" class="btn-inline" ng-hide="show_add_operator_form">
+        +
+      </a>
+    </h2>
 
+    {% include "_add_operator_form.html" %}
+
+    {% verbatim %}
     <table class="table table-striped">
-    {% for operator in company.operator_set.all %}
-      <tr><td>{{ operator.user.first_name }} {{ operator.user.last_name }} </td><td>{{operator.user.email}}</td></tr>
-    {% endfor %}
+      <tr ng-repeat="operator in operators">
+        <td>
+          {{ operator.user.first_name }} {{ operator.user.last_name }}
+        </td>
+        <td>
+          {{operator.user.email}}
+        </td>
+        <td>
+          <span ng-hide="operator.is_myself" ng-click="delete_operator(operator.id)">
+            <span class="el-icon-remove-circle"></span>
+          </span>
+        </td>
+      </tr>
     </table>
+    {% endverbatim %}
 
   {% endif %}
- 
+
   <!-- OPTIONS -->
   {% if company.optionplan_set.exists %}
     <h2>{% trans "Option Plans" %}</h2>
@@ -71,7 +91,7 @@
     {% endfor %}
     </table>
 
-  {% endif %}  
-    
-</div> 
+  {% endif %}
+
+</div>
 {% endblock %}

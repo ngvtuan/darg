@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.http import Http404
 
 from rest_framework import viewsets
 from rest_framework.views import APIView
@@ -7,15 +8,17 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.decorators import detail_route
 
-from services.rest.serializers import ShareholderSerializer, CompanySerializer, UserSerializer, \
-    PositionSerializer, AddCompanySerializer, UserWithEmailOnlySerializer, CountrySerializer, \
-    OptionPlanSerializer, OptionTransactionSerializer, SecuritySerializer
+from services.rest.serializers import (
+    ShareholderSerializer, CompanySerializer, UserSerializer,
+    PositionSerializer, AddCompanySerializer, UserWithEmailOnlySerializer,
+    CountrySerializer, OptionPlanSerializer, OptionTransactionSerializer,
+    SecuritySerializer, OperatorSerializer)
 from services.rest.permissions import UserCanAddCompanyPermission, \
     SafeMethodsOnlyPermission, UserCanAddShareholderPermission, UserCanAddPositionPermission,\
     UserCanEditCompanyPermission, \
-    UserCanAddOptionTransactionPermission
+    UserCanAddOptionTransactionPermission, UserIsOperatorPermission
 from shareholder.models import Shareholder, Company, Position, Country, OptionPlan, \
-    OptionTransaction, Security
+    OptionTransaction, Security, Operator
 
 User = get_user_model()
 
@@ -34,6 +37,41 @@ class ShareholderViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return Shareholder.objects.filter(company__operator__user=user)\
             .distinct()
+
+
+class OperatorViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    # FIXME filter by user perms
+    serializer_class = OperatorSerializer
+    permission_classes = [
+        UserIsOperatorPermission,
+    ]
+
+    def get_object(self, pk):
+        try:
+            return Operator.objects.get(pk=pk)
+        except Operator.DoesNotExist:
+            raise Http404
+
+    def get_queryset(self):
+        user = self.request.user
+        return Operator.objects.filter(company__operator__user=user)\
+            .distinct()
+
+    def destroy(self, request, pk=None):
+        operator = self.get_object(pk)
+        company_ids = request.user.operator_set.all().values_list(
+            'company__id', flat=True).distinct()
+        # cannot remove himself
+        if operator not in request.user.operator_set.all():
+            # user can only edit corps he manages
+            if operator.company.id in company_ids:
+                operator.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+        # else:
+        return Response(status=status.HTTP_403_FORBIDDEN)
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
@@ -88,8 +126,8 @@ class CountryViewSet(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
-        users = Country.objects.all()
-        return users
+        countries = Country.objects.all()
+        return countries
 
 
 class InviteeUpdateView(APIView):

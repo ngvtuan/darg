@@ -7,7 +7,92 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-from shareholder.generators import OperatorGenerator
+from shareholder.generators import (
+    OperatorGenerator, UserGenerator
+)
+from shareholder.models import Operator
+
+
+class OperatorTestCase(TestCase):
+
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_add_operator(self):
+        operator = OperatorGenerator().generate()
+        user = operator.user
+        company = operator.company
+        user2 = UserGenerator().generate()
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        data = {
+            "user": {
+                "email": user2.email
+            },
+            "company": "http://codingmachine:9000/services/rest/company/"
+            "{}".format(company.pk)
+        }
+
+        self.assertFalse(user2.operator_set.filter(company=company).exists())
+
+        response = self.client.post(
+            '/services/rest/operators',
+            data,
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
+                user.auth_token.key), 'format': 'json'})
+
+        self.assertEqual(response.status_code, 201)
+        self.assertTrue(user2.operator_set.filter(company=company).exists())
+
+    def test_delete_operator(self):
+        operator = OperatorGenerator().generate()
+        operator2 = OperatorGenerator().generate(company=operator.company)
+        user = operator.user
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        response = self.client.delete(
+            '/services/rest/operators/{}'.format(operator2.pk),
+            {},
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
+                user.auth_token.key), 'format': 'json'})
+
+        self.assertEqual(response.status_code, 204)
+        self.assertFalse(Operator.objects.filter(pk=operator2.pk).exists())
+
+    def test_delete_operator_other_company(self):
+        operator = OperatorGenerator().generate()
+        operator2 = OperatorGenerator().generate()
+        user = operator.user
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        response = self.client.delete(
+            '/services/rest/operators/{}'.format(operator2.pk),
+            {},
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
+                user.auth_token.key), 'format': 'json'})
+
+        self.assertEqual(response.status_code, 403)
+
+    def test_delete_operator_myself(self):
+        operator = OperatorGenerator().generate()
+        user = operator.user
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        response = self.client.delete(
+            '/services/rest/operators/{}'.format(operator.pk),
+            {},
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
+                user.auth_token.key), 'format': 'json'})
+
+        self.assertEqual(response.status_code, 403)
 
 
 class ShareholderTestCase(TestCase):

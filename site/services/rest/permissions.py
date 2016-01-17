@@ -26,7 +26,19 @@ class UserCanEditCompanyPermission(permissions.BasePermission):
         if obj is None:
             # Either a list or a create, so no author
             can_add = True
-        return can_add or super(UserCanEditCompanyPermission, self).has_object_permission(request, view, obj)
+        return can_add or super(
+            UserCanEditCompanyPermission, self
+        ).has_object_permission(request, view, obj)
+
+
+class UserIsOperatorPermission(permissions.BasePermission):
+    """
+    Only operators of the same company may edit
+    """
+    def has_object_permission(self, request, view, obj=None):
+
+        return request.user.operator_set.filter(company=obj.company).exists()
+
 
 class UserCanAddShareholderPermission(SafeMethodsOnlyPermission):
     """Allow everyone to add a company"""

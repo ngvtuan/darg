@@ -58,7 +58,6 @@ INSTALLED_APPS = (
     'company',
     'project',
     'utils',
-
 )
 
 MIDDLEWARE_CLASSES = (
@@ -256,4 +255,4 @@ SENDFILE_URL = "/media/private"
 try:
     from project.settings.local import *
 except ImportError:
-    pass
+    print "no local conf"

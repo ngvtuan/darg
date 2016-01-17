@@ -19,9 +19,12 @@ class BaseSeleniumTestCase(LiveServerTestCase):
         email = EmailMessage(
             '[vbnet] FE Test failed',
             'FE Test failed. See attached screenshot\n\n'
-            'stacktrace:\n\n%s' % traceback.format_exc(),
-            'no-reply@homesforrefugees.de',
-            # [e[1] for e in settings.ADMINS])
+            'stacktrace:\n\n%s\n\nbrowser log:\n%s\n\nurl: %s' % (
+                traceback.format_exc(),
+                self.selenium.get_log('browser'),
+                self.selenium.current_url
+            ),
+            'no-reply@vermieter-bewertung.net',
             ('jirka.schaefer@tschitschereengreen.com',),
             [],
             get_connection('django.core.mail.backends.smtp.EmailBackend'),
@@ -38,7 +41,7 @@ class BaseSeleniumTestCase(LiveServerTestCase):
             print entry
 
         # print python exception
-        print "Python Exception: ", str(e), traceback.format_exc()
+        print u"Python Exception: {}".format(e), traceback.format_exc()
 
         self._screenshot()  # make screenshot
 

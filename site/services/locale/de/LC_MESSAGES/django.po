@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 07:37+0000\n"
-"PO-Revision-Date: 2016-01-17 07:38+0000\n"
+"POT-Creation-Date: 2016-01-17 14:41+0000\n"
+"PO-Revision-Date: 2016-01-17 14:45+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
-#: services/rest/serializers.py:158
+#: services/rest/serializers.py:161
 msgid ""
 "User not yet registered with this application. Please ask the user to "
 "register first."
@@ -27,24 +27,50 @@ msgstr ""
 "Dieser Nutzer ist noch nicht registriert. Bitten Sie ihn dieser mit der "
 "angegebenen Email nachzuholen."
 
-#: services/rest/serializers.py:184 services/rest/serializers.py:227
+#: services/rest/serializers.py:168
+msgid "You cannot edit this company"
+msgstr "Sie können dieses Unternehmen nicht bearbeiten."
+
+#: services/rest/serializers.py:173
+msgid "You were added as administrator for {}"
+msgstr "Sie wurden als Administrator für das Unternehmen \"{}\" hinzugefügt."
+
+#: services/rest/serializers.py:174
+msgid ""
+"Dear,\n"
+"\n"
+"you have been granted edit privileges for this company on the share register\n"
+"\n"
+"Kind regards\n"
+"\n"
+"Your Das-Aktienregister Team"
+msgstr ""
+"Liebe(r) Nutzer(In),\n"
+"\n"
+"Ihnen wurden gerade Bearbeitungsrechte für dieses Unternehmen im Aktienregister eingerichtet.\n"
+"\n"
+"Mit besten Grüssen\n"
+"\n"
+"Das Aktienregister Team"
+
+#: services/rest/serializers.py:200 services/rest/serializers.py:243
 msgid "Email missing"
 msgstr "Bitte geben Sie eine gültige Email ein."
 
-#: services/rest/serializers.py:230
+#: services/rest/serializers.py:246
 msgid "First Name missing"
 msgstr "Bitte geben Sie eine gültigen Vornamen ein."
 
-#: services/rest/serializers.py:233
+#: services/rest/serializers.py:249
 msgid "Last Name missing"
 msgstr "Bitte geben Sie eine gültigen Nachnamen ein."
 
-#: services/rest/serializers.py:238
+#: services/rest/serializers.py:254
 msgid "Shareholder Number must be unique"
 msgstr ""
 "Diese Aktionärsnummer wird bereits verwendet. Bitte wählen Sie eine andere."
 
-#: services/rest/serializers.py:418
+#: services/rest/serializers.py:434
 msgid "Not a pdf file."
 msgstr "Falsches Dateiformat. Nur PDF ist erlaubt."
 

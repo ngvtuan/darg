@@ -190,7 +190,7 @@ class UserWithEmailOnlySerializer(serializers.HyperlinkedModelSerializer):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     operator_set = OperatorSerializer(many=True, read_only=True)
-    userprofile = UserProfileSerializer(many=False, required=False)
+    userprofile = UserProfileSerializer(many=False, required=False, allow_null=True)
 
     class Meta:
         model = User
@@ -271,6 +271,9 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
                 "last_name": validated_data.get("user").get("last_name"),
             })
 
+        if not hasattr(shareholder_user, 'userprofile'):
+            shareholder_user.userprofile = UserProfile.objects.create()
+
         if not created:
             if not shareholder_user.first_name:
                 shareholder_user.first_name = validated_data.get(
@@ -319,10 +322,6 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
         shareholder.save()
         return shareholder
 
-    def validate(self, attrs):
-        print attrs
-        return attrs
-
 
 class PositionSerializer(serializers.HyperlinkedModelSerializer):
     buyer = ShareholderSerializer(many=False, required=False)
@@ -334,7 +333,7 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer):
         model = Position
         fields = (
             'pk', 'buyer', 'seller', 'bought_at', 'count', 'value',
-            'security')
+            'security', 'comment')
         validators = [DependedFieldsValidator(fields=('seller', 'buyer'))]
 
     def create(self, validated_data):
@@ -380,6 +379,7 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer):
             "value": validated_data.get("value"),
             "count": validated_data.get("count"),
             "security": security,
+            "comment": validated_data.get("comment"),
         })
 
         position = Position.objects.create(**kwargs)

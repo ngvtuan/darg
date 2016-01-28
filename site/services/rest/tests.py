@@ -326,7 +326,8 @@ class ShareholderTestCase(TestCase):
                 self.assertEqual(getattr(userprofile, k).pk, v[-2:])
                 continue
             if k == 'birthday':
-                self.assertEqual(getattr(userprofile, k).strftime('%Y-%m-%d'), v)
+                self.assertEqual(
+                    getattr(userprofile, k).strftime('%Y-%m-%d'), v)
                 continue
             self.assertEqual(getattr(userprofile, k), v)
 

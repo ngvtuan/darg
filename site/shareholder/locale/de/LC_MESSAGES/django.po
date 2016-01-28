@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-28 20:17+0000\n"
-"PO-Revision-Date: 2016-01-28 20:19+0000\n"
+"PO-Revision-Date: 2016-01-28 20:27+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -168,7 +168,7 @@ msgstr "Noch keine Transaktionen"
 
 #: shareholder/templates/shareholder.html:15
 msgid "Shareholder Details"
-msgstr "Aktionaersdetails"
+msgstr "Aktionärsdetails"
 
 #: shareholder/templates/shareholder.html:17
 msgid ""
@@ -180,7 +180,7 @@ msgstr ""
 
 #: shareholder/templates/shareholder.html:21
 msgid "Shareholder Data"
-msgstr "Aktionaersdaten"
+msgstr "Aktionärsdaten"
 
 #: shareholder/templates/shareholder.html:29
 msgid "Please request the shareholder to complete his data."

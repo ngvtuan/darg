@@ -14,7 +14,7 @@ from services.rest.serializers import (
     CountrySerializer, OptionPlanSerializer, OptionTransactionSerializer,
     SecuritySerializer, OperatorSerializer)
 from services.rest.permissions import UserCanAddCompanyPermission, \
-    SafeMethodsOnlyPermission, UserCanAddShareholderPermission, UserCanAddPositionPermission,\
+    SafeMethodsOnlyPermission, UserCanAddPositionPermission,\
     UserCanEditCompanyPermission, \
     UserCanAddOptionTransactionPermission, UserIsOperatorPermission
 from shareholder.models import Shareholder, Company, Position, Country, OptionPlan, \

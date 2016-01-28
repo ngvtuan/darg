@@ -190,7 +190,7 @@ class UserWithEmailOnlySerializer(serializers.HyperlinkedModelSerializer):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     operator_set = OperatorSerializer(many=True, read_only=True)
-    userprofile = UserProfileSerializer(many=False)
+    userprofile = UserProfileSerializer(many=False, required=False)
 
     class Meta:
         model = User

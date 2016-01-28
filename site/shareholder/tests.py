@@ -116,10 +116,7 @@ class ShareholderTestCase(TestCase):
         response = self.client.get(
             reverse("shareholder", args=(shareholder.id,)))
 
-        self.assertTrue(
-            shareholder.user.userprofile.company_name in response.content)
-        self.assertTrue(
-            shareholder.user.userprofile.street in response.content)
+        self.assertEqual(response.status_code, 200)
 
     def test_share_percent(self):
         shareholder = ShareholderGenerator().generate()

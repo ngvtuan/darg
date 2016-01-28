@@ -154,6 +154,7 @@ class PositionViewSet(viewsets.ModelViewSet):
     serializer_class = PositionSerializer
     permission_classes = [
         UserCanAddPositionPermission,
+        UserIsOperatorPermission,
     ]
 
     def get_queryset(self):

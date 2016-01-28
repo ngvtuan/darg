@@ -9,7 +9,7 @@
   {% include "_form_errors.html" %}
 
   <div class="panel">
-    <a class="btn align-left" href="" ng-click="show_add_position_form()">{% trans "Transfer Shares" %}</a> 
+    <a class="btn align-left" href="" ng-click="show_add_position_form()">{% trans "Transfer Shares" %}</a>
     <a class="btn" href="" ng-click="show_add_capital_form()">{% trans "Increase Kapital" %}</a>
   </div>
 
@@ -19,8 +19,8 @@
   <div id="add_capital" ng-hide="!show_add_capital">
     {% include "_add_capital_form.html" %}
   </div>
-  
-  <div id="positions" ng-hide="!positions.length"> 
+
+  <div id="positions" ng-hide="!positions.length">
     <h2>{% trans "Your Positions" %}</h2>
     <table class="table table-hover">
       <caption></caption>
@@ -32,6 +32,7 @@
           <th class="text-right">{% trans "Share Count" %}</th>
           <th class="text-right">{% trans "Price" %}</th>
           <th>{% trans "Seller" %}</th>
+          <th>{% trans "Comment" %}</th>
       </thead
       <tbody>
       {% verbatim %}
@@ -42,6 +43,7 @@
         <td class="text-right">{{ position.count }}</td>
         <td class="text-right">{{ position.value }}</td>
         <td>{{ position.seller.user.first_name }} {{ position.seller.user.last_name }}</td>
+        <td>{{ position.comment }}</td>
       </tr>
       </tbody>
     </table>
@@ -52,5 +54,5 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
 {% endblock %}

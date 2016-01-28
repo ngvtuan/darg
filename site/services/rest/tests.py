@@ -120,6 +120,97 @@ class OperatorTestCase(TestCase):
         self.assertFalse(Operator.objects.filter(pk=operator2.pk).exists())
 
 
+class PositionTestCase(TestCase):
+
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_add_position(self):
+        """ test that we can add a position """
+
+        operator = OperatorGenerator().generate()
+        user = operator.user
+
+        buyer = ShareholderGenerator().generate(company=operator.company)
+        seller = ShareholderGenerator().generate(company=operator.company)
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        data = {
+            "bought_at": "2016-01-01T00:00:00.000Z",
+            "buyer": {
+                "pk": buyer.pk,
+                "user": {
+                    "first_name": buyer.user.first_name,
+                    "last_name": buyer.user.last_name,
+                    "email": buyer.user.email,
+                    "operator_set": [],
+                    "userprofile": None,
+                },
+                "number": "0",
+                "company": {
+                    "pk": operator.company.pk,
+                    "name": operator.company.name,
+                    "share_count": operator.company.share_count,
+                    "country": "",
+                    "url": "http://codingmachine:9000/services/rest/"
+                           "company/{}".format(operator.company.pk),
+                    "shareholder_count": 2
+                },
+                "share_percent": "99.90",
+                "share_count": 100002,
+                "share_value": 1000020,
+                "validate_gafi": {
+                    "is_valid": True,
+                    "errors": []
+                }
+            },
+            "security": {
+                "pk": 2,
+                "readable_title": "Preferred Stock",
+                "title": "P"
+            },
+            "count": 1,
+            "value": 1,
+            "seller": {
+                "pk": seller.pk,
+                "user": {
+                    "first_name": seller.user.first_name,
+                    "last_name": seller.user.last_name,
+                    "email": seller.user.email,
+                    "operator_set": [],
+                    "userprofile": None
+                },
+                "number": "0",
+                "company": {
+                    "pk": 5,
+                    "name": "LieblingzWaldCompany AG",
+                    "share_count": 100100,
+                    "country": "",
+                    "url": "http://codingmachine:9000/services/rest/company/5",
+                    "shareholder_count": 2
+                },
+                "share_percent": "99.90",
+                "share_count": 100002,
+                "share_value": 1000020,
+                "validate_gafi": {
+                    "is_valid": True,
+                    "errors": []
+                }
+            },
+            "comment": "sdfg"
+        }
+
+        response = self.client.post(
+            '/services/rest/position',
+            data,
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
+                user.auth_token.key), 'format': 'json'})
+
+        self.assertEqual(response.status_code, 201)
+
+
 class ShareholderTestCase(TestCase):
 
     def setUp(self):

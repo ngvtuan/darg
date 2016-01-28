@@ -11,6 +11,7 @@
       <select class="form-control" ng-model="newPosition.security" ng-options="security as security.readable_title for security in securities" placeholder="Security">
         <option value='' disabled>{% endverbatim %}{% trans "Security" %}{% verbatim %}</option>
       </select>
+      <input type="text" class="form-control" ng-model="newPosition.comment" placeholder="Comment">
     </div>
     <div class="form-group">
       <button class="btn btn-default" ng-click="hide_form()">{% endverbatim %}{% trans "Cancel" %}{% verbatim %}</button>

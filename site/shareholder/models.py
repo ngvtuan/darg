@@ -51,13 +51,13 @@ class UserProfile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, blank=True, null=True)
     street = models.CharField(max_length=255, blank=True, null=True)
-    city = models.CharField(max_length=255)
+    city = models.CharField(max_length=255, blank=True, null=True)
     province = models.CharField(max_length=255, blank=True, null=True)
-    postal_code = models.CharField(max_length=255)
-    country = models.ForeignKey(Country, blank=False)
+    postal_code = models.CharField(max_length=255, blank=True, null=True)
+    country = models.ForeignKey(Country, blank=False, null=True)
 
     company_name = models.CharField(max_length=255, blank=True, null=True)
-    birthday = models.DateField()
+    birthday = models.DateField(blank=True, null=True)
 
     def __unicode__(self):
         return "%s, %s %s" % (self.city, self.province,
@@ -74,8 +74,7 @@ class Shareholder(models.Model):
     number = models.CharField(max_length=255)
 
     def __str__(self):
-        return u"{} {} ({})".format(
-            self.user.first_name, self.user.last_name, self.number)
+        return u'{}'.format(self.id)
 
     def share_percent(self):
         """ returns percentage of shares owned compared to corps
@@ -180,6 +179,7 @@ class Position(models.Model):
     bought_at = models.DateField()
     value = models.DecimalField(max_digits=8, decimal_places=4, blank=True,
                                 null=True)
+    comment = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -234,7 +234,8 @@ class OptionPlan(models.Model):
         if not self.pdf_file:
             return None
         # needs timestamp to trigger reload
-        return "/optionsplan/{}/download/img/?t={}".format(self.pk, time.time())
+        return "/optionsplan/{}/download/img/?t={}".format(
+            self.pk, time.time())
 
     def pdf_file_url(self):
         if not self.pdf_file:

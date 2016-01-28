@@ -10,9 +10,9 @@ User = get_user_model()
 
 from shareholder.generators import (
     OperatorGenerator, UserGenerator, CompanyGenerator,
-    ShareholderGenerator
+    ShareholderGenerator, TwoInitialSecuritiesGenerator
 )
-from shareholder.models import Operator, Shareholder
+from shareholder.models import Operator, Shareholder, Position
 
 
 class OperatorTestCase(TestCase):
@@ -133,6 +133,7 @@ class PositionTestCase(TestCase):
 
         buyer = ShareholderGenerator().generate(company=operator.company)
         seller = ShareholderGenerator().generate(company=operator.company)
+        TwoInitialSecuritiesGenerator().generate(company=operator.company)
 
         logged_in = self.client.login(username=user.username, password='test')
         self.assertTrue(logged_in)
@@ -209,6 +210,13 @@ class PositionTestCase(TestCase):
                 user.auth_token.key), 'format': 'json'})
 
         self.assertEqual(response.status_code, 201)
+        self.assertTrue('sdfg' in response.content)
+
+        position = Position.objects.latest('id')
+        self.assertEqual(position.count, 1)
+        self.assertEqual(position.value, 1)
+        self.assertEqual(position.buyer, buyer)
+        self.assertEqual(position.seller, seller)
 
 
 class ShareholderTestCase(TestCase):

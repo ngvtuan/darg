@@ -50,13 +50,13 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, blank=True, null=True)
-    street = models.CharField(max_length=255)
+    street = models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=255)
-    province = models.CharField(max_length=255, blank=False, null=True)
+    province = models.CharField(max_length=255, blank=True, null=True)
     postal_code = models.CharField(max_length=255)
     country = models.ForeignKey(Country, blank=False)
 
-    company_name = models.CharField(max_length=255, blank=False, null=True)
+    company_name = models.CharField(max_length=255, blank=True, null=True)
     birthday = models.DateField()
 
     def __unicode__(self):
@@ -64,7 +64,7 @@ class UserProfile(models.Model):
                               str(self.country))
 
     class Meta:
-        verbose_name_plural = "Addresses"
+        verbose_name_plural = "UserProfile"
 
 
 class Shareholder(models.Model):

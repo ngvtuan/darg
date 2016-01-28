@@ -43,11 +43,8 @@ class UserIsOperatorPermission(permissions.BasePermission):
 class UserCanAddShareholderPermission(SafeMethodsOnlyPermission):
     """Allow everyone to add a company"""
     def has_object_permission(self, request, view, obj=None):
-        can_add = False
-        if obj is None:
-            # Either a list or a create, so no author
-            can_add = True
-        return can_add or super(UserCanAddShareholderPermission, self).has_object_permission(request, view, obj)
+
+        return request.user.operator_set.filter(company=obj.company).exists()
 
 class UserCanAddPositionPermission(SafeMethodsOnlyPermission):
     """Allow everyone to add a company"""

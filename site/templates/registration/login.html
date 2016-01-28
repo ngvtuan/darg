@@ -16,6 +16,10 @@
     <br />
     {% trans "Password lost?" %}
     <a href="{% url 'auth_password_reset' %}" class="btn-inline">{% trans "Reset Password" %}</a>
+    <br />
+    <br />
+    {% trans "Do you know our " %}
+    <a href="/blog/" class="btn-inline">{% trans "Blog" %}</a>?
   </p>
 </div>
 {% endblock %}

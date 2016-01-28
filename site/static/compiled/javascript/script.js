@@ -6,7 +6,11 @@
   app.factory('Shareholder', [
     '$resource', function($resource) {
       return $resource('/services/rest/shareholders/:id', {
-        id: '@id'
+        id: '@pk'
+      }, {
+        update: {
+          method: 'PUT'
+        }
       });
     }
   ]);
@@ -416,13 +420,38 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.shareholder', ['js.darg.api']);
+  app = angular.module('js.darg.app.shareholder', ['js.darg.api', 'xeditable']);
 
   app.controller('ShareholderController', [
-    '$scope', '$http', function($scope, $http) {
-      return $scope.test = true;
+    '$scope', '$http', 'Shareholder', function($scope, $http, Shareholder) {
+      $scope.shareholder = true;
+      $scope.errors = null;
+      $http.get('/services/rest/shareholders/' + shareholder_id).then(function(result) {
+        return $scope.shareholder = new Shareholder(result.data);
+      });
+      $http.get('/services/rest/country').then(function(result) {
+        return $scope.countries = result.data.results;
+      });
+      return $scope.edit_shareholder = function() {
+        if ($scope.shareholder.user.userprofile.country) {
+          $scope.shareholder.user.userprofile.country = $scope.shareholder.user.userprofile.country.url;
+        }
+        return $scope.shareholder.$update().then(function(result) {
+          return $scope.shareholder = new Shareholder(result);
+        }).then(function() {
+          return void 0;
+        }).then(function() {
+          return $scope.errors = null;
+        }, function(rejection) {
+          return $scope.errors = rejection.data;
+        });
+      };
     }
   ]);
+
+  app.run(function(editableOptions) {
+    editableOptions.theme = 'bs3';
+  });
 
 }).call(this);
 

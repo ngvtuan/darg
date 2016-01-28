@@ -4,14 +4,23 @@
 {% block ng_app %}js.darg.app.shareholder{% endblock %}
 
 {% block content %}
+
+<!-- required for angular API call -->
+<script>
+  var shareholder_id = {{ shareholder.id}};
+</script>
+
 <div ng_controller="ShareholderController">
 
   <h1>{% trans "Shareholder Details" %}</h1>
+
+  <div class="alert alert-warning" role="alert">{% trans "Warning, this page is an alpha version. Please use upon your own risk. Problems might occur. Please report all problems to us!" %}</div>
 
   {% include "_form_errors.html" %}
 
   <h2>{% trans "Shareholder Data" %}</h2>
 
+  {# gafi warning #}
   {% if not shareholder.validate_gafi.is_valid %}
   <div class="alert alert-warning alert-dismissible"  role="alert">
     {% for error in shareholder.validate_gafi.errors %}
@@ -21,33 +30,60 @@
   </div>
   {% endif %}
 
+  {# core data #}
   <table class="table table-striped">
     <tr>
     <tr>
       <td>
         {% trans "Shareholder Name" %}:
       </td>
-      <td>{{ shareholder.user.first_name }} {{ shareholder.user.last_name }}</td>
+      <td>
+        {% verbatim %}<span editable-text="shareholder.user.first_name" onaftersave="edit_shareholder()">{{ shareholder.user.first_name || '' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}
+        {% verbatim %}<span editable-text="shareholder.user.last_name" onaftersave="edit_shareholder()">{{ shareholder.user.last_name || '' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}
+      </td>
     </tr>
     <tr>
       <td>{% trans "Shareholder Email" %}:</td>
-      <td>{{ shareholder.user.email }}</td>
+      <td>
+        {% verbatim %}<span editable-text="shareholder.user.email" onaftersave="edit_shareholder()">{{ shareholder.user.email || '' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}
+      </td>
     </tr>
     <tr>
       <td>{% trans "Shareholder Company Name" %}:</td>
-      <td>{{ shareholder.user.userprofile.company_name }}</td>
+      <td>
+        {% verbatim %}<span editable-text="shareholder.user.userprofile.company_name" onaftersave="edit_shareholder()">{{ shareholder.user.userprofile.company_name || '' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}
+      </td>
     </tr>
     <tr>
-      <td>{% trans "Address" %}:</td>
-      <td>{{ shareholder.user.userprofile.street }} <br/>
-          {{ shareholder.user.userprofile.postal_code }} {{ shareholder.user.userprofile.city }}<br/>
-          {{ shareholder.user.userprofile.province }}<br/>
-          {{ shareholder.user.userprofile.country.name }}
+      <td>
+        <strong>{% trans "Address" %}:</strong><br/>
+        {% trans "Street" %}<br/>
+        {% trans "Zip" %} {% trans "City" %}<br/>
+        {% trans "Province" %}<br/>
+        {% trans "Country" %}
+      </td>
+      <td>
+        <br/>
+        {% verbatim %}
+        <span editable-text="shareholder.user.userprofile.street" onaftersave="edit_shareholder()">{{ shareholder.user.userprofile.street || 'Street' }} <span class="el-icon-pencil"></span></span>
+        <br/>
+        <span editable-text="shareholder.user.userprofile.postal_code" onaftersave="edit_shareholder()">{{ shareholder.user.userprofile.postal_code || 'PLZ' }} <span class="el-icon-pencil"></span></span>
+        <span editable-text="shareholder.user.userprofile.city" onaftersave="edit_shareholder()">{{ shareholder.user.userprofile.city || 'City' }} <span class="el-icon-pencil"></span></span>
+        <br/>
+        <span editable-text="shareholder.user.userprofile.province" onaftersave="edit_shareholder()">{{ shareholder.user.userprofile.province || 'Province' }} <span class="el-icon-pencil"></span></span>
+        <br/>
+        <span editable-select="shareholder.user.userprofile.country" onaftersave="edit_shareholder()" e-ng-options="c as c.name for c in countries">
+          {{ shareholder.user.userprofile.country.name || 'Country' }}
+          <span class="el-icon-pencil"></span>
+        </span>
+        {% endverbatim %}
       </td>
     </tr>
     <tr>
       <td>{% trans "Shareholder Birthday" %}:</td>
-      <td>{{ shareholder.user.userprofile.birthday }}</td>
+      <td>
+        {% verbatim %}<span editable-date="shareholder.user.userprofile.birthday" onaftersave="edit_shareholder()">{{ shareholder.user.userprofile.birthday || '' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}
+      </td>
     </tr>
     <tr>
       <td>{% trans "Shares" %}:</td>
@@ -58,6 +94,8 @@
       <td>{{ shareholder.share_value }}</td>
     </tr>
   </table>
+
+  <!-- <a class="btn btn-focus btn-danger" title="{% trans "Delete shareholder" %}" >{% trans "Delete shareholder" %}</a> -->
 
 </div>
 {% endblock %}

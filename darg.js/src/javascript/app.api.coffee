@@ -1,7 +1,7 @@
 app = angular.module 'js.darg.api', ['ngResource']
 
 app.factory 'Shareholder', ['$resource', ($resource) ->
-    $resource '/services/rest/shareholders/:id', id: '@id'
+    $resource('/services/rest/shareholders/:id', {id: '@pk'} , update: method: 'PUT')
 ]
 
 app.factory 'CompanyAdd', ['$resource', ($resource) ->

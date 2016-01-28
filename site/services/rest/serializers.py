@@ -171,7 +171,10 @@ class OperatorSerializer(serializers.HyperlinkedModelSerializer):
         # notify
         send_mail(
             _('You were added as administrator for {}').format(company.name),
-            _('Dear,\n\nyou have been granted edit privileges for this company on the share register\n\nKind regards\n\nYour Das-Aktienregister Team'),
+            _('Dear,\n\n'
+              'you have been granted edit privileges for this '
+              'company on the share register\n\nKind regards\n\n'
+              'Your Das-Aktienregister Team'),
             settings.SERVER_EMAIL,
             [user.email], fail_silently=False)
 
@@ -187,7 +190,7 @@ class UserWithEmailOnlySerializer(serializers.HyperlinkedModelSerializer):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     operator_set = OperatorSerializer(many=True, read_only=True)
-    userprofile = UserProfileSerializer(many=False, read_only=True)
+    userprofile = UserProfileSerializer(many=False)
 
     class Meta:
         model = User
@@ -260,15 +263,6 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
             validated_data.get("user").get("email") or ''
         )
 
-        # save user/-profile
-        # profile_data = validated_data.get("user").get("userprofile")
-        # country_data = profile_data.get("country")
-        # country, created = Country.objects.get_or_create(
-        #    iso_code=country_data.get("iso_code"),
-        #    defaults={
-        #        "name": country_data.get("name"),
-        #        "iso_code": country_data.get("iso_code"),
-        #    })
         shareholder_user, created = User.objects.get_or_create(
             email=validated_data.get("user").get("email"),
             defaults={
@@ -276,21 +270,6 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
                 "first_name": validated_data.get("user").get("first_name"),
                 "last_name": validated_data.get("user").get("last_name"),
             })
-
-        """
-        profile, created = UserProfile.objects.get_or_create(
-            user=shareholder_user,
-            defaults={
-                "company_name": profile_data.get("company_name"),
-                "street": profile_data.get("street"),
-                "postal_code": profile_data.get("postal_code"),
-                "province": profile_data.get("province"),
-                "city": profile_data.get("city"),
-                "country": country,
-                "birthday": profile_data.get("birthday"),
-                "user": shareholder_user,
-            })
-        """
 
         if not created:
             if not shareholder_user.first_name:
@@ -309,6 +288,40 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
         )
 
         return shareholder
+
+    def update(self, instance, validated_data):
+
+        shareholder = instance
+        user = shareholder.user
+
+        user.email = validated_data['user']['email']
+        user.first_name = validated_data['user']['first_name']
+        user.last_name = validated_data['user']['last_name']
+        user.save()
+
+        profile_kwargs = validated_data['user']['userprofile']
+        if not user.userprofile:
+            userprofile = UserProfile.objects.create(**profile_kwargs)
+            user.userprofile = userprofile
+            user.save()
+        else:
+            userprofile = user.userprofile
+            userprofile.street = profile_kwargs['street']
+            userprofile.city = profile_kwargs['city']
+            userprofile.province = profile_kwargs['province']
+            userprofile.postal_code = profile_kwargs['postal_code']
+            userprofile.country = profile_kwargs['country']
+            userprofile.company_name = profile_kwargs['company_name']
+            userprofile.birthday = profile_kwargs['birthday']
+            userprofile.save()
+
+        shareholder.number = validated_data['number']
+        shareholder.save()
+        return shareholder
+
+    def validate(self, attrs):
+        print attrs
+        return attrs
 
 
 class PositionSerializer(serializers.HyperlinkedModelSerializer):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 14:41+0000\n"
+"POT-Creation-Date: 2016-01-28 20:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,44 +163,74 @@ msgstr ""
 msgid "No Postions yet."
 msgstr ""
 
-#: shareholder/templates/shareholder.html:9
+#: shareholder/templates/shareholder.html:15
 msgid "Shareholder Details"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:13
+#: shareholder/templates/shareholder.html:17
+msgid ""
+"Warning, this page is an alpha version. Please use upon your own risk. "
+"Problems might occur. Please report all problems to us!"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:21
 msgid "Shareholder Data"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:20
+#: shareholder/templates/shareholder.html:29
 msgid "Please request the shareholder to complete his data."
 msgstr ""
 
-#: shareholder/templates/shareholder.html:28
+#: shareholder/templates/shareholder.html:38
 msgid "Shareholder Name"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:33
+#: shareholder/templates/shareholder.html:46
 msgid "Shareholder Email"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:37
+#: shareholder/templates/shareholder.html:52
 msgid "Shareholder Company Name"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:41
+#: shareholder/templates/shareholder.html:59
 msgid "Address"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:49
+#: shareholder/templates/shareholder.html:60
+msgid "Street"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:61
+msgid "Zip"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:61
+msgid "City"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:62
+msgid "Province"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:63
+msgid "Country"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:83
 msgid "Shareholder Birthday"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:53
+#: shareholder/templates/shareholder.html:89
 msgid "Shares"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:57
+#: shareholder/templates/shareholder.html:93
 msgid "Value of all shares according to last transaction"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:98
+msgid "Delete shareholder"
 msgstr ""
 
 #: shareholder/views.py:56 shareholder/views.py:65

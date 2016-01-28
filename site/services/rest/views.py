@@ -30,8 +30,14 @@ class ShareholderViewSet(viewsets.ModelViewSet):
     # FIXME filter by user perms
     serializer_class = ShareholderSerializer
     permission_classes = [
-        UserCanAddShareholderPermission,
+        UserIsOperatorPermission,
     ]
+
+    def get_object(self):
+        try:
+            return Shareholder.objects.get(pk=self.kwargs.get('pk'))
+        except Shareholder.DoesNotExist:
+            raise Http404
 
     def get_queryset(self):
         user = self.request.user

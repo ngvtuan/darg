@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 14:41+0000\n"
+"POT-Creation-Date: 2016-01-28 20:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,23 +102,27 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: templates/menu.html:7
-msgid "Logout"
+#: templates/menu.html:6
+msgid "I18N"
 msgstr ""
 
 #: templates/menu.html:8
-msgid "Options"
+msgid "Logout"
 msgstr ""
 
 #: templates/menu.html:9
-msgid "Log"
+msgid "Options"
 msgstr ""
 
 #: templates/menu.html:10
-msgid "Positions"
+msgid "Log"
 msgstr ""
 
 #: templates/menu.html:11
+msgid "Positions"
+msgstr ""
+
+#: templates/menu.html:12
 msgid "Start"
 msgstr ""
 
@@ -140,6 +144,16 @@ msgstr ""
 
 #: templates/registration/login.html:18
 msgid "Reset Password"
+msgstr ""
+
+#: templates/registration/login.html:21
+#: templates/registration/registration_form.html:18
+msgid "Do you know our "
+msgstr ""
+
+#: templates/registration/login.html:22
+#: templates/registration/registration_form.html:18
+msgid "Blog"
 msgstr ""
 
 #: templates/registration/logout.html:6
@@ -265,11 +279,11 @@ msgstr ""
 msgid "Register Here"
 msgstr ""
 
-#: templates/registration/registration_form.html:14
+#: templates/registration/registration_form.html:15
 msgid "Already registered?"
 msgstr ""
 
-#: templates/registration/registration_form.html:14
+#: templates/registration/registration_form.html:16
 msgid "Login"
 msgstr ""
 

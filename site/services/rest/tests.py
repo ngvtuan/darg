@@ -9,9 +9,10 @@ from django.contrib.sites.models import Site
 User = get_user_model()
 
 from shareholder.generators import (
-    OperatorGenerator, UserGenerator, CompanyGenerator
+    OperatorGenerator, UserGenerator, CompanyGenerator,
+    ShareholderGenerator
 )
-from shareholder.models import Operator
+from shareholder.models import Operator, Shareholder
 
 
 class OperatorTestCase(TestCase):
@@ -251,3 +252,84 @@ class ShareholderTestCase(TestCase):
 
         # check proper db status
         user = User.objects.get(email="mike.hildebrand@darg.com")
+
+    def test_edit_shareholder(self):
+        """ test editing shareholder data
+            required for editing:
+            first_name, last_name
+            email
+            shareholder company name
+            shareholder address (street, zip, city, province, country)
+            birthday
+        """
+        operator = OperatorGenerator().generate()
+        user = operator.user
+        company = operator.company
+        shareholder = ShareholderGenerator().generate(company=company)
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        data = {
+            "pk": 8,
+            "user": {
+                "first_name": "Mutter1Editable",
+                "last_name": "KutterEditable",
+                "email": "mutter@demo.ch",
+                "operator_set": [],
+                "userprofile": {
+                    "street": "SomeStreet",
+                    "city": "Hamm",
+                    "province": "SomeProvince",
+                    "postal_code": "932029",
+                    "country": "http://codingmachine:9000/services/rest/"
+                                "country/de",
+                    "birthday": "2016-01-27",
+                    "company_name": "SomeCompany"
+                },
+            },
+            "number": "00333e",
+            "company": {
+                "pk": 5,
+                "name": "LieblingzWaldCompany AG",
+                "share_count": 100100,
+                "country": "http://codingmachine:9000/services/rest"
+                           "/country/DL",
+                "url": "http://codingmachine:9000/services/rest/company/5",
+                "shareholder_count": 2
+            },
+            "share_percent": "0.00",
+            "share_count": 0,
+            "share_value": 0,
+            "validate_gafi": {
+                "is_valid": True,
+                "errors": []
+            }
+        }
+
+        response = self.client.put(
+            '/services/rest/shareholders/{}'.format(shareholder.pk),
+            data,
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
+                user.auth_token.key), 'format': 'json'})
+
+        s = Shareholder.objects.get(id=shareholder.id)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotEqual(response.data.get('pk'), None)
+        self.assertTrue(isinstance(response.data, dict))
+        self.assertEqual(response.data.get('number'), "00333e")
+        self.assertEqual(s.user.first_name, "Mutter1Editable")
+
+        userprofile = s.user.userprofile
+        for k, v in data['user']['userprofile'].iteritems():
+            if k == 'country':
+                self.assertEqual(getattr(userprofile, k).pk, v[-2:])
+                continue
+            if k == 'birthday':
+                self.assertEqual(getattr(userprofile, k).strftime('%Y-%m-%d'), v)
+                continue
+            self.assertEqual(getattr(userprofile, k), v)
+
+        # check proper db status
+        user = s.user
+        self.assertEqual(user.email, "mutter@demo.ch")

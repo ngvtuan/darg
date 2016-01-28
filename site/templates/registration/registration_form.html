@@ -11,8 +11,12 @@
                 <input type="submit" value="Submit" />
   </form>
 
-  <p class="comment">{% trans "Already registered?" %} <a href="{% url 'auth_login' %}">{% trans "Login" %}</a></p>
-
+  <p class="comment">
+    {% trans "Already registered?" %}
+    <a href="{% url 'auth_login' %}">{% trans "Login" %}</a>
+    <br />
+    {% trans "Do you know our " %} <a href="/blog/" class="btn-inline">{% trans "Blog" %}</a>?
+  </p>
 </div>
 
 {% endblock %}

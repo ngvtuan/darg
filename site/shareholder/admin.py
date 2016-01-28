@@ -23,7 +23,7 @@ class PositionAdmin(admin.ModelAdmin):
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user',)
+    list_display = ('pk',)
     pass
 
 
@@ -31,13 +31,16 @@ class CountryAdmin(admin.ModelAdmin):
     list_display = ('iso_code',)
     pass
 
+
 class SecurityAdmin(admin.ModelAdmin):
     list_display = ('title',)
     pass
 
+
 class OptionTransactionAdmin(admin.ModelAdmin):
     list_display = ('bought_at', 'buyer', 'seller',)
     pass
+
 
 class OptionPlanAdmin(admin.ModelAdmin):
     list_display = ('title',)

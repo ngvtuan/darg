@@ -14,6 +14,8 @@
 
   <h1>{% trans "Shareholder Details" %}</h1>
 
+  <div class="alert alert-warning" role="alert">{% trans "Warning, this page is an alpha version. Please use upon your own risk. Problems might occur. Please report all problems to us!" %}</div>
+
   {% include "_form_errors.html" %}
 
   <h2>{% trans "Shareholder Data" %}</h2>
@@ -93,7 +95,7 @@
     </tr>
   </table>
 
-  <a class="btn btn-focus btn-danger" title="{% trans "Delete shareholder" %}" >{% trans "Delete shareholder" %}</a>
+  <!-- <a class="btn btn-focus btn-danger" title="{% trans "Delete shareholder" %}" >{% trans "Delete shareholder" %}</a> -->
 
 </div>
 {% endblock %}

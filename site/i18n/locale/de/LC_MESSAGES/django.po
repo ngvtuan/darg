@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 14:41+0000\n"
+"POT-Creation-Date: 2016-01-28 20:17+0000\n"
 "PO-Revision-Date: 2016-01-17 07:40+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,23 +106,27 @@ msgstr "Das Aktienregister, 2015"
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/menu.html:7
+#: templates/menu.html:6
+msgid "I18N"
+msgstr ""
+
+#: templates/menu.html:8
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/menu.html:8
+#: templates/menu.html:9
 msgid "Options"
 msgstr "Optionen"
 
-#: templates/menu.html:9
+#: templates/menu.html:10
 msgid "Log"
 msgstr "Log"
 
-#: templates/menu.html:10
+#: templates/menu.html:11
 msgid "Positions"
 msgstr "Transaktionen"
 
-#: templates/menu.html:11
+#: templates/menu.html:12
 msgid "Start"
 msgstr "Start"
 
@@ -145,6 +149,16 @@ msgstr "Passwort vergessen?"
 #: templates/registration/login.html:18
 msgid "Reset Password"
 msgstr "Passwort zurücksetzen"
+
+#: templates/registration/login.html:21
+#: templates/registration/registration_form.html:18
+msgid "Do you know our "
+msgstr ""
+
+#: templates/registration/login.html:22
+#: templates/registration/registration_form.html:18
+msgid "Blog"
+msgstr ""
 
 #: templates/registration/logout.html:6
 msgid "Logged Out"
@@ -285,11 +299,11 @@ msgstr "Sie sind jetzt registriert. Starten Sie hier:"
 msgid "Register Here"
 msgstr "Registrieren Sie sich hier"
 
-#: templates/registration/registration_form.html:14
+#: templates/registration/registration_form.html:15
 msgid "Already registered?"
 msgstr "Bereits registriert?"
 
-#: templates/registration/registration_form.html:14
+#: templates/registration/registration_form.html:16
 msgid "Login"
 msgstr "Login"
 

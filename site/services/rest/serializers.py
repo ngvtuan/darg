@@ -303,7 +303,7 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
         user.save()
 
         profile_kwargs = validated_data['user']['userprofile']
-        if not user.userprofile:
+        if not hasattr(user, 'userprofile'):
             userprofile = UserProfile.objects.create(**profile_kwargs)
             user.userprofile = userprofile
             user.save()

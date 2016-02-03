@@ -6,12 +6,17 @@ from django.views.generic.base import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
+from zinnia.sitemaps import TagSitemap
+from zinnia.sitemaps import EntrySitemap
+from zinnia.sitemaps import CategorySitemap
+from zinnia.sitemaps import AuthorSitemap
+
 from rest_framework import routers
 from rest_framework.authtoken import views
 
 from services.rest.views import ShareholderViewSet, CompanyViewSet, UserViewSet, PositionViewSet, \
     InviteeUpdateView, AddCompanyView, CountryViewSet, OptionPlanViewSet, \
-    SecurityViewSet, OptionTransactionViewSet, OperatorViewSet
+    SecurityViewSet, OptionTransactionViewSet, OperatorViewSet, AddShareSplit
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'shareholders', ShareholderViewSet, base_name="shareholders")
@@ -28,6 +33,11 @@ router.register(r'security', SecurityViewSet, base_name="security")
 js_info_dict = {
     'packages': ('project', 'shareholder', 'utils', 'services',),
 }
+
+sitemaps = {'tags': TagSitemap,
+            'blog': EntrySitemap,
+            'authors': AuthorSitemap,
+            'categories': CategorySitemap,}
 
 urlpatterns = [
     # web views
@@ -61,6 +71,7 @@ urlpatterns = [
     # rest api
     url(r'^services/rest/company/add', AddCompanyView.as_view(),
         name='add_company'),
+    url(r'^services/rest/split', AddShareSplit.as_view(), name='split_shares'),
     url(r'^services/rest/', include(router.urls)),
     url(r'^services/rest/invitee', InviteeUpdateView.as_view(),
         name='invitee'),
@@ -102,3 +113,11 @@ if settings.DEBUG:
         (r'^_404/$', TemplateView.as_view(template_name="404.html")),
         (r'^_500/$', TemplateView.as_view(template_name="500.html")),
     )
+
+# sitemap
+urlpatterns += patterns(
+    'django.contrib.sitemaps.views',
+    url(r'^sitemap.xml$', 'index',
+        {'sitemaps': sitemaps}),
+    url(r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
+        {'sitemaps': sitemaps}),)

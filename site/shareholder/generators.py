@@ -159,7 +159,8 @@ class CompanyShareholderGenerator(object):
     def generate(self, **kwargs):
 
         company = kwargs.get('company') or CompanyGenerator().generate()
-
+        company_shareholder_created_at = kwargs.get('company_shareholder_created_at') or \
+            datetime.datetime.now()
         companyuser = User.objects.create(
             username=make_username('Company', 'itself', company.name),
             first_name='Company', last_name='itself',
@@ -174,6 +175,7 @@ class CompanyShareholderGenerator(object):
         pos_kwargs.update({
             'buyer': shareholder,
             'count': company.share_count,
+            'bought_at': company_shareholder_created_at
         })
 
         PositionGenerator().generate(**pos_kwargs)
@@ -196,10 +198,11 @@ class PositionGenerator(object):
         value = kwargs.get('value') or 2
         security = kwargs.get('security') or SecurityGenerator().generate(
             company=company)
+        bought_at = kwargs.get('bought_at') or datetime.datetime.now().date()
 
         kwargs2 = {
             "buyer": buyer,
-            "bought_at": datetime.datetime.now().date(),
+            "bought_at": bought_at,
             "count": count,
             "value": value,
             "security": security,
@@ -235,8 +238,11 @@ class ComplexShareholderConstellationGenerator(object):
         s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
 
         # initial company shareholder
+        company_shareholder_created_at = kwargs.get('company_shareholder_created_at') or\
+            datetime.datetime.now()
         cs = CompanyShareholderGenerator().generate(
-            company=company, security=s1)
+            company=company, security=s1,
+            company_shareholder_created_at=company_shareholder_created_at)
 
         # random shareholder generation
         shareholders = [cs]

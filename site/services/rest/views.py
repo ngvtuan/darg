@@ -212,7 +212,7 @@ class PositionViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         return Position.objects.filter(buyer__company__operator__user=user)\
-            .order_by('-bought_at')
+            .order_by('-bought_at', '-pk')
 
 
 class SecurityViewSet(viewsets.ModelViewSet):

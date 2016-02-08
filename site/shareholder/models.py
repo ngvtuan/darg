@@ -49,14 +49,19 @@ class Company(models.Model):
             "Your share split has been successful. Please find the list of "
             "partial shares below:\n\n"
         )
-        for id, part in partials.iteritems():
-            s = Shareholder.objects.get(id=id)
-            message = message + _("{}{}({}): {} shares\n").format(
-                s.user.first_name,
-                s.user.last_name,
-                s.user.email,
-                part,
-            )
+
+        if len(partials) > 0:
+            for id, part in partials.iteritems():
+                s = Shareholder.objects.get(id=id)
+                message = message + _("{}{}({}): {} shares\n").format(
+                    s.user.first_name,
+                    s.user.last_name,
+                    s.user.email,
+                    part,
+                )
+        else:
+            message = message + _("--- No partial shares during split --- \n")
+
         message = message + _(
             "\nThese shareholders are eligible to either "
             "sell their partial shares or get compensated.\n\n"

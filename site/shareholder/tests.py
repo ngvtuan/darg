@@ -91,8 +91,8 @@ class PositionTestCase(TestCase):
         self.assertEquals(len(mail.outbox), 1)
         self.assertEquals(
             mail.outbox[0].subject,
-            u"Your list of partials for the share split for "
-            u"company '{}'".format(company.name)
+            u"Ihre Liste gespaltener Aktienanrechte f\xfcr das Unternehmen "
+            u"'{}'".format(company.name)
         )
 
     def test_split_shares_in_past(self):
@@ -150,14 +150,14 @@ class PositionTestCase(TestCase):
                 round(assets[shareholder.pk]['count'] * m)
             )
 
-            #self.assertEqual(
-            #    round(shareholder.share_value(date=d)),
-            #    assets[shareholder.pk]['value']
-            #)
-            #self.assertEqual(
-            #    round(float(shareholder.share_percent(date=d)), 2),
-            #    float(assets[shareholder.pk]['percent'])
-            #)
+            # self.assertEqual(
+            #     round(shareholder.share_value(date=d)),
+            #     assets[shareholder.pk]['value']
+            # )
+            # self.assertEqual(
+            #     round(float(shareholder.share_percent(date=d)), 2),
+            #     float(assets[shareholder.pk]['percent'])
+            # )
 
         self.assertEqual(
             company.share_count,
@@ -166,8 +166,8 @@ class PositionTestCase(TestCase):
         self.assertEquals(len(mail.outbox), 1)
         self.assertEquals(
             mail.outbox[0].subject,
-            u"Your list of partials for the share split for "
-            u"company '{}'".format(company.name)
+            u"Ihre Liste gespaltener Aktienanrechte f\xfcr das Unternehmen "
+            u"'{}'".format(company.name)
         )
         # only one new pos as no shares were basically existing as we
         # split even before company creates their first shares

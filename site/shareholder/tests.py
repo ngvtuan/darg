@@ -1,14 +1,17 @@
 import unittest
+import datetime
 
 from django.test import TestCase
 from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.test.client import RequestFactory
+from django.core import mail
 
 from project.base import BaseSeleniumTestCase
 from shareholder.models import Country, Shareholder, Security
 from shareholder.generators import ShareholderGenerator, PositionGenerator, \
-    UserGenerator, TwoInitialSecuritiesGenerator, OperatorGenerator
+    UserGenerator, TwoInitialSecuritiesGenerator, OperatorGenerator, \
+    CompanyGenerator, ComplexShareholderConstellationGenerator
 from shareholder import page
 
 
@@ -25,6 +28,77 @@ class CountryTestCase(TestCase):
         self.assertEqual(qs.count(), 1)
         self.assertEqual(country.iso_code, 'de')
         self.assertEqual(country.name, 'Germany')
+
+
+class PositionTestCase(TestCase):
+
+    def test_split_shares(self):
+        """ share split leaves value, percent unchanged but
+        increases share count per shareholder
+        """
+        # test data
+        company = CompanyGenerator().generate(share_count=1000)
+        OperatorGenerator().generate(company=company)
+        shareholders, security = ComplexShareholderConstellationGenerator()\
+            .generate(company=company)
+
+        data = {
+            'execute_at': datetime.datetime.now(),
+            'dividend': 3,
+            'divisor': 7,
+            'comment': "Some random comment",
+            'security': security,
+        }
+        multiplier = data['divisor'] / float(data['dividend'])
+        company_share_count = company.share_count
+
+        # record initial shareholder asset status
+        assets = {}
+        for shareholder in shareholders:
+            assets.update({
+                shareholder.pk: {
+                    'count': shareholder.share_count(),
+                    'value': shareholder.share_value(),
+                    'percent': shareholder.share_percent()
+                }
+            })
+
+        # run
+        company.split_shares(data)
+
+        # asserts by checking overall shareholder situation
+        # means each shareholder should have now more shares but some
+        # overall stock value
+
+        for shareholder in shareholders:
+            self.assertEqual(
+                shareholder.share_count(),
+                round(assets[shareholder.pk]['count'] * multiplier)
+            )
+            self.assertEqual(
+                round(shareholder.share_value()),
+                assets[shareholder.pk]['value']
+            )
+            self.assertEqual(
+                round(float(shareholder.share_percent()), 2),
+                float(assets[shareholder.pk]['percent'])
+            )
+
+        self.assertEqual(
+            company.share_count,
+            round(company_share_count * multiplier))
+
+        self.assertEquals(len(mail.outbox), 1)
+        self.assertEquals(
+            mail.outbox[0].subject,
+            u"Your list of partials for the share split for "
+            u"company '{}'".format(company.name)
+        )
+
+    def test_split_shares_in_past(self):
+        """ we are splitting shares at some point in the past
+        even with newer transactions entered """
+        pass
 
 
 class UserProfileTestCase(TestCase):
@@ -206,11 +280,11 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
         pass
 
     @unittest.skip('not implemented')
-    def test_base_use_case_no_bouth_at(self):
+    def test_base_use_case_no_bougth_at(self):
         pass
 
     @unittest.skip('not implemented')
-    def test_base_use_case_no_option_pan(self):
+    def test_base_use_case_no_option_plan(self):
         pass
 
     @unittest.skip('not implemented')

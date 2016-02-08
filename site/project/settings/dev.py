@@ -13,6 +13,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # for local dev use this...
 # NOSE_ARGS = ['--pdb', '-s', '--logging-level=WARNING']
 REUSE_DB = True
+NOSE_PROGRESSIVE_EDITOR = 'vim'
 
 INSTALLED_APPS = INSTALLED_APPS + ('rosetta', 'django_nose',)
 

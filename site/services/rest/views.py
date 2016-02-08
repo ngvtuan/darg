@@ -1,5 +1,8 @@
+import dateutil.parser
+
 from django.contrib.auth import get_user_model
 from django.http import Http404
+from django.utils.translation import ugettext as _
 
 from rest_framework import viewsets
 from rest_framework.views import APIView
@@ -112,6 +115,55 @@ class AddCompanyView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class AddShareSplit(APIView):
+    """ creates a share split. danger: can be set to be in the past and ALL
+    following transactions must be adjusted
+    """
+    permission_classes = [
+        UserCanAddCompanyPermission,
+    ]
+
+    def _validate_data(self, data):
+        errors = {}
+        if not data.get('execute_at'):
+            errors.update({'execute_at': _('Field may not be empty.')})
+        if not data.get('dividend'):
+            errors.update({'dividend': _('Field may not be empty.')})
+        if not data.get('divisor'):
+            errors.update({'divisor': _('Field may not be empty.')})
+        if not data.get('security'):
+            errors.update({'security': _('Field may not be empty.')})
+
+        if not errors:
+            return True, {}
+        else:
+            return False, errors
+
+    def post(self, request, fomat=None):
+        data = request.data
+        is_valid, errors = self._validate_data(data)
+        if is_valid:
+            # get company and run company.split_shares(data)
+            company = request.user.operator_set.earliest('id').company
+            data.update({
+                'execute_at': dateutil.parser.parse(data['execute_at']),
+                'security': Security.objects.get(id=data['security']['pk'])
+            })
+            company.split_shares(data)
+
+            positions = Position.objects.filter(
+                buyer__company__operator__user=request.user).order_by(
+                    '-bought_at')
+
+            serializer = PositionSerializer(
+                positions, many=True, context={'request': request})
+            return Response(
+                {'success': True, 'data': serializer.data},
+                status=status.HTTP_201_CREATED)
+
+        return Response({'errors': errors}, status=status.HTTP_400_BAD_REQUEST)
+
+
 class UserViewSet(viewsets.ModelViewSet):
     """ API endpoint to get user base info """
     serializer_class = UserSerializer
@@ -160,7 +212,7 @@ class PositionViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         return Position.objects.filter(buyer__company__operator__user=user)\
-            .order_by('bought_at').order_by('-bought_at')
+            .order_by('-bought_at')
 
 
 class SecurityViewSet(viewsets.ModelViewSet):

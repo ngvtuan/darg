@@ -1,4 +1,6 @@
 # coding=utf-8
+import datetime
+
 from rest_framework.test import APIClient
 from rest_framework import status
 
@@ -10,9 +12,10 @@ User = get_user_model()
 
 from shareholder.generators import (
     OperatorGenerator, UserGenerator, CompanyGenerator,
-    ShareholderGenerator, TwoInitialSecuritiesGenerator
+    ShareholderGenerator, TwoInitialSecuritiesGenerator,
+    PositionGenerator
 )
-from shareholder.models import Operator, Shareholder, Position
+from shareholder.models import Operator, Shareholder, Position, Security
 
 
 class OperatorTestCase(TestCase):
@@ -217,6 +220,76 @@ class PositionTestCase(TestCase):
         self.assertEqual(position.value, 1)
         self.assertEqual(position.buyer, buyer)
         self.assertEqual(position.seller, seller)
+
+    def test_split_shares_GET(self):
+        operator = OperatorGenerator().generate()
+        user = operator.user
+
+        ShareholderGenerator().generate(company=operator.company)
+        ShareholderGenerator().generate(company=operator.company)
+        TwoInitialSecuritiesGenerator().generate(company=operator.company)
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+        response = self.client.get(
+            '/services/rest/split/', {},
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
+                user.auth_token.key), 'format': 'json'})
+
+        self.assertEqual(response.status_code, 405)
+
+    def test_split_shares_POST(self):
+        operator = OperatorGenerator().generate()
+        user = operator.user
+        company = operator.company
+
+        s1, s2 = TwoInitialSecuritiesGenerator().generate(
+            company=operator.company)
+        PositionGenerator().generate(company=operator.company, security=s1)
+        PositionGenerator().generate(company=operator.company, security=s1)
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        security = Security.objects.filter(company=company, title="P")[0]
+        data = {
+            'dividend': 3,
+            'divisor': 4,
+            "security": {
+                "pk": security.pk,
+                "readable_title": security.get_title_display(),
+                "title": security.title
+            },
+            'execute_at': datetime.datetime.now(),
+        }
+
+        response = self.client.post(
+            '/services/rest/split/', data,
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
+                user.auth_token.key), 'format': 'json'})
+
+        self.assertEqual(response.status_code, 201)
+
+    def test_split_shares_empty_payload(self):
+        operator = OperatorGenerator().generate()
+        user = operator.user
+
+        ShareholderGenerator().generate(company=operator.company)
+        ShareholderGenerator().generate(company=operator.company)
+        TwoInitialSecuritiesGenerator().generate(company=operator.company)
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        data = {}
+
+        response = self.client.post(
+            '/services/rest/split/', data,
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
+                user.auth_token.key), 'format': 'json'})
+
+        self.assertEqual(response.status_code, 400)
+        self.assertTrue('error' in response.content)
 
 
 class ShareholderTestCase(TestCase):

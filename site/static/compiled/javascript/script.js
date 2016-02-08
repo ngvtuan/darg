@@ -61,6 +61,14 @@
     }
   ]);
 
+  app.factory('Split', [
+    '$resource', function($resource) {
+      return $resource('/services/rest/split/:id', {
+        id: '@id'
+      });
+    }
+  ]);
+
   app.factory('Operator', [
     '$resource', function($resource) {
       return $resource('/services/rest/operators/:id', {
@@ -364,13 +372,15 @@
   app = angular.module('js.darg.app.positions', ['js.darg.api']);
 
   app.controller('PositionsController', [
-    '$scope', '$http', 'Position', function($scope, $http, Position) {
+    '$scope', '$http', 'Position', 'Split', function($scope, $http, Position, Split) {
       $scope.positions = [];
       $scope.shareholders = [];
       $scope.securities = [];
       $scope.show_add_position = false;
       $scope.show_add_capital = false;
+      $scope.show_split = false;
       $scope.newPosition = new Position();
+      $scope.newSplit = new Split();
       $http.get('/services/rest/position').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
           return $scope.positions.push(item);
@@ -390,6 +400,8 @@
         return $scope.newPosition.$save().then(function(result) {
           return $scope.positions.push(result);
         }).then(function() {
+          $scope.show_add_position = false;
+          $scope.show_add_capital = false;
           return $scope.newPosition = new Position();
         }).then(function() {
           return $scope.errors = null;
@@ -397,20 +409,41 @@
           return $scope.errors = rejection.data;
         });
       };
+      $scope.add_split = function() {
+        return $scope.newSplit.$save().then(function(result) {
+          return $scope.positions = result.data;
+        }).then(function() {
+          return $scope.newSplit = new Split();
+        }).then(function() {
+          $scope.errors = null;
+          return $scope.show_split = false;
+        }, function(rejection) {
+          return $scope.errors = rejection.data;
+        });
+      };
       $scope.show_add_position_form = function() {
         $scope.show_add_position = true;
         $scope.show_add_capital = false;
-        return $scope.newPosition = new Position();
+        $scope.newPosition = new Position();
+        return $scope.show_split = false;
       };
       $scope.show_add_capital_form = function() {
         $scope.show_add_position = false;
         $scope.show_add_capital = true;
-        return $scope.newPosition = new Position();
+        $scope.newPosition = new Position();
+        return $scope.show_split = false;
       };
-      return $scope.hide_form = function() {
+      $scope.hide_form = function() {
         $scope.show_add_position = false;
         $scope.show_add_capital = false;
-        return $scope.newPosition = new Position();
+        $scope.newPosition = new Position();
+        return $scope.show_split = false;
+      };
+      return $scope.show_split_form = function() {
+        $scope.show_add_position = false;
+        $scope.show_add_capital = false;
+        $scope.newSplit = new Split();
+        return $scope.show_split = true;
       };
     }
   ]);

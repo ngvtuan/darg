@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-28 20:17+0000\n"
+"POT-Creation-Date: 2016-02-08 17:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,71 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: shareholder/models.py:30
+#: shareholder/models.py:36
 msgid "Headquarter location"
 msgstr ""
 
-#: shareholder/models.py:121
-msgid "Missing all data required for #GAFI."
+#: shareholder/models.py:45
+msgid "Your list of partials for the share split for company '{}'"
+msgstr ""
+
+#: shareholder/models.py:48
+msgid ""
+"Dear Operator,\n"
+"\n"
+"Your share split has been successful. Please find the list of partial shares "
+"below:\n"
+"\n"
+msgstr ""
+
+#: shareholder/models.py:56
+msgid "{}{}({}): {} shares\n"
+msgstr ""
+
+#: shareholder/models.py:63
+msgid "--- No partial shares during split --- \n"
+msgstr ""
+
+#: shareholder/models.py:66
+msgid ""
+"\n"
+"These shareholders are eligible to either sell their partial shares or get "
+"compensated.\n"
+"\n"
+"Please handle them accordingly and update the share register.\n"
+"\n"
+"Your Share Register Team"
 msgstr ""
 
 #: shareholder/models.py:128
+msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
+msgstr ""
+
+#: shareholder/models.py:145
+msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
+msgstr ""
+
+#: shareholder/models.py:270
+msgid "Missing all data required for #GAFI."
+msgstr ""
+
+#: shareholder/models.py:277
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:132
+#: shareholder/models.py:281
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:136
+#: shareholder/models.py:285
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:142
+#: shareholder/models.py:291
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:205
+#: shareholder/models.py:363
 msgid "Number of shares approved"
 msgstr ""
 
@@ -74,7 +114,7 @@ msgid "Receipient"
 msgstr ""
 
 #: shareholder/templates/options.html:38
-#: shareholder/templates/positions.html:32
+#: shareholder/templates/positions.html:36
 msgid "Share Count"
 msgstr ""
 
@@ -108,6 +148,7 @@ msgid "Share count"
 msgstr ""
 
 #: shareholder/templates/optionsplan.html:32
+#: shareholder/templates/positions.html:39
 msgid "Comment"
 msgstr ""
 
@@ -132,34 +173,38 @@ msgid "Transfer Shares"
 msgstr ""
 
 #: shareholder/templates/positions.html:13
-msgid "Increase Kapital"
+msgid "Increase Capital"
 msgstr ""
 
-#: shareholder/templates/positions.html:24
+#: shareholder/templates/positions.html:14
+msgid "Split Shares"
+msgstr ""
+
+#: shareholder/templates/positions.html:28
 msgid "Your Positions"
 msgstr ""
 
-#: shareholder/templates/positions.html:29
+#: shareholder/templates/positions.html:33
 msgid "Buy Date"
 msgstr ""
 
-#: shareholder/templates/positions.html:30
+#: shareholder/templates/positions.html:34
 msgid "Buyer"
 msgstr ""
 
-#: shareholder/templates/positions.html:31
+#: shareholder/templates/positions.html:35
 msgid "Security"
 msgstr ""
 
-#: shareholder/templates/positions.html:33
+#: shareholder/templates/positions.html:37
 msgid "Price"
 msgstr ""
 
-#: shareholder/templates/positions.html:34
+#: shareholder/templates/positions.html:38
 msgid "Seller"
 msgstr ""
 
-#: shareholder/templates/positions.html:51
+#: shareholder/templates/positions.html:57
 msgid "No Postions yet."
 msgstr ""
 

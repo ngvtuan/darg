@@ -3,9 +3,11 @@ import hashlib
 import datetime
 
 from django.contrib.auth import get_user_model
+from django.utils.text import slugify
 
 from shareholder.models import Shareholder, Company, Position, Operator, \
     UserProfile, Country, Security
+from utils.user import make_username
 
 User = get_user_model()
 
@@ -152,20 +154,58 @@ class ShareholderGenerator(object):
         return shareholder
 
 
+class CompanyShareholderGenerator(object):
+
+    def generate(self, **kwargs):
+
+        company = kwargs.get('company') or CompanyGenerator().generate()
+        company_shareholder_created_at = kwargs.get('company_shareholder_created_at') or \
+            datetime.datetime.now()
+        companyuser = User.objects.create(
+            username=make_username('Company', 'itself', company.name),
+            first_name='Company', last_name='itself',
+            email='info@{}-company-itself.com'.format(slugify(company.name))
+        )
+        shareholder = Shareholder.objects.create(
+            user=companyuser,
+            company=company,
+            number='0')
+
+        pos_kwargs = kwargs.copy()
+        pos_kwargs.update({
+            'buyer': shareholder,
+            'count': company.share_count,
+            'bought_at': company_shareholder_created_at
+        })
+
+        PositionGenerator().generate(**pos_kwargs)
+
+        return shareholder
+
+
 class PositionGenerator(object):
 
     def generate(self, **kwargs):
-        buyer = kwargs.get('buyer') or ShareholderGenerator().generate()
+        company = kwargs.get('company') \
+            or kwargs.get('buyer').company \
+            or kwargs.get('seller').company \
+            or kwargs.get('security').company \
+            or CompanyGenerator
+        buyer = kwargs.get('buyer') or ShareholderGenerator().generate(
+            company=company)
         seller = kwargs.get('seller') or None
         count = kwargs.get('count') or 3
         value = kwargs.get('value') or 2
+        security = kwargs.get('security') or SecurityGenerator().generate(
+            company=company)
+        bought_at = kwargs.get('bought_at') or datetime.datetime.now().date()
 
         kwargs2 = {
             "buyer": buyer,
-            "bought_at": datetime.datetime.now().date(),
+            "bought_at": bought_at,
             "count": count,
             "value": value,
-            "security": SecurityGenerator().generate()
+            "security": security,
         }
         if seller:
             kwargs2.update({"seller": seller})
@@ -186,3 +226,41 @@ class TwoInitialSecuritiesGenerator(object):
         s2 = Security.objects.create(title='C', company=company, count=2)
 
         return (s1, s2)
+
+
+class ComplexShareholderConstellationGenerator(object):
+
+    def generate(self, **kwargs):
+
+        company = kwargs.get('company') or CompanyGenerator().generate()
+
+        # intial securities
+        s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
+
+        # initial company shareholder
+        company_shareholder_created_at = kwargs.get('company_shareholder_created_at') or\
+            datetime.datetime.now()
+        cs = CompanyShareholderGenerator().generate(
+            company=company, security=s1,
+            company_shareholder_created_at=company_shareholder_created_at)
+
+        # random shareholder generation
+        shareholders = [cs]
+        # initial share seeding
+        for i in range(0, 10):
+            shareholders.append(PositionGenerator().generate(
+                company=company, security=s1, seller=cs).buyer)
+
+        # two shareholders sold again
+        shareholders.append(
+            PositionGenerator().generate(
+                company=company,
+                seller=shareholders[3],
+                security=s1).buyer)
+        shareholders.append(
+            PositionGenerator().generate(
+                company=company,
+                seller=shareholders[6],
+                security=s1).buyer)
+
+        return shareholders, s1

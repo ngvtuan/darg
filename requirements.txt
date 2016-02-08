@@ -34,3 +34,4 @@ docutils
 ipdbplugin
 wand
 django-sendfile
+nose-progressive

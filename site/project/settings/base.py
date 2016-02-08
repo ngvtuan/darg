@@ -174,6 +174,10 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
+        'shareholder': {
+            'level': 'INFO',
+            'handlers': ['console'],
+        },
     },
 }
 

@@ -1,12 +1,18 @@
 import os
 import time
+import datetime
+import logging
+import math
 
 from decimal import Decimal
 
 from django.db import models
 from django.conf import settings
 from django.core.validators import MinValueValidator
+from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
+
+logger = logging.getLogger(__name__)
 
 
 class Country(models.Model):
@@ -32,18 +38,139 @@ class Company(models.Model):
     def __str__(self):
         return u"{}".format(self.name)
 
+    def _send_partial_share_rights_email(self, partials):
+        """ send email with partial share after split list """
+        operators = self.get_operators().values_list('user__email', flat=True)
+        subject = _(
+            "Your list of partials for the share split for "
+            "company '{}'").format(self.name)
+        message = _(
+            "Dear Operator,\n\n"
+            "Your share split has been successful. Please find the list of "
+            "partial shares below:\n\n"
+        )
+
+        if len(partials) > 0:
+            for id, part in partials.iteritems():
+                s = Shareholder.objects.get(id=id)
+                message = message + _("{}{}({}): {} shares\n").format(
+                    s.user.first_name,
+                    s.user.last_name,
+                    s.user.email,
+                    part,
+                )
+        else:
+            message = message + _("--- No partial shares during split --- \n")
+
+        message = message + _(
+            "\nThese shareholders are eligible to either "
+            "sell their partial shares or get compensated.\n\n"
+            "Please handle them accordingly and update the share "
+            "register.\n\n"
+            "Your Share Register Team"
+            )
+        send_mail(
+            subject, message, settings.SERVER_EMAIL,
+            operators, fail_silently=False)
+        logger.info(
+            'split partials mail sent to operators: {}'.format(
+                operators))
+
+    # --- GETTER
     def shareholder_count(self):
         """ total count of active Shareholders """
         return Position.objects.filter(
             buyer__company=self, seller__isnull=True).count()
 
-    def get_active_shareholders(self):
+    def get_active_shareholders(self, date=None):
         """ returns list of all active shareholders """
         shareholder_list = []
         for shareholder in self.shareholder_set.all().order_by('number'):
-            if shareholder.share_count() > 0:
+            if shareholder.share_count(date=date) > 0:
                 shareholder_list.append(shareholder)
+
         return shareholder_list
+
+    def get_company_shareholder(self):
+        return self.shareholder_set.earliest('id')
+
+    def get_operators(self):
+        return self.operator_set.all().distinct()
+
+    # --- LOGIC
+    def split_shares(self, data):
+        """ split all existing positions """
+        execute_at = data['execute_at']
+        dividend = float(data['dividend'])
+        divisor = float(data['divisor'])
+        security = data['security']
+
+        # get all active shareholder on day 'execute_at'
+        shareholders = self.get_active_shareholders(date=execute_at)
+        company_shareholder = self.get_company_shareholder()
+
+        # create return transactions to return old assets to company
+        # create transaction to hand out new assets to shareholders with
+        # new count
+        value = float(company_shareholder.last_traded_share_price(
+            date=execute_at, security=security))
+        partials = {}
+        for shareholder in shareholders:
+            count = shareholder.share_count(
+                execute_at, security)
+            kwargs1 = {
+                'buyer': company_shareholder,
+                'seller': shareholder,
+                'count': count,
+                'value': value,
+                'security': security,
+                'bought_at': execute_at,
+                'comment': _('Share split of {} on {} with ratio {}:{}. '
+                             'Return of old shares.'.format(
+                                 security, execute_at.date(),
+                                 int(dividend), int(divisor))),
+            }
+            if shareholder.pk != company_shareholder.pk:
+                p = Position.objects.create(**kwargs1)
+                logger.info('Split: share returned {}'.format(p))
+
+            part, count2 = math.modf(count * divisor / dividend)
+            kwargs2 = {
+                'buyer': shareholder,
+                'seller': company_shareholder,
+                'count': count2,
+                'value': value / divisor * dividend,
+                'security': security,
+                'bought_at': execute_at,
+                'comment': _('Share split of {} on {} with ratio {}:{}. '
+                             'Provisioning of new shares.'.format(
+                                 security, execute_at.date(),
+                                 int(dividend), int(divisor))),
+            }
+            if shareholder.pk == company_shareholder.pk:
+                part, count2 = math.modf(
+                    shareholder.company.share_count /
+                    dividend * float(divisor) -
+                    shareholder.company.share_count
+                )
+                kwargs2.update({
+                    'count': count2,
+                    'seller': None,
+                })
+
+            p = Position.objects.create(**kwargs2)
+            partials.update({shareholder.pk: round(part, 6)})
+            logger.info('Split: share issued {}'.format(p))
+
+        # update share count
+        self.share_count = int(
+            self.share_count / dividend * float(divisor)
+        )
+
+        # record partial shares to operator
+        self._send_partial_share_rights_email(partials)
+
+        self.save()
 
 
 class UserProfile(models.Model):
@@ -76,7 +203,7 @@ class Shareholder(models.Model):
     def __str__(self):
         return u'{}'.format(self.id)
 
-    def share_percent(self):
+    def share_percent(self, date=None):
         """ returns percentage of shares owned compared to corps
         total shares """
         total = self.company.share_count
@@ -86,14 +213,28 @@ class Shareholder(models.Model):
             return "{:.2f}".format(count / float(total) * 100)
         return False
 
-    def share_count(self):
+    def share_count(self, date=None, security=None):
         """ total count of shares for shareholder  """
-        return sum(self.buyer.all().values_list('count', flat=True)) - \
-            sum(self.seller.all().values_list('count', flat=True))
+        date = date or datetime.datetime.now()
+        qs_bought = self.buyer.all()
+        qs_sold = self.seller.all()
 
-    def share_value(self):
+        if date:
+            qs_bought = self.buyer.filter(bought_at__lte=date)
+            qs_sold = self.seller.filter(bought_at__lte=date)
+
+        if security:
+            qs_bought = qs_bought.filter(security=security)
+            qs_sold = qs_sold.filter(security=security)
+
+        count_bought = sum(qs_bought.values_list('count', flat=True))
+        count_sold = sum(qs_sold.values_list('count', flat=True))
+
+        return count_bought - count_sold
+
+    def share_value(self, date=None):
         """ calculate the total values of all shares for this shareholder """
-        share_count = self.share_count()
+        share_count = self.share_count(date=date)
         if share_count == 0:
             return 0
 
@@ -101,6 +242,15 @@ class Shareholder(models.Model):
         position = Position.objects.filter(buyer__company=self.company).latest(
             'bought_at')
         return share_count * position.value
+
+    def last_traded_share_price(self, date=None, security=None):
+        qs = Position.objects.filter(buyer__company=self.company)
+        if date:
+            qs = qs.filter(bought_at__lte=date)
+        if security:
+            qs = qs.filter(security=security)
+
+        return qs.latest('bought_at').value
 
     def validate_gafi(self):
         """ returns dict with indication if all data is correct to match
@@ -182,6 +332,14 @@ class Position(models.Model):
     comment = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return u"Pos {}->#{}@{}->{}".format(
+            self.seller,
+            self.count,
+            self.value,
+            self.buyer
+        )
 
 
 def get_option_plan_upload_path(instance, filename):

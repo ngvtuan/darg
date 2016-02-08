@@ -10,7 +10,8 @@
 
   <div class="panel">
     <a class="btn align-left" href="" ng-click="show_add_position_form()">{% trans "Transfer Shares" %}</a>
-    <a class="btn" href="" ng-click="show_add_capital_form()">{% trans "Increase Kapital" %}</a>
+    <a class="btn" href="" ng-click="show_add_capital_form()">{% trans "Increase Capital" %}</a>
+    <a class="btn" href="" ng-click="show_split_form()">{% trans "Split Shares" %}</a>
   </div>
 
   <div id="add_position" ng-hide="!show_add_position">
@@ -18,6 +19,9 @@
   </div>
   <div id="add_capital" ng-hide="!show_add_capital">
     {% include "_add_capital_form.html" %}
+  </div>
+  <div id="split-shares" ng-hide="!show_split">
+    {% include "_split_shares_form.html" %}
   </div>
 
   <div id="positions" ng-hide="!positions.length">

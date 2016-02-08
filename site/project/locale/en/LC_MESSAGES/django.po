@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-28 20:17+0000\n"
+"POT-Creation-Date: 2016-02-08 17:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,19 +24,21 @@ msgstr ""
 #: project/templates/_add_capital_form.html:12
 #: project/templates/_add_option_plan_form.html:11
 #: project/templates/_add_position_form.html:13
+#: project/templates/_split_shares_form.html:12
 msgid "Security"
 msgstr ""
 
-#: project/templates/_add_capital_form.html:16
+#: project/templates/_add_capital_form.html:17
 #: project/templates/_add_option_plan_form.html:18
 #: project/templates/_add_option_transaction_form.html:22
-#: project/templates/_add_position_form.html:22
+#: project/templates/_add_position_form.html:24
 #: project/templates/_add_shareholder_form.html:15
+#: project/templates/_split_shares_form.html:18
 msgid "Cancel"
 msgstr ""
 
-#: project/templates/_add_capital_form.html:17
-#: project/templates/_add_position_form.html:23
+#: project/templates/_add_capital_form.html:18
+#: project/templates/_add_position_form.html:25
 msgid "Add Position"
 msgstr ""
 
@@ -90,6 +92,23 @@ msgstr ""
 #: project/templates/_add_shareholder_form.html:16
 #: project/templates/start.html:15
 msgid "Add Shareholder"
+msgstr ""
+
+#: project/templates/_split_shares_form.html:3
+msgid "Please enter your share split data"
+msgstr ""
+
+#: project/templates/_split_shares_form.html:15
+msgid ""
+"Please note that the split will leave partial share rights unhandled. You "
+"must assign those options to the shareholders and either pay, trade or "
+"compensate them. Create a new transaction for these manually please. Once "
+"the split is complete we send you an email with the partial share options "
+"for each shareholder."
+msgstr ""
+
+#: project/templates/_split_shares_form.html:19
+msgid "Add Share Split"
 msgstr ""
 
 #: project/templates/active_shareholder_captable.pdf.html:37

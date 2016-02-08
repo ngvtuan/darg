@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-28 20:17+0000\n"
+"POT-Creation-Date: 2016-02-08 17:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,4 +66,9 @@ msgstr ""
 #: services/rest/validators.py:9
 #, python-brace-format
 msgid "The fields {field_names} must be empty together or contain values."
+msgstr ""
+
+#: services/rest/views.py:129 services/rest/views.py:131
+#: services/rest/views.py:133 services/rest/views.py:135
+msgid "Field may not be empty."
 msgstr ""

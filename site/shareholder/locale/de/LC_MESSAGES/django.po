@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-08 17:24+0000\n"
-"PO-Revision-Date: 2016-02-08 18:29+0000\n"
+"POT-Creation-Date: 2016-02-08 23:09+0000\n"
+"PO-Revision-Date: 2016-02-08 23:18+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -37,6 +37,7 @@ msgstr ""
 "Lieber Operator,\n"
 "\n"
 "Der Aktiensplit war erfolgreich. Sie finden die Daten zu den teilweisen Aktienanrechten wie folgt:\n"
+"\n"
 
 #: shareholder/models.py:56
 msgid "{}{}({}): {} shares\n"
@@ -186,12 +187,10 @@ msgid "Transfer Shares"
 msgstr "Aktien übertragen"
 
 #: shareholder/templates/positions.html:13
-#| msgid "Increase Kapital"
 msgid "Increase Capital"
 msgstr "Kapital erhöhen"
 
 #: shareholder/templates/positions.html:14
-#| msgid "Shares"
 msgid "Split Shares"
 msgstr "Aktiensplit"
 

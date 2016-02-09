@@ -40,15 +40,33 @@
       </thead
       <tbody>
       {% verbatim %}
-      <tr class="panel" ng-repeat="position in positions">
-        <td>{{ position.bought_at | date : 'd.MM.yy' }}</td>
-        <td>{{ position.buyer.user.first_name }} {{ position.buyer.user.last_name }}</td>
-        <td>{{ position.security.readable_title }}</td>
-        <td class="text-right">{{ position.count }}</td>
-        <td class="text-right">{{ position.value }}</td>
-        <td>{{ position.seller.user.first_name }} {{ position.seller.user.last_name }}</td>
-        <td>{{ position.comment }}</td>
-      </tr>
+      <tbody ng-repeat="position in positions">
+        <tr ng-show="position.is_split && !positions[$index-1].is_split">
+          <td>{{ position.bought_at | date : 'd.MM.yy' }}</td>
+          <td colspan="7">
+            {% endverbatim %}{% trans "Grouped split transactions." %}{% verbatim %}
+            <a ng-click="toggle_show_split_data()" class="btn-inline" ng-hide="show_split_data">
+              {% endverbatim %}{% trans "Show" %}{% verbatim %}
+            </a>
+            <a ng-click="toggle_show_split_data()" class="btn-inline" ng-show="show_split_data">
+              {% endverbatim %}{% trans "Hide" %}{% verbatim %}
+            </a>
+          </td>
+        </tr>
+        <tr class="panel" ng-hide="position.is_split && !show_split_data">
+          <td>{{ position.bought_at | date : 'd.MM.yy' }}</td>
+          <td>{{ position.buyer.user.first_name }} {{ position.buyer.user.last_name }}</td>
+          <td>{{ position.security.readable_title }}</td>
+          <td class="text-right">{{ position.count }}</td>
+          <td class="text-right">{{ position.value }}</td>
+          <td>{{ position.seller.user.first_name }} {{ position.seller.user.last_name }}</td>
+          <td>{{ position.comment }}</td>
+        </tr>
+        <tr ng-show="show_split_data && position.is_split && !positions[$index+1].is_split">
+          <td colspan="7">
+            {% endverbatim %}{% trans "--- End of split transactions ---" %}{% verbatim %}
+          </td>
+        </tr>
       </tbody>
     </table>
     {% endverbatim %}

@@ -7,6 +7,7 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
 
     $scope.show_add_position = false
     $scope.show_add_capital = false
+    $scope.show_split_data = false
     $scope.show_split = false
     $scope.newPosition = new Position()
     $scope.newSplit = new Split()
@@ -53,6 +54,12 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
         $scope.show_add_capital = false
         $scope.newPosition = new Position()
         $scope.show_split = false
+
+    $scope.toggle_show_split_data = ->
+        if $scope.show_split_data
+            $scope.show_split_data = false
+        else
+            $scope.show_split_data = true
 
     $scope.show_add_capital_form = ->
         $scope.show_add_position = false

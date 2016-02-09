@@ -378,6 +378,7 @@
       $scope.securities = [];
       $scope.show_add_position = false;
       $scope.show_add_capital = false;
+      $scope.show_split_data = false;
       $scope.show_split = false;
       $scope.newPosition = new Position();
       $scope.newSplit = new Split();
@@ -426,6 +427,13 @@
         $scope.show_add_capital = false;
         $scope.newPosition = new Position();
         return $scope.show_split = false;
+      };
+      $scope.toggle_show_split_data = function() {
+        if ($scope.show_split_data) {
+          return $scope.show_split_data = false;
+        } else {
+          return $scope.show_split_data = true;
+        }
       };
       $scope.show_add_capital_form = function() {
         $scope.show_add_position = false;

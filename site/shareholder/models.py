@@ -125,10 +125,11 @@ class Company(models.Model):
                 'value': value,
                 'security': security,
                 'bought_at': execute_at,
+                'is_split': True,
                 'comment': _('Share split of {} on {} with ratio {}:{}. '
-                             'Return of old shares.'.format(
+                             'Return of old shares.').format(
                                  security, execute_at.date(),
-                                 int(dividend), int(divisor))),
+                                 int(dividend), int(divisor)),
             }
             if shareholder.pk != company_shareholder.pk:
                 p = Position.objects.create(**kwargs1)
@@ -142,6 +143,7 @@ class Company(models.Model):
                 'value': value / divisor * dividend,
                 'security': security,
                 'bought_at': execute_at,
+                'is_split': True,
                 'comment': _('Share split of {} on {} with ratio {}:{}. '
                              'Provisioning of new shares.'.format(
                                  security, execute_at.date(),
@@ -159,7 +161,8 @@ class Company(models.Model):
                 })
 
             p = Position.objects.create(**kwargs2)
-            partials.update({shareholder.pk: round(part, 6)})
+            if part != 0.0:
+                partials.update({shareholder.pk: round(part, 6)})
             logger.info('Split: share issued {}'.format(p))
 
         # update share count
@@ -329,6 +332,7 @@ class Position(models.Model):
     bought_at = models.DateField()
     value = models.DecimalField(max_digits=8, decimal_places=4, blank=True,
                                 null=True)
+    is_split = models.BooleanField(default=False)
     comment = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

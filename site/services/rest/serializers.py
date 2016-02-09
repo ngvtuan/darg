@@ -190,7 +190,8 @@ class UserWithEmailOnlySerializer(serializers.HyperlinkedModelSerializer):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     operator_set = OperatorSerializer(many=True, read_only=True)
-    userprofile = UserProfileSerializer(many=False, required=False, allow_null=True)
+    userprofile = UserProfileSerializer(
+        many=False, required=False, allow_null=True)
 
     class Meta:
         model = User
@@ -333,7 +334,7 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer):
         model = Position
         fields = (
             'pk', 'buyer', 'seller', 'bought_at', 'count', 'value',
-            'security', 'comment')
+            'security', 'comment', 'is_split')
         validators = [DependedFieldsValidator(fields=('seller', 'buyer'))]
 
     def create(self, validated_data):

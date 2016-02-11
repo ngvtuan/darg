@@ -20,7 +20,7 @@
   </div>
   {% if user.operator_set.exists %}
     {% for operator in user.operator_set.all %}
-      <div id="shareholder_list" ng-hide="!user.operator_set.length"> 
+      <div id="shareholder_list" ng-hide="!user.operator_set.length">
         <h2>
           {% trans "Your Shareholders for" %} {{ operator.company.name }}
           <a href="{% url "company" operator.company.id %}" class="el-icon-cogs-wrapper btn">
@@ -38,7 +38,7 @@
           </thead
           <tbody>
           {% verbatim %}
-          <tr class="panel" ng-repeat="shareholder in shareholders" ng-click="goto_shareholder(shareholder.pk)" ng-mouseover="">
+          <tr class="panel" ng-repeat="shareholder in shareholders  | orderBy:'-share_count'" ng-click="goto_shareholder(shareholder.pk)" ng-mouseover="">
             <td><span class="el-icon-exclamation-sign" ng-hide="shareholder.validate_gafi.is_valid" data-toggle="tooltip" title="{% endverbatim %}{% trans "Gafi Validation failed" %}{% verbatim %}"></span>
               {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
             </td>
@@ -58,7 +58,7 @@
           {% trans "Download active Shareholders as" %}
           <a href="{% url "captable_pdf" company_id=operator.company.id %}" title="{% trans "Download active Shareholders as PDF" %}" class="btn btn-inline">
             {% trans "PDF" %}
-          </a> | 
+          </a> |
           <a href="{% url "captable_csv" company_id=operator.company.id %}" title="{% trans "Download active Shareholders as CSV" %}" class="btn btn-inline">
             {% trans "CSV" %}
           </a>
@@ -66,5 +66,5 @@
       </div>
     {% endfor %}
   {% endif %}
-</div> 
+</div>
 {% endblock %}

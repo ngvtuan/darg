@@ -40,7 +40,7 @@
       </thead
       <tbody>
       {% verbatim %}
-      <tbody ng-repeat="position in positions  | orderBy:bought_at ">
+      <tbody ng-repeat="position in positions  | orderBy:'-bought_at' ">
         <tr ng-show="position.is_split && !positions[$index-1].is_split">
           <td>{{ position.bought_at | date : 'd.MM.yy' }}</td>
           <td colspan="7">

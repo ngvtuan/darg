@@ -26,21 +26,20 @@ class CountrySerializer(serializers.HyperlinkedModelSerializer):
         model = Country
         fields = ('url', 'iso_code', 'name')
 
-    """
-    def update(self, instance, validated_data):
-        country_data = validated_data.pop('country')
 
-        country = Country.objects.get(iso_code=country_data.get('iso_code'))
+class SecuritySerializer(serializers.HyperlinkedModelSerializer):
+    readable_title = serializers.SerializerMethodField()
 
-        instance.country = country
-        instance.save()
+    class Meta:
+        model = Security
+        fields = ('pk', 'readable_title', 'title', 'url', 'count')
 
-        return instance
-    """
+    def get_readable_title(self, obj):
+        return obj.get_title_display()
 
 
 class CompanySerializer(serializers.HyperlinkedModelSerializer):
-
+    security_set = SecuritySerializer(many=True, read_only=True)
     country = serializers.HyperlinkedRelatedField(
         view_name='country-detail',
         required=False,
@@ -51,7 +50,7 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Company
         fields = ('pk', 'name', 'share_count', 'country', 'url',
-                  'shareholder_count')
+                  'shareholder_count', 'security_set')
 
 
 class AddCompanySerializer(serializers.Serializer):
@@ -95,17 +94,6 @@ class AddCompanySerializer(serializers.Serializer):
         )
 
         return validated_data
-
-
-class SecuritySerializer(serializers.HyperlinkedModelSerializer):
-    readable_title = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Security
-        fields = ('pk', 'readable_title', 'title', 'url')
-
-    def get_readable_title(self, obj):
-        return obj.get_title_display()
 
 
 class UserProfileSerializer(serializers.HyperlinkedModelSerializer):

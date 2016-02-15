@@ -505,6 +505,7 @@
     '$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', function($scope, $http, CompanyAdd, Shareholder, User) {
       $scope.shareholders = [];
       $scope.user = [];
+      $scope.total_shares = 0;
       $scope.show_add_shareholder = false;
       $scope.newShareholder = new Shareholder();
       $scope.newCompany = new CompanyAdd();
@@ -515,6 +516,12 @@
       });
       $http.get('/services/rest/user').then(function(result) {
         return $scope.user = result.data.results[0];
+      });
+      $scope.$watchCollection('shareholders', function(shareholders) {
+        $scope.total_shares = 0;
+        return angular.forEach(shareholders, function(item) {
+          return $scope.total_shares = item.share_count + $scope.total_shares;
+        });
       });
       $scope.add_company = function() {
         return $scope.newCompany.$save().then(function(result) {

@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-08 23:09+0000\n"
-"PO-Revision-Date: 2016-02-08 18:24+0000\n"
+"POT-Creation-Date: 2016-02-15 22:25+0000\n"
+"PO-Revision-Date: 2016-02-15 22:26+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
@@ -164,8 +164,8 @@ msgid ""
 "IMPORTANT: Excel does not fulfill legal requirements for a share register!"
 msgstr ""
 "Das Verwalten der Aktionäre mit Excel genügt ab 2016 nicht mehr den "
-"gesetzlichen Anforderungen in der Schweiz. <strong>\"Das Aktienregister\"</"
-"strong> stellt sicher:"
+"gesetzlichen Anforderungen in der Schweiz. <strong>\"Das "
+"Aktienregister\"</strong> stellt sicher:"
 
 #: project/templates/index.html:15
 msgid "Rapid Shareholder documentation"
@@ -185,8 +185,8 @@ msgstr "Datenexport als CSV für Excel etc."
 
 #: project/templates/index.html:21
 msgid ""
-"We are currently in private Beta. Please leave your email address to receive "
-"an invitation soon!"
+"We are currently in private Beta. Please leave your email address to receive"
+" an invitation soon!"
 msgstr ""
 "Wir sind aktuell in geschlossender Beta. Bitte hinterlassen Sie ihre Email, "
 "um eine Einladung zu erhalten."
@@ -235,23 +235,27 @@ msgstr "Willkommen"
 msgid "Gafi Validation failed"
 msgstr "GAFI-FATF Validierung fehlgeschlagen"
 
-#: project/templates/start.html:58
+#: project/templates/start.html:51
+msgid "Total Shares distributed (total shares registered with company)"
+msgstr "Zahl Aktien lt. Tabelle (Zahl Aktien lt. Unternehmensdaten)"
+
+#: project/templates/start.html:66
 msgid "Download active Shareholders as"
 msgstr "Download Liste der aktiven Aktionäre als"
 
-#: project/templates/start.html:59
+#: project/templates/start.html:67
 msgid "Download active Shareholders as PDF"
 msgstr "Download Liste der aktiven Aktionäre als PDF"
 
-#: project/templates/start.html:60
+#: project/templates/start.html:68
 msgid "PDF"
 msgstr "PDF"
 
-#: project/templates/start.html:62
+#: project/templates/start.html:70
 msgid "Download active Shareholders as CSV"
 msgstr "Download Liste der aktiven Aktionäre als CSV"
 
-#: project/templates/start.html:63
+#: project/templates/start.html:71
 msgid "CSV"
 msgstr "CSV"
 
@@ -281,8 +285,8 @@ msgstr "CSV"
 
 #~ msgid "GAFI Standard compliant"
 #~ msgstr ""
-#~ "Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" class="
-#~ "\"regular\">GAFI Standards</a>"
+#~ "Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" "
+#~ "class=\"regular\">GAFI Standards</a>"
 
 #~ msgid "Extensive data validation to ensure you cannot make a mistake"
 #~ msgstr "Umfangreiche Datenvalidierung  - Garantiert korrekte Daten"

@@ -5,6 +5,7 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
     # from server
     $scope.shareholders = []
     $scope.user = []
+    $scope.total_shares = 0
 
     $scope.show_add_shareholder = false
 
@@ -18,6 +19,11 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
 
     $http.get('/services/rest/user').then (result) ->
         $scope.user = result.data.results[0]
+
+    $scope.$watchCollection 'shareholders', (shareholders)->
+        $scope.total_shares = 0
+        angular.forEach shareholders, (item) ->
+            $scope.total_shares = item.share_count + $scope.total_shares
 
     $scope.add_company = ->
         $scope.newCompany.$save().then (result) ->

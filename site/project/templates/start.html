@@ -37,15 +37,23 @@
               <th class="text-right">{% trans "Shares (%)" %}</th>
           </thead
           <tbody>
-          {% verbatim %}
-          <tr class="panel" ng-repeat="shareholder in shareholders  | orderBy:'-share_count'" ng-click="goto_shareholder(shareholder.pk)" ng-mouseover="">
-            <td><span class="el-icon-exclamation-sign" ng-hide="shareholder.validate_gafi.is_valid" data-toggle="tooltip" title="{% endverbatim %}{% trans "Gafi Validation failed" %}{% verbatim %}"></span>
-              {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
-            </td>
-            <td>{{ shareholder.user.email }}<a class="btn"><span class="el-icon-eye-open"></span></a></td>
-            <td class="text-right">{{ shareholder.number }}</td>
-            <td class="text-right"><value ng-if="shareholder.share_count != '-'">{{ shareholder.share_count | number : 0}} ({{shareholder.share_percent | number : 1}}%)</value></td>
-          </tr>
+            {% verbatim %}
+            <tr class="panel" ng-repeat="shareholder in shareholders  | orderBy:'-share_count'" ng-click="goto_shareholder(shareholder.pk)" ng-mouseover="">
+              <td><span class="el-icon-exclamation-sign" ng-hide="shareholder.validate_gafi.is_valid" data-toggle="tooltip" title="{% endverbatim %}{% trans "Gafi Validation failed" %}{% verbatim %}"></span>
+                {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
+              </td>
+              <td>{{ shareholder.user.email }}<a class="btn"><span class="el-icon-eye-open"></span></a></td>
+              <td class="text-right">{{ shareholder.number }}</td>
+              <td class="text-right"><value ng-if="shareholder.share_count != '-'">{{ shareholder.share_count | number : 0}} ({{shareholder.share_percent | number : 1}}%)</value></td>
+            </tr>
+            <tr>
+              <td colspan="3" class="summary">
+                {% endverbatim %}{% trans "Total Shares distributed (total shares registered with company)" %}{% verbatim %}
+              </td>
+              <td class="summary text-right">
+                {{ total_shares }} ({{ shareholders[0].company.share_count }})
+              </td>
+            </tr>
           </tbody>
         </table>
         {% endverbatim %}

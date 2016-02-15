@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-08 23:09+0000\n"
-"PO-Revision-Date: 2016-02-08 23:18+0000\n"
+"POT-Creation-Date: 2016-02-15 22:25+0000\n"
+"PO-Revision-Date: 2016-02-15 22:27+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,37 +65,37 @@ msgstr ""
 "\n"
 "Das Aktienregister-Team"
 
-#: shareholder/models.py:128
+#: shareholder/models.py:129
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
 msgstr ""
 "Aktiensplit von {} für {} mit Verhältnis {}:{}. Rückgabe alter Aktien."
 
-#: shareholder/models.py:145
+#: shareholder/models.py:147
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr "Aktiensplit von {} für {} mit Verhältnis {}:{}. Ausgabe neuer Aktien."
 
-#: shareholder/models.py:270
+#: shareholder/models.py:273
 msgid "Missing all data required for #GAFI."
 msgstr "Alle Daten für GAFI-FATF fehlen."
 
-#: shareholder/models.py:277
+#: shareholder/models.py:280
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 "Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
 
-#: shareholder/models.py:281
+#: shareholder/models.py:284
 msgid "Shareholder birthday missing."
 msgstr "Geburstag"
 
-#: shareholder/models.py:285
+#: shareholder/models.py:288
 msgid "Shareholder origin/country missing."
 msgstr "Land des Aktionärs fehlt."
 
-#: shareholder/models.py:291
+#: shareholder/models.py:294
 msgid "Shareholder address or address details missing."
 msgstr "Adresse oder Adressdetails des Aktionärs fehlen."
 
-#: shareholder/models.py:363
+#: shareholder/models.py:367
 msgid "Number of shares approved"
 msgstr "Anzahl der genehmigten Aktien"
 
@@ -218,7 +218,23 @@ msgstr "Preis"
 msgid "Seller"
 msgstr "Verkäufer"
 
-#: shareholder/templates/positions.html:57
+#: shareholder/templates/positions.html:47
+msgid "Grouped split transactions."
+msgstr "Gruppierte Split-Transaktionen"
+
+#: shareholder/templates/positions.html:49
+msgid "Show"
+msgstr "Anzeigen"
+
+#: shareholder/templates/positions.html:52
+msgid "Hide"
+msgstr "Ausblenden"
+
+#: shareholder/templates/positions.html:67
+msgid "--- End of split transactions ---"
+msgstr "--- Ende der Split-Transaktionen ---"
+
+#: shareholder/templates/positions.html:75
 msgid "No Postions yet."
 msgstr "Noch keine Transaktionen"
 

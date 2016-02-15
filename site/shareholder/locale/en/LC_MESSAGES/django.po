@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-08 23:09+0000\n"
+"POT-Creation-Date: 2016-02-15 22:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,35 +53,35 @@ msgid ""
 "Your Share Register Team"
 msgstr ""
 
-#: shareholder/models.py:128
+#: shareholder/models.py:129
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
 msgstr ""
 
-#: shareholder/models.py:145
+#: shareholder/models.py:147
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr ""
 
-#: shareholder/models.py:270
+#: shareholder/models.py:273
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:277
+#: shareholder/models.py:280
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:281
+#: shareholder/models.py:284
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:285
+#: shareholder/models.py:288
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:291
+#: shareholder/models.py:294
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:363
+#: shareholder/models.py:367
 msgid "Number of shares approved"
 msgstr ""
 
@@ -204,7 +204,23 @@ msgstr ""
 msgid "Seller"
 msgstr ""
 
-#: shareholder/templates/positions.html:57
+#: shareholder/templates/positions.html:47
+msgid "Grouped split transactions."
+msgstr ""
+
+#: shareholder/templates/positions.html:49
+msgid "Show"
+msgstr ""
+
+#: shareholder/templates/positions.html:52
+msgid "Hide"
+msgstr ""
+
+#: shareholder/templates/positions.html:67
+msgid "--- End of split transactions ---"
+msgstr ""
+
+#: shareholder/templates/positions.html:75
 msgid "No Postions yet."
 msgstr ""
 

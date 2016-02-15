@@ -173,7 +173,8 @@ class PositionTestCase(TestCase):
             "security": {
                 "pk": 2,
                 "readable_title": "Preferred Stock",
-                "title": "P"
+                "title": "P",
+                "count": 3
             },
             "count": 1,
             "value": 1,

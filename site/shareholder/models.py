@@ -200,7 +200,7 @@ class UserProfile(models.Model):
 class Shareholder(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    company = models.ForeignKey('Company')
+    company = models.ForeignKey('Company', verbose_name="Shareholders Company")
     number = models.CharField(max_length=255)
 
     def __str__(self):
@@ -299,7 +299,7 @@ class Shareholder(models.Model):
 class Operator(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    company = models.ForeignKey('Company')
+    company = models.ForeignKey('Company', verbose_name="Operators Company")
     share_count = models.PositiveIntegerField(blank=True, null=True)
 
     def __str__(self):

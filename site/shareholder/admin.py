@@ -13,8 +13,11 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 class OperatorAdmin(admin.ModelAdmin):
-    list_display = ('user', 'company')
-    pass
+    list_display = ('id', 'user', 'company', 'user', 'date_joined')
+    list_filter = ('company',)
+
+    def date_joined(selfi, obj):
+        return obj.user.date_joined
 
 
 class PositionAdmin(admin.ModelAdmin):

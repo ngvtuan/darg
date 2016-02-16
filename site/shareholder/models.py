@@ -38,6 +38,9 @@ class Company(models.Model):
     def __str__(self):
         return u"{}".format(self.name)
 
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
     def _send_partial_share_rights_email(self, partials):
         """ send email with partial share after split list """
         operators = self.get_operators().values_list('user__email', flat=True)

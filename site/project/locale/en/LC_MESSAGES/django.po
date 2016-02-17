@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-15 22:25+0000\n"
+"POT-Creation-Date: 2016-02-17 21:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,8 +55,7 @@ msgid "Please enter your option plan data:"
 msgstr ""
 
 #: project/templates/_add_option_plan_form.html:19
-#: project/templates/_add_option_transaction_form.html:23
-msgid "Add Option"
+msgid "Add Option-Plan"
 msgstr ""
 
 #: project/templates/_add_option_plan_form.html:22
@@ -79,6 +78,10 @@ msgstr ""
 #: project/templates/_add_option_transaction_form.html:17
 #: project/templates/_add_position_form.html:18
 msgid "Seller"
+msgstr ""
+
+#: project/templates/_add_option_transaction_form.html:23
+msgid "Add Option"
 msgstr ""
 
 #: project/templates/_add_position_form.html:3

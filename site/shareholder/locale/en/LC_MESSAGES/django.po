@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-15 22:25+0000\n"
+"POT-Creation-Date: 2016-02-17 21:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,11 +21,11 @@ msgstr ""
 msgid "Headquarter location"
 msgstr ""
 
-#: shareholder/models.py:45
+#: shareholder/models.py:48
 msgid "Your list of partials for the share split for company '{}'"
 msgstr ""
 
-#: shareholder/models.py:48
+#: shareholder/models.py:51
 msgid ""
 "Dear Operator,\n"
 "\n"
@@ -34,15 +34,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#: shareholder/models.py:56
+#: shareholder/models.py:59
 msgid "{}{}({}): {} shares\n"
 msgstr ""
 
-#: shareholder/models.py:63
+#: shareholder/models.py:66
 msgid "--- No partial shares during split --- \n"
 msgstr ""
 
-#: shareholder/models.py:66
+#: shareholder/models.py:69
 msgid ""
 "\n"
 "These shareholders are eligible to either sell their partial shares or get "
@@ -53,35 +53,35 @@ msgid ""
 "Your Share Register Team"
 msgstr ""
 
-#: shareholder/models.py:129
+#: shareholder/models.py:132
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
 msgstr ""
 
-#: shareholder/models.py:147
+#: shareholder/models.py:150
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr ""
 
-#: shareholder/models.py:273
+#: shareholder/models.py:276
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:280
+#: shareholder/models.py:283
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:284
+#: shareholder/models.py:287
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:288
+#: shareholder/models.py:291
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:294
+#: shareholder/models.py:297
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:367
+#: shareholder/models.py:370
 msgid "Number of shares approved"
 msgstr ""
 

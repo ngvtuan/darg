@@ -34,6 +34,7 @@ class Company(models.Model):
     share_count = models.PositiveIntegerField(blank=True, null=True)
     country = models.ForeignKey(
         Country, null=True, blank=False, help_text=_("Headquarter location"))
+    founded_at = models.DateField(_('Foundation date of the company'))
 
     def __str__(self):
         return u"{}".format(self.name)

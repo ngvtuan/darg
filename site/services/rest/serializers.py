@@ -46,17 +46,19 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
         allow_null=True,
         queryset=Country.objects.all(),
     )
+    founded_at = serializers.DateField()
 
     class Meta:
         model = Company
         fields = ('pk', 'name', 'share_count', 'country', 'url',
-                  'shareholder_count', 'security_set')
+                  'shareholder_count', 'security_set', 'founded_at')
 
 
 class AddCompanySerializer(serializers.Serializer):
 
     name = serializers.CharField(max_length=255)
     face_value = serializers.DecimalField(max_digits=19, decimal_places=4)
+    founded_at = serializers.DateField(required=False)
     count = serializers.IntegerField()
 
     def create(self, validated_data):
@@ -66,7 +68,8 @@ class AddCompanySerializer(serializers.Serializer):
         user = validated_data.get("user")
         company = Company.objects.create(
             share_count=validated_data.get("count"),
-            name=validated_data.get("name")
+            name=validated_data.get("name"),
+            founded_at=validated_data.get('founded_at')
         )
         security = Security.objects.create(
             title="P",
@@ -81,7 +84,8 @@ class AddCompanySerializer(serializers.Serializer):
         shareholder = Shareholder.objects.create(user=companyuser,
                                                  company=company, number='0')
         Position.objects.create(
-            bought_at=datetime.datetime.now(),
+            bought_at=validated_data.get(
+                'founded_at') or datetime.datetime.now(),
             buyer=shareholder, count=validated_data.get("count"),
             value=validated_data.get("face_value"),
             security=security,

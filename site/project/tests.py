@@ -21,6 +21,7 @@ def _add_company_to_user_via_rest(user):
     response = client.post(
         reverse('add_company'), {
             'name': 'company',
+            'founded_at': '2015-01-02',
             'count': 1,
             'face_value': 2
         },

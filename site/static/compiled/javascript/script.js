@@ -130,6 +130,7 @@
       $scope.newOperator = new Operator();
       $http.get('/services/rest/company/' + company_id).then(function(result) {
         $scope.company = new Company(result.data);
+        $scope.company.founded_at = new Date($scope.company.founded_at);
         return $http.get($scope.company.country).then(function(result1) {
           return $scope.company.country = result1.data;
         });
@@ -170,7 +171,9 @@
       };
       return $scope.edit_company = function() {
         $scope.company.country = $scope.company.country.url;
+        $scope.company.founded_at = $scope.company.founded_at.toISOString().substring(0, 10);
         return $scope.company.$update().then(function(result) {
+          result.founded_at = new Date(result.founded_at);
           $scope.company = new Company(result);
           return $http.get($scope.company.country).then(function(result1) {
             return $scope.company.country = result1.data;
@@ -502,7 +505,7 @@
   app = angular.module('js.darg.app.start', ['js.darg.api']);
 
   app.controller('StartController', [
-    '$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', function($scope, $http, CompanyAdd, Shareholder, User) {
+    '$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', function($scope, $http, CompanyAdd, Shareholder, User, Company) {
       $scope.shareholders = [];
       $scope.user = [];
       $scope.total_shares = 0;
@@ -524,10 +527,14 @@
         });
       });
       $scope.add_company = function() {
+        if ($scope.newCompany.founded_at) {
+          $scope.newCompany.founded_at = $scope.newCompany.founded_at.toISOString().substring(0, 10);
+        } else {
+          delete $scope.newCompany.founded_at;
+        }
         return $scope.newCompany.$save().then(function(result) {
           return $http.get('/services/rest/user').then(function(result) {
-            $scope.user = result.data.results[0];
-            return console.log($scope.user);
+            return $scope.user = result.data.results[0];
           });
         }).then(function() {
           return $scope.company = new Company();

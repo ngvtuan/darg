@@ -1,6 +1,6 @@
 app = angular.module 'js.darg.app.start', ['js.darg.api',]
 
-app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', ($scope, $http, CompanyAdd, Shareholder, User) ->
+app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', ($scope, $http, CompanyAdd, Shareholder, User, Company) ->
 
     # from server
     $scope.shareholders = []
@@ -26,10 +26,13 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
             $scope.total_shares = item.share_count + $scope.total_shares
 
     $scope.add_company = ->
+        if $scope.newCompany.founded_at
+            $scope.newCompany.founded_at = $scope.newCompany.founded_at.toISOString().substring(0, 10)
+        else
+            delete $scope.newCompany.founded_at
         $scope.newCompany.$save().then (result) ->
             $http.get('/services/rest/user').then (result) ->
                 $scope.user = result.data.results[0]
-                console.log($scope.user)
         .then ->
             # Reset our editor to a new blank post
             $scope.company = new Company()

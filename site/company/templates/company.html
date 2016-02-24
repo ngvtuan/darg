@@ -18,12 +18,39 @@
   <table class="table table-striped">
     <tr>
       <td>{% trans "Company Name" %}:</td>
-      <td>{% verbatim %}<span editable-text="company.name" onaftersave="edit_company()">{{ company.name || 'empty' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}</td>
+      <td>
+        {% verbatim %}
+        <span editable-text="company.name" onaftersave="edit_company()">
+          {{ company.name || 'empty' }}
+          <span class="el-icon-pencil"></span>
+        </span>
+        {% endverbatim %}
+      </td>
     </tr>
     <tr>
       <td>{% trans "Company Share Count" %}:</td>
-      <td>{% verbatim %}<span editable-text="company.share_count" onaftersave="edit_company()">{{ company.share_count }} <span class="el-icon-pencil"></span></span>{% endverbatim %}</td>
+      <td>
+        {% verbatim %}
+        <span editable-text="company.share_count" onaftersave="edit_company()">
+          {{ company.share_count }}
+          <span class="el-icon-pencil"></span>
+        </span>
+        {% endverbatim %}
+      </td>
     </tr>
+
+   <tr>
+      <td>{% trans "Company founding date" %}:</td>
+      <td>
+        {% verbatim %}
+        <span editable-text="company.founded_at" onaftersave="edit_company()" editable-date="company.founded_at">
+          {{ (company.founded_at|date:"dd.MM.yy") || 'keines' }}
+          <span class="el-icon-pencil"></span>
+        </span>
+        {% endverbatim %}
+      </td>
+    </tr>
+
     <tr>
       <td>{% trans "Company Headquarter Country" %}:</td>
       <td>

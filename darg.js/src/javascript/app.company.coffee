@@ -11,6 +11,7 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
 
     $http.get('/services/rest/company/' + company_id).then (result) ->
         $scope.company = new Company(result.data)
+        $scope.company.founded_at = new Date($scope.company.founded_at)
         $http.get($scope.company.country).then (result1) ->
             $scope.company.country = result1.data
 
@@ -49,7 +50,9 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
     # hence needs conversion
     $scope.edit_company = () ->
         $scope.company.country = $scope.company.country.url
+        $scope.company.founded_at = $scope.company.founded_at.toISOString().substring(0, 10)
         $scope.company.$update().then (result) ->
+            result.founded_at = new Date(result.founded_at)
             $scope.company = new Company(result)
             # refetch country data
             $http.get($scope.company.country).then (result1) ->

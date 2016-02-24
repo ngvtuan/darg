@@ -527,7 +527,11 @@
         });
       });
       $scope.add_company = function() {
-        $scope.newCompany.founded_at = $scope.newCompany.founded_at.toISOString().substring(0, 10);
+        if ($scope.newCompany.founded_at) {
+          $scope.newCompany.founded_at = $scope.newCompany.founded_at.toISOString().substring(0, 10);
+        } else {
+          delete $scope.newCompany.founded_at;
+        }
         return $scope.newCompany.$save().then(function(result) {
           return $http.get('/services/rest/user').then(function(result) {
             return $scope.user = result.data.results[0];

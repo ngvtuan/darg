@@ -1,3 +1,4 @@
+import datetime
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -57,7 +58,7 @@ class AddCompanySerializer(serializers.Serializer):
 
     name = serializers.CharField(max_length=255)
     face_value = serializers.DecimalField(max_digits=19, decimal_places=4)
-    founded_at = serializers.DateField()
+    founded_at = serializers.DateField(required=False)
     count = serializers.IntegerField()
 
     def create(self, validated_data):
@@ -83,7 +84,8 @@ class AddCompanySerializer(serializers.Serializer):
         shareholder = Shareholder.objects.create(user=companyuser,
                                                  company=company, number='0')
         Position.objects.create(
-            bought_at=validated_data.get('founded_at'),
+            bought_at=validated_data.get(
+                'founded_at') or datetime.datetime.now(),
             buyer=shareholder, count=validated_data.get("count"),
             value=validated_data.get("face_value"),
             security=security,

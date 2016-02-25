@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-17 21:23+0000\n"
-"PO-Revision-Date: 2016-02-17 21:24+0000\n"
+"POT-Creation-Date: 2016-02-25 21:55+0000\n"
+"PO-Revision-Date: 2016-02-25 21:58+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,11 @@ msgstr "Position hinzufügen"
 msgid "Please enter your company name:"
 msgstr "Bitte geben Sie ihren Firmennamen ein"
 
-#: project/templates/_add_company_form.html:13
+#: project/templates/_add_company_form.html:9
+msgid "Founding Date"
+msgstr "Gründungsdatum"
+
+#: project/templates/_add_company_form.html:14
 msgid "Add Company"
 msgstr "Unternehmen hinzufügen"
 
@@ -57,7 +61,6 @@ msgid "Please enter your option plan data:"
 msgstr "Bitte geben Sie die Daten für den Optionsplan an:"
 
 #: project/templates/_add_option_plan_form.html:19
-#| msgid "Add Option"
 msgid "Add Option-Plan"
 msgstr "Optionsplan hinzufügen"
 
@@ -124,32 +127,52 @@ msgstr ""
 msgid "Add Share Split"
 msgstr "Aktiensplit hinzufügen"
 
-#: project/templates/active_shareholder_captable.pdf.html:37
+#: project/templates/active_shareholder_captable.pdf.html:53
 #: project/templates/start.html:25
 msgid "Your Shareholders for"
 msgstr "Ihre Aktionärsliste für"
 
-#: project/templates/active_shareholder_captable.pdf.html:42
+#: project/templates/active_shareholder_captable.pdf.html:59
 #: project/templates/index.html:11
 msgid "Das Aktienregister"
 msgstr "Das Aktienregister"
 
-#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/active_shareholder_captable.pdf.html:59
+msgid "Page"
+msgstr "Seite"
+
+#: project/templates/active_shareholder_captable.pdf.html:60
+msgid "of"
+msgstr "von"
+
+#: project/templates/active_shareholder_captable.pdf.html:61
+msgid "Date generated"
+msgstr "Datum der Erstellung des Dokuments"
+
+#: project/templates/active_shareholder_captable.pdf.html:66
+msgid "Total company capital"
+msgstr "Aktienkapital"
+
+#: project/templates/active_shareholder_captable.pdf.html:68
+msgid "Provisioned Capital"
+msgstr "Liberiertes Kapital"
+
+#: project/templates/active_shareholder_captable.pdf.html:72
 #: project/templates/start.html:34
 msgid "Name"
 msgstr "Name"
 
-#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/active_shareholder_captable.pdf.html:72
 #: project/templates/start.html:35
 msgid "Email"
 msgstr "Email"
 
-#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/active_shareholder_captable.pdf.html:72
 #: project/templates/start.html:36
 msgid "Shareholder Number"
 msgstr "Aktieninhabernummer"
 
-#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/active_shareholder_captable.pdf.html:72
 #: project/templates/start.html:37
 #, python-format
 msgid "Shares (%%)"

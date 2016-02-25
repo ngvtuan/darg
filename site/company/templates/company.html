@@ -39,12 +39,24 @@
       </td>
     </tr>
 
-   <tr>
+    <tr>
       <td>{% trans "Company founding date" %}:</td>
       <td>
         {% verbatim %}
         <span editable-text="company.founded_at" onaftersave="edit_company()" editable-date="company.founded_at">
           {{ (company.founded_at|date:"dd.MM.yy") || 'keines' }}
+          <span class="el-icon-pencil"></span>
+        </span>
+        {% endverbatim %}
+      </td>
+    </tr>
+
+    <tr>
+      <td>{% trans "Provisioned Capital (Liberiertes Kapital)" %}:</td>
+      <td>
+        {% verbatim %}
+        <span editable-text="company.provisioned_capital" onaftersave="edit_company()">
+          {{ company.provisioned_capital || 'k.A.' }}
           <span class="el-icon-pencil"></span>
         </span>
         {% endverbatim %}

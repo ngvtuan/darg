@@ -51,7 +51,8 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Company
         fields = ('pk', 'name', 'share_count', 'country', 'url',
-                  'shareholder_count', 'security_set', 'founded_at')
+                  'shareholder_count', 'security_set', 'founded_at',
+                  'provisioned_capital')
 
 
 class AddCompanySerializer(serializers.Serializer):

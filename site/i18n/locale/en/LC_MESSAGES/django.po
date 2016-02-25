@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-17 21:23+0000\n"
+"POT-Creation-Date: 2016-02-25 21:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,43 +41,51 @@ msgstr ""
 msgid "Company Name"
 msgstr ""
 
-#: company/templates/company.html:24
+#: company/templates/company.html:31
 msgid "Company Share Count"
 msgstr ""
 
-#: company/templates/company.html:28
+#: company/templates/company.html:43
+msgid "Company founding date"
+msgstr ""
+
+#: company/templates/company.html:55
+msgid "Provisioned Capital (Liberiertes Kapital)"
+msgstr ""
+
+#: company/templates/company.html:67
 msgid "Company Headquarter Country"
 msgstr ""
 
-#: company/templates/company.html:42
+#: company/templates/company.html:81
 msgid "Securities"
 msgstr ""
 
-#: company/templates/company.html:48
+#: company/templates/company.html:87
 msgid "Please contact us at our"
 msgstr ""
 
-#: company/templates/company.html:50
+#: company/templates/company.html:89
 msgid "for getting more security types added"
 msgstr ""
 
-#: company/templates/company.html:56
+#: company/templates/company.html:95
 msgid "Administrators"
 msgstr ""
 
-#: company/templates/company.html:57
+#: company/templates/company.html:96
 msgid "add operator"
 msgstr ""
 
-#: company/templates/company.html:86
+#: company/templates/company.html:125
 msgid "Option Plans"
 msgstr ""
 
-#: company/templates/company.html:90
+#: company/templates/company.html:129
 msgid "Options Plan Name"
 msgstr ""
 
-#: company/templates/company.html:90
+#: company/templates/company.html:129
 msgid "Edit Option Plan"
 msgstr ""
 

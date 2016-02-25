@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load humanize %}
 
 {% block inline_styles %}
 <style>
@@ -19,12 +20,25 @@
 
     }
 
+    table, thead, tr, td, div, span {
+        font-size: 11pt;
+    }
+
+    .company-info {
+        background-color: #f7f7f7;
+        padding: 1em 1em 0em 1em;
+    }
+
     .heading {
         font-size: 14pt;
     }
 
     .text-right {
         font-align: right;
+    }
+
+    #footer_content {
+        font-size: 8pt
     }
 </style>
 {% endblock %}
@@ -34,16 +48,27 @@
 
     <!-- Content for Static Frame 'header_frame' -->
     <div id="header_content">
-      {% trans "Your Shareholders for" %} 
+      {% trans "Your Shareholders for" %}
       <h2 class="heading">{{ company.name }}</h2>
     </div>
 
     <!-- Content for Static Frame 'footer_frame' -->
-    <div id="footer_content">{% trans "Das Aktienregister" %} - page <pdf:pagenumber>
-        of <pdf:pagecount>
+    <div id="footer_content">
+        {% trans "Das Aktienregister" %} - {% trans "Page" %} <pdf:pagenumber>
+        {% trans "of" %} <pdf:pagecount> -
+        {% trans "Date generated" %}: {{ today }}
     </div>
 
     <!-- HTML Content -->
+    <div class="company-info">
+        <div>{% trans "Total company capital" %}: {{ total_capital|intcomma }} {{ currency }}</div>
+        {% if provisioned_capital %}
+        <div>{% trans "Provisioned Capital" %}: {{ provisioned_capital|intcomma }} {{ currency }}</div>
+        {% endif %}
+        {% if company.founded_at %}
+        <div style="margin-bottom: 1em">{% trans "Founding Date" %}: {{ company.founded_at}} </div>
+        {% endif %}
+    </div>
     <table class="table table-hover">
       <thead><tr><th align="left">{% trans "Name" %}</th><th align="left">{% trans "Email" %}</th><th align="right">{% trans "Shareholder Number" %}</th><th align="right">{% trans "Shares (%)" %}</th></tr></thead>
       </table>

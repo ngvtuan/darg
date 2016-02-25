@@ -37,6 +37,7 @@ class Company(models.Model):
     founded_at = models.DateField(
         _('Foundation date of the company'),
         null=True, blank=False)
+    provisioned_capital = models.PositiveIntegerField(blank=True, null=True)
 
     def __str__(self):
         return u"{}".format(self.name)
@@ -102,6 +103,27 @@ class Company(models.Model):
 
     def get_operators(self):
         return self.operator_set.all().distinct()
+
+    def get_provisioned_capital(self):
+        """ its libiertes or eingelegtes capital. means on company
+        foundation the capital is provisioned by the shareholders.
+        e.g. if company was founded with 1m chf equity, owners might have
+        provided only 200k. this value here would then be 200k """
+
+        return self.provisioned_capital
+
+    def get_total_capital(self):
+        """ returns the total monetary value of the companies
+        capital (Nennkapital) by getting all share creation positions (inital
+        and increases) and sum up count*val
+        """
+        positions = Position.objects.filter(
+            buyer__company=self, seller__isnull=True)
+        val = 0
+        for position in positions:
+            val += position.count * position.value
+
+        return val
 
     # --- LOGIC
     def split_shares(self, data):
@@ -214,7 +236,12 @@ class Shareholder(models.Model):
 
     def share_percent(self, date=None):
         """ returns percentage of shares owned compared to corps
-        total shares """
+        total shares
+        FIXME returns wrong values if the company still holds shares
+        after capital increase, which are not distributed to shareholders
+        company would then have a percentage of itself, although this is
+        not relevant for voting rights, etc.
+        """
         total = self.company.share_count
         count = sum(self.buyer.all().values_list('count', flat=True)) - \
             sum(self.seller.all().values_list('count', flat=True))
@@ -334,10 +361,12 @@ class Position(models.Model):
     seller = models.ForeignKey('Shareholder', blank=True, null=True,
                                related_name="seller")
     security = models.ForeignKey(Security)
-    count = models.PositiveIntegerField()
+    count = models.PositiveIntegerField(_('Share Count transfered or created'))
     bought_at = models.DateField()
-    value = models.DecimalField(max_digits=8, decimal_places=4, blank=True,
-                                null=True)
+    value = models.DecimalField(
+        _('Nominal value or payed price for the transaction'),
+        max_digits=8, decimal_places=4, blank=True,
+        null=True)
     is_split = models.BooleanField(default=False)
     comment = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

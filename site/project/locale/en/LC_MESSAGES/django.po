@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-17 21:23+0000\n"
+"POT-Creation-Date: 2016-02-25 21:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,11 @@ msgstr ""
 msgid "Please enter your company name:"
 msgstr ""
 
-#: project/templates/_add_company_form.html:13
+#: project/templates/_add_company_form.html:9
+msgid "Founding Date"
+msgstr ""
+
+#: project/templates/_add_company_form.html:14
 msgid "Add Company"
 msgstr ""
 
@@ -114,32 +118,52 @@ msgstr ""
 msgid "Add Share Split"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:37
+#: project/templates/active_shareholder_captable.pdf.html:53
 #: project/templates/start.html:25
 msgid "Your Shareholders for"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:42
+#: project/templates/active_shareholder_captable.pdf.html:59
 #: project/templates/index.html:11
 msgid "Das Aktienregister"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/active_shareholder_captable.pdf.html:59
+msgid "Page"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:60
+msgid "of"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:61
+msgid "Date generated"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:66
+msgid "Total company capital"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:68
+msgid "Provisioned Capital"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:72
 #: project/templates/start.html:34
 msgid "Name"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/active_shareholder_captable.pdf.html:72
 #: project/templates/start.html:35
 msgid "Email"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/active_shareholder_captable.pdf.html:72
 #: project/templates/start.html:36
 msgid "Shareholder Number"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:48
+#: project/templates/active_shareholder_captable.pdf.html:72
 #: project/templates/start.html:37
 #, python-format
 msgid "Shares (%%)"

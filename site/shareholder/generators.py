@@ -50,8 +50,9 @@ def _make_user():
     country, created = Country.objects.get_or_create(
         iso_code="de", defaults={"name": "Germany", "iso_code": "de"})
 
-    UserProfile.objects.get_or_create(
-        user=user,
+    # reload user to get the userprofile created by signal too
+    user = User.objects.get(id=user.id)
+    UserProfile.objects.filter(user=user).update(**dict(
         country=country,
         street="Some Street",
         city="SomeCity",
@@ -59,6 +60,7 @@ def _make_user():
         postal_code="12345",
         birthday=datetime.datetime.now(),
         company_name="SomeCorp"
+        )
     )
 
     user.set_password(DEFAULT_TEST_DATA.get('password'))

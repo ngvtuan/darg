@@ -14,8 +14,6 @@
 
   <h1>{% trans "Shareholder Details" %}</h1>
 
-  <div class="alert alert-warning" role="alert">{% trans "Warning, this page is an alpha version. Please use upon your own risk. Problems might occur. Please report all problems to us!" %}</div>
-
   {% include "_form_errors.html" %}
 
   <h2>{% trans "Shareholder Data" %}</h2>
@@ -82,7 +80,12 @@
     <tr>
       <td>{% trans "Shareholder Birthday" %}:</td>
       <td>
-        {% verbatim %}<span editable-date="shareholder.user.userprofile.birthday" onaftersave="edit_shareholder()">{{ shareholder.user.userprofile.birthday || '' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}
+        {% verbatim %}
+        <span editable-date="shareholder.user.userprofile.birthday" onaftersave="edit_shareholder()">
+          {{ (shareholder.user.userprofile.birthday| date:"dd.MM.yy") || '' }}
+          <span class="el-icon-pencil"></span>
+        </span>
+        {% endverbatim %}
       </td>
     </tr>
     <tr>

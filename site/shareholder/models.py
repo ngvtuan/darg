@@ -212,7 +212,7 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=255, blank=True, null=True)
     province = models.CharField(max_length=255, blank=True, null=True)
     postal_code = models.CharField(max_length=255, blank=True, null=True)
-    country = models.ForeignKey(Country, blank=False, null=True)
+    country = models.ForeignKey(Country, blank=True, null=True)
 
     company_name = models.CharField(max_length=255, blank=True, null=True)
     birthday = models.DateField(blank=True, null=True)

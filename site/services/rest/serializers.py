@@ -303,13 +303,13 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
             user.save()
         else:
             userprofile = user.userprofile
-            userprofile.street = profile_kwargs['street']
-            userprofile.city = profile_kwargs['city']
-            userprofile.province = profile_kwargs['province']
-            userprofile.postal_code = profile_kwargs['postal_code']
-            userprofile.country = profile_kwargs['country']
-            userprofile.company_name = profile_kwargs['company_name']
-            userprofile.birthday = profile_kwargs['birthday']
+            userprofile.street = profile_kwargs.get('street')
+            userprofile.city = profile_kwargs.get('city')
+            userprofile.province = profile_kwargs.get('province')
+            userprofile.postal_code = profile_kwargs.get('postal_code')
+            userprofile.country = profile_kwargs.get('country')
+            userprofile.company_name = profile_kwargs.get('company_name')
+            userprofile.birthday = profile_kwargs.get('birthday')
             userprofile.save()
 
         shareholder.number = validated_data['number']

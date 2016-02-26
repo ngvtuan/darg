@@ -61,12 +61,12 @@
 
     <!-- HTML Content -->
     <div class="company-info">
-        <div>{% trans "Total company capital" %}: {{ total_capital|intcomma }} {{ currency }}</div>
+        <div>{% trans "Total company capital" %}: {{ total_capital|floatformat:"0"|intcomma }} {{ currency }}</div>
         {% if provisioned_capital %}
-        <div>{% trans "Provisioned Capital" %}: {{ provisioned_capital|intcomma }} {{ currency }}</div>
+        <div>{% trans "Provisioned Capital" %}: {{ provisioned_capital|floatformat:"0"|intcomma }} {{ currency }}</div>
         {% endif %}
         {% if company.founded_at %}
-        <div style="margin-bottom: 1em">{% trans "Founding Date" %}: {{ company.founded_at}} </div>
+        <div style="margin-bottom: 2em">{% trans "Founding Date" %}: {{ company.founded_at}} </div>
         {% endif %}
     </div>
     <table class="table table-hover">

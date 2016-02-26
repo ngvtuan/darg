@@ -21,8 +21,31 @@ class OperatorAdmin(admin.ModelAdmin):
 
 
 class PositionAdmin(admin.ModelAdmin):
-    list_display = ('bought_at', 'buyer', 'seller', 'count', 'value')
-    pass
+    list_display = (
+        'bought_at', 'get_buyer', 'get_seller', 'count', 'value', 'get_company'
+        )
+    list_filter = ('buyer__company', 'seller__company')
+    search_fields = [
+        'buyer__user__email', 'seller__user__email',
+        'buyer__company__name', 'seller__company__name'
+    ]
+
+    def get_seller(self, obj):
+        if obj.seller:
+            return obj.seller.user.email
+        return None
+
+    def get_buyer(self, obj):
+        if obj.buyer:
+            return obj.buyer.user.email
+        return None
+
+    def get_company(self, obj):
+        if obj.buyer:
+            return obj.buyer.company
+        elif obj.seller:
+            return obj.seller.company
+        return None
 
 
 class UserProfileAdmin(admin.ModelAdmin):

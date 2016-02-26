@@ -207,7 +207,7 @@ class Company(models.Model):
 class UserProfile(models.Model):
 
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, blank=True, null=True)
+        settings.AUTH_USER_MODEL)
     street = models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=255, blank=True, null=True)
     province = models.CharField(max_length=255, blank=True, null=True)
@@ -466,3 +466,4 @@ from rest_framework.authtoken.models import Token
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+        UserProfile.objects.create(user=instance)

@@ -472,7 +472,10 @@
       $scope.errors = null;
       $http.get('/services/rest/shareholders/' + shareholder_id).then(function(result) {
         result.data.user.userprofile.birthday = new Date(result.data.user.userprofile.birthday);
-        return $scope.shareholder = new Shareholder(result.data);
+        $scope.shareholder = new Shareholder(result.data);
+        return $http.get($scope.shareholder.user.userprofile.country).then(function(result1) {
+          return $scope.shareholder.user.userprofile.country = result1.data;
+        });
       });
       $http.get('/services/rest/country').then(function(result) {
         return $scope.countries = result.data.results;
@@ -486,7 +489,10 @@
         }
         return $scope.shareholder.$update().then(function(result) {
           result.user.userprofile.birthday = new Date(result.user.userprofile.birthday);
-          return $scope.shareholder = new Shareholder(result);
+          $scope.shareholder = new Shareholder(result);
+          return $http.get($scope.shareholder.user.userprofile.country).then(function(result1) {
+            return $scope.shareholder.user.userprofile.country = result1.data;
+          });
         }).then(function() {
           return void 0;
         }).then(function() {

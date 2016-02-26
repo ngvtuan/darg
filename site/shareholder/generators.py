@@ -50,7 +50,7 @@ def _make_user():
     country, created = Country.objects.get_or_create(
         iso_code="de", defaults={"name": "Germany", "iso_code": "de"})
 
-    UserProfile.objects.create(
+    UserProfile.objects.get_or_create(
         user=user,
         country=country,
         street="Some Street",

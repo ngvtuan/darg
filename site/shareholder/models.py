@@ -117,11 +117,17 @@ class Company(models.Model):
         capital (Nennkapital) by getting all share creation positions (inital
         and increases) and sum up count*val
         """
-        positions = Position.objects.filter(
+        cap_creating_positions = Position.objects.filter(
             buyer__company=self, seller__isnull=True)
         val = 0
-        for position in positions:
+        for position in cap_creating_positions:
             val += position.count * position.value
+
+        cap_destroying_positions = Position.objects.filter(
+            seller__company=self, buyer__isnull=True)
+
+        for position in cap_destroying_positions:
+            val -= position.count * position.value
 
         return val
 
@@ -159,9 +165,11 @@ class Company(models.Model):
                                  security, execute_at.date(),
                                  int(dividend), int(divisor)),
             }
-            if shareholder.pk != company_shareholder.pk:
-                p = Position.objects.create(**kwargs1)
-                logger.info('Split: share returned {}'.format(p))
+            if shareholder.pk == company_shareholder.pk:
+                kwargs1.update(dict(buyer=None, count=self.share_count,
+                    value=shareholder.buyer.first().value))
+            p = Position.objects.create(**kwargs1)
+            logger.info('Split: share returned {}'.format(p))
 
             part, count2 = math.modf(count * divisor / dividend)
             kwargs2 = {
@@ -173,15 +181,14 @@ class Company(models.Model):
                 'bought_at': execute_at,
                 'is_split': True,
                 'comment': _('Share split of {} on {} with ratio {}:{}. '
-                             'Provisioning of new shares.'.format(
+                             'Provisioning of new shares.').format(
                                  security, execute_at.date(),
-                                 int(dividend), int(divisor))),
+                                 int(dividend), int(divisor)),
             }
             if shareholder.pk == company_shareholder.pk:
                 part, count2 = math.modf(
-                    shareholder.company.share_count /
-                    dividend * float(divisor) -
-                    shareholder.company.share_count
+                    self.share_count /
+                    dividend * float(divisor)
                 )
                 kwargs2.update({
                     'count': count2,
@@ -285,6 +292,9 @@ class Shareholder(models.Model):
             qs = qs.filter(bought_at__lte=date)
         if security:
             qs = qs.filter(security=security)
+        if not qs.exists():
+            raise ValueError(
+                'No Transactions available to calculate recent share price')
 
         return qs.latest('bought_at').value
 
@@ -357,7 +367,7 @@ class Security(models.Model):
 
 class Position(models.Model):
 
-    buyer = models.ForeignKey('Shareholder', related_name="buyer")
+    buyer = models.ForeignKey('Shareholder', related_name="buyer", blank=True, null=True)
     seller = models.ForeignKey('Shareholder', blank=True, null=True,
                                related_name="seller")
     security = models.ForeignKey(Security)

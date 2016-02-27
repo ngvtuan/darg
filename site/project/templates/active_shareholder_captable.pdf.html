@@ -74,7 +74,20 @@
       </table>
         {% for shareholder in company.get_active_shareholders %}
         <table>
-          <tr class="panel"><td>{{ shareholder.user.first_name }} {{ shareholder.user.last_name }}</td><td>{{ shareholder.user.email }}</td><td align="right">{{ shareholder.number }}</td><td align="right">{{ shareholder.share_count }} ({{shareholder.share_percent }})</td></tr>
+          <tr class="panel">
+            <td>
+              {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
+            </td>
+            <td>
+              {{ shareholder.user.email }}
+            </td>
+            <td align="right">
+              {{ shareholder.number }}
+            </td>
+            <td align="right">
+              {{ shareholder.share_count|intcomma }} ({{shareholder.share_percent }})
+            </td>
+          </tr>
         </table>
         {% endfor %}
   {% endblock %}

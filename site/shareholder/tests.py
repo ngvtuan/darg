@@ -171,7 +171,7 @@ class PositionTestCase(TestCase):
         )
         # only one new pos as no shares were basically existing as we
         # split even before company creates their first shares
-        self.assertEqual(pcount + 1, Position.objects.count())
+        self.assertEqual(pcount + 2, Position.objects.count())
 
 
 class UserProfileTestCase(TestCase):

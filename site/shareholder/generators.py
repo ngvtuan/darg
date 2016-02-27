@@ -92,7 +92,7 @@ class CompanyGenerator(object):
 class SecurityGenerator(object):
 
     def generate(self, **kwargs):
-        company = CompanyGenerator().generate()
+        company = kwargs.get('company', CompanyGenerator().generate())
         s1 = Security.objects.create(title='P', company=company, count=1)
 
         return s1

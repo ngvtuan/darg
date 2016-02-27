@@ -80,6 +80,7 @@ class CompanyModelTestCase(TestCase):
         cshareholder = objs['cshareholder']
 
         self.assertEqual(company.share_count, 11000)
+        self.assertEqual(company.get_total_capital(), 11000000)
 
         # exec
         company.split_shares(data=dict(
@@ -96,6 +97,7 @@ class CompanyModelTestCase(TestCase):
         self.assertEqual(
             Shareholder.objects.get(id=cshareholder.id).share_count(), 1040000)
         self.assertEqual(company.share_count, 1100000)
+        self.assertEqual(float(company.get_total_capital()), float(11000000))
 
     def test_split_split_shares(self):
         """ split, and split once more. will it work?

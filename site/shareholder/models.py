@@ -285,6 +285,9 @@ class Shareholder(models.Model):
             qs = qs.filter(bought_at__lte=date)
         if security:
             qs = qs.filter(security=security)
+        if not qs.exists():
+            raise ValueError(
+                'No Transactions available to calculate recent share price')
 
         return qs.latest('bought_at').value
 

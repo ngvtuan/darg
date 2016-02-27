@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
+from django.utils.text import slugify
 
 from shareholder.models import Company, Operator
 from utils.pdf import render_to_pdf
@@ -39,9 +40,9 @@ def captable_csv(request, company_id):
 
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename='
-    '"{}_captable_{}.csv"'.format(
-        time.strftime("%Y-%m-%d"), company.name)
+    response['Content-Disposition'] = u'attachment; filename='
+    u'"{}_captable_{}.csv"'.format(
+        time.strftime("%Y-%m-%d"), slugify(company.name))
 
     writer = csv.writer(response)
     writer.writerow([

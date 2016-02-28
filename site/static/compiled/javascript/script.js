@@ -170,7 +170,9 @@
         });
       };
       return $scope.edit_company = function() {
-        $scope.company.country = $scope.company.country.url;
+        if ($scope.company.country) {
+          $scope.company.country = $scope.company.country.url;
+        }
         $scope.company.founded_at = $scope.company.founded_at.toISOString().substring(0, 10);
         return $scope.company.$update().then(function(result) {
           result.founded_at = new Date(result.founded_at);
@@ -529,7 +531,12 @@
         });
       });
       $http.get('/services/rest/user').then(function(result) {
-        return $scope.user = result.data.results[0];
+        $scope.user = result.data.results[0];
+        return angular.forEach($scope.user.operator_set, function(item, key) {
+          return $http.get(item.company).then(function(result1) {
+            return $scope.user.operator_set[key].company = result1.data;
+          });
+        });
       });
       $scope.$watchCollection('shareholders', function(shareholders) {
         $scope.total_shares = 0;
@@ -543,11 +550,17 @@
         } else {
           delete $scope.newCompany.founded_at;
         }
-        return $scope.newCompany.$save().then(function(result) {
+        $scope.newCompany.$save().then(function(result) {
           return $http.get('/services/rest/user').then(function(result) {
-            return $scope.user = result.data.results[0];
+            $scope.user = result.data.results[0];
+            return angular.forEach($scope.user.operator_set, function(item, key) {
+              return $http.get(item.company).then(function(result1) {
+                return $scope.user.operator_set[key].company = result1.data;
+              });
+            });
           });
-        }).then(function() {
+        });
+        return $window.location.reload().then(function() {
           return $scope.company = new Company();
         }).then(function() {
           return $scope.errors = null;

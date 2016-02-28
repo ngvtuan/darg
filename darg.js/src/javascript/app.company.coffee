@@ -49,7 +49,8 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
     # ATTENTION: django eats a url, angular eats an object.
     # hence needs conversion
     $scope.edit_company = () ->
-        $scope.company.country = $scope.company.country.url
+        if $scope.company.country
+            $scope.company.country = $scope.company.country.url
         $scope.company.founded_at = $scope.company.founded_at.toISOString().substring(0, 10)
         $scope.company.$update().then (result) ->
             result.founded_at = new Date(result.founded_at)

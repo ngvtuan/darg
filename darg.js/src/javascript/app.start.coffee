@@ -19,6 +19,10 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
 
     $http.get('/services/rest/user').then (result) ->
         $scope.user = result.data.results[0]
+        # loop over ops and fetch corp data
+        angular.forEach $scope.user.operator_set, (item, key) ->
+            $http.get(item.company).then (result1) ->
+                $scope.user.operator_set[key].company = result1.data
 
     $scope.$watchCollection 'shareholders', (shareholders)->
         $scope.total_shares = 0
@@ -33,6 +37,12 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
         $scope.newCompany.$save().then (result) ->
             $http.get('/services/rest/user').then (result) ->
                 $scope.user = result.data.results[0]
+                # loop over ops and fetch corp data
+                angular.forEach $scope.user.operator_set, (item, key) ->
+                    $http.get(item.company).then (result1) ->
+                        $scope.user.operator_set[key].company = result1.data
+
+        $window.location.reload()
         .then ->
             # Reset our editor to a new blank post
             $scope.company = new Company()

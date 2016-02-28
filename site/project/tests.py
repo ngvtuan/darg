@@ -79,7 +79,7 @@ class TrackingTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue("UA-58468401-4" in response.content)
         self.assertTrue("Willkommen" in response.content)
-        self.assertFalse("shareholder_list" in response.content)
+        self.assertTrue("shareholder_list" in response.content)
         # self.assertTrue('download/pdf' in response.content)
         # self.assertTrue('download/csv' in response.content)
 

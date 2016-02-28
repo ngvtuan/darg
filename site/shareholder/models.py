@@ -348,6 +348,8 @@ class Operator(models.Model):
     def __str__(self):
         return u"{} {} ({})".format(self.user.first_name, self.user.last_name, self.user.email)
 
+    def __unicode__(self):
+        return u"{} {} ({})".format(self.user.first_name, self.user.last_name, self.user.email)
 
 class Security(models.Model):
     SECURITY_TITLES = (

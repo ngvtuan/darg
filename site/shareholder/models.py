@@ -346,7 +346,7 @@ class Operator(models.Model):
     share_count = models.PositiveIntegerField(blank=True, null=True)
 
     def __str__(self):
-        return u"{} {}".format(self.user.first_name, self.user.last_name)
+        return u"{} {} ({})".format(self.user.first_name, self.user.last_name, self.user.email)
 
 
 class Security(models.Model):

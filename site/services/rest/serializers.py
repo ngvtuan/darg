@@ -6,6 +6,7 @@ from django.utils.translation import ugettext as _
 from django.utils.text import slugify
 from django.core.mail import mail_managers
 from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
 
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
@@ -47,12 +48,25 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
         queryset=Country.objects.all(),
     )
     founded_at = serializers.DateField()
+    profile_url  = serializers.SerializerMethodField()
+    captable_pdf_url = serializers.SerializerMethodField()
+    captable_csv_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Company
         fields = ('pk', 'name', 'share_count', 'country', 'url',
                   'shareholder_count', 'security_set', 'founded_at',
-                  'provisioned_capital')
+                  'provisioned_capital', 'profile_url', 'captable_pdf_url',
+                  'captable_csv_url')
+
+    def get_profile_url(self, obj):
+        return reverse('company', kwargs={'company_id': obj.id})
+
+    def get_captable_pdf_url(self, obj):
+        return reverse('captable_pdf', kwargs={'company_id': obj.id} )
+
+    def get_captable_csv_url(self, obj):
+        return reverse('captable_csv', kwargs={'company_id': obj.id})
 
 
 class AddCompanySerializer(serializers.Serializer):

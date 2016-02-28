@@ -550,8 +550,8 @@
         } else {
           delete $scope.newCompany.founded_at;
         }
-        $scope.newCompany.$save().then(function(result) {
-          return $http.get('/services/rest/user').then(function(result) {
+        return $scope.newCompany.$save().then(function(result) {
+          $http.get('/services/rest/user').then(function(result) {
             $scope.user = result.data.results[0];
             return angular.forEach($scope.user.operator_set, function(item, key) {
               return $http.get(item.company).then(function(result1) {
@@ -559,8 +559,12 @@
               });
             });
           });
-        });
-        return $window.location.reload().then(function() {
+          return $http.get('/services/rest/shareholders').then(function(result) {
+            return angular.forEach(result.data.results, function(item) {
+              return $scope.shareholders.push(item);
+            });
+          });
+        }).then(function() {
           return $scope.company = new Company();
         }).then(function() {
           return $scope.errors = null;

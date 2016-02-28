@@ -41,8 +41,9 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
                 angular.forEach $scope.user.operator_set, (item, key) ->
                     $http.get(item.company).then (result1) ->
                         $scope.user.operator_set[key].company = result1.data
-
-        $window.location.reload()
+            $http.get('/services/rest/shareholders').then (result) ->
+                angular.forEach result.data.results, (item) ->
+                    $scope.shareholders.push item
         .then ->
             # Reset our editor to a new blank post
             $scope.company = new Company()

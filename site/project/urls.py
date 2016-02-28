@@ -14,6 +14,9 @@ from zinnia.sitemaps import AuthorSitemap
 from rest_framework import routers
 from rest_framework.authtoken import views
 
+from registration.backends.simple.views import RegistrationView
+from registration.forms import RegistrationFormUniqueEmail
+
 from services.rest.views import ShareholderViewSet, CompanyViewSet, UserViewSet, PositionViewSet, \
     InviteeUpdateView, AddCompanyView, CountryViewSet, OptionPlanViewSet, \
     SecurityViewSet, OptionTransactionViewSet, OperatorViewSet, AddShareSplit
@@ -37,7 +40,8 @@ js_info_dict = {
 sitemaps = {'tags': TagSitemap,
             'blog': EntrySitemap,
             'authors': AuthorSitemap,
-            'categories': CategorySitemap,}
+            'categories': CategorySitemap,
+            }
 
 urlpatterns = [
     # web views
@@ -66,6 +70,7 @@ urlpatterns = [
         name='optionplan_download_img'),
 
     # auth
+    url(r'^accounts/register/$', RegistrationView.as_view(form_class=RegistrationFormUniqueEmail), name='registration_register'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
 
     # rest api

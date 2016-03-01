@@ -23,7 +23,8 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
             $scope.shareholders.push item
 
     $scope.add_option_plan = ->
-        $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10)
+        if $scope.newOptionPlan.board_approved_at
+            $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10)
         $scope.newOptionPlan.$save().then (result) ->
             $scope.option_plans.push result
         .then ->
@@ -37,7 +38,8 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
             $scope.errors = rejection.data
 
     $scope.add_option_transaction = ->
-        $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10)
+        if $scope.newOptionTransaction.bought_at
+            $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10)
         $scope.newOptionTransaction.$save().then (result) ->
             $scope._reload_option_plans()
         .then ->

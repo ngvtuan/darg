@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-29 21:59+0000\n"
+"POT-Creation-Date: 2016-03-01 20:55+0000\n"
 "PO-Revision-Date: 2016-02-08 18:24+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,3 +87,7 @@ msgstr ""
 #: services/rest/views.py:133 services/rest/views.py:135
 msgid "Field may not be empty."
 msgstr "Das Feld darf nicht leer sein."
+
+#: services/rest/views.py:237 services/rest/views.py:319
+msgid "Confirmed position cannot be deleted."
+msgstr ""

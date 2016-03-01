@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-29 21:59+0000\n"
+"POT-Creation-Date: 2016-03-01 20:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,6 +63,10 @@ msgstr ""
 
 #: shareholder/models.py:183
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
+msgstr ""
+
+#: shareholder/models.py:237
+msgid "User"
 msgstr ""
 
 #: shareholder/models.py:316

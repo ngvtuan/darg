@@ -457,7 +457,22 @@ strong {
   font-size: 0.2em;
 }
 
-/* line 202, ../../sass/screen.sass */
+/* line 201, ../../sass/screen.sass */
+.capitalize {
+  display: inline-block;
+}
+
+/* line 204, ../../sass/screen.sass */
+.capitalize::first-letter {
+  text-transform: uppercase;
+}
+
+/* line 207, ../../sass/screen.sass */
+.capitalize2 {
+  text-transform: capitalize;
+}
+
+/* line 219, ../../sass/screen.sass */
 .index_background {
   background-size: cover;
   background-image: url("/static/compiled/images/Zuerich_Boerse.jpg");
@@ -466,12 +481,12 @@ strong {
   position: relative;
 }
 
-/* line 208, ../../sass/screen.sass */
+/* line 225, ../../sass/screen.sass */
 .button-panel {
   margin-top: 15px;
 }
 
-/* line 210, ../../sass/screen.sass */
+/* line 227, ../../sass/screen.sass */
 .leaf {
   font-size: 2em;
   position: inherit;
@@ -479,53 +494,53 @@ strong {
   right: 2.4em;
 }
 
-/* line 215, ../../sass/screen.sass */
+/* line 232, ../../sass/screen.sass */
 .bg-success {
   padding: 1em;
 }
 
-/* line 217, ../../sass/screen.sass */
+/* line 234, ../../sass/screen.sass */
 .pub_menu, .social_links {
   position: absolute;
   top: 1em;
   right: 1em;
 }
-/* line 221, ../../sass/screen.sass */
+/* line 238, ../../sass/screen.sass */
 .pub_menu a, .social_links a {
   border: none;
   color: white;
   font-size: 1em;
 }
-/* line 225, ../../sass/screen.sass */
+/* line 242, ../../sass/screen.sass */
 .pub_menu a:hover, .social_links a:hover {
   text-decoration: none;
 }
 
-/* line 228, ../../sass/screen.sass */
+/* line 245, ../../sass/screen.sass */
 .social_links {
   bottom: 1em;
   top: auto;
 }
-/* line 232, ../../sass/screen.sass */
+/* line 249, ../../sass/screen.sass */
 .social_links a {
   font-size: 2em;
 }
 
-/* line 237, ../../sass/screen.sass */
+/* line 254, ../../sass/screen.sass */
 #auth .comment {
   margin-top: 5em;
 }
-/* line 239, ../../sass/screen.sass */
+/* line 256, ../../sass/screen.sass */
 #auth input {
   display: block;
 }
 
-/* line 243, ../../sass/screen.sass */
+/* line 260, ../../sass/screen.sass */
 div #add_shareholder {
   margin-bottom: 1em;
 }
 
-/* line 246, ../../sass/screen.sass */
+/* line 263, ../../sass/screen.sass */
 div #shareholder_list table a {
   padding: 0em;
   padding-left: 1em;
@@ -533,110 +548,110 @@ div #shareholder_list table a {
   margin: 0em;
 }
 
-/* line 252, ../../sass/screen.sass */
+/* line 269, ../../sass/screen.sass */
 div #shareholder_list table tr:hover a {
   visibility: visible;
 }
 
-/* line 255, ../../sass/screen.sass */
+/* line 272, ../../sass/screen.sass */
 div #shareholder_list table tr td.summary {
   border-top: 1px solid black;
 }
 
-/* line 258, ../../sass/screen.sass */
+/* line 275, ../../sass/screen.sass */
 div.captable_context_actions {
   text-align: right;
 }
 
-/* line 265, ../../sass/screen.sass */
+/* line 282, ../../sass/screen.sass */
 div#optionplan .pdf_upload_preview {
   border: 1px solid gray;
 }
 
-/* line 270, ../../sass/screen.sass */
+/* line 287, ../../sass/screen.sass */
 #company div.form {
   margin-bottom: 1em;
 }
-/* line 273, ../../sass/screen.sass */
+/* line 290, ../../sass/screen.sass */
 #company h2 a {
   cursor: pointer;
 }
 
-/* line 278, ../../sass/screen.sass */
+/* line 295, ../../sass/screen.sass */
 .blog .lead {
   font-size: 1em;
 }
-/* line 280, ../../sass/screen.sass */
+/* line 297, ../../sass/screen.sass */
 .blog .well {
   background-color: transparent;
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 285, ../../sass/screen.sass */
+/* line 302, ../../sass/screen.sass */
 .blog .btn-primary {
   background-color: transparent;
   border: 1px solid #666666;
   color: #1661ff;
 }
-/* line 289, ../../sass/screen.sass */
+/* line 306, ../../sass/screen.sass */
 .blog .row {
   margin-top: 4em;
 }
-/* line 291, ../../sass/screen.sass */
+/* line 308, ../../sass/screen.sass */
 .blog .entry-tags {
   display: none;
 }
-/* line 293, ../../sass/screen.sass */
+/* line 310, ../../sass/screen.sass */
 .blog .entry-shorturl {
   display: none;
 }
-/* line 295, ../../sass/screen.sass */
+/* line 312, ../../sass/screen.sass */
 .blog .entry-footer {
   padding-left: 0px;
 }
-/* line 297, ../../sass/screen.sass */
+/* line 314, ../../sass/screen.sass */
 .blog .entry-footer span {
   display: none;
 }
-/* line 299, ../../sass/screen.sass */
+/* line 316, ../../sass/screen.sass */
 .blog .navbar-default {
   background-color: white;
 }
-/* line 301, ../../sass/screen.sass */
+/* line 318, ../../sass/screen.sass */
 .blog .navbar-brand {
   font-size: 2em;
 }
-/* line 303, ../../sass/screen.sass */
+/* line 320, ../../sass/screen.sass */
 .blog .navbar-header span {
   top: 0.8em;
   position: relative;
   left: -1.7em;
 }
-/* line 307, ../../sass/screen.sass */
+/* line 324, ../../sass/screen.sass */
 .blog a {
   border: none;
   font-size: 1em;
 }
-/* line 310, ../../sass/screen.sass */
+/* line 327, ../../sass/screen.sass */
 .blog a:active, .blog a:focus, .blog a:hover {
   color: #1661ff;
   text-decoration: none;
 }
-/* line 313, ../../sass/screen.sass */
+/* line 330, ../../sass/screen.sass */
 .blog h2 {
   margin-bottom: 0em;
 }
-/* line 315, ../../sass/screen.sass */
+/* line 332, ../../sass/screen.sass */
 .blog h2 a {
   padding: 0;
   margin: 0;
 }
-/* line 318, ../../sass/screen.sass */
+/* line 335, ../../sass/screen.sass */
 .blog p {
   margin: 0 0 0 0;
 }
-/* line 320, ../../sass/screen.sass */
+/* line 337, ../../sass/screen.sass */
 .blog small {
   font-size: 40%;
 }

@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 
 from shareholder.models import Shareholder, Company, Position, Operator, \
-    UserProfile, Country, Security
+    UserProfile, Country, Security, OptionTransaction, OptionPlan
 from utils.user import make_username
 
 User = get_user_model()
@@ -188,11 +188,16 @@ class CompanyShareholderGenerator(object):
 class PositionGenerator(object):
 
     def generate(self, **kwargs):
-        company = kwargs.get('company') \
-            or kwargs.get('buyer').company \
-            or kwargs.get('seller').company \
-            or kwargs.get('security').company \
-            or CompanyGenerator
+        company = kwargs.get('company')
+        if not company and kwargs.get('buyer'):
+            company = kwargs.get('buyer').company
+        if not company and kwargs.get('seller'):
+            company = kwargs.get('seller').company
+        if not company and kwargs.get('security'):
+            company = kwargs.get('security').company
+        if not company:
+            company = CompanyGenerator().generate()
+
         buyer = kwargs.get('buyer') or ShareholderGenerator().generate(
             company=company)
         seller = kwargs.get('seller') or None
@@ -213,6 +218,55 @@ class PositionGenerator(object):
             kwargs2.update({"seller": seller})
 
         position = Position.objects.create(**kwargs2)
+
+        return position
+
+
+class OptionPlanGenerator(object):
+
+    def generate(self, **kwargs):
+
+        kwargs2 = dict(
+            company=kwargs.get('company') or CompanyGenerator().generate(),
+            board_approved_at=datetime.datetime.now().date(),
+            title='some opt plan title',
+            security=kwargs.get('security') or SecurityGenerator().generate(),
+            exercise_price=3,
+            count=3
+        )
+
+        return OptionPlan.objects.create(**kwargs2)
+
+
+class OptionTransactionGenerator(object):
+
+    def generate(self, **kwargs):
+        company = kwargs.get('company')
+        if not company and kwargs.get('buyer'):
+            company = kwargs.get('buyer').company
+        if not company and kwargs.get('seller'):
+            company = kwargs.get('seller').company
+        if not company:
+            company = CompanyGenerator().generate()
+
+        buyer = kwargs.get('buyer') or ShareholderGenerator().generate(
+            company=company)
+        seller = kwargs.get('seller') or None
+        count = kwargs.get('count') or 3
+        value = kwargs.get('value') or 2
+        bought_at = kwargs.get('bought_at') or datetime.datetime.now().date()
+
+        kwargs2 = {
+            "buyer": buyer,
+            "bought_at": bought_at,
+            "count": count,
+            "option_plan": kwargs.get('option_plan') or OptionPlanGenerator(
+                ).generate(company=company)
+        }
+        if seller:
+            kwargs2.update({"seller": seller})
+
+        position = OptionTransaction.objects.create(**kwargs2)
 
         return position
 

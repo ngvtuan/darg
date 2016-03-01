@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-25 21:55+0000\n"
-"PO-Revision-Date: 2016-02-25 21:58+0000\n"
+"POT-Creation-Date: 2016-02-29 21:59+0000\n"
+"PO-Revision-Date: 2016-02-29 21:45+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
@@ -49,6 +49,7 @@ msgid "Please enter your company name:"
 msgstr "Bitte geben Sie ihren Firmennamen ein"
 
 #: project/templates/_add_company_form.html:9
+#: project/templates/active_shareholder_captable.pdf.html:69
 msgid "Founding Date"
 msgstr "Gründungsdatum"
 
@@ -127,53 +128,53 @@ msgstr ""
 msgid "Add Share Split"
 msgstr "Aktiensplit hinzufügen"
 
-#: project/templates/active_shareholder_captable.pdf.html:53
-#: project/templates/start.html:25
+#: project/templates/active_shareholder_captable.pdf.html:51
+#: project/templates/start.html:26
 msgid "Your Shareholders for"
 msgstr "Ihre Aktionärsliste für"
 
-#: project/templates/active_shareholder_captable.pdf.html:59
+#: project/templates/active_shareholder_captable.pdf.html:57
 #: project/templates/index.html:11
 msgid "Das Aktienregister"
 msgstr "Das Aktienregister"
 
-#: project/templates/active_shareholder_captable.pdf.html:59
+#: project/templates/active_shareholder_captable.pdf.html:57
 msgid "Page"
 msgstr "Seite"
 
-#: project/templates/active_shareholder_captable.pdf.html:60
+#: project/templates/active_shareholder_captable.pdf.html:58
 msgid "of"
 msgstr "von"
 
-#: project/templates/active_shareholder_captable.pdf.html:61
+#: project/templates/active_shareholder_captable.pdf.html:59
 msgid "Date generated"
 msgstr "Datum der Erstellung des Dokuments"
 
-#: project/templates/active_shareholder_captable.pdf.html:66
+#: project/templates/active_shareholder_captable.pdf.html:64
 msgid "Total company capital"
 msgstr "Aktienkapital"
 
-#: project/templates/active_shareholder_captable.pdf.html:68
+#: project/templates/active_shareholder_captable.pdf.html:66
 msgid "Provisioned Capital"
 msgstr "Liberiertes Kapital"
 
-#: project/templates/active_shareholder_captable.pdf.html:72
-#: project/templates/start.html:34
+#: project/templates/active_shareholder_captable.pdf.html:73
+#: project/templates/start.html:35
 msgid "Name"
 msgstr "Name"
 
-#: project/templates/active_shareholder_captable.pdf.html:72
-#: project/templates/start.html:35
+#: project/templates/active_shareholder_captable.pdf.html:73
+#: project/templates/start.html:36
 msgid "Email"
 msgstr "Email"
 
-#: project/templates/active_shareholder_captable.pdf.html:72
-#: project/templates/start.html:36
+#: project/templates/active_shareholder_captable.pdf.html:73
+#: project/templates/start.html:37
 msgid "Shareholder Number"
 msgstr "Aktieninhabernummer"
 
-#: project/templates/active_shareholder_captable.pdf.html:72
-#: project/templates/start.html:37
+#: project/templates/active_shareholder_captable.pdf.html:73
+#: project/templates/start.html:38
 #, python-format
 msgid "Shares (%%)"
 msgstr "Aktien (%%)"
@@ -191,8 +192,8 @@ msgid ""
 "IMPORTANT: Excel does not fulfill legal requirements for a share register!"
 msgstr ""
 "Das Verwalten der Aktionäre mit Excel genügt ab 2016 nicht mehr den "
-"gesetzlichen Anforderungen in der Schweiz. <strong>\"Das "
-"Aktienregister\"</strong> stellt sicher:"
+"gesetzlichen Anforderungen in der Schweiz. <strong>\"Das Aktienregister\"</"
+"strong> stellt sicher:"
 
 #: project/templates/index.html:15
 msgid "Rapid Shareholder documentation"
@@ -212,8 +213,8 @@ msgstr "Datenexport als CSV für Excel etc."
 
 #: project/templates/index.html:21
 msgid ""
-"We are currently in private Beta. Please leave your email address to receive"
-" an invitation soon!"
+"We are currently in private Beta. Please leave your email address to receive "
+"an invitation soon!"
 msgstr ""
 "Wir sind aktuell in geschlossender Beta. Bitte hinterlassen Sie ihre Email, "
 "um eine Einladung zu erhalten."
@@ -266,23 +267,27 @@ msgstr "GAFI-FATF Validierung fehlgeschlagen"
 msgid "Total Shares distributed (total shares registered with company)"
 msgstr "Zahl Aktien lt. Tabelle (Zahl Aktien lt. Unternehmensdaten)"
 
-#: project/templates/start.html:66
+#: project/templates/start.html:62
+msgid "No Shareholders yet."
+msgstr "Noch keine Gesellschafter"
+
+#: project/templates/start.html:67
 msgid "Download active Shareholders as"
 msgstr "Download Liste der aktiven Aktionäre als"
 
-#: project/templates/start.html:67
+#: project/templates/start.html:68
 msgid "Download active Shareholders as PDF"
 msgstr "Download Liste der aktiven Aktionäre als PDF"
 
-#: project/templates/start.html:68
+#: project/templates/start.html:69
 msgid "PDF"
 msgstr "PDF"
 
-#: project/templates/start.html:70
+#: project/templates/start.html:71
 msgid "Download active Shareholders as CSV"
 msgstr "Download Liste der aktiven Aktionäre als CSV"
 
-#: project/templates/start.html:71
+#: project/templates/start.html:72
 msgid "CSV"
 msgstr "CSV"
 
@@ -312,8 +317,8 @@ msgstr "CSV"
 
 #~ msgid "GAFI Standard compliant"
 #~ msgstr ""
-#~ "Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" "
-#~ "class=\"regular\">GAFI Standards</a>"
+#~ "Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" class="
+#~ "\"regular\">GAFI Standards</a>"
 
 #~ msgid "Extensive data validation to ensure you cannot make a mistake"
 #~ msgstr "Umfangreiche Datenvalidierung  - Garantiert korrekte Daten"

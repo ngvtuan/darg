@@ -17,9 +17,9 @@ from services.rest.serializers import (
     CountrySerializer, OptionPlanSerializer, OptionTransactionSerializer,
     SecuritySerializer, OperatorSerializer)
 from services.rest.permissions import UserCanAddCompanyPermission, \
-    SafeMethodsOnlyPermission, UserCanAddPositionPermission,\
+    SafeMethodsOnlyPermission,\
     UserCanEditCompanyPermission, \
-    UserCanAddOptionTransactionPermission, UserIsOperatorPermission
+    UserIsOperatorPermission
 from shareholder.models import Shareholder, Company, Position, Country, OptionPlan, \
     OptionTransaction, Security, Operator
 
@@ -205,7 +205,6 @@ class PositionViewSet(viewsets.ModelViewSet):
     """ API endpoint to get positions """
     serializer_class = PositionSerializer
     permission_classes = [
-        UserCanAddPositionPermission,
         UserIsOperatorPermission,
     ]
 
@@ -213,6 +212,31 @@ class PositionViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return Position.objects.filter(buyer__company__operator__user=user)\
             .order_by('-bought_at', '-pk')
+
+    @detail_route(
+        methods=['post'], permission_classes=[UserIsOperatorPermission])
+    def confirm(self, request, pk=None):
+        """ confirm position and make it unchangable """
+        position = self.get_object()
+        position.is_draft = False
+        position.save()
+        return Response({"success": True}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, pk=None):
+        """ delete position. but not if is_draft-False"""
+
+        position = self.get_object()
+        if position.is_draft is True:
+            position.delete()
+            return Response(
+                {"success": True}, status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(
+                {
+                    'success': False,
+                    'errors': [_('Confirmed position cannot be deleted.')]
+                },
+                status=status.HTTP_400_BAD_REQUEST)
 
 
 class SecurityViewSet(viewsets.ModelViewSet):
@@ -263,10 +287,35 @@ class OptionTransactionViewSet(viewsets.ModelViewSet):
     """ API endpoint to get options """
     serializer_class = OptionTransactionSerializer
     permission_classes = [
-        UserCanAddOptionTransactionPermission,
+        UserIsOperatorPermission
     ]
 
     def get_queryset(self):
         user = self.request.user
         return OptionTransaction.objects.filter(
             option_plan__company__operator__user=user)
+
+    @detail_route(
+        methods=['post'], permission_classes=[UserIsOperatorPermission])
+    def confirm(self, request, pk=None):
+        """ confirm position and make it unchangable """
+        position = self.get_object()
+        position.is_draft = False
+        position.save()
+        return Response({"success": True}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, pk=None):
+        """ delete position. but not if is_draft-False"""
+
+        position = self.get_object()
+        if position.is_draft is True:
+            position.delete()
+            return Response(
+                {"success": True}, status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(
+                {
+                    'success': False,
+                    'errors': [_('Confirmed position cannot be deleted.')]
+                },
+                status=status.HTTP_400_BAD_REQUEST)

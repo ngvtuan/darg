@@ -1,5 +1,6 @@
 # coding=utf-8
 import datetime
+import json
 
 from rest_framework.test import APIClient
 from rest_framework import status
@@ -13,9 +14,9 @@ User = get_user_model()
 from shareholder.generators import (
     OperatorGenerator, UserGenerator, CompanyGenerator,
     ShareholderGenerator, TwoInitialSecuritiesGenerator,
-    PositionGenerator
+    PositionGenerator, OptionTransactionGenerator
 )
-from shareholder.models import Operator, Shareholder, Position, Security
+from shareholder.models import Operator, Shareholder, Position, Security, OptionTransaction
 
 
 class OperatorTestCase(TestCase):
@@ -142,7 +143,7 @@ class PositionTestCase(TestCase):
         self.assertTrue(logged_in)
 
         data = {
-            "bought_at": "2016-01-01T00:00:00.000Z",
+            "bought_at": "2016-01-01",
             "buyer": {
                 "pk": buyer.pk,
                 "user": {
@@ -221,6 +222,86 @@ class PositionTestCase(TestCase):
         self.assertEqual(position.value, 1)
         self.assertEqual(position.buyer, buyer)
         self.assertEqual(position.seller, seller)
+
+    def test_delete_position(self):
+        """
+        operator deletes position
+        """
+        operator = OperatorGenerator().generate()
+        user = operator.user
+        position = PositionGenerator().generate(company=operator.company)
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        res = self.client.delete(
+            '/services/rest/position/{}'.format(position.pk))
+
+        self.assertEqual(res.status_code, 204)
+        self.assertFalse(Position.objects.filter(id=position.pk).exists())
+
+    def test_delete_position_shareholder(self):
+        """
+        shareholder cannot delete positions
+        """
+
+        operator = ShareholderGenerator().generate()
+        user = operator.user
+        position = PositionGenerator().generate(company=operator.company)
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        res = self.client.delete(
+            '/services/rest/position/{}'.format(position.pk))
+
+        self.assertEqual(res.status_code, 404)
+
+    def test_delete_confirmed_position(self):
+        """
+        confirmed positions cannot be deleted
+        """
+        operator = OperatorGenerator().generate()
+        user = operator.user
+        position = PositionGenerator().generate(company=operator.company)
+        position.is_draft = False
+        position.save()
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        res = self.client.delete(
+            '/services/rest/position/{}'.format(position.pk))
+
+        self.assertEqual(res.status_code, 400)
+
+    def test_confirm_position(self):
+
+        operator = OperatorGenerator().generate()
+        user = operator.user
+        seller = ShareholderGenerator().generate(company=operator.company)
+        position = PositionGenerator().generate(seller=seller)
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        # get and prep data
+        res = self.client.login(username=user.username, password='test')
+        self.assertTrue(res)
+
+        res = self.client.get(
+            '/services/rest/position/{}'.format(position.pk),
+            format='json')
+
+        # update data
+        res = self.client.post(
+            '/services/rest/position/{}/confirm'.format(position.pk),
+            {},
+            format='json'
+            )
+
+        self.assertEqual(res.status_code, 200)
+        self.assertFalse(Position.objects.get(id=position.id).is_draft)
 
     def test_split_shares_GET(self):
         operator = OperatorGenerator().generate()
@@ -507,3 +588,90 @@ class ShareholderTestCase(TestCase):
         # check proper db status
         user = s.user
         self.assertEqual(user.email, "mutter@demo.ch")
+
+
+class OptionTransactionTestCase(TestCase):
+
+    def setUp(self):
+        self.client = APIClient()
+
+
+    def test_delete_option_transaction(self):
+        """
+        operator deletes position
+        """
+        operator = OperatorGenerator().generate()
+        user = operator.user
+        optiontransaction = OptionTransactionGenerator().generate(company=operator.company)
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        res = self.client.delete(
+            '/services/rest/optiontransaction/{}'.format(optiontransaction.pk))
+
+        self.assertEqual(res.status_code, 204)
+        self.assertFalse(OptionTransaction.objects.filter(id=optiontransaction.pk).exists())
+
+    def test_delete_optiontransaction_shareholder(self):
+        """
+        shareholder cannot delete positions
+        """
+
+        operator = ShareholderGenerator().generate()
+        user = operator.user
+        optiontransaction = OptionTransactionGenerator().generate(company=operator.company)
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        res = self.client.delete(
+            '/services/rest/optiontransaction/{}'.format(optiontransaction.pk))
+
+        self.assertEqual(res.status_code, 404)
+
+    def test_delete_confirmed_optiontransaction(self):
+        """
+        confirmed positions cannot be deleted
+        """
+        operator = OperatorGenerator().generate()
+        user = operator.user
+        optiontransaction = OptionTransactionGenerator().generate(company=operator.company)
+        optiontransaction.is_draft = False
+        optiontransaction.save()
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        res = self.client.delete(
+            '/services/rest/optiontransaction/{}'.format(optiontransaction.pk))
+
+        self.assertEqual(res.status_code, 400)
+
+    def test_confirm_optiontransaction(self):
+
+        operator = OperatorGenerator().generate()
+        user = operator.user
+        seller = ShareholderGenerator().generate(company=operator.company)
+        optiontransaction = OptionTransactionGenerator().generate(seller=seller)
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        # get and prep data
+        res = self.client.login(username=user.username, password='test')
+        self.assertTrue(res)
+
+        res = self.client.get(
+            '/services/rest/optiontransaction/{}'.format(optiontransaction.pk),
+            format='json')
+
+        # update data
+        res = self.client.post(
+            '/services/rest/optiontransaction/{}/confirm'.format(optiontransaction.pk),
+            {},
+            format='json'
+            )
+
+        self.assertEqual(res.status_code, 200)
+        self.assertFalse(OptionTransaction.objects.get(id=optiontransaction.id).is_draft)

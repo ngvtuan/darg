@@ -255,7 +255,9 @@
         });
       });
       $scope.add_option_plan = function() {
-        $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10);
+        if ($scope.newOptionPlan.board_approved_at) {
+          $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10);
+        }
         return $scope.newOptionPlan.$save().then(function(result) {
           return $scope.option_plans.push(result);
         }).then(function() {
@@ -268,7 +270,9 @@
         });
       };
       $scope.add_option_transaction = function() {
-        $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10);
+        if ($scope.newOptionTransaction.bought_at) {
+          $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10);
+        }
         return $scope.newOptionTransaction.$save().then(function(result) {
           return $scope._reload_option_plans();
         }).then(function() {
@@ -418,7 +422,9 @@
         });
       });
       $scope.add_position = function() {
-        $scope.newPosition.bought_at = $scope.newPosition.bought_at.toISOString().substring(0, 10);
+        if ($scope.newPosition.bought_at) {
+          $scope.newPosition.bought_at = $scope.newPosition.bought_at.toISOString().substring(0, 10);
+        }
         return $scope.newPosition.$save().then(function(result) {
           return $scope.positions.push(result);
         }).then(function() {

@@ -25,7 +25,8 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $scope.securities.push item
 
     $scope.add_position = ->
-        $scope.newPosition.bought_at = $scope.newPosition.bought_at.toISOString().substring(0, 10)
+        if $scope.newPosition.bought_at
+            $scope.newPosition.bought_at = $scope.newPosition.bought_at.toISOString().substring(0, 10)
         $scope.newPosition.$save().then (result) ->
             $scope.positions.push result
         .then ->

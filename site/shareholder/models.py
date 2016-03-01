@@ -380,6 +380,7 @@ class Position(models.Model):
         max_digits=8, decimal_places=4, blank=True,
         null=True)
     is_split = models.BooleanField(default=False)
+    is_draft = models.BooleanField(default=True)
     comment = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -461,6 +462,7 @@ class OptionTransaction(models.Model):
     seller = models.ForeignKey('Shareholder', blank=True, null=True,
                                related_name="option_seller")
     vesting_months = models.PositiveIntegerField(blank=True, null=True)
+    is_draft = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

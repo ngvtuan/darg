@@ -37,7 +37,14 @@ class UserIsOperatorPermission(permissions.BasePermission):
     """
     def has_object_permission(self, request, view, obj=None):
 
-        return request.user.operator_set.filter(company=obj.company).exists()
+        if hasattr(obj, 'company'):
+            company = obj.company
+        elif hasattr(obj.buyer, 'company'):
+            company = obj.buyer.company
+        elif hasattr(obj.seller, 'company'):
+            company = obj.seller.company
+
+        return request.user.operator_set.filter(company=company).exists()
 
 
 class UserCanAddShareholderPermission(SafeMethodsOnlyPermission):

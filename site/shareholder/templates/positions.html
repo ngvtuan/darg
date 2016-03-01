@@ -54,13 +54,32 @@
           </td>
         </tr>
         <tr class="panel" ng-hide="position.is_split && !show_split_data">
-          <td>{{ position.bought_at | date : 'd.MM.yy' }}</td>
+          <td>
+            <div>{{ position.bought_at | date : 'd.MM.yy' }}</div>
+            <div ng-show="position.is_draft" class="draft">
+              {% endverbatim %}
+              {% trans "Draft" %}
+              {% verbatim %}
+            </div>
+          </td>
           <td>{{ position.buyer.user.first_name }} {{ position.buyer.user.last_name }}</td>
           <td>{{ position.security.readable_title }}</td>
           <td class="text-right">{{ position.count }}</td>
           <td class="text-right">{{ position.value }}</td>
           <td>{{ position.seller.user.first_name }} {{ position.seller.user.last_name }}</td>
           <td>{{ position.comment }}</td>
+          <td>
+            <div ng-show="position.is_draft">
+              <a class="btn-inline" ng-click="delete_position(position)" href>
+                {% endverbatim %}{% trans "delete" %}{% verbatim %}
+              </a>
+            </div>
+            <div ng-show="position.is_draft">
+              <a class="btn-inline" ng-click="confirm_position(position)" href>
+                {% endverbatim %}{% trans "confirm" %}{% verbatim %}
+              </a>
+            </div>
+          </td>
         </tr>
         <tr ng-show="show_split_data && position.is_split && !positions[$index+1].is_split">
           <td colspan="7">

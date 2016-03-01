@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-25 21:55+0000\n"
+"POT-Creation-Date: 2016-02-29 21:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,7 +103,7 @@ msgid "Change password"
 msgstr ""
 
 #: templates/base_auth.html:19
-msgid "The Share Register, 2015"
+msgid "The Share Register, 2016"
 msgstr ""
 
 #: templates/menu.html:5

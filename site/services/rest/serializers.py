@@ -335,13 +335,13 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer):
     buyer = ShareholderSerializer(many=False, required=False)
     seller = ShareholderSerializer(many=False, required=False)
     security = SecuritySerializer(many=False, required=True)
-    bought_at = serializers.DateTimeField()  # e.g. 2015-06-02T23:00:00.000Z
+    bought_at = serializers.DateField()  # e.g. 2015-06-02T23:00:00.000Z
 
     class Meta:
         model = Position
         fields = (
             'pk', 'buyer', 'seller', 'bought_at', 'count', 'value',
-            'security', 'comment', 'is_split')
+            'security', 'comment', 'is_split', 'is_draft')
         validators = [DependedFieldsValidator(fields=('seller', 'buyer'))]
 
     def create(self, validated_data):
@@ -398,11 +398,12 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer):
 class OptionTransactionSerializer(serializers.HyperlinkedModelSerializer):
     buyer = ShareholderSerializer(many=False, required=True)
     seller = ShareholderSerializer(many=False, required=True)
-    bought_at = serializers.DateTimeField()  # e.g. 2015-06-02T23:00:00.000Z
+    bought_at = serializers.DateField()  # e.g. 2015-06-02T23:00:00.000Z
 
     class Meta:
         model = OptionTransaction
-        fields = ('pk', 'buyer', 'seller', 'bought_at', 'count', 'option_plan')
+        fields = ('pk', 'buyer', 'seller', 'bought_at', 'count', 'option_plan',
+                  'is_draft')
 
     def create(self, validated_data):
 
@@ -440,7 +441,7 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
     security = SecuritySerializer(many=False, required=True)
     optiontransaction_set = OptionTransactionSerializer(many=True,
                                                         read_only=True)
-    board_approved_at = serializers.DateTimeField()
+    board_approved_at = serializers.DateField()
 
     class Meta:
         model = OptionPlan

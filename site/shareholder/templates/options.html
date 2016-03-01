@@ -9,7 +9,7 @@
   {% include "_form_errors.html" %}
 
   <div class="panel">
-    <a class="btn align-left" href="" ng-click="show_add_option_transaction_form()">{% trans "Transfer Option" %}</a> 
+    <a class="btn align-left" href="" ng-click="show_add_option_transaction_form()">{% trans "Transfer Option" %}</a>
     <a class="btn align-left" href="" ng-click="show_add_option_plan_form()">{% trans "Grant New Option Plan" %}</a>
   </div>
 
@@ -19,7 +19,7 @@
   <div id="add_option_plan" ng-hide="!show_add_option_plan">
     {% include "_add_option_plan_form.html" %}
   </div>
-  
+
   {% verbatim %}
   <div id="options" ng-hide="!option_plans.length" ng-repeat="option_plan in option_plans">
     {% endverbatim %}
@@ -42,11 +42,30 @@
       <tbody>
       {% verbatim %}
       <tr class="panel" ng-repeat="option_transaction in option_plan.optiontransaction_set">
-        <td>{{ option_transaction.bought_at | date : 'd.MM.yy' }}</td>
+        <td>
+          <div>{{ option_transaction.bought_at | date : 'd.MM.yy' }}</div>
+          <div ng-show="option_transaction.is_draft" class="draft">
+            {% endverbatim %}
+            {% trans "Draft" %}
+            {% verbatim %}
+          </div>
+        </td>
         <td>{{ option_transaction.buyer.user.first_name }} {{ option_transaction.buyer.user.last_name }}</td>
         <td class="text-right">{{ option_transaction.count }}</td>
         <td class="text-right">{{ option_plan.exercise_price }}</td>
         <td>{{ option_transaction.seller.user.first_name }} {{ option_transaction.seller.user.last_name }}</td>
+        <td>
+          <div ng-show="option_transaction.is_draft">
+            <a class="btn-inline" ng-click="delete_option_transaction(option_transaction)" href>
+              {% endverbatim %}{% trans "delete" %}{% verbatim %}
+            </a>
+          </div>
+          <div ng-show="option_transaction.is_draft" ng-click="confirm_option_transaction(option_transaction)" href>
+            <a class="btn-inline">
+              {% endverbatim %}{% trans "confirm" %}{% verbatim %}
+            </a>
+          </div>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -57,5 +76,5 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
 {% endblock %}

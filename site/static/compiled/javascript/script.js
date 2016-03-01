@@ -255,6 +255,7 @@
         });
       });
       $scope.add_option_plan = function() {
+        $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10);
         return $scope.newOptionPlan.$save().then(function(result) {
           return $scope.option_plans.push(result);
         }).then(function() {
@@ -267,13 +268,9 @@
         });
       };
       $scope.add_option_transaction = function() {
+        $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10);
         return $scope.newOptionTransaction.$save().then(function(result) {
-          $scope.option_plans = [];
-          return $http.get('/services/rest/optionplan').then(function(result) {
-            return angular.forEach(result.data.results, function(item) {
-              return $scope.option_plans.push(item);
-            });
-          });
+          return $scope._reload_option_plans();
         }).then(function() {
           $scope.newOptionTransaction = new OptionPlan();
           return $scope.show_add_option_transaction = false;
@@ -281,6 +278,24 @@
           return $scope.errors = null;
         }, function(rejection) {
           return $scope.errors = rejection.data;
+        });
+      };
+      $scope._reload_option_plans = function() {
+        $scope.option_plans = [];
+        return $http.get('/services/rest/optionplan').then(function(result) {
+          return angular.forEach(result.data.results, function(item) {
+            return $scope.option_plans.push(item);
+          });
+        });
+      };
+      $scope.delete_option_transaction = function(option_transaction) {
+        return $http["delete"]('/services/rest/optiontransaction/' + option_transaction.pk).then(function(result) {
+          return $scope._reload_option_plans();
+        });
+      };
+      $scope.confirm_option_transaction = function(option_transaction) {
+        return $http.post('/services/rest/optiontransaction/' + option_transaction.pk + '/confirm').then(function(result) {
+          return $scope._reload_option_plans();
         });
       };
       $scope.show_add_option_plan_form = function() {
@@ -413,6 +428,26 @@
           return $scope.errors = null;
         }, function(rejection) {
           return $scope.errors = rejection.data;
+        });
+      };
+      $scope.delete_position = function(position) {
+        return $http["delete"]('/services/rest/position/' + position.pk).then(function(result) {
+          $scope.positions = [];
+          return $http.get('/services/rest/position').then(function(result1) {
+            return angular.forEach(result1.data.results, function(item) {
+              return $scope.positions.push(item);
+            });
+          });
+        });
+      };
+      $scope.confirm_position = function(position) {
+        return $http.post('/services/rest/position/' + position.pk + '/confirm').then(function(result) {
+          $scope.positions = [];
+          return $http.get('/services/rest/position').then(function(result1) {
+            return angular.forEach(result1.data.results, function(item) {
+              return $scope.positions.push(item);
+            });
+          });
         });
       };
       $scope.add_split = function() {

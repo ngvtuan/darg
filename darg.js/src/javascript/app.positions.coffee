@@ -38,6 +38,20 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
         , (rejection) ->
             $scope.errors = rejection.data
 
+    $scope.delete_position = (position) ->
+        $http.delete('/services/rest/position/'+position.pk).then (result) ->
+            $scope.positions = []
+            $http.get('/services/rest/position').then (result1) ->
+                angular.forEach result1.data.results, (item) ->
+                    $scope.positions.push item
+
+    $scope.confirm_position = (position) ->
+        $http.post('/services/rest/position/'+position.pk+'/confirm').then (result) ->
+            $scope.positions = []
+            $http.get('/services/rest/position').then (result1) ->
+                angular.forEach result1.data.results, (item) ->
+                    $scope.positions.push item
+
     $scope.add_split = ->
         $scope.newSplit.$save().then (result) ->
             $scope.positions = result.data

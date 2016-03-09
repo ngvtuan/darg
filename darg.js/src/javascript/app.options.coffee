@@ -5,6 +5,7 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
     $scope.option_plans = []
     $scope.securities = []
     $scope.shareholders = []
+    $scope.loading = true
 
     $scope.show_add_option_transaction = false
     $scope.show_add_option_plan = false
@@ -21,6 +22,8 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
     $http.get('/services/rest/shareholders').then (result) ->
         angular.forEach result.data.results, (item) ->
             $scope.shareholders.push item
+    .finally =>
+        $scope.loading = false
 
     $scope.add_option_plan = ->
         if $scope.newOptionPlan.board_approved_at

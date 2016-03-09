@@ -22,9 +22,10 @@
   </div>
 
   {% verbatim %}
-  <div class="spinner" ng-hide="option_plans.length">
+  <div class="spinner" ng-show="loading">
     <img src="{% endverbatim %}{% static "compiled/images/loading_spinner.gif" %}{% verbatim %}" />
   </div>
+
   <div id="options" ng-hide="!option_plans.length" ng-repeat="option_plan in option_plans">
     {% endverbatim %}
     <h2>

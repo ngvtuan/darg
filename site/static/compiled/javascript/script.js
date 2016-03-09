@@ -236,6 +236,7 @@
       $scope.option_plans = [];
       $scope.securities = [];
       $scope.shareholders = [];
+      $scope.loading = true;
       $scope.show_add_option_transaction = false;
       $scope.show_add_option_plan = false;
       $scope.newOptionPlan = new OptionPlan();
@@ -253,7 +254,11 @@
         return angular.forEach(result.data.results, function(item) {
           return $scope.shareholders.push(item);
         });
-      });
+      })["finally"]((function(_this) {
+        return function() {
+          return $scope.loading = false;
+        };
+      })(this));
       $scope.add_option_plan = function() {
         if ($scope.newOptionPlan.board_approved_at) {
           $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10);

@@ -11,6 +11,7 @@ UserAdmin.list_display = (
     'first_name',
     'last_name',
     'is_active',
+    'last_login',
     'date_joined',
     'is_staff')
 UserAdmin.list_filter = ('is_staff', 'date_joined', 'operator__company', 'shareholder__company')

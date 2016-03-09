@@ -354,7 +354,6 @@
           $scope.files = [$scope.file];
         }
       });
-      $scope.log = '';
       return $scope.upload = function(files) {
         var file, i, payload;
         if (files && files.length) {
@@ -376,14 +375,15 @@
                   $scope.pdf_upload_errors = false;
                 });
                 return $timeout(function() {
-                  return $scope.pdf_upload_success = false;
+                  $scope.pdf_upload_success = false;
+                  return $scope.loading = false;
                 }, 3000);
               }), (function(response) {
                 return $timeout(function() {
-                  return $scope.pdf_upload_errors = response.data;
+                  $scope.pdf_upload_errors = response.data;
+                  return $scope.loading = false;
                 });
               }), function(evt) {});
-              $scope.loading = false;
               return;
             }
           }

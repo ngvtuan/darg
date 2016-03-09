@@ -21,7 +21,6 @@ app.controller 'OptionPlanController', ['$scope', '$http', 'OptionPlan', 'Upload
       if $scope.file != null
         $scope.files = [ $scope.file ]
       return
-    $scope.log = ''
 
     $scope.upload = (files) ->
       if files and files.length
@@ -44,13 +43,14 @@ app.controller 'OptionPlanController', ['$scope', '$http', 'OptionPlan', 'Upload
                   return
                 $timeout(() ->
                   $scope.pdf_upload_success = false
+                  $scope.loading = false
                 , 3000)
               ), ((response) ->
                 $timeout ->
                   $scope.pdf_upload_errors = response.data
+                  $scope.loading = false
               ), (evt) ->
                 return
-              $scope.loading = false
               return
 ]
 

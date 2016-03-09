@@ -1,28 +1,35 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load staticfiles %}
 
 {% block body_block %}
   {% block header %}
     {% include "menu.html" %}
   {% endblock %}
 <div class="container">
-<div class="centered" id="auth">
-  <h1>{% trans "Register Here" %}</h1>
-  <form method="post" action=".">
-                {% csrf_token %}
-                {{ form.as_p }}
+  <div id="auth">
+    <div class="registration-form" id="auth">
+      <h1>{% trans "Register Here" %}</h1>
+      <form method="post" action=".">
+                    {% csrf_token %}
+                    {{ form.as_p }}
 
-                <input type="submit" value="{% trans "Sign up now" %}" />
-  </form>
+                    <input type="submit" value="{% trans "Sign up now" %}" />
+      </form>
 
-  <p class="comment">
-    {% trans "Already registered?" %}
-    <a href="{% url 'auth_login' %}" class="btn-inline">{% trans "Login" %}</a>
-    <br />
-    <br/>
-    {% trans "Do you know our " %} <a href="/blog/" class="btn-inline">{% trans "Blog" %}</a>?
-  </p>
-</div>
+      <p class="comment">
+        {% trans "Already registered?" %}
+        <a href="{% url 'auth_login' %}" class="btn-inline">{% trans "Login" %}</a>
+        <br />
+        <br/>
+        {% trans "Do you know our " %} <a href="/blog/" class="btn-inline">{% trans "Blog" %}</a>?
+      </p>
+    </div>
+
+    <div class="registration-teaser">
+      <img src="{% static 'compiled/images/Das-Aktienregister-Screenshot.png' %}" alt="Das Aktienregister Screenshot" />
+    </div>
+  </div>
 </div>
 
 {% endblock %}

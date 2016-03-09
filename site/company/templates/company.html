@@ -126,7 +126,7 @@
 
     <table class="table table-striped">
     {% for optionplan in company.optionplan_set.all %}
-      <tr><td>{% trans "Options Plan Name" %}</td><td><a href="{% url "optionplan" optionplan.pk %}" title="{% trans "Edit Option Plan" %}" class="btn align-left">{{ optionplan.title }}</a></td></tr>
+      <tr><td>{% trans "Options Plan Name" %}</td><td><a href="{% url "optionplan" optionplan.pk %}" title="{% trans "Edit Option Plan" %}" class="btn-inline align-left">{{ optionplan.title }}</a></td></tr>
     {% endfor %}
     </table>
 

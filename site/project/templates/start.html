@@ -5,29 +5,35 @@
 
 {% block content %}
 <div ng_controller="StartController">
-  <h1>{% trans "Welcome" %} {{ request.user }}!</h1>
   {% include "_form_errors.html" %}
   <div id="add_company" ng-show="!user.operator_set.length">
     {% include "_add_company_form.html" %}
   </div>
 
-  <div class="panel" ng-hide="!user.operator_set.length">
-    <a class="btn align-left" href="" ng-click="show_add_shareholder_form()">{% trans "Add Shareholder" %}</a>
-  </div>
-
   {% verbatim %}
-  <div id="add_shareholder" ng-hide="!user.operator_set.length  || !show_add_shareholder">
-    {% endverbatim %}{% include "_add_shareholder_form.html" %}{% verbatim %}
-  </div>
 
   <!-- table per company -->
   <div id="shareholder_list" ng-hide="!user.operator_set.length" ng-repeat="operator in user.operator_set">
+
     <h2>
       {% endverbatim %}{% trans "Your Shareholders for" %}{% verbatim %} {{ operator.company.name }}
-      <a href="{{ operator.company.profile_url }}" class="el-icon-cogs-wrapper btn">
+      <a href="{{ operator.company.profile_url }}" class="el-icon-cogs-wrapper btn-inline">
         <span class="el-icon-cogs"></span>
       </a>
     </h2>
+
+    <!-- ACTIONS -->
+    <div class="panel" ng-hide="!user.operator_set.length">
+      <a class="btn-inline align-left" href="" ng-click="show_add_shareholder_form()">
+        {% endverbatim %}{% trans "Add Shareholder" %}{% verbatim %}
+      </a>
+    </div>
+
+    <div id="add_shareholder" ng-hide="!user.operator_set.length  || !show_add_shareholder">
+      {% endverbatim %}{% include "_add_shareholder_form.html" %}{% verbatim %}
+    </div>
+
+    <!-- TABLE -->
     <table class="table table-hover">
       <caption></caption>
       <thead>
@@ -42,7 +48,7 @@
           <td><span class="el-icon-exclamation-sign" ng-hide="shareholder.validate_gafi.is_valid" data-toggle="tooltip" title="{% endverbatim %}{% trans "Gafi Validation failed" %}{% verbatim %}"></span>
             {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
           </td>
-          <td>{{ shareholder.user.email }}<a class="btn"><span class="el-icon-eye-open"></span></a></td>
+          <td>{{ shareholder.user.email }}<a class="btn-inline"><span class="el-icon-eye-open"></span></a></td>
           <td class="text-right">{{ shareholder.number }}</td>
           <td class="text-right"><value ng-if="shareholder.share_count != '-'">{{ shareholder.share_count | number : 0}} ({{shareholder.share_percent | number : 1}}%)</value></td>
         </tr>

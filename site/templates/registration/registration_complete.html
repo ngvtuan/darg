@@ -2,9 +2,15 @@
 {% load i18n %}
 
 {% block body_block %}
-<div class="centered">
+{% block header %}
+{% include "menu.html" %}
+{% endblock %}
+
+<div class="container">
+<div class="centered" id="auth">
   <h1>{% trans "Registration Complete" %}</h1>
-  <p>{% trans "You are now registered. Start here:" %} <a href="{% url "start" %}" class="button">Start</a></p>
+  <p>{% trans "You are now registered. Start here:" %} <a href="{% url "start" %}" class="btn-inline">Start</a></p>
+</div>
 </div>
 <!-- instapage tracking -->
 <script type="text/javascript" src="//instapage-scripts.s3.amazonaws.com/conversion-external.js"></script><iframe class="instapage-noscrap" src="//d3mwhxgzltpnyp.cloudfront.net/local-storage/index.html" name="instapage-local-storage" height="0px" width="0px" onload="(function() { InstapageExternalConversion(554305, 'A'); })();" style="display: block;"></iframe>

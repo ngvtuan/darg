@@ -6,19 +6,16 @@
     {% include "menu.html" %}
   {% endblock %}
 
-  <div class="container">
+  <div class="container" ng-cloak>
     {% block content %}
     {% endblock %}
 
   {% block footer %}
   <footer class="footer">
-    <a href="{% url "auth_password_change" %}" title="{% trans "Reset password" %}" class="btn-inline">
-      {% trans "Change password" %}
-    </a>
-    |
     {% trans "The Share Register, 2016" %}
-    |
-    v{{VERSION}}
+    v{{VERSION}} |
+    {% trans "do you know our" %}
+    <a href="/blog/" title="Das Aktienregister Blog" class="btn-inline">{% trans "our blog" %}</a>?
   </footer>
   {% endblock %}
   </div>

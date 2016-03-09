@@ -1,13 +1,63 @@
 {% load i18n %}
+{% load staticfiles %}
 
-<div class="navbar">
-  {% if request.user.is_superuser %}
-  <a href="{% url 'admin:index' %}" class="pull-right" target="_blank">{% trans "Admin" %}</a>
-  <a href="/rosetta/" class="pull-right" target="_blank">{% trans "I18N" %}</a>
-  {% endif %}
-  <a href="{% url "auth_logout" %}" class="pull-right">{% trans "Logout" %}</a>
-  <a href="{% url "options" %}" class="pull-right">{% trans "Options" %}</a>
-  <!-- <a href="{% url "log" %}" class="pull-right">{% trans "Log" %}</a> -->
-  <a href="{% url "positions" %}" class="pull-right">{% trans "Positions" %}</a>
-  <a href="{% url "start" %}" class="pull-right">{% trans "Start" %}</a>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://www.das-aktienregister.ch">
+        <img alt="Brand" src="{% static "compiled/images/dasaktienregister.png" %}">
+      </a>
+      <a class="navbar-brand" href="http://www.das-aktienregister.ch">Das Aktienregister</a>
+
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    {% url 'start' as start_url %}
+    {% url 'options' as options_url %}
+    {% url 'positions' as positions_url %}
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        {% if request.user.is_authenticated %}
+        <li {% ifequal request.path start_url %}class="active"{% endifequal %}>
+          <a href="{{start_url}}" class="pull-right">{% trans "Start" %}</a>
+        </li>
+        <li {% ifequal request.path positions_url %}class="active"{% endifequal %}>
+          <a href="{{ positions_url }}" class="pull-right">{% trans "Positions" %}</a>
+        </li>
+        <li {% ifequal request.path options_url %}class="active"{% endifequal %}>
+          <a href="{{options_url}}" class="pull-right">{% trans "Options" %}</a>
+        </li>
+        {% endif %}
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if request.user.is_authenticated %}
+        <li><p class="navbar-text">{% trans "Logged in as" %} {{request.user.username}}</p></li>
+        <li>
+          <a href="{% url "auth_logout" %}" class="pull-right">{% trans "Logout" %}</a>
+        </li>
+        {% endif %}
+        {% if request.user.is_superuser %}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Other" %}<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'admin:index' %}" class="pull-right" target="_blank">{% trans "Admin" %}</a></li>
+            <li><a href="/rosetta/" class="pull-right" target="_blank">{% trans "I18N" %}</a></li>
+            <li>
+              <a href="{% url "auth_password_change" %}" title="{% trans "Reset password" %}" class="btn-inline">
+                {% trans "Change password" %}
+              </a>
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

@@ -13,7 +13,7 @@
   <h1>{% trans "Option plan details for" %} {% verbatim %}{{ optionplan.title }}{% endverbatim %}</h1>
 
   {% include "_form_errors.html" %}
-  
+
   <h2>{% trans "Data" %}</h2>
   <table class="table table-striped">
     <tr>
@@ -37,7 +37,7 @@
       <td>
       {% verbatim %}
         <span editable-select="optionplan.security" onaftersave="edit_security()" e-ng-options="c.title as c.readable_title for c in securities">
-          {{ optionplan.security.readable_title || 'empty' }} 
+          {{ optionplan.security.readable_title || 'empty' }}
           <!--<span class="el-icon-pencil"></span>-->
         </span>
       {% endverbatim %}
@@ -49,15 +49,15 @@
   <h2>{% trans "PDF of approved option plan" %}</h2>
     <div>
       {% verbatim %}
-      <a ng-show="optionplan.pdf_file" ng-href="{{ optionplan.pdf_file_url }}" title="Download">
+      <a ng-show="optionplan.pdf_file" ng-href="{{ optionplan.pdf_file_url }}" title="Download" class="">
         <img ng-src="{{ optionplan.pdf_file_preview_url }}" alt="" ng-show="optionplan.pdf_file_preview_url" width="300" class="option-plan-preview"/>
       </a>
     </div>
-    <div>
-      <a ng-show="optionplan.pdf_file" ng-href="{{ optionplan.pdf_file_url }}" title="Download">
+    <div class="panel">
+      <a ng-show="optionplan.pdf_file" ng-href="{{ optionplan.pdf_file_url }}" title="Download" class="btn-inline">
         Download
       </a>
-      <button class="button" ngf-select ng-model="file" ngf-multiple="false">Upload File</button>
+      <button class="btn-inline" ngf-select ng-model="file" ngf-multiple="false">Upload File</button>
     </div>
     <p ng-show="pdf_upload_success" class="alert alert-success pdf_upload_success" ng-cloak>
       {% endverbatim %}{% trans "Upload success" %}{% verbatim %}
@@ -71,5 +71,5 @@
     </div>-->
   {% endverbatim %}
 <!-- end controller -->
-</div> 
+</div>
 {% endblock %}

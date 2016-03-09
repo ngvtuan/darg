@@ -6,6 +6,7 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
     $scope.shareholders = []
     $scope.user = []
     $scope.total_shares = 0
+    $scope.loading = true
 
     $scope.show_add_shareholder = false
 
@@ -23,6 +24,8 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
         angular.forEach $scope.user.operator_set, (item, key) ->
             $http.get(item.company).then (result1) ->
                 $scope.user.operator_set[key].company = result1.data
+    .finally ->
+        $scope.loading = false
 
     $scope.$watchCollection 'shareholders', (shareholders)->
         $scope.total_shares = 0

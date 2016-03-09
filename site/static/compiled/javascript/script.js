@@ -564,6 +564,7 @@
       $scope.shareholders = [];
       $scope.user = [];
       $scope.total_shares = 0;
+      $scope.loading = true;
       $scope.show_add_shareholder = false;
       $scope.newShareholder = new Shareholder();
       $scope.newCompany = new CompanyAdd();
@@ -579,6 +580,8 @@
             return $scope.user.operator_set[key].company = result1.data;
           });
         });
+      })["finally"](function() {
+        return $scope.loading = false;
       });
       $scope.$watchCollection('shareholders', function(shareholders) {
         $scope.total_shares = 0;

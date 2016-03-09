@@ -1,19 +1,25 @@
 {% extends "base_auth.html" %}
 {% load i18n %}
+{% load staticfiles %}
 
 {% block ng_app %}js.darg.app.start{% endblock %}
 
 {% block content %}
 <div ng_controller="StartController">
   {% include "_form_errors.html" %}
-  <div id="add_company" ng-show="!user.operator_set.length">
+  <div id="add_company" ng-show="!user.operator_set.length && !loading">
     {% include "_add_company_form.html" %}
   </div>
 
   {% verbatim %}
 
+  <!-- spinner -->
+  <div class="spinner" ng-show="loading">
+    <img src="{% endverbatim %}{% static "compiled/images/loading_spinner.gif" %}{% verbatim %}" />
+  </div>
+
   <!-- table per company -->
-  <div id="shareholder_list" ng-hide="!user.operator_set.length" ng-repeat="operator in user.operator_set">
+  <div id="shareholder_list" ng-hide="!user.operator_set.length || loading" ng-repeat="operator in user.operator_set">
 
     <h2>
       {% endverbatim %}{% trans "Your Shareholders for" %}{% verbatim %} {{ operator.company.name }}
@@ -34,6 +40,7 @@
     </div>
 
     <!-- TABLE -->
+
     <table class="table table-hover">
       <caption></caption>
       <thead>

@@ -1,5 +1,6 @@
 {% extends "base_auth.html" %}
 {% load i18n %}
+{% load staticfiles %}
 
 {% block ng_app %}js.darg.app.positions{% endblock %}
 
@@ -94,6 +95,11 @@
         <em>{% trans "No Postions yet." %}</em>
       </div>
     </div>
+  </div> <!-- END Positions -->
+
+  <div class="spinner" ng-hide="positions.length">
+    <img src="{% static "compiled/images/loading_spinner.gif" %}" />
   </div>
+
 </div>
 {% endblock %}

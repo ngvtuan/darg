@@ -42,6 +42,13 @@
         <li>
           <a href="{% url "auth_logout" %}" class="pull-right">{% trans "Logout" %}</a>
         </li>
+        {% else %}
+        <li>
+          <a href="{% url "registration_register" %}" class="pull-right">{% trans "Register" %}</a>
+        </li>
+        <li>
+          <a href="{% url 'auth_login' %}" class="pull-right">{% trans "Login" %}</a>
+        </li>
         {% endif %}
         {% if request.user.is_superuser %}
         <li class="dropdown">

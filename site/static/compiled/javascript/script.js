@@ -338,6 +338,7 @@
       $scope.file = null;
       $scope.pdf_upload_success = false;
       $scope.pdf_upload_errors = false;
+      $scope.loading = false;
       $http.get('/services/rest/optionplan/' + optionplan_id).then(function(result) {
         $scope.optionplan = new OptionPlan(result.data);
         return $scope.optionplan.board_approved_at = $scope.optionplan.board_approved_at;
@@ -357,6 +358,7 @@
       return $scope.upload = function(files) {
         var file, i, payload;
         if (files && files.length) {
+          $scope.loading = true;
           i = 0;
           while (i < files.length) {
             file = files[i];
@@ -381,6 +383,7 @@
                   return $scope.pdf_upload_errors = response.data;
                 });
               }), function(evt) {});
+              $scope.loading = false;
               return;
             }
           }

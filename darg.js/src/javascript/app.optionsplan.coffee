@@ -5,6 +5,7 @@ app.controller 'OptionPlanController', ['$scope', '$http', 'OptionPlan', 'Upload
     $scope.file = null
     $scope.pdf_upload_success = false
     $scope.pdf_upload_errors = false
+    $scope.loading = false
 
     $http.get('/services/rest/optionplan/' + optionplan_id).then (result) ->
         $scope.optionplan = new OptionPlan(result.data)
@@ -24,6 +25,7 @@ app.controller 'OptionPlanController', ['$scope', '$http', 'OptionPlan', 'Upload
 
     $scope.upload = (files) ->
       if files and files.length
+        $scope.loading = true
         i = 0
         while i < files.length
           file = files[i]
@@ -48,6 +50,7 @@ app.controller 'OptionPlanController', ['$scope', '$http', 'OptionPlan', 'Upload
                   $scope.pdf_upload_errors = response.data
               ), (evt) ->
                 return
+              $scope.loading = false
               return
 ]
 

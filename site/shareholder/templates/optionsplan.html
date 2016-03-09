@@ -1,5 +1,6 @@
 {% extends "base_auth.html" %}
 {% load i18n %}
+{% load staticfiles %}
 
 {% block ng_app %}js.darg.app.optionplan{% endblock %}
 
@@ -49,7 +50,10 @@
   <h2>{% trans "PDF of approved option plan" %}</h2>
     <div>
       {% verbatim %}
-      <a ng-show="optionplan.pdf_file" ng-href="{{ optionplan.pdf_file_url }}" title="Download" class="">
+      <div class="spinner" ng-show="loading">
+        <img src="{% endverbatim %}{% static "compiled/images/loading_spinner.gif" %}{% verbatim %}" />
+      </div>
+      <a ng-show="optionplan.pdf_file && !loading" ng-href="{{ optionplan.pdf_file_url }}" title="Download" class="">
         <img ng-src="{{ optionplan.pdf_file_preview_url }}" alt="" ng-show="optionplan.pdf_file_preview_url" width="300" class="option-plan-preview"/>
       </a>
     </div>

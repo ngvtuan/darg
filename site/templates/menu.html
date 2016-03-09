@@ -50,12 +50,13 @@
           <a href="{% url 'auth_login' %}" class="pull-right">{% trans "Login" %}</a>
         </li>
         {% endif %}
-        {% if request.user.is_superuser %}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Other" %}<span class="caret"></span></a>
           <ul class="dropdown-menu">
+            {% if request.user.is_superuser %}
             <li><a href="{% url 'admin:index' %}" class="pull-right" target="_blank">{% trans "Admin" %}</a></li>
             <li><a href="/rosetta/" class="pull-right" target="_blank">{% trans "I18N" %}</a></li>
+            {% endif %}
             <li>
               <a href="{% url "auth_password_change" %}" title="{% trans "Reset password" %}" class="btn-inline">
                 {% trans "Change password" %}
@@ -63,7 +64,6 @@
             </li>
           </ul>
         </li>
-        {% endif %}
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

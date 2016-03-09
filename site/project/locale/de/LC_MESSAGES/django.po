@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-01 20:55+0000\n"
+"POT-Creation-Date: 2016-03-09 14:18+0000\n"
 "PO-Revision-Date: 2016-02-29 21:45+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,15 +45,19 @@ msgid "Add Position"
 msgstr "Position hinzufügen"
 
 #: project/templates/_add_company_form.html:3
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: project/templates/_add_company_form.html:5
 msgid "Please enter your company name:"
 msgstr "Bitte geben Sie ihren Firmennamen ein"
 
-#: project/templates/_add_company_form.html:9
+#: project/templates/_add_company_form.html:11
 #: project/templates/active_shareholder_captable.pdf.html:69
 msgid "Founding Date"
 msgstr "Gründungsdatum"
 
-#: project/templates/_add_company_form.html:14
+#: project/templates/_add_company_form.html:16
 msgid "Add Company"
 msgstr "Unternehmen hinzufügen"
 
@@ -102,7 +106,7 @@ msgid "Please enter your shareholder data:"
 msgstr "Bitte geben Sie die Aktionärsdaten ein:"
 
 #: project/templates/_add_shareholder_form.html:16
-#: project/templates/start.html:15
+#: project/templates/start.html:28
 msgid "Add Shareholder"
 msgstr "Aktionär hinzufügen"
 
@@ -129,7 +133,7 @@ msgid "Add Share Split"
 msgstr "Aktiensplit hinzufügen"
 
 #: project/templates/active_shareholder_captable.pdf.html:51
-#: project/templates/start.html:26
+#: project/templates/start.html:19
 msgid "Your Shareholders for"
 msgstr "Ihre Aktionärsliste für"
 
@@ -159,22 +163,22 @@ msgid "Provisioned Capital"
 msgstr "Liberiertes Kapital"
 
 #: project/templates/active_shareholder_captable.pdf.html:73
-#: project/templates/start.html:35
+#: project/templates/start.html:41
 msgid "Name"
 msgstr "Name"
 
 #: project/templates/active_shareholder_captable.pdf.html:73
-#: project/templates/start.html:36
+#: project/templates/start.html:42
 msgid "Email"
 msgstr "Email"
 
 #: project/templates/active_shareholder_captable.pdf.html:73
-#: project/templates/start.html:37
+#: project/templates/start.html:43
 msgid "Shareholder Number"
 msgstr "Aktieninhabernummer"
 
 #: project/templates/active_shareholder_captable.pdf.html:73
-#: project/templates/start.html:38
+#: project/templates/start.html:44
 #, python-format
 msgid "Shares (%%)"
 msgstr "Aktien (%%)"
@@ -255,39 +259,35 @@ msgstr "Aktion"
 msgid "No Log Entries yet."
 msgstr "Noch keine Einträge"
 
-#: project/templates/start.html:8
-msgid "Welcome"
-msgstr "Willkommen"
-
-#: project/templates/start.html:42
+#: project/templates/start.html:48
 msgid "Gafi Validation failed"
 msgstr "GAFI-FATF Validierung fehlgeschlagen"
 
-#: project/templates/start.html:51
+#: project/templates/start.html:57
 msgid "Total Shares distributed (total shares registered with company)"
 msgstr "Zahl Aktien lt. Tabelle (Zahl Aktien lt. Unternehmensdaten)"
 
-#: project/templates/start.html:62
+#: project/templates/start.html:68
 msgid "No Shareholders yet."
 msgstr "Noch keine Gesellschafter"
 
-#: project/templates/start.html:67
+#: project/templates/start.html:73
 msgid "Download active Shareholders as"
 msgstr "Download Liste der aktiven Aktionäre als"
 
-#: project/templates/start.html:68
+#: project/templates/start.html:74
 msgid "Download active Shareholders as PDF"
 msgstr "Download Liste der aktiven Aktionäre als PDF"
 
-#: project/templates/start.html:69
+#: project/templates/start.html:75
 msgid "PDF"
 msgstr "PDF"
 
-#: project/templates/start.html:71
+#: project/templates/start.html:77
 msgid "Download active Shareholders as CSV"
 msgstr "Download Liste der aktiven Aktionäre als CSV"
 
-#: project/templates/start.html:72
+#: project/templates/start.html:78
 msgid "CSV"
 msgstr "CSV"
 

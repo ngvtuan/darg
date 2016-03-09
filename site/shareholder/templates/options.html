@@ -9,8 +9,8 @@
   {% include "_form_errors.html" %}
 
   <div class="panel">
-    <a class="btn align-left" href="" ng-click="show_add_option_transaction_form()">{% trans "Transfer Option" %}</a>
-    <a class="btn align-left" href="" ng-click="show_add_option_plan_form()">{% trans "Grant New Option Plan" %}</a>
+    <a class="btn-inline align-left" href="" ng-click="show_add_option_transaction_form()">{% trans "Transfer Option" %}</a>
+    <a class="btn-inline " href="" ng-click="show_add_option_plan_form()">{% trans "Grant New Option Plan" %}</a>
   </div>
 
   <div id="add_option_transaction" ng-hide="!show_add_option_transaction">
@@ -25,7 +25,7 @@
     {% endverbatim %}
     <h2>
       {% trans "Optionplan" %}: {% verbatim %}{{ option_plan.title }}{% endverbatim %} {% trans "for" %} {% verbatim %}{{ option_plan.security.readable_title }}{% endverbatim %}
-      <a href="/optionsplan/{% verbatim %}{{ option_plan.pk }}{% endverbatim %}/" class="el-icon-cogs-wrapper btn">
+      <a href="/optionsplan/{% verbatim %}{{ option_plan.pk }}{% endverbatim %}/" class="el-icon-cogs-wrapper btn-inline">
          <span class="el-icon-cogs"></span>
       </a>
     </h2>

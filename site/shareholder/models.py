@@ -12,6 +12,10 @@ from django.core.validators import MinValueValidator
 from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
+
 logger = logging.getLogger(__name__)
 
 
@@ -28,6 +32,11 @@ class Country(models.Model):
         ordering = ["name", "iso_code"]
 
 
+def get_company_logo_upload_path(instance, filename):
+    return os.path.join(
+        "public", "company", "%d" % instance.id, "logo", filename)
+
+
 class Company(models.Model):
 
     name = models.CharField(max_length=255)
@@ -38,6 +47,9 @@ class Company(models.Model):
         _('Foundation date of the company'),
         null=True, blank=False)
     provisioned_capital = models.PositiveIntegerField(blank=True, null=True)
+    logo = models.ImageField(
+        blank=True, null=True,
+        upload_to=get_company_logo_upload_path,)
 
     def __str__(self):
         return u"{}".format(self.name)
@@ -167,7 +179,7 @@ class Company(models.Model):
             }
             if shareholder.pk == company_shareholder.pk:
                 kwargs1.update(dict(buyer=None, count=self.share_count,
-                    value=shareholder.buyer.first().value))
+                                    value=shareholder.buyer.first().value))
             p = Position.objects.create(**kwargs1)
             logger.info('Split: share returned {}'.format(p))
 
@@ -330,8 +342,11 @@ class Shareholder(models.Model):
             result['is_valid'] = False
             result['errors'].append(_('Shareholder origin/country missing.'))
 
-        if not self.user.userprofile.city or not self.user.userprofile.postal_code or not \
-                self.user.userprofile.street:
+        if (
+            not self.user.userprofile.city or
+            not self.user.userprofile.postal_code or
+            not self.user.userprofile.street
+        ):
             result['is_valid'] = False
             result['errors'].append(_(
                 'Shareholder address or address details missing.'))
@@ -346,10 +361,13 @@ class Operator(models.Model):
     share_count = models.PositiveIntegerField(blank=True, null=True)
 
     def __str__(self):
-        return u"{} {} ({})".format(self.user.first_name, self.user.last_name, self.user.email)
+        return u"{} {} ({})".format(
+            self.user.first_name, self.user.last_name, self.user.email)
 
     def __unicode__(self):
-        return u"{} {} ({})".format(self.user.first_name, self.user.last_name, self.user.email)
+        return u"{} {} ({})".format(
+            self.user.first_name, self.user.last_name, self.user.email)
+
 
 class Security(models.Model):
     SECURITY_TITLES = (
@@ -369,7 +387,8 @@ class Security(models.Model):
 
 class Position(models.Model):
 
-    buyer = models.ForeignKey('Shareholder', related_name="buyer", blank=True, null=True)
+    buyer = models.ForeignKey(
+        'Shareholder', related_name="buyer", blank=True, null=True)
     seller = models.ForeignKey('Shareholder', blank=True, null=True,
                                related_name="seller")
     security = models.ForeignKey(Security)
@@ -469,13 +488,6 @@ class OptionTransaction(models.Model):
 
 # --------- SIGNALS ----------
 # must be inside a file which is imported by django on startup
-
-from django.conf import settings
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from rest_framework.authtoken.models import Token
-
-
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:

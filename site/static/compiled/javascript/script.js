@@ -119,14 +119,18 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.company', ['js.darg.api', 'xeditable']);
+  app = angular.module('js.darg.app.company', ['js.darg.api', 'xeditable', 'ngFileUpload']);
 
   app.controller('CompanyController', [
-    '$scope', '$http', 'Company', 'Country', 'Operator', function($scope, $http, Company, Country, Operator) {
+    '$scope', '$http', 'Company', 'Country', 'Operator', 'Upload', '$timeout', function($scope, $http, Company, Country, Operator, Upload, $timeout) {
       $scope.operators = [];
       $scope.company = null;
       $scope.errors = null;
       $scope.show_add_operator_form = false;
+      $scope.file = null;
+      $scope.logo_success = false;
+      $scope.logo_errors = false;
+      $scope.loading = false;
       $scope.newOperator = new Operator();
       $http.get('/services/rest/company/' + company_id).then(function(result) {
         $scope.company = new Company(result.data);
@@ -169,7 +173,7 @@
           return $scope.errors = rejection.data;
         });
       };
-      return $scope.edit_company = function() {
+      $scope.edit_company = function() {
         if ($scope.company.country) {
           $scope.company.country = $scope.company.country.url;
         }
@@ -187,6 +191,53 @@
         }, function(rejection) {
           return $scope.errors = rejection.data;
         });
+      };
+      $scope.$watch('files', function() {
+        $scope.upload($scope.files);
+      });
+      $scope.$watch('file', function() {
+        if ($scope.file !== null) {
+          $scope.files = [$scope.file];
+        }
+      });
+      return $scope.upload = function(files) {
+        var file, i, payload;
+        if (files && files.length) {
+          $scope.loading = true;
+          i = 0;
+          while (i < files.length) {
+            file = files[i];
+            if (!file.$error) {
+              payload = $scope.company;
+              payload.founded_at = $scope.company.founded_at.toISOString().substring(0, 10);
+              payload.logo = file;
+              Upload.upload({
+                url: '/services/rest/company/' + company_id + '/upload',
+                data: payload,
+                objectKey: '.k'
+              }).then((function(response) {
+                $timeout(function() {
+                  var company;
+                  company = new Company(response.data);
+                  company.founded_at = new Date(company.founded_at);
+                  $scope.company = company;
+                  $scope.logo_success = true;
+                  $scope.logo_errors = false;
+                });
+                return $timeout(function() {
+                  $scope.logo_success = false;
+                  return $scope.loading = false;
+                }, 3000);
+              }), (function(response) {
+                return $timeout(function() {
+                  $scope.logo_errors = response.data;
+                  return $scope.loading = false;
+                });
+              }), function(evt) {});
+              return;
+            }
+          }
+        }
       };
     }
   ]);

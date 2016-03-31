@@ -1,11 +1,16 @@
-app = angular.module 'js.darg.app.company', ['js.darg.api', 'xeditable']
+app = angular.module 'js.darg.app.company', ['js.darg.api', 'xeditable', 'ngFileUpload']
 
-app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'Operator', ($scope, $http, Company, Country, Operator) ->
+app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'Operator', 'Upload', '$timeout', ($scope, $http, Company, Country, Operator, Upload, $timeout) ->
 
     $scope.operators = []
     $scope.company = null
     $scope.errors = null
     $scope.show_add_operator_form = false
+
+    $scope.file = null
+    $scope.logo_success = false
+    $scope.logo_errors = false
+    $scope.loading = false
 
     $scope.newOperator = new Operator()
 
@@ -68,6 +73,49 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
+
+    # logo upload
+    $scope.$watch 'files', ->
+      $scope.upload $scope.files
+      return
+    $scope.$watch 'file', ->
+      if $scope.file != null
+        $scope.files = [ $scope.file ]
+      return
+
+    $scope.upload = (files) ->
+      if files and files.length
+        $scope.loading = true
+        i = 0
+        while i < files.length
+          file = files[i]
+          if !file.$error
+            # prepare data
+            payload = $scope.company
+            payload.founded_at = $scope.company.founded_at.toISOString().substring(0, 10)
+            payload.logo = file
+            Upload.upload(
+              url: '/services/rest/company/'+company_id+'/upload'
+              data: payload
+              objectKey: '.k').then ((response) ->
+                $timeout ->
+                  company = new Company(response.data)
+                  company.founded_at = new Date(company.founded_at)
+                  $scope.company = company
+                  $scope.logo_success = true
+                  $scope.logo_errors = false
+                  return
+                $timeout(() ->
+                  $scope.logo_success = false
+                  $scope.loading = false
+                , 3000)
+              ), ((response) ->
+                $timeout ->
+                  $scope.logo_errors = response.data
+                  $scope.loading = false
+              ), (evt) ->
+                return
+              return
 
 ]
 

@@ -1,5 +1,6 @@
 {% extends "base_auth.html" %}
 {% load i18n %}
+{% load staticfiles %}
 
 {% block ng_app %}js.darg.app.company{% endblock %}
 
@@ -10,9 +11,37 @@
 
 <div ng_controller="CompanyController" id="company">
 
-  <h1>{% trans "Company Details for" %} {% verbatim %}{{ company.name }}{% endverbatim %}</h1>
+  <h1>
+    {% verbatim %}
+    <img ng-src="{{ company.logo_url }}" alt="company logo" ng-show="company.logo_url && !loading" class="logo"/>
+    {% endverbatim %}
+    {% trans "Company Details for" %} {% verbatim %}{{ company.name }}{% endverbatim %}
+  </h1>
 
   {% include "_form_errors.html" %}
+
+  <!-- pdf file -->
+  <h2>{% trans "Company Logo" %}</h2>
+  <div>
+    {% verbatim %}
+    <div class="spinner" ng-show="loading">
+      <img src="{% endverbatim %}{% static "compiled/images/loading_spinner.gif" %}{% verbatim %}" />
+    </div>
+    </div>
+  <div class="panel">
+    <button class="btn-inline" ngf-select ng-model="file" ngf-multiple="false">Upload File</button>
+  </div>
+  <p ng-show="pdf_upload_success" class="alert alert-success pdf_upload_success" ng-cloak>
+    {% endverbatim %}{% trans "Upload success" %}{% verbatim %}
+  </p>
+  <p ng-repeat="(name, errs) in pdf_upload_errors" class="alert alert-danger" ng-cloak>
+    <strong>{{ errs[0] }}</strong>
+  </p>
+  <!--<div>
+    Upload Log:
+    <pre>{{log}}</pre>
+  </div>-->
+  {% endverbatim %}
 
   <h2>{% trans "Data" %}</h2>
   <table class="table table-striped">

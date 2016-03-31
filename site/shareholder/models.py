@@ -5,6 +5,7 @@ import logging
 import math
 
 from decimal import Decimal
+from sorl.thumbnail import get_thumbnail
 
 from django.db import models
 from django.conf import settings
@@ -142,6 +143,14 @@ class Company(models.Model):
             val -= position.count * position.value
 
         return val
+
+    def get_logo_url(self):
+        """ return url for logo """
+        if not self.logo:
+            return
+
+        kwargs = {'crop': 'center', 'quality': 99}
+        return get_thumbnail(self.logo.file, '100x100', **kwargs).url
 
     # --- LOGIC
     def split_shares(self, data):

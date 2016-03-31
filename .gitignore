@@ -2,6 +2,7 @@
 *.pyc
 *.sqlite3
 *.swp
+.ropeproject
 npm-debug.log
 db.sqlite3
 darg.js/node_modules/grunt-contrib-watch/

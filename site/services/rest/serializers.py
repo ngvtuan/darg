@@ -48,25 +48,29 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
         queryset=Country.objects.all(),
     )
     founded_at = serializers.DateField()
-    profile_url  = serializers.SerializerMethodField()
+    profile_url = serializers.SerializerMethodField()
     captable_pdf_url = serializers.SerializerMethodField()
     captable_csv_url = serializers.SerializerMethodField()
+    logo_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Company
         fields = ('pk', 'name', 'share_count', 'country', 'url',
                   'shareholder_count', 'security_set', 'founded_at',
                   'provisioned_capital', 'profile_url', 'captable_pdf_url',
-                  'captable_csv_url')
+                  'captable_csv_url', 'logo_url')
 
     def get_profile_url(self, obj):
         return reverse('company', kwargs={'company_id': obj.id})
 
     def get_captable_pdf_url(self, obj):
-        return reverse('captable_pdf', kwargs={'company_id': obj.id} )
+        return reverse('captable_pdf', kwargs={'company_id': obj.id})
 
     def get_captable_csv_url(self, obj):
         return reverse('captable_csv', kwargs={'company_id': obj.id})
+
+    def get_logo_url(self, obj):
+        return obj.get_logo_url()
 
 
 class AddCompanySerializer(serializers.Serializer):

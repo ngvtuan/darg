@@ -20,8 +20,10 @@ from services.rest.permissions import UserCanAddCompanyPermission, \
     SafeMethodsOnlyPermission,\
     UserCanEditCompanyPermission, \
     UserIsOperatorPermission
-from shareholder.models import Shareholder, Company, Position, Country, OptionPlan, \
+from shareholder.models import (
+    Shareholder, Company, Position, Country, OptionPlan,
     OptionTransaction, Security, Operator
+    )
 
 User = get_user_model()
 
@@ -97,6 +99,25 @@ class CompanyViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         return Company.objects.filter(operator__user=user)
+
+    # FIXME add perms like that to decor. permission_classes=[IsAdminOrIsSelf]
+    @detail_route(methods=['post'])
+    def upload(self, request, pk=None):
+        obj = self.get_object()
+        # modify data
+        serializer = CompanySerializer(data=request.data)
+        # add file to serializer
+        if serializer.is_valid():
+            obj.logo = request.FILES['logo']
+            obj.save()
+            return Response(CompanySerializer(
+                obj,
+                context={'request': request}).data,
+                status=status.HTTP_201_CREATED)
+        else:
+            return Response(
+                serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST)
 
 
 class AddCompanyView(APIView):

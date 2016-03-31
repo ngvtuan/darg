@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 14:18+0000\n"
+"POT-Creation-Date: 2016-03-31 22:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,21 +17,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: services/rest/serializers.py:168
+#: services/rest/serializers.py:172
 msgid ""
 "User not yet registered with this application. Please ask the user to "
 "register first."
 msgstr ""
 
-#: services/rest/serializers.py:175
+#: services/rest/serializers.py:179
 msgid "You cannot edit this company"
 msgstr ""
 
-#: services/rest/serializers.py:180
+#: services/rest/serializers.py:184
 msgid "You were added as administrator for {}"
 msgstr ""
 
-#: services/rest/serializers.py:181
+#: services/rest/serializers.py:185
 msgid ""
 "Dear,\n"
 "\n"
@@ -43,23 +43,23 @@ msgid ""
 "Your Das-Aktienregister Team"
 msgstr ""
 
-#: services/rest/serializers.py:211 services/rest/serializers.py:254
+#: services/rest/serializers.py:215 services/rest/serializers.py:258
 msgid "Email missing"
 msgstr ""
 
-#: services/rest/serializers.py:257
+#: services/rest/serializers.py:261
 msgid "First Name missing"
 msgstr ""
 
-#: services/rest/serializers.py:260
+#: services/rest/serializers.py:264
 msgid "Last Name missing"
 msgstr ""
 
-#: services/rest/serializers.py:265
+#: services/rest/serializers.py:269
 msgid "Shareholder Number must be unique"
 msgstr ""
 
-#: services/rest/serializers.py:456
+#: services/rest/serializers.py:460
 msgid "Not a pdf file."
 msgstr ""
 
@@ -68,11 +68,11 @@ msgstr ""
 msgid "The fields {field_names} must be empty together or contain values."
 msgstr ""
 
-#: services/rest/views.py:129 services/rest/views.py:131
-#: services/rest/views.py:133 services/rest/views.py:135
+#: services/rest/views.py:150 services/rest/views.py:152
+#: services/rest/views.py:154 services/rest/views.py:156
 msgid "Field may not be empty."
 msgstr ""
 
-#: services/rest/views.py:237 services/rest/views.py:319
+#: services/rest/views.py:258 services/rest/views.py:340
 msgid "Confirmed position cannot be deleted."
 msgstr ""

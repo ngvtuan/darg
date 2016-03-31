@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 14:18+0000\n"
+"POT-Creation-Date: 2016-03-31 22:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,63 +29,71 @@ msgstr ""
 msgid "Add Operator"
 msgstr ""
 
-#: company/templates/company.html:13
+#: company/templates/company.html:18
 msgid "Company Details for"
 msgstr ""
 
-#: company/templates/company.html:17
+#: company/templates/company.html:24
+msgid "Company Logo"
+msgstr ""
+
+#: company/templates/company.html:35
+msgid "Upload success"
+msgstr ""
+
+#: company/templates/company.html:46
 msgid "Data"
 msgstr ""
 
-#: company/templates/company.html:20
+#: company/templates/company.html:49
 msgid "Company Name"
 msgstr ""
 
-#: company/templates/company.html:31
+#: company/templates/company.html:60
 msgid "Company Share Count"
 msgstr ""
 
-#: company/templates/company.html:43
+#: company/templates/company.html:72
 msgid "Company founding date"
 msgstr ""
 
-#: company/templates/company.html:55
+#: company/templates/company.html:84
 msgid "Provisioned Capital (Liberiertes Kapital)"
 msgstr ""
 
-#: company/templates/company.html:67
+#: company/templates/company.html:96
 msgid "Company Headquarter Country"
 msgstr ""
 
-#: company/templates/company.html:81
+#: company/templates/company.html:110
 msgid "Securities"
 msgstr ""
 
-#: company/templates/company.html:87
+#: company/templates/company.html:116
 msgid "Please contact us at our"
 msgstr ""
 
-#: company/templates/company.html:89
+#: company/templates/company.html:118
 msgid "for getting more security types added"
 msgstr ""
 
-#: company/templates/company.html:95
+#: company/templates/company.html:124
 msgid "Administrators"
 msgstr ""
 
-#: company/templates/company.html:96
+#: company/templates/company.html:125
 msgid "add operator"
 msgstr ""
 
-#: company/templates/company.html:125
+#: company/templates/company.html:154
 msgid "Option Plans"
 msgstr ""
 
-#: company/templates/company.html:129
+#: company/templates/company.html:158
 msgid "Options Plan Name"
 msgstr ""
 
-#: company/templates/company.html:129
+#: company/templates/company.html:158
 msgid "Edit Option Plan"
 msgstr ""
 
@@ -121,25 +129,33 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: templates/menu.html:48
+#: templates/menu.html:47 templates/registration/login.html:21
+msgid "Register"
+msgstr ""
+
+#: templates/menu.html:50 templates/registration/registration_form.html:22
+msgid "Login"
+msgstr ""
+
+#: templates/menu.html:54
 msgid "Other"
 msgstr ""
 
-#: templates/menu.html:50
+#: templates/menu.html:57
 msgid "Admin"
 msgstr ""
 
-#: templates/menu.html:51
+#: templates/menu.html:58
 msgid "I18N"
 msgstr ""
 
-#: templates/menu.html:53 templates/registration/password_reset_form.html:4
+#: templates/menu.html:61 templates/registration/password_reset_form.html:4
 #: templates/registration/password_reset_form.html:14
 #: templates/registration/password_reset_form.html:34
 msgid "Reset password"
 msgstr ""
 
-#: templates/menu.html:54 templates/registration/password_change_form.html:4
+#: templates/menu.html:62 templates/registration/password_change_form.html:4
 #: templates/registration/password_change_form.html:13
 msgid "Change password"
 msgstr ""
@@ -152,10 +168,6 @@ msgstr ""
 msgid "Not  a member?"
 msgstr ""
 
-#: templates/registration/login.html:21
-msgid "Register"
-msgstr ""
-
 #: templates/registration/login.html:24
 msgid "Password lost?"
 msgstr ""
@@ -165,12 +177,12 @@ msgid "Reset Password"
 msgstr ""
 
 #: templates/registration/login.html:28
-#: templates/registration/registration_form.html:23
+#: templates/registration/registration_form.html:25
 msgid "Do you know our "
 msgstr ""
 
 #: templates/registration/login.html:29
-#: templates/registration/registration_form.html:23
+#: templates/registration/registration_form.html:25
 msgid "Blog"
 msgstr ""
 
@@ -293,20 +305,16 @@ msgstr ""
 msgid "You are now registered. Start here:"
 msgstr ""
 
-#: templates/registration/registration_form.html:10
+#: templates/registration/registration_form.html:12
 msgid "Register Here"
 msgstr ""
 
-#: templates/registration/registration_form.html:15
+#: templates/registration/registration_form.html:17
 msgid "Sign up now"
 msgstr ""
 
-#: templates/registration/registration_form.html:19
+#: templates/registration/registration_form.html:21
 msgid "Already registered?"
-msgstr ""
-
-#: templates/registration/registration_form.html:20
-msgid "Login"
 msgstr ""
 
 #: templates/zinnia/base.html:10

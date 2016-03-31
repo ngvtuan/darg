@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 14:18+0000\n"
+"POT-Creation-Date: 2016-03-31 22:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: shareholder/models.py:36
+#: shareholder/models.py:46
 msgid "Headquarter location"
 msgstr ""
 
-#: shareholder/models.py:38
+#: shareholder/models.py:48
 msgid "Foundation date of the company"
 msgstr ""
 
-#: shareholder/models.py:52
+#: shareholder/models.py:65
 msgid "Your list of partials for the share split for company '{}'"
 msgstr ""
 
-#: shareholder/models.py:55
+#: shareholder/models.py:68
 msgid ""
 "Dear Operator,\n"
 "\n"
@@ -38,15 +38,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#: shareholder/models.py:63
+#: shareholder/models.py:76
 msgid "{}{}({}): {} shares\n"
 msgstr ""
 
-#: shareholder/models.py:70
+#: shareholder/models.py:83
 msgid "--- No partial shares during split --- \n"
 msgstr ""
 
-#: shareholder/models.py:73
+#: shareholder/models.py:86
 msgid ""
 "\n"
 "These shareholders are eligible to either sell their partial shares or get "
@@ -57,158 +57,154 @@ msgid ""
 "Your Share Register Team"
 msgstr ""
 
-#: shareholder/models.py:163
+#: shareholder/models.py:184
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
 msgstr ""
 
-#: shareholder/models.py:183
+#: shareholder/models.py:204
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr ""
 
-#: shareholder/models.py:316
+#: shareholder/models.py:337
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:323
+#: shareholder/models.py:344
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:327
+#: shareholder/models.py:348
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:331
+#: shareholder/models.py:352
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:337
+#: shareholder/models.py:361
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:376
+#: shareholder/models.py:404
 msgid "Share Count transfered or created"
 msgstr ""
 
-#: shareholder/models.py:379
+#: shareholder/models.py:407
 msgid "Nominal value or payed price for the transaction"
 msgstr ""
 
-#: shareholder/models.py:415
+#: shareholder/models.py:443
 msgid "Number of shares approved"
 msgstr ""
 
-#: shareholder/templates/options.html:8
+#: shareholder/templates/options.html:9
 msgid "Options"
 msgstr ""
 
-#: shareholder/templates/options.html:12
+#: shareholder/templates/options.html:13
 msgid "Transfer Option"
 msgstr ""
 
-#: shareholder/templates/options.html:13
+#: shareholder/templates/options.html:14
 msgid "Grant New Option Plan"
 msgstr ""
 
-#: shareholder/templates/options.html:27
+#: shareholder/templates/options.html:32
 msgid "Optionplan"
 msgstr ""
 
-#: shareholder/templates/options.html:27
+#: shareholder/templates/options.html:32
 msgid "for"
 msgstr ""
 
-#: shareholder/templates/options.html:36
+#: shareholder/templates/options.html:41
 msgid "Grant Date"
 msgstr ""
 
-#: shareholder/templates/options.html:37
+#: shareholder/templates/options.html:42
 msgid "Receipient"
 msgstr ""
 
-#: shareholder/templates/options.html:38
+#: shareholder/templates/options.html:43
 #: shareholder/templates/positions.html:36
 msgid "Share Count"
 msgstr ""
 
-#: shareholder/templates/options.html:39
-#: shareholder/templates/optionsplan.html:24
+#: shareholder/templates/options.html:44
+#: shareholder/templates/optionsplan.html:25
 msgid "Exercise Price"
 msgstr ""
 
-#: shareholder/templates/options.html:40
+#: shareholder/templates/options.html:45
 msgid "Issuer"
 msgstr ""
 
-#: shareholder/templates/options.html:49
+#: shareholder/templates/options.html:54
 #: shareholder/templates/positions.html:61
 msgid "Draft"
 msgstr ""
 
-#: shareholder/templates/options.html:60
+#: shareholder/templates/options.html:65
 #: shareholder/templates/positions.html:74
 msgid "delete"
 msgstr ""
 
-#: shareholder/templates/options.html:65
+#: shareholder/templates/options.html:70
 #: shareholder/templates/positions.html:79
 msgid "confirm"
 msgstr ""
 
-#: shareholder/templates/options.html:75
+#: shareholder/templates/options.html:80
 msgid "No options yet."
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:13
+#: shareholder/templates/optionsplan.html:14
 msgid "Option plan details for"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:17
+#: shareholder/templates/optionsplan.html:18
 msgid "Data"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:20
+#: shareholder/templates/optionsplan.html:21
 msgid "Board approval date"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:28
+#: shareholder/templates/optionsplan.html:29
 msgid "Share count"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:32
+#: shareholder/templates/optionsplan.html:33
 #: shareholder/templates/positions.html:39
 msgid "Comment"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:36
+#: shareholder/templates/optionsplan.html:37
 msgid "Security Type"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:49
+#: shareholder/templates/optionsplan.html:50
 msgid "PDF of approved option plan"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:63
+#: shareholder/templates/optionsplan.html:67
 msgid "Upload success"
 msgstr ""
 
-#: shareholder/templates/positions.html:8
+#: shareholder/templates/positions.html:9
 msgid "Positions"
 msgstr ""
 
-#: shareholder/templates/positions.html:12
+#: shareholder/templates/positions.html:13
 msgid "Transfer Shares"
 msgstr ""
 
-#: shareholder/templates/positions.html:13
+#: shareholder/templates/positions.html:14
 msgid "Increase Capital"
 msgstr ""
 
-#: shareholder/templates/positions.html:14
+#: shareholder/templates/positions.html:15
 msgid "Split Shares"
-msgstr ""
-
-#: shareholder/templates/positions.html:28
-msgid "Your Positions"
 msgstr ""
 
 #: shareholder/templates/positions.html:33

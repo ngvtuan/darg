@@ -12,10 +12,10 @@
 <div ng_controller="CompanyController" id="company">
 
   <h1>
+    {% trans "Company Details for" %} {% verbatim %}{{ company.name }}{% endverbatim %}
     {% verbatim %}
     <img ng-src="{{ company.logo_url }}" alt="company logo" ng-show="company.logo_url && !loading" class="logo"/>
     {% endverbatim %}
-    {% trans "Company Details for" %} {% verbatim %}{{ company.name }}{% endverbatim %}
   </h1>
 
   {% include "_form_errors.html" %}

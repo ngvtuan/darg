@@ -1,5 +1,9 @@
+import os
+
 import cStringIO as StringIO
 from xhtml2pdf import pisa
+
+from django.conf import settings
 from django.template.loader import get_template
 from django.template import Context
 from django.http import HttpResponse
@@ -12,7 +16,18 @@ def render_to_pdf(template_src, context_dict):
     html = template.render(context)
     result = StringIO.StringIO()
 
-    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result, encoding='UTF-8')
+    pdf = pisa.pisaDocument(
+        StringIO.StringIO(html.encode("UTF-8")),
+        result,
+        link_callback=fetch_resources,
+        encoding='UTF-8')
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
+
+
+def fetch_resources(uri, rel):
+    path = os.path.join(
+        settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
+
+    return path

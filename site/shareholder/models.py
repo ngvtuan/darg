@@ -119,7 +119,7 @@ class Company(models.Model):
         sh_ids = self.optionplan_set.all().filter(
             optiontransaction__isnull=False
             ).values_list(
-            'optiontransaction__buyer__id', flat=True)
+            'optiontransaction__buyer__id', flat=True).distinct()
         for sh_id in sh_ids:
             sh = Shareholder.objects.get(id=sh_id)
             bought_options = sh.option_buyer.aggregate(Sum('count'))
@@ -423,8 +423,12 @@ class Shareholder(models.Model):
             return 0
 
         # last payed price
-        position = Position.objects.filter(buyer__company=self.company).latest(
-            'bought_at')
+        if Position.objects.filter(buyer__company=self.company).exists():
+            position = Position.objects.filter(
+                buyer__company=self.company).latest('bought_at')
+        else:
+            return 0
+
         return options_count * position.value
 
 

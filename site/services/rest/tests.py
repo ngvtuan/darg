@@ -39,19 +39,19 @@ class CompanyViewSetTestCase(TestCase):
             'company-option-holder', kwargs={'pk': op.company.pk}))
 
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(len(res.data), 10)
+        self.assertEqual(len(res.data['results']), 10)
 
         # sell one persions options and check again
-        op = opts[0]
+        ot = opts[0]
         OptionTransactionGenerator().generate(
-            company=op.company, seller=op.buyer, count=op.count, price=1)
+            company=ot.option_plan.company, seller=ot.buyer, count=ot.count,
+            price=1, buyer=opts[1].buyer)
 
-        self.client.force_authenticate(user=op.user)
         res = self.client.get(reverse(
-            'company-option-holder', args={'pk': op.company.pk}))
+            'company-option-holder', kwargs={'pk': ot.option_plan.company.pk}))
 
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(len(res.data), 9)
+        self.assertEqual(len(res.data['results']), 9)
 
 
 class OperatorTestCase(TestCase):

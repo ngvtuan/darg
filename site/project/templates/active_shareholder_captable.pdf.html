@@ -83,25 +83,68 @@
         {% endif %}
     </div>
     <table class="table table-hover">
-      <thead><tr><th align="left">{% trans "Name" %}</th><th align="left">{% trans "Email" %}</th><th align="right">{% trans "Shareholder Number" %}</th><th align="right">{% trans "Shares (%)" %}</th></tr></thead>
-      </table>
-        {% for shareholder in company.get_active_shareholders %}
-        <table>
-          <tr class="panel">
-            <td>
-              {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
-            </td>
-            <td>
-              {{ shareholder.user.email }}
-            </td>
-            <td align="right">
-              {{ shareholder.number }}
-            </td>
-            <td align="right">
-              {{ shareholder.share_count|intcomma }} ({{shareholder.share_percent }})
-            </td>
-          </tr>
-        </table>
-        {% endfor %}
+      <thead>
+        <tr>
+          <th align="left">{% trans "Name" %}</th>
+          <th align="left">{% trans "Email" %}</th>
+          <th align="right">{% trans "Shareholder Number" %}</th>
+          <th align="right">{% trans "Shares (%)" %}</th>
+        </tr>
+      </thead>
+    </table>
+
+    {% for shareholder in company.get_active_shareholders %}
+    <table>
+      <tr class="panel">
+        <td>
+          {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
+        </td>
+        <td>
+          {{ shareholder.user.email }}
+        </td>
+        <td align="right">
+          {{ shareholder.number }}
+        </td>
+        <td align="right">
+          {{ shareholder.share_count|intcomma }} ({{shareholder.share_percent }})
+        </td>
+      </tr>
+    </table>
+    {% endfor %}
+
+    {% if company.get_active_option_holders %}
+
+    <h2 class="heading">{% trans "Options" %}</h2>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th align="left">{% trans "Name" %}</th>
+          <th align="left">{% trans "Email" %}</th>
+          <th align="right">{% trans "Shareholder Number" %}</th>
+          <th align="right">{% trans "Optionen (%)" %}</th>
+        </tr>
+      </thead>
+    </table>
+
+    {% for shareholder in company.get_active_option_holders %}
+    <table>
+      <tr class="panel">
+        <td>
+          {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
+        </td>
+        <td>
+          {{ shareholder.user.email }}
+        </td>
+        <td align="right">
+          {{ shareholder.number }}
+        </td>
+        <td align="right">
+          {{ shareholder.options_count|intcomma }} ({{shareholder.options_percent }})
+        </td>
+      </tr>
+    </table>
+    {% endfor %}
+    {% endif %}
   {% endblock %}
 {% endblock %}

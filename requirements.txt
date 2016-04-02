@@ -16,7 +16,7 @@ django-celery
 pytz
 celery
 kombu
-xhtml2pdf
+git+https://github.com/xhtml2pdf/xhtml2pdf.git@master#egg=xhtml2pdf
 sorl-thumbnail
 
 #-- zinnia reqs

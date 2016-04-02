@@ -8,6 +8,7 @@ from decimal import Decimal
 from sorl.thumbnail import get_thumbnail
 
 from django.db import models
+from django.db.models import Sum
 from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.core.mail import send_mail
@@ -110,6 +111,25 @@ class Company(models.Model):
                 shareholder_list.append(shareholder)
 
         return shareholder_list
+
+    def get_active_option_holders(self, date=None):
+        """ returns list of all active shareholders """
+        oh_list = []
+        # get all users
+        sh_ids = self.optionplan_set.all().filter(
+            optiontransaction__isnull=False
+            ).values_list(
+            'optiontransaction__buyer__id', flat=True)
+        for sh_id in sh_ids:
+            sh = Shareholder.objects.get(id=sh_id)
+            bought_options = sh.option_buyer.aggregate(Sum('count'))
+            sold_options = sh.option_seller.aggregate(Sum('count'))
+            if (bought_options['count__sum'] or 0) - (sold_options['count__sum'] or 0) > 0:
+                oh_list.append(sh)
+            elif (bought_options['count__sum'] or 0) - (sold_options['count__sum'] or 0) < 0:
+                logger.error('user sold more options then he got',
+                             extra={'shareholder': sh})
+        return oh_list
 
     def get_company_shareholder(self):
         return self.shareholder_set.earliest('id')
@@ -361,6 +381,51 @@ class Shareholder(models.Model):
                 'Shareholder address or address details missing.'))
 
         return result
+
+    def options_percent(self, date=None):
+        """ returns percentage of shares owned compared to corps
+        total shares
+        FIXME returns wrong values if the company still holds shares
+        after capital increase, which are not distributed to shareholders
+        company would then have a percentage of itself, although this is
+        not relevant for voting rights, etc.
+        """
+        total = self.company.share_count
+        count = sum(self.option_buyer.all().values_list('count', flat=True)) - \
+            sum(self.option_seller.all().values_list('count', flat=True))
+        if total:
+            return "{:.2f}".format(count / float(total) * 100)
+        return False
+
+    def options_count(self, date=None, security=None):
+        """ total count of shares for shareholder  """
+        date = date or datetime.datetime.now()
+        qs_bought = self.option_buyer.all()
+        qs_sold = self.option_seller.all()
+
+        if date:
+            qs_bought = self.option_buyer.filter(bought_at__lte=date)
+            qs_sold = self.option_seller.filter(bought_at__lte=date)
+
+        if security:
+            qs_bought = qs_bought.filter(security=security)
+            qs_sold = qs_sold.filter(security=security)
+
+        count_bought = sum(qs_bought.values_list('count', flat=True))
+        count_sold = sum(qs_sold.values_list('count', flat=True))
+
+        return count_bought - count_sold
+
+    def options_value(self, date=None):
+        """ calculate the total values of all shares for this shareholder """
+        options_count = self.options_count(date=date)
+        if options_count == 0:
+            return 0
+
+        # last payed price
+        position = Position.objects.filter(buyer__company=self.company).latest(
+            'bought_at')
+        return options_count * position.value
 
 
 class Operator(models.Model):

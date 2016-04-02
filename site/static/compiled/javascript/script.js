@@ -663,6 +663,7 @@
   app.controller('StartController', [
     '$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', function($scope, $http, CompanyAdd, Shareholder, User, Company) {
       $scope.shareholders = [];
+      $scope.option_holders = [];
       $scope.user = [];
       $scope.total_shares = 0;
       $scope.loading = true;
@@ -678,7 +679,12 @@
         $scope.user = result.data.results[0];
         return angular.forEach($scope.user.operator_set, function(item, key) {
           return $http.get(item.company).then(function(result1) {
-            return $scope.user.operator_set[key].company = result1.data;
+            $scope.user.operator_set[key].company = result1.data;
+            return $http.get('/services/rest/company/' + result1.data.pk + '/option_holder').then(function(result2) {
+              return angular.forEach(result2.data.results, function(item) {
+                return $scope.option_holders.push(item);
+              });
+            });
           });
         });
       })["finally"](function() {
@@ -701,7 +707,12 @@
             $scope.user = result.data.results[0];
             return angular.forEach($scope.user.operator_set, function(item, key) {
               return $http.get(item.company).then(function(result1) {
-                return $scope.user.operator_set[key].company = result1.data;
+                $scope.user.operator_set[key].company = result1.data;
+                return $http.get('/services/rest/company/' + result1.data.pk + '/option_holder').then(function(result2) {
+                  return angular.forEach(result2.data.results, function(item) {
+                    return $scope.option_holders.push(item);
+                  });
+                });
               });
             });
           });

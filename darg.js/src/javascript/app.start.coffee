@@ -1,4 +1,10 @@
-app = angular.module 'js.darg.app.start', ['js.darg.api',]
+app = angular.module 'js.darg.app.start', ['js.darg.api', 'pascalprecht.translate']
+
+app.config ['$translateProvider', ($translateProvider) ->
+    $translateProvider.translations('de', django.catalog)
+    $translateProvider.preferredLanguage('de')
+]
+
 
 app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', ($scope, $http, CompanyAdd, Shareholder, User, Company) ->
 

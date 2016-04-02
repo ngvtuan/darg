@@ -119,7 +119,14 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.company', ['js.darg.api', 'xeditable', 'ngFileUpload']);
+  app = angular.module('js.darg.app.company', ['js.darg.api', 'xeditable', 'ngFileUpload', 'pascalprecht.translate']);
+
+  app.config([
+    '$translateProvider', function($translateProvider) {
+      $translateProvider.translations('de', django.catalog);
+      return $translateProvider.preferredLanguage('de');
+    }
+  ]);
 
   app.controller('CompanyController', [
     '$scope', '$http', 'Company', 'Country', 'Operator', 'Upload', '$timeout', function($scope, $http, Company, Country, Operator, Upload, $timeout) {
@@ -280,7 +287,14 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.options', ['js.darg.api']);
+  app = angular.module('js.darg.app.options', ['js.darg.api', 'pascalprecht.translate']);
+
+  app.config([
+    '$translateProvider', function($translateProvider) {
+      $translateProvider.translations('de', django.catalog);
+      return $translateProvider.preferredLanguage('de');
+    }
+  ]);
 
   app.controller('OptionsController', [
     '$scope', '$http', 'OptionPlan', 'OptionTransaction', function($scope, $http, OptionPlan, OptionTransaction) {
@@ -382,7 +396,14 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.optionplan', ['js.darg.api', 'xeditable', 'ngFileUpload']);
+  app = angular.module('js.darg.app.optionplan', ['js.darg.api', 'xeditable', 'ngFileUpload', 'pascalprecht.translate']);
+
+  app.config([
+    '$translateProvider', function($translateProvider) {
+      $translateProvider.translations('de', django.catalog);
+      return $translateProvider.preferredLanguage('de');
+    }
+  ]);
 
   app.controller('OptionPlanController', [
     '$scope', '$http', 'OptionPlan', 'Upload', '$timeout', function($scope, $http, OptionPlan, Upload, $timeout) {
@@ -452,7 +473,14 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.positions', ['js.darg.api']);
+  app = angular.module('js.darg.app.positions', ['js.darg.api', 'pascalprecht.translate']);
+
+  app.config([
+    '$translateProvider', function($translateProvider) {
+      $translateProvider.translations('de', django.catalog);
+      return $translateProvider.preferredLanguage('de');
+    }
+  ]);
 
   app.controller('PositionsController', [
     '$scope', '$http', 'Position', 'Split', function($scope, $http, Position, Split) {
@@ -567,7 +595,14 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.shareholder', ['js.darg.api', 'xeditable']);
+  app = angular.module('js.darg.app.shareholder', ['js.darg.api', 'xeditable', 'pascalprecht.translate']);
+
+  app.config([
+    '$translateProvider', function($translateProvider) {
+      $translateProvider.translations('de', django.catalog);
+      return $translateProvider.preferredLanguage('de');
+    }
+  ]);
 
   app.controller('ShareholderController', [
     '$scope', '$http', 'Shareholder', function($scope, $http, Shareholder) {
@@ -616,7 +651,14 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.start', ['js.darg.api']);
+  app = angular.module('js.darg.app.start', ['js.darg.api', 'pascalprecht.translate']);
+
+  app.config([
+    '$translateProvider', function($translateProvider) {
+      $translateProvider.translations('de', django.catalog);
+      return $translateProvider.preferredLanguage('de');
+    }
+  ]);
 
   app.controller('StartController', [
     '$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', function($scope, $http, CompanyAdd, Shareholder, User, Company) {

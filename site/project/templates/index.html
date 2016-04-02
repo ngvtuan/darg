@@ -30,7 +30,7 @@
         {% include "_form_errors.html" %}
         {% verbatim %}
         <form class="form-inline" ng-show="show_add_invitee == true" name="inviteeForm">
-          <input type="text" class="form-control" ng-model="newInvitee.email" placeholder="{% endverbatim %}{% trans "Your Email" %}{% verbatim %}" required>
+          <input type="text" class="form-control" ng-model="newInvitee.email" translate translate-attr-placeholder="{% endverbatim %}{% trans "Your Email" %}{% verbatim %}" required>
           <button class="btn btn-default btn-focus" ng-click="add_invitee()" ng-disabled="inviteeForm.$invalid">
             {% endverbatim %}{% trans "Request Invitation" %}
           </button>

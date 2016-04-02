@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 18:15+0000\n"
+"POT-Creation-Date: 2016-04-02 15:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,167 +17,142 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: static/admin/js/SelectFilter2.js:45
-#, c-format
-msgid "Available %s"
+#: static/compiled/javascript/i18n_noop.js:1
+#: static/compiled/javascript/i18n_noop.js:20
+msgid "First Name"
 msgstr ""
 
-#: static/admin/js/SelectFilter2.js:46
-#, c-format
-msgid ""
-"This is the list of available %s. You may choose some by selecting them in "
-"the box below and then clicking the \"Choose\" arrow between the two boxes."
+#: static/compiled/javascript/i18n_noop.js:2
+#: static/compiled/javascript/i18n_noop.js:21
+msgid "Last Name"
 msgstr ""
 
-#: static/admin/js/SelectFilter2.js:53
-#, c-format
-msgid "Type into this box to filter down the list of available %s."
+#: static/compiled/javascript/i18n_noop.js:3
+#: static/compiled/javascript/i18n_noop.js:22
+msgid "Shareholder Number"
 msgstr ""
 
-#: static/admin/js/SelectFilter2.js:57
-msgid "Filter"
+#: static/compiled/javascript/i18n_noop.js:4
+msgid "Count"
 msgstr ""
 
-#: static/admin/js/SelectFilter2.js:61
-msgid "Choose all"
+#: static/compiled/javascript/i18n_noop.js:5
+msgid "Payed Price"
 msgstr ""
 
-#: static/admin/js/SelectFilter2.js:61
-#, c-format
-msgid "Click to choose all %s at once."
+#: static/compiled/javascript/i18n_noop.js:6
+msgid "Comment"
 msgstr ""
 
-#: static/admin/js/SelectFilter2.js:67
-msgid "Choose"
+#: static/compiled/javascript/i18n_noop.js:7
+msgid "Title"
 msgstr ""
 
-#: static/admin/js/SelectFilter2.js:69
-msgid "Remove"
+#: static/compiled/javascript/i18n_noop.js:8
+msgid "Name"
 msgstr ""
 
-#: static/admin/js/SelectFilter2.js:75
-#, c-format
-msgid "Chosen %s"
+#: static/compiled/javascript/i18n_noop.js:9
+msgid "Buyer"
 msgstr ""
 
-#: static/admin/js/SelectFilter2.js:76
-#, c-format
-msgid ""
-"This is the list of chosen %s. You may remove some by selecting them in the "
-"box below and then clicking the \"Remove\" arrow between the two boxes."
+#: static/compiled/javascript/i18n_noop.js:10
+msgid "Seller"
 msgstr ""
 
-#: static/admin/js/SelectFilter2.js:80
-msgid "Remove all"
+#: static/compiled/javascript/i18n_noop.js:11
+msgid "Date"
 msgstr ""
 
-#: static/admin/js/SelectFilter2.js:80
-#, c-format
-msgid "Click to remove all chosen %s at once."
+#: static/compiled/javascript/i18n_noop.js:12
+msgid "Security"
 msgstr ""
 
-#: static/admin/js/actions.js:22 static/admin/js/actions.min.js:1
-msgid "%(sel)s of %(cnt)s selected"
-msgid_plural "%(sel)s of %(cnt)s selected"
-msgstr[0] ""
-msgstr[1] ""
-
-#: static/admin/js/actions.js:114 static/admin/js/actions.min.js:4
-msgid ""
-"You have unsaved changes on individual editable fields. If you run an "
-"action, your unsaved changes will be lost."
+#: static/compiled/javascript/i18n_noop.js:13
+#: static/compiled/javascript/i18n_noop.js:15
+msgid "Share Count"
 msgstr ""
 
-#: static/admin/js/actions.js:126 static/admin/js/actions.min.js:5
-msgid ""
-"You have selected an action, but you haven't saved your changes to "
-"individual fields yet. Please click OK to save. You'll need to re-run the "
-"action."
+#: static/compiled/javascript/i18n_noop.js:14
+msgid "Option Plan"
 msgstr ""
 
-#: static/admin/js/actions.js:128 static/admin/js/actions.min.js:5
-msgid ""
-"You have selected an action, and you haven't made any changes on individual "
-"fields. You're probably looking for the Go button rather than the Save "
-"button."
+#: static/compiled/javascript/i18n_noop.js:16
+msgid "Board Approval Date"
 msgstr ""
 
-#: static/admin/js/admin/DateTimeShortcuts.js:79
-#, c-format
-msgid "Note: You are %s hour ahead of server time."
-msgid_plural "Note: You are %s hours ahead of server time."
-msgstr[0] ""
-msgstr[1] ""
-
-#: static/admin/js/admin/DateTimeShortcuts.js:87
-#, c-format
-msgid "Note: You are %s hour behind server time."
-msgid_plural "Note: You are %s hours behind server time."
-msgstr[0] ""
-msgstr[1] ""
-
-#: static/admin/js/admin/DateTimeShortcuts.js:114
-#: static/admin/js/admin/DateTimeShortcuts.js:149
-msgid "Now"
+#: static/compiled/javascript/i18n_noop.js:17
+msgid "Underlying Asset"
 msgstr ""
 
-#: static/admin/js/admin/DateTimeShortcuts.js:118
-msgid "Clock"
+#: static/compiled/javascript/i18n_noop.js:18
+msgid "Exercise Price"
 msgstr ""
 
-#: static/admin/js/admin/DateTimeShortcuts.js:146
-msgid "Choose a time"
+#: static/compiled/javascript/i18n_noop.js:19
+msgid "Face Value"
 msgstr ""
 
-#: static/admin/js/admin/DateTimeShortcuts.js:150
-msgid "Midnight"
+#: static/compiled/javascript/i18n_noop.js:23
+msgid "Vesting Period (months)"
 msgstr ""
 
-#: static/admin/js/admin/DateTimeShortcuts.js:151
-msgid "6 a.m."
+#: static/compiled/javascript/i18n_noop.js:24
+msgid "Ratio: Dividend"
 msgstr ""
 
-#: static/admin/js/admin/DateTimeShortcuts.js:152
-msgid "Noon"
+#: static/compiled/javascript/i18n_noop.js:25
+msgid "Ratio: Divisor"
 msgstr ""
 
-#: static/admin/js/admin/DateTimeShortcuts.js:156
-#: static/admin/js/admin/DateTimeShortcuts.js:276
-msgid "Cancel"
+#: static/compiled/javascript/i18n_noop.js:26
+msgid "dividend"
 msgstr ""
 
-#: static/admin/js/admin/DateTimeShortcuts.js:216
-#: static/admin/js/admin/DateTimeShortcuts.js:269
-msgid "Today"
+#: static/compiled/javascript/i18n_noop.js:27
+msgid "security"
 msgstr ""
 
-#: static/admin/js/admin/DateTimeShortcuts.js:220
-msgid "Calendar"
+#: static/compiled/javascript/i18n_noop.js:28
+msgid "execute_at"
 msgstr ""
 
-#: static/admin/js/admin/DateTimeShortcuts.js:267
-msgid "Yesterday"
+#: static/compiled/javascript/i18n_noop.js:29
+msgid "divisor"
 msgstr ""
 
-#: static/admin/js/admin/DateTimeShortcuts.js:271
-msgid "Tomorrow"
+#: static/compiled/javascript/i18n_noop.js:30
+msgid "count"
 msgstr ""
 
-#: static/admin/js/calendar.js:8
-msgid ""
-"January February March April May June July August September October November "
-"December"
+#: static/compiled/javascript/i18n_noop.js:31
+msgid "bought_at"
 msgstr ""
 
-#: static/admin/js/calendar.js:9
-msgid "S M T W T F S"
+#: static/compiled/javascript/i18n_noop.js:32
+msgid "user"
 msgstr ""
 
-#: static/admin/js/collapse.js:8 static/admin/js/collapse.js.c:19
-#: static/admin/js/collapse.min.js:1
-msgid "Show"
+#: static/compiled/javascript/i18n_noop.js:33
+msgid "number"
 msgstr ""
 
-#: static/admin/js/collapse.js:16 static/admin/js/collapse.min.js:1
-msgid "Hide"
+#: static/compiled/javascript/i18n_noop.js:34
+msgid "title"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:35
+msgid "board_approved_at"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:36
+msgid "option_plan"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:37
+msgid "seller"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:38
+msgid "buyer"
 msgstr ""

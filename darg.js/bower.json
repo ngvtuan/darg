@@ -1,13 +1,16 @@
 {
-    "name": "darg.js",
-    "version": "1.0.0",
-    "dependencies": {
-        "angular": "",
-        "angular-resource": "",
-        "underscore": "",
-        "bootstrap": "",
-        "angular-xeditable": "",
-        "ng-file-upload": ""
-    },
-    "private": true
+  "name": "darg.js",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "",
+    "angular-resource": "",
+    "underscore": "",
+    "bootstrap": "",
+    "angular-xeditable": "",
+    "ng-file-upload": ""
+  },
+  "private": true,
+  "devDependencies": {
+    "angular-translate": "~2.11.0"
+  }
 }

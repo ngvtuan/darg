@@ -51,7 +51,7 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <form method="get" action="{% url 'zinnia:entry_search' %}" class="navbar-form navbar-left">
             <div class="form-group">
-              <input type="text" class="search-query form-control" placeholder="{% trans 'Search' %}" name="pattern" value="{{ pattern }}" />
+              <input type="text" class="search-query form-control" translate translate-attr-placeholder="{% trans 'Search' %}" name="pattern" value="{{ pattern }}" />
             </div>
             <button type="submit" name="submit" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-search"></span>

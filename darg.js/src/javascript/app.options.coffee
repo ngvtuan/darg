@@ -1,4 +1,9 @@
-app = angular.module 'js.darg.app.options', ['js.darg.api',]
+app = angular.module 'js.darg.app.options', ['js.darg.api','pascalprecht.translate']
+
+app.config ['$translateProvider', ($translateProvider) ->
+    $translateProvider.translations('de', django.catalog);
+    $translateProvider.preferredLanguage('de');
+]
 
 app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTransaction', ($scope, $http, OptionPlan, OptionTransaction) ->
 

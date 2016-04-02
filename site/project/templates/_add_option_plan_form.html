@@ -5,14 +5,14 @@
 <div>
   <form class="form-inline">
     <div class="form-group block-level">
-      <input type="date" class="form-control" ng-model="newOptionPlan.board_approved_at" placeholder="Board Approval Date" data-date-format="yyyy-mm-dd" validatedateformat calendar>
-      <input type="text" class="form-control" ng-model="newOptionPlan.title" placeholder="Title" ng-maxlength="255">
-      <select class="form-control" ng-model="newOptionPlan.security" ng-options="security as security.readable_title for security in securities" placeholder="Underlying Asset">
+      <input type="date" class="form-control" ng-model="newOptionPlan.board_approved_at" translate translate-attr-placeholder="Board Approval Date" data-date-format="yyyy-mm-dd" validatedateformat calendar>
+      <input type="text" class="form-control" ng-model="newOptionPlan.title" translate translate-attr-placeholder="Title" ng-maxlength="255">
+      <select class="form-control" ng-model="newOptionPlan.security" ng-options="security as security.readable_title for security in securities" translate translate-attr-placeholder="Underlying Asset">
         <option value='' disabled>{% endverbatim %}{% trans "Security" %}{% verbatim %}</option>
       </select>
-      <input type="number" class="form-control" ng-model="newOptionPlan.exercise_price" placeholder="Exercise Price" ng-maxlength="10">
-      <input type="number" class="form-control" ng-model="newOptionPlan.count" placeholder="Share Count" ng-maxlength="5">
-      <input type="text" class="form-control" ng-model="newOptionPlan.comment" placeholder="Comment" ng-maxlength="255">
+      <input type="number" class="form-control" ng-model="newOptionPlan.exercise_price" translate translate-attr-placeholder="Exercise Price" ng-maxlength="10">
+      <input type="number" class="form-control" ng-model="newOptionPlan.count" translate translate-attr-placeholder="Share Count" ng-maxlength="5">
+      <input type="text" class="form-control" ng-model="newOptionPlan.comment" translate translate-attr-placeholder="Comment" ng-maxlength="255">
     </div>
     <div class="form-group">
       <button class="btn btn-default" ng-click="hide_form()">{% endverbatim %}{% trans "Cancel" %}{% verbatim %}</button>

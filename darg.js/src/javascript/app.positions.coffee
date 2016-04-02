@@ -1,4 +1,9 @@
-app = angular.module 'js.darg.app.positions', ['js.darg.api',]
+app = angular.module 'js.darg.app.positions', ['js.darg.api', 'pascalprecht.translate']
+
+app.config ['$translateProvider', ($translateProvider) ->
+    $translateProvider.translations('de', django.catalog);
+    $translateProvider.preferredLanguage('de');
+]
 
 app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', ($scope, $http, Position, Split) ->
     $scope.positions = []

@@ -371,7 +371,7 @@ class PositionTestCase(TestCase):
                 user.auth_token.key), 'format': 'json'})
 
         self.assertEqual(response.status_code, 400)
-        self.assertTrue('error' in response.content)
+        self.assertTrue(len(response.data), 3)
 
 
 class ShareholderTestCase(TestCase):

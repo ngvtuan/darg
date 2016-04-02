@@ -150,7 +150,7 @@ class Company(models.Model):
             return
 
         kwargs = {'crop': 'center', 'quality': 99}
-        return get_thumbnail(self.logo.file, '40x40', **kwargs).url
+        return get_thumbnail(self.logo.file, 'x40', **kwargs).url
 
     # --- LOGIC
     def split_shares(self, data):

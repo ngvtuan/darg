@@ -61,7 +61,22 @@
           <td class="text-right">{{ shareholder.number }}</td>
           <td class="text-right"><value ng-if="shareholder.share_count != '-'">{{ shareholder.share_count | number : 0}} ({{shareholder.share_percent | number : 1}}%)</value></td>
         </tr>
-        <tr>
+        <tr ng-show="option_holders.length" class="option-holders-heading">
+          <td colspan="4">{% endverbatim %}{% trans "Option Holders" %}{% verbatim %}</td>
+        </tr>
+        <tr ng-show="option_holders.length" ng-repeat="option_holder in option_holders  | orderBy:'-share_count'" ng-click="goto_shareholder(option_holder.pk)" ng-mouseover="" class="option-holders">
+          <td>
+            {{ option_holder.user.first_name }} {{ option_holder.user.last_name }}
+          </td>
+          <td>{{ option_holder.user.email }}<a class="btn-inline"><span class="el-icon-eye-open"></span></a></td>
+          <td class="text-right">{{ option_holder.number }}</td>
+          <td class="text-right">
+            <value ng-if="option_holder.options_count != '-'">
+              {{ option_holder.options_count | number : 0}} ({{option_holder.options_percent | number : 1}}%)
+            </value>
+          </td>
+        </tr>
+        <tr class="totals">
           <td colspan="3" class="summary">
             {% endverbatim %}{% trans "Total Shares distributed (total shares registered with company)" %}{% verbatim %}
           </td>

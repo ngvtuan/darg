@@ -5,11 +5,11 @@ app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.preferredLanguage('de')
 ]
 
-
 app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', ($scope, $http, CompanyAdd, Shareholder, User, Company) ->
 
     # from server
     $scope.shareholders = []
+    $scope.option_holders = []
     $scope.user = []
     $scope.total_shares = 0
     $scope.loading = true
@@ -20,6 +20,7 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
     $scope.newShareholder = new Shareholder()
     $scope.newCompany = new CompanyAdd()
 
+    # FIXME - its not company specific
     $http.get('/services/rest/shareholders').then (result) ->
         angular.forEach result.data.results, (item) ->
             $scope.shareholders.push item
@@ -28,8 +29,14 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
         $scope.user = result.data.results[0]
         # loop over ops and fetch corp data
         angular.forEach $scope.user.operator_set, (item, key) ->
+            # get company data
             $http.get(item.company).then (result1) ->
                 $scope.user.operator_set[key].company = result1.data
+                # fetch operators for this company
+                $http.get('/services/rest/company/'+result1.data.pk+'/option_holder').then (result2) ->
+                    angular.forEach result2.data.results, (item) ->
+                        $scope.option_holders.push item
+
     .finally ->
         $scope.loading = false
 
@@ -50,6 +57,11 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
                 angular.forEach $scope.user.operator_set, (item, key) ->
                     $http.get(item.company).then (result1) ->
                         $scope.user.operator_set[key].company = result1.data
+                        # fetch operators for this company
+                        $http.get('/services/rest/company/'+result1.data.pk+'/option_holder').then (result2) ->
+                            angular.forEach result2.data.results, (item) ->
+                                $scope.option_holders.push item
+
             $http.get('/services/rest/shareholders').then (result) ->
                 angular.forEach result.data.results, (item) ->
                     $scope.shareholders.push item

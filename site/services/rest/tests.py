@@ -1,10 +1,10 @@
 # coding=utf-8
 import datetime
-import json
 
 from rest_framework.test import APIClient
 from rest_framework import status
 
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
@@ -16,7 +16,42 @@ from shareholder.generators import (
     ShareholderGenerator, TwoInitialSecuritiesGenerator,
     PositionGenerator, OptionTransactionGenerator
 )
-from shareholder.models import Operator, Shareholder, Position, Security, OptionTransaction
+from shareholder.models import (
+    Operator, Shareholder, Position, Security, OptionTransaction
+    )
+
+
+class CompanyViewSetTestCase(TestCase):
+
+    def setUp(self):
+        self.client = APIClient()
+        self.site = Site.objects.get_current()
+
+    def test_get_option_holders(self):
+        op = OperatorGenerator().generate()
+        opts = []
+        for x in range(0, 10):
+            opts.append(
+                OptionTransactionGenerator().generate(company=op.company))
+
+        self.client.force_authenticate(user=op.user)
+        res = self.client.get(reverse(
+            'company-option-holder', kwargs={'pk': op.company.pk}))
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(res.data['results']), 10)
+
+        # sell one persions options and check again
+        ot = opts[0]
+        OptionTransactionGenerator().generate(
+            company=ot.option_plan.company, seller=ot.buyer, count=ot.count,
+            price=1, buyer=opts[1].buyer)
+
+        res = self.client.get(reverse(
+            'company-option-holder', kwargs={'pk': ot.option_plan.company.pk}))
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(res.data['results']), 9)
 
 
 class OperatorTestCase(TestCase):
@@ -595,14 +630,14 @@ class OptionTransactionTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
 
-
     def test_delete_option_transaction(self):
         """
         operator deletes position
         """
         operator = OperatorGenerator().generate()
         user = operator.user
-        optiontransaction = OptionTransactionGenerator().generate(company=operator.company)
+        optiontransaction = OptionTransactionGenerator().generate(
+            company=operator.company)
 
         logged_in = self.client.login(username=user.username, password='test')
         self.assertTrue(logged_in)
@@ -611,7 +646,8 @@ class OptionTransactionTestCase(TestCase):
             '/services/rest/optiontransaction/{}'.format(optiontransaction.pk))
 
         self.assertEqual(res.status_code, 204)
-        self.assertFalse(OptionTransaction.objects.filter(id=optiontransaction.pk).exists())
+        self.assertFalse(
+            OptionTransaction.objects.filter(id=optiontransaction.pk).exists())
 
     def test_delete_optiontransaction_shareholder(self):
         """
@@ -620,7 +656,8 @@ class OptionTransactionTestCase(TestCase):
 
         operator = ShareholderGenerator().generate()
         user = operator.user
-        optiontransaction = OptionTransactionGenerator().generate(company=operator.company)
+        optiontransaction = OptionTransactionGenerator().generate(
+            company=operator.company)
 
         logged_in = self.client.login(username=user.username, password='test')
         self.assertTrue(logged_in)
@@ -636,7 +673,8 @@ class OptionTransactionTestCase(TestCase):
         """
         operator = OperatorGenerator().generate()
         user = operator.user
-        optiontransaction = OptionTransactionGenerator().generate(company=operator.company)
+        optiontransaction = OptionTransactionGenerator().generate(
+            company=operator.company)
         optiontransaction.is_draft = False
         optiontransaction.save()
 
@@ -668,10 +706,12 @@ class OptionTransactionTestCase(TestCase):
 
         # update data
         res = self.client.post(
-            '/services/rest/optiontransaction/{}/confirm'.format(optiontransaction.pk),
+            '/services/rest/optiontransaction/{}/confirm'.format(
+                optiontransaction.pk),
             {},
             format='json'
             )
 
         self.assertEqual(res.status_code, 200)
-        self.assertFalse(OptionTransaction.objects.get(id=optiontransaction.id).is_draft)
+        self.assertFalse(
+            OptionTransaction.objects.get(id=optiontransaction.id).is_draft)

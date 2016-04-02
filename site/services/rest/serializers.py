@@ -481,3 +481,15 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
         option_plan = OptionPlan.objects.create(**kwargs)
 
         return option_plan
+
+
+class OptionHolderSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserSerializer(many=False)
+    company = CompanySerializer(many=False,  read_only=True)
+
+    class Meta:
+        model = Shareholder
+        fields = (
+            'pk', 'user', 'number', 'company', 'options_percent',
+            'options_count', 'options_value'
+        )

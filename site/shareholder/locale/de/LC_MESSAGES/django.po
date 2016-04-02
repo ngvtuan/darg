@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-31 22:48+0000\n"
+"POT-Creation-Date: 2016-04-02 22:38+0000\n"
 "PO-Revision-Date: 2016-02-29 22:00+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
-#: shareholder/models.py:46
+#: shareholder/models.py:47
 msgid "Headquarter location"
 msgstr "Ort des Unternehmensstammsitzes"
 
-#: shareholder/models.py:48
+#: shareholder/models.py:49
 msgid "Foundation date of the company"
 msgstr "Gründungsdatum des Unternehmens"
 
-#: shareholder/models.py:65
+#: shareholder/models.py:66
 msgid "Your list of partials for the share split for company '{}'"
 msgstr "Ihre Liste gespaltener Aktienanrechte für das Unternehmen '{}'"
 
-#: shareholder/models.py:68
+#: shareholder/models.py:69
 msgid ""
 "Dear Operator,\n"
 "\n"
@@ -45,15 +45,15 @@ msgstr ""
 "Aktienanrechten wie folgt:\n"
 "\n"
 
-#: shareholder/models.py:76
+#: shareholder/models.py:77
 msgid "{}{}({}): {} shares\n"
 msgstr "{} {} ({}): {} shares\n"
 
-#: shareholder/models.py:83
+#: shareholder/models.py:84
 msgid "--- No partial shares during split --- \n"
 msgstr "--- Keine partiellen Splitbeträge ---\n"
 
-#: shareholder/models.py:86
+#: shareholder/models.py:87
 msgid ""
 "\n"
 "These shareholders are eligible to either sell their partial shares or get "
@@ -74,43 +74,43 @@ msgstr ""
 "\n"
 "Das Aktienregister-Team"
 
-#: shareholder/models.py:184
+#: shareholder/models.py:204
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
 msgstr "Aktiensplit von {} für {} mit Verhältnis {}:{}. Rückgabe alter Aktien."
 
-#: shareholder/models.py:204
+#: shareholder/models.py:224
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr "Aktiensplit von {} für {} mit Verhältnis {}:{}. Ausgabe neuer Aktien."
 
-#: shareholder/models.py:337
+#: shareholder/models.py:357
 msgid "Missing all data required for #GAFI."
 msgstr "Alle Daten für GAFI-FATF fehlen."
 
-#: shareholder/models.py:344
+#: shareholder/models.py:364
 msgid "Shareholder first name, last name or company name missing."
 msgstr "Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
 
-#: shareholder/models.py:348
+#: shareholder/models.py:368
 msgid "Shareholder birthday missing."
 msgstr "Geburstag"
 
-#: shareholder/models.py:352
+#: shareholder/models.py:372
 msgid "Shareholder origin/country missing."
 msgstr "Land des Aktionärs fehlt."
 
-#: shareholder/models.py:361
+#: shareholder/models.py:381
 msgid "Shareholder address or address details missing."
 msgstr "Adresse oder Adressdetails des Aktionärs fehlen."
 
-#: shareholder/models.py:404
+#: shareholder/models.py:469
 msgid "Share Count transfered or created"
 msgstr "transferierte oder erstellte Aktienanzahl"
 
-#: shareholder/models.py:407
+#: shareholder/models.py:472
 msgid "Nominal value or payed price for the transaction"
 msgstr "Nominalwert (bei Kapitalerhöhung) oder Kaufpreis"
 
-#: shareholder/models.py:443
+#: shareholder/models.py:508
 msgid "Number of shares approved"
 msgstr "Anzahl der genehmigten Aktien"
 

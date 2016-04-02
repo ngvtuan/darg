@@ -10,7 +10,7 @@
   {% include "_form_errors.html" %}
 
   <div class="panel">
-    <a class="btn-inline align-left" href="" ng-click="show_add_option_transaction_form()">{% trans "Transfer Option" %}</a>
+    <a class="btn-inline align-left" href="" ng-click="show_add_option_transaction_form()" ng-hide="!option_plans.length">{% trans "Transfer Option" %}</a>
     <a class="btn-inline " href="" ng-click="show_add_option_plan_form()">{% trans "Grant New Option Plan" %}</a>
   </div>
 

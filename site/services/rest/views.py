@@ -15,7 +15,7 @@ from services.rest.serializers import (
     ShareholderSerializer, CompanySerializer, UserSerializer,
     PositionSerializer, AddCompanySerializer, UserWithEmailOnlySerializer,
     CountrySerializer, OptionPlanSerializer, OptionTransactionSerializer,
-    SecuritySerializer, OperatorSerializer)
+    SecuritySerializer, OperatorSerializer, OptionHolderSerializer)
 from services.rest.permissions import UserCanAddCompanyPermission, \
     SafeMethodsOnlyPermission,\
     UserCanEditCompanyPermission, \
@@ -118,6 +118,18 @@ class CompanyViewSet(viewsets.ModelViewSet):
             return Response(
                 serializer.errors,
                 status=status.HTTP_400_BAD_REQUEST)
+
+    @detail_route(methods=['get'])
+    def option_holder(self, request, pk=None):
+        """ returns the captable part for all option holders """
+        obj = self.get_object()
+        ohs = obj.get_active_option_holders()
+        page = self.paginate_queryset(ohs)
+        if page is not None:
+            serializer = OptionHolderSerializer(page, many=True, context={'request': request})
+            return self.get_paginated_response(serializer.data)
+        serializer = OptionHolderSerializer(ohs, many=True, context={'request': request})
+        return Response(serializer.data)
 
 
 class AddCompanyView(APIView):

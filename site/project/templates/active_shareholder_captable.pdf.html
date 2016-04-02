@@ -16,7 +16,7 @@
         }
 
         @frame content_frame {          /* Content Frame */
-            left: 50pt; top: 121pt; height: 430pt; width:100%; margin-right:50pt
+            left: 50pt; top: 121pt; height: 430pt; width:100%; margin-right:50pt; position: relative
         }
         @frame footer_frame {           /* Another static Frame */
             -pdf-frame-content: footer_content;
@@ -55,13 +55,14 @@
     <div id="header_content">
       {% trans "Your Shareholders for" %}
       <h2 class="heading">{{ company.name }}</h2>
-      <div>right</div>
     </div>
 
     <!-- right aligned logo -->
+    {% if company.get_logo_url %}
     <div id="header_content2">
       <img src="{{ company.get_logo_url }}" alt="company logo" />
     </div>
+    {% endif %}
 
 
     <!-- Content for Static Frame 'footer_frame' -->

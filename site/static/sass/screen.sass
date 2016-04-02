@@ -60,7 +60,8 @@ html, body
 
   input
     display: inline-block
-    background-color: transparent
+    // background-color: transparent // see #50 and
+    // http://stackoverflow.com/questions/18967852/input-type-date-in-ios-7
     color: $color-black
     padding-left: 0.3em
     padding-right: 0.3em
@@ -123,17 +124,9 @@ html, body
     padding-left: 0em
 
   .centered
+    +zen-clear
+    +zen-grid-item(4,1)
     background: rgba(255, 255, 255, 0.95)
-    padding: 2em
-    position: absolute
-    // center it http://stackoverflow.com/questions/14189625/true-center-vertical-and-horizontal-css-div
-    //position: fixed
-    // top: 50%
-    left: 50%
-    width: 480px
-    height: 580px
-    // margin-top: -290px
-    margin-left: -240px
 
   .errorlist
     color: red

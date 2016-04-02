@@ -264,7 +264,6 @@ html, body {
 /* line 61, ../../sass/screen.sass */
 .core .container input {
   display: inline-block;
-  background-color: transparent;
   color: #666666;
   padding-left: 0.3em;
   padding-right: 0.3em;

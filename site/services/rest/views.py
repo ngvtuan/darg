@@ -147,13 +147,13 @@ class AddShareSplit(APIView):
     def _validate_data(self, data):
         errors = {}
         if not data.get('execute_at'):
-            errors.update({'execute_at': _('Field may not be empty.')})
+            errors.update({'execute_at': [_('Field may not be empty.')]})
         if not data.get('dividend'):
-            errors.update({'dividend': _('Field may not be empty.')})
+            errors.update({'dividend': [_('Field may not be empty.')]})
         if not data.get('divisor'):
-            errors.update({'divisor': _('Field may not be empty.')})
+            errors.update({'divisor': [_('Field may not be empty.')]})
         if not data.get('security'):
-            errors.update({'security': _('Field may not be empty.')})
+            errors.update({'security': [_('Field may not be empty.')]})
 
         if not errors:
             return True, {}
@@ -182,7 +182,7 @@ class AddShareSplit(APIView):
                 {'success': True, 'data': serializer.data},
                 status=status.HTTP_201_CREATED)
 
-        return Response({'errors': errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserViewSet(viewsets.ModelViewSet):

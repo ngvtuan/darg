@@ -4,8 +4,13 @@ from django.test.client import Client
 
 from rest_framework.test import APIClient
 
-from shareholder.generators import UserGenerator, CompanyGenerator, ShareholderGenerator, \
-    PositionGenerator, OperatorGenerator
+from project.base import BaseSeleniumTestCase
+from project import page
+from shareholder.generators import (
+    UserGenerator, CompanyGenerator, ShareholderGenerator,
+    PositionGenerator, OperatorGenerator, TwoInitialSecuritiesGenerator
+    )
+from shareholder.models import Security, Shareholder
 
 
 def _add_company_to_user_via_rest(user):
@@ -129,18 +134,27 @@ class DownloadTestCase(TestCase):
         company = CompanyGenerator().generate()
         shareholder_list = []
         for x in range(1, 6):  # don't statt with 0, Generators 'if' will fail
-            shareholder_list.append(ShareholderGenerator().generate(company=company, number=str(x)))
+            shareholder_list.append(ShareholderGenerator().generate(
+                company=company, number=str(x)))
 
         # initial share creation
-        PositionGenerator().generate(buyer=shareholder_list[0], count=1000, value=10)
+        PositionGenerator().generate(
+            buyer=shareholder_list[0], count=1000, value=10)
         # single transaction
-        PositionGenerator().generate(buyer=shareholder_list[1], count=10, value=10, seller=shareholder_list[0])
+        PositionGenerator().generate(
+            buyer=shareholder_list[1], count=10, value=10,
+            seller=shareholder_list[0])
         # shareholder bought and sold
-        PositionGenerator().generate(buyer=shareholder_list[2], count=20, value=20, seller=shareholder_list[0])
-        PositionGenerator().generate(buyer=shareholder_list[0], count=20, value=20, seller=shareholder_list[2])
+        PositionGenerator().generate(
+            buyer=shareholder_list[2], count=20, value=20,
+            seller=shareholder_list[0])
+        PositionGenerator().generate(
+            buyer=shareholder_list[0], count=20, value=20,
+            seller=shareholder_list[2])
 
         # run test
-        response = self.client.get(reverse('captable_csv', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_csv', kwargs={"company_id": company.id}))
 
         # not logged in user
         self.assertEqual(response.status_code, 302)
@@ -242,3 +256,32 @@ class DownloadTestCase(TestCase):
 
         # assert response code
         self.assertEqual(response.status_code, 403)
+
+
+# --- FUNCTIONAL TESTS
+class StartFunctionalTestCase(BaseSeleniumTestCase):
+
+    def setUp(self):
+        self.operator = OperatorGenerator().generate()
+        TwoInitialSecuritiesGenerator().generate(company=self.operator.company)
+        self.buyer = ShareholderGenerator().generate(
+            company=self.operator.company)
+        self.seller = ShareholderGenerator().generate(
+            company=self.operator.company)
+
+    def tearDown(self):
+        Security.objects.all().delete()
+
+    def test_ticket_49(self):
+        """ add shareholder as ops and then try login as this shareholder """
+        self.operator = OperatorGenerator().generate(
+            user=self.buyer.user, company=self.operator.company)
+
+        try:
+            start = page.StartPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            start.is_properly_displayed()
+            start.has_shareholder_count(Shareholder.objects.count())
+
+        except Exception, e:
+            self._handle_exception(e)

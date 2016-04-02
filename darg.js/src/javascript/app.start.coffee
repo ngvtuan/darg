@@ -1,8 +1,8 @@
 app = angular.module 'js.darg.app.start', ['js.darg.api', 'pascalprecht.translate']
 
 app.config ['$translateProvider', ($translateProvider) ->
-    $translateProvider.translations('de', django.catalog);
-    $translateProvider.preferredLanguage('de');
+    $translateProvider.translations('de', django.catalog)
+    $translateProvider.preferredLanguage('de')
 ]
 
 

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-02 14:21+0000\n"
-"PO-Revision-Date: 2016-04-02 14:22+0000\n"
+"POT-Creation-Date: 2016-04-02 15:24+0000\n"
+"PO-Revision-Date: 2016-04-02 15:24+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -106,6 +106,61 @@ msgstr "Ratio: Divident"
 #: static/compiled/javascript/i18n_noop.js:25
 msgid "Ratio: Divisor"
 msgstr "Ratio: Divisor"
+
+#: static/compiled/javascript/i18n_noop.js:26
+msgid "dividend"
+msgstr "Divident"
+
+#: static/compiled/javascript/i18n_noop.js:27
+msgid "security"
+msgstr "Wertpapier"
+
+#: static/compiled/javascript/i18n_noop.js:28
+msgid "execute_at"
+msgstr "Datum"
+
+#: static/compiled/javascript/i18n_noop.js:29
+msgid "divisor"
+msgstr "Divisor"
+
+#: static/compiled/javascript/i18n_noop.js:30
+msgid "count"
+msgstr "Anzahl"
+
+#: static/compiled/javascript/i18n_noop.js:31
+msgid "bought_at"
+msgstr "Kaufdatum"
+
+#: static/compiled/javascript/i18n_noop.js:32
+msgid "user"
+msgstr "Nutzer"
+
+#: static/compiled/javascript/i18n_noop.js:33
+msgid "number"
+msgstr "Gesellschafternummer"
+
+#: static/compiled/javascript/i18n_noop.js:34
+msgid "title"
+msgstr "Titel"
+
+#: static/compiled/javascript/i18n_noop.js:35
+msgid "board_approved_at"
+msgstr "Bestätigt durch Board am..."
+
+#: static/compiled/javascript/i18n_noop.js:36
+#| msgid "Option Plan"
+msgid "option_plan"
+msgstr "Optionsplan"
+
+#: static/compiled/javascript/i18n_noop.js:37
+#| msgid "Seller"
+msgid "seller"
+msgstr "Verkäufer"
+
+#: static/compiled/javascript/i18n_noop.js:38
+#| msgid "Buyer"
+msgid "buyer"
+msgstr "Käufer"
 
 #~ msgid "Available %s"
 #~ msgstr "Verfügbar %s"

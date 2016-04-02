@@ -1,4 +1,9 @@
-app = angular.module 'js.darg.app.company', ['js.darg.api', 'xeditable', 'ngFileUpload']
+app = angular.module 'js.darg.app.company', ['js.darg.api', 'xeditable', 'ngFileUpload', 'pascalprecht.translate']
+
+app.config ['$translateProvider', ($translateProvider) ->
+    $translateProvider.translations('de', django.catalog)
+    $translateProvider.preferredLanguage('de')
+]
 
 app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'Operator', 'Upload', '$timeout', ($scope, $http, Company, Country, Operator, Upload, $timeout) ->
 

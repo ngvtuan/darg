@@ -1,4 +1,9 @@
-app = angular.module 'js.darg.app.optionplan', ['js.darg.api', 'xeditable', 'ngFileUpload']
+app = angular.module 'js.darg.app.optionplan', ['js.darg.api', 'xeditable', 'ngFileUpload', 'pascalprecht.translate']
+
+app.config ['$translateProvider', ($translateProvider) ->
+    $translateProvider.translations('de', django.catalog)
+    $translateProvider.preferredLanguage('de')
+]
 
 app.controller 'OptionPlanController', ['$scope', '$http', 'OptionPlan', 'Upload', '$timeout', ($scope, $http, OptionPlan, Upload, $timeout) ->
 

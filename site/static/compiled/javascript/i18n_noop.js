@@ -23,3 +23,18 @@ gettext('Shareholder Number');
 gettext('Vesting Period (months)');
 gettext('Ratio: Dividend');
 gettext('Ratio: Divisor');
+gettext('dividend');
+gettext('security');
+gettext('execute_at');
+gettext('divisor');
+gettext('count');
+gettext('bought_at');
+gettext('user');
+gettext('number');
+gettext('title');
+gettext('board_approved_at');
+gettext('option_plan');
+gettext('seller');
+gettext('buyer');
+
+// gettext('');

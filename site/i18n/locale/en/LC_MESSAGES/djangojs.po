@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-02 14:21+0000\n"
+"POT-Creation-Date: 2016-04-02 15:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,4 +103,56 @@ msgstr ""
 
 #: static/compiled/javascript/i18n_noop.js:25
 msgid "Ratio: Divisor"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:26
+msgid "dividend"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:27
+msgid "security"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:28
+msgid "execute_at"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:29
+msgid "divisor"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:30
+msgid "count"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:31
+msgid "bought_at"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:32
+msgid "user"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:33
+msgid "number"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:34
+msgid "title"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:35
+msgid "board_approved_at"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:36
+msgid "option_plan"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:37
+msgid "seller"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:38
+msgid "buyer"
 msgstr ""

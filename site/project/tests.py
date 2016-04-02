@@ -1,3 +1,5 @@
+import time
+
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
@@ -164,7 +166,8 @@ class DownloadTestCase(TestCase):
         OperatorGenerator().generate(user=user, company=company)
         is_loggedin = self.client.login(username=user.username, password='test')
         self.assertTrue(is_loggedin)
-        response = self.client.get(reverse('captable_csv', kwargs={"company_id": company.id}))
+        response = self.client.get(reverse('captable_csv',
+            kwargs={"company_id": company.id}))
 
         # assert response code
         self.assertEqual(response.status_code, 200)
@@ -173,7 +176,7 @@ class DownloadTestCase(TestCase):
         lines.pop()  # remove last element based on final '\r\n'
         for row in lines:
             self.assertEqual(row.count(','), 5)
-        self.assertEqual(len(lines), 3)  # ensure we have the right amount of data
+        self.assertEqual(len(lines), 3)  # ensure we have the right data
         # assert company itself
         self.assertEqual(shareholder_list[0].number, lines[1].split(',')[0])
         # assert share owner
@@ -192,12 +195,16 @@ class DownloadTestCase(TestCase):
         company = CompanyGenerator().generate()
         shareholder_list = []
         for x in range(1, 6):  # don't statt with 0, Generators 'if' will fail
-            shareholder_list.append(ShareholderGenerator().generate(company=company, number=str(x)))
+            shareholder_list.append(ShareholderGenerator().generate(
+                company=company, number=str(x)))
 
         # initial share creation
-        PositionGenerator().generate(buyer=shareholder_list[0], count=1000, value=10)
+        PositionGenerator().generate(
+            buyer=shareholder_list[0], count=1000, value=10)
         # single transaction
-        PositionGenerator().generate(buyer=shareholder_list[1], count=10, value=10, seller=shareholder_list[0])
+        PositionGenerator().generate(
+            buyer=shareholder_list[1], count=10, value=10,
+            seller=shareholder_list[0])
         # shareholder bought and sold
         PositionGenerator().generate(buyer=shareholder_list[2], count=20, value=20, seller=shareholder_list[0])
         PositionGenerator().generate(buyer=shareholder_list[0], count=20, value=20, seller=shareholder_list[2])
@@ -282,6 +289,48 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
                 self.selenium, self.live_server_url, self.operator.user)
             start.is_properly_displayed()
             start.has_shareholder_count(Shareholder.objects.count())
+
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_ticket_8(self):
+        """ adding shareholder with user and userprofile for the same user for
+        many companies/registers
+
+        means we will create 3 companies, with 3 operators and each will add the
+        same shareholder for its company.
+
+        then login as the shareholder and check what happened and what is shown
+        """
+        ops = []
+        ops.append(OperatorGenerator().generate())
+        ops.append(OperatorGenerator().generate())
+        ops.append(OperatorGenerator().generate())
+        user = UserGenerator().generate()
+
+        try:
+            for op in ops:
+                start = page.StartPage(
+                    self.selenium, self.live_server_url, op.user)
+                start.is_properly_displayed()
+                start.has_shareholder_count(Shareholder.objects.filter(
+                    company=op.company).count())
+                start.click_open_add_shareholder()
+                start.add_shareholder(user)
+                start.click_save_add_shareholder()
+                start.has_shareholder_count(Shareholder.objects.filter(
+                    company=op.company).count())
+
+            # shareholder now, no shareholder login yet
+            # start = page.StartPage(
+            #    self.selenium, self.live_server_url, user)
+            # start.is_properly_displayed()
+
+            time.sleep(2)
+            self.assertEqual(user.shareholder_set.count(), 3)
+            for op in ops:
+                self.assertEqual(
+                    user.shareholder_set.filter(company=op.company).count(), 1)
 
         except Exception, e:
             self._handle_exception(e)

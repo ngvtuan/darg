@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-02 22:38+0000\n"
-"PO-Revision-Date: 2016-04-02 22:55+0000\n"
+"POT-Creation-Date: 2016-04-22 22:34+0000\n"
+"PO-Revision-Date: 2016-04-22 22:36+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -162,26 +162,38 @@ msgstr "Aktienkapital"
 msgid "Provisioned Capital"
 msgstr "Liberiertes Kapital"
 
-#: project/templates/active_shareholder_captable.pdf.html:86
+#: project/templates/active_shareholder_captable.pdf.html:88
+#: project/templates/active_shareholder_captable.pdf.html:122
 #: project/templates/start.html:50
 msgid "Name"
 msgstr "Name"
 
-#: project/templates/active_shareholder_captable.pdf.html:86
+#: project/templates/active_shareholder_captable.pdf.html:89
+#: project/templates/active_shareholder_captable.pdf.html:123
 #: project/templates/start.html:51
 msgid "Email"
 msgstr "Email"
 
-#: project/templates/active_shareholder_captable.pdf.html:86
+#: project/templates/active_shareholder_captable.pdf.html:90
+#: project/templates/active_shareholder_captable.pdf.html:124
 #: project/templates/start.html:52
 msgid "Shareholder Number"
 msgstr "Aktieninhabernummer"
 
-#: project/templates/active_shareholder_captable.pdf.html:86
-#: project/templates/start.html:53
+#: project/templates/active_shareholder_captable.pdf.html:91
 #, python-format
 msgid "Shares (%%)"
 msgstr "Aktien (%%)"
+
+#: project/templates/active_shareholder_captable.pdf.html:117
+#| msgid "Add Option"
+msgid "Options"
+msgstr "Optionen"
+
+#: project/templates/active_shareholder_captable.pdf.html:125
+#, python-format
+msgid "Optionen (%%)"
+msgstr "Optionen (%%)"
 
 #: project/templates/index.html:12
 msgid ""
@@ -259,42 +271,47 @@ msgstr "Aktion"
 msgid "No Log Entries yet."
 msgstr "Noch keine Einträge"
 
+#: project/templates/start.html:53
+#, python-format
+#| msgid "Shares (%%)"
+msgid "Shares (Voting-%%)"
+msgstr "Aktien (Stimmrechte: %%)"
+
 #: project/templates/start.html:57
 msgid "Gafi Validation failed"
 msgstr "GAFI-FATF Validierung fehlgeschlagen"
 
-#: project/templates/start.html:65
-#| msgid "Option Plan"
+#: project/templates/start.html:72
 msgid "Option Holders"
 msgstr ""
 "Optionsinhaber <span class=\"note\">(zugrundeliegende Aktien werden "
 "ebenfalls unter obenstehendem Unternehmen geführt)</span>"
 
-#: project/templates/start.html:81
+#: project/templates/start.html:88
 msgid "Total Shares distributed (total shares registered with company)"
 msgstr "Zahl Aktien lt. Tabelle (Zahl Aktien lt. Unternehmensdaten)"
 
-#: project/templates/start.html:92
+#: project/templates/start.html:99
 msgid "No Shareholders yet."
 msgstr "Noch keine Gesellschafter"
 
-#: project/templates/start.html:97
+#: project/templates/start.html:104
 msgid "Download active Shareholders as"
 msgstr "Download Liste der aktiven Aktionäre als"
 
-#: project/templates/start.html:98
+#: project/templates/start.html:105
 msgid "Download active Shareholders as PDF"
 msgstr "Download Liste der aktiven Aktionäre als PDF"
 
-#: project/templates/start.html:99
+#: project/templates/start.html:106
 msgid "PDF"
 msgstr "PDF"
 
-#: project/templates/start.html:101
+#: project/templates/start.html:108
 msgid "Download active Shareholders as CSV"
 msgstr "Download Liste der aktiven Aktionäre als CSV"
 
-#: project/templates/start.html:102
+#: project/templates/start.html:109
 msgid "CSV"
 msgstr "CSV"
 

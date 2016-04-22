@@ -340,12 +340,44 @@ class ShareholderTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_share_percent(self):
-        shareholder = ShareholderGenerator().generate()
-        PositionGenerator().generate(buyer=shareholder)
+        """
+        proper share percent math
+        """
+        company = CompanyGenerator().generate(share_count=1000000)
+        security = SecurityGenerator().generate(company=company)
+        sc = ShareholderGenerator().generate(company=company)
+        s1 = ShareholderGenerator().generate(company=company)
+        s2 = ShareholderGenerator().generate(company=company)
+        s3 = ShareholderGenerator().generate(company=company)
+        now = datetime.datetime.now()
 
-        res = shareholder.share_percent()
+        p0 = PositionGenerator().generate(
+            buyer=sc, count=1000000, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=11)
+            )
+        p1 = PositionGenerator().generate(
+            buyer=s1, seller=sc, count=500000, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=10)
+            )
+        p2 = PositionGenerator().generate(
+            buyer=s2, seller=sc, count=5000, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=9)
+            )
+        p3 = PositionGenerator().generate(
+            buyer=s3, seller=sc, count=50, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=8)
+            )
 
-        self.assertEqual(res, '100.00')
+        self.assertEqual(s1.share_percent(), '99.00')
+        self.assertEqual(s2.share_percent(), '0.99')
+        self.assertEqual(s3.share_percent(), '0.01')
+
+        p4 = PositionGenerator().generate(
+            buyer=s2, seller=s1, count=250000, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=7)
+            )
+
+        self.assertEqual(s1.share_percent(), '49.50')
 
 
 # --- FUNCTIONAL TESTS

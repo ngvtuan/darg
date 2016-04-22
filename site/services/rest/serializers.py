@@ -238,12 +238,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
     user = UserSerializer(many=False)
     company = CompanySerializer(many=False,  read_only=True)
+    is_company = serializers.SerializerMethodField()
 
     class Meta:
         model = Shareholder
         fields = (
             'pk', 'user', 'number', 'company', 'share_percent', 'share_count',
-            'share_value', 'validate_gafi',
+            'share_value', 'validate_gafi', 'is_company'
         )
 
     def create(self, validated_data):
@@ -333,6 +334,12 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
         shareholder.number = validated_data['number']
         shareholder.save()
         return shareholder
+
+    def get_is_company(self, obj):
+        """
+        bool if shareholder is company itself
+        """
+        return obj == obj.company.get_company_shareholder()
 
 
 class PositionSerializer(serializers.HyperlinkedModelSerializer):

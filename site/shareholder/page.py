@@ -51,6 +51,45 @@ class BasePage(object):
             username), 'failed to login. got {} page instead'.format(
             page_heading)
 
+    def refresh(self):
+        """ reload page """
+        self.driver.get(self.driver.current_url)
+
+
+class ShareholderDetailPage(BasePage):
+    """Options List View"""
+
+    def __init__(self, driver, live_server_url, user, path=None):
+        """ load MainPage '/' """
+        self.live_server_url = live_server_url
+        # prepare driver
+        super(ShareholderDetailPage, self).__init__(driver)
+
+        # login and load page
+        self.operator = user.operator_set.all()[0]
+        self.login(username=user.username, password='test')
+        if path:
+            self.driver.get('%s%s' % (live_server_url, path))
+        else:
+            self.driver.get('%s%s' % (live_server_url))
+
+    def click_to_edit(self, class_name):
+        el = self.driver.find_element_by_class_name(class_name)
+        el = el.find_element_by_class_name('editable-click')
+        el.click()
+
+    def edit_shareholder_number(self, value, class_name):
+        el = self.driver.find_element_by_class_name(class_name)
+        el = el.find_element_by_class_name('editable-input')
+        el.clear()
+        el.send_keys(str(value))
+
+    def save_edit(self, class_name):
+        el = self.driver.find_element_by_class_name(class_name)
+        el = el.find_element_by_class_name('editable-buttons')
+        el = el.find_element_by_tag_name('button')
+        el.click()
+
 
 class OptionsPage(BasePage):
     """Options List View"""

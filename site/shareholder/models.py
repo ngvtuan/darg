@@ -301,6 +301,12 @@ class Shareholder(models.Model):
         # id we have company.share_count set
         # don't count as total what company currently owns = free floating cap
         if total:
+
+            # we have no other shareholders
+            if total == cs.share_count(date):
+                return "{:.2f}".format(float(0))
+
+            # do the math
             return "{:.2f}".format(
                 count / float(total-cs.share_count(date)) * 100)
 

@@ -247,7 +247,7 @@ class PositionViewSet(viewsets.ModelViewSet):
         return Position.objects.filter(
             Q(buyer__company__operator__user=user) |
             Q(seller__company__operator__user=user)
-        ).order_by('-bought_at', '-pk')
+        ).distinct().order_by('-bought_at', '-pk')
 
     @detail_route(
         methods=['post'], permission_classes=[UserIsOperatorPermission])

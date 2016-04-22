@@ -3,6 +3,7 @@ import dateutil.parser
 from django.contrib.auth import get_user_model
 from django.http import Http404
 from django.utils.translation import ugettext as _
+from django.db.models import Q
 
 from rest_framework import viewsets
 from rest_framework.views import APIView
@@ -243,8 +244,10 @@ class PositionViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return Position.objects.filter(buyer__company__operator__user=user)\
-            .order_by('-bought_at', '-pk')
+        return Position.objects.filter(
+            Q(buyer__company__operator__user=user) |
+            Q(seller__company__operator__user=user)
+        ).order_by('-bought_at', '-pk')
 
     @detail_route(
         methods=['post'], permission_classes=[UserIsOperatorPermission])

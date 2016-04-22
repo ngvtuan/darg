@@ -283,18 +283,27 @@ class Shareholder(models.Model):
         return u'{}'.format(self.id)
 
     def share_percent(self, date=None):
-        """ returns percentage of shares owned compared to corps
-        total shares
-        FIXME returns wrong values if the company still holds shares
-        after capital increase, which are not distributed to shareholders
-        company would then have a percentage of itself, although this is
-        not relevant for voting rights, etc.
+        """
+        returns percentage of shares in the understanding of voting rights.
+        hence related to free floating capital.
         """
         total = self.company.share_count
+        cs = self.company.get_company_shareholder()
+
+        # we use % as voting rights, hence company does not have it
+        if self == cs:
+            return False
+
+        # this shareholder total count
         count = sum(self.buyer.all().values_list('count', flat=True)) - \
             sum(self.seller.all().values_list('count', flat=True))
+
+        # id we have company.share_count set
+        # don't count as total what company currently owns = free floating cap
         if total:
-            return "{:.2f}".format(count / float(total) * 100)
+            return "{:.2f}".format(
+                count / float(total-cs.share_count(date)) * 100)
+
         return False
 
     def share_count(self, date=None, security=None):

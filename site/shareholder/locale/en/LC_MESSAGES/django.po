@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-02 22:38+0000\n"
+"POT-Creation-Date: 2016-04-22 22:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,35 +65,35 @@ msgstr ""
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr ""
 
-#: shareholder/models.py:357
+#: shareholder/models.py:366
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:364
+#: shareholder/models.py:373
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:368
+#: shareholder/models.py:377
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:372
+#: shareholder/models.py:381
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:381
+#: shareholder/models.py:390
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:469
+#: shareholder/models.py:482
 msgid "Share Count transfered or created"
 msgstr ""
 
-#: shareholder/models.py:472
+#: shareholder/models.py:485
 msgid "Nominal value or payed price for the transaction"
 msgstr ""
 
-#: shareholder/models.py:508
+#: shareholder/models.py:521
 msgid "Number of shares approved"
 msgstr ""
 
@@ -259,55 +259,59 @@ msgstr ""
 msgid "Please request the shareholder to complete his data."
 msgstr ""
 
-#: shareholder/templates/shareholder.html:36
+#: shareholder/templates/shareholder.html:34
+msgid "Shareholder Number"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:41
 msgid "Shareholder Name"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:44
+#: shareholder/templates/shareholder.html:49
 msgid "Shareholder Email"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:50
+#: shareholder/templates/shareholder.html:55
 msgid "Shareholder Company Name"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:57
+#: shareholder/templates/shareholder.html:62
 msgid "Address"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:58
+#: shareholder/templates/shareholder.html:63
 msgid "Street"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:59
+#: shareholder/templates/shareholder.html:64
 msgid "Zip"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:59
+#: shareholder/templates/shareholder.html:64
 msgid "City"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:60
+#: shareholder/templates/shareholder.html:65
 msgid "Province"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:61
+#: shareholder/templates/shareholder.html:66
 msgid "Country"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:81
+#: shareholder/templates/shareholder.html:86
 msgid "Shareholder Birthday"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:92
+#: shareholder/templates/shareholder.html:97
 msgid "Shares"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:96
+#: shareholder/templates/shareholder.html:101
 msgid "Value of all shares according to last transaction"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:101
+#: shareholder/templates/shareholder.html:106
 msgid "Delete shareholder"
 msgstr ""
 

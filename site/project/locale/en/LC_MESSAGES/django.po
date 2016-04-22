@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-02 22:38+0000\n"
+"POT-Creation-Date: 2016-04-22 22:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,25 +153,36 @@ msgstr ""
 msgid "Provisioned Capital"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:86
+#: project/templates/active_shareholder_captable.pdf.html:88
+#: project/templates/active_shareholder_captable.pdf.html:122
 #: project/templates/start.html:50
 msgid "Name"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:86
+#: project/templates/active_shareholder_captable.pdf.html:89
+#: project/templates/active_shareholder_captable.pdf.html:123
 #: project/templates/start.html:51
 msgid "Email"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:86
+#: project/templates/active_shareholder_captable.pdf.html:90
+#: project/templates/active_shareholder_captable.pdf.html:124
 #: project/templates/start.html:52
 msgid "Shareholder Number"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:86
-#: project/templates/start.html:53
+#: project/templates/active_shareholder_captable.pdf.html:91
 #, python-format
 msgid "Shares (%%)"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:117
+msgid "Options"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:125
+#, python-format
+msgid "Optionen (%%)"
 msgstr ""
 
 #: project/templates/index.html:12
@@ -243,38 +254,43 @@ msgstr ""
 msgid "No Log Entries yet."
 msgstr ""
 
+#: project/templates/start.html:53
+#, python-format
+msgid "Shares (Voting-%%)"
+msgstr ""
+
 #: project/templates/start.html:57
 msgid "Gafi Validation failed"
 msgstr ""
 
-#: project/templates/start.html:65
+#: project/templates/start.html:72
 msgid "Option Holders"
 msgstr ""
 
-#: project/templates/start.html:81
+#: project/templates/start.html:88
 msgid "Total Shares distributed (total shares registered with company)"
 msgstr ""
 
-#: project/templates/start.html:92
+#: project/templates/start.html:99
 msgid "No Shareholders yet."
 msgstr ""
 
-#: project/templates/start.html:97
+#: project/templates/start.html:104
 msgid "Download active Shareholders as"
 msgstr ""
 
-#: project/templates/start.html:98
+#: project/templates/start.html:105
 msgid "Download active Shareholders as PDF"
 msgstr ""
 
-#: project/templates/start.html:99
+#: project/templates/start.html:106
 msgid "PDF"
 msgstr ""
 
-#: project/templates/start.html:101
+#: project/templates/start.html:108
 msgid "Download active Shareholders as CSV"
 msgstr ""
 
-#: project/templates/start.html:102
+#: project/templates/start.html:109
 msgid "CSV"
 msgstr ""

@@ -5,8 +5,7 @@ from shareholder.models import Shareholder, Company, Operator, Position, \
 
 
 class ShareholderAdmin(admin.ModelAdmin):
-    pass
-
+    search_fields = ['user__email', 'user__first_name', 'user__last_name']
 
 class CompanyAdmin(admin.ModelAdmin):
     pass

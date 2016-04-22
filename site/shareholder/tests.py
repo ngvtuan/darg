@@ -2,17 +2,20 @@ import unittest
 import datetime
 import time
 
-from django.test import TestCase
+from django.test import TestCase, TransactionTestCase
 from django.test.client import Client
+from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.test.client import RequestFactory
 from django.core import mail
 
 from project.base import BaseSeleniumTestCase
 from shareholder.models import Country, Shareholder, Security, Position
-from shareholder.generators import ShareholderGenerator, PositionGenerator, \
-    UserGenerator, TwoInitialSecuritiesGenerator, OperatorGenerator, \
-    CompanyGenerator, ComplexShareholderConstellationGenerator
+from shareholder.generators import (
+    ShareholderGenerator, PositionGenerator, UserGenerator,
+    TwoInitialSecuritiesGenerator, OperatorGenerator, CompanyGenerator,
+    ComplexShareholderConstellationGenerator, SecurityGenerator
+    )
 from shareholder import page
 
 
@@ -31,7 +34,7 @@ class CountryTestCase(TestCase):
         self.assertEqual(country.name, 'Germany')
 
 
-class PositionTestCase(TestCase):
+class PositionTestCase(TransactionTestCase):
 
     def test_split_shares(self):
         """ share split leaves value, percent unchanged but
@@ -97,7 +100,8 @@ class PositionTestCase(TestCase):
         )
 
     def test_split_shares_in_past(self):
-        """ we are splitting shares at some point in the past
+        """
+        we are splitting shares at some point in the past
         even with newer transactions entered
         approach: split in the very past and check that nothing was changed
         """
@@ -173,6 +177,75 @@ class PositionTestCase(TestCase):
         # only one new pos as no shares were basically existing as we
         # split even before company creates their first shares
         self.assertEqual(pcount + 2, Position.objects.count())
+
+    def test_watter_split_61(self):
+        """
+        issue shares multiple times, sell some of them then do a split. see #61
+        """
+        company = CompanyGenerator().generate(share_count=10000000)
+        sc = ShareholderGenerator().generate(company=company)  # aka Company
+        s1 = ShareholderGenerator().generate(company=company)  # aka W
+        s2 = ShareholderGenerator().generate(company=company)  # aka S
+        OperatorGenerator().generate(company=company)
+        security = SecurityGenerator().generate(company=company)
+        now = datetime.datetime.now()
+        PositionGenerator().generate(
+            buyer=s2, seller=sc, count=10000, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=11)
+        )  # initial seed
+
+        p1 = PositionGenerator().generate(
+            buyer=s1, seller=sc, count=187, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=10)
+            )
+        p2 = PositionGenerator().generate(
+            buyer=s1, seller=sc, count=398, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=9)
+            )
+        p3 = PositionGenerator().generate(
+            buyer=s2, seller=s1, count=80, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=8)
+            )
+        p4 = PositionGenerator().generate(
+            buyer=s2, seller=s1, count=437, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=7)
+            )
+        p5 = PositionGenerator().generate(
+            buyer=s1, seller=sc, count=837, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=6)
+            )
+        p6 = PositionGenerator().generate(
+            buyer=s1, seller=sc, count=68, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=5)
+            )
+
+        split_data = {
+            'execute_at': now - datetime.timedelta(days=4),
+            'dividend': 1,
+            'divisor': 100,
+            'comment': "MEGA SPLIT",
+            'security': security,
+        }
+        company.split_shares(split_data)
+
+        p8 = PositionGenerator().generate(
+            buyer=s1, seller=sc, count=3350, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=3)
+            )
+
+        self.assertEqual(s1.share_count(), 100650)
+        positions = Position.objects.filter(comment__contains="split").filter(
+            Q(buyer=s1) | Q(seller=s1)
+        )
+        self.assertEqual(positions.count(), 2)
+        p1 = positions[0]
+        p2 = positions[1]
+        self.assertEqual(p1.count, 973)
+        self.assertEqual(p1.buyer, sc)
+        self.assertEqual(p1.seller, s1)
+        self.assertEqual(p2.count, 97300)
+        self.assertEqual(p2.seller, sc)
+        self.assertEqual(p2.buyer, s1)
 
 
 class UserProfileTestCase(TestCase):

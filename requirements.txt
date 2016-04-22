@@ -1,6 +1,7 @@
 Django==1.8.9
 django-registration-redux
 djangorestframework==3.2.3
+django-nose>=1.4.3
 raven
 cssmin==0.2.0
 jsmin==2.0.11

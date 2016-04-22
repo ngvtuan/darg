@@ -3,7 +3,7 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 @import url(https://fonts.googleapis.com/css?family=Muli:300,400);
-/* line 5, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../../../var/lib/gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -25,45 +25,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../var/lib/gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../var/lib/gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../var/lib/gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../var/lib/gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../var/lib/gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../var/lib/gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../var/lib/gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../var/lib/gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
@@ -76,20 +76,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   /* line 10, ../../sass/_breakpoints.sass */
   body header .container .search-box {
     float: left;
-    width: 62.5%;
-    margin-left: 37.5%;
+    width: 500%;
+    margin-left: 300%;
     margin-right: -100%;
     padding-left: 10px;
     padding-right: 10px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
-    word-wrap: break-word;
   }
   /* line 12, ../../sass/_breakpoints.sass */
   body header .container .search-box .auto-suggestions {
-    width: 56.25%;
+    width: 450%;
   }
 }
 @media only screen and (max-width: 800px) {
@@ -115,16 +113,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   body #mask .container .mask-wrapper .content-wrapper .content, body #mask .container .mask-wrapper .content-wrapper .map {
     clear: left;
     float: left;
-    width: 100%;
+    width: 800%;
     margin-left: 0%;
     margin-right: -100%;
     padding-left: 10px;
     padding-right: 10px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
-    word-wrap: break-word;
     float: none;
   }
   /* line 43, ../../sass/_breakpoints.sass */
@@ -145,38 +141,34 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   /* line 56, ../../sass/_breakpoints.sass */
   body header .container .logo {
     float: left;
-    width: 100%;
+    width: 800%;
     margin-left: 0%;
     margin-right: -100%;
     padding-left: 10px;
     padding-right: 10px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
-    word-wrap: break-word;
     float: none;
     margin-bottom: 10px;
   }
   /* line 60, ../../sass/_breakpoints.sass */
   body header .container .search-box {
     float: left;
-    width: 100%;
+    width: 800%;
     margin-left: 0%;
     margin-right: -100%;
     padding-left: 10px;
     padding-right: 10px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
-    word-wrap: break-word;
     float: none;
   }
   /* line 63, ../../sass/_breakpoints.sass */
   body header .container .search-box .auto-suggestions {
     top: 156px;
-    width: 75%;
+    width: 600%;
   }
   /* line 67, ../../sass/_breakpoints.sass */
   body #mask header {
@@ -217,7 +209,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 html, body {
   height: 100%;
   font-size: 1em;
-  color: #666666;
+  color: #666;
   font-family: Muli;
   font-weight: 300;
   width: 100%;
@@ -236,19 +228,21 @@ html, body {
   width: 1000px;
   margin: 6em auto;
 }
-/* line 45, ../../../../../../../var/lib/gems/1.9.1/gems/zen-grids-1.5/stylesheets/zen/_grids.scss */
-.core .container:before, .core .container:after {
+/* line 69, ../../../../../../../var/lib/gems/2.0.0/gems/zen-grids-2.0.1/sass/zen-grids/_grids.scss */
+.core .container:before {
   content: "";
   display: table;
 }
-/* line 50, ../../../../../../../var/lib/gems/1.9.1/gems/zen-grids-1.5/stylesheets/zen/_grids.scss */
+/* line 73, ../../../../../../../var/lib/gems/2.0.0/gems/zen-grids-2.0.1/sass/zen-grids/_grids.scss */
 .core .container:after {
+  content: "";
+  display: table;
   clear: both;
 }
 /* line 46, ../../sass/screen.sass */
 .core .container a, .core .container button, .core .container input[type=submit] {
   color: #337ab7;
-  border: 1px solid #666666;
+  border: 1px solid #666;
   margin: 0.3em 0.3em 0.3em 0em;
   display: inline-block;
   background-color: transparent;
@@ -264,7 +258,7 @@ html, body {
 /* line 61, ../../sass/screen.sass */
 .core .container input {
   display: inline-block;
-  color: #666666;
+  color: #666;
   padding-left: 0.3em;
   padding-right: 0.3em;
   margin: 0.3em 0.3em 0.3em 0em;
@@ -335,16 +329,14 @@ html, body {
 .core .container .footer {
   clear: left;
   float: left;
-  width: 75%;
+  width: 600%;
   margin-left: 0%;
-  margin-right: -75%;
+  margin-right: -100%;
   padding-left: 10px;
   padding-right: 10px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
-  word-wrap: break-word;
   height: 3em;
   margin-top: 4em;
   padding-left: 0em;
@@ -353,16 +345,14 @@ html, body {
 .core .container .centered {
   clear: left;
   float: left;
-  width: 50%;
+  width: 400%;
   margin-left: 0%;
-  margin-right: -50%;
+  margin-right: -100%;
   padding-left: 10px;
   padding-right: 10px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
-  word-wrap: break-word;
   background: rgba(255, 255, 255, 0.95);
 }
 /* line 131, ../../sass/screen.sass */
@@ -371,8 +361,8 @@ html, body {
 }
 /* line 134, ../../sass/screen.sass */
 .core .container .disable {
-  color: #dddddd;
-  border: 1px solid #dddddd;
+  color: #ddd;
+  border: 1px solid #ddd;
 }
 /* line 139, ../../sass/screen.sass */
 .core .container .el-icon-cogs {
@@ -416,7 +406,7 @@ html, body {
 }
 /* line 176, ../../sass/screen.sass */
 .core .container .editable-click, .core .container a.editable-click {
-  color: #666666;
+  color: #666;
   border: none;
 }
 /* line 179, ../../sass/screen.sass */
@@ -479,16 +469,14 @@ div#auth input, div#auth button {
 /* line 226, ../../sass/screen.sass */
 div#auth .registration-form {
   float: left;
-  width: 50%;
+  width: 400%;
   margin-left: 0%;
-  margin-right: -50%;
+  margin-right: -100%;
   padding-left: 10px;
   padding-right: 10px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
-  word-wrap: break-word;
 }
 /* line 228, ../../sass/screen.sass */
 div#auth .registration-form .helptext {
@@ -497,16 +485,14 @@ div#auth .registration-form .helptext {
 /* line 230, ../../sass/screen.sass */
 div#auth .registration-teaser {
   float: left;
-  width: 75%;
-  margin-left: 50%;
-  margin-right: -125%;
+  width: 600%;
+  margin-left: 400%;
+  margin-right: -100%;
   padding-left: 10px;
   padding-right: 10px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
-  word-wrap: break-word;
 }
 /* line 232, ../../sass/screen.sass */
 div#auth .registration-teaser img {
@@ -607,7 +593,7 @@ div.captable_context_actions {
 
 /* line 297, ../../sass/screen.sass */
 tr.option-holders-heading td {
-  background-color: whitesmoke;
+  background-color: #f5f5f5;
 }
 
 /* line 304, ../../sass/screen.sass */
@@ -638,7 +624,7 @@ div#optionplan .pdf_upload_preview {
 /* line 324, ../../sass/screen.sass */
 .blog .btn-primary {
   background-color: transparent;
-  border: 1px solid #666666;
+  border: 1px solid #666;
   color: #337ab7;
 }
 /* line 328, ../../sass/screen.sass */

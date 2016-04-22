@@ -1,5 +1,6 @@
 import unittest
 import datetime
+import time
 
 from django.test import TestCase
 from django.test.client import Client
@@ -275,6 +276,44 @@ class ShareholderTestCase(TestCase):
 
 
 # --- FUNCTIONAL TESTS
+class ShareholderDetailFunctionalTestCase(BaseSeleniumTestCase):
+
+    def setUp(self):
+        self.operator = OperatorGenerator().generate()
+        TwoInitialSecuritiesGenerator().generate(company=self.operator.company)
+        self.buyer = ShareholderGenerator().generate(
+            company=self.operator.company)
+        self.seller = ShareholderGenerator().generate(
+            company=self.operator.company)
+
+    def tearDown(self):
+        Security.objects.all().delete()
+
+    def test_edit_shareholder_number_53(self):
+        """ means: create a option plan and move options for users """
+        try:
+
+            p = page.ShareholderDetailPage(
+                self.selenium, self.live_server_url, self.operator.user,
+                path=reverse(
+                    'shareholder',
+                    kwargs={'shareholder_id': self.buyer.id}
+                    )
+                )
+            p.click_to_edit("shareholder-number")
+            time.sleep(1)
+            p.edit_shareholder_number(99, "shareholder-number")
+            time.sleep(1)
+            p.save_edit("shareholder-number")
+            time.sleep(1)
+
+        except Exception, e:
+            self._handle_exception(e)
+
+        shareholder = Shareholder.objects.get(id=self.buyer.id)
+        self.assertEqual(shareholder.number, str(99))
+
+
 class OptionsFunctionalTestCase(BaseSeleniumTestCase):
 
     def setUp(self):

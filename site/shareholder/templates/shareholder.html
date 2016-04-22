@@ -31,6 +31,11 @@
   {# core data #}
   <table class="table table-striped">
     <tr>
+      <td>{% trans "Shareholder Number" %}:</td>
+      <td>
+        {% verbatim %}<span editable-text="shareholder.number" onaftersave="edit_shareholder()">{{ shareholder.number || '' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}
+      </td>
+    </tr>
     <tr>
       <td>
         {% trans "Shareholder Name" %}:

@@ -50,12 +50,12 @@ def captable_csv(request, company_id):
         'email', 'share count', 'share percent'])
     for shareholder in company.get_active_shareholders():
         writer.writerow([
-            shareholder.number,
-            shareholder.user.last_name,
-            shareholder.user.first_name,
-            shareholder.user.email,
+            shareholder.number.encode('utf-8'),
+            shareholder.user.last_name.encode('utf-8'),
+            shareholder.user.first_name.encode('utf-8'),
+            shareholder.user.email.encode('utf-8'),
             shareholder.share_count(),
-            shareholder.share_percent()
+            shareholder.share_percent().encode('utf-8')
         ])
 
     return response

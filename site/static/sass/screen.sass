@@ -24,6 +24,8 @@
 @import url(https://fonts.googleapis.com/css?family=Muli:300,400)
 
 html, body
+  // DEBUG
+  // +zen-grid-background
   height: 100%
   font-size: $content-font-size
   color: $color-font
@@ -218,7 +220,6 @@ div#auth
     background-color: transparent
     font-size: 1.5em
     border: 1px solid #666666
-    // color: #666666
     padding: 0.1em
     padding-left: 0.3em
     padding-right: 0.3em
@@ -228,7 +229,7 @@ div#auth
     .helptext
       display: none
   .registration-teaser
-    +zen-grid-item(6, 5)
+    +zen-grid-item(3, 5)
     img
       width: 27em
       margin-top: 6em

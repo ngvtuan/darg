@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 10:55+0000\n"
+"POT-Creation-Date: 2016-05-06 12:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,23 +43,23 @@ msgid ""
 "Your Das-Aktienregister Team"
 msgstr ""
 
-#: services/rest/serializers.py:215 services/rest/serializers.py:259
+#: services/rest/serializers.py:215 services/rest/serializers.py:260
 msgid "Email missing"
 msgstr ""
 
-#: services/rest/serializers.py:262
+#: services/rest/serializers.py:263
 msgid "First Name missing"
 msgstr ""
 
-#: services/rest/serializers.py:265
+#: services/rest/serializers.py:266
 msgid "Last Name missing"
 msgstr ""
 
-#: services/rest/serializers.py:270
+#: services/rest/serializers.py:271
 msgid "Shareholder Number must be unique"
 msgstr ""
 
-#: services/rest/serializers.py:467
+#: services/rest/serializers.py:471
 msgid "Not a pdf file."
 msgstr ""
 

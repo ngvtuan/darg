@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 10:55+0000\n"
-"PO-Revision-Date: 2016-04-22 22:38+0000\n"
+"POT-Creation-Date: 2016-05-06 12:33+0000\n"
+"PO-Revision-Date: 2016-05-06 12:38+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
@@ -35,14 +35,12 @@ msgstr "Ihre Liste gespaltener Aktienanrechte für das Unternehmen '{}'"
 msgid ""
 "Dear Operator,\n"
 "\n"
-"Your share split has been successful. Please find the list of partial shares "
-"below:\n"
+"Your share split has been successful. Please find the list of partial shares below:\n"
 "\n"
 msgstr ""
 "Lieber Operator,\n"
 "\n"
-"Der Aktiensplit war erfolgreich. Sie finden die Daten zu den teilweisen "
-"Aktienanrechten wie folgt:\n"
+"Der Aktiensplit war erfolgreich. Sie finden die Daten zu den teilweisen Aktienanrechten wie folgt:\n"
 "\n"
 
 #: shareholder/models.py:77
@@ -56,19 +54,16 @@ msgstr "--- Keine partiellen Splitbeträge ---\n"
 #: shareholder/models.py:87
 msgid ""
 "\n"
-"These shareholders are eligible to either sell their partial shares or get "
-"compensated.\n"
+"These shareholders are eligible to either sell their partial shares or get compensated.\n"
 "\n"
 "Please handle them accordingly and update the share register.\n"
 "\n"
 "Your Share Register Team"
 msgstr ""
 "\n"
-"Diese Gesellschafter sind berechtigt Ihre Anrechte zu verschenken, verkaufen "
-"oder eine entsprechende Kompensation für die Nichtverwendung zu erhalten.\n"
+"Diese Gesellschafter sind berechtigt Ihre Anrechte zu verschenken, verkaufen oder eine entsprechende Kompensation für die Nichtverwendung zu erhalten.\n"
 "\n"
-"Bitte handhaben Sie diese Anteile entsprechend und tragen Sie die "
-"durchgeführten Transaktionen nach.\n"
+"Bitte handhaben Sie diese Anteile entsprechend und tragen Sie die durchgeführten Transaktionen nach.\n"
 "\n"
 "Mit besten Grüßen\n"
 "\n"
@@ -76,7 +71,8 @@ msgstr ""
 
 #: shareholder/models.py:204
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
-msgstr "Aktiensplit von {} für {} mit Verhältnis {}:{}. Rückgabe alter Aktien."
+msgstr ""
+"Aktiensplit von {} für {} mit Verhältnis {}:{}. Rückgabe alter Aktien."
 
 #: shareholder/models.py:224
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
@@ -88,7 +84,8 @@ msgstr "Alle Daten für GAFI-FATF fehlen."
 
 #: shareholder/models.py:379
 msgid "Shareholder first name, last name or company name missing."
-msgstr "Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
+msgstr ""
+"Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
 
 #: shareholder/models.py:383
 msgid "Shareholder birthday missing."
@@ -143,7 +140,7 @@ msgid "Receipient"
 msgstr "Empfänger"
 
 #: shareholder/templates/options.html:43
-#: shareholder/templates/positions.html:36
+#: shareholder/templates/positions.html:39
 msgid "Share Count"
 msgstr "Anzahl Aktien"
 
@@ -157,17 +154,17 @@ msgid "Issuer"
 msgstr "Herausgeber"
 
 #: shareholder/templates/options.html:54
-#: shareholder/templates/positions.html:61
+#: shareholder/templates/positions.html:65
 msgid "Draft"
 msgstr "Entwurf"
 
 #: shareholder/templates/options.html:65
-#: shareholder/templates/positions.html:74
+#: shareholder/templates/positions.html:78
 msgid "delete"
 msgstr "Löschen"
 
 #: shareholder/templates/options.html:70
-#: shareholder/templates/positions.html:79
+#: shareholder/templates/positions.html:83
 msgid "confirm"
 msgstr "Festschreiben"
 
@@ -192,7 +189,7 @@ msgid "Share count"
 msgstr "Anzahl Aktien"
 
 #: shareholder/templates/optionsplan.html:33
-#: shareholder/templates/positions.html:39
+#: shareholder/templates/positions.html:42
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -212,55 +209,64 @@ msgstr "Hochladen erfolgreich."
 msgid "Positions"
 msgstr "Transaktionen"
 
-#: shareholder/templates/positions.html:13
+#: shareholder/templates/positions.html:11
+msgid ""
+"Use Transactions to record each shareholders state of shares. For initial "
+"foundation transfer shares from company to..."
+msgstr ""
+"Verwenden Sie \"Transaktionen\" um den Bestand an Aktien eines jeden "
+"Gesellschafters aufzuzeichnen. Für die Unternehmensgründung übertragen Sie "
+"Aktien vom Unternehmen an die Aktionäre am Gründungsdatum."
+
+#: shareholder/templates/positions.html:16
 msgid "Transfer Shares"
 msgstr "Aktien übertragen"
 
-#: shareholder/templates/positions.html:14
+#: shareholder/templates/positions.html:17
 msgid "Increase Capital"
 msgstr "Kapital erhöhen"
 
-#: shareholder/templates/positions.html:15
+#: shareholder/templates/positions.html:18
 msgid "Split Shares"
 msgstr "Aktiensplit"
 
-#: shareholder/templates/positions.html:33
+#: shareholder/templates/positions.html:36
 msgid "Buy Date"
 msgstr "Kaufdatum"
 
-#: shareholder/templates/positions.html:34
+#: shareholder/templates/positions.html:37
 msgid "Buyer"
 msgstr "Käufer"
 
-#: shareholder/templates/positions.html:35
+#: shareholder/templates/positions.html:38
 msgid "Security"
 msgstr "Aktienart"
 
-#: shareholder/templates/positions.html:37
+#: shareholder/templates/positions.html:40
 msgid "Price"
 msgstr "Preis"
 
-#: shareholder/templates/positions.html:38
+#: shareholder/templates/positions.html:41
 msgid "Seller"
 msgstr "Verkäufer"
 
-#: shareholder/templates/positions.html:47
+#: shareholder/templates/positions.html:51
 msgid "Grouped split transactions."
 msgstr "Gruppierte Split-Transaktionen"
 
-#: shareholder/templates/positions.html:49
+#: shareholder/templates/positions.html:53
 msgid "Show"
 msgstr "Anzeigen"
 
-#: shareholder/templates/positions.html:52
+#: shareholder/templates/positions.html:56
 msgid "Hide"
 msgstr "Ausblenden"
 
-#: shareholder/templates/positions.html:86
+#: shareholder/templates/positions.html:90
 msgid "--- End of split transactions ---"
 msgstr "--- Ende der Split-Transaktionen ---"
 
-#: shareholder/templates/positions.html:94
+#: shareholder/templates/positions.html:98
 msgid "No Postions yet."
 msgstr "Noch keine Transaktionen"
 

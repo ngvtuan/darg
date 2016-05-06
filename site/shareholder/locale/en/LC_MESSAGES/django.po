@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 10:55+0000\n"
+"POT-Creation-Date: 2016-05-06 12:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,7 +126,7 @@ msgid "Receipient"
 msgstr ""
 
 #: shareholder/templates/options.html:43
-#: shareholder/templates/positions.html:36
+#: shareholder/templates/positions.html:39
 msgid "Share Count"
 msgstr ""
 
@@ -140,17 +140,17 @@ msgid "Issuer"
 msgstr ""
 
 #: shareholder/templates/options.html:54
-#: shareholder/templates/positions.html:61
+#: shareholder/templates/positions.html:65
 msgid "Draft"
 msgstr ""
 
 #: shareholder/templates/options.html:65
-#: shareholder/templates/positions.html:74
+#: shareholder/templates/positions.html:78
 msgid "delete"
 msgstr ""
 
 #: shareholder/templates/options.html:70
-#: shareholder/templates/positions.html:79
+#: shareholder/templates/positions.html:83
 msgid "confirm"
 msgstr ""
 
@@ -175,7 +175,7 @@ msgid "Share count"
 msgstr ""
 
 #: shareholder/templates/optionsplan.html:33
-#: shareholder/templates/positions.html:39
+#: shareholder/templates/positions.html:42
 msgid "Comment"
 msgstr ""
 
@@ -195,55 +195,61 @@ msgstr ""
 msgid "Positions"
 msgstr ""
 
-#: shareholder/templates/positions.html:13
+#: shareholder/templates/positions.html:11
+msgid ""
+"Use Transactions to record each shareholders state of shares. For initial "
+"foundation transfer shares from company to..."
+msgstr ""
+
+#: shareholder/templates/positions.html:16
 msgid "Transfer Shares"
 msgstr ""
 
-#: shareholder/templates/positions.html:14
+#: shareholder/templates/positions.html:17
 msgid "Increase Capital"
 msgstr ""
 
-#: shareholder/templates/positions.html:15
+#: shareholder/templates/positions.html:18
 msgid "Split Shares"
 msgstr ""
 
-#: shareholder/templates/positions.html:33
+#: shareholder/templates/positions.html:36
 msgid "Buy Date"
 msgstr ""
 
-#: shareholder/templates/positions.html:34
+#: shareholder/templates/positions.html:37
 msgid "Buyer"
 msgstr ""
 
-#: shareholder/templates/positions.html:35
+#: shareholder/templates/positions.html:38
 msgid "Security"
 msgstr ""
 
-#: shareholder/templates/positions.html:37
+#: shareholder/templates/positions.html:40
 msgid "Price"
 msgstr ""
 
-#: shareholder/templates/positions.html:38
+#: shareholder/templates/positions.html:41
 msgid "Seller"
 msgstr ""
 
-#: shareholder/templates/positions.html:47
+#: shareholder/templates/positions.html:51
 msgid "Grouped split transactions."
 msgstr ""
 
-#: shareholder/templates/positions.html:49
+#: shareholder/templates/positions.html:53
 msgid "Show"
 msgstr ""
 
-#: shareholder/templates/positions.html:52
+#: shareholder/templates/positions.html:56
 msgid "Hide"
 msgstr ""
 
-#: shareholder/templates/positions.html:86
+#: shareholder/templates/positions.html:90
 msgid "--- End of split transactions ---"
 msgstr ""
 
-#: shareholder/templates/positions.html:94
+#: shareholder/templates/positions.html:98
 msgid "No Postions yet."
 msgstr ""
 

@@ -97,8 +97,8 @@ class AddCompanySerializer(serializers.Serializer):
         )
         companyuser = User.objects.create(
             username=make_username('Company', 'itself', company.name),
-            first_name='Company', last_name='itself',
-            email='info@{}-company-itself.com'.format(slugify(company.name))
+            first_name='Unternehmen:', last_name=company.name,
+            email='info+{}@darg.ch'.format(slugify(company.name))
         )
         shareholder = Shareholder.objects.create(user=companyuser,
                                                  company=company, number='0')
@@ -239,12 +239,13 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
     user = UserSerializer(many=False)
     company = CompanySerializer(many=False,  read_only=True)
     is_company = serializers.SerializerMethodField()
+    full_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Shareholder
         fields = (
             'pk', 'user', 'number', 'company', 'share_percent', 'share_count',
-            'share_value', 'validate_gafi', 'is_company'
+            'share_value', 'validate_gafi', 'is_company', 'full_name'
         )
 
     def create(self, validated_data):
@@ -340,6 +341,9 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
         bool if shareholder is company itself
         """
         return obj == obj.company.get_company_shareholder()
+
+    def get_full_name(self, obj):
+        return "{} {}".format(obj.user.first_name, obj.user.last_name)
 
 
 class PositionSerializer(serializers.HyperlinkedModelSerializer):

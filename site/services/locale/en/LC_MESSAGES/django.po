@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-22 22:34+0000\n"
+"POT-Creation-Date: 2016-05-06 10:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,11 +68,11 @@ msgstr ""
 msgid "The fields {field_names} must be empty together or contain values."
 msgstr ""
 
-#: services/rest/views.py:162 services/rest/views.py:164
-#: services/rest/views.py:166 services/rest/views.py:168
+#: services/rest/views.py:163 services/rest/views.py:165
+#: services/rest/views.py:167 services/rest/views.py:169
 msgid "Field may not be empty."
 msgstr ""
 
-#: services/rest/views.py:270 services/rest/views.py:352
+#: services/rest/views.py:273 services/rest/views.py:355
 msgid "Confirmed position cannot be deleted."
 msgstr ""

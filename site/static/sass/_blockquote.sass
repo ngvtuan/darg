@@ -1,0 +1,35 @@
+blockquote
+  font-style:  normal
+  background-color:  #ccd7dd
+  padding:  24px 40px 16px 25px
+  line-height:  24px
+
+blockquote p
+  font-size: 14px
+  text-align: right
+  padding: 0
+  color:  #134977
+  display: block
+
+blockquote p.says
+  font-size: 16px
+  text-align: left
+  padding: 0 0 10px 20px
+  position: relative
+
+blockquote p.says
+  &:before, &:after
+    content:  '”'
+    font-size:  32px
+    font-family: Georgia, "Times New Roman", Times, serif
+    color:  #134977
+    font-weight: bold
+    vertical-align: top
+    line-height: 0.8
+
+blockquote p.says
+  &:before
+    content:  '“'
+    position: absolute
+    left: 0
+    top: -2px

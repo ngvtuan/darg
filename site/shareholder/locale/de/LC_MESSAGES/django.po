@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-22 22:34+0000\n"
+"POT-Creation-Date: 2016-05-06 10:55+0000\n"
 "PO-Revision-Date: 2016-04-22 22:38+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
@@ -35,12 +35,14 @@ msgstr "Ihre Liste gespaltener Aktienanrechte für das Unternehmen '{}'"
 msgid ""
 "Dear Operator,\n"
 "\n"
-"Your share split has been successful. Please find the list of partial shares below:\n"
+"Your share split has been successful. Please find the list of partial shares "
+"below:\n"
 "\n"
 msgstr ""
 "Lieber Operator,\n"
 "\n"
-"Der Aktiensplit war erfolgreich. Sie finden die Daten zu den teilweisen Aktienanrechten wie folgt:\n"
+"Der Aktiensplit war erfolgreich. Sie finden die Daten zu den teilweisen "
+"Aktienanrechten wie folgt:\n"
 "\n"
 
 #: shareholder/models.py:77
@@ -54,16 +56,19 @@ msgstr "--- Keine partiellen Splitbeträge ---\n"
 #: shareholder/models.py:87
 msgid ""
 "\n"
-"These shareholders are eligible to either sell their partial shares or get compensated.\n"
+"These shareholders are eligible to either sell their partial shares or get "
+"compensated.\n"
 "\n"
 "Please handle them accordingly and update the share register.\n"
 "\n"
 "Your Share Register Team"
 msgstr ""
 "\n"
-"Diese Gesellschafter sind berechtigt Ihre Anrechte zu verschenken, verkaufen oder eine entsprechende Kompensation für die Nichtverwendung zu erhalten.\n"
+"Diese Gesellschafter sind berechtigt Ihre Anrechte zu verschenken, verkaufen "
+"oder eine entsprechende Kompensation für die Nichtverwendung zu erhalten.\n"
 "\n"
-"Bitte handhaben Sie diese Anteile entsprechend und tragen Sie die durchgeführten Transaktionen nach.\n"
+"Bitte handhaben Sie diese Anteile entsprechend und tragen Sie die "
+"durchgeführten Transaktionen nach.\n"
 "\n"
 "Mit besten Grüßen\n"
 "\n"
@@ -71,43 +76,41 @@ msgstr ""
 
 #: shareholder/models.py:204
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
-msgstr ""
-"Aktiensplit von {} für {} mit Verhältnis {}:{}. Rückgabe alter Aktien."
+msgstr "Aktiensplit von {} für {} mit Verhältnis {}:{}. Rückgabe alter Aktien."
 
 #: shareholder/models.py:224
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr "Aktiensplit von {} für {} mit Verhältnis {}:{}. Ausgabe neuer Aktien."
 
-#: shareholder/models.py:366
+#: shareholder/models.py:372
 msgid "Missing all data required for #GAFI."
 msgstr "Alle Daten für GAFI-FATF fehlen."
 
-#: shareholder/models.py:373
+#: shareholder/models.py:379
 msgid "Shareholder first name, last name or company name missing."
-msgstr ""
-"Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
+msgstr "Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
 
-#: shareholder/models.py:377
+#: shareholder/models.py:383
 msgid "Shareholder birthday missing."
 msgstr "Geburstag"
 
-#: shareholder/models.py:381
+#: shareholder/models.py:387
 msgid "Shareholder origin/country missing."
 msgstr "Land des Aktionärs fehlt."
 
-#: shareholder/models.py:390
+#: shareholder/models.py:396
 msgid "Shareholder address or address details missing."
 msgstr "Adresse oder Adressdetails des Aktionärs fehlen."
 
-#: shareholder/models.py:482
+#: shareholder/models.py:488
 msgid "Share Count transfered or created"
 msgstr "transferierte oder erstellte Aktienanzahl"
 
-#: shareholder/models.py:485
+#: shareholder/models.py:491
 msgid "Nominal value or payed price for the transaction"
 msgstr "Nominalwert (bei Kapitalerhöhung) oder Kaufpreis"
 
-#: shareholder/models.py:521
+#: shareholder/models.py:527
 msgid "Number of shares approved"
 msgstr "Anzahl der genehmigten Aktien"
 
@@ -274,7 +277,6 @@ msgid "Please request the shareholder to complete his data."
 msgstr "Bitte bitten Sie den Aktionärs seine Daten zu vervollständigen."
 
 #: shareholder/templates/shareholder.html:34
-#| msgid "Shareholder Name"
 msgid "Shareholder Number"
 msgstr "Aktionärsnummer"
 

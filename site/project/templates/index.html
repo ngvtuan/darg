@@ -1,58 +1,73 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block ng_app %}js.darg.app.index{% endblock %}
 
 {% block body_class%}index_background{% endblock %}
 
 {% block body_block %}
-  <div class="index_background" >
-    <div class="centered">
-      <div><h1>{% trans "Das Aktienregister" %}</h1></div>
-      <!--<div>{% trans "Administrate your shareholder data. <br />Be compliant - simple and efficient." %}</div>-->
-      <div>{% trans "IMPORTANT: Excel does not fulfill legal requirements for a share register!" %}</div>
-        <ul>
-          <li>{% trans "Rapid Shareholder documentation" %}</li>
-          <li>{% trans "Audit trail proof transaction recording" %}</li>
-          <li>{% trans "Easy CapTable printout for General Meetings" %}</li>
-          <li>{% trans "Easy data export via CSV" %}</li>
-        </ul>
-      <div class="button-panel">
-        {% trans "We are currently in private Beta. Please leave your email address to receive an invitation soon!" %}<br/><br/>
+
+<div class="intro" ng_controller="IndexController">
+  <header class="home core">
+    <div class="container">
+      <div class="logo">
+        <span>{% trans "Das Aktienregister" %}</span>
+        <span class="el-icon-leaf"></span>
       </div>
-      <!--
-      <div class="button-panel">
-        <a href="{% url "auth_login" %}" >.</a>
-        <a href="{% url "registration_register" %}" >.</a>
+      <div class="menu">
+        <a href="{% url "auth_login" %}" title="Login" class="btn-inline">{% trans "Login" %}</a>
+        <a href="/blog/" title="Blog" class="btn-inline">{% trans "Blog" %}</a>
+        |
+        <a href="{% url "registration_register" %}" title="{% trans "Try for free" %}" class="btn btn-default btn-white">
+          {% trans "Try for free" %}
+        </a>
       </div>
-      -->
-      <div ng_controller="IndexController">
-        {% include "_form_errors.html" %}
-        {% verbatim %}
-        <form class="form-inline" ng-show="show_add_invitee == true" name="inviteeForm">
-          <input type="text" class="form-control" ng-model="newInvitee.email" translate translate-attr-placeholder="{% endverbatim %}{% trans "Your Email" %}{% verbatim %}" required>
-          <button class="btn btn-default btn-focus" ng-click="add_invitee()" ng-disabled="inviteeForm.$invalid">
-            {% endverbatim %}{% trans "Request Invitation" %}
-          </button>
-        </form>
-        <div class="bg-success" ng-hide="show_add_invitee == true">
-          {% trans "Thanks you. We will be back to you ASAP!" %}
+    </div>
+  </header>
+  <div class="container">
+    <h1>{% trans "Das Online-Aktienbuch" %}</h1>
+    <h2>{% trans "Mit Sicherheit gesetzeskonform durch automatische Validierung." %}</h2>
+    <a href="{% url "registration_register" %}" title="{% trans "Try for free" %}" class="btn btn-default btn-white">
+      {% trans "Try for free" %}
+    </a>
+    <div class="main-screenshot chrome animated fadeInUp">
+      <div class="toolbar">
+        <div class="circle-wrap">
+          <span class="circles"></span>
         </div>
       </div>
-
-      <div class="leaf"><span class="el-icon-leaf"></span></div>
+      <div class="screenshot"></div>
     </div>
   </div>
-
-  <!-- Social Links -->
-  <div class="social_links">
-    <a href="https://twitter.com/DAktienregister" ><span class="el-icon-twitter"></span></a>
+  <div class="benefits">
+    <div class="container">
+      <ul>
+        <li>{% trans "Eingabe alle Daten mit maximaler Effizienz." %}</li>
+        <li>{% trans "Revisionssichere Ablage." %}</li>
+        <li>{% trans "Automatische Validierung der Daten." %}</li>
+        <li>{% trans "10 Jahre Datengarantie." %}</li>
+        <li>{% trans "Aktienbuch als PDF herunterladen." %}</li>
+      </ul>
+      <a href="{% url "registration_register" %}" title="{% trans "Try for free" %}" class="btn btn-default btn-focus">
+        {% trans "Try for free" %}
+      </a>
+    </div>
   </div>
-
-  <!-- public menu -->
-  <div class="pub_menu">
-    <a href="{% url "auth_login" %}" title="Login">{% trans "Login" %}</a>
-    <a href="/blog/" title="Blog">{% trans "Blog" %}</a>
+  <div class="summary">
+    <div class="container">
+      <blockquote>
+        <p class="says">
+          {% trans "Die Automatische Validierung verhindert Fehler und sichert maximale Gesetzeskonformitaet. Das Online-Aktienbuch macht die Pflege schnell und effizient, damit Zeit frei wird fuer die wirklichen Herausforderungen" %}
+        </p>
+        <p class="author"></p>
+      </blockquote>
+    </div>
   </div>
+  <footer>
+    <div class="container">
+      {% trans "A service provided by KKD Komm. GmbH" %}
+    </div>
+  </footer>
+</div>
 
 {% endblock %}

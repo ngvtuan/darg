@@ -2,7 +2,6 @@ from django.conf.urls import include, url, patterns
 from django.contrib import admin
 from django.views.i18n import javascript_catalog
 from django.views.generic import TemplateView
-from django.views.generic.base import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -17,9 +16,12 @@ from rest_framework.authtoken import views
 from registration.backends.simple.views import RegistrationView
 from registration.forms import RegistrationFormUniqueEmail
 
-from services.rest.views import ShareholderViewSet, CompanyViewSet, UserViewSet, PositionViewSet, \
-    InviteeUpdateView, AddCompanyView, CountryViewSet, OptionPlanViewSet, \
+from services.rest.views import (
+    ShareholderViewSet, CompanyViewSet, UserViewSet,
+    PositionViewSet,
+    InviteeUpdateView, AddCompanyView, CountryViewSet, OptionPlanViewSet,
     SecurityViewSet, OptionTransactionViewSet, OperatorViewSet, AddShareSplit
+)
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'shareholders', ShareholderViewSet, base_name="shareholders")
@@ -69,8 +71,10 @@ urlpatterns = [
         name='optionplan_download_img'),
 
     # auth
-    url(r'^accounts/register/$', RegistrationView.as_view(form_class=RegistrationFormUniqueEmail), name='registration_register'),
+    url(r'^accounts/register/$', RegistrationView.as_view(
+        form_class=RegistrationFormUniqueEmail), name='registration_register'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^instapage/', 'project.views.instapage', name='instapage'),
 
     # rest api
     url(r'^services/rest/company/add', AddCompanyView.as_view(),

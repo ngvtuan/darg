@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-22 22:34+0000\n"
+"POT-Creation-Date: 2016-05-06 10:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,35 +65,35 @@ msgstr ""
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr ""
 
-#: shareholder/models.py:366
+#: shareholder/models.py:372
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:373
+#: shareholder/models.py:379
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:377
+#: shareholder/models.py:383
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:381
+#: shareholder/models.py:387
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:390
+#: shareholder/models.py:396
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:482
+#: shareholder/models.py:488
 msgid "Share Count transfered or created"
 msgstr ""
 
-#: shareholder/models.py:485
+#: shareholder/models.py:491
 msgid "Nominal value or payed price for the transaction"
 msgstr ""
 
-#: shareholder/models.py:521
+#: shareholder/models.py:527
 msgid "Number of shares approved"
 msgstr ""
 

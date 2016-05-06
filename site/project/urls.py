@@ -45,8 +45,7 @@ sitemaps = {'tags': TagSitemap,
 
 urlpatterns = [
     # web views
-    url(r'^$', RedirectView.as_view(url='start/', permanent=True),
-        name='index'),
+    url(r'^$', 'project.views.index', name='index'),
     url(r'^start/$', 'project.views.start', name='start'),
     url(r'^positions/$', 'shareholder.views.positions', name='positions'),
     url(r'^log/$', 'shareholder.views.log', name='log'),

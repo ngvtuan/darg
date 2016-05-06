@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-22 22:34+0000\n"
-"PO-Revision-Date: 2016-04-22 22:36+0000\n"
+"POT-Creation-Date: 2016-05-06 10:55+0000\n"
+"PO-Revision-Date: 2016-05-06 10:57+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -138,7 +138,7 @@ msgid "Your Shareholders for"
 msgstr "Ihre Aktionärsliste für"
 
 #: project/templates/active_shareholder_captable.pdf.html:70
-#: project/templates/index.html:11
+#: project/templates/index.html:14
 msgid "Das Aktienregister"
 msgstr "Das Aktienregister"
 
@@ -186,7 +186,6 @@ msgid "Shares (%%)"
 msgstr "Aktien (%%)"
 
 #: project/templates/active_shareholder_captable.pdf.html:117
-#| msgid "Add Option"
 msgid "Options"
 msgstr "Optionen"
 
@@ -195,65 +194,61 @@ msgstr "Optionen"
 msgid "Optionen (%%)"
 msgstr "Optionen (%%)"
 
-#: project/templates/index.html:12
-msgid ""
-"Administrate your shareholder data. <br />Be compliant - simple and "
-"efficient."
-msgstr ""
-"Verwalten Sie ihre Aktionärsdaten. <br />Revisionssicher - einfach und "
-"effizient."
-
-#: project/templates/index.html:13
-msgid ""
-"IMPORTANT: Excel does not fulfill legal requirements for a share register!"
-msgstr ""
-"Das Verwalten der Aktionäre mit Excel genügt ab 2016 nicht mehr den "
-"gesetzlichen Anforderungen in der Schweiz. <strong>\"Das "
-"Aktienregister\"</strong> stellt sicher:"
-
-#: project/templates/index.html:15
-msgid "Rapid Shareholder documentation"
-msgstr "Effiziente Erfassung der Aktionäre"
-
-#: project/templates/index.html:16
-msgid "Audit trail proof transaction recording"
-msgstr "Audit Trail sichere Transaktions-Dokumentation"
-
-#: project/templates/index.html:17
-msgid "Easy CapTable printout for General Meetings"
-msgstr "Ausdruck der CapTable als PDF"
-
 #: project/templates/index.html:18
-msgid "Easy data export via CSV"
-msgstr "Datenexport als CSV für Excel etc."
-
-#: project/templates/index.html:21
-msgid ""
-"We are currently in private Beta. Please leave your email address to receive"
-" an invitation soon!"
-msgstr ""
-"Wir sind aktuell in geschlossender Beta. Bitte hinterlassen Sie ihre Email, "
-"um eine Einladung zu erhalten."
-
-#: project/templates/index.html:33
-msgid "Your Email"
-msgstr "Email"
-
-#: project/templates/index.html:35
-msgid "Request Invitation"
-msgstr "Einladung anfragen"
-
-#: project/templates/index.html:39
-msgid "Thanks you. We will be back to you ASAP!"
-msgstr "Besten Dank! Wir melden uns umgehend."
-
-#: project/templates/index.html:54
 msgid "Login"
 msgstr "Login"
 
-#: project/templates/index.html:55
+#: project/templates/index.html:19
 msgid "Blog"
 msgstr "Blog"
+
+#: project/templates/index.html:21 project/templates/index.html.py:22
+#: project/templates/index.html:30 project/templates/index.html.py:31
+#: project/templates/index.html:51 project/templates/index.html.py:52
+msgid "Try for free"
+msgstr "Kostenlos testen"
+
+#: project/templates/index.html:28
+msgid "Das Online-Aktienbuch"
+msgstr "Das Online-Aktienbuch"
+
+#: project/templates/index.html:29
+msgid "Mit Sicherheit gesetzeskonform durch automatische Validierung."
+msgstr ""
+
+#: project/templates/index.html:45
+msgid "Eingabe alle Daten mit maximaler Effizienz."
+msgstr ""
+
+#: project/templates/index.html:46
+msgid "Revisionssichere Ablage."
+msgstr ""
+
+#: project/templates/index.html:47
+msgid "Automatische Validierung der Daten."
+msgstr ""
+
+#: project/templates/index.html:48
+msgid "10 Jahre Datengarantie."
+msgstr ""
+
+#: project/templates/index.html:49
+msgid "Aktienbuch als PDF herunterladen."
+msgstr ""
+
+#: project/templates/index.html:60
+msgid ""
+"Die Automatische Validierung verhindert Fehler und sichert maximale "
+"Gesetzeskonformitaet. Das Online-Aktienbuch macht die Pflege schnell und "
+"effizient, damit Zeit frei wird fuer die wirklichen Herausforderungen"
+msgstr ""
+"Die Automatische Validierung verhindert Fehler und sichert maximale "
+"Gesetzeskonformität. Das Online-Aktienbuch macht die Pflege schnell und "
+"effizient, damit Zeit frei wird für die wirklichen Herausforderungen"
+
+#: project/templates/index.html:68
+msgid "A service provided by KKD Komm. GmbH"
+msgstr ""
 
 #: project/templates/log.html:15
 msgid "Your Transaction Log"
@@ -273,7 +268,6 @@ msgstr "Noch keine Einträge"
 
 #: project/templates/start.html:53
 #, python-format
-#| msgid "Shares (%%)"
 msgid "Shares (Voting-%%)"
 msgstr "Aktien (Stimmrechte: %%)"
 
@@ -314,6 +308,45 @@ msgstr "Download Liste der aktiven Aktionäre als CSV"
 #: project/templates/start.html:109
 msgid "CSV"
 msgstr "CSV"
+
+#~ msgid ""
+#~ "Administrate your shareholder data. <br />Be compliant - simple and "
+#~ "efficient."
+#~ msgstr ""
+#~ "Verwalten Sie ihre Aktionärsdaten. <br />Revisionssicher - einfach und "
+#~ "effizient."
+
+#~ msgid ""
+#~ "IMPORTANT: Excel does not fulfill legal requirements for a share register!"
+#~ msgstr "Das Online-Aktienbuch: mit Sicherheit gesetzeskonform."
+
+#~ msgid "Rapid Shareholder documentation"
+#~ msgstr "Effiziente Erfassung der Aktionäre"
+
+#~ msgid "Audit trail proof transaction recording"
+#~ msgstr "Audit Trail sichere Transaktions-Dokumentation"
+
+#~ msgid "Easy CapTable printout for General Meetings"
+#~ msgstr "Ausdruck der CapTable als PDF"
+
+#~ msgid "Easy data export via CSV"
+#~ msgstr "Datenexport als CSV für Excel etc."
+
+#~ msgid ""
+#~ "We are currently in private Beta. Please leave your email address to receive"
+#~ " an invitation soon!"
+#~ msgstr ""
+#~ "Wir sind aktuell in geschlossender Beta. Bitte hinterlassen Sie ihre Email, "
+#~ "um eine Einladung zu erhalten."
+
+#~ msgid "Your Email"
+#~ msgstr "Email"
+
+#~ msgid "Request Invitation"
+#~ msgstr "Einladung anfragen"
+
+#~ msgid "Thanks you. We will be back to you ASAP!"
+#~ msgstr "Besten Dank! Wir melden uns umgehend."
 
 #~ msgid "Positions"
 #~ msgstr "Transaktionen"

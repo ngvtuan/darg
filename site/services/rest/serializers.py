@@ -343,7 +343,7 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
         return obj == obj.company.get_company_shareholder()
 
     def get_full_name(self, obj):
-        return "{} {}".format(obj.user.first_name, obj.user.last_name)
+        return u"{} {}".format(obj.user.first_name, obj.user.last_name)
 
 
 class PositionSerializer(serializers.HyperlinkedModelSerializer):

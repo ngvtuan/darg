@@ -2600,12 +2600,8 @@ html, body {
 }
 
 /* line 47, ../../sass/screen.sass */
-.members-area {
-  margin-top: 6em;
-}
-
-/* line 49, ../../sass/screen.sass */
 .core .container {
+  margin-top: 6em;
   width: 1000px;
 }
 /* line 69, ../../../../../../../var/lib/gems/2.0.0/gems/zen-grids-2.0.1/sass/zen-grids/_grids.scss */
@@ -2619,7 +2615,7 @@ html, body {
   display: table;
   clear: both;
 }
-/* line 54, ../../sass/screen.sass */
+/* line 53, ../../sass/screen.sass */
 .core .container a, .core .container button, .core .container input[type=submit] {
   color: #337ab7;
   border: 1px solid #666;
@@ -2627,7 +2623,7 @@ html, body {
   display: inline-block;
   background-color: transparent;
 }
-/* line 62, ../../sass/screen.sass */
+/* line 61, ../../sass/screen.sass */
 .core .container a.regular, .core .container button.regular, .core .container input[type=submit].regular {
   font-size: 1em;
   border: none;
@@ -2635,7 +2631,7 @@ html, body {
   margin: 0em;
   text-decoration: underline;
 }
-/* line 69, ../../sass/screen.sass */
+/* line 68, ../../sass/screen.sass */
 .core .container input {
   display: inline-block;
   color: #666;
@@ -2644,15 +2640,15 @@ html, body {
   margin: 0.3em 0.3em 0.3em 0em;
   display: inline-block;
 }
-/* line 79, ../../sass/screen.sass */
+/* line 78, ../../sass/screen.sass */
 .core .container form {
   margin-bottom: 3em;
 }
-/* line 82, ../../sass/screen.sass */
+/* line 81, ../../sass/screen.sass */
 .core .container p {
   margin: 0 0 10px;
 }
-/* line 85, ../../sass/screen.sass */
+/* line 84, ../../sass/screen.sass */
 .core .container label {
   text-decoration: none;
   cursor: pointer;
@@ -2660,52 +2656,52 @@ html, body {
   padding: 0.1em;
   background-color: transparent;
 }
-/* line 92, ../../sass/screen.sass */
+/* line 91, ../../sass/screen.sass */
 .core .container h1 {
   font-size: 3em;
   margin-bottom: 0.5em;
 }
-/* line 95, ../../sass/screen.sass */
+/* line 94, ../../sass/screen.sass */
 .core .container h2 {
   font-size: 2em;
   margin-bottom: 1em;
   margin-top: 1.25em;
 }
-/* line 100, ../../sass/screen.sass */
+/* line 99, ../../sass/screen.sass */
 .core .container h3 {
   font-size: 1.5em;
   margin-bottom: 0.125em;
 }
-/* line 104, ../../sass/screen.sass */
+/* line 103, ../../sass/screen.sass */
 .core .container h4 {
   font-size: 1.25em;
   margin-bottom: 0.0625em;
 }
-/* line 108, ../../sass/screen.sass */
+/* line 107, ../../sass/screen.sass */
 .core .container h5 {
   font-size: 1.125em;
   margin-bottom: 0.03125;
 }
-/* line 112, ../../sass/screen.sass */
+/* line 111, ../../sass/screen.sass */
 .core .container ul, .core .container ol {
   list-style: inherit;
   padding: 1em;
 }
-/* line 116, ../../sass/screen.sass */
+/* line 115, ../../sass/screen.sass */
 .core .container li {
   padding-top: 0.6em;
 }
-/* line 119, ../../sass/screen.sass */
+/* line 118, ../../sass/screen.sass */
 .core .container strong {
   font-weight: bold;
 }
-/* line 122, ../../sass/screen.sass */
+/* line 121, ../../sass/screen.sass */
 .core .container .note {
   font-style: italic;
   padding-top: 10px;
   font-size: 0.8em;
 }
-/* line 127, ../../sass/screen.sass */
+/* line 126, ../../sass/screen.sass */
 .core .container .footer {
   clear: left;
   float: left;
@@ -2721,7 +2717,7 @@ html, body {
   margin-top: 4em;
   padding-left: 0em;
 }
-/* line 134, ../../sass/screen.sass */
+/* line 133, ../../sass/screen.sass */
 .core .container .centered {
   clear: left;
   float: left;
@@ -2735,25 +2731,25 @@ html, body {
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.95);
 }
-/* line 139, ../../sass/screen.sass */
+/* line 138, ../../sass/screen.sass */
 .core .container .errorlist {
   color: red;
 }
-/* line 142, ../../sass/screen.sass */
+/* line 141, ../../sass/screen.sass */
 .core .container .disable {
   color: #ddd;
   border: 1px solid #ddd;
 }
-/* line 147, ../../sass/screen.sass */
+/* line 146, ../../sass/screen.sass */
 .core .container .el-icon-cogs {
   font-size: 50%;
 }
-/* line 150, ../../sass/screen.sass */
+/* line 149, ../../sass/screen.sass */
 .core .container .el-icon-cogs-wrapper {
   padding: 0em;
   margin: 0em;
 }
-/* line 155, ../../sass/screen.sass */
+/* line 154, ../../sass/screen.sass */
 .core .container .btn-inline {
   border: none;
   margin: 0em;
@@ -2761,17 +2757,17 @@ html, body {
   vertical-align: inherit;
   font-size: 1em;
 }
-/* line 162, ../../sass/screen.sass */
+/* line 161, ../../sass/screen.sass */
 .core .container .panel .btn-inline {
   margin-right: 1em;
 }
-/* line 166, ../../sass/screen.sass */
+/* line 165, ../../sass/screen.sass */
 .core .container .btn-focus {
   border: 1px solid #337ab7;
   color: #337ab7;
   font-weight: bold;
 }
-/* line 170, ../../sass/screen.sass */
+/* line 169, ../../sass/screen.sass */
 .core .container .btn-danger {
   border: 1px solid #c0392b;
   color: #c0392b;
@@ -2779,68 +2775,68 @@ html, body {
   color: #c0392b;
   background: none;
 }
-/* line 176, ../../sass/screen.sass */
+/* line 175, ../../sass/screen.sass */
 .core .container .btn-white {
   background-color: #fff;
   color: #337ab7;
 }
-/* line 181, ../../sass/screen.sass */
+/* line 180, ../../sass/screen.sass */
 .core .container .align-left {
   padding-left: 0em;
   margin-left: 0em;
 }
-/* line 186, ../../sass/screen.sass */
+/* line 185, ../../sass/screen.sass */
 .core .container .editable-click, .core .container a.editable-click {
   color: #666;
   border: none;
 }
-/* line 189, ../../sass/screen.sass */
+/* line 188, ../../sass/screen.sass */
 .core .container .editable-click span, .core .container a.editable-click span {
   font-size: 0.6em;
 }
-/* line 192, ../../sass/screen.sass */
+/* line 191, ../../sass/screen.sass */
 .core .container .draft {
   color: #c0392b;
   font-style: italic;
   font-family: sans-serif;
   font-size: 0.2em;
 }
-/* line 198, ../../sass/screen.sass */
+/* line 197, ../../sass/screen.sass */
 .core .container .capitalize {
   display: inline-block;
 }
-/* line 201, ../../sass/screen.sass */
+/* line 200, ../../sass/screen.sass */
 .core .container .capitalize::first-letter {
   text-transform: uppercase;
 }
-/* line 204, ../../sass/screen.sass */
+/* line 203, ../../sass/screen.sass */
 .core .container .capitalize2 {
   text-transform: capitalize;
 }
-/* line 207, ../../sass/screen.sass */
+/* line 206, ../../sass/screen.sass */
 .core .container .spinner {
   width: 100%;
 }
-/* line 209, ../../sass/screen.sass */
+/* line 208, ../../sass/screen.sass */
 .core .container .spinner img {
   margin-left: 20%;
 }
 
-/* line 214, ../../sass/screen.sass */
+/* line 213, ../../sass/screen.sass */
 nav.navbar a:not(.navbar-brand) {
   color: #337ab7 !important;
 }
-/* line 217, ../../sass/screen.sass */
+/* line 216, ../../sass/screen.sass */
 nav.navbar a.navbar-brand img {
   position: relative;
   top: -0.3em;
 }
-/* line 220, ../../sass/screen.sass */
+/* line 219, ../../sass/screen.sass */
 nav.navbar .navbar-text {
   margin-top: 18px;
 }
 
-/* line 226, ../../sass/screen.sass */
+/* line 225, ../../sass/screen.sass */
 div#auth input, div#auth button {
   display: block;
   background-color: transparent;
@@ -2851,7 +2847,7 @@ div#auth input, div#auth button {
   padding-right: 0.3em;
   margin: 0.3em 0.3em 0.3em 0em;
 }
-/* line 235, ../../sass/screen.sass */
+/* line 234, ../../sass/screen.sass */
 div#auth .registration-form {
   float: left;
   width: 50%;
@@ -2863,11 +2859,11 @@ div#auth .registration-form {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 237, ../../sass/screen.sass */
+/* line 236, ../../sass/screen.sass */
 div#auth .registration-form .helptext {
   display: none;
 }
-/* line 239, ../../sass/screen.sass */
+/* line 238, ../../sass/screen.sass */
 div#auth .registration-teaser {
   float: left;
   width: 37.5%;
@@ -2879,13 +2875,13 @@ div#auth .registration-teaser {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 241, ../../sass/screen.sass */
+/* line 240, ../../sass/screen.sass */
 div#auth .registration-teaser img {
   width: 27em;
   margin-top: 6em;
 }
 
-/* line 247, ../../sass/screen.sass */
+/* line 246, ../../sass/screen.sass */
 .intro {
   background-size: cover;
   background-image: linear-gradient(90deg, #2090c5 0%, #337ab7);
@@ -2893,15 +2889,15 @@ div#auth .registration-teaser img {
   position: relative;
   color: #fff;
 }
-/* line 253, ../../sass/screen.sass */
+/* line 252, ../../sass/screen.sass */
 .intro header.home {
   padding: 3em 0 3em;
 }
-/* line 256, ../../sass/screen.sass */
+/* line 255, ../../sass/screen.sass */
 .intro header.home .container a {
   margin: 0 0.5em 0 0.5em;
 }
-/* line 258, ../../sass/screen.sass */
+/* line 257, ../../sass/screen.sass */
 .intro header.home .container .logo {
   float: left;
   width: 37.5%;
@@ -2915,14 +2911,14 @@ div#auth .registration-teaser img {
   text-align: left;
   font-size: 1.4em;
 }
-/* line 262, ../../sass/screen.sass */
+/* line 261, ../../sass/screen.sass */
 .intro header.home .container .logo .el-icon-leaf {
   top: -0.7em;
   position: relative;
   font-size: 0.7em;
   left: -0.4em;
 }
-/* line 267, ../../sass/screen.sass */
+/* line 266, ../../sass/screen.sass */
 .intro header.home .container .menu {
   float: left;
   width: 37.5%;
@@ -2935,48 +2931,49 @@ div#auth .registration-teaser img {
   box-sizing: border-box;
   text-align: right;
 }
-/* line 270, ../../sass/screen.sass */
+/* line 269, ../../sass/screen.sass */
 .intro header.home .container .btn-inline {
   border: none;
   color: white;
   font-size: 1em;
   hover-text-decoration: none;
 }
-/* line 276, ../../sass/screen.sass */
+/* line 275, ../../sass/screen.sass */
 .intro a.btn-white {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
   color: #337ab7;
   border-color: #337ab7;
 }
-/* line 280, ../../sass/screen.sass */
+/* line 279, ../../sass/screen.sass */
 .intro footer {
   padding: 2em 0 2em;
   font-size: 50%;
 }
-/* line 283, ../../sass/screen.sass */
+/* line 282, ../../sass/screen.sass */
 .intro blockquote {
   background-color: transparent;
 }
-/* line 285, ../../sass/screen.sass */
+/* line 284, ../../sass/screen.sass */
 .intro blockquote p {
   color: #fff;
 }
-/* line 287, ../../sass/screen.sass */
+/* line 286, ../../sass/screen.sass */
 .intro blockquote p.says {
   font-size: 2em;
   line-height: 1.5em;
   text-align: center;
 }
-/* line 291, ../../sass/screen.sass */
+/* line 290, ../../sass/screen.sass */
 .intro blockquote p.says:before {
   color: #fff;
 }
-/* line 293, ../../sass/screen.sass */
+/* line 292, ../../sass/screen.sass */
 .intro blockquote p.says:after {
   color: #fff;
 }
-/* line 295, ../../sass/screen.sass */
+/* line 294, ../../sass/screen.sass */
 .intro .container {
+  margin-top: 0em;
   text-align: center;
 }
 /* line 297, ../../sass/screen.sass */

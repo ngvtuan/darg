@@ -41,6 +41,11 @@
       {% endverbatim %}{% include "_add_shareholder_form.html" %}{% verbatim %}
     </div>
 
+    <!-- add shareholder success -->
+    <p class="shareholder-added-success alert alert-success" ng-show="shareholder_added_success">
+      {% endverbatim %}{% trans "Shareholderr added. record share transfers here" %}{% verbatim %}
+    </p>
+
     <!-- TABLE -->
 
     <table class="table table-hover">

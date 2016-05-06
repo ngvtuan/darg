@@ -661,12 +661,13 @@
   ]);
 
   app.controller('StartController', [
-    '$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', function($scope, $http, CompanyAdd, Shareholder, User, Company) {
+    '$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', '$timeout', function($scope, $http, CompanyAdd, Shareholder, User, Company, $timeout) {
       $scope.shareholders = [];
       $scope.option_holders = [];
       $scope.user = [];
       $scope.total_shares = 0;
       $scope.loading = true;
+      $scope.shareholder_added_success = false;
       $scope.show_add_shareholder = false;
       $scope.newShareholder = new Shareholder();
       $scope.newCompany = new CompanyAdd();
@@ -733,7 +734,11 @@
         return $scope.newShareholder.$save().then(function(result) {
           return $scope.shareholders.push(result);
         }).then(function() {
-          return $scope.newShareholder = new Shareholder();
+          $scope.newShareholder = new Shareholder();
+          $scope.shareholder_added_success = true;
+          return $timeout(function() {
+            return $scope.shareholder_added_success = false;
+          }, 30000);
         }).then(function() {
           return $scope.errors = null;
         }, function(rejection) {

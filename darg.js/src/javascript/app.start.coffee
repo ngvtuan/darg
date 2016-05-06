@@ -5,7 +5,7 @@ app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.preferredLanguage('de')
 ]
 
-app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', ($scope, $http, CompanyAdd, Shareholder, User, Company) ->
+app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', '$timeout', ($scope, $http, CompanyAdd, Shareholder, User, Company, $timeout) ->
 
     # from server
     $scope.shareholders = []
@@ -13,6 +13,7 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
     $scope.user = []
     $scope.total_shares = 0
     $scope.loading = true
+    $scope.shareholder_added_success = false
 
     $scope.show_add_shareholder = false
 
@@ -80,6 +81,10 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
         .then ->
             # Reset our editor to a new blank post
             $scope.newShareholder = new Shareholder()
+            $scope.shareholder_added_success = true
+            $timeout ->
+                $scope.shareholder_added_success = false
+            , 30000
         .then ->
             # Clear any errors
             $scope.errors = null

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 10:55+0000\n"
-"PO-Revision-Date: 2016-05-06 10:57+0000\n"
+"POT-Creation-Date: 2016-05-06 11:26+0000\n"
+"PO-Revision-Date: 2016-05-06 11:29+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -164,19 +164,19 @@ msgstr "Liberiertes Kapital"
 
 #: project/templates/active_shareholder_captable.pdf.html:88
 #: project/templates/active_shareholder_captable.pdf.html:122
-#: project/templates/start.html:50
+#: project/templates/start.html:55
 msgid "Name"
 msgstr "Name"
 
 #: project/templates/active_shareholder_captable.pdf.html:89
 #: project/templates/active_shareholder_captable.pdf.html:123
-#: project/templates/start.html:51
+#: project/templates/start.html:56
 msgid "Email"
 msgstr "Email"
 
 #: project/templates/active_shareholder_captable.pdf.html:90
 #: project/templates/active_shareholder_captable.pdf.html:124
-#: project/templates/start.html:52
+#: project/templates/start.html:57
 msgid "Shareholder Number"
 msgstr "Aktieninhabernummer"
 
@@ -214,27 +214,27 @@ msgstr "Das Online-Aktienbuch"
 
 #: project/templates/index.html:29
 msgid "Mit Sicherheit gesetzeskonform durch automatische Validierung."
-msgstr ""
+msgstr "Mit Sicherheit gesetzeskonform durch automatische Validierung."
 
 #: project/templates/index.html:45
 msgid "Eingabe alle Daten mit maximaler Effizienz."
-msgstr ""
+msgstr "Eingabe alle Daten mit maximaler Effizienz."
 
 #: project/templates/index.html:46
 msgid "Revisionssichere Ablage."
-msgstr ""
+msgstr "Revisionssichere Ablage."
 
 #: project/templates/index.html:47
 msgid "Automatische Validierung der Daten."
-msgstr ""
+msgstr "Automatische Validierung der Daten."
 
 #: project/templates/index.html:48
 msgid "10 Jahre Datengarantie."
-msgstr ""
+msgstr "10 Jahre Datengarantie."
 
 #: project/templates/index.html:49
 msgid "Aktienbuch als PDF herunterladen."
-msgstr ""
+msgstr "Aktienbuch als PDF herunterladen."
 
 #: project/templates/index.html:60
 msgid ""
@@ -248,7 +248,7 @@ msgstr ""
 
 #: project/templates/index.html:68
 msgid "A service provided by KKD Komm. GmbH"
-msgstr ""
+msgstr "A service provided by KKD Komm. GmbH"
 
 #: project/templates/log.html:15
 msgid "Your Transaction Log"
@@ -266,46 +266,53 @@ msgstr "Aktion"
 msgid "No Log Entries yet."
 msgstr "Noch keine Einträge"
 
-#: project/templates/start.html:53
+#: project/templates/start.html:46
+msgid "Shareholderr added. record share transfers here"
+msgstr ""
+"Aktionär hinzugefügt. Verwenden Sie <a href=\"/positions/\" title=\"Aktien "
+"übertragen\" class=\"btn-inline\">Transaktionen</a> um seinen Aktienstand "
+"einzutragen."
+
+#: project/templates/start.html:58
 #, python-format
 msgid "Shares (Voting-%%)"
 msgstr "Aktien (Stimmrechte: %%)"
 
-#: project/templates/start.html:57
+#: project/templates/start.html:62
 msgid "Gafi Validation failed"
 msgstr "GAFI-FATF Validierung fehlgeschlagen"
 
-#: project/templates/start.html:72
+#: project/templates/start.html:77
 msgid "Option Holders"
 msgstr ""
 "Optionsinhaber <span class=\"note\">(zugrundeliegende Aktien werden "
 "ebenfalls unter obenstehendem Unternehmen geführt)</span>"
 
-#: project/templates/start.html:88
+#: project/templates/start.html:93
 msgid "Total Shares distributed (total shares registered with company)"
 msgstr "Zahl Aktien lt. Tabelle (Zahl Aktien lt. Unternehmensdaten)"
 
-#: project/templates/start.html:99
+#: project/templates/start.html:104
 msgid "No Shareholders yet."
 msgstr "Noch keine Gesellschafter"
 
-#: project/templates/start.html:104
+#: project/templates/start.html:109
 msgid "Download active Shareholders as"
 msgstr "Download Liste der aktiven Aktionäre als"
 
-#: project/templates/start.html:105
+#: project/templates/start.html:110
 msgid "Download active Shareholders as PDF"
 msgstr "Download Liste der aktiven Aktionäre als PDF"
 
-#: project/templates/start.html:106
+#: project/templates/start.html:111
 msgid "PDF"
 msgstr "PDF"
 
-#: project/templates/start.html:108
+#: project/templates/start.html:113
 msgid "Download active Shareholders as CSV"
 msgstr "Download Liste der aktiven Aktionäre als CSV"
 
-#: project/templates/start.html:109
+#: project/templates/start.html:114
 msgid "CSV"
 msgstr "CSV"
 

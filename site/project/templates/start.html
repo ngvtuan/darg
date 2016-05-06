@@ -55,7 +55,7 @@
           <th>{% endverbatim %}{% trans "Name" %}{% verbatim %}</th>
           <th>{% endverbatim %}{% trans "Email" %}{% verbatim %}</th>
           <th class="text-right">{% endverbatim %}{% trans "Shareholder Number" %}{% verbatim %}</th>
-          <th class="text-right">{% endverbatim %}{% trans "Shares (Voting-%)" %}{% verbatim %}</th>
+          <th class="text-right">{% endverbatim %}{% trans "Shares (Voting-%%)" %}{% verbatim %}</th>
       </thead
       <tbody>
         <tr class="panel" ng-repeat="shareholder in shareholders  | orderBy:'-share_count'" ng-click="goto_shareholder(shareholder.pk)" ng-mouseover="">

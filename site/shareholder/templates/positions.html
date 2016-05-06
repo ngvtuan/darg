@@ -7,6 +7,9 @@
 {% block content %}
 <div ng_controller="PositionsController">
   <h1>{% trans "Positions" %}</h1>
+  <p class="explaination">
+    {% trans "Use Transactions to record each shareholders state of shares. For initial foundation transfer shares from company to..."%}
+  </p>
   {% include "_form_errors.html" %}
 
   <div class="panel">
@@ -37,6 +40,7 @@
           <th class="text-right">{% trans "Price" %}</th>
           <th>{% trans "Seller" %}</th>
           <th>{% trans "Comment" %}</th>
+          <th></th>
       </thead
       <tbody>
       {% verbatim %}

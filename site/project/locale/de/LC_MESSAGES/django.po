@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 11:26+0000\n"
-"PO-Revision-Date: 2016-05-06 11:29+0000\n"
+"POT-Creation-Date: 2016-05-06 12:33+0000\n"
+"PO-Revision-Date: 2016-05-06 12:34+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "Bitte geben Sie die Daten die Kapitalerhöhung an:"
 
 #: project/templates/_add_capital_form.html:12
 #: project/templates/_add_option_plan_form.html:11
-#: project/templates/_add_position_form.html:13
+#: project/templates/_add_position_form.html:22
 #: project/templates/_split_shares_form.html:12
 msgid "Security"
 msgstr "Aktienart"
@@ -33,14 +33,14 @@ msgstr "Aktienart"
 #: project/templates/_add_capital_form.html:17
 #: project/templates/_add_option_plan_form.html:18
 #: project/templates/_add_option_transaction_form.html:22
-#: project/templates/_add_position_form.html:24
+#: project/templates/_add_position_form.html:29
 #: project/templates/_add_shareholder_form.html:15
 #: project/templates/_split_shares_form.html:18
 msgid "Cancel"
 msgstr "Abbrechen"
 
 #: project/templates/_add_capital_form.html:18
-#: project/templates/_add_position_form.html:25
+#: project/templates/_add_position_form.html:30
 msgid "Add Position"
 msgstr "Position hinzufügen"
 
@@ -80,7 +80,7 @@ msgid "Please enter your Option data:"
 msgstr "Bitte geben Sie die Daten für die Option an:"
 
 #: project/templates/_add_option_transaction_form.html:10
-#: project/templates/_add_position_form.html:10
+#: project/templates/_add_position_form.html:17
 msgid "Buyer"
 msgstr "Käufer"
 
@@ -89,7 +89,7 @@ msgid "Option Plan"
 msgstr "Optionsplan"
 
 #: project/templates/_add_option_transaction_form.html:17
-#: project/templates/_add_position_form.html:18
+#: project/templates/_add_position_form.html:13
 msgid "Seller"
 msgstr "Verkäufer"
 
@@ -99,7 +99,19 @@ msgstr "Option hinzufügen"
 
 #: project/templates/_add_position_form.html:3
 msgid "Please enter your position data:"
-msgstr "Bitte geben Sie die Daten fuer eine Position an:"
+msgstr "Bitte geben Sie die Daten für die Übertragung der Aktien an:"
+
+#: project/templates/_add_position_form.html:9
+msgid "On (date)"
+msgstr "Am (Datum)"
+
+#: project/templates/_add_position_form.html:11
+msgid "from"
+msgstr "von"
+
+#: project/templates/_add_position_form.html:15
+msgid "to"
+msgstr "an"
 
 #: project/templates/_add_shareholder_form.html:3
 msgid "Please enter your shareholder data:"
@@ -276,7 +288,7 @@ msgstr ""
 #: project/templates/start.html:58
 #, python-format
 msgid "Shares (Voting-%%)"
-msgstr "Aktien (Stimmrechte: %%)"
+msgstr "Aktien (%Stimmrechte)"
 
 #: project/templates/start.html:62
 msgid "Gafi Validation failed"

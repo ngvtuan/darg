@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 11:26+0000\n"
+"POT-Creation-Date: 2016-05-06 12:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: project/templates/_add_capital_form.html:12
 #: project/templates/_add_option_plan_form.html:11
-#: project/templates/_add_position_form.html:13
+#: project/templates/_add_position_form.html:22
 #: project/templates/_split_shares_form.html:12
 msgid "Security"
 msgstr ""
@@ -31,14 +31,14 @@ msgstr ""
 #: project/templates/_add_capital_form.html:17
 #: project/templates/_add_option_plan_form.html:18
 #: project/templates/_add_option_transaction_form.html:22
-#: project/templates/_add_position_form.html:24
+#: project/templates/_add_position_form.html:29
 #: project/templates/_add_shareholder_form.html:15
 #: project/templates/_split_shares_form.html:18
 msgid "Cancel"
 msgstr ""
 
 #: project/templates/_add_capital_form.html:18
-#: project/templates/_add_position_form.html:25
+#: project/templates/_add_position_form.html:30
 msgid "Add Position"
 msgstr ""
 
@@ -76,7 +76,7 @@ msgid "Please enter your Option data:"
 msgstr ""
 
 #: project/templates/_add_option_transaction_form.html:10
-#: project/templates/_add_position_form.html:10
+#: project/templates/_add_position_form.html:17
 msgid "Buyer"
 msgstr ""
 
@@ -85,7 +85,7 @@ msgid "Option Plan"
 msgstr ""
 
 #: project/templates/_add_option_transaction_form.html:17
-#: project/templates/_add_position_form.html:18
+#: project/templates/_add_position_form.html:13
 msgid "Seller"
 msgstr ""
 
@@ -95,6 +95,18 @@ msgstr ""
 
 #: project/templates/_add_position_form.html:3
 msgid "Please enter your position data:"
+msgstr ""
+
+#: project/templates/_add_position_form.html:9
+msgid "On (date)"
+msgstr ""
+
+#: project/templates/_add_position_form.html:11
+msgid "from"
+msgstr ""
+
+#: project/templates/_add_position_form.html:15
+msgid "to"
 msgstr ""
 
 #: project/templates/_add_shareholder_form.html:3

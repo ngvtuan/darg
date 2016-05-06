@@ -3,12 +3,18 @@ import time
 import datetime
 
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.http import (
+    HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
+    )
+from django.shortcuts import get_object_or_404, redirect
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
+from django.core.urlresolvers import reverse
 
+from services.instapage import InstapageSubmission as Instapage
 from shareholder.models import Company, Operator
 from utils.pdf import render_to_pdf
 
@@ -24,6 +30,48 @@ def start(request):
     template = loader.get_template('start.html')
     context = RequestContext(request, {})
     return HttpResponse(template.render(context))
+
+
+def instapage(request):
+    """
+    import user data from instapage
+    instapage?submission=30122798
+    create user and login
+    """
+    if not request.GET.get('submission'):
+        return HttpResponseBadRequest('invalid data')
+
+    # get and extract data
+    sub = int(request.GET.get('submission'))
+    instapage = Instapage()
+    instapage.get(sub)
+    name = instapage._get_value_by_field_name('Name').split(' ')
+    email = instapage._get_value_by_field_name('Email')
+    ip = instapage._get_value_by_field_name('ip')
+    password = User.objects.make_random_password()
+    kwargs = dict(
+        first_name=name[0], last_name=name[1], email=email,
+        is_active=True, username=email,
+        )
+
+    # save data
+    user = User.objects.create(**kwargs)
+    user.set_password(password)
+    user.save()
+    profile = user.userprofile
+    profile.ip = ip
+    profile.tnc_accepted = True
+    profile.save()
+
+    # authenticate user
+    user = authenticate(username=email, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+
+    # send password email
+
+    return redirect(reverse('start'))
 
 
 @login_required

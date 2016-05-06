@@ -1,5 +1,7 @@
 import time
 
+from django.core import mail
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
@@ -12,7 +14,7 @@ from shareholder.generators import (
     UserGenerator, CompanyGenerator, ShareholderGenerator,
     PositionGenerator, OperatorGenerator, TwoInitialSecuritiesGenerator
     )
-from shareholder.models import Security, Shareholder
+from shareholder.models import Security, Shareholder, UserProfile
 
 
 def _add_company_to_user_via_rest(user):
@@ -58,6 +60,40 @@ class IndexTestCase(TestCase):
         self.assertTrue("xeditable.min.js" in response.content)
         self.assertTrue("xeditable.css" in response.content)
         self.assertTrue("last css in" in response.content)
+
+
+class InstapageTestCase(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_get(self):
+        """
+        user arriving from instapage must be imported, logged in and redirected
+        """
+        response = self.client.get(reverse('instapage'), follow=True)
+
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse('instapage') + '?submission=30122798', follow=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            User.objects.filter(
+                email='jirka@tschitschereengreen.com',
+                first_name='Jirka',
+                last_name='Schaefer',
+                is_active=True
+                ).exists())
+        self.assertIn('_auth_user_id', self.client.session)
+        self.assertEqual(
+            response.redirect_chain[0][0], 'http://testserver/start/')
+        self.assertTrue(UserProfile.objects.filter(
+            user__email='jirka@tschitschereengreen.com',
+            tnc_accepted=True, ip='79.168.182.174').exists())
+        # FIXME
+        # self.assertEqual(len(mail.outbox), 1)
 
 
 class TrackingTestCase(TestCase):

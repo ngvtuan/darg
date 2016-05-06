@@ -265,6 +265,9 @@ class UserProfile(models.Model):
     company_name = models.CharField(max_length=255, blank=True, null=True)
     birthday = models.DateField(blank=True, null=True)
 
+    ip = models.GenericIPAddressField(blank=True, null=True)
+    tnc_accepted = models.BooleanField(default=False)
+
     def __unicode__(self):
         return "%s, %s %s" % (self.city, self.province,
                               str(self.country))

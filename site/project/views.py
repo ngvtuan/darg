@@ -49,8 +49,16 @@ def instapage(request):
     email = instapage._get_value_by_field_name('Email')
     ip = instapage._get_value_by_field_name('ip')
     password = User.objects.make_random_password()
+
+    if len(name) == 2:
+        first_name, last_name = name
+    elif len(name) == 1:
+        first_name, last_name = '', name[0]
+    else:
+        first_name, last_name = name[0], ' '.join(name[1:])
+
     kwargs = dict(
-        first_name=name[0], last_name=name[1], email=email,
+        first_name=first_name, last_name=last_name, email=email,
         is_active=True, username=email,
         )
 

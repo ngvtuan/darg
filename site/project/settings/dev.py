@@ -1,4 +1,12 @@
 from .base import *
+import os
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env_variable(var_name):
+    if var_name not in os.environ:
+        raise ImproperlyConfigured("Set %s environment variable" % var_name)
+    return os.environ[var_name]
 
 DEBUG = True
 
@@ -12,8 +20,6 @@ TRACKING_CODE = 'UA-58468401-4'  # used by test
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # for local dev use this...
 # NOSE_ARGS = ['--pdb', '-s', '--logging-level=WARNING']
-REUSE_DB = True
-NOSE_PROGRESSIVE_EDITOR = 'vim'
 
 INSTALLED_APPS = INSTALLED_APPS + ('rosetta', 'django_nose',)
 
@@ -26,6 +32,10 @@ DATABASES = {
 
 # -- SENDFILE for downloads
 SENDFILE_BACKEND = 'sendfile.backends.development'
+
+INSTAPAGE_TOKEN = get_env_variable('INSTAPAGE_TOKEN')
+INSTAPAGE_ACCESS_TOKEN = get_env_variable('INSTAPAGE_ACCESS_TOKEN')
+INSTPAGE_ENABLED = True
 
 try:
     from .dev_local import *

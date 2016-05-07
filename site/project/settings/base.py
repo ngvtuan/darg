@@ -27,7 +27,7 @@ SECRET_KEY = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.das-aktienregister.ch',]
+ALLOWED_HOSTS = ['www.das-aktienregister.ch']
 
 # Application definition
 
@@ -143,7 +143,8 @@ LOGGING = {
             'format': '%(asctime)s %(levelname)s %(message)s'
         },
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d '
+                      '%(thread)d %(message)s'
         },
     },
     'handlers': {
@@ -154,7 +155,8 @@ LOGGING = {
         },
         'sentry': {
             'level': 'WARNING',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+            'class': 'raven.contrib.django.raven_compat.handlers.'
+                     'SentryHandler',
         },
     },
     'loggers': {
@@ -209,18 +211,19 @@ STATICFILES_DIRS = (
     # os.path.join(BASE_DIR, 'static', 'minified'),
     os.path.join(BASE_DIR, 'static'),
 )
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'media', 'static')
 
-MEDIA_ROOT = 'media'  # used also by zinnia for path inside static. is relative.
+MEDIA_ROOT = 'media'  # used also by zinnia for path inside static. is relative
+
 MEDIA_URL = '/media/'
 
 # --- REGISTRATION
 REGISTRATION_OPEN = True        # If True, users can register
-ACCOUNT_ACTIVATION_DAYS = 7     # One-week activation window; you may, of course, use a different value.
-REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
-LOGIN_REDIRECT_URL = '/start/'  # The page you want users to arrive at after they successful log in
-LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not logged in,
-                                # and are trying to access pages requiring authentication
+ACCOUNT_ACTIVATION_DAYS = 7     # One-week activation window; you may, of cour
+REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logg
+LOGIN_REDIRECT_URL = '/start/'  # The page you want users to arrive at after t
+LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are n
 
 # --- REST
 REST_FRAMEWORK = {
@@ -236,7 +239,11 @@ APPEND_SLASH = False
 
 # --- I18N
 # add here for app module dirs to show up under 'project' filter in rosetta
-LOCALE_PATHS = ('./i18n/locale/', './shareholder/locale/',  './services/locale/', )
+LOCALE_PATHS = (
+    './i18n/locale/',
+    './shareholder/locale/',
+    './services/locale/',
+)
 
 # --- Sentry
 RAVEN_CONFIG = {

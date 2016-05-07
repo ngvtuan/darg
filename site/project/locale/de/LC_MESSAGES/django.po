@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-06 12:33+0000\n"
-"PO-Revision-Date: 2016-05-06 12:34+0000\n"
+"PO-Revision-Date: 2016-05-07 22:08+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,9 @@ msgstr "Willkommen"
 
 #: project/templates/_add_company_form.html:5
 msgid "Please enter your company name:"
-msgstr "Bitte geben Sie ihren Firmennamen ein"
+msgstr ""
+"<strong>Unternehmen anlegen:</strong><br/> Geben Sie ihren Firmennamen, das "
+"Gründungsdatum, die Anzahl und den Nennwert der Aktien bei Gründung ein:"
 
 #: project/templates/_add_company_form.html:11
 #: project/templates/active_shareholder_captable.pdf.html:82

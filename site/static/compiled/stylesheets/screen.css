@@ -3146,40 +3146,49 @@ div#optionplan .pdf_upload_preview {
 .blog .entry-footer span {
   display: none;
 }
-/* line 412, ../../sass/screen.sass */
+/* line 413, ../../sass/screen.sass */
+.blog .entry-content > p, .blog .entry-content ul {
+  margin-bottom: 1em;
+}
+/* line 415, ../../sass/screen.sass */
+.blog .entry-content > ul {
+  list-style: initial;
+  margin-left: 1.1em;
+}
+/* line 418, ../../sass/screen.sass */
 .blog .navbar-default {
   background-color: white;
 }
-/* line 414, ../../sass/screen.sass */
+/* line 420, ../../sass/screen.sass */
 .blog .navbar-brand {
   font-size: 2em;
 }
-/* line 416, ../../sass/screen.sass */
+/* line 422, ../../sass/screen.sass */
 .blog .navbar-header span {
   top: 0.3em;
   position: relative;
   left: -1em;
 }
-/* line 420, ../../sass/screen.sass */
+/* line 426, ../../sass/screen.sass */
 .blog a {
   border: none;
   font-size: 1em;
 }
-/* line 423, ../../sass/screen.sass */
+/* line 429, ../../sass/screen.sass */
 .blog a:active, .blog a:focus, .blog a:hover {
   color: #337ab7;
   text-decoration: none;
 }
-/* line 426, ../../sass/screen.sass */
+/* line 432, ../../sass/screen.sass */
 .blog h2 > a {
   font-size: 2em;
   display: block;
 }
-/* line 429, ../../sass/screen.sass */
+/* line 435, ../../sass/screen.sass */
 .blog p {
   margin: 0 0 0 0;
 }
-/* line 431, ../../sass/screen.sass */
+/* line 437, ../../sass/screen.sass */
 .blog small {
   font-size: 40%;
 }

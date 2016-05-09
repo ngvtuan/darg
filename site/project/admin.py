@@ -14,7 +14,10 @@ UserAdmin.list_display = (
     'last_login',
     'date_joined',
     'is_staff')
-UserAdmin.list_filter = ('is_staff', 'date_joined', 'operator__company', 'shareholder__company')
+UserAdmin.list_filter = (
+    'is_staff', 'date_joined', 'operator__company', 'shareholder__company',
+    'last_login',
+    )
 
 
 admin.site.unregister(User)

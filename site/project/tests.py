@@ -8,6 +8,7 @@ from django.test.client import Client
 
 from rest_framework.test import APIClient
 
+from project.tasks import send_initial_password_mail
 from project.base import BaseSeleniumTestCase
 from project import page
 from shareholder.generators import (
@@ -299,6 +300,19 @@ class DownloadTestCase(TestCase):
 
         # assert response code
         self.assertEqual(response.status_code, 403)
+
+
+# --- TASKS
+class TaskTestCase(TestCase):
+
+    def test_send_initial_password_mail(self):
+
+        password = 'SomePass'
+        user = UserGenerator().generate()
+
+        send_initial_password_mail(user, password)
+
+        self.assertEqual(len(mail.outbox), 1)
 
 
 # --- FUNCTIONAL TESTS

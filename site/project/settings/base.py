@@ -47,6 +47,8 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'raven.contrib.django.raven_compat',
     'sorl.thumbnail',
+    'djrill',
+    'djcelery',
 
     # -- zinnia
     'django_comments',
@@ -265,6 +267,18 @@ ZINNIA_MARKUP_LANGUAGE = 'restructuredtext'
 SENDFILE_BACKEND = 'sendfile.backends.nginx'
 SENDFILE_ROOT = os.path.join(MEDIA_ROOT, 'private')
 SENDFILE_URL = "/media/private"
+
+MANDRILL_API_KEY = "<your Mandrill key>"
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+DEFAULT_FROM_EMAIL = "info@das-aktienregister.ch"
+MANDRILL_SETTINGS = {
+    'tracking_domain': 'mail.das-aktienregister.ch',
+    'track_opens': True,
+}
+
+CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
+# CELERY_RESULT_BACKEND = 'djcelery.backends.cache:CacheBackend',
+CELERY_ALWAYS_EAGER = False
 
 try:
     from project.settings.local import *

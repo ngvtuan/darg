@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 
+from project.tasks import send_initial_password_mail
 from services.instapage import InstapageSubmission as Instapage
 from shareholder.models import Company, Operator
 from utils.pdf import render_to_pdf
@@ -78,6 +79,7 @@ def instapage(request):
             login(request, user)
 
     # send password email
+    send_initial_password_mail(user=user, password=password)
 
     return redirect(reverse('start'))
 

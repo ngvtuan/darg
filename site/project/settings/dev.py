@@ -37,6 +37,8 @@ INSTAPAGE_TOKEN = get_env_variable('INSTAPAGE_TOKEN')
 INSTAPAGE_ACCESS_TOKEN = get_env_variable('INSTAPAGE_ACCESS_TOKEN')
 INSTPAGE_ENABLED = True
 
+CELERY_ALWAYS_EAGER = True
+
 try:
     from .dev_local import *
 except ImportError:

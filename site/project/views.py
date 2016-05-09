@@ -79,7 +79,7 @@ def instapage(request):
             login(request, user)
 
     # send password email
-    send_initial_password_mail(user=user, password=password)
+    send_initial_password_mail.delay(user=user, password=password)
 
     return redirect(reverse('start'))
 

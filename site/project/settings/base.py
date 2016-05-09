@@ -286,7 +286,7 @@ CELERY_QUEUES = (
 )
 CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-BROKER_URL = 'amqp://darg:dargd@localhost:5672/darg'
+BROKER_URL = 'amqp://darg:darg@localhost:5672/darg'
 
 try:
     from project.settings.local import *

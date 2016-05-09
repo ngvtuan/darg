@@ -276,9 +276,16 @@ MANDRILL_SETTINGS = {
     'track_opens': True,
 }
 
-CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
-# CELERY_RESULT_BACKEND = 'djcelery.backends.cache:CacheBackend',
-CELERY_ALWAYS_EAGER = False
+# --- CELERY
+# CELERY_ALWAYS_EAGER = False # use default anyway
+CELERYD_HIJACK_ROOT_LOGGER = False
+CELERY_DEFAULT_QUEUE = 'darg'
+CELERY_QUEUES = (
+    Queue('darg', Exchange('darg'), routing_key='darg'),
+)
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+BROKER_URL = 'amqp://darg:dargd@localhost:5672/darg'
 
 try:
     from project.settings.local import *

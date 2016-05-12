@@ -83,6 +83,17 @@
       </td>
     </tr>
     <tr>
+      <td>{% trans "Shareholder Language" %}:</td>
+      <td>
+        {% verbatim %}
+        <span editable-select="shareholder.user.userprofile.language" onaftersave="edit_shareholder()" e-ng-options="l as l.name for l in languages">
+          {{ shareholder.user.userprofile.readable_language || 'Language' }}
+          <span class="el-icon-pencil"></span>
+        </span>
+        {% endverbatim %}
+      </td>
+    </tr>
+    <tr>
       <td>{% trans "Shareholder Birthday" %}:</td>
       <td>
         {% verbatim %}

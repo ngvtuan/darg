@@ -607,16 +607,23 @@
   app.controller('ShareholderController', [
     '$scope', '$http', 'Shareholder', function($scope, $http, Shareholder) {
       $scope.shareholder = true;
+      $scope.countries = [];
+      $scope.languages = [];
       $scope.errors = null;
       $http.get('/services/rest/shareholders/' + shareholder_id).then(function(result) {
         result.data.user.userprofile.birthday = new Date(result.data.user.userprofile.birthday);
         $scope.shareholder = new Shareholder(result.data);
-        return $http.get($scope.shareholder.user.userprofile.country).then(function(result1) {
-          return $scope.shareholder.user.userprofile.country = result1.data;
-        });
+        if ($scope.shareholder.user.userprofile.country) {
+          return $http.get($scope.shareholder.user.userprofile.country).then(function(result1) {
+            return $scope.shareholder.user.userprofile.country = result1.data;
+          });
+        }
       });
       $http.get('/services/rest/country').then(function(result) {
         return $scope.countries = result.data.results;
+      });
+      $http.get('/services/rest/language').then(function(result) {
+        return $scope.languages = result.data;
       });
       return $scope.edit_shareholder = function() {
         if ($scope.shareholder.user.userprofile.country) {
@@ -625,12 +632,17 @@
         if ($scope.shareholder.user.userprofile.birthday) {
           $scope.shareholder.user.userprofile.birthday = $scope.shareholder.user.userprofile.birthday.toISOString().substring(0, 10);
         }
+        if ($scope.shareholder.user.userprofile.language) {
+          $scope.shareholder.user.userprofile.language = $scope.shareholder.user.userprofile.language.iso;
+        }
         return $scope.shareholder.$update().then(function(result) {
           result.user.userprofile.birthday = new Date(result.user.userprofile.birthday);
           $scope.shareholder = new Shareholder(result);
-          return $http.get($scope.shareholder.user.userprofile.country).then(function(result1) {
-            return $scope.shareholder.user.userprofile.country = result1.data;
-          });
+          if ($scope.shareholder.user.userprofile.country) {
+            return $http.get($scope.shareholder.user.userprofile.country).then(function(result1) {
+              return $scope.shareholder.user.userprofile.country = result1.data;
+            });
+          }
         }).then(function() {
           return void 0;
         }).then(function() {

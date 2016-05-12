@@ -13,10 +13,11 @@ from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
-
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 from rest_framework.authtoken.models import Token
+from django_languages import fields as language_fields
 
 logger = logging.getLogger(__name__)
 
@@ -261,6 +262,7 @@ class UserProfile(models.Model):
     province = models.CharField(max_length=255, blank=True, null=True)
     postal_code = models.CharField(max_length=255, blank=True, null=True)
     country = models.ForeignKey(Country, blank=True, null=True)
+    language = language_fields.LanguageField(blank=True, null=True)
 
     company_name = models.CharField(max_length=255, blank=True, null=True)
     birthday = models.DateField(blank=True, null=True)

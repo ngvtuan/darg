@@ -198,6 +198,21 @@ class AddShareSplit(APIView):
         return Response(errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class LanguageView(APIView):
+    """
+    Endpint delivering language options
+    """
+    def get(self, *args, **kwargs):
+        from django_languages.languages import LANGUAGES
+        languages = []
+        for language in LANGUAGES:
+            languages.append({
+                'iso': language[0],
+                'name': language[1],
+            })
+        return Response(languages)
+
+
 class UserViewSet(viewsets.ModelViewSet):
     """ API endpoint to get user base info """
     serializer_class = UserSerializer

@@ -9,8 +9,6 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
-User = get_user_model()
-
 from shareholder.generators import (
     OperatorGenerator, UserGenerator, CompanyGenerator,
     ShareholderGenerator, TwoInitialSecuritiesGenerator,
@@ -19,6 +17,8 @@ from shareholder.generators import (
 from shareholder.models import (
     Operator, Shareholder, Position, Security, OptionTransaction
     )
+
+User = get_user_model()
 
 
 class CompanyViewSetTestCase(TestCase):
@@ -555,6 +555,9 @@ class ShareholderTestCase(TestCase):
         user = operator.user
         company = operator.company
         shareholder = ShareholderGenerator().generate(company=company)
+        p = shareholder.user.userprofile
+        p.language = "de"
+        p.save()
 
         logged_in = self.client.login(username=user.username, password='test')
         self.assertTrue(logged_in)
@@ -574,7 +577,8 @@ class ShareholderTestCase(TestCase):
                     "country": "http://codingmachine:9000/services/rest/"
                                 "country/de",
                     "birthday": "2016-01-27",
-                    "company_name": "SomeCompany"
+                    "company_name": "SomeCompany",
+                    "language": "ab",
                 },
             },
             "number": "00333e",
@@ -608,6 +612,7 @@ class ShareholderTestCase(TestCase):
         self.assertTrue(isinstance(response.data, dict))
         self.assertEqual(response.data.get('number'), "00333e")
         self.assertEqual(s.user.first_name, "Mutter1Editable")
+        self.assertEqual(s.user.userprofile.language, "ab")
 
         userprofile = s.user.userprofile
         for k, v in data['user']['userprofile'].iteritems():

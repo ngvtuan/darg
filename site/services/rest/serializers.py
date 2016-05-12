@@ -122,11 +122,15 @@ class AddCompanySerializer(serializers.Serializer):
 class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
     """ serialize additional user data """
     # country = CountrySerializer(many=False)
+    readable_language = serializers.SerializerMethodField()
 
     class Meta:
         model = UserProfile
         fields = ('street', 'city', 'province', 'postal_code', 'country',
-                  'birthday', 'company_name')
+                  'birthday', 'company_name', 'language', 'readable_language')
+
+    def get_readable_language(self, obj):
+        return obj.get_language_display()
 
 
 class UserWithEmailOnlySerializer(serializers.HyperlinkedModelSerializer):
@@ -330,6 +334,7 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
             userprofile.country = profile_kwargs.get('country')
             userprofile.company_name = profile_kwargs.get('company_name')
             userprofile.birthday = profile_kwargs.get('birthday')
+            userprofile.language = profile_kwargs.get('language')
             userprofile.save()
 
         shareholder.number = validated_data['number']

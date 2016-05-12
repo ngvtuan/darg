@@ -20,7 +20,8 @@ from services.rest.views import (
     ShareholderViewSet, CompanyViewSet, UserViewSet,
     PositionViewSet,
     InviteeUpdateView, AddCompanyView, CountryViewSet, OptionPlanViewSet,
-    SecurityViewSet, OptionTransactionViewSet, OperatorViewSet, AddShareSplit
+    SecurityViewSet, OptionTransactionViewSet, OperatorViewSet, AddShareSplit,
+    LanguageView
 )
 
 router = routers.DefaultRouter(trailing_slash=False)
@@ -83,6 +84,8 @@ urlpatterns = [
     url(r'^services/rest/', include(router.urls)),
     url(r'^services/rest/invitee', InviteeUpdateView.as_view(),
         name='invitee'),
+    url(r'^services/rest/language', LanguageView.as_view(),
+        name='language'),
     # url(r'^api-auth/', include('rest_framework.urls',
     #    namespace='rest_framework')),
     url(r'^services/rest/api-token-auth/',

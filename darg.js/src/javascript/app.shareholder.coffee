@@ -8,16 +8,22 @@ app.config ['$translateProvider', ($translateProvider) ->
 app.controller 'ShareholderController', ['$scope', '$http', 'Shareholder', ($scope, $http, Shareholder) ->
 
     $scope.shareholder = true
+    $scope.countries = []
+    $scope.languages = []
     $scope.errors = null
 
     $http.get('/services/rest/shareholders/' + shareholder_id).then (result) ->
         result.data.user.userprofile.birthday = new Date(result.data.user.userprofile.birthday)
         $scope.shareholder = new Shareholder(result.data)
-        $http.get($scope.shareholder.user.userprofile.country).then (result1) ->
-            $scope.shareholder.user.userprofile.country = result1.data
+        if $scope.shareholder.user.userprofile.country
+            $http.get($scope.shareholder.user.userprofile.country).then (result1) ->
+                $scope.shareholder.user.userprofile.country = result1.data
 
     $http.get('/services/rest/country').then (result) ->
             $scope.countries = result.data.results
+
+    $http.get('/services/rest/language').then (result) ->
+            $scope.languages = result.data
 
     # ATTENTION: django eats a url, angular eats an object.
     # hence needs conversion
@@ -26,11 +32,14 @@ app.controller 'ShareholderController', ['$scope', '$http', 'Shareholder', ($sco
             $scope.shareholder.user.userprofile.country = $scope.shareholder.user.userprofile.country.url
         if $scope.shareholder.user.userprofile.birthday
             $scope.shareholder.user.userprofile.birthday = $scope.shareholder.user.userprofile.birthday.toISOString().substring(0, 10)
+        if $scope.shareholder.user.userprofile.language
+            $scope.shareholder.user.userprofile.language = $scope.shareholder.user.userprofile.language.iso
         $scope.shareholder.$update().then (result) ->
             result.user.userprofile.birthday = new Date(result.user.userprofile.birthday)
             $scope.shareholder = new Shareholder(result)
-            $http.get($scope.shareholder.user.userprofile.country).then (result1) ->
-                $scope.shareholder.user.userprofile.country = result1.data
+            if $scope.shareholder.user.userprofile.country
+                $http.get($scope.shareholder.user.userprofile.country).then (result1) ->
+                    $scope.shareholder.user.userprofile.country = result1.data
         .then ->
             # Reset our editor to a new blank post
             #$scope.company = new Company()

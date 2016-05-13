@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 12:33+0000\n"
-"PO-Revision-Date: 2016-05-07 22:08+0000\n"
+"POT-Creation-Date: 2016-05-13 08:36+0000\n"
+"PO-Revision-Date: 2016-05-13 08:38+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
+
+#: project/tasks.py:18
+msgid "Welcome to Das Aktienregister - Your new password"
+msgstr "Willkommen zu Das Aktienregister - Ihr neues Passwort"
 
 #: project/templates/_add_capital_form.html:3
 msgid "Please enter your capital increase data"
@@ -218,7 +222,7 @@ msgstr "Blog"
 
 #: project/templates/index.html:21 project/templates/index.html.py:22
 #: project/templates/index.html:30 project/templates/index.html.py:31
-#: project/templates/index.html:51 project/templates/index.html.py:52
+#: project/templates/index.html:56 project/templates/index.html.py:57
 msgid "Try for free"
 msgstr "Kostenlos testen"
 
@@ -230,27 +234,39 @@ msgstr "Das Online-Aktienbuch"
 msgid "Mit Sicherheit gesetzeskonform durch automatische Validierung."
 msgstr "Mit Sicherheit gesetzeskonform durch automatische Validierung."
 
+#: project/templates/index.html:43
+msgid "Jetzt ab"
+msgstr "Jetzt ab"
+
+#: project/templates/index.html:44
+msgid "4,99"
+msgstr "4,99"
+
 #: project/templates/index.html:45
+msgid "CHF/mtl."
+msgstr "CHF/mtl."
+
+#: project/templates/index.html:50
 msgid "Eingabe alle Daten mit maximaler Effizienz."
 msgstr "Eingabe alle Daten mit maximaler Effizienz."
 
-#: project/templates/index.html:46
+#: project/templates/index.html:51
 msgid "Revisionssichere Ablage."
 msgstr "Revisionssichere Ablage."
 
-#: project/templates/index.html:47
+#: project/templates/index.html:52
 msgid "Automatische Validierung der Daten."
 msgstr "Automatische Validierung der Daten."
 
-#: project/templates/index.html:48
+#: project/templates/index.html:53
 msgid "10 Jahre Datengarantie."
 msgstr "10 Jahre Datengarantie."
 
-#: project/templates/index.html:49
+#: project/templates/index.html:54
 msgid "Aktienbuch als PDF herunterladen."
 msgstr "Aktienbuch als PDF herunterladen."
 
-#: project/templates/index.html:60
+#: project/templates/index.html:65
 msgid ""
 "Die Automatische Validierung verhindert Fehler und sichert maximale "
 "Gesetzeskonformitaet. Das Online-Aktienbuch macht die Pflege schnell und "
@@ -260,7 +276,7 @@ msgstr ""
 "Gesetzeskonformität. Das Online-Aktienbuch macht die Pflege schnell und "
 "effizient, damit Zeit frei wird für die wirklichen Herausforderungen"
 
-#: project/templates/index.html:68
+#: project/templates/index.html:73
 msgid "A service provided by KKD Komm. GmbH"
 msgstr "A service provided by KKD Komm. GmbH"
 

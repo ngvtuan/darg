@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 12:33+0000\n"
-"PO-Revision-Date: 2016-05-06 12:38+0000\n"
+"POT-Creation-Date: 2016-05-13 08:36+0000\n"
+"PO-Revision-Date: 2016-05-13 08:38+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
-#: shareholder/models.py:47
+#: shareholder/models.py:48
 msgid "Headquarter location"
 msgstr "Ort des Unternehmensstammsitzes"
 
-#: shareholder/models.py:49
+#: shareholder/models.py:50
 msgid "Foundation date of the company"
 msgstr "Gründungsdatum des Unternehmens"
 
-#: shareholder/models.py:66
+#: shareholder/models.py:67
 msgid "Your list of partials for the share split for company '{}'"
 msgstr "Ihre Liste gespaltener Aktienanrechte für das Unternehmen '{}'"
 
-#: shareholder/models.py:69
+#: shareholder/models.py:70
 msgid ""
 "Dear Operator,\n"
 "\n"
@@ -43,15 +43,15 @@ msgstr ""
 "Der Aktiensplit war erfolgreich. Sie finden die Daten zu den teilweisen Aktienanrechten wie folgt:\n"
 "\n"
 
-#: shareholder/models.py:77
+#: shareholder/models.py:78
 msgid "{}{}({}): {} shares\n"
 msgstr "{} {} ({}): {} shares\n"
 
-#: shareholder/models.py:84
+#: shareholder/models.py:85
 msgid "--- No partial shares during split --- \n"
 msgstr "--- Keine partiellen Splitbeträge ---\n"
 
-#: shareholder/models.py:87
+#: shareholder/models.py:88
 msgid ""
 "\n"
 "These shareholders are eligible to either sell their partial shares or get compensated.\n"
@@ -69,45 +69,45 @@ msgstr ""
 "\n"
 "Das Aktienregister-Team"
 
-#: shareholder/models.py:204
+#: shareholder/models.py:205
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
 msgstr ""
 "Aktiensplit von {} für {} mit Verhältnis {}:{}. Rückgabe alter Aktien."
 
-#: shareholder/models.py:224
+#: shareholder/models.py:225
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr "Aktiensplit von {} für {} mit Verhältnis {}:{}. Ausgabe neuer Aktien."
 
-#: shareholder/models.py:372
+#: shareholder/models.py:377
 msgid "Missing all data required for #GAFI."
 msgstr "Alle Daten für GAFI-FATF fehlen."
 
-#: shareholder/models.py:379
+#: shareholder/models.py:384
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 "Es fehlen Vorname, Nachname oder Unternehmensname des Gesellschafters."
 
-#: shareholder/models.py:383
+#: shareholder/models.py:388
 msgid "Shareholder birthday missing."
 msgstr "Geburstag"
 
-#: shareholder/models.py:387
+#: shareholder/models.py:392
 msgid "Shareholder origin/country missing."
 msgstr "Land des Aktionärs fehlt."
 
-#: shareholder/models.py:396
+#: shareholder/models.py:401
 msgid "Shareholder address or address details missing."
 msgstr "Adresse oder Adressdetails des Aktionärs fehlen."
 
-#: shareholder/models.py:488
+#: shareholder/models.py:493
 msgid "Share Count transfered or created"
 msgstr "transferierte oder erstellte Aktienanzahl"
 
-#: shareholder/models.py:491
+#: shareholder/models.py:496
 msgid "Nominal value or payed price for the transaction"
 msgstr "Nominalwert (bei Kapitalerhöhung) oder Kaufpreis"
 
-#: shareholder/models.py:527
+#: shareholder/models.py:532
 msgid "Number of shares approved"
 msgstr "Anzahl der genehmigten Aktien"
 
@@ -323,18 +323,23 @@ msgid "Country"
 msgstr "Land"
 
 #: shareholder/templates/shareholder.html:86
+#| msgid "Shareholder Data"
+msgid "Shareholder Language"
+msgstr "Sprache"
+
+#: shareholder/templates/shareholder.html:97
 msgid "Shareholder Birthday"
 msgstr "Geburstag"
 
-#: shareholder/templates/shareholder.html:97
+#: shareholder/templates/shareholder.html:108
 msgid "Shares"
 msgstr "Aktien"
 
-#: shareholder/templates/shareholder.html:101
+#: shareholder/templates/shareholder.html:112
 msgid "Value of all shares according to last transaction"
 msgstr "Wert der Aktien basierend auf der letzten Transaktion"
 
-#: shareholder/templates/shareholder.html:106
+#: shareholder/templates/shareholder.html:117
 msgid "Delete shareholder"
 msgstr "Gesellschafter löschen"
 

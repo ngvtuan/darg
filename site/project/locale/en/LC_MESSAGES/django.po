@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 12:33+0000\n"
+"POT-Creation-Date: 2016-05-13 08:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: project/tasks.py:18
+msgid "Welcome to Das Aktienregister - Your new password"
+msgstr ""
 
 #: project/templates/_add_capital_form.html:3
 msgid "Please enter your capital increase data"
@@ -207,7 +211,7 @@ msgstr ""
 
 #: project/templates/index.html:21 project/templates/index.html.py:22
 #: project/templates/index.html:30 project/templates/index.html.py:31
-#: project/templates/index.html:51 project/templates/index.html.py:52
+#: project/templates/index.html:56 project/templates/index.html.py:57
 msgid "Try for free"
 msgstr ""
 
@@ -219,34 +223,46 @@ msgstr ""
 msgid "Mit Sicherheit gesetzeskonform durch automatische Validierung."
 msgstr ""
 
+#: project/templates/index.html:43
+msgid "Jetzt ab"
+msgstr ""
+
+#: project/templates/index.html:44
+msgid "4,99"
+msgstr ""
+
 #: project/templates/index.html:45
+msgid "CHF/mtl."
+msgstr ""
+
+#: project/templates/index.html:50
 msgid "Eingabe alle Daten mit maximaler Effizienz."
 msgstr ""
 
-#: project/templates/index.html:46
+#: project/templates/index.html:51
 msgid "Revisionssichere Ablage."
 msgstr ""
 
-#: project/templates/index.html:47
+#: project/templates/index.html:52
 msgid "Automatische Validierung der Daten."
 msgstr ""
 
-#: project/templates/index.html:48
+#: project/templates/index.html:53
 msgid "10 Jahre Datengarantie."
 msgstr ""
 
-#: project/templates/index.html:49
+#: project/templates/index.html:54
 msgid "Aktienbuch als PDF herunterladen."
 msgstr ""
 
-#: project/templates/index.html:60
+#: project/templates/index.html:65
 msgid ""
 "Die Automatische Validierung verhindert Fehler und sichert maximale "
 "Gesetzeskonformitaet. Das Online-Aktienbuch macht die Pflege schnell und "
 "effizient, damit Zeit frei wird fuer die wirklichen Herausforderungen"
 msgstr ""
 
-#: project/templates/index.html:68
+#: project/templates/index.html:73
 msgid "A service provided by KKD Komm. GmbH"
 msgstr ""
 

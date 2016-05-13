@@ -5,6 +5,7 @@ import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.core.urlresolvers import reverse
 from django.http import (
     HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
     )
@@ -12,7 +13,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
-from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
 
 from zinnia.models.entry import Entry
 
@@ -107,8 +108,10 @@ def captable_csv(request, company_id):
 
     writer = csv.writer(response)
     writer.writerow([
-        'shareholder number', 'last name', 'first name',
-        'email', 'share count', 'share percent'])
+        _(u'shareholder number'), _(u'last name'), _(u'first name'),
+        _(u'email'), _(u'share count'), _(u'votes share percent'),
+        _(u'language ISO'), _('language full')
+    ])
     for shareholder in company.get_active_shareholders():
         row = [
             shareholder.number,
@@ -116,7 +119,9 @@ def captable_csv(request, company_id):
             shareholder.user.first_name,
             shareholder.user.email,
             shareholder.share_count(),
-            shareholder.share_percent(),
+            shareholder.share_percent() or '--',
+            shareholder.user.userprofile.language,
+            shareholder.user.userprofile.get_language_display()
         ]
         writer.writerow([unicode(s).encode("utf-8") for s in row])
 

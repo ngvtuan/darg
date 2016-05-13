@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-13 16:41+0000\n"
+"POT-Creation-Date: 2016-05-13 16:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -333,4 +333,36 @@ msgstr ""
 
 #: project/templates/start.html:114
 msgid "CSV"
+msgstr ""
+
+#: project/views.py:111
+msgid "shareholder number"
+msgstr ""
+
+#: project/views.py:111
+msgid "last name"
+msgstr ""
+
+#: project/views.py:111
+msgid "first name"
+msgstr ""
+
+#: project/views.py:112
+msgid "email"
+msgstr ""
+
+#: project/views.py:112
+msgid "share count"
+msgstr ""
+
+#: project/views.py:112
+msgid "votes share percent"
+msgstr ""
+
+#: project/views.py:113
+msgid "language ISO"
+msgstr ""
+
+#: project/views.py:113
+msgid "language full"
 msgstr ""

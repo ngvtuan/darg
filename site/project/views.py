@@ -14,6 +14,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 
+from zinnia.models.entry import Entry
+
 from project.tasks import send_initial_password_mail
 from services.instapage import InstapageSubmission as Instapage
 from shareholder.models import Company, Operator
@@ -23,6 +25,7 @@ from utils.pdf import render_to_pdf
 def index(request):
     template = loader.get_template('index.html')
     context = RequestContext(request, {})
+    context['latest_blog_entry'] = Entry.published.all()[0]
     return HttpResponse(template.render(context))
 
 

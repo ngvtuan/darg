@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static %}
+{% load i18n static zinnia %}
 
 {% block ng_app %}js.darg.app.index{% endblock %}
 
@@ -66,6 +66,18 @@
         </p>
         <p class="author"></p>
       </blockquote>
+    </div>
+  </div>
+  <div class="blog">
+    <div class="container">
+      <h2>{% trans "Do you know our Blog?" %}</h2>
+      <blockquote>
+        <p class="says">{{ latest_blog_entry.excerpt }}</p>
+        <p class="author"></p>
+      </blockquote>
+      <a href="/blog/" title="{% trans "Read our Blog" %}" class="btn btn-default btn-focus">
+        {% trans "Read our Blog" %}
+      </a>
     </div>
   </div>
   <footer>

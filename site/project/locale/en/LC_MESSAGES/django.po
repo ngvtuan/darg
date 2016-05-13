@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-13 08:36+0000\n"
+"POT-Creation-Date: 2016-05-13 16:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -263,6 +263,14 @@ msgid ""
 msgstr ""
 
 #: project/templates/index.html:73
+msgid "Do you know our Blog?"
+msgstr ""
+
+#: project/templates/index.html:78 project/templates/index.html.py:79
+msgid "Read our Blog"
+msgstr ""
+
+#: project/templates/index.html:85
 msgid "A service provided by KKD Komm. GmbH"
 msgstr ""
 

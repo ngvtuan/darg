@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-13 08:36+0000\n"
-"PO-Revision-Date: 2016-05-13 10:57+0000\n"
+"POT-Creation-Date: 2016-05-13 16:41+0000\n"
+"PO-Revision-Date: 2016-05-13 16:41+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -278,6 +278,14 @@ msgstr ""
 "<strong>PLUS: der rechtlichen Verantwortung des Verwaltungsrates ist Sorge getragen.</strong>"
 
 #: project/templates/index.html:73
+msgid "Do you know our Blog?"
+msgstr "Kennen Sie unser Blog?"
+
+#: project/templates/index.html:78 project/templates/index.html.py:79
+msgid "Read our Blog"
+msgstr "Blog jetzt lesen"
+
+#: project/templates/index.html:85
 msgid "A service provided by KKD Komm. GmbH"
 msgstr "A service provided by KKD Komm. GmbH"
 

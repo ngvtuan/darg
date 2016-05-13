@@ -202,6 +202,8 @@ class LanguageView(APIView):
     """
     Endpint delivering language options
     """
+    permission_classes = (AllowAny,)
+
     def get(self, *args, **kwargs):
         from django_languages.languages import LANGUAGES
         languages = []

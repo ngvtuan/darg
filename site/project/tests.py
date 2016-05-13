@@ -212,7 +212,7 @@ class DownloadTestCase(TestCase):
         lines = response.content.split('\r\n')
         lines.pop()  # remove last element based on final '\r\n'
         for row in lines:
-            self.assertEqual(row.count(','), 5)
+            self.assertEqual(row.count(','), 7)
         self.assertEqual(len(lines), 3)  # ensure we have the right data
         # assert company itself
         self.assertEqual(shareholder_list[0].number, lines[1].split(',')[0])

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 12:33+0000\n"
+"POT-Creation-Date: 2016-05-13 08:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,21 +17,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: services/rest/serializers.py:172
+#: services/rest/serializers.py:176
 msgid ""
 "User not yet registered with this application. Please ask the user to "
 "register first."
 msgstr ""
 
-#: services/rest/serializers.py:179
+#: services/rest/serializers.py:183
 msgid "You cannot edit this company"
 msgstr ""
 
-#: services/rest/serializers.py:184
+#: services/rest/serializers.py:188
 msgid "You were added as administrator for {}"
 msgstr ""
 
-#: services/rest/serializers.py:185
+#: services/rest/serializers.py:189
 msgid ""
 "Dear,\n"
 "\n"
@@ -43,23 +43,23 @@ msgid ""
 "Your Das-Aktienregister Team"
 msgstr ""
 
-#: services/rest/serializers.py:215 services/rest/serializers.py:260
+#: services/rest/serializers.py:219 services/rest/serializers.py:264
 msgid "Email missing"
 msgstr ""
 
-#: services/rest/serializers.py:263
+#: services/rest/serializers.py:267
 msgid "First Name missing"
 msgstr ""
 
-#: services/rest/serializers.py:266
+#: services/rest/serializers.py:270
 msgid "Last Name missing"
 msgstr ""
 
-#: services/rest/serializers.py:271
+#: services/rest/serializers.py:275
 msgid "Shareholder Number must be unique"
 msgstr ""
 
-#: services/rest/serializers.py:471
+#: services/rest/serializers.py:476
 msgid "Not a pdf file."
 msgstr ""
 
@@ -73,6 +73,6 @@ msgstr ""
 msgid "Field may not be empty."
 msgstr ""
 
-#: services/rest/views.py:273 services/rest/views.py:355
+#: services/rest/views.py:290 services/rest/views.py:372
 msgid "Confirmed position cannot be deleted."
 msgstr ""

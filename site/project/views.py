@@ -26,7 +26,8 @@ from utils.pdf import render_to_pdf
 def index(request):
     template = loader.get_template('index.html')
     context = RequestContext(request, {})
-    context['latest_blog_entry'] = Entry.published.all()[0]
+    if Entry.published.all().exists():
+        context['latest_blog_entry'] = Entry.published.all()[0]
     return HttpResponse(template.render(context))
 
 

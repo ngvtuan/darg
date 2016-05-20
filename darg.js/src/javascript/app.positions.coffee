@@ -30,8 +30,12 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $scope.securities.push item
 
     $scope.add_position = ->
-        if $scope.newPosition.bought_at
-            $scope.newPosition.bought_at = $scope.newPosition.bought_at.toISOString().substring(0, 10)
+        #if $scope.newPosition.bought_at
+        #    $scope.newPosition.bought_at = $scope.newPosition.bought_at.toISOString().substring(0, 10)
+        #else
+        #    $scope.errors =  {'bought_at': 'not set'}
+        #    return
+
         $scope.newPosition.$save().then (result) ->
             $scope.positions.push result
         .then ->

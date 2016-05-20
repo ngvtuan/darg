@@ -509,9 +509,6 @@
         });
       });
       $scope.add_position = function() {
-        if ($scope.newPosition.bought_at) {
-          $scope.newPosition.bought_at = $scope.newPosition.bought_at.toISOString().substring(0, 10);
-        }
         return $scope.newPosition.$save().then(function(result) {
           return $scope.positions.push(result);
         }).then(function() {

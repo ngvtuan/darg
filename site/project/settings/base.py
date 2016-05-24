@@ -28,6 +28,8 @@ SECRET_KEY = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+SITE_ID = 1
+
 ALLOWED_HOSTS = [
     'www.das-aktienregister.ch',
     'app.das-aktienregister.ch',
@@ -48,6 +50,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.humanize',
+    'django.contrib.flatpages',
 
     'registration',
     'rest_framework',
@@ -56,6 +59,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'djrill',
     'djcelery',
+    'django_markdown',
 
     # -- zinnia
     'django_comments',

@@ -107,7 +107,6 @@ urlpatterns = [
 
 # admin
 admin.autodiscover()
-flatpages.register()
 admin_url = settings.DEBUG and r'^admin/' or r'^__adm/'
 urlpatterns += patterns(
     '',
@@ -141,7 +140,8 @@ urlpatterns += patterns(
     url(r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
         {'sitemaps': sitemaps}),)
 
-# flatpages (MUST be end of pattern)
+# flatpages (MUST be end of pattern) + markdown
 urlpatterns += [
+    url(r'^markdownx/', include('markdownx.urls')),
     url(r'^(?P<url>.*/)$', flatpage),
 ]

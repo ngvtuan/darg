@@ -36,6 +36,8 @@ django-app-namespace-template-loader
 zinnia-theme-bootstrap
 docutils
 markdown
+django_markdown
+django-markdownx
 #-- end blog
 
 ipdbplugin

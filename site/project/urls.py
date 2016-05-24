@@ -4,6 +4,8 @@ from django.views.i18n import javascript_catalog
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.flatpages.views import flatpage
+from django.contrib.flatpages.sitemaps import FlatPageSitemap
 
 from zinnia.sitemaps import TagSitemap
 from zinnia.sitemaps import EntrySitemap
@@ -12,6 +14,8 @@ from zinnia.sitemaps import AuthorSitemap
 
 from rest_framework import routers
 from rest_framework.authtoken import views
+
+from django_markdown import flatpages
 
 from registration.backends.simple.views import RegistrationView
 from registration.forms import RegistrationFormUniqueEmail
@@ -44,6 +48,7 @@ sitemaps = {'tags': TagSitemap,
             'blog': EntrySitemap,
             'authors': AuthorSitemap,
             'categories': CategorySitemap,
+            'pages': FlatPageSitemap,
             }
 
 urlpatterns = [
@@ -94,12 +99,14 @@ urlpatterns = [
     # i18n
     url(r'^jsi18n/$', javascript_catalog, js_info_dict),
 
-    # blog
+    # content/blog/flatpages
     url(r'^blog/', include('zinnia.urls', namespace='zinnia')),
     url(r'^comments/', include('django_comments.urls')),
+    url(r'^markdown/', include('django_markdown.urls')),
 ]
 
 # admin
+admin.autodiscover()
 admin_url = settings.DEBUG and r'^admin/' or r'^__adm/'
 urlpatterns += patterns(
     '',
@@ -132,3 +139,9 @@ urlpatterns += patterns(
         {'sitemaps': sitemaps}),
     url(r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
         {'sitemaps': sitemaps}),)
+
+# flatpages (MUST be end of pattern) + markdown
+urlpatterns += [
+    url(r'^markdownx/', include('markdownx.urls')),
+    url(r'^(?P<url>.*/)$', flatpage),
+]

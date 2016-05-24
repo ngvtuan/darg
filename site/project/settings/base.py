@@ -28,6 +28,8 @@ SECRET_KEY = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+SITE_ID = 1
+
 ALLOWED_HOSTS = [
     'www.das-aktienregister.ch',
     'app.das-aktienregister.ch',
@@ -48,6 +50,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.humanize',
+    'django.contrib.flatpages',
 
     'registration',
     'rest_framework',
@@ -56,6 +59,8 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'djrill',
     'djcelery',
+    'django_markdown',
+    'markdownx',
 
     # -- zinnia
     'django_comments',
@@ -293,6 +298,10 @@ CELERY_QUEUES = (
 CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 BROKER_URL = 'amqp://darg:darg@localhost:5672/darg'
+
+# --- MARKDOWN X
+
+MARKDOWNX_MARKDOWNIFY_FUNCTION = 'markdownx.utils.markdownify'
 
 try:
     from project.settings.local import *

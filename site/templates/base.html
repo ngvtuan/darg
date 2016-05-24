@@ -5,11 +5,23 @@
 <head>
   <meta charset="UTF-8">
 
- {% include "_meta_tags.html" %}
- {% include "_html_head_links.html" %}
+  {% block title %}
+    <TITLE>Das Aktienregister</TITLE>
+    <META NAME="Description" CONTENT="Das Aktienregister - GAFI konform und Audit Trail sicher">
+    <META NAME="Keywords" CONTENT="Aktienregister, Share Register, Aktionariat, Aktien, Aktiengesellschaft">
+  {% endblock %}
 
- {% block inline_styles %}
- {% endblock %}
+  <META NAME="author" CONTENT="KKD Komm GmbH">
+  <META NAME="subject" CONTENT="Aktiengesellschaft">
+  <META NAME="Geography" CONTENT="Schweiz">
+  <META NAME="Language" CONTENT="Deutsch">
+  <META NAME="distribution" CONTENT="Global">
+  <META NAME="country" CONTENT="Schweiz">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  {% include "_html_head_links.html" %}
+
+  {% block inline_styles %}{% endblock %}
 
 </head>
 <body ng-app="{% block ng_app %}js.darg.app.base{% endblock %}" ng-cloak class="core">

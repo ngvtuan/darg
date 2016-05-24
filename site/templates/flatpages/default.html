@@ -1,5 +1,18 @@
 {% extends "base_auth.html" %}
+
+{% load django_markdown markdownify %}
+
 {% block body_block %}
-<h1>{{ flatpage.title }}</h1>
-{{ flatpage.content }}
+
+  {% block header %}
+    {% include "menu.html" %}
+  {% endblock %}
+
+  <div class="container">
+    <div class="" id="flagpage">
+      <h1>{{ flatpage.title }}</h1>
+      <p>{{ flatpage.content|markdown }}</p>
+    </div>
+  </div>
+
 {% endblock %}

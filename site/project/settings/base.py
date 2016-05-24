@@ -268,7 +268,7 @@ TRACKING_CODE = ""
 
 # -- BLOG
 ZINNIA_UPLOAD_TO = os.path.join(MEDIA_ROOT, 'blog')
-ZINNIA_MARKUP_LANGUAGE = 'restructuredtext'
+ZINNIA_MARKUP_LANGUAGE = 'markdown'
 
 # -- SENDFILE for downloads
 SENDFILE_BACKEND = 'sendfile.backends.nginx'

@@ -302,6 +302,14 @@ BROKER_URL = 'amqp://darg:darg@localhost:5672/darg'
 # --- MARKDOWN X
 
 MARKDOWNX_MARKDOWNIFY_FUNCTION = 'markdownx.utils.markdownify'
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'markdown.extensions.nl2br',
+    'markdown.extensions.smarty',
+]
+
+# Media path
+MARKDOWNX_MEDIA_PATH = 'f/'  # Path, where images will be stored in MEDIA_ROOT folder
 
 try:
     from project.settings.local import *

@@ -35,6 +35,7 @@ Pillow
 django-app-namespace-template-loader
 zinnia-theme-bootstrap
 docutils
+markdown
 #-- end blog
 
 ipdbplugin

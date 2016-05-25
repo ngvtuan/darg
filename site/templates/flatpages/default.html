@@ -48,22 +48,4 @@
   <script src="{% static "compiled/javascript/contrib/js.cookie.js" %}"></script>
   <script src="{% static "compiled/contrib/bootstrap/dist/js/bootstrap.min.js" %}"></script>
 
-  <!-- Mailchimp -->
-  <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
-
-  <script type="text/javascript">
-
-    function showMailingPopUp() {
-        console.log('ok');
-        require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us9.list-manage.com","uuid":"59c5b2d0d9ebfebb1fcaf0802","lid":"2200f70ad3"})})
-        // document.cookie = "MCEvilPopupClosed=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-       Cookies.remove('MCEvilPopupClosed', { path: '/' });
-    };
-    window.onload = function () {
-      $(".open-popup").click(function() {
-        showMailingPopUp();
-      });
-    };
-    </script>
-
   {% endblock %}

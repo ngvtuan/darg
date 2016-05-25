@@ -2,6 +2,13 @@
 
 {% load django_markdown markdownify %}
 
+{% block title %}
+  <TITLE>{{ flatpage.title }} - Das Aktienregister</TITLE>
+  <META NAME="Description" CONTENT="Das Aktienregister - GAFI konform und Audit Trail sicher">
+  <META NAME="Keywords" CONTENT="Aktienregister, Share Register, Aktionariat, Aktien, Aktiengesellschaft">
+{% endblock %}
+
+
 {% block body_block %}
 
   {% block header %}
@@ -9,7 +16,7 @@
   {% endblock %}
 
   <div class="container">
-    <div class="" id="flagpage">
+    <div class="" id="flatpage">
       <h1>{{ flatpage.title }}</h1>
       <p>{{ flatpage.content|markdown }}</p>
     </div>

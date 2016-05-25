@@ -69,6 +69,20 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
+/* line 1, ../../sass/_flatpages.sass */
+#flatpage {
+  clear: left;
+  float: left;
+  width: 75%;
+  margin-left: 12.5%;
+  margin-right: -100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 @media only screen and (max-width: 960px) {
   /* line 5, ../../sass/_breakpoints.sass */
   body .container {
@@ -172,31 +186,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     width: 75%;
   }
   /* line 67, ../../sass/_breakpoints.sass */
-  body #mask header {
-    text-align: left;
-  }
-
-  /* line 70, ../../sass/_breakpoints.sass */
-  body.body-flatpage header {
-    height: 80px;
+  body #flatpage {
+    float: left;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: -100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
   }
 }
 @media only screen and (max-width: 500px) {
-  /* line 76, ../../sass/_breakpoints.sass */
+  /* line 73, ../../sass/_breakpoints.sass */
   body .container {
     width: 400px;
-  }
-}
-@media screen and (orientation: portrait) {
-  /* line 81, ../../sass/_breakpoints.sass */
-  div .coordinates {
-    display: none;
-  }
-
-  /* line 84, ../../sass/_breakpoints.sass */
-  div .immolink {
-    width: 70% !important;
-    margin-left: 15% !important;
   }
 }
 @-webkit-keyframes fadeIn {

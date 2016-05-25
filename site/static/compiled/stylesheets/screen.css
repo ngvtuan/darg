@@ -3167,70 +3167,74 @@ div#optionplan .pdf_upload_preview {
   display: none;
 }
 /* line 421, ../../sass/screen.sass */
+.blog .entry-image {
+  margin-bottom: 2em;
+}
+/* line 423, ../../sass/screen.sass */
 .blog .entry-footer {
   padding-left: 0px;
 }
-/* line 423, ../../sass/screen.sass */
+/* line 425, ../../sass/screen.sass */
 .blog .entry-footer span {
   display: none;
 }
-/* line 426, ../../sass/screen.sass */
+/* line 428, ../../sass/screen.sass */
 .blog .entry-content > p, .blog .entry-content ul {
   margin-bottom: 1em;
 }
-/* line 428, ../../sass/screen.sass */
+/* line 430, ../../sass/screen.sass */
 .blog .entry-content > ul {
   list-style: initial;
   margin-left: 1.1em;
 }
-/* line 431, ../../sass/screen.sass */
+/* line 433, ../../sass/screen.sass */
 .blog .entry-content > h1 {
   font-size: 2em;
   margin: 1em 0 1em;
 }
-/* line 434, ../../sass/screen.sass */
+/* line 436, ../../sass/screen.sass */
 .blog .entry-content > h2 {
   font-size: 1.5em;
   margin: 1em 0 1em;
 }
-/* line 437, ../../sass/screen.sass */
+/* line 439, ../../sass/screen.sass */
 .blog .entry-content strong {
   font-weight: bold;
 }
-/* line 439, ../../sass/screen.sass */
+/* line 441, ../../sass/screen.sass */
 .blog .navbar-default {
   background-color: white;
 }
-/* line 441, ../../sass/screen.sass */
+/* line 443, ../../sass/screen.sass */
 .blog .navbar-brand {
   font-size: 2em;
 }
-/* line 443, ../../sass/screen.sass */
+/* line 445, ../../sass/screen.sass */
 .blog .navbar-header span {
   top: 0.3em;
   position: relative;
   left: -1em;
 }
-/* line 447, ../../sass/screen.sass */
+/* line 449, ../../sass/screen.sass */
 .blog a {
   border: none;
   font-size: 1em;
 }
-/* line 450, ../../sass/screen.sass */
+/* line 452, ../../sass/screen.sass */
 .blog a:active, .blog a:focus, .blog a:hover {
   color: #337ab7;
   text-decoration: none;
 }
-/* line 453, ../../sass/screen.sass */
+/* line 455, ../../sass/screen.sass */
 .blog h2 > a {
   font-size: 2em;
   display: block;
 }
-/* line 456, ../../sass/screen.sass */
+/* line 458, ../../sass/screen.sass */
 .blog p {
   margin: 0 0 0 0;
 }
-/* line 458, ../../sass/screen.sass */
+/* line 460, ../../sass/screen.sass */
 .blog small {
   font-size: 40%;
 }

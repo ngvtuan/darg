@@ -82,6 +82,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+/* line 4, ../../sass/_flatpages.sass */
+#flatpage p {
+  line-height: 1.5em;
+  margin-top: 1.5em;
+}
 
 @media only screen and (max-width: 960px) {
   /* line 5, ../../sass/_breakpoints.sass */
@@ -185,21 +190,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     top: 156px;
     width: 75%;
   }
-  /* line 67, ../../sass/_breakpoints.sass */
-  body #flatpage {
-    float: left;
-    width: 100%;
-    margin-left: 0%;
-    margin-right: -100%;
-    padding-left: 10px;
-    padding-right: 10px;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-  }
 }
 @media only screen and (max-width: 500px) {
-  /* line 73, ../../sass/_breakpoints.sass */
+  /* line 69, ../../sass/_breakpoints.sass */
   body .container {
     width: 400px;
   }

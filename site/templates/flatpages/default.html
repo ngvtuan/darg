@@ -39,6 +39,7 @@
   <script src="{% static "compiled/javascript/script.js" %}?v={{VERSION}}"></script>
   <script src="{% static "compiled/contrib/angular-xeditable/dist/js/xeditable.min.js" %}"></script>
   <script src="{% static "compiled/javascript/contrib/ng-file-upload.js" %}"></script>
+  <script src="{% static "static/compiled/javascript/contrib/js.cookie.js" %}"></script>
   <script>
   // Add the CSRF Token
   var app = angular.module(angular.element($('[ng-app]')).attr('ng-app')); // Not including a list of dependent modules (2nd parameter to `module`) "re-opens" the module for additional configuration

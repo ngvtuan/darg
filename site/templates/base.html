@@ -24,13 +24,14 @@
   {% block inline_styles %}{% endblock %}
 
 </head>
-<body ng-app="{% block ng_app %}js.darg.app.base{% endblock %}" ng-cloak class="core">
+<body ng-app="{% block ng_app %}js.darg.app.base{% endblock %}" {% block ng_cloak %}ng-cloak{% endblock %} class="core">
 
 
 
   {% block body_block %}
   {% endblock %}
 
+  {% block scripts %}
   <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
   <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
   <!-- CDN fallback -->
@@ -51,6 +52,7 @@
      $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
   }]);
   </script>
+  {% endblock %}
 
   {% include "_tracking.html" %}
 

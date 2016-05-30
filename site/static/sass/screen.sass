@@ -70,8 +70,8 @@ html, body
     // background-color: transparent // see #50 and
     // http://stackoverflow.com/questions/18967852/input-type-date-in-ios-7
     color: $color-black
-    padding-left: 0.3em
-    padding-right: 0.3em
+    //padding-left: 0.3em
+    //padding-right: 0.3em
     margin: 0.3em 0.3em 0.3em 0em
     display: inline-block
 
@@ -183,8 +183,9 @@ html, body
     color: $color-red
     background: none
   .btn-white
-    background-color: $color-white
-    color: $color-blue
+    background-color: $color-white !important
+    color: $color-blue !important
+    border: 1px solid $color-blue !important
 
   // to remove all left spacing
   .align-left

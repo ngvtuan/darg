@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-13 16:52+0000\n"
+"POT-Creation-Date: 2016-05-30 14:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -202,75 +202,91 @@ msgid "Optionen (%%)"
 msgstr ""
 
 #: project/templates/index.html:18
-msgid "Login"
+msgid "Gratis Aktienbuch-Muster"
 msgstr ""
 
 #: project/templates/index.html:19
+msgid "Login"
+msgstr ""
+
+#: project/templates/index.html:20
 msgid "Blog"
 msgstr ""
 
-#: project/templates/index.html:21 project/templates/index.html.py:22
-#: project/templates/index.html:30 project/templates/index.html.py:31
-#: project/templates/index.html:56 project/templates/index.html.py:57
+#: project/templates/index.html:22 project/templates/index.html.py:23
+#: project/templates/index.html:31 project/templates/index.html.py:32
+#: project/templates/index.html:57 project/templates/index.html.py:58
 msgid "Try for free"
 msgstr ""
 
-#: project/templates/index.html:28
+#: project/templates/index.html:29
 msgid "Das Online-Aktienbuch"
 msgstr ""
 
-#: project/templates/index.html:29
+#: project/templates/index.html:30
 msgid "Mit Sicherheit gesetzeskonform durch automatische Validierung."
 msgstr ""
 
-#: project/templates/index.html:43
+#: project/templates/index.html:44
 msgid "Jetzt ab"
 msgstr ""
 
-#: project/templates/index.html:44
+#: project/templates/index.html:45
 msgid "4,99"
 msgstr ""
 
-#: project/templates/index.html:45
+#: project/templates/index.html:46
 msgid "CHF/mtl."
 msgstr ""
 
-#: project/templates/index.html:50
+#: project/templates/index.html:51
 msgid "Eingabe alle Daten mit maximaler Effizienz."
 msgstr ""
 
-#: project/templates/index.html:51
+#: project/templates/index.html:52
 msgid "Revisionssichere Ablage."
 msgstr ""
 
-#: project/templates/index.html:52
+#: project/templates/index.html:53
 msgid "Automatische Validierung der Daten."
 msgstr ""
 
-#: project/templates/index.html:53
+#: project/templates/index.html:54
 msgid "10 Jahre Datengarantie."
 msgstr ""
 
-#: project/templates/index.html:54
+#: project/templates/index.html:55
 msgid "Aktienbuch als PDF herunterladen."
 msgstr ""
 
-#: project/templates/index.html:65
+#: project/templates/index.html:66
 msgid ""
 "Die Automatische Validierung verhindert Fehler und sichert maximale "
 "Gesetzeskonformitaet. Das Online-Aktienbuch macht die Pflege schnell und "
 "effizient, damit Zeit frei wird fuer die wirklichen Herausforderungen"
 msgstr ""
 
-#: project/templates/index.html:73
+#: project/templates/index.html:75
 msgid "Do you know our Blog?"
 msgstr ""
 
-#: project/templates/index.html:78 project/templates/index.html.py:79
+#: project/templates/index.html:80 project/templates/index.html.py:81
 msgid "Read our Blog"
 msgstr ""
 
-#: project/templates/index.html:85
+#: project/templates/index.html:88
+msgid "Subscribe to our newsletter!"
+msgstr ""
+
+#: project/templates/index.html:89
+msgid "Stay up to date about our work and latest share register industry news"
+msgstr ""
+
+#: project/templates/index.html:96
+msgid "Geben Sie Ihre Email-Adresse ein"
+msgstr ""
+
+#: project/templates/index.html:120
 msgid "A service provided by KKD Komm. GmbH"
 msgstr ""
 
@@ -335,34 +351,34 @@ msgstr ""
 msgid "CSV"
 msgstr ""
 
-#: project/views.py:111
+#: project/views.py:112
 msgid "shareholder number"
 msgstr ""
 
-#: project/views.py:111
+#: project/views.py:112
 msgid "last name"
 msgstr ""
 
-#: project/views.py:111
+#: project/views.py:112
 msgid "first name"
 msgstr ""
 
-#: project/views.py:112
+#: project/views.py:113
 msgid "email"
 msgstr ""
 
-#: project/views.py:112
+#: project/views.py:113
 msgid "share count"
 msgstr ""
 
-#: project/views.py:112
+#: project/views.py:113
 msgid "votes share percent"
 msgstr ""
 
-#: project/views.py:113
+#: project/views.py:114
 msgid "language ISO"
 msgstr ""
 
-#: project/views.py:113
+#: project/views.py:114
 msgid "language full"
 msgstr ""

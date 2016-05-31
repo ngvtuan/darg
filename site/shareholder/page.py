@@ -195,7 +195,7 @@ class OptionsPage(BasePage):
     def is_transfer_option_shown(self, **kwargs):
         for table in self.driver.find_elements_by_class_name('table'):
             for td in table.find_elements_by_tag_name('td'):
-                s = "{} {}".format(
+                s = u"{} {}".format(
                     kwargs.get('buyer').user.first_name,
                     kwargs.get('buyer').user.last_name,
                 )

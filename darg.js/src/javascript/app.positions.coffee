@@ -1,8 +1,8 @@
-app = angular.module 'js.darg.app.positions', ['js.darg.api', 'pascalprecht.translate']
+app = angular.module 'js.darg.app.positions', ['js.darg.api', 'pascalprecht.translate', 'ui.bootstrap']
 
 app.config ['$translateProvider', ($translateProvider) ->
-    $translateProvider.translations('de', django.catalog);
-    $translateProvider.preferredLanguage('de');
+    $translateProvider.translations('de', django.catalog)
+    $translateProvider.preferredLanguage('de')
 ]
 
 app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', ($scope, $http, Position, Split) ->
@@ -30,11 +30,15 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $scope.securities.push item
 
     $scope.add_position = ->
-        #if $scope.newPosition.bought_at
-        #    $scope.newPosition.bought_at = $scope.newPosition.bought_at.toISOString().substring(0, 10)
-        #else
-        #    $scope.errors =  {'bought_at': 'not set'}
-        #    return
+        if $scope.newPosition.bought_at
+            $scope.newPosition.bought_at = $scope.newPosition.bought_at.toISOString().substring(0, 10)
+        else
+            $scope.errors =  {'bought_at': 'not set'}
+            Raven.captureMessage('form error', {
+                level: 'warning',
+                extra: { rejection: rejection },
+            })
+            return
 
         $scope.newPosition.$save().then (result) ->
             $scope.positions.push result
@@ -111,5 +115,17 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
         $scope.show_add_capital = false
         $scope.newSplit = new Split()
         $scope.show_split = true
+
+    # --- DATEPICKER
+    $scope.datepicker = { opened: false }
+    $scope.datepicker.format = 'd. MMM yyyy'
+    $scope.datepicker.options = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false,
+    }
+    $scope.open_datepicker = ->
+        $scope.datepicker.opened = true
+
 
 ]

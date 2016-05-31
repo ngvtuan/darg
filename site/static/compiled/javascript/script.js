@@ -119,7 +119,7 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.company', ['js.darg.api', 'xeditable', 'ngFileUpload', 'pascalprecht.translate']);
+  app = angular.module('js.darg.app.company', ['js.darg.api', 'xeditable', 'ngFileUpload', 'pascalprecht.translate', 'ui.bootstrap']);
 
   app.config([
     '$translateProvider', function($translateProvider) {
@@ -303,7 +303,7 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.options', ['js.darg.api', 'pascalprecht.translate']);
+  app = angular.module('js.darg.app.options', ['js.darg.api', 'pascalprecht.translate', 'ui.bootstrap']);
 
   app.config([
     '$translateProvider', function($translateProvider) {
@@ -410,11 +410,23 @@
         $scope.show_add_option_plan = false;
         return $scope.newOptionTransaction = new OptionTransaction();
       };
-      return $scope.hide_form = function() {
+      $scope.hide_form = function() {
         $scope.show_add_option_plan = false;
         $scope.show_add_option_transaction = false;
         $scope.newOptionPlan = new OptionPlan();
         return $scope.newOptionTransaction = new OptionTransaction();
+      };
+      $scope.datepicker = {
+        opened: false
+      };
+      $scope.datepicker.format = 'd. MMM yyyy';
+      $scope.datepicker.options = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false
+      };
+      return $scope.open_datepicker = function() {
+        return $scope.datepicker.opened = true;
       };
     }
   ]);
@@ -424,7 +436,7 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.optionplan', ['js.darg.api', 'xeditable', 'ngFileUpload', 'pascalprecht.translate']);
+  app = angular.module('js.darg.app.optionplan', ['js.darg.api', 'xeditable', 'ngFileUpload', 'pascalprecht.translate', 'ui.bootstrap']);
 
   app.config([
     '$translateProvider', function($translateProvider) {
@@ -505,7 +517,7 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.positions', ['js.darg.api', 'pascalprecht.translate']);
+  app = angular.module('js.darg.app.positions', ['js.darg.api', 'pascalprecht.translate', 'ui.bootstrap']);
 
   app.config([
     '$translateProvider', function($translateProvider) {
@@ -541,6 +553,20 @@
         });
       });
       $scope.add_position = function() {
+        if ($scope.newPosition.bought_at) {
+          $scope.newPosition.bought_at = $scope.newPosition.bought_at.toISOString().substring(0, 10);
+        } else {
+          $scope.errors = {
+            'bought_at': 'not set'
+          };
+          Raven.captureMessage('form error', {
+            level: 'warning',
+            extra: {
+              rejection: rejection
+            }
+          });
+          return;
+        }
         return $scope.newPosition.$save().then(function(result) {
           return $scope.positions.push(result);
         }).then(function() {
@@ -622,11 +648,23 @@
         $scope.newPosition = new Position();
         return $scope.show_split = false;
       };
-      return $scope.show_split_form = function() {
+      $scope.show_split_form = function() {
         $scope.show_add_position = false;
         $scope.show_add_capital = false;
         $scope.newSplit = new Split();
         return $scope.show_split = true;
+      };
+      $scope.datepicker = {
+        opened: false
+      };
+      $scope.datepicker.format = 'd. MMM yyyy';
+      $scope.datepicker.options = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false
+      };
+      return $scope.open_datepicker = function() {
+        return $scope.datepicker.opened = true;
       };
     }
   ]);
@@ -636,7 +674,7 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.shareholder', ['js.darg.api', 'xeditable', 'pascalprecht.translate']);
+  app = angular.module('js.darg.app.shareholder', ['js.darg.api', 'xeditable', 'pascalprecht.translate', 'ui.bootstrap']);
 
   app.config([
     '$translateProvider', function($translateProvider) {
@@ -710,7 +748,7 @@
 (function() {
   var app;
 
-  app = angular.module('js.darg.app.start', ['js.darg.api', 'pascalprecht.translate']);
+  app = angular.module('js.darg.app.start', ['js.darg.api', 'pascalprecht.translate', 'ui.bootstrap']);
 
   app.config([
     '$translateProvider', function($translateProvider) {
@@ -822,8 +860,20 @@
       $scope.hide_form = function() {
         return $scope.show_add_shareholder = false;
       };
-      return $scope.goto_shareholder = function(shareholder_id) {
+      $scope.goto_shareholder = function(shareholder_id) {
         return window.location = "/shareholder/" + shareholder_id + "/";
+      };
+      $scope.datepicker = {
+        opened: false
+      };
+      $scope.datepicker.format = 'd. MMM yyyy';
+      $scope.datepicker.options = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false
+      };
+      return $scope.open_datepicker = function() {
+        return $scope.datepicker.opened = true;
       };
     }
   ]);

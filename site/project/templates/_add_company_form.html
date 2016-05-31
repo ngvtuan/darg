@@ -8,7 +8,21 @@
   <form class="form-inline">
     <div class="form-group block-level">
       <input type="text" class="form-control" ng-model="newCompany.name" translate translate-attr-placeholder="Name">
-      <input type="date" class="form-control" ng-model="newCompany.founded_at" translate translate-attr-placeholder="{% endverbatim %}{% trans "Founding Date" %}{% verbatim %}">
+        <span class="input-group date-field">
+          <input type="text" class="form-control"
+            ng-model="newCompany.founded_at"
+            uib-datepicker-popup="{{ datepicker.format }}"
+            datepicker-options="datepicker.options"
+            is-open="datepicker.opened"
+            show-button-bar="true"
+            close-text="Schliessen"
+            clear-text="Leeren"
+            current-text="Heute"
+            />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open_datepicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </span>
       <input type="number" class="form-control" ng-model="newCompany.count" translate translate-attr-placeholder="Share Count">
       <input type="number" class="form-control" ng-model="newCompany.face_value" translate translate-attr-placeholder="Face Value">
     </div>

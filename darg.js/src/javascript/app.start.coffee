@@ -1,4 +1,4 @@
-app = angular.module 'js.darg.app.start', ['js.darg.api', 'pascalprecht.translate']
+app = angular.module 'js.darg.app.start', ['js.darg.api', 'pascalprecht.translate', 'ui.bootstrap']
 
 app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.translations('de', django.catalog)
@@ -107,4 +107,15 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
 
     $scope.goto_shareholder = (shareholder_id) ->
         window.location = "/shareholder/"+shareholder_id+"/"
+
+    # --- DATEPICKER
+    $scope.datepicker = { opened: false }
+    $scope.datepicker.format = 'd. MMM yyyy'
+    $scope.datepicker.options = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false,
+    }
+    $scope.open_datepicker = ->
+        $scope.datepicker.opened = true
 ]

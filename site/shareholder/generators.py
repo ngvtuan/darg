@@ -14,7 +14,7 @@ User = get_user_model()
 DEFAULT_TEST_DATA = {
     'password': 'test',
     'username': 'testusername',
-    'date': '1.1.2016',
+    'date': '1. Jan 2016',  # datepicker format
     'title': '2016 OptionsPlan',
     'exercise_price': '2.05',
     'share_count': '156',

@@ -14,6 +14,9 @@ RAVEN_CONFIG = {
     'dsn': (
         'http://cc2e8566f011445e8ca861dfafc5bb3c:d0e872aa4c504ce4a49f6c69f9'
         '1a10d4@aggregator.ttg-dresden.de:9000/5'
+    'dsn_public': (
+        'http://cc2e8566f011445e8ca861dfafc5bb3c'
+        '@aggregator.ttg-dresden.de:9000/5'
     ),
 }
 

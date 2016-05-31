@@ -48,7 +48,7 @@
       {% verbatim %}
       <tr class="panel" ng-repeat="option_transaction in option_plan.optiontransaction_set">
         <td>
-          <div>{{ option_transaction.bought_at | date : 'd.MM.yy' }}</div>
+          <div class="bought-at">{{ option_transaction.bought_at | date : 'd.MM.yy' }}</div>
           <div ng-show="option_transaction.is_draft" class="draft">
             {% endverbatim %}
             {% trans "Draft" %}

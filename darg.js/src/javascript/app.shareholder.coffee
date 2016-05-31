@@ -3,6 +3,7 @@ app = angular.module 'js.darg.app.shareholder', ['js.darg.api', 'xeditable', 'pa
 app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.translations('de', django.catalog)
     $translateProvider.preferredLanguage('de')
+    $translateProvider.useSanitizeValueStrategy('escaped')
 ]
 
 app.controller 'ShareholderController', ['$scope', '$http', 'Shareholder', ($scope, $http, Shareholder) ->

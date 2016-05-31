@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-31 11:38+0000\n"
+"POT-Creation-Date: 2016-05-31 22:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,24 +25,24 @@ msgstr ""
 msgid "Please enter your capital increase data"
 msgstr ""
 
-#: project/templates/_add_capital_form.html:12
-#: project/templates/_add_option_plan_form.html:11
-#: project/templates/_add_position_form.html:22
-#: project/templates/_split_shares_form.html:12
+#: project/templates/_add_capital_form.html:26
+#: project/templates/_add_option_plan_form.html:26
+#: project/templates/_add_position_form.html:37
+#: project/templates/_split_shares_form.html:26
 msgid "Security"
 msgstr ""
 
-#: project/templates/_add_capital_form.html:17
-#: project/templates/_add_option_plan_form.html:18
-#: project/templates/_add_option_transaction_form.html:22
-#: project/templates/_add_position_form.html:29
+#: project/templates/_add_capital_form.html:31
+#: project/templates/_add_option_plan_form.html:33
+#: project/templates/_add_option_transaction_form.html:37
+#: project/templates/_add_position_form.html:44
 #: project/templates/_add_shareholder_form.html:15
-#: project/templates/_split_shares_form.html:18
+#: project/templates/_split_shares_form.html:32
 msgid "Cancel"
 msgstr ""
 
-#: project/templates/_add_capital_form.html:18
-#: project/templates/_add_position_form.html:30
+#: project/templates/_add_capital_form.html:32
+#: project/templates/_add_position_form.html:45
 msgid "Add Position"
 msgstr ""
 
@@ -55,11 +55,10 @@ msgid "Please enter your company name:"
 msgstr ""
 
 #: project/templates/_add_company_form.html:11
-#: project/templates/active_shareholder_captable.pdf.html:82
-msgid "Founding Date"
+msgid "Founding Date:"
 msgstr ""
 
-#: project/templates/_add_company_form.html:16
+#: project/templates/_add_company_form.html:31
 msgid "Add Company"
 msgstr ""
 
@@ -67,11 +66,15 @@ msgstr ""
 msgid "Please enter your option plan data:"
 msgstr ""
 
-#: project/templates/_add_option_plan_form.html:19
+#: project/templates/_add_option_plan_form.html:8
+msgid "Board Approval Date"
+msgstr ""
+
+#: project/templates/_add_option_plan_form.html:34
 msgid "Add Option-Plan"
 msgstr ""
 
-#: project/templates/_add_option_plan_form.html:22
+#: project/templates/_add_option_plan_form.html:37
 msgid "Approved Option Plan PDF can be uploaded later in Plan's Edit Form"
 msgstr ""
 
@@ -79,21 +82,25 @@ msgstr ""
 msgid "Please enter your Option data:"
 msgstr ""
 
-#: project/templates/_add_option_transaction_form.html:10
-#: project/templates/_add_position_form.html:17
+#: project/templates/_add_option_transaction_form.html:8
+msgid "Buying Date"
+msgstr ""
+
+#: project/templates/_add_option_transaction_form.html:25
+#: project/templates/_add_position_form.html:32
 msgid "Buyer"
 msgstr ""
 
-#: project/templates/_add_option_transaction_form.html:13
+#: project/templates/_add_option_transaction_form.html:28
 msgid "Option Plan"
 msgstr ""
 
-#: project/templates/_add_option_transaction_form.html:17
-#: project/templates/_add_position_form.html:13
+#: project/templates/_add_option_transaction_form.html:32
+#: project/templates/_add_position_form.html:28
 msgid "Seller"
 msgstr ""
 
-#: project/templates/_add_option_transaction_form.html:23
+#: project/templates/_add_option_transaction_form.html:38
 msgid "Add Option"
 msgstr ""
 
@@ -105,11 +112,11 @@ msgstr ""
 msgid "On (date)"
 msgstr ""
 
-#: project/templates/_add_position_form.html:11
+#: project/templates/_add_position_form.html:26
 msgid "from"
 msgstr ""
 
-#: project/templates/_add_position_form.html:15
+#: project/templates/_add_position_form.html:30
 msgid "to"
 msgstr ""
 
@@ -126,7 +133,7 @@ msgstr ""
 msgid "Please enter your share split data"
 msgstr ""
 
-#: project/templates/_split_shares_form.html:15
+#: project/templates/_split_shares_form.html:29
 msgid ""
 "Please note that the split will leave partial share rights unhandled. You "
 "must assign those options to the shareholders and either pay, trade or "
@@ -135,7 +142,7 @@ msgid ""
 "for each shareholder."
 msgstr ""
 
-#: project/templates/_split_shares_form.html:19
+#: project/templates/_split_shares_form.html:33
 msgid "Add Share Split"
 msgstr ""
 
@@ -167,6 +174,10 @@ msgstr ""
 
 #: project/templates/active_shareholder_captable.pdf.html:79
 msgid "Provisioned Capital"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:82
+msgid "Founding Date"
 msgstr ""
 
 #: project/templates/active_shareholder_captable.pdf.html:88
@@ -201,100 +212,104 @@ msgstr ""
 msgid "Optionen (%%)"
 msgstr ""
 
-#: project/templates/index.html:18
+#: project/templates/index.html:19
+msgid "Gratis Aktienbuch-Muster"
+msgstr ""
+
+#: project/templates/index.html:21
 msgid "Login"
 msgstr ""
 
-#: project/templates/index.html:19
+#: project/templates/index.html:22
 msgid "Blog"
 msgstr ""
 
-#: project/templates/index.html:21 project/templates/index.html.py:22
-#: project/templates/index.html:30 project/templates/index.html.py:31
-#: project/templates/index.html:56 project/templates/index.html.py:57
+#: project/templates/index.html:24 project/templates/index.html.py:25
+#: project/templates/index.html:33 project/templates/index.html.py:34
+#: project/templates/index.html:59 project/templates/index.html.py:60
 msgid "Try for free"
 msgstr ""
 
-#: project/templates/index.html:28
+#: project/templates/index.html:31
 msgid "Das Online-Aktienbuch"
 msgstr ""
 
-#: project/templates/index.html:29
+#: project/templates/index.html:32
 msgid "Mit Sicherheit gesetzeskonform durch automatische Validierung."
 msgstr ""
 
-#: project/templates/index.html:43
+#: project/templates/index.html:46
 msgid "Jetzt ab"
 msgstr ""
 
-#: project/templates/index.html:44
+#: project/templates/index.html:47
 msgid "4,99"
 msgstr ""
 
-#: project/templates/index.html:45
+#: project/templates/index.html:48
 msgid "CHF/mtl."
 msgstr ""
 
-#: project/templates/index.html:50
+#: project/templates/index.html:53
 msgid "Eingabe alle Daten mit maximaler Effizienz."
 msgstr ""
 
-#: project/templates/index.html:51
+#: project/templates/index.html:54
 msgid "Revisionssichere Ablage."
 msgstr ""
 
-#: project/templates/index.html:52
+#: project/templates/index.html:55
 msgid "Automatische Validierung der Daten."
 msgstr ""
 
-#: project/templates/index.html:53
+#: project/templates/index.html:56
 msgid "10 Jahre Datengarantie."
 msgstr ""
 
-#: project/templates/index.html:54
+#: project/templates/index.html:57
 msgid "Aktienbuch als PDF herunterladen."
 msgstr ""
 
-#: project/templates/index.html:65
+#: project/templates/index.html:68
 msgid ""
 "Die Automatische Validierung verhindert Fehler und sichert maximale "
 "Gesetzeskonformitaet. Das Online-Aktienbuch macht die Pflege schnell und "
 "effizient, damit Zeit frei wird fuer die wirklichen Herausforderungen"
 msgstr ""
 
-#: project/templates/index.html:74
+#: project/templates/index.html:77
 msgid "Do you know our Blog?"
 msgstr ""
 
-#: project/templates/index.html:79 project/templates/index.html.py:80
+#: project/templates/index.html:82 project/templates/index.html.py:83
 msgid "Read our Blog"
 msgstr ""
 
-#: project/templates/index.html:87
+#: project/templates/index.html:90
 msgid "Subscribe to our newsletter!"
 msgstr ""
 
-#: project/templates/index.html:88
+#: project/templates/index.html:91
 msgid "Stay up to date about our work and latest share register industry news"
 msgstr ""
 
-#: project/templates/index.html:95
+#: project/templates/index.html:98
 msgid "Geben Sie Ihre Email-Adresse ein"
 msgstr ""
 
-#: project/templates/index.html:124 project/templates/index.html.py:125
+#: project/templates/index.html:127 project/templates/index.html.py:128
 msgid "Read our blog"
 msgstr ""
 
-#: project/templates/index.html:129 project/templates/index.html.py:130
+#: project/templates/index.html:132 project/templates/index.html.py:133
 msgid "Service Status"
 msgstr ""
 
-#: project/templates/index.html:134 project/templates/index.html.py:135
+#: project/templates/index.html:137 project/templates/index.html.py:138
 msgid "AGB"
 msgstr ""
 
-#: project/templates/index.html:139 project/templates/index.html.py:140
+#: project/templates/index.html:142 project/templates/index.html.py:143
 msgid "A service provided by KKD Komm. GmbH"
 msgstr ""
 

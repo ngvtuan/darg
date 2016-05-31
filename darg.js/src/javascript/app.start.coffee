@@ -3,6 +3,7 @@ app = angular.module 'js.darg.app.start', ['js.darg.api', 'pascalprecht.translat
 app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.translations('de', django.catalog)
     $translateProvider.preferredLanguage('de')
+    $translateProvider.useSanitizeValueStrategy('escaped')
 ]
 
 app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', '$timeout', ($scope, $http, CompanyAdd, Shareholder, User, Company, $timeout) ->
@@ -47,10 +48,6 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
             $scope.total_shares = item.share_count + $scope.total_shares
 
     $scope.add_company = ->
-        if $scope.newCompany.founded_at
-            $scope.newCompany.founded_at = $scope.newCompany.founded_at.toISOString().substring(0, 10)
-        else
-            delete $scope.newCompany.founded_at
         $scope.newCompany.$save().then (result) ->
             $http.get('/services/rest/user').then (result) ->
                 $scope.user = result.data.results[0]

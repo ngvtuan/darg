@@ -3,6 +3,7 @@ app = angular.module 'js.darg.app.optionplan', ['js.darg.api', 'xeditable', 'ngF
 app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.translations('de', django.catalog)
     $translateProvider.preferredLanguage('de')
+    $translateProvider.useSanitizeValueStrategy('escaped')
 ]
 
 app.controller 'OptionPlanController', ['$scope', '$http', 'OptionPlan', 'Upload', '$timeout', ($scope, $http, OptionPlan, Upload, $timeout) ->

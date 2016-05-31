@@ -3,6 +3,7 @@ app = angular.module 'js.darg.app.options', ['js.darg.api','pascalprecht.transla
 app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.translations('de', django.catalog)
     $translateProvider.preferredLanguage('de')
+    $translateProvider.useSanitizeValueStrategy('escaped')
 ]
 
 app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTransaction', ($scope, $http, OptionPlan, OptionTransaction) ->
@@ -15,6 +16,9 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
     $scope.show_add_option_transaction = false
     $scope.show_add_option_plan = false
     $scope.newOptionPlan = new OptionPlan()
+    $scope.newOptionPlan.board_approved_at = new Date()
+    $scope.newOptionTransaction = new OptionTransaction()
+    $scope.newOptionTransaction.bought_at = new Date()
 
     $http.get('/services/rest/optionplan').then (result) ->
         angular.forEach result.data.results, (item) ->
@@ -31,8 +35,6 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
         $scope.loading = false
 
     $scope.add_option_plan = ->
-        if $scope.newOptionPlan.board_approved_at
-            $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10)
         $scope.newOptionPlan.$save().then (result) ->
             $scope.option_plans.push result
         .then ->
@@ -50,8 +52,6 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
             })
 
     $scope.add_option_transaction = ->
-        if $scope.newOptionTransaction.bought_at
-            $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10)
         $scope.newOptionTransaction.$save().then (result) ->
             $scope._reload_option_plans()
         .then ->

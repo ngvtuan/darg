@@ -31,7 +31,7 @@ def _add_company_to_user_via_rest(user):
     response = client.post(
         reverse('add_company'), {
             'name': 'company',
-            'founded_at': '2015-01-02',
+            'founded_at': '2015-01-02T23:00:00.000Z',
             'count': 1,
             'face_value': 2
         },
@@ -129,22 +129,27 @@ class TrackingTestCase(TestCase):
 
     def test_start_authorized_with_operator(self):
 
-        user = UserGenerator().generate()
+        try:
 
-        is_operator_added = _add_company_to_user_via_rest(user)
-        self.assertTrue(is_operator_added)
+            user = UserGenerator().generate()
 
-        is_loggedin = self.client.login(
-            username=user.username, password='test')
+            is_operator_added = _add_company_to_user_via_rest(user)
+            self.assertTrue(is_operator_added)
 
-        self.assertTrue(is_loggedin)
+            is_loggedin = self.client.login(
+                username=user.username, password='test')
 
-        response = self.client.get(reverse('start'), follow=True)
+            self.assertTrue(is_loggedin)
 
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue("UA-58468401-4" in response.content)
-        self.assertTrue("Willkommen" in response.content)
-        self.assertTrue("shareholder_list" in response.content)
+            response = self.client.get(reverse('start'), follow=True)
+
+            self.assertEqual(response.status_code, 200)
+            self.assertTrue("UA-58468401-4" in response.content)
+            self.assertTrue("Willkommen" in response.content)
+            self.assertTrue("shareholder_list" in response.content)
+
+        except Exception, e:
+            self._handle_exception(e)
 
     def test_start_nonauthorized(self):
 

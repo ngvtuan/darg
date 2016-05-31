@@ -12,7 +12,7 @@ from django.contrib.sites.models import Site
 from shareholder.generators import (
     OperatorGenerator, UserGenerator, CompanyGenerator,
     ShareholderGenerator, TwoInitialSecuritiesGenerator,
-    PositionGenerator, OptionTransactionGenerator
+    PositionGenerator, OptionTransactionGenerator, DEFAULT_TEST_DATA
 )
 from shareholder.models import (
     Operator, Shareholder, Position, Security, OptionTransaction
@@ -178,7 +178,7 @@ class PositionTestCase(TestCase):
         self.assertTrue(logged_in)
 
         data = {
-            "bought_at": "2016-01-01",
+            "bought_at": "2016-05-13T23:00:00.000Z",
             "buyer": {
                 "pk": buyer.pk,
                 "user": {
@@ -257,6 +257,8 @@ class PositionTestCase(TestCase):
         self.assertEqual(position.value, 1)
         self.assertEqual(position.buyer, buyer)
         self.assertEqual(position.seller, seller)
+        self.assertEqual(
+            position.bought_at.isoformat(), '2016-05-13')
 
     def test_delete_position(self):
         """

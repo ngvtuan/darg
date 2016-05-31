@@ -202,19 +202,19 @@ class PositionTestCase(TransactionTestCase):
             buyer=s1, seller=sc, count=398, value=100, security=security,
             bought_at=now-datetime.timedelta(days=9)
             )
-        p3 = PositionGenerator().generate(
+        PositionGenerator().generate(
             buyer=s2, seller=s1, count=80, value=100, security=security,
             bought_at=now-datetime.timedelta(days=8)
             )
-        p4 = PositionGenerator().generate(
+        PositionGenerator().generate(
             buyer=s2, seller=s1, count=437, value=100, security=security,
             bought_at=now-datetime.timedelta(days=7)
             )
-        p5 = PositionGenerator().generate(
+        PositionGenerator().generate(
             buyer=s1, seller=sc, count=837, value=100, security=security,
             bought_at=now-datetime.timedelta(days=6)
             )
-        p6 = PositionGenerator().generate(
+        PositionGenerator().generate(
             buyer=s1, seller=sc, count=68, value=100, security=security,
             bought_at=now-datetime.timedelta(days=5)
             )
@@ -228,7 +228,7 @@ class PositionTestCase(TransactionTestCase):
         }
         company.split_shares(split_data)
 
-        p8 = PositionGenerator().generate(
+        PositionGenerator().generate(
             buyer=s1, seller=sc, count=3350, value=100, security=security,
             bought_at=now-datetime.timedelta(days=3)
             )
@@ -351,19 +351,19 @@ class ShareholderTestCase(TestCase):
         s3 = ShareholderGenerator().generate(company=company)
         now = datetime.datetime.now()
 
-        p0 = PositionGenerator().generate(
+        PositionGenerator().generate(
             buyer=sc, count=1000000, value=100, security=security,
             bought_at=now-datetime.timedelta(days=11)
             )
-        p1 = PositionGenerator().generate(
+        PositionGenerator().generate(
             buyer=s1, seller=sc, count=500000, value=100, security=security,
             bought_at=now-datetime.timedelta(days=10)
             )
-        p2 = PositionGenerator().generate(
+        PositionGenerator().generate(
             buyer=s2, seller=sc, count=5000, value=100, security=security,
             bought_at=now-datetime.timedelta(days=9)
             )
-        p3 = PositionGenerator().generate(
+        PositionGenerator().generate(
             buyer=s3, seller=sc, count=50, value=100, security=security,
             bought_at=now-datetime.timedelta(days=8)
             )
@@ -372,7 +372,7 @@ class ShareholderTestCase(TestCase):
         self.assertEqual(s2.share_percent(), '0.99')
         self.assertEqual(s3.share_percent(), '0.01')
 
-        p4 = PositionGenerator().generate(
+        PositionGenerator().generate(
             buyer=s2, seller=s1, count=250000, value=100, security=security,
             bought_at=now-datetime.timedelta(days=7)
             )
@@ -457,6 +457,8 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
             self.assertTrue(app.is_transfer_option_shown(
                 buyer=self.buyer, seller=self.seller
             ))
+            self.assertTrue(app.is_option_date_equal('13.05.16'))
+
         except Exception, e:
             self._handle_exception(e)
 

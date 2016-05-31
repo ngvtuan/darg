@@ -3,6 +3,7 @@ app = angular.module 'js.darg.app.company', ['js.darg.api', 'xeditable', 'ngFile
 app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.translations('de', django.catalog)
     $translateProvider.preferredLanguage('de')
+    $translateProvider.useSanitizeValueStrategy('escaped')
 ]
 
 app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'Operator', 'Upload', '$timeout', ($scope, $http, Company, Country, Operator, Upload, $timeout) ->

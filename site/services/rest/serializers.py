@@ -77,7 +77,7 @@ class AddCompanySerializer(serializers.Serializer):
 
     name = serializers.CharField(max_length=255)
     face_value = serializers.DecimalField(max_digits=19, decimal_places=4)
-    founded_at = serializers.DateField(required=False)
+    founded_at = serializers.DateTimeField(required=False)
     count = serializers.IntegerField()
 
     def create(self, validated_data):
@@ -355,7 +355,7 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer):
     buyer = ShareholderSerializer(many=False, required=False)
     seller = ShareholderSerializer(many=False, required=False)
     security = SecuritySerializer(many=False, required=True)
-    bought_at = serializers.DateField()  # e.g. 2015-06-02T23:00:00.000Z
+    bought_at = serializers.DateTimeField()  # e.g. 2015-06-02T23:00:00.000Z
 
     class Meta:
         model = Position
@@ -418,7 +418,7 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer):
 class OptionTransactionSerializer(serializers.HyperlinkedModelSerializer):
     buyer = ShareholderSerializer(many=False, required=True)
     seller = ShareholderSerializer(many=False, required=True)
-    bought_at = serializers.DateField()  # e.g. 2015-06-02T23:00:00.000Z
+    bought_at = serializers.DateTimeField()  # e.g. 2015-06-02T23:00:00.000Z
 
     class Meta:
         model = OptionTransaction
@@ -461,7 +461,7 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
     security = SecuritySerializer(many=False, required=True)
     optiontransaction_set = OptionTransactionSerializer(many=True,
                                                         read_only=True)
-    board_approved_at = serializers.DateField()
+    board_approved_at = serializers.DateTimeField()
 
     class Meta:
         model = OptionPlan

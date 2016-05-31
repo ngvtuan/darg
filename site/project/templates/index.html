@@ -116,7 +116,31 @@
   </div>
   <footer>
     <div class="container">
-      {% trans "A service provided by KKD Komm. GmbH" %}
+      <ul>
+        {% for page in flatpages %}
+          <li><a href="{{ page.url }}" class="btn-inline">{{ page.title }}</a> | </li>
+        {% endfor %}
+        <li>
+          <a href="/blog/" title="{% trans "Read our blog" %}" class="btn-inline">
+            {% trans "Read our blog" %}
+          </a> |
+        </li>
+        <li>
+          <a href="http://uptime.statuscake.com/?TestID=uaZ8Xyv6rE" title="{% trans "Service Status" %}" class="btn-inline">
+            {% trans "Service Status" %}
+          </a> |
+        </li>
+        <li>
+          <a href="http://www1.das-aktienregister.ch/agb" title="{% trans "AGB" %}" class="btn-inline">
+            {% trans "AGB" %}
+          </a> |
+        </li>
+        <li>
+          <a href="http://www.kkd-partners.com" title="{% trans "A service provided by KKD Komm. GmbH" %}" class="btn-inline">
+            {% trans "A service provided by KKD Komm. GmbH" %}
+          </a>
+        </li>
+      </ul>
     </div>
   </footer>
 </div>

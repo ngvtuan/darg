@@ -2840,26 +2840,22 @@ html, body {
 .core .container .spinner img {
   margin-left: 20%;
 }
-/* line 222, ../../sass/screen.sass */
-.core .container .orange {
-  color: #b7a533 !important;
-}
 
-/* line 227, ../../sass/screen.sass */
+/* line 224, ../../sass/screen.sass */
 nav.navbar a:not(.navbar-brand) {
   color: #337ab7 !important;
 }
-/* line 230, ../../sass/screen.sass */
+/* line 227, ../../sass/screen.sass */
 nav.navbar a.navbar-brand img {
   position: relative;
   top: -0.3em;
 }
-/* line 233, ../../sass/screen.sass */
+/* line 230, ../../sass/screen.sass */
 nav.navbar .navbar-text {
   margin-top: 18px;
 }
 
-/* line 239, ../../sass/screen.sass */
+/* line 236, ../../sass/screen.sass */
 div#auth input, div#auth button {
   display: block;
   background-color: transparent;
@@ -2870,7 +2866,7 @@ div#auth input, div#auth button {
   padding-right: 0.3em;
   margin: 0.3em 0.3em 0.3em 0em;
 }
-/* line 248, ../../sass/screen.sass */
+/* line 245, ../../sass/screen.sass */
 div#auth .registration-form {
   float: left;
   width: 50%;
@@ -2882,11 +2878,11 @@ div#auth .registration-form {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 250, ../../sass/screen.sass */
+/* line 247, ../../sass/screen.sass */
 div#auth .registration-form .helptext {
   display: none;
 }
-/* line 252, ../../sass/screen.sass */
+/* line 249, ../../sass/screen.sass */
 div#auth .registration-teaser {
   float: left;
   width: 37.5%;
@@ -2898,13 +2894,13 @@ div#auth .registration-teaser {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 254, ../../sass/screen.sass */
+/* line 251, ../../sass/screen.sass */
 div#auth .registration-teaser img {
   width: 27em;
   margin-top: 6em;
 }
 
-/* line 260, ../../sass/screen.sass */
+/* line 257, ../../sass/screen.sass */
 .intro {
   background-size: cover;
   background-image: linear-gradient(90deg, #2090c5 0%, #337ab7);
@@ -2912,15 +2908,15 @@ div#auth .registration-teaser img {
   position: relative;
   color: #fff;
 }
-/* line 266, ../../sass/screen.sass */
+/* line 263, ../../sass/screen.sass */
 .intro header.home {
   padding: 3em 0 3em;
 }
-/* line 269, ../../sass/screen.sass */
+/* line 266, ../../sass/screen.sass */
 .intro header.home .container a {
   margin: 0 0.5em 0 0.5em;
 }
-/* line 271, ../../sass/screen.sass */
+/* line 268, ../../sass/screen.sass */
 .intro header.home .container .logo {
   float: left;
   width: 37.5%;
@@ -2934,18 +2930,18 @@ div#auth .registration-teaser img {
   text-align: left;
   font-size: 1.4em;
 }
-/* line 275, ../../sass/screen.sass */
+/* line 272, ../../sass/screen.sass */
 .intro header.home .container .logo .el-icon-leaf {
   top: -0.7em;
   position: relative;
   font-size: 0.7em;
   left: -0.4em;
 }
-/* line 280, ../../sass/screen.sass */
+/* line 277, ../../sass/screen.sass */
 .intro header.home .container .menu {
   float: left;
-  width: 62.5%;
-  margin-left: 37.5%;
+  width: 37.5%;
+  margin-left: 62.5%;
   margin-right: -100%;
   padding-left: 10px;
   padding-right: 10px;
@@ -2954,108 +2950,115 @@ div#auth .registration-teaser img {
   box-sizing: border-box;
   text-align: right;
 }
-/* line 283, ../../sass/screen.sass */
+/* line 280, ../../sass/screen.sass */
 .intro header.home .container .btn-inline {
   border: none;
   color: white;
   font-size: 1em;
   hover-text-decoration: none;
 }
-/* line 289, ../../sass/screen.sass */
+/* line 286, ../../sass/screen.sass */
 .intro a.btn-white {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
   color: #337ab7;
   border-color: #337ab7;
 }
-/* line 293, ../../sass/screen.sass */
+/* line 290, ../../sass/screen.sass */
 .intro footer {
   padding: 2em 0 2em;
   font-size: 50%;
 }
-/* line 296, ../../sass/screen.sass */
+/* line 293, ../../sass/screen.sass */
 .intro blockquote {
   background-color: transparent;
 }
-/* line 298, ../../sass/screen.sass */
+/* line 295, ../../sass/screen.sass */
 .intro blockquote p {
   color: #fff;
 }
-/* line 300, ../../sass/screen.sass */
+/* line 297, ../../sass/screen.sass */
 .intro blockquote p.says {
   font-size: 2em;
   line-height: 1.5em;
   text-align: center;
 }
-/* line 304, ../../sass/screen.sass */
+/* line 301, ../../sass/screen.sass */
 .intro blockquote p.says:before {
   color: #fff;
 }
-/* line 306, ../../sass/screen.sass */
+/* line 303, ../../sass/screen.sass */
 .intro blockquote p.says:after {
   color: #fff;
 }
-/* line 308, ../../sass/screen.sass */
+/* line 305, ../../sass/screen.sass */
 .intro .container {
   margin-top: 0em;
   text-align: center;
 }
-/* line 311, ../../sass/screen.sass */
+/* line 308, ../../sass/screen.sass */
 .intro .container h1 {
   font-size: 2.2em;
   font-weight: bold;
 }
-/* line 314, ../../sass/screen.sass */
+/* line 311, ../../sass/screen.sass */
 .intro .container h2 {
   font-size: 1.5em;
 }
-/* line 316, ../../sass/screen.sass */
+/* line 313, ../../sass/screen.sass */
 .intro .container .main-screenshot {
   margin-top: 1em;
 }
-/* line 318, ../../sass/screen.sass */
+/* line 315, ../../sass/screen.sass */
 .intro .benefits {
   background-color: #fff;
   color: #666;
   text-align: left;
   padding: 2em 0 2em;
 }
-/* line 323, ../../sass/screen.sass */
+/* line 320, ../../sass/screen.sass */
 .intro .benefits ul > li {
   list-style: none;
   font-size: 2em;
 }
-/* line 326, ../../sass/screen.sass */
+/* line 323, ../../sass/screen.sass */
 .intro .benefits a.btn-focus {
   background-color: #337ab7;
   color: #fff;
 }
-/* line 329, ../../sass/screen.sass */
+/* line 326, ../../sass/screen.sass */
 .intro .summary {
   padding: 3em 0 3em;
 }
-/* line 331, ../../sass/screen.sass */
+/* line 328, ../../sass/screen.sass */
 .intro .blog {
   padding: 5em 0 5em;
   background-color: #fff;
   color: #666;
 }
-/* line 335, ../../sass/screen.sass */
+/* line 332, ../../sass/screen.sass */
 .intro .blog a {
   background-color: #337ab7;
   color: #fff;
 }
-/* line 338, ../../sass/screen.sass */
+/* line 335, ../../sass/screen.sass */
 .intro .blog h2 {
   font-size: 2em;
 }
-/* line 340, ../../sass/screen.sass */
+/* line 337, ../../sass/screen.sass */
 .intro .blog blockquote .says {
   color: #666;
-  font-size: 1.1em;
 }
-/* line 343, ../../sass/screen.sass */
+/* line 339, ../../sass/screen.sass */
 .intro .blog blockquote .says:before, .intro .blog blockquote .says:after {
   color: #337ab7;
+}
+/* line 341, ../../sass/screen.sass */
+.intro .newsletter {
+  padding-top: 4em;
+}
+/* line 343, ../../sass/screen.sass */
+.intro .newsletter #mc_embed_signup {
+  margin-top: 4em;
 }
 /* line 345, ../../sass/screen.sass */
 .intro .price-badge {

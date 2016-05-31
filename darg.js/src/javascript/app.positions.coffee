@@ -48,6 +48,10 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
+            Raven.captureMessage('form error', {
+                level: 'warning',
+                extra: { rejection: rejection },
+            })
 
     $scope.delete_position = (position) ->
         $http.delete('/services/rest/position/'+position.pk).then (result) ->
@@ -73,6 +77,10 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $scope.show_split = false
         , (rejection) ->
             $scope.errors = rejection.data
+            Raven.captureMessage('form error', {
+                level: 'warning',
+                extra: { rejection: rejection },
+            })
 
     $scope.show_add_position_form = ->
         $scope.show_add_position = true

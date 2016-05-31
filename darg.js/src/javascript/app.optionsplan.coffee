@@ -55,6 +55,9 @@ app.controller 'OptionPlanController', ['$scope', '$http', 'OptionPlan', 'Upload
                   $scope.pdf_upload_errors = response.data
                   $scope.loading = false
               ), (evt) ->
+                Raven.captureException(evt, {
+                    level: 'warning',
+                })
                 return
               return
 ]

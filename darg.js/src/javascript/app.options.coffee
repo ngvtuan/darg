@@ -1,4 +1,4 @@
-app = angular.module 'js.darg.app.options', ['js.darg.api','pascalprecht.translate']
+app = angular.module 'js.darg.app.options', ['js.darg.api','pascalprecht.translate','ui.bootstrap']
 
 app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.translations('de', django.catalog)
@@ -97,5 +97,16 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
         $scope.show_add_option_transaction = false
         $scope.newOptionPlan = new OptionPlan()
         $scope.newOptionTransaction = new OptionTransaction()
+
+    # --- DATEPICKER
+    $scope.datepicker = { opened: false }
+    $scope.datepicker.format = 'd. MMM yyyy'
+    $scope.datepicker.options = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false,
+    }
+    $scope.open_datepicker = ->
+        $scope.datepicker.opened = true
 
 ]

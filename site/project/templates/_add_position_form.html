@@ -7,7 +7,22 @@
     <div class="form-group block-level">
       <div>
         {% endverbatim %} {% trans "On (date)" %} {% verbatim %}
-        <input class="form-control" ng-model="newPosition.bought_at" translate translate-attr-placeholder="Date">
+        <span class="input-group date-field">
+          <input type="text" class="form-control"
+            ng-model="newPosition.bought_at"
+            uib-datepicker-popup="{{ datepicker.format }}"
+            datepicker-options="datepicker.options"
+            is-open="datepicker.opened"
+            show-button-bar="true"
+            close-text="Schliessen"
+            clear-text="Leeren"
+            current-text="Heute"
+            />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open_datepicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </span>
+
         {% endverbatim %} {% trans "from" %} {% verbatim %}
         <select type="email" class="form-control" ng-model="newPosition.seller" ng-options="shareholder as shareholder.full_name for shareholder in shareholders" translate translate-attr-placeholder="Seller">
           <option value='' disabled>{% endverbatim %}{% trans "Seller" %}{% verbatim %}</option>

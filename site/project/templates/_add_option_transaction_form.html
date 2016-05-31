@@ -5,7 +5,21 @@
 <div>
   <form class="form-inline">
     <div class="form-group block-level">
-      <input type="date" class="form-control" ng-model="newOptionTransaction.bought_at" translate translate-attr-placeholder="Date">
+        <span class="input-group date-field">
+          <input type="text" class="form-control"
+            ng-model="newOptionTransaction.bought_at"
+            uib-datepicker-popup="{{ datepicker.format }}"
+            datepicker-options="datepicker.options"
+            is-open="datepicker.opened"
+            show-button-bar="true"
+            close-text="Schliessen"
+            clear-text="Leeren"
+            current-text="Heute"
+            />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open_datepicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </span>
       <select class="form-control" ng-model="newOptionTransaction.buyer" ng-options="shareholder as shareholder.user.email for shareholder in shareholders" translate translate-attr-placeholder="Buyer">
         <option value='' disabled>{% endverbatim %}{% trans "Buyer" %}{% verbatim %}</option>
       </select>

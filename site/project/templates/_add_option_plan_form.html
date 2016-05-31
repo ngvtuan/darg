@@ -5,7 +5,21 @@
 <div>
   <form class="form-inline">
     <div class="form-group block-level">
-      <input type="date" class="form-control" ng-model="newOptionPlan.board_approved_at" translate translate-attr-placeholder="Board Approval Date" data-date-format="yyyy-mm-dd" validatedateformat calendar>
+        <span class="input-group date-field">
+          <input type="text" class="form-control"
+            ng-model="newOptionPlan.board_approved_at"
+            uib-datepicker-popup="{{ datepicker.format }}"
+            datepicker-options="datepicker.options"
+            is-open="datepicker.opened"
+            show-button-bar="true"
+            close-text="Schliessen"
+            clear-text="Leeren"
+            current-text="Heute"
+            />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open_datepicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </span>
       <input type="text" class="form-control" ng-model="newOptionPlan.title" translate translate-attr-placeholder="Title" ng-maxlength="255">
       <select class="form-control" ng-model="newOptionPlan.security" ng-options="security as security.readable_title for security in securities" translate translate-attr-placeholder="Underlying Asset">
         <option value='' disabled>{% endverbatim %}{% trans "Security" %}{% verbatim %}</option>

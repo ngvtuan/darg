@@ -1,4 +1,4 @@
-app = angular.module 'js.darg.app.shareholder', ['js.darg.api', 'xeditable', 'pascalprecht.translate']
+app = angular.module 'js.darg.app.shareholder', ['js.darg.api', 'xeditable', 'pascalprecht.translate', 'ui.bootstrap']
 
 app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.translations('de', django.catalog)

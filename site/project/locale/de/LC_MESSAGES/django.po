@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-31 20:10+0000\n"
-"PO-Revision-Date: 2016-05-31 20:11+0000\n"
+"POT-Creation-Date: 2016-05-31 22:00+0000\n"
+"PO-Revision-Date: 2016-05-31 22:00+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,12 @@ msgstr ""
 "<strong>Unternehmen anlegen:</strong><br/> Geben Sie ihren Firmennamen, das "
 "Gründungsdatum, die Anzahl und den Nennwert der Aktien bei Gründung ein:"
 
-#: project/templates/_add_company_form.html:30
+#: project/templates/_add_company_form.html:11
+#| msgid "Founding Date"
+msgid "Founding Date:"
+msgstr "Gründungsdatum"
+
+#: project/templates/_add_company_form.html:31
 msgid "Add Company"
 msgstr "Unternehmen hinzufügen"
 
@@ -85,7 +90,6 @@ msgid "Please enter your Option data:"
 msgstr "Bitte geben Sie die Daten für die Option an:"
 
 #: project/templates/_add_option_transaction_form.html:8
-#| msgid "Buy Date"
 msgid "Buying Date"
 msgstr "Kaufdatum"
 

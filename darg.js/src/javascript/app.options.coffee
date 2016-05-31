@@ -35,8 +35,6 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
         $scope.loading = false
 
     $scope.add_option_plan = ->
-        if $scope.newOptionPlan.board_approved_at
-            $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10)
         $scope.newOptionPlan.$save().then (result) ->
             $scope.option_plans.push result
         .then ->
@@ -54,8 +52,6 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
             })
 
     $scope.add_option_transaction = ->
-        if $scope.newOptionTransaction.bought_at
-            $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10)
         $scope.newOptionTransaction.$save().then (result) ->
             $scope._reload_option_plans()
         .then ->

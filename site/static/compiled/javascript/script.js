@@ -346,9 +346,6 @@
         };
       })(this));
       $scope.add_option_plan = function() {
-        if ($scope.newOptionPlan.board_approved_at) {
-          $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10);
-        }
         return $scope.newOptionPlan.$save().then(function(result) {
           return $scope.option_plans.push(result);
         }).then(function() {
@@ -367,9 +364,6 @@
         });
       };
       $scope.add_option_transaction = function() {
-        if ($scope.newOptionTransaction.bought_at) {
-          $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10);
-        }
         return $scope.newOptionTransaction.$save().then(function(result) {
           return $scope._reload_option_plans();
         }).then(function() {
@@ -560,20 +554,6 @@
         });
       });
       $scope.add_position = function() {
-        if ($scope.newPosition.bought_at) {
-          $scope.newPosition.bought_at = $scope.newPosition.bought_at.toISOString().substring(0, 10);
-        } else {
-          $scope.errors = {
-            'bought_at': 'not set'
-          };
-          Raven.captureMessage('form error', {
-            level: 'warning',
-            extra: {
-              rejection: rejection
-            }
-          });
-          return;
-        }
         return $scope.newPosition.$save().then(function(result) {
           return $scope.positions.push(result);
         }).then(function() {
@@ -804,11 +784,6 @@
         });
       });
       $scope.add_company = function() {
-        if ($scope.newCompany.founded_at) {
-          $scope.newCompany.founded_at = $scope.newCompany.founded_at.toISOString().substring(0, 10);
-        } else {
-          delete $scope.newCompany.founded_at;
-        }
         return $scope.newCompany.$save().then(function(result) {
           $http.get('/services/rest/user').then(function(result) {
             $scope.user = result.data.results[0];

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-31 20:10+0000\n"
+"POT-Creation-Date: 2016-05-31 22:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,7 +54,11 @@ msgstr ""
 msgid "Please enter your company name:"
 msgstr ""
 
-#: project/templates/_add_company_form.html:30
+#: project/templates/_add_company_form.html:11
+msgid "Founding Date:"
+msgstr ""
+
+#: project/templates/_add_company_form.html:31
 msgid "Add Company"
 msgstr ""
 

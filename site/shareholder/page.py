@@ -203,6 +203,19 @@ class OptionsPage(BasePage):
                     return True
         return False
 
+    def is_option_date_equal(self, date):
+        """
+        return the date from the markup to the test for verification
+
+        date must be string
+        """
+        for table in self.driver.find_elements_by_class_name('table'):
+            for td in table.find_elements_by_tag_name('td'):
+                div = td.find_elements_by_class_name('bought-at')
+                if len(div) > 0 and div[0].text == date:
+                    return True
+        return False
+
     # --  aggregations of logic
     def prepare_optionplan_fixtures(self):
         """ setup options plan """

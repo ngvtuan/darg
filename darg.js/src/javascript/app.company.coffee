@@ -55,6 +55,10 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
+            Raven.captureMessage('form error', {
+                level: 'warning',
+                extra: { rejection: rejection },
+            })
 
     # ATTENTION: django eats a url, angular eats an object.
     # hence needs conversion
@@ -78,6 +82,10 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
+            Raven.captureMessage('form error', {
+                level: 'warning',
+                extra: { rejection: rejection },
+            })
 
     # logo upload
     $scope.$watch 'files', ->
@@ -119,6 +127,9 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
                   $scope.logo_errors = response.data
                   $scope.loading = false
               ), (evt) ->
+                Raven.captureException(evt, {
+                    level: 'warning',
+                })
                 return
               return
 

@@ -49,6 +49,10 @@ app.controller 'ShareholderController', ['$scope', '$http', 'Shareholder', ($sco
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
+            Raven.captureMessage('form error', {
+                level: 'warning',
+                extra: { rejection: rejection },
+            })
 ]
 
 app.run (editableOptions) ->

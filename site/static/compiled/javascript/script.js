@@ -177,7 +177,13 @@
         }).then(function() {
           return $scope.errors = null;
         }, function(rejection) {
-          return $scope.errors = rejection.data;
+          $scope.errors = rejection.data;
+          return Raven.captureMessage('form error', {
+            level: 'warning',
+            extra: {
+              rejection: rejection
+            }
+          });
         });
       };
       $scope.edit_company = function() {
@@ -196,7 +202,13 @@
         }).then(function() {
           return $scope.errors = null;
         }, function(rejection) {
-          return $scope.errors = rejection.data;
+          $scope.errors = rejection.data;
+          return Raven.captureMessage('form error', {
+            level: 'warning',
+            extra: {
+              rejection: rejection
+            }
+          });
         });
       };
       $scope.$watch('files', function() {
@@ -240,7 +252,11 @@
                   $scope.logo_errors = response.data;
                   return $scope.loading = false;
                 });
-              }), function(evt) {});
+              }), function(evt) {
+                Raven.captureException(evt, {
+                  level: 'warning'
+                });
+              });
               return;
             }
           }
@@ -336,7 +352,13 @@
         }).then(function() {
           return $scope.errors = null;
         }, function(rejection) {
-          return $scope.errors = rejection.data;
+          $scope.errors = rejection.data;
+          return Raven.captureMessage('form error', {
+            level: 'warning',
+            extra: {
+              rejection: rejection
+            }
+          });
         });
       };
       $scope.add_option_transaction = function() {
@@ -351,7 +373,13 @@
         }).then(function() {
           return $scope.errors = null;
         }, function(rejection) {
-          return $scope.errors = rejection.data;
+          $scope.errors = rejection.data;
+          return Raven.captureMessage('form error', {
+            level: 'warning',
+            extra: {
+              rejection: rejection
+            }
+          });
         });
       };
       $scope._reload_option_plans = function() {
@@ -455,7 +483,11 @@
                   $scope.pdf_upload_errors = response.data;
                   return $scope.loading = false;
                 });
-              }), function(evt) {});
+              }), function(evt) {
+                Raven.captureException(evt, {
+                  level: 'warning'
+                });
+              });
               return;
             }
           }
@@ -518,7 +550,13 @@
         }).then(function() {
           return $scope.errors = null;
         }, function(rejection) {
-          return $scope.errors = rejection.data;
+          $scope.errors = rejection.data;
+          return Raven.captureMessage('form error', {
+            level: 'warning',
+            extra: {
+              rejection: rejection
+            }
+          });
         });
       };
       $scope.delete_position = function(position) {
@@ -550,7 +588,13 @@
           $scope.errors = null;
           return $scope.show_split = false;
         }, function(rejection) {
-          return $scope.errors = rejection.data;
+          $scope.errors = rejection.data;
+          return Raven.captureMessage('form error', {
+            level: 'warning',
+            extra: {
+              rejection: rejection
+            }
+          });
         });
       };
       $scope.show_add_position_form = function() {
@@ -645,7 +689,13 @@
         }).then(function() {
           return $scope.errors = null;
         }, function(rejection) {
-          return $scope.errors = rejection.data;
+          $scope.errors = rejection.data;
+          return Raven.captureMessage('form error', {
+            level: 'warning',
+            extra: {
+              rejection: rejection
+            }
+          });
         });
       };
     }
@@ -736,7 +786,13 @@
         }).then(function() {
           return $scope.errors = null;
         }, function(rejection) {
-          return $scope.errors = rejection.data;
+          $scope.errors = rejection.data;
+          return Raven.captureMessage('form error', {
+            level: 'warning',
+            extra: {
+              rejection: rejection
+            }
+          });
         });
       };
       $scope.add_shareholder = function() {
@@ -751,7 +807,13 @@
         }).then(function() {
           return $scope.errors = null;
         }, function(rejection) {
-          return $scope.errors = rejection.data;
+          $scope.errors = rejection.data;
+          return Raven.captureMessage('form error', {
+            level: 'warning',
+            extra: {
+              rejection: rejection
+            }
+          });
         });
       };
       $scope.show_add_shareholder_form = function() {

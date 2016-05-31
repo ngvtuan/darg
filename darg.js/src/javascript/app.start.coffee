@@ -74,6 +74,10 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
+            Raven.captureMessage('form error', {
+                level: 'warning',
+                extra: { rejection: rejection },
+            })
 
     $scope.add_shareholder = ->
         $scope.newShareholder.$save().then (result) ->
@@ -90,6 +94,10 @@ app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
+            Raven.captureMessage('form error', {
+                level: 'warning',
+                extra: { rejection: rejection },
+            })
 
     $scope.show_add_shareholder_form = ->
         $scope.show_add_shareholder = true

@@ -44,6 +44,10 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
+            Raven.captureMessage('form error', {
+                level: 'warning',
+                extra: { rejection: rejection },
+            })
 
     $scope.add_option_transaction = ->
         if $scope.newOptionTransaction.bought_at
@@ -59,6 +63,10 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
+            Raven.captureMessage('form error', {
+                level: 'warning',
+                extra: { rejection: rejection },
+            })
 
     $scope._reload_option_plans = () ->
         $scope.option_plans = []

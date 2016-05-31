@@ -14,6 +14,7 @@ from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from django.utils.translation import ugettext as _
+from django.contrib.flatpages.models import FlatPage
 
 from zinnia.models.entry import Entry
 
@@ -28,6 +29,7 @@ def index(request):
     context = RequestContext(request, {})
     if Entry.published.all().exists():
         context['latest_blog_entry'] = Entry.published.all()[0]
+    context['flatpages'] = FlatPage.objects.all()
     return HttpResponse(template.render(context))
 
 

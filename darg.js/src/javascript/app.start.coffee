@@ -3,6 +3,7 @@ app = angular.module 'js.darg.app.start', ['js.darg.api', 'pascalprecht.translat
 app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.translations('de', django.catalog)
     $translateProvider.preferredLanguage('de')
+    $translateProvider.useSanitizeValueStrategy('escaped')
 ]
 
 app.controller 'StartController', ['$scope', '$http', 'CompanyAdd', 'Shareholder', 'User', 'Company', '$timeout', ($scope, $http, CompanyAdd, Shareholder, User, Company, $timeout) ->

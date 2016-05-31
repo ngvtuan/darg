@@ -124,7 +124,8 @@
   app.config([
     '$translateProvider', function($translateProvider) {
       $translateProvider.translations('de', django.catalog);
-      return $translateProvider.preferredLanguage('de');
+      $translateProvider.preferredLanguage('de');
+      return $translateProvider.useSanitizeValueStrategy('escaped');
     }
   ]);
 
@@ -308,7 +309,8 @@
   app.config([
     '$translateProvider', function($translateProvider) {
       $translateProvider.translations('de', django.catalog);
-      return $translateProvider.preferredLanguage('de');
+      $translateProvider.preferredLanguage('de');
+      return $translateProvider.useSanitizeValueStrategy('escaped');
     }
   ]);
 
@@ -321,6 +323,9 @@
       $scope.show_add_option_transaction = false;
       $scope.show_add_option_plan = false;
       $scope.newOptionPlan = new OptionPlan();
+      $scope.newOptionPlan.board_approved_at = new Date();
+      $scope.newOptionTransaction = new OptionTransaction();
+      $scope.newOptionTransaction.bought_at = new Date();
       $http.get('/services/rest/optionplan').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
           return $scope.option_plans.push(item);
@@ -441,7 +446,8 @@
   app.config([
     '$translateProvider', function($translateProvider) {
       $translateProvider.translations('de', django.catalog);
-      return $translateProvider.preferredLanguage('de');
+      $translateProvider.preferredLanguage('de');
+      return $translateProvider.useSanitizeValueStrategy('escaped');
     }
   ]);
 
@@ -522,7 +528,8 @@
   app.config([
     '$translateProvider', function($translateProvider) {
       $translateProvider.translations('de', django.catalog);
-      return $translateProvider.preferredLanguage('de');
+      $translateProvider.preferredLanguage('de');
+      return $translateProvider.useSanitizeValueStrategy('escaped');
     }
   ]);
 
@@ -679,7 +686,8 @@
   app.config([
     '$translateProvider', function($translateProvider) {
       $translateProvider.translations('de', django.catalog);
-      return $translateProvider.preferredLanguage('de');
+      $translateProvider.preferredLanguage('de');
+      return $translateProvider.useSanitizeValueStrategy('escaped');
     }
   ]);
 
@@ -753,7 +761,8 @@
   app.config([
     '$translateProvider', function($translateProvider) {
       $translateProvider.translations('de', django.catalog);
-      return $translateProvider.preferredLanguage('de');
+      $translateProvider.preferredLanguage('de');
+      return $translateProvider.useSanitizeValueStrategy('escaped');
     }
   ]);
 

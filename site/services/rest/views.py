@@ -105,20 +105,12 @@ class CompanyViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['post'])
     def upload(self, request, pk=None):
         obj = self.get_object()
-        # modify data
-        serializer = CompanySerializer(data=request.data)
-        # add file to serializer
-        if serializer.is_valid():
-            obj.logo = request.FILES['logo']
-            obj.save()
-            return Response(CompanySerializer(
-                obj,
-                context={'request': request}).data,
-                status=status.HTTP_201_CREATED)
-        else:
-            return Response(
-                serializer.errors,
-                status=status.HTTP_400_BAD_REQUEST)
+        obj.logo = request.FILES['logo']
+        obj.save()
+        return Response(CompanySerializer(
+            obj,
+            context={'request': request}).data,
+            status=status.HTTP_201_CREATED)
 
     @detail_route(methods=['get'])
     def option_holder(self, request, pk=None):
@@ -127,9 +119,11 @@ class CompanyViewSet(viewsets.ModelViewSet):
         ohs = obj.get_active_option_holders()
         page = self.paginate_queryset(ohs)
         if page is not None:
-            serializer = OptionHolderSerializer(page, many=True, context={'request': request})
+            serializer = OptionHolderSerializer(
+                page, many=True, context={'request': request})
             return self.get_paginated_response(serializer.data)
-        serializer = OptionHolderSerializer(ohs, many=True, context={'request': request})
+        serializer = OptionHolderSerializer(
+            ohs, many=True, context={'request': request})
         return Response(serializer.data)
 
 

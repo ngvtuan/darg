@@ -387,11 +387,7 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer):
             kwargs.update({"seller": seller})
 
         else:
-            buyer = Shareholder.objects.get(
-                company=company,
-                user__first_name='Company',
-                user__last_name='itself',
-            )
+            buyer = company.get_company_shareholder()
             company.share_count = company.share_count + \
                 validated_data.get("count")
             company.save()

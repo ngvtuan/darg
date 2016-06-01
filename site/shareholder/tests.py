@@ -1,6 +1,7 @@
 import unittest
 import datetime
 import time
+from decimal import Decimal
 
 from django.test import TestCase, TransactionTestCase
 from django.test.client import Client
@@ -379,6 +380,29 @@ class ShareholderTestCase(TestCase):
             )
 
         self.assertEqual(s1.share_percent(), '49.50')
+
+    def test_share_value(self):
+        """
+        share value is last trated price
+        """
+        company = CompanyGenerator().generate(share_count=1000000)
+        security = SecurityGenerator().generate(company=company)
+        sc = ShareholderGenerator().generate(company=company)
+        s1 = ShareholderGenerator().generate(company=company)
+        now = datetime.datetime.now()
+
+        PositionGenerator().generate(
+            buyer=sc, count=1000000, value=1, security=security,
+            bought_at=now-datetime.timedelta(days=11)
+            )
+        p = PositionGenerator().generate(
+            buyer=s1, seller=sc, count=500000, value=100, security=security,
+            bought_at=now-datetime.timedelta(days=10)
+            )
+        p.value = None
+        p.save()
+
+        self.assertEqual(s1.share_value(), Decimal('500000.0000'))
 
 
 # --- FUNCTIONAL TESTS

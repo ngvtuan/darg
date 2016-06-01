@@ -91,13 +91,13 @@ class AddCompanySerializer(serializers.Serializer):
             founded_at=validated_data.get('founded_at')
         )
         security = Security.objects.create(
-            title="P",
+            title="C",
             count=validated_data.get("count"),
             company=company,
         )
         companyuser = User.objects.create(
             username=make_username('Company', 'itself', company.name),
-            first_name='Unternehmen:', last_name=company.name,
+            first_name='Unternehmen:', last_name=company.name[:30],
             email='info+{}@darg.ch'.format(slugify(company.name))
         )
         shareholder = Shareholder.objects.create(user=companyuser,

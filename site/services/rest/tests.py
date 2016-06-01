@@ -3,6 +3,7 @@ import datetime
 
 from rest_framework.test import APIClient
 from rest_framework import status
+from rest_framework.test import APITestCase
 
 from django.core.urlresolvers import reverse
 from django.test import TestCase
@@ -19,6 +20,33 @@ from shareholder.models import (
     )
 
 User = get_user_model()
+
+
+class AddCompanyTestCase(APITestCase):
+    """
+    test add company logic
+    """
+    def test_add_company(self):
+        """
+        confirm that we add all properly
+        #54: common stock as default security
+        """
+        user = UserGenerator().generate()
+        kwargs = {
+            "name": "Pariatur Rerum est voluptates ipsa in officia libero "
+                    "soluta omnis saepe voluptates omnis quidem autem veniam "
+                    "rerum molestiae incidunt",
+            "count": 36,
+            "face_value": 18,
+            "founded_at": "2016-05-31T23:00:00.000Z"
+        }
+
+        self.client.force_authenticate(user=user)
+        res = self.client.post(reverse('add_company'), kwargs)
+
+        self.assertEqual(res.status_code, 201)
+        company = user.operator_set.all()[0].company
+        self.assertEqual(company.security_set.all()[0].title, 'C')
 
 
 class CompanyViewSetTestCase(TestCase):
@@ -730,7 +758,8 @@ class OptionTransactionTestCase(TestCase):
         operator = OperatorGenerator().generate()
         user = operator.user
         seller = ShareholderGenerator().generate(company=operator.company)
-        optiontransaction = OptionTransactionGenerator().generate(seller=seller)
+        optiontransaction = OptionTransactionGenerator().generate(
+            seller=seller)
 
         logged_in = self.client.login(username=user.username, password='test')
         self.assertTrue(logged_in)

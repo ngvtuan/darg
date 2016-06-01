@@ -127,7 +127,8 @@ class OptionsPage(BasePage):
         inputs = form.find_elements_by_tag_name('input')
         selects = form.find_elements_by_tag_name('select')
 
-        inputs[0].send_keys(DEFAULT_TEST_DATA.get('date'))
+        inputs[0].send_keys(
+            kwargs.get('date') or DEFAULT_TEST_DATA.get('date'))
         inputs[1].send_keys(DEFAULT_TEST_DATA.get('count'))
         inputs[2].send_keys(DEFAULT_TEST_DATA.get('vesting_period'))
 
@@ -139,7 +140,9 @@ class OptionsPage(BasePage):
             select_input.extend([buyer.user.email])
         else:
             select_input.extend([''])
-        select_input.extend([DEFAULT_TEST_DATA.get('title')])
+        select_input.extend([
+            kwargs.get('title') or DEFAULT_TEST_DATA.get('title')
+        ])
         if seller:
             select_input.extend([seller.user.email])
 

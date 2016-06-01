@@ -14,7 +14,8 @@ from shareholder.models import Country, Shareholder, Security, Position
 from shareholder.generators import (
     ShareholderGenerator, PositionGenerator, UserGenerator,
     TwoInitialSecuritiesGenerator, OperatorGenerator, CompanyGenerator,
-    ComplexShareholderConstellationGenerator, SecurityGenerator
+    ComplexShareholderConstellationGenerator, SecurityGenerator,
+    OptionPlanGenerator
     )
 from shareholder import page
 
@@ -423,7 +424,8 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
 
     def setUp(self):
         self.operator = OperatorGenerator().generate()
-        TwoInitialSecuritiesGenerator().generate(company=self.operator.company)
+        self.securities = TwoInitialSecuritiesGenerator().generate(
+            company=self.operator.company)
         self.buyer = ShareholderGenerator().generate(
             company=self.operator.company)
         self.seller = ShareholderGenerator().generate(
@@ -517,3 +519,48 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
     @unittest.skip('not implemented')
     def test_base_use_case_negative_Vesting(self):
         pass
+
+    def test_date_save_error_78(self):
+        """
+        for some date the server stores the day before, for some not
+        good: 1.11.2016
+        bad: 15.5.2016)
+        """
+
+        self.optionplan = OptionPlanGenerator().generate(
+            company=self.operator.company,
+            security=self.securities[0]
+        )
+
+        try:
+
+            app = page.OptionsPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_transfer_option()
+            app.enter_transfer_option_data(
+                date='13. Mai 2016', buyer=self.buyer,
+                title=self.optionplan.title,
+                seller=self.operator.company.get_company_shareholder()
+            )
+            app.click_save_transfer_option()
+
+            self.assertTrue(app.is_no_errors_displayed())
+            self.assertTrue(app.is_transfer_option_shown(buyer=self.buyer))
+            self.assertTrue(app.is_option_date_equal('13.05.16'))
+
+            app.click_open_transfer_option()
+            app.enter_transfer_option_data(
+                date='1. Nov. 2016', buyer=self.buyer,
+                title=self.optionplan.title,
+                seller=self.operator.company.get_company_shareholder()
+            )
+            app.click_save_transfer_option()
+
+            self.assertTrue(app.is_no_errors_displayed())
+            self.assertTrue(app.is_transfer_option_shown(buyer=self.buyer))
+            self.assertTrue(app.is_option_date_equal('1.11.16'))
+
+            self._screenshot()
+
+        except Exception, e:
+            self._handle_exception(e)

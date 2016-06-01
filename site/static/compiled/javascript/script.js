@@ -143,9 +143,11 @@
       $http.get('/services/rest/company/' + company_id).then(function(result) {
         $scope.company = new Company(result.data);
         $scope.company.founded_at = new Date($scope.company.founded_at);
-        return $http.get($scope.company.country).then(function(result1) {
-          return $scope.company.country = result1.data;
-        });
+        if ($scope.company.country.length > 0) {
+          return $http.get($scope.company.country).then(function(result1) {
+            return $scope.company.country = result1.data;
+          });
+        }
       });
       $http.get('/services/rest/country').then(function(result) {
         return $scope.countries = result.data.results;
@@ -220,7 +222,7 @@
           $scope.files = [$scope.file];
         }
       });
-      return $scope.upload = function(files) {
+      $scope.upload = function(files) {
         var file, i, payload;
         if (files && files.length) {
           $scope.loading = true;
@@ -263,8 +265,30 @@
           }
         }
       };
+      $scope.datepicker = {
+        opened: false
+      };
+      $scope.datepicker.format = 'd.MM.yy';
+      $scope.datepicker.options = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false
+      };
+      return $scope.open_datepicker = function() {
+        return $scope.datepicker.opened = true;
+      };
     }
   ]);
+
+  app.directive('datepickerPopup', function() {
+    return {
+      restrict: 'EAC',
+      require: 'ngModel',
+      link: function(scope, element, attr, controller) {
+        controller.$formatters.shift();
+      }
+    };
+  });
 
   app.run(function(editableOptions) {
     editableOptions.theme = 'bs3';

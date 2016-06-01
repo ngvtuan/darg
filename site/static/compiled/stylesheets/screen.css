@@ -2429,6 +2429,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 /* line 7, ../../sass/_datepicker.sass */
 .uib-datepicker-popup button {
   color: initial;
+  border: none;
 }
 
 /* line 1, ../../sass/_blockquote.sass */

@@ -12,7 +12,7 @@ from django.contrib.sites.models import Site
 from shareholder.generators import (
     OperatorGenerator, UserGenerator, CompanyGenerator,
     ShareholderGenerator, TwoInitialSecuritiesGenerator,
-    PositionGenerator, OptionTransactionGenerator, DEFAULT_TEST_DATA
+    PositionGenerator, OptionTransactionGenerator
 )
 from shareholder.models import (
     Operator, Shareholder, Position, Security, OptionTransaction
@@ -508,6 +508,38 @@ class ShareholderTestCase(TestCase):
 
         # check proper db status
         user = User.objects.get(email="mike.hildebrand2@darg.com")
+
+    def test_add_duplicate_new_shareholder(self):
+        """
+        adds a new shareholder with same id"""
+
+        operator = OperatorGenerator().generate()
+        shareholder = ShareholderGenerator().generate(company=operator.company)
+        user = operator.user
+
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        data = {
+            u"user": {
+                u"first_name": u"Mike2Grüße",
+                u"last_name": u"Hildebrand2Grüße",
+                u"email": u"mike.hildebrand2@darg.com",
+            },
+            u"number": shareholder.number}
+
+        response = self.client.post(
+            '/services/rest/shareholders',
+            data,
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
+                user.auth_token.key), 'format': 'json'})
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(
+            response.data.get('number'),
+            [u'Diese Aktion\xe4rsnummer wird bereits verwendet. Bitte '
+             u'w\xe4hlen Sie eine andere.']
+        )
 
     def test_add_shareholder_for_existing_user_account(self):
         """ test to add a shareholder for an existing

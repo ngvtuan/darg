@@ -261,18 +261,19 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
         company = user.operator_set.all()[0].company
 
         if not validated_data.get('user').get('email'):
-            raise ValidationError(_('Email missing'))
+            raise ValidationError({'email': [_('Email missing')]})
 
         if not validated_data.get('user').get('first_name'):
-            raise ValidationError(_('First Name missing'))
+            raise ValidationError({'first_name': [_('First Name missing')]})
 
         if not validated_data.get('user').get('last_name'):
-            raise ValidationError(_('Last Name missing'))
+            raise ValidationError({'last_name': [_('Last Name missing')]})
 
         if company.shareholder_set.filter(
             number=validated_data.get('number')
         ).exists():
-            raise ValidationError(_('Shareholder Number must be unique'))
+            raise ValidationError(
+                {'number': [_('Shareholder Number must be unique')]})
 
         # get unique username
         username = make_username(

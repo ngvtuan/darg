@@ -343,8 +343,12 @@ class Shareholder(models.Model):
             return 0
 
         # last payed price
-        position = Position.objects.filter(buyer__company=self.company).latest(
-            'bought_at')
+        position = Position.objects.filter(
+            buyer__company=self.company,
+            value__isnull=False
+        ).latest(
+            'bought_at'
+        )
         return share_count * position.value
 
     def last_traded_share_price(self, date=None, security=None):

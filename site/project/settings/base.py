@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'djcelery',
     'django_markdown',
     'markdownx',
+    'reversion',
 
     # -- zinnia
     'django_comments',
@@ -78,6 +79,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'reversion.middleware.RevisionMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

@@ -584,7 +584,5 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
             self.assertTrue(app.is_transfer_option_shown(buyer=self.buyer))
             self.assertTrue(app.is_option_date_equal('1.11.16'))
 
-            self._screenshot()
-
         except Exception, e:
             self._handle_exception(e)

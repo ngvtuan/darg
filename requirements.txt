@@ -3,6 +3,10 @@ django-registration-redux
 djangorestframework==3.2.3
 django-nose>=1.4.3
 django-languages
+django-reversion
+django-rosetta
+django-sendfile
+
 raven
 cssmin==0.2.0
 jsmin==2.0.11
@@ -12,7 +16,6 @@ regex==2014.11.14
 uWSGI==2.0.8
 wsgiref==0.1.2
 python-memcached
-django-rosetta
 ipython
 django-celery
 pytz
@@ -21,6 +24,7 @@ kombu
 git+https://github.com/xhtml2pdf/xhtml2pdf.git@master#egg=xhtml2pdf
 sorl-thumbnail
 djrill
+diff-match-patch
 
 #-- zinnia reqs
 django-mptt>=0.5.1
@@ -42,5 +46,4 @@ django-markdownx
 
 ipdbplugin
 wand
-django-sendfile
 nose-progressive

@@ -9,7 +9,11 @@ from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 
 from markdownx.widgets import AdminMarkdownxWidget
-from django_markdown.models import MarkdownField
+from reversion.helpers import patch_admin
+
+# ReVersioned UserAdmin
+patch_admin(User)
+
 
 UserAdmin.list_display = (
     'email',

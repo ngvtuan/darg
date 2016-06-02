@@ -1,17 +1,19 @@
 from django.contrib import admin
+from reversion.admin import VersionAdmin
 
 from shareholder.models import Shareholder, Company, Operator, Position, \
     UserProfile, Country, OptionPlan, OptionTransaction, Security
 
 
-class ShareholderAdmin(admin.ModelAdmin):
+class ShareholderAdmin(VersionAdmin):
     search_fields = ['user__email', 'user__first_name', 'user__last_name']
 
-class CompanyAdmin(admin.ModelAdmin):
+
+class CompanyAdmin(VersionAdmin):
     pass
 
 
-class OperatorAdmin(admin.ModelAdmin):
+class OperatorAdmin(VersionAdmin):
     list_display = ('id', 'user', 'company', 'user', 'date_joined')
     list_filter = ('company',)
 
@@ -19,7 +21,7 @@ class OperatorAdmin(admin.ModelAdmin):
         return obj.user.date_joined
 
 
-class PositionAdmin(admin.ModelAdmin):
+class PositionAdmin(VersionAdmin):
     list_display = (
         'bought_at', 'get_buyer', 'get_seller', 'count', 'value', 'get_company'
         )
@@ -47,29 +49,30 @@ class PositionAdmin(admin.ModelAdmin):
         return None
 
 
-class UserProfileAdmin(admin.ModelAdmin):
+class UserProfileAdmin(VersionAdmin):
     list_display = ('pk',)
     pass
 
 
-class CountryAdmin(admin.ModelAdmin):
+class CountryAdmin(VersionAdmin):
     list_display = ('iso_code',)
     pass
 
 
-class SecurityAdmin(admin.ModelAdmin):
+class SecurityAdmin(VersionAdmin):
     list_display = ('title',)
     pass
 
 
-class OptionTransactionAdmin(admin.ModelAdmin):
+class OptionTransactionAdmin(VersionAdmin):
     list_display = ('bought_at', 'buyer', 'seller',)
     pass
 
 
-class OptionPlanAdmin(admin.ModelAdmin):
+class OptionPlanAdmin(VersionAdmin):
     list_display = ('title',)
     pass
+
 
 admin.site.register(Shareholder, ShareholderAdmin)
 admin.site.register(Company, CompanyAdmin)

@@ -14,7 +14,8 @@ app.controller 'ShareholderController', ['$scope', '$http', 'Shareholder', ($sco
     $scope.errors = null
 
     $http.get('/services/rest/shareholders/' + shareholder_id).then (result) ->
-        result.data.user.userprofile.birthday = new Date(result.data.user.userprofile.birthday)
+        if result.data.user.userprofile.birthday != null
+            result.data.user.userprofile.birthday = new Date(result.data.user.userprofile.birthday)
         $scope.shareholder = new Shareholder(result.data)
         if $scope.shareholder.user.userprofile.country
             $http.get($scope.shareholder.user.userprofile.country).then (result1) ->
@@ -31,12 +32,11 @@ app.controller 'ShareholderController', ['$scope', '$http', 'Shareholder', ($sco
     $scope.edit_shareholder = () ->
         if $scope.shareholder.user.userprofile.country
             $scope.shareholder.user.userprofile.country = $scope.shareholder.user.userprofile.country.url
-        if $scope.shareholder.user.userprofile.birthday
-            $scope.shareholder.user.userprofile.birthday = $scope.shareholder.user.userprofile.birthday.toISOString().substring(0, 10)
         if $scope.shareholder.user.userprofile.language
             $scope.shareholder.user.userprofile.language = $scope.shareholder.user.userprofile.language.iso
         $scope.shareholder.$update().then (result) ->
-            result.user.userprofile.birthday = new Date(result.user.userprofile.birthday)
+            if result.user.userprofile.birthday != null
+                result.user.userprofile.birthday = new Date(result.user.userprofile.birthday)
             $scope.shareholder = new Shareholder(result)
             if $scope.shareholder.user.userprofile.country
                 $http.get($scope.shareholder.user.userprofile.country).then (result1) ->
@@ -54,6 +54,18 @@ app.controller 'ShareholderController', ['$scope', '$http', 'Shareholder', ($sco
                 level: 'warning',
                 extra: { rejection: rejection },
             })
+
+    # --- DATEPICKER
+    $scope.datepicker = { opened: false }
+    $scope.datepicker.format = 'd.MM.yy'
+    $scope.datepicker.options = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false,
+    }
+    $scope.open_datepicker = ->
+        $scope.datepicker.opened = true
+
 ]
 
 app.run (editableOptions) ->

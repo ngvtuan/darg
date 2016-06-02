@@ -95,11 +95,23 @@
     </tr>
     <tr>
       <td>{% trans "Shareholder Birthday" %}:</td>
-      <td>
+      <td class="date-field">
         {% verbatim %}
-        <span editable-date="shareholder.user.userprofile.birthday" onaftersave="edit_shareholder()">
-          {{ (shareholder.user.userprofile.birthday| date:"dd.MM.yy") || '' }}
-          <span class="el-icon-pencil"></span>
+        <span editable-bsdate="shareholder.user.userprofile.birthday"
+              onaftersave="edit_shareholder()"
+              e-showWeeks=false
+              e-is-open="datepicker.opened"
+              e-ng-click="open_datepicker()"
+              e-datepicker-options="datepicker.options"
+              e-show-button-bar="true"
+              e-close-text="Schliessen"
+              e-clear-text="Leeren"
+              e-init-date=""
+              e-current-text="Heute"
+              e-datepicker-popup="{{datepicker.format}}"
+              >
+            {{ (shareholder.user.userprofile.birthday|date:"dd.MM.yy") || 'nicht angegeben' }}
+            <span class="el-icon-pencil"></span>
         </span>
         {% endverbatim %}
       </td>

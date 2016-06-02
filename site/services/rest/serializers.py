@@ -123,6 +123,7 @@ class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
     """ serialize additional user data """
     # country = CountrySerializer(many=False)
     readable_language = serializers.SerializerMethodField()
+    birthday = serializers.DateTimeField()
 
     class Meta:
         model = UserProfile

@@ -82,6 +82,7 @@ class CompanyGenerator(object):
             "name": name,
             "share_count": share_count,
             "country": country,
+            "founded_at": datetime.datetime.now().date()
         }
 
         company = Company.objects.create(**kwargs2)
@@ -123,10 +124,9 @@ class OperatorGenerator(object):
         user = kwargs.get("user") or _make_user()
 
         company = kwargs.get("company") or \
-            Company.objects.create(
+            CompanyGenerator().generate(
                 name='{} A.B.'.format(word),
                 share_count=3,
-                country=CountryGenerator().generate()
             )
 
         operator = Operator.objects.create(
@@ -161,8 +161,9 @@ class CompanyShareholderGenerator(object):
     def generate(self, **kwargs):
 
         company = kwargs.get('company') or CompanyGenerator().generate()
-        company_shareholder_created_at = kwargs.get('company_shareholder_created_at') or \
-            datetime.datetime.now()
+        company_shareholder_created_at = kwargs.get(
+            'company_shareholder_created_at'
+        ) or datetime.datetime.now()
         companyuser = User.objects.create(
             username=make_username('Company', 'itself', company.name),
             first_name='Company', last_name='itself',
@@ -253,7 +254,7 @@ class OptionTransactionGenerator(object):
             company=company)
         seller = kwargs.get('seller') or None
         count = kwargs.get('count') or 3
-        value = kwargs.get('value') or 2
+        kwargs.get('value') or 2
         bought_at = kwargs.get('bought_at') or datetime.datetime.now().date()
 
         kwargs2 = {
@@ -294,8 +295,9 @@ class ComplexShareholderConstellationGenerator(object):
         s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
 
         # initial company shareholder
-        company_shareholder_created_at = kwargs.get('company_shareholder_created_at') or\
-            datetime.datetime.now()
+        company_shareholder_created_at = kwargs.get(
+            'company_shareholder_created_at'
+        ) or datetime.datetime.now()
         cs = CompanyShareholderGenerator().generate(
             company=company, security=s1,
             company_shareholder_created_at=company_shareholder_created_at)

@@ -23,8 +23,9 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
     $http.get('/services/rest/company/' + company_id).then (result) ->
         $scope.company = new Company(result.data)
         $scope.company.founded_at = new Date($scope.company.founded_at)
-        $http.get($scope.company.country).then (result1) ->
-            $scope.company.country = result1.data
+        if $scope.company.country.length > 0
+            $http.get($scope.company.country).then (result1) ->
+                $scope.company.country = result1.data
 
     $http.get('/services/rest/country').then (result) ->
         $scope.countries = result.data.results
@@ -37,7 +38,6 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
             $scope.show_add_operator_form = false
         else
             $scope.show_add_operator_form = true
-
     $scope.delete_operator = (pk) ->
         $http.delete('/services/rest/operators/'+pk)
         .then ->
@@ -133,6 +133,17 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
                 })
                 return
               return
+
+    # --- DATEPICKER
+    $scope.datepicker = { opened: false }
+    $scope.datepicker.format = 'd.MM.yy'
+    $scope.datepicker.options = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false,
+    }
+    $scope.open_datepicker = ->
+        $scope.datepicker.opened = true
 
 ]
 

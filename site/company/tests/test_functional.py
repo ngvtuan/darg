@@ -1,10 +1,13 @@
-from django.test import TestCase
+import datetime
+import time
+
 from django.contrib.auth import get_user_model
 
 from project.base import BaseSeleniumTestCase
 from shareholder.generators import (
     UserGenerator, TwoInitialSecuritiesGenerator, OperatorGenerator
 )
+from shareholder.models import Company
 from company import page
 
 User = get_user_model()
@@ -81,3 +84,34 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
                 user=operator.user).exists())
         except Exception, e:
             self._handle_exception(e)
+
+    def test_edit_founding_date_76(self):
+        """
+        edit companies founding_date using the datepicker
+        """
+        try:
+
+            p = page.CompanyPage(
+                self.selenium,
+                self.live_server_url,
+                self.operator.user,
+                self.operator.company
+            )
+            p.click_to_edit("founding-date")
+            p.click_open_datepicker("founding-date")
+            p.click_date_in_datepicker("founding-date")
+            p.save_edit("founding-date")
+
+            today = datetime.datetime.now().date()
+            founding_date = datetime.date(today.year, today.month, 1)
+            time.sleep(1)
+            self.assertEqual(
+                p.get_founding_date(),
+                founding_date.strftime('%d.%m.%y'))
+
+        except Exception, e:
+            self._handle_exception(e)
+
+        self.assertEqual(
+            Company.objects.get(id=self.operator.company.id).founded_at,
+            founding_date)

@@ -19,7 +19,10 @@
   <table class="table table-striped">
     <tr>
       <td>{% trans "Board approval date" %}:</td>
-      <td>{% verbatim %}<span editable-text="optionplan.board_approved_at" onaftersave="edit_board_approved_at()">{{ optionplan.board_approved_at }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
+      <td>{% verbatim %}
+        <span editable-text="optionplan.board_approved_at"
+            onaftersave="edit_board_approved_at()">
+            {{ optionplan.board_approved_at }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
     </tr>
     <tr>
       <td>{% trans "Exercise Price" %}:</td>

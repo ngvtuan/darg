@@ -447,7 +447,7 @@ class Shareholder(models.Model):
             return 0
 
         # last payed price
-        if Position.objects.filter(buyer__company=self.company).exists():
+        if Position.objects.filter(buyer__company=self.company, value__isnull=False).exists():
             position = Position.objects.filter(
                 buyer__company=self.company).latest('bought_at')
         else:

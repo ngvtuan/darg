@@ -78,12 +78,48 @@ class ShareholderDetailPage(BasePage):
         el = el.find_element_by_class_name('editable-click')
         el.click()
 
+    def click_open_datepicker(self, class_name):
+        """
+        click to open the datepicker for element X
+        """
+        el = self.driver.find_element_by_class_name(class_name)
+        btn = el.find_element_by_xpath(
+            '//td[@class="date-field"]//span[@class="input-group-btn"]//button'
+        )
+        btn.click()
+
+    def click_date_in_datepicker(self, class_name):
+        """
+        select some date in datepicker
+
+        click first day of current month
+        """
+        el = self.driver.find_element_by_class_name(class_name)
+        dp_row = el.find_element_by_xpath(
+            '//table[@class="uib-daypicker"]//tr[@class="uib-weeks ng-scope"]')
+        for td in dp_row.find_elements_by_tag_name('td'):
+            el2 = td.find_elements_by_tag_name('span')
+            if el2 and el2[0].text == '01':
+                btn = td.find_element_by_tag_name('button')
+                btn.click()
+                break
+
     def edit_shareholder_number(self, value, class_name):
         el = self.driver.find_element_by_class_name(class_name)
         el = el.find_element_by_class_name('editable-input')
         el.clear()
         el.send_keys(str(value))
 
+    # --- GET DATA
+    def get_birthday(self, class_name="birthday"):
+        """
+        return date from inside this element
+        """
+        bday = self.driver.find_element_by_xpath(
+            '//tr[@class="birthday active"]/td/span')
+        return bday.text
+
+    # --- trigger buttons
     def save_edit(self, class_name):
         el = self.driver.find_element_by_class_name(class_name)
         el = el.find_element_by_class_name('editable-buttons')

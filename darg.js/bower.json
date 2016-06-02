@@ -5,7 +5,7 @@
     "angular": "~1.5.6",
     "angular-animate": "~1.5.6",
     "angular-resource": "",
-    "angular-xeditable": "",
+    "angular-xeditable": "0.1.12",
     "bootstrap": "",
     "ng-file-upload": "",
     "underscore": ""

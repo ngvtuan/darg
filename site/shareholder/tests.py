@@ -431,9 +431,7 @@ class ShareholderDetailFunctionalTestCase(BaseSeleniumTestCase):
                     )
                 )
             p.click_to_edit("shareholder-number")
-            time.sleep(1)
             p.edit_shareholder_number(99, "shareholder-number")
-            time.sleep(1)
             p.save_edit("shareholder-number")
             time.sleep(1)
 
@@ -442,6 +440,38 @@ class ShareholderDetailFunctionalTestCase(BaseSeleniumTestCase):
 
         shareholder = Shareholder.objects.get(id=self.buyer.id)
         self.assertEqual(shareholder.number, str(99))
+
+    def test_edit_birthday_76(self):
+        """
+        edit shareholders birthday using the datepicker
+        """
+        try:
+
+            p = page.ShareholderDetailPage(
+                self.selenium, self.live_server_url, self.operator.user,
+                path=reverse(
+                    'shareholder',
+                    kwargs={'shareholder_id': self.buyer.id}
+                    )
+                )
+            p.click_to_edit("birthday")
+            p.click_open_datepicker("birthday")
+            p.click_date_in_datepicker("birthday")
+            p.save_edit("birthday")
+
+            today = datetime.datetime.now().date()
+            birthday = datetime.date(today.year, today.month, 1)
+            time.sleep(1)
+            self.assertEqual(
+                p.get_birthday(),
+                birthday.strftime('%d.%m.%y'))
+
+        except Exception, e:
+            self._handle_exception(e)
+
+        shareholder = Shareholder.objects.get(id=self.buyer.id)
+        self.assertEqual(
+            shareholder.user.userprofile.birthday, birthday)
 
 
 class OptionsFunctionalTestCase(BaseSeleniumTestCase):
@@ -583,8 +613,6 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
             self.assertTrue(app.is_no_errors_displayed())
             self.assertTrue(app.is_transfer_option_shown(buyer=self.buyer))
             self.assertTrue(app.is_option_date_equal('1.11.16'))
-
-            self._screenshot()
 
         except Exception, e:
             self._handle_exception(e)

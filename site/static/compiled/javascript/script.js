@@ -143,9 +143,11 @@
       $http.get('/services/rest/company/' + company_id).then(function(result) {
         $scope.company = new Company(result.data);
         $scope.company.founded_at = new Date($scope.company.founded_at);
-        return $http.get($scope.company.country).then(function(result1) {
-          return $scope.company.country = result1.data;
-        });
+        if ($scope.company.country.length > 0) {
+          return $http.get($scope.company.country).then(function(result1) {
+            return $scope.company.country = result1.data;
+          });
+        }
       });
       $http.get('/services/rest/country').then(function(result) {
         return $scope.countries = result.data.results;
@@ -220,7 +222,7 @@
           $scope.files = [$scope.file];
         }
       });
-      return $scope.upload = function(files) {
+      $scope.upload = function(files) {
         var file, i, payload;
         if (files && files.length) {
           $scope.loading = true;
@@ -262,6 +264,18 @@
             }
           }
         }
+      };
+      $scope.datepicker = {
+        opened: false
+      };
+      $scope.datepicker.format = 'd.MM.yy';
+      $scope.datepicker.options = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false
+      };
+      return $scope.open_datepicker = function() {
+        return $scope.datepicker.opened = true;
       };
     }
   ]);
@@ -338,6 +352,9 @@
       });
       $http.get('/services/rest/shareholders').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
+          if (item.user.userprofile.birthday) {
+            item.user.userprofile.birthday = new Date(item.user.userprofile.birthday);
+          }
           return $scope.shareholders.push(item);
         });
       })["finally"]((function(_this) {
@@ -545,6 +562,9 @@
       });
       $http.get('/services/rest/shareholders').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
+          if (item.user.userprofile.birthday) {
+            item.user.userprofile.birthday = new Date(item.user.userprofile.birthday);
+          }
           return $scope.shareholders.push(item);
         });
       });
@@ -678,7 +698,9 @@
       $scope.languages = [];
       $scope.errors = null;
       $http.get('/services/rest/shareholders/' + shareholder_id).then(function(result) {
-        result.data.user.userprofile.birthday = new Date(result.data.user.userprofile.birthday);
+        if (result.data.user.userprofile.birthday !== null) {
+          result.data.user.userprofile.birthday = new Date(result.data.user.userprofile.birthday);
+        }
         $scope.shareholder = new Shareholder(result.data);
         if ($scope.shareholder.user.userprofile.country) {
           return $http.get($scope.shareholder.user.userprofile.country).then(function(result1) {
@@ -692,18 +714,17 @@
       $http.get('/services/rest/language').then(function(result) {
         return $scope.languages = result.data;
       });
-      return $scope.edit_shareholder = function() {
+      $scope.edit_shareholder = function() {
         if ($scope.shareholder.user.userprofile.country) {
           $scope.shareholder.user.userprofile.country = $scope.shareholder.user.userprofile.country.url;
-        }
-        if ($scope.shareholder.user.userprofile.birthday) {
-          $scope.shareholder.user.userprofile.birthday = $scope.shareholder.user.userprofile.birthday.toISOString().substring(0, 10);
         }
         if ($scope.shareholder.user.userprofile.language) {
           $scope.shareholder.user.userprofile.language = $scope.shareholder.user.userprofile.language.iso;
         }
         return $scope.shareholder.$update().then(function(result) {
-          result.user.userprofile.birthday = new Date(result.user.userprofile.birthday);
+          if (result.user.userprofile.birthday !== null) {
+            result.user.userprofile.birthday = new Date(result.user.userprofile.birthday);
+          }
           $scope.shareholder = new Shareholder(result);
           if ($scope.shareholder.user.userprofile.country) {
             return $http.get($scope.shareholder.user.userprofile.country).then(function(result1) {
@@ -723,6 +744,18 @@
             }
           });
         });
+      };
+      $scope.datepicker = {
+        opened: false
+      };
+      $scope.datepicker.format = 'd.MM.yy';
+      $scope.datepicker.options = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false
+      };
+      return $scope.open_datepicker = function() {
+        return $scope.datepicker.opened = true;
       };
     }
   ]);

@@ -2984,7 +2984,7 @@ div#auth .registration-teaser img {
 }
 /* line 302, ../../sass/screen.sass */
 .intro footer .btn-inline {
-  color: #fff;
+  color: #fff !important;
 }
 /* line 304, ../../sass/screen.sass */
 .intro blockquote {

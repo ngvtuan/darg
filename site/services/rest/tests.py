@@ -483,6 +483,7 @@ class ShareholderTestCase(TestCase):
 
         # prepare test data
         operator = OperatorGenerator().generate()
+        shareholder = ShareholderGenerator().generate(company=operator.company)
         user = operator.user
         user.set_password('test')
         user.save()
@@ -504,7 +505,10 @@ class ShareholderTestCase(TestCase):
                'format': 'json'
                })
 
-        self.assertEqual(response.data.get('results'), [])
+        self.assertTrue(len(response.data.get('results')) == 1)
+        self.assertEqual(
+            response.data['results'][0].get('user').get('userprofile').get('birthday'),
+            shareholder.user.userprofile.birthday.strftime('%Y-%m-%d'))
 
     def test_add_new_shareholder(self):
         """ addes a new shareholder and user and checks for special chars"""
@@ -638,7 +642,7 @@ class ShareholderTestCase(TestCase):
                     "postal_code": "932029",
                     "country": "http://codingmachine:9000/services/rest/"
                                 "country/de",
-                    "birthday": "2016-01-27",
+                    "birthday": "2016-01-27T00:00:00.000Z",
                     "company_name": "SomeCompany",
                     "language": "ab",
                 },
@@ -683,7 +687,7 @@ class ShareholderTestCase(TestCase):
                 continue
             if k == 'birthday':
                 self.assertEqual(
-                    getattr(userprofile, k).strftime('%Y-%m-%d'), v)
+                    datetime.datetime.combine(getattr(userprofile, k), datetime.datetime.min.time()).isoformat(), v[:-5])
                 continue
             self.assertEqual(getattr(userprofile, k), v)
 

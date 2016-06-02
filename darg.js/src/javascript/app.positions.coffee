@@ -24,6 +24,8 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
 
     $http.get('/services/rest/shareholders').then (result) ->
         angular.forEach result.data.results, (item) ->
+            if item.user.userprofile.birthday
+                item.user.userprofile.birthday = new Date(item.user.userprofile.birthday)
             $scope.shareholders.push item
 
     $http.get('/services/rest/security').then (result) ->

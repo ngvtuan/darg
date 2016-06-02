@@ -13,7 +13,8 @@ from project.base import BaseSeleniumTestCase
 from project import page
 from shareholder.generators import (
     UserGenerator, CompanyGenerator, ShareholderGenerator,
-    PositionGenerator, OperatorGenerator, TwoInitialSecuritiesGenerator
+    PositionGenerator, OperatorGenerator, TwoInitialSecuritiesGenerator,
+    CompanyShareholderGenerator
     )
 from shareholder.models import Security, Shareholder, UserProfile
 
@@ -326,6 +327,8 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
     def setUp(self):
         self.operator = OperatorGenerator().generate()
         TwoInitialSecuritiesGenerator().generate(company=self.operator.company)
+        self.company_shareholder = CompanyShareholderGenerator().generate(
+            company=self.operator.company)
         self.buyer = ShareholderGenerator().generate(
             company=self.operator.company)
         self.seller = ShareholderGenerator().generate(
@@ -387,5 +390,35 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
                 self.assertEqual(
                     user.shareholder_set.filter(company=op.company).count(), 1)
 
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_ticket_68(self):
+        """
+        ensure that all share counts on start page after initial company setup
+        are right
+        """
+
+        try:
+            start = page.StartPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            start.is_properly_displayed()
+            start.has_shareholder_count(Shareholder.objects.count())
+
+            share_count = self.operator.company.share_count
+            # company shareholder count
+            self.assertEqual(int(
+                self.selenium.find_element_by_xpath(
+                    '//table/tbody/tr[1]/td[last()]/value'
+                ).text),
+                share_count
+            )
+            # totals
+            self.assertEqual(
+                self.selenium.find_element_by_xpath(
+                    '//table/tbody/tr[5]/td[last()]'
+                ).text,
+                "{} ({})".format(share_count, share_count)
+            )
         except Exception, e:
             self._handle_exception(e)

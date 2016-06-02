@@ -433,6 +433,7 @@ class ShareholderDetailFunctionalTestCase(BaseSeleniumTestCase):
             p.click_to_edit("shareholder-number")
             p.edit_shareholder_number(99, "shareholder-number")
             p.save_edit("shareholder-number")
+            time.sleep(1)
 
         except Exception, e:
             self._handle_exception(e)

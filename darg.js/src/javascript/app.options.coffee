@@ -30,6 +30,8 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
 
     $http.get('/services/rest/shareholders').then (result) ->
         angular.forEach result.data.results, (item) ->
+            if item.user.userprofile.birthday
+                item.user.userprofile.birthday = new Date(item.user.userprofile.birthday)
             $scope.shareholders.push item
     .finally =>
         $scope.loading = false

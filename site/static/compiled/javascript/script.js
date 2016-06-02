@@ -352,6 +352,9 @@
       });
       $http.get('/services/rest/shareholders').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
+          if (item.user.userprofile.birthday) {
+            item.user.userprofile.birthday = new Date(item.user.userprofile.birthday);
+          }
           return $scope.shareholders.push(item);
         });
       })["finally"]((function(_this) {

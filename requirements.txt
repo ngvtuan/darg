@@ -13,7 +13,7 @@ jsmin==2.0.11
 psycopg2==2.5.4
 python-dateutil==2.2
 regex==2014.11.14
-uWSGI==2.0.8
+uWSGI
 wsgiref==0.1.2
 python-memcached
 ipython

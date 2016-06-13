@@ -9,24 +9,24 @@ from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 
 from markdownx.widgets import AdminMarkdownxWidget
-from reversion.helpers import patch_admin
-
-# ReVersioned UserAdmin
-patch_admin(User)
+from reversion.admin import VersionAdmin
 
 
-UserAdmin.list_display = (
-    'email',
-    'first_name',
-    'last_name',
-    'is_active',
-    'last_login',
-    'date_joined',
-    'is_staff')
-UserAdmin.list_filter = (
-    'is_staff', 'date_joined', 'operator__company', 'shareholder__company',
-    'last_login',
-    )
+class ReversionedUserAdmin(VersionAdmin, UserAdmin):
+
+    list_display = (
+        'email',
+        'first_name',
+        'last_name',
+        'is_active',
+        'last_login',
+        'date_joined',
+        'is_staff')
+
+    list_filter = (
+        'is_staff', 'date_joined', 'operator__company', 'shareholder__company',
+        'last_login',
+        )
 
 
 class FlatPageAdminX(FlatPageAdmin):
@@ -38,4 +38,4 @@ class FlatPageAdminX(FlatPageAdmin):
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageAdminX)
 admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+admin.site.register(User, ReversionedUserAdmin)

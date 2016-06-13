@@ -57,11 +57,13 @@
             <li><a href="{% url 'admin:index' %}" class="pull-right" target="_blank">{% trans "Admin" %}</a></li>
             <li><a href="/rosetta/" class="pull-right" target="_blank">{% trans "I18N" %}</a></li>
             {% endif %}
+			<!--
             <li>
               <a href="/aenderungsverfolgung-das-aktienregister/" title="{% trans "Change history" %}" class="btn-inline">
                 {% trans "Change History" %}
               </a>
             </li>
+			-->
             <li>
               <a href="{% url "auth_password_change" %}" title="{% trans "Reset password" %}" class="btn-inline">
                 {% trans "Change password" %}

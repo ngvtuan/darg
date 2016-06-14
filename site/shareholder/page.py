@@ -322,6 +322,14 @@ class PositionPage(BasePage):
         btn = self.driver.find_element_by_class_name('split-shares')
         btn.click()
 
+    def click_open_cap_increase_form(self):
+        btn = self.driver.find_element_by_class_name('add-capital')
+        btn.click()
+
+    def click_save_cap_increase(self):
+        btn = self.driver.find_element_by_class_name('save-capital')
+        btn.click()
+
     def click_save_position(self):
         btn = self.driver.find_element_by_class_name('save-position')
         btn.click()
@@ -351,6 +359,30 @@ class PositionPage(BasePage):
         for select in selects:
             select = Select(select)
             select.select_by_index(1)
+
+    def enter_new_cap_data(self, position):
+
+        el = self.driver.find_element_by_id('add_capital')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+        selects = form.find_elements_by_tag_name('select')
+
+        # input #0 use datepicker
+        self.use_datepicker('add-capital-form', None)
+        if position.count:
+            inputs[1].clear()
+            inputs[1].send_keys(position.count)  # count
+        if position.value:
+            inputs[2].clear()
+            inputs[2].send_keys(position.value)  # price
+        inputs[3].clear()
+        inputs[3].send_keys(position.comment)  # comment
+
+        # select elements: seller, buyer, security
+        for select in selects:
+            select = Select(select)
+            select.select_by_index(1)
+
 
     def enter_new_split_data(self, *args):
         el = self.driver.find_element_by_id('split-shares')

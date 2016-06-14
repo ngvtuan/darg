@@ -616,3 +616,95 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
 
         except Exception, e:
             self._handle_exception(e)
+
+
+class PositionFunctionalTestCase(BaseSeleniumTestCase):
+    """
+    test all core position funcs
+    logic is tested in api, this here covers mainly FE logic
+    """
+
+    def setUp(self):
+        self.operator = OperatorGenerator().generate()
+        self.securities = TwoInitialSecuritiesGenerator().generate(
+            company=self.operator.company)
+        self.buyer = ShareholderGenerator().generate(
+            company=self.operator.company)
+        self.seller = ShareholderGenerator().generate(
+            company=self.operator.company)
+
+    def test_add(self):
+        """
+        add position
+        """
+        position = PositionGenerator().generate(
+            save=False, seller=self.seller, buyer=self.buyer,
+            security=self.securities[0])
+
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_add_position_form()
+            app.enter_new_position_data(position)
+            app.click_save_position()
+
+            self.assertEqual(len(app.get_position_row_data()), 8)
+            self.assertTrue(app.is_no_errors_displayed())
+
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_add_error(self):
+        """
+        confirm form error handling
+        """
+        position = PositionGenerator().generate(
+            save=False, seller=self.seller, buyer=self.buyer,
+            security=self.securities[0])
+
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_add_position_form()
+
+            # enter missing
+            position.count = None
+            position.value = None
+            app.enter_new_position_data(position)
+            app.click_save_position()
+
+            self.assertFalse(app.is_no_errors_displayed())
+
+            # enter large data
+            position.count = 99999999991
+            position.value = 99999199999
+            app.enter_new_position_data(position)
+            app.click_save_position()
+
+            self.assertFalse(app.is_no_errors_displayed())
+
+            # complete data
+            position.count = 999999999
+            position.value = 11111111
+            app.enter_new_position_data(position)
+            app.click_save_position()
+
+            self.assertEqual(len(app.get_position_row_data()), 8)
+            self.assertTrue(app.is_no_errors_displayed())
+
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_cap_increase(self):
+        raise NotImplementedError()
+
+    def test_split(self):
+        raise NotImplementedError()
+
+    def test_delete(self):
+        raise NotImplementedError()
+
+    def test_confirm(self):
+        raise NotImplementedError()

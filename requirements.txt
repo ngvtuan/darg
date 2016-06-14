@@ -25,6 +25,7 @@ git+https://github.com/xhtml2pdf/xhtml2pdf.git@master#egg=xhtml2pdf
 sorl-thumbnail
 djrill
 diff-match-patch
+model_mommy
 
 #-- zinnia reqs
 django-mptt>=0.5.1

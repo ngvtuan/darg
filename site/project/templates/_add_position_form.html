@@ -2,7 +2,7 @@
 
 <!-- {% trans "Please enter your position data:" %} -->
 {% verbatim %}
-<div>
+<div class="add-position-form">
   <form class="form-inline">
     <div class="form-group block-level">
       <div>
@@ -36,13 +36,13 @@
         <select class="form-control" ng-model="newPosition.security" ng-options="security as security.readable_title for security in securities" translate translate-attr-placeholder="Security">
           <option value='' disabled>{% endverbatim %}{% trans "Security" %}{% verbatim %}</option>
         </select>
-        <input type="number" class="form-control" ng-model="newPosition.count" translate translate-attr-placeholder="Count" ng-maxlength="5">
+        <input type="number" class="form-control" ng-model="newPosition.count" translate translate-attr-placeholder="Count" ng-maxlength="10">
         <input type="number" class="form-control" ng-model="newPosition.value" translate translate-attr-placeholder="Payed Price" ng-maxlength="10">
         <input type="text" class="form-control" ng-model="newPosition.comment" translate translate-attr-placeholder="Comment">
       </div>
 
-      <button class="btn btn-default" ng-click="hide_form()">{% endverbatim %}{% trans "Cancel" %}{% verbatim %}</button>
-      <button class="btn btn-focus" ng-click="add_position()">{% endverbatim %}{% trans "Add Position" %}{% verbatim %}</button>
+      <button class="btn btn-default cancel" ng-click="hide_form()">{% endverbatim %}{% trans "Cancel" %}{% verbatim %}</button>
+      <button class="btn btn-focus save-position" ng-click="add_position()">{% endverbatim %}{% trans "Add Position" %}{% verbatim %}</button>
     </div>
 
   </form>

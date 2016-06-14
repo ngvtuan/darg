@@ -55,6 +55,47 @@ class BasePage(object):
         """ reload page """
         self.driver.get(self.driver.current_url)
 
+    def use_datepicker(self, class_name, date):
+        """
+        use default datepicker to select a date
+        """
+        self.click_open_datepicker(class_name)
+        self.click_date_in_datepicker(class_name)
+
+    def click_open_datepicker(self, class_name):
+        """
+        click to open the datepicker for element X
+        """
+        el = self.driver.find_element_by_class_name(class_name)
+        btn = el.find_element_by_xpath(
+            '//*[contains(@class, "date-field")]//span[@class="input-group-btn"]//button'
+        )
+        btn.click()
+
+    def click_date_in_datepicker(self, class_name):
+        """
+        select some date in datepicker
+
+        click first day of current month
+        """
+        el = self.driver.find_element_by_class_name(class_name)
+        dp_row = el.find_element_by_xpath(
+            '//table[@class="uib-daypicker"]//tr[@class="uib-weeks ng-scope"]')
+        for td in dp_row.find_elements_by_tag_name('td'):
+            el2 = td.find_elements_by_tag_name('span')
+            if el2 and el2[0].text == '01':
+                btn = td.find_element_by_tag_name('button')
+                btn.click()
+                break
+
+    def is_no_errors_displayed(self):
+        """ MUST not find it, hence exception is True :) """
+        try:
+            self._is_element_displayed(cls='alert-danger')
+            return False
+        except:
+            return True
+
 
 class ShareholderDetailPage(BasePage):
     """Options List View"""
@@ -78,31 +119,6 @@ class ShareholderDetailPage(BasePage):
         el = el.find_element_by_class_name('editable-click')
         el.click()
 
-    def click_open_datepicker(self, class_name):
-        """
-        click to open the datepicker for element X
-        """
-        el = self.driver.find_element_by_class_name(class_name)
-        btn = el.find_element_by_xpath(
-            '//td[@class="date-field"]//span[@class="input-group-btn"]//button'
-        )
-        btn.click()
-
-    def click_date_in_datepicker(self, class_name):
-        """
-        select some date in datepicker
-
-        click first day of current month
-        """
-        el = self.driver.find_element_by_class_name(class_name)
-        dp_row = el.find_element_by_xpath(
-            '//table[@class="uib-daypicker"]//tr[@class="uib-weeks ng-scope"]')
-        for td in dp_row.find_elements_by_tag_name('td'):
-            el2 = td.find_elements_by_tag_name('span')
-            if el2 and el2[0].text == '01':
-                btn = td.find_element_by_tag_name('button')
-                btn.click()
-                break
 
     def edit_shareholder_number(self, value, class_name):
         el = self.driver.find_element_by_class_name(class_name)
@@ -213,14 +229,6 @@ class OptionsPage(BasePage):
     def is_option_plan_form_open(self):
         return self._is_element_displayed(id='add_option_plan')
 
-    def is_no_errors_displayed(self):
-        """ MUST not find it, hence exception is True :) """
-        try:
-            self._is_element_displayed(cls='alert-danger')
-            return False
-        except:
-            return True
-
     def is_option_plan_displayed(self):
         h2s = self.driver.find_elements_by_tag_name('h2')
         string = u"Optionsplan: {} f\xfcr {}".format(
@@ -262,3 +270,59 @@ class OptionsPage(BasePage):
 
         self.enter_option_plan_form_data()
         self.click_save_option_plan_form()
+
+
+class PositionPage(BasePage):
+    """Options List View"""
+
+    def __init__(self, driver, live_server_url, user):
+        """ load MainPage '/' """
+        self.live_server_url = live_server_url
+        # prepare driver
+        super(PositionPage, self).__init__(driver)
+
+        # load page
+        self.operator = user.operator_set.all()[0]
+        self.login(username=user.username, password='test')
+        self.driver.get('%s%s' % (live_server_url, '/positions/'))
+
+    def click_open_add_position_form(self):
+        btn = self.driver.find_element_by_class_name('add-position')
+        btn.click()
+
+    def click_save_position(self):
+        btn = self.driver.find_element_by_class_name('save-position')
+        btn.click()
+
+    def enter_new_position_data(self, position):
+        el = self.driver.find_element_by_id('add_position')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+        selects = form.find_elements_by_tag_name('select')
+
+        # input #0 use datepicker
+        self.use_datepicker('add-position-form', None)
+        if position.count:
+            inputs[1].clear()
+            inputs[1].send_keys(position.count)  # count
+        if position.value:
+            inputs[2].clear()
+            inputs[2].send_keys(position.value)  # price
+        inputs[3].clear()
+        inputs[3].send_keys(position.comment)  # comment
+
+        # select elements: seller, buyer, security
+        for select in selects:
+            select = Select(select)
+            select.select_by_index(1)
+
+    def get_position_row_data(self):
+        """
+        return list of data from position in single row of table
+        """
+        table = self.driver.find_element_by_tag_name('table')
+        time.sleep(1)
+        trs = table.find_elements_by_tag_name('tr')
+        row = trs[2]
+        return [td.text for td in row.find_elements_by_tag_name('td')]
+

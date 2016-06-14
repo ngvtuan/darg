@@ -498,7 +498,7 @@ class Position(models.Model):
     bought_at = models.DateField()
     value = models.DecimalField(
         _('Nominal value or payed price for the transaction'),
-        max_digits=8, decimal_places=4, blank=True,
+        max_digits=16, decimal_places=8, blank=True,
         null=True)
     is_split = models.BooleanField(default=False)
     is_draft = models.BooleanField(default=True)

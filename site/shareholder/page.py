@@ -9,6 +9,10 @@ http://selenium-python.readthedocs.org/en/latest/page-objects.html
 import time
 
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.remote.webelement import WebElement
 
 from shareholder.generators import DEFAULT_TEST_DATA
 
@@ -68,7 +72,8 @@ class BasePage(object):
         """
         el = self.driver.find_element_by_class_name(class_name)
         btns = el.find_elements_by_xpath(
-            '//*[contains(@class, "date-field")]//span[@class="input-group-btn"]//button'
+            '//*[contains(@class, "date-field")]//'
+            'span[@class="input-group-btn"]//button'
         )
         for btn in btns:
             if btn.is_displayed():
@@ -108,6 +113,80 @@ class BasePage(object):
         except:
             return True
 
+    def scroll_to(self, Y=None, element=None):
+        """
+        scroll to element or coordinate
+        """
+        if element:
+            self.driver.execute_script(
+                "return arguments[0].scrollIntoView();", element)
+        else:
+            self.driver.execute_script("window.scrollTo(0, {})".format(Y))
+
+    def wait_until_clickable(self, element):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.element_to_be_clickable(element))
+        return element
+
+    def wait_until_visible(self, element):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        if isinstance(element, WebElement):
+            element = wait.until(EC.visibility_of(element))
+        else:
+            element = wait.until(EC.visibility_of_element_located(element))
+        return element
+
+    def wait_until_invisible(self, element):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.invisibility_of_element_located(element))
+        return element
+
+    def wait_unti_text_present(self, element, text):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.text_to_be_present_in_element(element, text))
+        return element
+
+    def drag_n_drop(self, object, target):
+        """
+        used to simulate drag'n drop to move elemens
+        from
+        http://stackoverflow.com/questions/29381233/how-to-simulate-html5-drag-and-drop-in-selenium-webdriver/29381532#29381532
+        object, target : jquery identifiers
+        """
+
+        jquery_url = "http://code.jquery.com/jquery-1.11.2.min.js"
+
+        # load jQuery helper
+        with open("jquery_load_helper.js") as f:
+            load_jquery_js = f.read()
+
+        # load drag and drop helper
+        with open("drag_and_drop_helper.js") as f:
+            drag_and_drop_js = f.read()
+
+        # load jQuery
+        self.driver.execute_async_script(load_jquery_js, jquery_url)
+
+        # perform drag&drop
+        self.driver.execute_script(
+            drag_and_drop_js +
+            "$('{}').simulateDragDrop({ dropTarget: '{}'});".format(
+                object, target
+            )
+        )
+
 
 class ShareholderDetailPage(BasePage):
     """Options List View"""
@@ -128,9 +207,8 @@ class ShareholderDetailPage(BasePage):
 
     def click_to_edit(self, class_name):
         el = self.driver.find_element_by_class_name(class_name)
-        el = el.find_element_by_class_name('editable-click')
+        el = self.wait_until_visible((By.CLASS_NAME, 'editable-click'))
         el.click()
-
 
     def edit_shareholder_number(self, value, class_name):
         el = self.driver.find_element_by_class_name(class_name)
@@ -382,7 +460,6 @@ class PositionPage(BasePage):
         for select in selects:
             select = Select(select)
             select.select_by_index(1)
-
 
     def enter_new_split_data(self, *args):
         el = self.driver.find_element_by_id('split-shares')

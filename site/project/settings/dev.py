@@ -20,7 +20,7 @@ TRACKING_CODE = 'UA-58468401-4'  # used by test
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # for local dev use this...
 # NOSE_ARGS = ['--pdb', '-s', '--logging-level=WARNING']
-NOSE_ARGS = ['--with-progressive']
+NOSE_ARGS = ['--with-progressive', '--nologcapture']
 
 INSTALLED_APPS = INSTALLED_APPS + ('rosetta', 'django_nose',)
 

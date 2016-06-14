@@ -698,13 +698,66 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             self._handle_exception(e)
 
     def test_cap_increase(self):
-        raise NotImplementedError()
+        position = PositionGenerator().generate(
+            save=False, seller=self.seller, buyer=self.buyer,
+            security=self.securities[0])
+
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_cap_increase_form()
+            app.enter_new_cap_data(position)
+            app.click_save_cap_increase()
+
+            self.assertEqual(len(app.get_position_row_data()), 8)
+            self.assertTrue(app.is_no_errors_displayed())
+
+        except Exception, e:
+            self._handle_exception(e)
 
     def test_split(self):
-        raise NotImplementedError()
+
+        # initial pos
+        PositionGenerator().generate(
+            seller=self.seller, buyer=self.buyer,
+            security=self.securities[0])
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_split_form()
+            app.enter_new_split_data(2, 3, 'test comment')
+            app.click_save_split()
+
+            self.assertEqual(len(app.get_position_row_data()), 8)
+            self.assertTrue(app.is_no_errors_displayed())
+
+        except Exception, e:
+            self._handle_exception(e)
 
     def test_delete(self):
-        raise NotImplementedError()
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_delete_position()
+
+            self.assertEqual(app.get_position_row_count(), 2)
+
+        except Exception, e:
+            self._handle_exception(e)
 
     def test_confirm(self):
-        raise NotImplementedError()
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_cap_increase_form()
+            app.enter_new_cap_data(position)
+            app.click_save_cap_increase()
+
+            self.assertEqual(app.count_draft_mode_items(), 1)
+
+        except Exception, e:
+            self._handle_exception(e)

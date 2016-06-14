@@ -67,10 +67,15 @@ class BasePage(object):
         click to open the datepicker for element X
         """
         el = self.driver.find_element_by_class_name(class_name)
-        btn = el.find_element_by_xpath(
+        btns = el.find_elements_by_xpath(
             '//*[contains(@class, "date-field")]//span[@class="input-group-btn"]//button'
         )
-        btn.click()
+        for btn in btns:
+            if btn.is_displayed():
+                btn.click()
+                return
+
+        raise Exception('Clickable button not found')
 
     def click_date_in_datepicker(self, class_name):
         """
@@ -79,14 +84,21 @@ class BasePage(object):
         click first day of current month
         """
         el = self.driver.find_element_by_class_name(class_name)
-        dp_row = el.find_element_by_xpath(
+        dp_rows = el.find_elements_by_xpath(
             '//table[@class="uib-daypicker"]//tr[@class="uib-weeks ng-scope"]')
-        for td in dp_row.find_elements_by_tag_name('td'):
-            el2 = td.find_elements_by_tag_name('span')
-            if el2 and el2[0].text == '01':
-                btn = td.find_element_by_tag_name('button')
-                btn.click()
-                break
+        # in case we have multiple dps
+        for dp_row in dp_rows:
+            if not dp_row.is_displayed():
+                continue
+
+            for td in dp_row.find_elements_by_tag_name('td'):
+                el2 = td.find_elements_by_tag_name('span')
+                if el2 and el2[0].text == '01':
+                    btn = td.find_element_by_tag_name('button')
+                    btn.click()
+                    return
+
+        raise Exception('Clickable button not found')
 
     def is_no_errors_displayed(self):
         """ MUST not find it, hence exception is True :) """
@@ -290,8 +302,16 @@ class PositionPage(BasePage):
         btn = self.driver.find_element_by_class_name('add-position')
         btn.click()
 
+    def click_open_split_form(self):
+        btn = self.driver.find_element_by_class_name('split-shares')
+        btn.click()
+
     def click_save_position(self):
         btn = self.driver.find_element_by_class_name('save-position')
+        btn.click()
+
+    def click_save_split(self):
+        btn = self.driver.find_element_by_class_name('save-split')
         btn.click()
 
     def enter_new_position_data(self, position):
@@ -316,6 +336,23 @@ class PositionPage(BasePage):
             select = Select(select)
             select.select_by_index(1)
 
+    def enter_new_split_data(self, *args):
+        el = self.driver.find_element_by_id('split-shares')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+        selects = form.find_elements_by_tag_name('select')
+
+        # input #0 use datepicker
+        self.use_datepicker('split-shares-form', None)
+        inputs[1].send_keys(args[0])  # dividend
+        inputs[2].send_keys(args[1])  # divisor
+        inputs[3].send_keys(args[2])  # comment
+
+        # select elements: seller, buyer, security
+        for select in selects:
+            select = Select(select)
+            select.select_by_index(1)
+
     def get_position_row_data(self):
         """
         return list of data from position in single row of table
@@ -325,4 +362,3 @@ class PositionPage(BasePage):
         trs = table.find_elements_by_tag_name('tr')
         row = trs[2]
         return [td.text for td in row.find_elements_by_tag_name('td')]
-

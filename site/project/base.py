@@ -6,6 +6,7 @@ from django.test import LiveServerTestCase
 from django.core.mail import EmailMessage, get_connection
 
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.chrome.options import Options
 from pyvirtualdisplay import Display
 
 
@@ -60,7 +61,11 @@ class BaseSeleniumTestCase(LiveServerTestCase):
         display = Display(visible=0, size=(1024, 768))
         display.start()
 
-        cls.selenium = WebDriver()
+        chrome_options = Options()
+        chrome_options.add_argument("--start-maximized")
+        cls.selenium = WebDriver(
+            './chromedriver', chrome_options=chrome_options)
+
         cls.selenium.implicitly_wait(10)
         super(BaseSeleniumTestCase, cls).setUpClass()
 

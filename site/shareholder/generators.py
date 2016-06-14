@@ -2,6 +2,8 @@ import random
 import hashlib
 import datetime
 
+from model_mommy import generators
+
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 
@@ -214,13 +216,15 @@ class PositionGenerator(object):
             "count": count,
             "value": value,
             "security": security,
+            "comment": kwargs.get('comment') or generators.gen_string(55)
         }
         if seller:
             kwargs2.update({"seller": seller})
 
-        position = Position.objects.create(**kwargs2)
+        if kwargs.get('save') == False:
+            return Position(**kwargs2)
 
-        return position
+        return Position.objects.create(**kwargs2)
 
 
 class OptionPlanGenerator(object):

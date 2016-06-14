@@ -9,6 +9,10 @@ http://selenium-python.readthedocs.org/en/latest/page-objects.html
 import time
 
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.remote.webelement import WebElement
 
 from shareholder.generators import DEFAULT_TEST_DATA
 
@@ -55,6 +59,134 @@ class BasePage(object):
         """ reload page """
         self.driver.get(self.driver.current_url)
 
+    def use_datepicker(self, class_name, date):
+        """
+        use default datepicker to select a date
+        """
+        self.click_open_datepicker(class_name)
+        self.click_date_in_datepicker(class_name)
+
+    def click_open_datepicker(self, class_name):
+        """
+        click to open the datepicker for element X
+        """
+        el = self.driver.find_element_by_class_name(class_name)
+        btns = el.find_elements_by_xpath(
+            '//*[contains(@class, "date-field")]//'
+            'span[@class="input-group-btn"]//button'
+        )
+        for btn in btns:
+            if btn.is_displayed():
+                btn.click()
+                return
+
+        raise Exception('Clickable button not found')
+
+    def click_date_in_datepicker(self, class_name):
+        """
+        select some date in datepicker
+
+        click first day of current month
+        """
+        el = self.driver.find_element_by_class_name(class_name)
+        dp_rows = el.find_elements_by_xpath(
+            '//table[@class="uib-daypicker"]//tr[@class="uib-weeks ng-scope"]')
+        # in case we have multiple dps
+        for dp_row in dp_rows:
+            if not dp_row.is_displayed():
+                continue
+
+            for td in dp_row.find_elements_by_tag_name('td'):
+                el2 = td.find_elements_by_tag_name('span')
+                if el2 and el2[0].text == '01':
+                    btn = td.find_element_by_tag_name('button')
+                    btn.click()
+                    return
+
+        raise Exception('Clickable button not found')
+
+    def is_no_errors_displayed(self):
+        """ MUST not find it, hence exception is True :) """
+        try:
+            self._is_element_displayed(cls='alert-danger')
+            return False
+        except:
+            return True
+
+    def scroll_to(self, Y=None, element=None):
+        """
+        scroll to element or coordinate
+        """
+        if element:
+            self.driver.execute_script(
+                "return arguments[0].scrollIntoView();", element)
+        else:
+            self.driver.execute_script("window.scrollTo(0, {})".format(Y))
+
+    def wait_until_clickable(self, element):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.element_to_be_clickable(element))
+        return element
+
+    def wait_until_visible(self, element):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        if isinstance(element, WebElement):
+            element = wait.until(EC.visibility_of(element))
+        else:
+            element = wait.until(EC.visibility_of_element_located(element))
+        return element
+
+    def wait_until_invisible(self, element):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.invisibility_of_element_located(element))
+        return element
+
+    def wait_unti_text_present(self, element, text):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.text_to_be_present_in_element(element, text))
+        return element
+
+    def drag_n_drop(self, object, target):
+        """
+        used to simulate drag'n drop to move elemens
+        from
+        http://stackoverflow.com/questions/29381233/how-to-simulate-html5-drag-and-drop-in-selenium-webdriver/29381532#29381532
+        object, target : jquery identifiers
+        """
+
+        jquery_url = "http://code.jquery.com/jquery-1.11.2.min.js"
+
+        # load jQuery helper
+        with open("jquery_load_helper.js") as f:
+            load_jquery_js = f.read()
+
+        # load drag and drop helper
+        with open("drag_and_drop_helper.js") as f:
+            drag_and_drop_js = f.read()
+
+        # load jQuery
+        self.driver.execute_async_script(load_jquery_js, jquery_url)
+
+        # perform drag&drop
+        self.driver.execute_script(
+            drag_and_drop_js +
+            "$('{}').simulateDragDrop({ dropTarget: '{}'});".format(
+                object, target
+            )
+        )
+
 
 class ShareholderDetailPage(BasePage):
     """Options List View"""
@@ -74,35 +206,12 @@ class ShareholderDetailPage(BasePage):
             self.driver.get('%s%s' % (live_server_url))
 
     def click_to_edit(self, class_name):
-        el = self.driver.find_element_by_class_name(class_name)
-        el = el.find_element_by_class_name('editable-click')
+        el = self.wait_until_visible((
+            By.XPATH,
+            '//tr[contains(@class, "{}")]//'
+            'span[contains(@class, "editable-click")]'.format(class_name)
+        ))
         el.click()
-
-    def click_open_datepicker(self, class_name):
-        """
-        click to open the datepicker for element X
-        """
-        el = self.driver.find_element_by_class_name(class_name)
-        btn = el.find_element_by_xpath(
-            '//td[@class="date-field"]//span[@class="input-group-btn"]//button'
-        )
-        btn.click()
-
-    def click_date_in_datepicker(self, class_name):
-        """
-        select some date in datepicker
-
-        click first day of current month
-        """
-        el = self.driver.find_element_by_class_name(class_name)
-        dp_row = el.find_element_by_xpath(
-            '//table[@class="uib-daypicker"]//tr[@class="uib-weeks ng-scope"]')
-        for td in dp_row.find_elements_by_tag_name('td'):
-            el2 = td.find_elements_by_tag_name('span')
-            if el2 and el2[0].text == '01':
-                btn = td.find_element_by_tag_name('button')
-                btn.click()
-                break
 
     def edit_shareholder_number(self, value, class_name):
         el = self.driver.find_element_by_class_name(class_name)
@@ -213,14 +322,6 @@ class OptionsPage(BasePage):
     def is_option_plan_form_open(self):
         return self._is_element_displayed(id='add_option_plan')
 
-    def is_no_errors_displayed(self):
-        """ MUST not find it, hence exception is True :) """
-        try:
-            self._is_element_displayed(cls='alert-danger')
-            return False
-        except:
-            return True
-
     def is_option_plan_displayed(self):
         h2s = self.driver.find_elements_by_tag_name('h2')
         string = u"Optionsplan: {} f\xfcr {}".format(
@@ -262,3 +363,143 @@ class OptionsPage(BasePage):
 
         self.enter_option_plan_form_data()
         self.click_save_option_plan_form()
+
+
+class PositionPage(BasePage):
+    """Options List View"""
+
+    def __init__(self, driver, live_server_url, user):
+        """ load MainPage '/' """
+        self.live_server_url = live_server_url
+        # prepare driver
+        super(PositionPage, self).__init__(driver)
+
+        # load page
+        self.operator = user.operator_set.all()[0]
+        self.login(username=user.username, password='test')
+        self.driver.get('%s%s' % (live_server_url, '/positions/'))
+
+    def click_confirm_position(self):
+        table = self.driver.find_element_by_tag_name('table')
+        time.sleep(1)
+        trs = table.find_elements_by_tag_name('tr')
+        row = trs[2]
+        td = row.find_elements_by_tag_name('td')[-1]
+        td.find_elements_by_tag_name('a')[1].click()
+
+    def click_delete_position(self):
+        table = self.driver.find_element_by_tag_name('table')
+        time.sleep(1)
+        trs = table.find_elements_by_tag_name('tr')
+        row = trs[2]
+        td = row.find_elements_by_tag_name('td')[-1]
+        td.find_element_by_tag_name('a').click()
+
+    def click_open_add_position_form(self):
+        btn = self.driver.find_element_by_class_name('add-position')
+        btn.click()
+
+    def click_open_split_form(self):
+        btn = self.driver.find_element_by_class_name('split-shares')
+        btn.click()
+
+    def click_open_cap_increase_form(self):
+        btn = self.driver.find_element_by_class_name('add-capital')
+        btn.click()
+
+    def click_save_cap_increase(self):
+        btn = self.driver.find_element_by_class_name('save-capital')
+        btn.click()
+
+    def click_save_position(self):
+        btn = self.driver.find_element_by_class_name('save-position')
+        btn.click()
+
+    def click_save_split(self):
+        btn = self.driver.find_element_by_class_name('save-split')
+        btn.click()
+
+    def enter_new_position_data(self, position):
+        el = self.driver.find_element_by_id('add_position')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+        selects = form.find_elements_by_tag_name('select')
+
+        # input #0 use datepicker
+        self.use_datepicker('add-position-form', None)
+        if position.count:
+            inputs[1].clear()
+            inputs[1].send_keys(position.count)  # count
+        if position.value:
+            inputs[2].clear()
+            inputs[2].send_keys(position.value)  # price
+        inputs[3].clear()
+        inputs[3].send_keys(position.comment)  # comment
+
+        # select elements: seller, buyer, security
+        for select in selects:
+            select = Select(select)
+            select.select_by_index(1)
+
+    def enter_new_cap_data(self, position):
+
+        el = self.driver.find_element_by_id('add_capital')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+        selects = form.find_elements_by_tag_name('select')
+
+        # input #0 use datepicker
+        self.use_datepicker('add-capital-form', None)
+        if position.count:
+            inputs[1].clear()
+            inputs[1].send_keys(position.count)  # count
+        if position.value:
+            inputs[2].clear()
+            inputs[2].send_keys(position.value)  # price
+        inputs[3].clear()
+        inputs[3].send_keys(position.comment)  # comment
+
+        # select elements: seller, buyer, security
+        for select in selects:
+            select = Select(select)
+            select.select_by_index(1)
+
+    def enter_new_split_data(self, *args):
+        el = self.driver.find_element_by_id('split-shares')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+        selects = form.find_elements_by_tag_name('select')
+
+        # input #0 use datepicker
+        self.use_datepicker('split-shares-form', None)
+        inputs[1].send_keys(args[0])  # dividend
+        inputs[2].send_keys(args[1])  # divisor
+        inputs[3].send_keys(args[2])  # comment
+
+        # select elements: seller, buyer, security
+        for select in selects:
+            select = Select(select)
+            select.select_by_index(1)
+
+    def get_position_row_data(self):
+        """
+        return list of data from position in single row of table
+        """
+        table = self.driver.find_element_by_tag_name('table')
+        time.sleep(1)
+        trs = table.find_elements_by_tag_name('tr')
+        row = trs[2]
+        return [td.text for td in row.find_elements_by_tag_name('td')]
+
+    def get_position_row_count(self):
+        table = self.driver.find_element_by_tag_name('table')
+        time.sleep(1)
+        trs = table.find_elements_by_tag_name('tr')
+        return len(trs)
+
+    def count_draft_mode_items(self):
+        table = self.driver.find_element_by_tag_name('table')
+        time.sleep(1)
+        trs = table.find_elements_by_tag_name('tr')
+        row = trs[2]
+        return row.find_element_by_tag_name('td').text.count('Entwurf')

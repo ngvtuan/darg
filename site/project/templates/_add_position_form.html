@@ -2,7 +2,7 @@
 
 <!-- {% trans "Please enter your position data:" %} -->
 {% verbatim %}
-<div>
+<div class="add-position-form">
   <form class="form-inline">
     <div class="form-group block-level">
       <div>
@@ -41,8 +41,8 @@
         <input type="text" class="form-control" ng-model="newPosition.comment" translate translate-attr-placeholder="Comment">
       </div>
 
-      <button class="btn btn-default" ng-click="hide_form()">{% endverbatim %}{% trans "Cancel" %}{% verbatim %}</button>
-      <button class="btn btn-focus" ng-click="add_position()">{% endverbatim %}{% trans "Add Position" %}{% verbatim %}</button>
+      <button class="btn btn-default cancel" ng-click="hide_form()">{% endverbatim %}{% trans "Cancel" %}{% verbatim %}</button>
+      <button class="btn btn-focus save-position" ng-click="add_position()">{% endverbatim %}{% trans "Add Position" %}{% verbatim %}</button>
     </div>
 
   </form>

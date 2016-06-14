@@ -33,7 +33,6 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $scope.securities.push item
 
     $scope.add_position = ->
-
         $scope.newPosition.$save().then (result) ->
             $scope.positions.push result
         .then ->

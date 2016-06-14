@@ -7,3 +7,4 @@ pyvirtualdisplay
 git+git://github.com/jwhitlock/django-nose@178_fix_argparse_v2#egg=django-nose
 mock
 nose-progressive
+pdbpp

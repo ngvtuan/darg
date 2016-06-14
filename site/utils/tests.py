@@ -20,7 +20,7 @@ class UtilsTestCase(TestCase):
     def test_unique_username(self):
         """
         on prod we had
-        http://aggregator.ttg-dresden.de:9000/sentry-internal/production/
+        http://sentry.ttg-dresden.de/sentry-internal/production/
         issues/28313/
         jirka2@tschitschereengreen.com
         vs

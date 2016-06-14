@@ -298,6 +298,22 @@ class PositionPage(BasePage):
         self.login(username=user.username, password='test')
         self.driver.get('%s%s' % (live_server_url, '/positions/'))
 
+    def click_confirm_position(self):
+        table = self.driver.find_element_by_tag_name('table')
+        time.sleep(1)
+        trs = table.find_elements_by_tag_name('tr')
+        row = trs[2]
+        td = row.find_elements_by_tag_name('td')[-1]
+        td.find_elements_by_tag_name('a')[1].click()
+
+    def click_delete_position(self):
+        table = self.driver.find_element_by_tag_name('table')
+        time.sleep(1)
+        trs = table.find_elements_by_tag_name('tr')
+        row = trs[2]
+        td = row.find_elements_by_tag_name('td')[-1]
+        td.find_element_by_tag_name('a').click()
+
     def click_open_add_position_form(self):
         btn = self.driver.find_element_by_class_name('add-position')
         btn.click()
@@ -362,3 +378,16 @@ class PositionPage(BasePage):
         trs = table.find_elements_by_tag_name('tr')
         row = trs[2]
         return [td.text for td in row.find_elements_by_tag_name('td')]
+
+    def get_position_row_count(self):
+        table = self.driver.find_element_by_tag_name('table')
+        time.sleep(1)
+        trs = table.find_elements_by_tag_name('tr')
+        return len(trs)
+
+    def count_draft_mode_items(self):
+        table = self.driver.find_element_by_tag_name('table')
+        time.sleep(1)
+        trs = table.find_elements_by_tag_name('tr')
+        row = trs[2]
+        return row.find_element_by_tag_name('td').text.count('Entwurf')

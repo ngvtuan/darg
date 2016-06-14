@@ -737,27 +737,37 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             self._handle_exception(e)
 
     def test_delete(self):
+
+        # initial pos
+        PositionGenerator().generate(
+            seller=self.seller, buyer=self.buyer,
+            security=self.securities[0])
+
         try:
 
             app = page.PositionPage(
                 self.selenium, self.live_server_url, self.operator.user)
             app.click_delete_position()
 
-            self.assertEqual(app.get_position_row_count(), 2)
+            self.assertEqual(app.get_position_row_count(), 1)
 
         except Exception, e:
             self._handle_exception(e)
 
     def test_confirm(self):
+
+        # initial pos
+        PositionGenerator().generate(
+            seller=self.seller, buyer=self.buyer,
+            security=self.securities[0])
+
         try:
 
             app = page.PositionPage(
                 self.selenium, self.live_server_url, self.operator.user)
-            app.click_open_cap_increase_form()
-            app.enter_new_cap_data(position)
-            app.click_save_cap_increase()
+            app.click_confirm_position()
 
-            self.assertEqual(app.count_draft_mode_items(), 1)
+            self.assertEqual(app.count_draft_mode_items(), 0)
 
         except Exception, e:
             self._handle_exception(e)

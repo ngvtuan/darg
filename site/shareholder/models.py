@@ -64,8 +64,8 @@ class Company(models.Model):
         """ send email with partial share after split list """
         operators = self.get_operators().values_list('user__email', flat=True)
         subject = _(
-            u"Your list of partials for the share split for "
-            u"company '{}'").format(self.name)
+            "Your list of partials for the share split for "
+            "company '{}'").format(self.name)
         message = _(
             "Dear Operator,\n\n"
             "Your share split has been successful. Please find the list of "
@@ -125,9 +125,15 @@ class Company(models.Model):
             sh = Shareholder.objects.get(id=sh_id)
             bought_options = sh.option_buyer.aggregate(Sum('count'))
             sold_options = sh.option_seller.aggregate(Sum('count'))
-            if (bought_options['count__sum'] or 0) - (sold_options['count__sum'] or 0) > 0:
+            if (
+                (bought_options['count__sum'] or 0) -
+                (sold_options['count__sum'] or 0) > 0
+            ):
                 oh_list.append(sh)
-            elif (bought_options['count__sum'] or 0) - (sold_options['count__sum'] or 0) < 0:
+            elif (
+                (bought_options['count__sum'] or 0) -
+                (sold_options['count__sum'] or 0) < 0
+            ):
                 logger.error('user sold more options then he got',
                              extra={'shareholder': sh})
         return oh_list
@@ -447,7 +453,11 @@ class Shareholder(models.Model):
             return 0
 
         # last payed price
-        if Position.objects.filter(buyer__company=self.company, value__isnull=False).exists():
+        if (
+            Position.objects.filter(
+                buyer__company=self.company, value__isnull=False
+            ).exists()
+        ):
             position = Position.objects.filter(
                 buyer__company=self.company).latest('bought_at')
         else:

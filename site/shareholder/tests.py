@@ -430,6 +430,7 @@ class ShareholderDetailFunctionalTestCase(BaseSeleniumTestCase):
                     kwargs={'shareholder_id': self.buyer.id}
                     )
                 )
+            time.sleep(1)
             p.click_to_edit("shareholder-number")
             p.edit_shareholder_number(99, "shareholder-number")
             p.save_edit("shareholder-number")

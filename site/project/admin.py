@@ -9,9 +9,28 @@ from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 
 from markdownx.widgets import AdminMarkdownxWidget
-# from reversion.admin import VersionAdmin
+# from reversion.admin import VersionAdmin  # revers > 2.0
+from reversion.helpers import patch_admin  # reversion < 2.0
 
-"""
+# ReVersioned UserAdmin
+patch_admin(User)
+
+
+UserAdmin.list_display = (
+    'email',
+    'first_name',
+    'last_name',
+    'is_active',
+    'last_login',
+    'date_joined',
+    'is_staff')
+UserAdmin.list_filter = (
+    'is_staff', 'date_joined', 'operator__company', 'shareholder__company',
+    'last_login',
+    )
+
+
+""" reversion > 2.0
 class ReversionedUserAdmin(VersionAdmin, UserAdmin):
 
     list_display = (
@@ -29,6 +48,7 @@ class ReversionedUserAdmin(VersionAdmin, UserAdmin):
         )
 """
 
+
 class FlatPageAdminX(FlatPageAdmin):
     formfield_overrides = {
         models.TextField: {'widget': AdminMarkdownxWidget},
@@ -38,4 +58,4 @@ class FlatPageAdminX(FlatPageAdmin):
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageAdminX)
 admin.site.unregister(User)
-# admin.site.register(User, ReversionedUserAdmin)
+admin.site.register(User, UserAdmin)

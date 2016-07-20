@@ -192,3 +192,21 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
 
         self.assertTrue(self.selenium.find_element_by_class_name(
             'editable-error').is_displayed())
+
+    def test_no_numbered_shares(self):
+        """
+        test that company without numbered shares does not see anything
+        """
+        try:
+            page.CompanyPage(
+                self.selenium,
+                self.live_server_url,
+                self.operator.user,
+                self.operator.company
+            )
+
+        except Exception, e:
+            self._handle_exception(e)
+
+        self.assertFalse(self.selenium.find_element_by_class_name(
+            'numbered-segments').is_displayed())

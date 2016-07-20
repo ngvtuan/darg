@@ -123,8 +123,8 @@
     <tr ng-repeat="security in company.security_set" class="security">	
 	  <td>{{ security.readable_title}} </td>
 	  <td>{{ security.count }}</td>
-      <td class="numbered-segments">
-        <span ng-show=security.track_numbers />
+      <td class="numbered-segments" ng-show="security.track_numbers">
+        <span />
           {% endverbatim %}{% trans 'tracking security numbers for owners enabled. segments:' %}{% verbatim %}
         </span>
         <span editable-text="security.number_segments" onaftersave="edit_security(security)">

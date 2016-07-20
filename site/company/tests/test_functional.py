@@ -12,8 +12,6 @@ from company import page
 
 User = get_user_model()
 
-# --- MODEL TESTS
-
 
 # --- FUNCTIONAL TESTS
 class CompanyFunctionalTestCase(BaseSeleniumTestCase):

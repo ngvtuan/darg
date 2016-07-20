@@ -33,7 +33,7 @@ class SecuritySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Security
-        fields = ('pk', 'readable_title', 'title', 'url', 'count')
+        fields = ('pk', 'readable_title', 'title', 'url', 'count', 'track_numbers')
 
     def get_readable_title(self, obj):
         return obj.get_title_display()

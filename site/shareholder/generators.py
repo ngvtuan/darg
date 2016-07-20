@@ -96,7 +96,9 @@ class SecurityGenerator(object):
 
     def generate(self, **kwargs):
         company = kwargs.get('company', CompanyGenerator().generate())
-        s1 = Security.objects.create(title='P', company=company, count=1)
+        kwargs2 = dict(title='P', company=company, count=1)
+        kwargs2.update(kwargs)
+        s1 = Security.objects.create(**kwargs2)
 
         return s1
 

@@ -121,11 +121,17 @@
     <h2>{% trans "Securities" %}</h2>
     <table class="table table-striped">
     {% for security in company.security_set.all %}
-       <tr><td>{{ security.get_title_display}} </td><td>{{security.count}}</td></tr>
+        <tr>	
+		  <td>{{ security.get_title_display}} </td>
+		  <td>{{security.count}}</td>
+          <td>
+			{% if security.track_numbers %}{% trans 'tracking security numbers for owners enabled ' %}{% endif %}
+		  </td>
+		</tr>
     {% endfor %}
     </table>
     {% trans 'Please contact us at our' %}
-    <a href="mailto:jirka.schaefer@das-aktienregister.ch" class="btn-inline">customer service desk</a>
+    <a href="mailto:info+helpdesk@das-aktienregister.ch" class="btn-inline">Customer Service Desk</a>
     {% trans 'for getting more security types added' %}
   {% endif %}
 

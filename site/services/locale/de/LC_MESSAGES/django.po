@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-31 22:00+0000\n"
+"POT-Creation-Date: 2016-07-20 10:54+0000\n"
 "PO-Revision-Date: 2016-03-09 13:09+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
-#: services/rest/serializers.py:176
+#: services/rest/serializers.py:178
 msgid ""
 "User not yet registered with this application. Please ask the user to "
 "register first."
@@ -27,15 +27,15 @@ msgstr ""
 "Dieser Nutzer ist noch nicht registriert. Bitten Sie ihn dieser mit der "
 "angegebenen Email nachzuholen."
 
-#: services/rest/serializers.py:183
+#: services/rest/serializers.py:185
 msgid "You cannot edit this company"
 msgstr "Sie können dieses Unternehmen nicht bearbeiten."
 
-#: services/rest/serializers.py:188
+#: services/rest/serializers.py:190
 msgid "You were added as administrator for {}"
 msgstr "Sie wurden als Administrator für das Unternehmen \"{}\" hinzugefügt."
 
-#: services/rest/serializers.py:189
+#: services/rest/serializers.py:191
 msgid ""
 "Dear,\n"
 "\n"
@@ -55,24 +55,24 @@ msgstr ""
 "\n"
 "Das Aktienregister Team"
 
-#: services/rest/serializers.py:219 services/rest/serializers.py:264
+#: services/rest/serializers.py:221 services/rest/serializers.py:266
 msgid "Email missing"
 msgstr "Bitte geben Sie eine gültige Email ein."
 
-#: services/rest/serializers.py:267
+#: services/rest/serializers.py:269
 msgid "First Name missing"
 msgstr "Bitte geben Sie eine gültigen Vornamen ein."
 
-#: services/rest/serializers.py:270
+#: services/rest/serializers.py:272
 msgid "Last Name missing"
 msgstr "Bitte geben Sie eine gültigen Nachnamen ein."
 
-#: services/rest/serializers.py:275
+#: services/rest/serializers.py:278
 msgid "Shareholder Number must be unique"
 msgstr ""
 "Diese Aktionärsnummer wird bereits verwendet. Bitte wählen Sie eine andere."
 
-#: services/rest/serializers.py:476
+#: services/rest/serializers.py:475
 msgid "Not a pdf file."
 msgstr "Falsches Dateiformat. Nur PDF ist erlaubt."
 
@@ -83,12 +83,12 @@ msgstr ""
 "Die Felder {field_names} müssen gemeinsam leer sein oder gleichzeitig Werte "
 "haben."
 
-#: services/rest/views.py:163 services/rest/views.py:165
-#: services/rest/views.py:167 services/rest/views.py:169
+#: services/rest/views.py:157 services/rest/views.py:159
+#: services/rest/views.py:161 services/rest/views.py:163
 msgid "Field may not be empty."
 msgstr "Das Feld darf nicht leer sein."
 
-#: services/rest/views.py:290 services/rest/views.py:372
+#: services/rest/views.py:284 services/rest/views.py:366
 msgid "Confirmed position cannot be deleted."
 msgstr ""
 "Festgeschriebene Transaktionen können nicht gelöscht werden. Verwenden Sie "

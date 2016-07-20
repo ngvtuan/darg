@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-31 22:00+0000\n"
+"POT-Creation-Date: 2016-07-20 10:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,43 +57,47 @@ msgid ""
 "Your Share Register Team"
 msgstr ""
 
-#: shareholder/models.py:205
+#: shareholder/models.py:211
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
 msgstr ""
 
-#: shareholder/models.py:225
+#: shareholder/models.py:231
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr ""
 
-#: shareholder/models.py:377
+#: shareholder/models.py:387
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:384
+#: shareholder/models.py:394
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:388
+#: shareholder/models.py:398
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:392
+#: shareholder/models.py:402
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:401
+#: shareholder/models.py:411
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:493
+#: shareholder/models.py:498
+msgid "App needs to track IDs of shares"
+msgstr ""
+
+#: shareholder/models.py:511
 msgid "Share Count transfered or created"
 msgstr ""
 
-#: shareholder/models.py:496
+#: shareholder/models.py:514
 msgid "Nominal value or payed price for the transaction"
 msgstr ""
 
-#: shareholder/models.py:532
+#: shareholder/models.py:550
 msgid "Number of shares approved"
 msgstr ""
 
@@ -131,7 +135,7 @@ msgid "Share Count"
 msgstr ""
 
 #: shareholder/templates/options.html:44
-#: shareholder/templates/optionsplan.html:25
+#: shareholder/templates/optionsplan.html:28
 msgid "Exercise Price"
 msgstr ""
 
@@ -139,22 +143,22 @@ msgstr ""
 msgid "Issuer"
 msgstr ""
 
-#: shareholder/templates/options.html:54
+#: shareholder/templates/options.html:55
 #: shareholder/templates/positions.html:65
 msgid "Draft"
 msgstr ""
 
-#: shareholder/templates/options.html:65
+#: shareholder/templates/options.html:66
 #: shareholder/templates/positions.html:78
 msgid "delete"
 msgstr ""
 
-#: shareholder/templates/options.html:70
+#: shareholder/templates/options.html:71
 #: shareholder/templates/positions.html:83
 msgid "confirm"
 msgstr ""
 
-#: shareholder/templates/options.html:80
+#: shareholder/templates/options.html:81
 msgid "No options yet."
 msgstr ""
 
@@ -170,24 +174,24 @@ msgstr ""
 msgid "Board approval date"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:29
+#: shareholder/templates/optionsplan.html:32
 msgid "Share count"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:33
+#: shareholder/templates/optionsplan.html:36
 #: shareholder/templates/positions.html:42
 msgid "Comment"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:37
+#: shareholder/templates/optionsplan.html:40
 msgid "Security Type"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:50
+#: shareholder/templates/optionsplan.html:53
 msgid "PDF of approved option plan"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:67
+#: shareholder/templates/optionsplan.html:70
 msgid "Upload success"
 msgstr ""
 
@@ -313,15 +317,15 @@ msgstr ""
 msgid "Shareholder Birthday"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:108
+#: shareholder/templates/shareholder.html:120
 msgid "Shares"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:112
+#: shareholder/templates/shareholder.html:124
 msgid "Value of all shares according to last transaction"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:117
+#: shareholder/templates/shareholder.html:129
 msgid "Delete shareholder"
 msgstr ""
 

@@ -405,6 +405,14 @@ class ShareholderTestCase(TestCase):
         self.assertEqual(s1.share_value(), Decimal('500000.0000'))
 
 
+class SecurityTestCase(TestCase):
+
+    def test_fields(self):
+        security = SecurityGenerator().generate()
+
+        self.assertTrue(hasattr(security, 'track_numbers'))
+
+
 # --- FUNCTIONAL TESTS
 class ShareholderDetailFunctionalTestCase(BaseSeleniumTestCase):
 

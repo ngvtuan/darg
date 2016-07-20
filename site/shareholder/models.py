@@ -493,6 +493,10 @@ class Security(models.Model):
     company = models.ForeignKey(Company)
     count = models.PositiveIntegerField()
 
+    # settings
+    track_numbers = models.BooleanField(
+        _('App needs to track IDs of shares'), default=False)
+
     def __str__(self):
         return u"{}".format(self.get_title_display())
 

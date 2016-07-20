@@ -48,3 +48,6 @@ django-markdownx
 ipdbplugin
 wand
 nose-progressive
+
+# fix https://github.com/xhtml2pdf/xhtml2pdf/issues/318
+html5lib==1.0b8

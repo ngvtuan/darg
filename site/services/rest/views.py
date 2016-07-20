@@ -290,7 +290,7 @@ class SecurityViewSet(viewsets.ModelViewSet):
     """ API endpoint to get options """
     serializer_class = SecuritySerializer
     permission_classes = [
-        SafeMethodsOnlyPermission,
+        UserIsOperatorPermission,
     ]
 
     def get_queryset(self):

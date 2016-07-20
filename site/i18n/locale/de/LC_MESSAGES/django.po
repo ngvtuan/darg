@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-20 11:26+0000\n"
-"PO-Revision-Date: 2016-07-20 11:30+0000\n"
+"POT-Creation-Date: 2016-07-20 21:19+0000\n"
+"PO-Revision-Date: 2016-07-20 21:20+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -69,20 +69,20 @@ msgstr "Liberiertes/eingelegtes Kapital"
 msgid "Company Headquarter Country"
 msgstr "Land des Unternehmenssitzes"
 
-#: company/templates/company.html:121
+#: company/templates/company.html:120
 msgid "Securities"
 msgstr "Aktienart"
 
-#: company/templates/company.html:128 company/tests/test_views.py:33
-msgid "tracking security numbers for owners enabled "
-msgstr "Nummerierte Aktien sind aktiviert."
+#: company/templates/company.html:128
+#| msgid "tracking security numbers for owners enabled "
+msgid "tracking security numbers for owners enabled. segments:"
+msgstr "Nummerierte Aktiensegmente:"
 
-#: company/templates/company.html:133
+#: company/templates/company.html:138
 msgid "Please contact us at our"
 msgstr "Bitte kontaktieren Sie uns unter"
 
-#: company/templates/company.html:135
-#| msgid "for getting more security types added"
+#: company/templates/company.html:140
 msgid ""
 "for getting more security types (common stock, preferred stock, numbered "
 "shares) added"
@@ -90,25 +90,29 @@ msgstr ""
 "um mehr Wertpapierarten (Vorzugsaktien, Stammaktien, Aktien mit "
 "verschiedenen Nennwerten, Nummerierte Aktien) zu erhalten."
 
-#: company/templates/company.html:141
+#: company/templates/company.html:147
 msgid "Administrators"
 msgstr "Administratoren"
 
-#: company/templates/company.html:142
+#: company/templates/company.html:148
 msgid "add operator"
 msgstr "Administrator hinzufügen"
 
-#: company/templates/company.html:171
+#: company/templates/company.html:177
 msgid "Option Plans"
 msgstr "Optionsplan"
 
-#: company/templates/company.html:175
+#: company/templates/company.html:181
 msgid "Options Plan Name"
 msgstr "Name des Optionsplanes"
 
-#: company/templates/company.html:175
+#: company/templates/company.html:181
 msgid "Edit Option Plan"
 msgstr "Optionsplan editieren"
+
+#: company/tests/test_views.py:33
+msgid "tracking security numbers for owners enabled "
+msgstr "Nummerierte Aktien sind aktiviert."
 
 #: templates/base_auth.html:15
 msgid "The Share Register, 2016"
@@ -162,7 +166,7 @@ msgstr "Admin"
 msgid "I18N"
 msgstr "I18N"
 
-#: templates/menu.html:62 templates/menu.html.py:63
+#: templates/menu.html:62 templates/menu.html:63
 msgid "Change Log"
 msgstr "Änderungslog"
 
@@ -384,8 +388,8 @@ msgstr "Tags"
 msgid "Tags"
 msgstr "Tags"
 
-#: templates/zinnia/base.html:55 templates/zinnia/base.html.py:56
-#: templates/zinnia/skeleton.html:79 templates/zinnia/skeleton.html.py:80
+#: templates/zinnia/base.html:55 templates/zinnia/base.html:56
+#: templates/zinnia/skeleton.html:79 templates/zinnia/skeleton.html:80
 msgid "Sitemap"
 msgstr "Sitemap"
 
@@ -401,15 +405,15 @@ msgstr "RSS Feed"
 msgid "Tools"
 msgstr "Werkzeuge"
 
-#: templates/zinnia/base.html:71 templates/zinnia/base.html.py:73
+#: templates/zinnia/base.html:71 templates/zinnia/base.html:73
 msgid "Dashboard"
 msgstr "Übersicht"
 
-#: templates/zinnia/base.html:79 templates/zinnia/base.html.py:81
+#: templates/zinnia/base.html:79 templates/zinnia/base.html:81
 msgid "Post an entry"
 msgstr "Artikel verfassen"
 
-#: templates/zinnia/base.html:88 templates/zinnia/base.html.py:90
+#: templates/zinnia/base.html:88 templates/zinnia/base.html:90
 msgid "Log out"
 msgstr "Logout"
 
@@ -417,7 +421,7 @@ msgstr "Logout"
 msgid "Alles ueber Aktienregister."
 msgstr "Alles über Das Aktienregister"
 
-#: templates/zinnia/skeleton.html:54 templates/zinnia/skeleton.html.py:86
+#: templates/zinnia/skeleton.html:54 templates/zinnia/skeleton.html:86
 msgid "Search"
 msgstr "Suche"
 
@@ -425,7 +429,7 @@ msgstr "Suche"
 msgid "Useful links"
 msgstr "Links"
 
-#: templates/zinnia/skeleton.html:74 templates/zinnia/skeleton.html.py:75
+#: templates/zinnia/skeleton.html:74 templates/zinnia/skeleton.html:75
 msgid "Weblog index"
 msgstr "Blog Start"
 

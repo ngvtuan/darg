@@ -6,18 +6,19 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
 from shareholder.generators import (
     OperatorGenerator, UserGenerator, CompanyGenerator,
     ShareholderGenerator, TwoInitialSecuritiesGenerator,
-    PositionGenerator, OptionTransactionGenerator
+    PositionGenerator, OptionTransactionGenerator, SecurityGenerator
 )
 from shareholder.models import (
     Operator, Shareholder, Position, Security, OptionTransaction
     )
+from services.rest.serializers import SecuritySerializer
 
 User = get_user_model()
 
@@ -507,7 +508,8 @@ class ShareholderTestCase(TestCase):
 
         self.assertTrue(len(response.data.get('results')) == 1)
         self.assertEqual(
-            response.data['results'][0].get('user').get('userprofile').get('birthday'),
+            response.data['results'][0].get('user').get(
+                'userprofile').get('birthday'),
             shareholder.user.userprofile.birthday.strftime('%Y-%m-%d'))
 
     def test_add_new_shareholder(self):
@@ -687,7 +689,10 @@ class ShareholderTestCase(TestCase):
                 continue
             if k == 'birthday':
                 self.assertEqual(
-                    datetime.datetime.combine(getattr(userprofile, k), datetime.datetime.min.time()).isoformat(), v[:-5])
+                    datetime.datetime.combine(
+                        getattr(userprofile, k),
+                        datetime.datetime.min.time()
+                    ).isoformat(), v[:-5])
                 continue
             self.assertEqual(getattr(userprofile, k), v)
 
@@ -696,10 +701,7 @@ class ShareholderTestCase(TestCase):
         self.assertEqual(user.email, "mutter@demo.ch")
 
 
-class OptionTransactionTestCase(TestCase):
-
-    def setUp(self):
-        self.client = APIClient()
+class OptionTransactionTestCase(APITestCase):
 
     def test_delete_option_transaction(self):
         """
@@ -787,3 +789,36 @@ class OptionTransactionTestCase(TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertFalse(
             OptionTransaction.objects.get(id=optiontransaction.id).is_draft)
+
+
+class SecurityTestCase(APITestCase):
+
+    def setUp(self):
+        super(SecurityTestCase, self).setUp()
+        self.factory = RequestFactory()
+
+    def test_save_number_segments(self):
+        company = CompanyGenerator().generate()
+        operator = OperatorGenerator().generate(company=company)
+        security = SecurityGenerator().generate(company=company)
+        url = reverse('security-detail', kwargs={'pk': security.id})
+        request = request = self.factory.get(url)
+
+        data = SecuritySerializer(security, context={'request': request}).data
+        data.update({'number_segments': '1,2,3,4,8-10'})
+
+        self.client.force_authenticate(user=operator.user)
+
+        res = self.client.put(url, data=data)
+
+        security = Security.objects.get(id=security.id)
+        self.assertEqual(security.number_segments, [1, 2, 3, 4, u'8-10'])
+
+        data.update({'number_segments': '1,2,3,4,4,,8-10'})
+
+        res = self.client.put(url, data=data)
+
+        self.assertEqual(res.status_code, 200)
+
+        security = Security.objects.get(id=security.id)
+        self.assertEqual(security.number_segments, [1, 2, 3, 4, 4, u'8-10'])

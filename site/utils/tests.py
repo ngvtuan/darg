@@ -2,6 +2,8 @@ from django.test import TestCase
 
 from utils.user import make_username
 
+from utils.formatters import string_list_to_json
+
 
 class UtilsTestCase(TestCase):
 
@@ -33,3 +35,13 @@ class UtilsTestCase(TestCase):
             'Jirka2', 'Schaefer2', u'jirka2@tschitschereengreen.com')
 
         self.assertNotEqual(username1, username2)
+
+    def test_string_list_to_json(self):
+
+        with self.assertRaises(ValueError):
+            string_list_to_json('[]')
+            string_list_to_json('1,2,3,4--10')
+            string_list_to_json('1,,2,3,4-10,11-12X')
+
+        self.assertEqual(string_list_to_json('1,2,3,4-10'), [1, 2, 3, u'4-10'])
+        self.assertEqual(string_list_to_json('1,2,3,,4-10'), [1, 2, 3, u'4-10'])

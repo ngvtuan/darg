@@ -499,7 +499,7 @@ class Security(models.Model):
     count = models.PositiveIntegerField()
     number_segments = JSONField(
         _('JSON list of segments of ids for securities. can be 1, 2, 3, 4-10'),
-        default=dict)
+        default=list)
 
     # settings
     track_numbers = models.BooleanField(

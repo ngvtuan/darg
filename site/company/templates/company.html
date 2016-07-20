@@ -117,25 +117,29 @@
   </table>
 
   <!-- SECURITIES -->
-  {% if company.security_set.exists %}
-    <h2>{% trans "Securities" %}</h2>
-    <table class="table table-striped">
-    {% for security in company.security_set.all %}
-        <tr>	
-		  <td>{{ security.get_title_display}} </td>
-		  <td>{{security.count}}</td>
-          <td>
-			{% if security.track_numbers %}{% trans 'tracking security numbers for owners enabled ' %}{% endif %}
-		  </td>
-		</tr>
-    {% endfor %}
-    </table>
-    <div class="alert alert-info" role="alert">
-      {% trans 'Please contact us at our' %}
-      <a href="mailto:info+helpdesk@das-aktienregister.ch" class="btn-inline">Customer Service Desk</a>
-      {% trans 'for getting more security types (common stock, preferred stock, numbered shares) added' %}
-    </div>
-  {% endif %}
+  <h2>{% trans "Securities" %}</h2>
+  {% verbatim %}
+  <table class="table table-striped">
+    <tr ng-repeat="security in company.security_set" class="security">	
+	  <td>{{ security.readable_title}} </td>
+	  <td>{{ security.count }}</td>
+      <td class="numbered-segments">
+        <span ng-show=security.track_numbers />
+          {% endverbatim %}{% trans 'tracking security numbers for owners enabled. segments:' %}{% verbatim %}
+        </span>
+        <span editable-text="security.number_segments" onaftersave="edit_security(security)">
+          {{ security.readable_number_segments }}
+          <span class="el-icon-pencil"></span>
+        </span>
+      </td>
+    </tr>
+  </table>
+  <div class="alert alert-info" role="alert">
+    {% endverbatim %}{% trans 'Please contact us at our' %}{% verbatim %}
+    <a href="mailto:info+helpdesk@das-aktienregister.ch" class="btn-inline">Customer Service Desk</a>
+    {% endverbatim %}{% trans 'for getting more security types (common stock, preferred stock, numbered shares) added' %}{% verbatim %}
+  </div>
+  {% endverbatim %}
 
   <!-- ADMINS -->
   {% if company.operator_set.exists %}

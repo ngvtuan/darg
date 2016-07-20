@@ -1,4 +1,5 @@
 import datetime
+import re
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -16,6 +17,7 @@ from shareholder.models import Shareholder, Company, Operator, Position, \
 from services.rest.validators import DependedFieldsValidator
 
 from utils.user import make_username
+from utils.formatters import string_list_to_json
 
 User = get_user_model()
 
@@ -30,13 +32,40 @@ class CountrySerializer(serializers.HyperlinkedModelSerializer):
 
 class SecuritySerializer(serializers.HyperlinkedModelSerializer):
     readable_title = serializers.SerializerMethodField()
+    readable_number_segments = serializers.SerializerMethodField()
 
     class Meta:
         model = Security
-        fields = ('pk', 'readable_title', 'title', 'url', 'count', 'track_numbers')
+        fields = ('pk', 'readable_title', 'title', 'url', 'count',
+                  'track_numbers', 'readable_number_segments',
+                  'number_segments')
 
     def get_readable_title(self, obj):
         return obj.get_title_display()
+
+    def get_readable_number_segments(self, obj):
+        """
+        change json into human readble format
+        """
+        return str(obj.number_segments).translate(None, "'[]u{}")
+
+    def update(self, instance, validated_data):
+        """
+        handle saving human readable numbers segments format
+        """
+        number_segments = validated_data.get(
+            'number_segments', instance.number_segments)
+        instance.number_segments = string_list_to_json(number_segments)
+        instance.save()
+        return instance
+
+    def validate_number_segments(self, value):
+        pattern = re.compile(r'[^0-9,\- ]')
+        for part in value:
+            if pattern.findall(part):
+                raise serializers.ValidationError(
+                    _("Invalid number segment '{}'. Please use 1, 2, 3, 4-10.".format(part)))
+        return value
 
 
 class CompanySerializer(serializers.HyperlinkedModelSerializer):

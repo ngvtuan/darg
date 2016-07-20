@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-20 11:26+0000\n"
+"POT-Creation-Date: 2016-07-20 21:19+0000\n"
 "PO-Revision-Date: 2016-06-01 09:40+0000\n"
 "Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,13 +58,19 @@ msgstr ""
 "<strong>Unternehmen anlegen:</strong><br/> Geben Sie ihren Firmennamen, das "
 "Gründungsdatum, die Anzahl und den Nennwert der Aktien bei Gründung ein:"
 
-#: project/templates/_add_company_form.html:11
-msgid "Founding Date:"
-msgstr "Gründungsdatum"
-
 #: project/templates/_add_company_form.html:31
 msgid "Add Company"
 msgstr "Unternehmen hinzufügen"
+
+#: project/templates/_add_company_form.html:37
+msgid "Please contact us at our"
+msgstr ""
+
+#: project/templates/_add_company_form.html:39
+msgid ""
+"for getting more security types (common stock, preferred stock, numbered "
+"shares) added"
+msgstr ""
 
 #: project/templates/_add_option_plan_form.html:3
 msgid "Please enter your option plan data:"
@@ -235,9 +241,9 @@ msgstr "Login"
 msgid "Blog"
 msgstr "Blog"
 
-#: project/templates/index.html:24 project/templates/index.html.py:25
-#: project/templates/index.html:33 project/templates/index.html.py:34
-#: project/templates/index.html:59 project/templates/index.html.py:60
+#: project/templates/index.html:24 project/templates/index.html:25
+#: project/templates/index.html:33 project/templates/index.html:34
+#: project/templates/index.html:59 project/templates/index.html:60
 msgid "Try for free"
 msgstr "Kostenlos testen"
 
@@ -300,7 +306,7 @@ msgstr ""
 msgid "Do you know our Blog?"
 msgstr "Kennen Sie unser Blog?"
 
-#: project/templates/index.html:82 project/templates/index.html.py:83
+#: project/templates/index.html:82 project/templates/index.html:83
 msgid "Read our Blog"
 msgstr "Blog jetzt lesen"
 
@@ -318,19 +324,19 @@ msgstr ""
 msgid "Geben Sie Ihre Email-Adresse ein"
 msgstr "Geben Sie Ihre Email-Adresse ein"
 
-#: project/templates/index.html:127 project/templates/index.html.py:128
+#: project/templates/index.html:127 project/templates/index.html:128
 msgid "Read our blog"
 msgstr "Lesen Sie unser Blog"
 
-#: project/templates/index.html:132 project/templates/index.html.py:133
+#: project/templates/index.html:132 project/templates/index.html:133
 msgid "Service Status"
 msgstr "Service Status"
 
-#: project/templates/index.html:137 project/templates/index.html.py:138
+#: project/templates/index.html:137 project/templates/index.html:138
 msgid "AGB"
 msgstr "AGB"
 
-#: project/templates/index.html:142 project/templates/index.html.py:143
+#: project/templates/index.html:142 project/templates/index.html:143
 msgid "A service provided by KKD Komm. GmbH"
 msgstr "A service provided by KKD Komm. GmbH"
 
@@ -358,8 +364,9 @@ msgstr ""
 "einzutragen."
 
 #: project/templates/start.html:58
-#, python-format
-msgid "Shares (Voting-%%)"
+#, fuzzy, python-format
+#| msgid "Shares (Voting-%%)"
+msgid "Shares (Voting-%%%%)"
 msgstr "Aktien (%Stimmrechte)"
 
 #: project/templates/start.html:62
@@ -431,6 +438,9 @@ msgstr "Sprache ISO"
 #: project/views.py:116
 msgid "language full"
 msgstr "Sprache"
+
+#~ msgid "Founding Date:"
+#~ msgstr "Gründungsdatum"
 
 #~ msgid ""
 #~ "Administrate your shareholder data. <br />Be compliant - simple and "

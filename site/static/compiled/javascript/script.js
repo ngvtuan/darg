@@ -15,6 +15,18 @@
     }
   ]);
 
+  app.factory('Security', [
+    '$resource', function($resource) {
+      return $resource('/services/rest/security/:id', {
+        id: '@pk'
+      }, {
+        update: {
+          method: 'PUT'
+        }
+      });
+    }
+  ]);
+
   app.factory('CompanyAdd', [
     '$resource', function($resource) {
       return $resource('/services/rest/company/add/');
@@ -130,7 +142,7 @@
   ]);
 
   app.controller('CompanyController', [
-    '$scope', '$http', 'Company', 'Country', 'Operator', 'Upload', '$timeout', function($scope, $http, Company, Country, Operator, Upload, $timeout) {
+    '$scope', '$http', 'Company', 'Country', 'Operator', 'Upload', 'Security', '$timeout', function($scope, $http, Company, Country, Operator, Upload, Security, $timeout) {
       $scope.operators = [];
       $scope.company = null;
       $scope.errors = null;
@@ -143,7 +155,7 @@
       $http.get('/services/rest/company/' + company_id).then(function(result) {
         $scope.company = new Company(result.data);
         $scope.company.founded_at = new Date($scope.company.founded_at);
-        if ($scope.company.country.length > 0) {
+        if ($scope.company.country) {
           return $http.get($scope.company.country).then(function(result1) {
             return $scope.company.country = result1.data;
           });
@@ -187,6 +199,17 @@
               rejection: rejection
             }
           });
+        });
+      };
+      $scope.edit_security = function(security) {
+        var sec;
+        sec = new Security(security);
+        return sec.$update().then(function(result) {
+          var i;
+          i = $scope.company.security_set.indexOf(security);
+          return $scope.company.security_set[i] = result;
+        }, function(rejection) {
+          return rejection.data.number_segments[0];
         });
       };
       $scope.edit_company = function() {

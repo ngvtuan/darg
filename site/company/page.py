@@ -39,6 +39,11 @@ class CompanyPage(BasePage):
 
         field.send_keys(email)
 
+    def enter_string(self, css_class, string):
+        el = self.driver.find_element_by_class_name(css_class)
+        el = el.find_element_by_tag_name('input')
+        el.send_keys(string)
+
     # -- CLICKs
     def click_save_new_operator(self):
         time.sleep(2)

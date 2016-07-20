@@ -113,3 +113,82 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
         self.assertEqual(
             Company.objects.get(id=self.operator.company.id).founded_at,
             founding_date)
+
+    def test_add_number_segment(self):
+
+        for s in self.operator.company.security_set.all():
+            s.track_numbers = True
+            s.save()
+
+        try:
+            p = page.CompanyPage(
+                self.selenium,
+                self.live_server_url,
+                self.operator.user,
+                self.operator.company
+            )
+            p.click_to_edit("security")
+            p.enter_string("security", "88, 99-100")
+            p.save_edit("security")
+
+        except Exception, e:
+            self._handle_exception(e)
+
+        time.sleep(1)
+
+        self.assertTrue(
+            [88, u' 99-100'] in
+            self.operator.company.security_set.values_list(
+                'number_segments', flat=True))
+
+    def test_alter_number_segment(self):
+
+        security = self.operator.company.security_set.all()[0]
+        security.number_segments = [1, 2]
+        security.track_numbers = True
+        security.save()
+
+        try:
+            p = page.CompanyPage(
+                self.selenium,
+                self.live_server_url,
+                self.operator.user,
+                self.operator.company
+            )
+            p.click_to_edit("security")
+            p.enter_string("security", ", 88, 99-100")
+            p.save_edit("security")
+
+        except Exception, e:
+            self._handle_exception(e)
+
+        time.sleep(1)
+
+        self.assertTrue(
+            [1, 2, 88, u' 99-100'] in
+            self.operator.company.security_set.values_list(
+                'number_segments', flat=True))
+
+    def test_save_invalid_number_segment(self):
+
+        security = self.operator.company.security_set.all()[0]
+        security.number_segments = [1, 2]
+        security.track_numbers = True
+        security.save()
+
+        try:
+            p = page.CompanyPage(
+                self.selenium,
+                self.live_server_url,
+                self.operator.user,
+                self.operator.company
+            )
+            p.click_to_edit("security")
+            p.enter_string("security", ";X, 88, 99-100")
+            p.save_edit("security")
+
+        except Exception, e:
+            self._handle_exception(e)
+
+        self.assertTrue(self.selenium.find_element_by_class_name(
+            'editable-error').is_displayed())

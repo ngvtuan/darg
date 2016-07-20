@@ -4,6 +4,9 @@ app.factory 'Shareholder', ['$resource', ($resource) ->
     $resource('/services/rest/shareholders/:id', {id: '@pk'} , update: method: 'PUT')
 ]
 
+app.factory 'Security', ['$resource', ($resource) ->
+    $resource('/services/rest/security/:id', {id: '@pk'} , update: method: 'PUT')
+]
 app.factory 'CompanyAdd', ['$resource', ($resource) ->
     $resource '/services/rest/company/add/'
 ]

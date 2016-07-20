@@ -18,14 +18,14 @@ class BaseSeleniumTestCase(LiveServerTestCase):
 
         # in test env its using locmem backend
         email = EmailMessage(
-            '[vbnet] FE Test failed',
+            '[darg] FE Test failed',
             'FE Test failed. See attached screenshot\n\n'
             'stacktrace:\n\n%s\n\nbrowser log:\n%s\n\nurl: %s' % (
                 traceback.format_exc(),
                 self.selenium.get_log('browser'),
                 self.selenium.current_url
             ),
-            'no-reply@vermieter-bewertung.net',
+            'no-reply@das-aktienregister.ch',
             ('jirka.schaefer@tschitschereengreen.com',),
             [],
             get_connection('django.core.mail.backends.smtp.EmailBackend'),

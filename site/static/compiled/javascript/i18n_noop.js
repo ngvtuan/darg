@@ -1,3 +1,5 @@
+// record needed JS strings inside this file for django makemessages
+
 gettext('First Name');
 gettext('Last Name');
 gettext('Shareholder Number');
@@ -36,5 +38,8 @@ gettext('board_approved_at');
 gettext('option_plan');
 gettext('seller');
 gettext('buyer');
+gettext('Founding Date');
+gettext('Company Name');
 
+// TEMPLATE
 // gettext('');

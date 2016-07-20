@@ -7,8 +7,7 @@
 <div>
   <form class="form-inline">
     <div class="form-group block-level">
-      <input type="text" class="form-control" ng-model="newCompany.name" translate translate-attr-placeholder="Name">
-      {% endverbatim %}{% trans "Founding Date:" %}{% verbatim %}:
+      <input type="text" class="form-control" ng-model="newCompany.name" translate translate-attr-placeholder="Company Name">
       <span class="input-group date-field">
         <input type="text" class="form-control"
           ng-model="newCompany.founded_at"
@@ -19,6 +18,7 @@
           close-text="Schliessen"
           clear-text="Leeren"
           current-text="Heute"
+		  placeholder="Gruendungsdatum"
           />
         <span class="input-group-btn">
           <button type="button" class="btn btn-default" ng-click="open_datepicker()"><i class="glyphicon glyphicon-calendar"></i></button>

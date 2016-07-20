@@ -130,9 +130,11 @@
 		</tr>
     {% endfor %}
     </table>
-    {% trans 'Please contact us at our' %}
-    <a href="mailto:info+helpdesk@das-aktienregister.ch" class="btn-inline">Customer Service Desk</a>
-    {% trans 'for getting more security types added' %}
+    <div class="alert alert-info" role="alert">
+      {% trans 'Please contact us at our' %}
+      <a href="mailto:info+helpdesk@das-aktienregister.ch" class="btn-inline">Customer Service Desk</a>
+      {% trans 'for getting more security types (common stock, preferred stock, numbered shares) added' %}
+    </div>
   {% endif %}
 
   <!-- ADMINS -->

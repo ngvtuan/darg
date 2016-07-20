@@ -10,6 +10,7 @@ from sorl.thumbnail import get_thumbnail
 from django.db import models
 from django.db.models import Sum
 from django.conf import settings
+from django.contrib.postgres.fields import JSONField
 from django.core.validators import MinValueValidator
 from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
@@ -490,8 +491,15 @@ class Security(models.Model):
         # ('V', 'Convertible Instrument'),
     )
     title = models.CharField(max_length=1, choices=SECURITY_TITLES)
+    face_value = models.DecimalField(
+        _('Nominal value of this asset'),
+        max_digits=16, decimal_places=8, blank=True,
+        null=True)
     company = models.ForeignKey(Company)
     count = models.PositiveIntegerField()
+    number_segments = JSONField(
+        _('JSON list of segments of ids for securities. can be 1, 2, 3, 4-10'),
+        default=dict)
 
     # settings
     track_numbers = models.BooleanField(

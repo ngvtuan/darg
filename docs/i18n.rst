@@ -18,3 +18,10 @@ and then compile
 ::
 
     ./manage.py compilemessages
+
+Translations for angular
+--------------------------
+either inside fields using angular-translate or while using angular code we place token
+strings inside `site/static/compiled/javascript/i18n_noop.js`.
+
+Then execute above JS message rendering command.

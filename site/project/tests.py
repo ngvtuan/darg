@@ -90,7 +90,7 @@ class InstapageTestCase(TestCase):
                 ).exists())
         self.assertIn('_auth_user_id', self.client.session)
         self.assertEqual(
-            response.redirect_chain[0][0], 'http://testserver/start/')
+            response.redirect_chain[0][0], '/start/')
         self.assertTrue(UserProfile.objects.filter(
             user__email='jirka@tschitschereengreen.com',
             tnc_accepted=True, ip='79.168.182.174').exists())

@@ -425,21 +425,32 @@ class PositionPage(BasePage):
         inputs = form.find_elements_by_tag_name('input')
         selects = form.find_elements_by_tag_name('select')
 
-        # input #0 use datepicker
-        self.use_datepicker('add-position-form', None)
-        if position.count:
-            inputs[1].clear()
-            inputs[1].send_keys(position.count)  # count
-        if position.value:
-            inputs[2].clear()
-            inputs[2].send_keys(position.value)  # price
-        inputs[3].clear()
-        inputs[3].send_keys(position.comment)  # comment
-
-        # select elements: seller, buyer, security
+        # select elements: seller, buyer, security - before inputs to have magic
+        # working
         for select in selects:
             select = Select(select)
             select.select_by_index(1)
+
+        time.sleep(1)
+
+        # input #0 use datepicker
+        self.use_datepicker('add-position-form', None)
+        if position.count:
+            inputs[1].clear()  # clear existing values
+            inputs[1].send_keys(position.count)  # count
+        if position.value:
+            inputs[2].clear()  # clear existing values
+            inputs[2].send_keys(position.value)  # price
+
+        # if numbered shares enter segment
+        if position.security.track_numbers:
+            input = form.find_elements_by_tag_name('input')[3]
+            input.send_keys('0,1,2,999-1001')
+            inputs[4].clear()  # clear existing values
+            inputs[4].send_keys(position.comment)  # comment
+        else:
+            inputs[4].clear()  # clear existing values
+            inputs[4].send_keys(position.comment)  # comment
 
     def enter_new_cap_data(self, position):
 

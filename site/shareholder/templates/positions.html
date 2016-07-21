@@ -67,7 +67,7 @@
             </div>
           </td>
           <td>{{ position.buyer.user.first_name }} {{ position.buyer.user.last_name }}</td>
-          <td>{{ position.security.readable_title }}</td>
+          <td>{{ position.security.readable_title }} <span class="note" ng-show="position.security.track_numbers && position.readable_number_segments">(#{{ position.readable_number_segments }})</span></td>
           <td class="text-right">{{ position.count }}</td>
           <td class="text-right">{{ position.value }}</td>
           <td>{{ position.seller.user.first_name }} {{ position.seller.user.last_name }}</td>

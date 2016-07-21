@@ -1,5 +1,4 @@
 import datetime
-import re
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -12,6 +11,7 @@ from django.core.urlresolvers import reverse
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
+from services.rest.mixins import FieldValidationMixin
 from shareholder.models import Shareholder, Company, Operator, Position, \
     UserProfile, Country, OptionPlan, OptionTransaction, Security
 from services.rest.validators import DependedFieldsValidator
@@ -30,7 +30,8 @@ class CountrySerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'iso_code', 'name')
 
 
-class SecuritySerializer(serializers.HyperlinkedModelSerializer):
+class SecuritySerializer(serializers.HyperlinkedModelSerializer,
+                         FieldValidationMixin):
     readable_title = serializers.SerializerMethodField()
     readable_number_segments = serializers.SerializerMethodField()
 
@@ -58,14 +59,6 @@ class SecuritySerializer(serializers.HyperlinkedModelSerializer):
         instance.number_segments = string_list_to_json(number_segments)
         instance.save()
         return instance
-
-    def validate_number_segments(self, value):
-        pattern = re.compile(r'[^0-9,\- ]')
-        for part in value:
-            if pattern.findall(part):
-                raise serializers.ValidationError(
-                    _("Invalid number segment '{}'. Please use 1, 2, 3, 4-10.".format(part)))
-        return value
 
 
 class CompanySerializer(serializers.HyperlinkedModelSerializer):
@@ -383,18 +376,37 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
         return u"{} {}".format(obj.user.first_name, obj.user.last_name)
 
 
-class PositionSerializer(serializers.HyperlinkedModelSerializer):
+class PositionSerializer(serializers.HyperlinkedModelSerializer,
+                         FieldValidationMixin):
+
     buyer = ShareholderSerializer(many=False, required=False)
     seller = ShareholderSerializer(many=False, required=False)
     security = SecuritySerializer(many=False, required=True)
     bought_at = serializers.DateTimeField()  # e.g. 2015-06-02T23:00:00.000Z
+    readable_number_segments = serializers.SerializerMethodField()
 
     class Meta:
         model = Position
         fields = (
             'pk', 'buyer', 'seller', 'bought_at', 'count', 'value',
-            'security', 'comment', 'is_split', 'is_draft')
+            'security', 'comment', 'is_split', 'is_draft', 'number_segments',
+            'readable_number_segments')
         validators = [DependedFieldsValidator(fields=('seller', 'buyer'))]
+
+    def get_readable_number_segments(self, obj):
+        """
+        change json into human readble format
+        """
+        return str(obj.number_segments).translate(None, "'[]u{}")
+
+    def is_valid(self, raise_exception=False):
+        security = self.initial_data.get('security')
+        if security and Security.objects.get(id=security['pk']).track_numbers:
+            if not self.initial_data.get('number_segments'):
+                raise serializers.ValidationError(
+                    {'number_segments': [_('Invalid security numbers segments.')]})
+
+        return super(PositionSerializer, self).is_valid(raise_exception)
 
     def create(self, validated_data):
         """ adding a new position and handling nested data for buyer
@@ -438,6 +450,12 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer):
             "comment": validated_data.get("comment"),
         })
 
+        if security.track_numbers and validated_data.get("number_segments"):
+            kwargs.update({
+                "number_segments": string_list_to_json(
+                    validated_data.get("number_segments"))
+            })
+
         position = Position.objects.create(**kwargs)
 
         return position
@@ -451,7 +469,7 @@ class OptionTransactionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = OptionTransaction
         fields = ('pk', 'buyer', 'seller', 'bought_at', 'count', 'option_plan',
-                  'is_draft')
+                  'is_draft', 'number_segments')
 
     def create(self, validated_data):
 
@@ -495,7 +513,8 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
         model = OptionPlan
         fields = ('pk', 'title', 'security', 'optiontransaction_set',
                   'exercise_price', 'count', 'comment', 'board_approved_at',
-                  'url', 'pdf_file', 'pdf_file_preview_url', 'pdf_file_url')
+                  'url', 'pdf_file', 'pdf_file_preview_url', 'pdf_file_url',
+                  'number_segments')
 
     def validate_pdf_file(self, value):
         if value.content_type == 'application/pdf':

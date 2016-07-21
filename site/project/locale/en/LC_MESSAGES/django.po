@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-20 21:19+0000\n"
+"POT-Creation-Date: 2016-07-20 23:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,14 +35,14 @@ msgstr ""
 #: project/templates/_add_capital_form.html:31
 #: project/templates/_add_option_plan_form.html:33
 #: project/templates/_add_option_transaction_form.html:37
-#: project/templates/_add_position_form.html:44
+#: project/templates/_add_position_form.html:45
 #: project/templates/_add_shareholder_form.html:15
 #: project/templates/_split_shares_form.html:32
 msgid "Cancel"
 msgstr ""
 
 #: project/templates/_add_capital_form.html:32
-#: project/templates/_add_position_form.html:45
+#: project/templates/_add_position_form.html:46
 msgid "Add Position"
 msgstr ""
 

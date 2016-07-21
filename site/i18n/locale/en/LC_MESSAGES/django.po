@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-20 21:19+0000\n"
+"POT-Creation-Date: 2016-07-20 23:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,33 +73,33 @@ msgstr ""
 msgid "tracking security numbers for owners enabled. segments:"
 msgstr ""
 
-#: company/templates/company.html:138
+#: company/templates/company.html:139
 msgid "Please contact us at our"
 msgstr ""
 
-#: company/templates/company.html:140
+#: company/templates/company.html:141
 msgid ""
 "for getting more security types (common stock, preferred stock, numbered "
 "shares) added"
 msgstr ""
 
-#: company/templates/company.html:147
+#: company/templates/company.html:148
 msgid "Administrators"
 msgstr ""
 
-#: company/templates/company.html:148
+#: company/templates/company.html:149
 msgid "add operator"
 msgstr ""
 
-#: company/templates/company.html:177
+#: company/templates/company.html:178
 msgid "Option Plans"
 msgstr ""
 
-#: company/templates/company.html:181
+#: company/templates/company.html:182
 msgid "Options Plan Name"
 msgstr ""
 
-#: company/templates/company.html:181
+#: company/templates/company.html:182
 msgid "Edit Option Plan"
 msgstr ""
 

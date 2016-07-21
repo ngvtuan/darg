@@ -265,6 +265,87 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
         except Exception, e:
             self._handle_exception(e)
 
+    def test_add_numbered_segments(self):
+        """
+        add position with numbered shares
+        """
+        position = PositionGenerator().generate(
+            save=False, seller=self.seller, buyer=self.buyer,
+            security=self.securities[0])
+
+        for s in self.securities:
+            s.track_numbers = True
+            s.save()
+
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_add_position_form()
+            app.enter_new_position_data(position)
+            app.click_save_position()
+
+            self.assertEqual(len(app.get_position_row_data()), 8)
+            self.assertTrue(app.is_no_errors_displayed())
+            self.assertTrue('0, 1, 2, 999-1001' in self.selenium.page_source)
+
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_add_numbered_segments_invalid(self):
+        """
+        add position with numbered shares
+        """
+        position = PositionGenerator().generate(
+            save=False, seller=self.seller, buyer=self.buyer,
+            security=self.securities[0])
+
+        for s in self.securities:
+            s.track_numbers = True
+            s.save()
+
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_add_position_form()
+            app.enter_new_position_data(position)
+
+            # clear numbers segment field
+            el = self.selenium.find_element_by_id('add_position')
+            form = el.find_element_by_tag_name('form')
+            input = form.find_elements_by_tag_name('input')[3]
+            input.clear()
+
+            app.click_save_position()
+
+            self.assertFalse(app.is_no_errors_displayed())
+
+            # add [A-Z] number segments
+            el = self.selenium.find_element_by_id('add_position')
+            form = el.find_element_by_tag_name('form')
+            input = form.find_elements_by_tag_name('input')[3]
+            input.send_keys('AA')
+
+            app.click_save_position()
+
+            self.assertFalse(app.is_no_errors_displayed())
+
+            # add valid number segments
+            el = self.selenium.find_element_by_id('add_position')
+            form = el.find_element_by_tag_name('form')
+            input.clear()
+            input = form.find_elements_by_tag_name('input')[3]
+            input.send_keys('1,2,3')
+
+            app.click_save_position()
+
+            self.assertEqual(len(app.get_position_row_data()), 8)
+            self.assertTrue(app.is_no_errors_displayed())
+
+        except Exception, e:
+            self._handle_exception(e)
+
     def test_add_error(self):
         """
         confirm form error handling
@@ -279,7 +360,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
                 self.selenium, self.live_server_url, self.operator.user)
             app.click_open_add_position_form()
 
-            # enter missing
+            # enter empty data
             position.count = None
             position.value = None
             app.enter_new_position_data(position)
@@ -287,7 +368,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
 
             self.assertFalse(app.is_no_errors_displayed())
 
-            # enter large data
+            # enter data too large
             position.count = 99999999991
             position.value = 99999199999
             app.enter_new_position_data(position)
@@ -295,7 +376,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
 
             self.assertFalse(app.is_no_errors_displayed())
 
-            # complete data
+            # working data
             position.count = 999999999
             position.value = 11111111
             app.enter_new_position_data(position)

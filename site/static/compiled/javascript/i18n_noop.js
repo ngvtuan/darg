@@ -40,6 +40,9 @@ gettext('seller');
 gettext('buyer');
 gettext('Founding Date');
 gettext('Company Name');
+gettext('Share IDs');
+gettext('Invalid number segment. Please use 1, 2, 3, 4-10.');
+gettext('number_segments');
 
 // TEMPLATE
 // gettext('');

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-20 12:04+0000\n"
+"POT-Creation-Date: 2016-07-20 23:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,4 +163,16 @@ msgstr ""
 
 #: static/compiled/javascript/i18n_noop.js:42
 msgid "Company Name"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:43
+msgid "Share IDs"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:44
+msgid "Invalid number segment. Please use 1, 2, 3, 4-10."
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:45
+msgid "number_segments"
 msgstr ""

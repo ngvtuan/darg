@@ -30,4 +30,4 @@ class CompanyDetailViewTestCase(TestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertTrue(
-            _('tracking security numbers for owners enabled ') in res.content)
+            _('tracking security numbers for owners enabled. segments:') in res.content)

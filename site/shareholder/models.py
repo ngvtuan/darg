@@ -518,12 +518,16 @@ class Position(models.Model):
     security = models.ForeignKey(Security)
     count = models.PositiveIntegerField(_('Share Count transfered or created'))
     bought_at = models.DateField()
+    # needs at least 4 post comma digits to be precise (finanzial math standard)
     value = models.DecimalField(
         _('Nominal value or payed price for the transaction'),
-        max_digits=16, decimal_places=8, blank=True,
+        max_digits=16, decimal_places=4, blank=True,
         null=True)
     is_split = models.BooleanField(default=False)
     is_draft = models.BooleanField(default=True)
+    number_segments = JSONField(
+        _('JSON list of segments of ids for securities. can be 1, 2, 3, 4-10'),
+        default=list, blank=True, null=True)
     comment = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -560,6 +564,9 @@ class OptionPlan(models.Model):
     pdf_file = models.FileField(
         blank=True, null=True,
         upload_to=get_option_plan_upload_path,)
+    number_segments = JSONField(
+        _('JSON list of segments of ids for securities. can be 1, 2, 3, 4-10'),
+        default=list, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -605,6 +612,9 @@ class OptionTransaction(models.Model):
     seller = models.ForeignKey('Shareholder', blank=True, null=True,
                                related_name="option_seller")
     vesting_months = models.PositiveIntegerField(blank=True, null=True)
+    number_segments = JSONField(
+        _('JSON list of segments of ids for securities. can be 1, 2, 3, 4-10'),
+        default=list, blank=True, null=True)
     is_draft = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

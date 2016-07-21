@@ -8,22 +8,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-20 21:19+0000\n"
-"PO-Revision-Date: 2016-03-09 13:09+0000\n"
-"Last-Translator: Jirka Operator1 <jirka@tschitschereengreen.com>\n"
+"POT-Creation-Date: 2016-07-20 23:32+0000\n"
+"PO-Revision-Date: 2016-07-20 23:33+0000\n"
+"Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Translated-Using: django-rosetta 0.7.6\n"
+"X-Translated-Using: django-rosetta 0.7.11\n"
 
-#: services/rest/serializers.py:67
-msgid "Invalid number segment '{}'. Please use 1, 2, 3, 4-10."
-msgstr ""
+#: services/rest/mixins.py:22
+#, fuzzy
+#| msgid "Invalid number segment '{}'. Please use 1, 2, 3, 4-10."
+msgid "Invalid number segment. Please use 1, 2, 3, 4-10."
+msgstr "Ungültiges Aktiennummernsegment '{}'. Korrektes Format: 1, 2, 3, 4-9."
 
-#: services/rest/serializers.py:207
+#: services/rest/serializers.py:200
 msgid ""
 "User not yet registered with this application. Please ask the user to "
 "register first."
@@ -31,20 +33,19 @@ msgstr ""
 "Dieser Nutzer ist noch nicht registriert. Bitten Sie ihn dieser mit der "
 "angegebenen Email nachzuholen."
 
-#: services/rest/serializers.py:214
+#: services/rest/serializers.py:207
 msgid "You cannot edit this company"
 msgstr "Sie können dieses Unternehmen nicht bearbeiten."
 
-#: services/rest/serializers.py:219
+#: services/rest/serializers.py:212
 msgid "You were added as administrator for {}"
 msgstr "Sie wurden als Administrator für das Unternehmen \"{}\" hinzugefügt."
 
-#: services/rest/serializers.py:220
+#: services/rest/serializers.py:213
 msgid ""
 "Dear,\n"
 "\n"
-"you have been granted edit privileges for this company on the share "
-"register\n"
+"you have been granted edit privileges for this company on the share register\n"
 "\n"
 "Kind regards\n"
 "\n"
@@ -52,31 +53,34 @@ msgid ""
 msgstr ""
 "Liebe(r) Nutzer(In),\n"
 "\n"
-"Ihnen wurden gerade Bearbeitungsrechte für dieses Unternehmen im "
-"Aktienregister eingerichtet.\n"
+"Ihnen wurden gerade Bearbeitungsrechte für dieses Unternehmen im Aktienregister eingerichtet.\n"
 "\n"
 "Mit besten Grüssen\n"
 "\n"
 "Das Aktienregister Team"
 
-#: services/rest/serializers.py:250 services/rest/serializers.py:295
+#: services/rest/serializers.py:243 services/rest/serializers.py:288
 msgid "Email missing"
 msgstr "Bitte geben Sie eine gültige Email ein."
 
-#: services/rest/serializers.py:298
+#: services/rest/serializers.py:291
 msgid "First Name missing"
 msgstr "Bitte geben Sie eine gültigen Vornamen ein."
 
-#: services/rest/serializers.py:301
+#: services/rest/serializers.py:294
 msgid "Last Name missing"
 msgstr "Bitte geben Sie eine gültigen Nachnamen ein."
 
-#: services/rest/serializers.py:307
+#: services/rest/serializers.py:300
 msgid "Shareholder Number must be unique"
 msgstr ""
 "Diese Aktionärsnummer wird bereits verwendet. Bitte wählen Sie eine andere."
 
-#: services/rest/serializers.py:504
+#: services/rest/serializers.py:407
+msgid "Invalid security numbers segments."
+msgstr "Ungültige Aktiennummern (1,2,3,4-9)."
+
+#: services/rest/serializers.py:523
 msgid "Not a pdf file."
 msgstr "Falsches Dateiformat. Nur PDF ist erlaubt."
 

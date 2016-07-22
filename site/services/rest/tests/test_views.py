@@ -300,10 +300,12 @@ class PositionTestCase(TestCase):
 
         buyer = ShareholderGenerator().generate(company=operator.company)
         seller = ShareholderGenerator().generate(company=operator.company)
-        PositionGenerator().generate(number_segments=[u'1-5'],
-            company=operator.company, buyer=seller, count=5)
         securities = TwoInitialSecuritiesGenerator().generate(
             company=operator.company)
+        PositionGenerator().generate(
+            number_segments=[u'1-5'],
+            company=operator.company, buyer=seller, count=5,
+            security=securities[1])
 
         for s in securities:
             s.track_numbers = True
@@ -347,7 +349,7 @@ class PositionTestCase(TestCase):
                 "title": "P",
                 "count": 3
             },
-            "count": 1,
+            "count": 5,
             "value": 1,
             "seller": {
                 "pk": seller.pk,
@@ -921,7 +923,7 @@ class SecurityTestCase(APITestCase):
         res = self.client.put(url, data=data)
 
         security = Security.objects.get(id=security.id)
-        self.assertEqual(security.number_segments, [1, 2, 3, 4, u'8-10'])
+        self.assertEqual(security.number_segments, [u'1-4', u'8-10'])
 
         data.update({'number_segments': '1,2,3,4,4,,8-10'})
 

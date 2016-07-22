@@ -171,7 +171,7 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
         time.sleep(1)
 
         self.assertTrue(
-            [1, 2, 88, u'99-100'] in
+            [u'1-2', 88, u'99-100'] in
             self.operator.company.security_set.values_list(
                 'number_segments', flat=True))
 

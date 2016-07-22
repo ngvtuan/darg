@@ -3,12 +3,13 @@ import time
 
 from django.contrib.auth import get_user_model
 
-from project.base import BaseSeleniumTestCase
-from shareholder.generators import (
-    UserGenerator, TwoInitialSecuritiesGenerator, OperatorGenerator
-)
-from shareholder.models import Company
 from company import page
+from project.base import BaseSeleniumTestCase
+from shareholder.generators import (OperatorGenerator, PositionGenerator,
+                                    ShareholderGenerator,
+                                    TwoInitialSecuritiesGenerator,
+                                    UserGenerator)
+from shareholder.models import Company
 
 User = get_user_model()
 
@@ -18,6 +19,11 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
 
     def setUp(self):
         self.operator = OperatorGenerator().generate()
+        # initial position
+        shareholder = ShareholderGenerator().generate(user=self.operator.user)
+        PositionGenerator().generate(
+            company=self.operator.company,
+            number_segments=[u'0-9999'], buyer=shareholder, count=10000)
         TwoInitialSecuritiesGenerator().generate(company=self.operator.company)
 
     def test_add_new_operator(self):

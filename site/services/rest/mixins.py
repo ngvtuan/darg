@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import re
 import logging
-
-from rest_framework import serializers
+import re
 
 from django.utils.translation import ugettext_lazy as _
+from rest_framework import serializers
+
+from utils.formatters import string_list_to_json
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +16,10 @@ class FieldValidationMixin(object):
     def validate_number_segments(self, value):
 
         pattern = re.compile(r'[^0-9,\- ]')
+
+        if isinstance(value, unicode):
+            value = string_list_to_json(value)
+
         for part in value:
 
             # validate value as we have to track value...
@@ -39,3 +44,4 @@ class FieldValidationMixin(object):
                 logger.warning("Invalid number segment: {}".format(part))
 
         return value
+

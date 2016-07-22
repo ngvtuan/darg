@@ -300,6 +300,8 @@ class PositionTestCase(TestCase):
 
         buyer = ShareholderGenerator().generate(company=operator.company)
         seller = ShareholderGenerator().generate(company=operator.company)
+        PositionGenerator().generate(number_segments=[u'1-5'],
+            company=operator.company, buyer=seller, count=5)
         securities = TwoInitialSecuritiesGenerator().generate(
             company=operator.company)
 
@@ -909,7 +911,7 @@ class SecurityTestCase(APITestCase):
         operator = OperatorGenerator().generate(company=company)
         security = SecurityGenerator().generate(company=company)
         url = reverse('security-detail', kwargs={'pk': security.id})
-        request = request = self.factory.get(url)
+        request = self.factory.get(url)
 
         data = SecuritySerializer(security, context={'request': request}).data
         data.update({'number_segments': '1,2,3,4,8-10'})

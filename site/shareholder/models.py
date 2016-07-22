@@ -485,7 +485,8 @@ class Shareholder(models.Model):
         logger.warning('segment owning check does not check option plans')
 
         return (len(failed_segments) == 0,
-                deflate_segments(failed_segments))
+                deflate_segments(failed_segments),
+                deflate_segments(segments_owning))
 
     def current_segments(self, security, date=None):
         """

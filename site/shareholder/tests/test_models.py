@@ -411,13 +411,13 @@ class ShareholderTestCase(TestCase):
 
         self.assertEqual(
             shs[1].owns_segments(segments, positions[0].security),
-            (True, []))
+            (True, [], [u'1000-1200', 1666]))
 
         segments = [1000, 1050, 1666, 1667]
 
         self.assertEqual(
             shs[1].owns_segments(segments, positions[0].security),
-            (False, [1667]))
+            (False, [1667], [u'1000-1200', 1666]))
 
     def test_current_segments(self):
         """

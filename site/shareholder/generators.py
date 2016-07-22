@@ -168,10 +168,11 @@ class CompanyShareholderGenerator(object):
         company_shareholder_created_at = kwargs.get(
             'company_shareholder_created_at'
         ) or datetime.datetime.now()
+        email = 'info@{}-company-itself.com'.format(slugify(company.name))
         companyuser = User.objects.create(
-            username=make_username('Company', 'itself', company.name),
+            username=make_username('Company', 'itself', email),
             first_name='Company', last_name='itself',
-            email='info@{}-company-itself.com'.format(slugify(company.name))
+            email=email
         )
         shareholder = Shareholder.objects.create(
             user=companyuser,
@@ -205,7 +206,8 @@ class PositionGenerator(object):
 
         buyer = kwargs.get('buyer') or ShareholderGenerator().generate(
             company=company)
-        seller = kwargs.get('seller') or None
+        seller = kwargs.get('seller') or ShareholderGenerator().generate(
+            company=company)
         count = kwargs.get('count') or 3
         value = kwargs.get('value') or 2
         security = kwargs.get('security') or SecurityGenerator().generate(

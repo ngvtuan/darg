@@ -2,22 +2,20 @@ import datetime
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext as _
-from django.utils.text import slugify
-from django.core.mail import mail_managers
-from django.core.mail import send_mail
+from django.core.mail import mail_managers, send_mail
 from django.core.urlresolvers import reverse
-
+from django.utils.text import slugify
+from django.utils.translation import ugettext as _
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from services.rest.mixins import FieldValidationMixin
-from shareholder.models import Shareholder, Company, Operator, Position, \
-    UserProfile, Country, OptionPlan, OptionTransaction, Security
 from services.rest.validators import DependedFieldsValidator
-
-from utils.user import make_username
+from shareholder.models import (Company, Country, Operator, OptionPlan,
+                                OptionTransaction, Position, Security,
+                                Shareholder, UserProfile)
 from utils.formatters import string_list_to_json
+from utils.user import make_username
 
 User = get_user_model()
 
@@ -56,7 +54,7 @@ class SecuritySerializer(serializers.HyperlinkedModelSerializer,
         """
         number_segments = validated_data.get(
             'number_segments', instance.number_segments)
-        instance.number_segments = string_list_to_json(number_segments)
+        instance.number_segments = number_segments
         instance.save()
         return instance
 
@@ -400,11 +398,48 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
         return str(obj.number_segments).translate(None, "'[]u{}")
 
     def is_valid(self, raise_exception=False):
-        security = self.initial_data.get('security')
+        """
+        validate cross data relations
+        """
+        initial_data = self.initial_data
+
+        security = initial_data.get('security')
         if security and Security.objects.get(id=security['pk']).track_numbers:
-            if not self.initial_data.get('number_segments'):
+
+            security = Security.objects.get(id=security['pk'])
+            segments = string_list_to_json(initial_data.get('number_segments'))
+            seller = Shareholder.objects.get(
+                pk=initial_data.get('seller')['pk'])
+            owning, failed_segments, owned_segments = seller.owns_segments(
+                segments, security)
+
+            # we need number_segments if this is a security with .track_numbers
+            if not segments:
                 raise serializers.ValidationError(
-                    {'number_segments': [_('Invalid security numbers segments.')]})
+                    {'number_segments':
+                        [_('Invalid security numbers segments.')]})
+
+            # segments must be owned by seller
+            elif not owning:
+                raise serializers.ValidationError({
+                    'number_segments':
+                        [_('Segments "{}" must be owned by seller "{}". '
+                        'Available are {}').format(
+                            failed_segments, seller.user.last_name, owned_segments
+                        )]
+                })
+
+            # validate segment count == share count
+            elif (security.count_in_segments(segments) !=
+                    initial_data.get('count')):
+                raise serializers.ValidationError({
+                    'count':
+                        [_('Number of shares in segments ({}) '
+                           'does not match count {}').format(
+                                security.count_in_segments(segments),
+                                initial_data.get('count')
+                           )]
+                })
 
         return super(PositionSerializer, self).is_valid(raise_exception)
 
@@ -450,10 +485,10 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
             "comment": validated_data.get("comment"),
         })
 
+        # segments must be ordered, have no duplicates and must be list...
         if security.track_numbers and validated_data.get("number_segments"):
             kwargs.update({
-                "number_segments": string_list_to_json(
-                    validated_data.get("number_segments"))
+                "number_segments": validated_data.get("number_segments")
             })
 
         position = Position.objects.create(**kwargs)

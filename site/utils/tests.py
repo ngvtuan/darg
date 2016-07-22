@@ -1,8 +1,8 @@
 from django.test import TestCase
 
+from utils.formatters import (deflate_segments, inflate_segments,
+                              string_list_to_json)
 from utils.user import make_username
-
-from utils.formatters import string_list_to_json
 
 
 class UtilsTestCase(TestCase):
@@ -45,3 +45,25 @@ class UtilsTestCase(TestCase):
 
         self.assertEqual(string_list_to_json('1,2,3,4-10'), [1, 2, 3, u'4-10'])
         self.assertEqual(string_list_to_json('1,2,3,,4-10'), [1, 2, 3, u'4-10'])
+
+    def test_inflate_segments(self):
+        segments = [1, 2, 3, 4, u'9-14', 18]
+
+        res = inflate_segments(segments)
+
+        self.assertEqual(res, [1, 2, 3, 4, 9, 10, 11, 12, 13, 14, 18])
+
+    def test_deflate_segments(self):
+        """
+        watch the end of deflation logic!
+        """
+
+        # closing lonely int
+        segments = [1, 2, 3, 4, 6, 9, 10, 11, 12, 13, 14, 18]
+        res = deflate_segments(segments)
+        self.assertEqual(res, [u'1-4', 6, u'9-14', 18])
+
+        # closing range
+        segments = [1, 2, 3, 4, 6, 9, 10, 11, 12, 13, 14]
+        res = deflate_segments(segments)
+        self.assertEqual(res, [u'1-4', 6, u'9-14'])

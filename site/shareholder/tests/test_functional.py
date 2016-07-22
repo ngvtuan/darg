@@ -248,7 +248,6 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             security=self.securities[1], number_segments=[u'0-9999'],
             count=10000)
 
-
     def test_add(self):
         """
         add position
@@ -446,7 +445,8 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
                 self.selenium, self.live_server_url, self.operator.user)
             app.click_delete_position()
 
-            self.assertEqual(app.get_position_row_count(), 1)
+            # header, row, 2x split
+            self.assertEqual(app.get_position_row_count(), 4)
 
         except Exception, e:
             self._handle_exception(e)

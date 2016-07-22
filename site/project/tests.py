@@ -416,7 +416,7 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
             # totals
             self.assertEqual(
                 self.selenium.find_element_by_xpath(
-                    '//table/tbody/tr[5]/td[last()]'
+                    '//table/tbody/tr[6]/td[last()]'
                 ).text,
                 "{} ({})".format(share_count, share_count)
             )

@@ -1,14 +1,14 @@
-import random
-import hashlib
 import datetime
-
-from model_mommy import generators
+import hashlib
+import random
 
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
+from model_mommy import generators
 
-from shareholder.models import Shareholder, Company, Position, Operator, \
-    UserProfile, Country, Security, OptionTransaction, OptionPlan
+from shareholder.models import (Company, Country, Operator, OptionPlan,
+                                OptionTransaction, Position, Security,
+                                Shareholder, UserProfile)
 from utils.user import make_username
 
 User = get_user_model()
@@ -183,7 +183,8 @@ class CompanyShareholderGenerator(object):
         pos_kwargs.update({
             'buyer': shareholder,
             'count': company.share_count,
-            'bought_at': company_shareholder_created_at
+            'bought_at': company_shareholder_created_at,
+            'seller': None,
         })
 
         PositionGenerator().generate(**pos_kwargs)
@@ -206,8 +207,8 @@ class PositionGenerator(object):
 
         buyer = kwargs.get('buyer') or ShareholderGenerator().generate(
             company=company)
-        seller = kwargs.get('seller') or ShareholderGenerator().generate(
-            company=company)
+        seller = kwargs.get('seller', ShareholderGenerator().generate(
+            company=company))
         count = kwargs.get('count') or 3
         value = kwargs.get('value') or 2
         security = kwargs.get('security') or SecurityGenerator().generate(

@@ -59,13 +59,7 @@ def inflate_segments(segments):
         if isinstance(to_list(segment), list):
             flattened_segments.extend(segment)
 
-    # --- standardize
-    # remove dupes
-    segments = list(set(flattened_segments))
-    # sort
-    segments.sort()
-
-    return segments
+    return flattened_segments
 
 
 def deflate_segments(segments):
@@ -75,6 +69,12 @@ def deflate_segments(segments):
     * remove duplicates
     * sort
     """
+    # --- standardize on deflate
+    # remove dupes
+    segments = list(set(segments))
+    # sort
+    segments.sort()
+
     start = None
     advance = None
     deflated_segments = []
@@ -84,6 +84,9 @@ def deflate_segments(segments):
         if start is None:
             start = segment
             advance = segment
+            # if this is a one element list
+            if segment == segments[-1]:
+                deflated_segments.append(start)
             continue
         elif advance and segment == advance + 1:
             advance = segment

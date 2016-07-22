@@ -17,8 +17,15 @@ class FieldValidationMixin(object):
 
         pattern = re.compile(r'[^0-9,\- ]')
 
-        if isinstance(value, unicode):
-            value = string_list_to_json(value)
+        try:
+            if isinstance(value, unicode):
+                value = string_list_to_json(value)
+        except ValueError:
+            raise serializers.ValidationError(
+                _("Invalid number segment. "
+                  "Please use 1, 2, 3, 4-10.")
+            )
+            logger.warning("Invalid number segment: {}".format(value))
 
         for part in value:
 

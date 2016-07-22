@@ -38,7 +38,8 @@ class CompanyModelTestCase(TestCase):
             buyer=cshareholder, count=600, value=80, seller=shareholder3,
             security=security)
         PositionGenerator().generate(
-            buyer=cshareholder, count=1000, value=1000, security=security)
+            buyer=cshareholder, count=1000, value=1000, security=security,
+            seller=None)
         company.share_count = 11000
         company.save()
 
@@ -133,5 +134,6 @@ class CompanyModelTestCase(TestCase):
         self.assertEqual(
             Shareholder.objects.get(id=shareholder3.id).share_count(), 3000000)
         self.assertEqual(
-            Shareholder.objects.get(id=cshareholder.id).share_count(), 104000000)
+            Shareholder.objects.get(id=cshareholder.id).share_count(),
+            104000000)
         self.assertEqual(company.share_count, 110000000)

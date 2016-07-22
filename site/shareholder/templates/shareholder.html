@@ -132,9 +132,7 @@
       <th>{% trans "segments" %}</th>
     </tr></thead>
 	{% for security in securities %}
-      {% if security.segments %}
-      <tr><td>{{ security }}</td><td>{{ security.count }}</td><td>{{ security.segments }}</td></tr>
-      {% endif %}
+      <tr><td>{{ security }}</td><td>{{ security.count }}</td>{% if security.segments %}<td>{{ security.segments }}</td>{% else %}<td></td>{% endif %}</tr>
 	{% endfor %}
   </table>
 

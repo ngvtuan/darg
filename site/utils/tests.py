@@ -43,8 +43,10 @@ class UtilsTestCase(TestCase):
             string_list_to_json('1,2,3,4--10')
             string_list_to_json('1,,2,3,4-10,11-12X')
 
-        self.assertEqual(string_list_to_json('1,2,3,4-10'), [1, 2, 3, u'4-10'])
-        self.assertEqual(string_list_to_json('1,2,3,,4-10'), [1, 2, 3, u'4-10'])
+        self.assertEqual(string_list_to_json('1,2,3,4-10'), [u'1-10'])
+        self.assertEqual(string_list_to_json('1,2,3,,4-10'), [u'1-10'])
+        # test removal of duplicates and that is ordered
+        self.assertEqual(string_list_to_json('0, 3,,, 3, 5-10, 9-12, 2'), [0, u'2-3', u'5-12'])
 
     def test_inflate_segments(self):
         segments = [1, 2, 3, 4, u'9-14', 18]

@@ -20,6 +20,8 @@ def string_list_to_json(string):
     parts = string.split(",")
     res = []
     for part in parts:
+        if part == '':
+            continue
         part = part.strip()
         if part.count('-') == 1:
             res.append(unicode(part))
@@ -29,12 +31,18 @@ def string_list_to_json(string):
             logger.warning('attempt to add badly formatted number segment',
                            extra={'string': part})
 
+    res = deflate_segments(inflate_segments(res))
+
     return res
 
 
 def inflate_segments(segments):
     """
     change all shortened segments u'1-10' into [1,2 ..., 10]
+    also standardizes format:
+    * ordered
+    * deflated
+    * no duplicates
     """
     def to_list(segment):
         if isinstance(segment, unicode):
@@ -51,12 +59,21 @@ def inflate_segments(segments):
         if isinstance(to_list(segment), list):
             flattened_segments.extend(segment)
 
-    return flattened_segments
+    # --- standardize
+    # remove dupes
+    segments = list(set(flattened_segments))
+    # sort
+    segments.sort()
+
+    return segments
 
 
 def deflate_segments(segments):
     """
-    inverted inflate_segments method
+    inverted inflate_segments method by:
+    * using range where possible
+    * remove duplicates
+    * sort
     """
     start = None
     advance = None

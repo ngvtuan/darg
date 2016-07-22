@@ -427,6 +427,7 @@ class PositionPage(BasePage):
 
         # select elements: seller, buyer, security - before inputs to have magic
         # working
+        time.sleep(2)
         for select in selects:
             select = Select(select)
             select.select_by_index(1)

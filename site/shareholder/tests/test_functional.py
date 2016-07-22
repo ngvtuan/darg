@@ -246,7 +246,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
         PositionGenerator().generate(
             buyer=self.seller,
             security=self.securities[1], number_segments=[u'0-9999'],
-            count=10000)
+            count=10000, seller=None)
 
     def test_add(self):
         """
@@ -254,7 +254,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
         """
         position = PositionGenerator().generate(
             save=False, seller=self.seller, buyer=self.buyer,
-            security=self.securities[0])
+            security=self.securities[1])
 
         try:
 
@@ -303,7 +303,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
         """
         position = PositionGenerator().generate(
             save=False, seller=self.seller, buyer=self.buyer,
-            security=self.securities[0])
+            security=self.securities[1])
 
         for s in self.securities:
             s.track_numbers = True
@@ -357,7 +357,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
         """
         position = PositionGenerator().generate(
             save=False, seller=self.seller, buyer=self.buyer,
-            security=self.securities[0])
+            security=self.securities[1])
 
         try:
 

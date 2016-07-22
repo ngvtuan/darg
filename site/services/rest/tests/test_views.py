@@ -389,16 +389,16 @@ class PositionTestCase(TestCase):
 
         self.assertEqual(response.status_code, 201)
         self.assertTrue('sdfg' in response.content)
-        self.assertEqual(response.data['number_segments'], [1, 2, u'3-5'])
+        self.assertEqual(response.data['number_segments'], [u'1-5'])
 
         position = Position.objects.latest('id')
-        self.assertEqual(position.count, 1)
+        self.assertEqual(position.count, 5)
         self.assertEqual(position.value, 1)
         self.assertEqual(position.buyer, buyer)
         self.assertEqual(position.seller, seller)
         self.assertEqual(
             position.bought_at.isoformat(), '2016-05-13')
-        self.assertEqual(position.number_segments, [1, 2, u'3-5'])
+        self.assertEqual(position.number_segments, [u'1-5'])
 
     def test_delete_position(self):
         """
@@ -932,4 +932,4 @@ class SecurityTestCase(APITestCase):
         self.assertEqual(res.status_code, 200)
 
         security = Security.objects.get(id=security.id)
-        self.assertEqual(security.number_segments, [1, 2, 3, 4, 4, u'8-10'])
+        self.assertEqual(security.number_segments, [u'1-4', u'8-10'])

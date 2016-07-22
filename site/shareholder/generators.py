@@ -218,7 +218,8 @@ class PositionGenerator(object):
             "count": count,
             "value": value,
             "security": security,
-            "comment": kwargs.get('comment') or generators.gen_string(55)
+            "comment": kwargs.get('comment') or generators.gen_string(55),
+            "number_segments": kwargs.get('number_segments', [])
         }
         if seller:
             kwargs2.update({"seller": seller})
@@ -328,3 +329,50 @@ class ComplexShareholderConstellationGenerator(object):
                 security=s1).buyer)
 
         return shareholders, s1
+
+
+class ComplexPositionsWithSegmentsGenerator(object):
+
+    def generate(self, *args, **kwargs):
+        """
+        goal is to simulate for segmented shares the history of sales and buys
+        of the same stocks
+        """
+        company = kwargs.get('company') or CompanyGenerator().generate()
+
+        # intial securities
+        s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
+        s1.track_numbers = True
+        s1.number_segments = [u'0001-1000']
+        s1.save()
+        s2.track_numbers = True
+        s2.number_segments = [u'2000-3000']
+        s2.save()
+
+        # initial company shareholder
+        company_shareholder_created_at = kwargs.get(
+            'company_shareholder_created_at'
+        ) or datetime.datetime.now()
+        cs = CompanyShareholderGenerator().generate(
+            company=company, security=s1,
+            company_shareholder_created_at=company_shareholder_created_at)
+        s = ShareholderGenerator().generate(company=company)
+
+        shareholders = [cs, s]
+        positions = []
+
+        # random shareholder generation
+        def buy_segment(segments, buyer, seller):
+            p = PositionGenerator().generate(
+                company=company, security=s1, buyer=buyer,
+                seller=seller, number_segments=segments)
+            return p
+
+        positions.append(buy_segment([u'1000-1050'], s, cs))
+        positions.append(buy_segment([1050], cs, s))
+        positions.append(buy_segment([u'1050-1100'], s, cs))
+        positions.append(buy_segment([u'1101-1200', 1666], s, cs))
+        positions.append(buy_segment([1050], cs, s))
+        positions.append(buy_segment([1050], s, cs))
+
+        return positions, shareholders

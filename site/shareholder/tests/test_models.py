@@ -3,19 +3,19 @@
 import datetime
 from decimal import Decimal
 
-from django.test import TestCase, TransactionTestCase
-from django.test.client import Client
-from django.db.models import Q
-from django.core.urlresolvers import reverse
-from django.test.client import RequestFactory
 from django.core import mail
+from django.core.urlresolvers import reverse
+from django.db.models import Q
+from django.test import TestCase, TransactionTestCase
+from django.test.client import Client, RequestFactory
 
-from shareholder.models import Country, Shareholder, Position, Security
-from shareholder.generators import (
-    ShareholderGenerator, PositionGenerator, UserGenerator,
-    OperatorGenerator, CompanyGenerator,
-    ComplexShareholderConstellationGenerator, SecurityGenerator,
-    )
+from shareholder.generators import (CompanyGenerator,
+                                    ComplexPositionsWithSegmentsGenerator,
+                                    ComplexShareholderConstellationGenerator,
+                                    OperatorGenerator, PositionGenerator,
+                                    SecurityGenerator, ShareholderGenerator,
+                                    UserGenerator)
+from shareholder.models import Country, Position, Security, Shareholder
 
 
 # --- MODEL TESTS
@@ -401,6 +401,32 @@ class ShareholderTestCase(TestCase):
 
         self.assertEqual(s1.share_value(), Decimal('500000.0000'))
 
+    def test_owns_segments(self):
+        """
+        check if shareholder owns this list of segments. returns false on first
+        fail
+        """
+        positions, shs = ComplexPositionsWithSegmentsGenerator().generate()
+        segments = [1000, 1050, 1666, u'1103-1105']
+
+        self.assertEqual(
+            shs[1].owns_segments(segments, positions[0].security),
+            (True, []))
+
+        segments = [1000, 1050, 1666, 1667]
+
+        self.assertEqual(
+            shs[1].owns_segments(segments, positions[0].security),
+            (False, [1667]))
+
+    def test_current_segments(self):
+        """
+        get shareholders list of segments owned
+        """
+        positions, shs = ComplexPositionsWithSegmentsGenerator().generate()
+
+        self.assertEqual(shs[1].current_segments(positions[0].security), [u'1000-1200', 1666])
+
 
 class SecurityTestCase(TestCase):
 
@@ -418,3 +444,17 @@ class SecurityTestCase(TestCase):
         # refresh from db
         s = Security.objects.get(id=security.id)
         self.assertEqual(s.number_segments, segments)
+
+    def test_count_in_segments(self):
+        """
+        count shares in segments
+        """
+        security = SecurityGenerator().generate()
+
+        segments = '1, 3,4, 99-1000'
+        count = security.count_in_segments(segments)
+        self.assertEqual(count, 905)
+
+        segments = [1, 3, 4, 5, u'99-1000']
+        count = security.count_in_segments(segments)
+        self.assertEqual(count, 906)

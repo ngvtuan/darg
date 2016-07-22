@@ -7,6 +7,10 @@ import re
 logger = logging.getLogger(__name__)
 
 
+def humand_readable_segments(segments):
+    return u','.join([str(s) for s in segments])
+
+
 def string_list_to_json(string):
     """
     takes string and converts into list: "1,2,3,4-10"

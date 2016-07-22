@@ -428,9 +428,21 @@ class PositionPage(BasePage):
         # select elements: seller, buyer, security - before inputs to have magic
         # working
         time.sleep(2)
-        for select in selects:
-            select = Select(select)
-            select.select_by_index(1)
+        # seller
+        name = '{} {}'.format(position.seller.user.first_name,
+                              position.seller.user.last_name)
+        select = Select(selects[0])
+        select.select_by_visible_text(name)
+
+        # buyer
+        name = '{} {}'.format(position.buyer.user.first_name,
+                              position.buyer.user.last_name)
+        select = Select(selects[1])
+        select.select_by_visible_text(name)
+
+        # security
+        select = Select(selects[2])
+        select.select_by_index(1)
 
         time.sleep(1)
 

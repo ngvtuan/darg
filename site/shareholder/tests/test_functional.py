@@ -242,6 +242,12 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             company=self.operator.company)
         self.seller = ShareholderGenerator().generate(
             company=self.operator.company)
+        # initial position
+        PositionGenerator().generate(
+            buyer=self.seller,
+            security=self.securities[1], number_segments=[u'0-9999'],
+            count=10000)
+
 
     def test_add(self):
         """
@@ -271,7 +277,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
         """
         position = PositionGenerator().generate(
             save=False, seller=self.seller, buyer=self.buyer,
-            security=self.securities[0])
+            security=self.securities[1])
 
         for s in self.securities:
             s.track_numbers = True

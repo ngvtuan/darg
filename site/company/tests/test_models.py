@@ -23,7 +23,8 @@ class CompanyModelTestCase(TestCase):
         shareholder3 = ShareholderGenerator().generate(company=company)
         shareholder4 = ShareholderGenerator().generate(company=company)
         PositionGenerator().generate(
-            buyer=cshareholder, count=10000, value=1000, security=security)
+            buyer=cshareholder, count=10000, value=1000, security=security,
+            seller=None)
         p1 = PositionGenerator().generate(
             buyer=shareholder1, count=100, value=20, seller=cshareholder,
             security=security)

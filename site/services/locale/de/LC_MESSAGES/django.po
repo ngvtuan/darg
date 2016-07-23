@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-20 23:32+0000\n"
-"PO-Revision-Date: 2016-07-20 23:33+0000\n"
+"POT-Creation-Date: 2016-07-23 22:12+0000\n"
+"PO-Revision-Date: 2016-07-23 22:18+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,13 +19,21 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.11\n"
 
-#: services/rest/mixins.py:22
-#, fuzzy
+#: services/rest/mixins.py:25 services/rest/mixins.py:35
 #| msgid "Invalid number segment '{}'. Please use 1, 2, 3, 4-10."
 msgid "Invalid number segment. Please use 1, 2, 3, 4-10."
-msgstr "Ungültiges Aktiennummernsegment '{}'. Korrektes Format: 1, 2, 3, 4-9."
+msgstr "Ungültige Aktiennummern. Korrektes Format: 1, 2, 3, 4-9."
 
-#: services/rest/serializers.py:200
+#: services/rest/mixins.py:48
+#| msgid "Invalid number segment '{}'. Please use 1, 2, 3, 4-10."
+msgid ""
+"Number Segment Range start smaller/equal then end '{}'. Please use 1, 2, 3, "
+"4-10."
+msgstr ""
+"Fehler Aktiennummernsegment: Anfangswert grösser als Endwert '{}'. Korrektes"
+" Format: 4-9."
+
+#: services/rest/serializers.py:198
 msgid ""
 "User not yet registered with this application. Please ask the user to "
 "register first."
@@ -33,15 +41,15 @@ msgstr ""
 "Dieser Nutzer ist noch nicht registriert. Bitten Sie ihn dieser mit der "
 "angegebenen Email nachzuholen."
 
-#: services/rest/serializers.py:207
+#: services/rest/serializers.py:205
 msgid "You cannot edit this company"
 msgstr "Sie können dieses Unternehmen nicht bearbeiten."
 
-#: services/rest/serializers.py:212
+#: services/rest/serializers.py:210
 msgid "You were added as administrator for {}"
 msgstr "Sie wurden als Administrator für das Unternehmen \"{}\" hinzugefügt."
 
-#: services/rest/serializers.py:213
+#: services/rest/serializers.py:211
 msgid ""
 "Dear,\n"
 "\n"
@@ -59,28 +67,38 @@ msgstr ""
 "\n"
 "Das Aktienregister Team"
 
-#: services/rest/serializers.py:243 services/rest/serializers.py:288
+#: services/rest/serializers.py:241 services/rest/serializers.py:286
 msgid "Email missing"
 msgstr "Bitte geben Sie eine gültige Email ein."
 
-#: services/rest/serializers.py:291
+#: services/rest/serializers.py:289
 msgid "First Name missing"
 msgstr "Bitte geben Sie eine gültigen Vornamen ein."
 
-#: services/rest/serializers.py:294
+#: services/rest/serializers.py:292
 msgid "Last Name missing"
 msgstr "Bitte geben Sie eine gültigen Nachnamen ein."
 
-#: services/rest/serializers.py:300
+#: services/rest/serializers.py:298
 msgid "Shareholder Number must be unique"
 msgstr ""
 "Diese Aktionärsnummer wird bereits verwendet. Bitte wählen Sie eine andere."
 
-#: services/rest/serializers.py:407
+#: services/rest/serializers.py:420
 msgid "Invalid security numbers segments."
 msgstr "Ungültige Aktiennummern (1,2,3,4-9)."
 
-#: services/rest/serializers.py:523
+#: services/rest/serializers.py:426
+msgid "Segments \"{}\" must be owned by seller \"{}\". Available are {}"
+msgstr "Aktiennummer \"{}\" gehört nicht zu Verkäufer \"{}\". Verfügbar sind \"{}\"."
+
+#: services/rest/serializers.py:437
+msgid "Number of shares in segments ({}) does not match count {}"
+msgstr ""
+"Anzahl der Aktien in den Aktiennummern ist nicht identisch mit der Anzahl "
+"der Aktien im Formular: {}"
+
+#: services/rest/serializers.py:558
 msgid "Not a pdf file."
 msgstr "Falsches Dateiformat. Nur PDF ist erlaubt."
 

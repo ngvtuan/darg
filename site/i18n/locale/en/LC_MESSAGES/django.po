@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-20 23:32+0000\n"
+"POT-Creation-Date: 2016-07-23 22:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Securities"
 msgstr ""
 
-#: company/templates/company.html:128
+#: company/templates/company.html:128 company/tests/test_views.py:33
 msgid "tracking security numbers for owners enabled. segments:"
 msgstr ""
 
@@ -101,10 +101,6 @@ msgstr ""
 
 #: company/templates/company.html:182
 msgid "Edit Option Plan"
-msgstr ""
-
-#: company/tests/test_views.py:33
-msgid "tracking security numbers for owners enabled "
 msgstr ""
 
 #: templates/base_auth.html:15

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-20 23:32+0000\n"
+"POT-Creation-Date: 2016-07-23 22:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: shareholder/models.py:49
+#: shareholder/models.py:50
 msgid "Headquarter location"
 msgstr ""
 
-#: shareholder/models.py:51
+#: shareholder/models.py:52
 msgid "Foundation date of the company"
 msgstr ""
 
-#: shareholder/models.py:68
+#: shareholder/models.py:69
 msgid "Your list of partials for the share split for company '{}'"
 msgstr ""
 
-#: shareholder/models.py:71
+#: shareholder/models.py:72
 msgid ""
 "Dear Operator,\n"
 "\n"
@@ -38,15 +38,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#: shareholder/models.py:79
+#: shareholder/models.py:80
 msgid "{}{}({}): {} shares\n"
 msgstr ""
 
-#: shareholder/models.py:86
+#: shareholder/models.py:87
 msgid "--- No partial shares during split --- \n"
 msgstr ""
 
-#: shareholder/models.py:89
+#: shareholder/models.py:90
 msgid ""
 "\n"
 "These shareholders are eligible to either sell their partial shares or get "
@@ -57,56 +57,56 @@ msgid ""
 "Your Share Register Team"
 msgstr ""
 
-#: shareholder/models.py:212
+#: shareholder/models.py:213
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
 msgstr ""
 
-#: shareholder/models.py:232
+#: shareholder/models.py:233
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr ""
 
-#: shareholder/models.py:388
+#: shareholder/models.py:389
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:395
+#: shareholder/models.py:396
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:399
+#: shareholder/models.py:400
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:403
+#: shareholder/models.py:404
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:412
+#: shareholder/models.py:413
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:495
+#: shareholder/models.py:563
 msgid "Nominal value of this asset"
 msgstr ""
 
-#: shareholder/models.py:501 shareholder/models.py:528
-#: shareholder/models.py:567 shareholder/models.py:615
+#: shareholder/models.py:569 shareholder/models.py:619
+#: shareholder/models.py:658 shareholder/models.py:706
 msgid "JSON list of segments of ids for securities. can be 1, 2, 3, 4-10"
 msgstr ""
 
-#: shareholder/models.py:506
+#: shareholder/models.py:574
 msgid "App needs to track IDs of shares"
 msgstr ""
 
-#: shareholder/models.py:519
+#: shareholder/models.py:609
 msgid "Share Count transfered or created"
 msgstr ""
 
-#: shareholder/models.py:522
+#: shareholder/models.py:613
 msgid "Nominal value or payed price for the transaction"
 msgstr ""
 
-#: shareholder/models.py:561
+#: shareholder/models.py:652
 msgid "Number of shares approved"
 msgstr ""
 
@@ -327,17 +327,38 @@ msgid "Shareholder Birthday"
 msgstr ""
 
 #: shareholder/templates/shareholder.html:120
-msgid "Shares"
-msgstr ""
-
-#: shareholder/templates/shareholder.html:124
 msgid "Value of all shares according to last transaction"
 msgstr ""
 
-#: shareholder/templates/shareholder.html:129
+#: shareholder/templates/shareholder.html:125
+msgid "Owned Stock"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:126
+msgid "Count Shares Total"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:127
+#, python-format
+msgid "%% Ownership"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:130
+msgid "security"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:131
+msgid "count"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:132
+msgid "segments"
+msgstr ""
+
+#: shareholder/templates/shareholder.html:139
 msgid "Delete shareholder"
 msgstr ""
 
-#: shareholder/views.py:56 shareholder/views.py:65
+#: shareholder/views.py:66 shareholder/views.py:75
 msgid "Permission denied"
 msgstr ""

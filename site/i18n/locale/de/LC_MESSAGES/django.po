@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-20 23:32+0000\n"
+"POT-Creation-Date: 2016-07-23 22:12+0000\n"
 "PO-Revision-Date: 2016-07-20 21:20+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgstr "Land des Unternehmenssitzes"
 msgid "Securities"
 msgstr "Aktienart"
 
-#: company/templates/company.html:128
+#: company/templates/company.html:128 company/tests/test_views.py:33
 msgid "tracking security numbers for owners enabled. segments:"
 msgstr "Nummerierte Aktiensegmente:"
 
@@ -108,10 +108,6 @@ msgstr "Name des Optionsplanes"
 #: company/templates/company.html:182
 msgid "Edit Option Plan"
 msgstr "Optionsplan editieren"
-
-#: company/tests/test_views.py:33
-msgid "tracking security numbers for owners enabled "
-msgstr "Nummerierte Aktien sind aktiviert."
 
 #: templates/base_auth.html:15
 msgid "The Share Register, 2016"
@@ -441,6 +437,9 @@ msgstr "Links"
 #: templates/zinnia/skeleton.html:74 templates/zinnia/skeleton.html:75
 msgid "Weblog index"
 msgstr "Blog Start"
+
+#~ msgid "tracking security numbers for owners enabled "
+#~ msgstr "Nummerierte Aktien sind aktiviert."
 
 #~ msgid "Change History"
 #~ msgstr "Passwort ändern"

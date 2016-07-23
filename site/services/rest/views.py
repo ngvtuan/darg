@@ -50,6 +50,18 @@ class ShareholderViewSet(viewsets.ModelViewSet):
         return Shareholder.objects.filter(company__operator__user=user)\
             .distinct()
 
+    @detail_route(methods=['get'])
+    def number_segments(self, request, pk=None):
+        shareholder = self.get_object()
+        data = []
+        for security in shareholder.company.security_set.all():
+            if security.track_numbers:
+                data.append({
+                    'security_pk': security.pk,
+                    'number_segments': shareholder.current_segments(security)
+                })
+        return Response(data, status=status.HTTP_200_OK)
+
 
 class OperatorViewSet(viewsets.ModelViewSet):
     """

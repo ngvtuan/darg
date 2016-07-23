@@ -343,6 +343,8 @@ class ComplexPositionsWithSegmentsGenerator(object):
         """
         company = kwargs.get('company') or CompanyGenerator().generate()
 
+        OperatorGenerator().generate(company=company)
+
         # intial securities
         s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
         s1.track_numbers = True

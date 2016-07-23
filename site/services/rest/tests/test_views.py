@@ -1,24 +1,24 @@
 # coding=utf-8
 import datetime
 
-from rest_framework.test import APIClient
-from rest_framework import status
-from rest_framework.test import APITestCase
-
-from django.core.urlresolvers import reverse
-from django.test import TestCase, RequestFactory
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
+from django.test import RequestFactory, TestCase
+from rest_framework import status
+from rest_framework.test import APIClient, APITestCase
 
-from shareholder.generators import (
-    OperatorGenerator, UserGenerator, CompanyGenerator,
-    ShareholderGenerator, TwoInitialSecuritiesGenerator,
-    PositionGenerator, OptionTransactionGenerator, SecurityGenerator
-)
-from shareholder.models import (
-    Operator, Shareholder, Position, Security, OptionTransaction
-    )
 from services.rest.serializers import SecuritySerializer
+from shareholder.generators import (CompanyGenerator,
+                                    ComplexPositionsWithSegmentsGenerator,
+                                    OperatorGenerator,
+                                    OptionTransactionGenerator,
+                                    PositionGenerator, SecurityGenerator,
+                                    ShareholderGenerator,
+                                    TwoInitialSecuritiesGenerator,
+                                    UserGenerator)
+from shareholder.models import (Operator, OptionTransaction, Position,
+                                Security, Shareholder)
 
 User = get_user_model()
 
@@ -810,6 +810,20 @@ class ShareholderTestCase(TestCase):
         # check proper db status
         user = s.user
         self.assertEqual(user.email, "mutter@demo.ch")
+
+    def test_get_number_segments(self):
+        """
+        detailview to return owned segments for shareholder for all securities
+        """
+        positions, shs = ComplexPositionsWithSegmentsGenerator().generate()
+
+        self.client.force_authenticate(
+            shs[0].company.operator_set.all()[0].user.username)
+
+        res = self.client.get(reverse('shareholders-number-segments',
+                                      kwargs={'pk': shs[1].pk}))
+
+        self.assertEqual(res.data[1]['number_segments'], [u'1000-1200', 1666])
 
 
 class OptionTransactionTestCase(APITestCase):

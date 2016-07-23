@@ -450,7 +450,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             app.click_delete_position()
 
             # header, row, 2x split
-            self.assertEqual(app.get_position_row_count(), 4)
+            self.assertEqual(app.get_position_row_count(), 3)
 
         except Exception, e:
             self._handle_exception(e)

@@ -519,7 +519,7 @@ class PositionPage(BasePage):
         table = self.driver.find_element_by_tag_name('table')
         time.sleep(1)
         trs = table.find_elements_by_tag_name('tr')
-        return len(trs)
+        return [tr.is_displayed() for tr in trs].count(True)
 
     def count_draft_mode_items(self):
         table = self.driver.find_element_by_tag_name('table')

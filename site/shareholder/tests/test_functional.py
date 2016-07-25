@@ -332,7 +332,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             self.assertFalse(app.has_available_segments_tooltip())
             app.enter_seller(position.seller)
             self.assertFalse(app.has_available_segments_tooltip())
-            app.enter_security(position.security)
+            app.enter_security(position.security, 'add-position-form')
             time.sleep(2)
             self.assertTrue(app.has_available_segments_tooltip())
             self.assertEqual(app.get_segment_from_tooltip(), u'0,1-9999')

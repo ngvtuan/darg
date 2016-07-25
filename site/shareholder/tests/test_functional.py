@@ -236,13 +236,13 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
 
     def setUp(self):
         self.operator = OperatorGenerator().generate()
+        company = self.operator.company
         self.securities = TwoInitialSecuritiesGenerator().generate(
-            company=self.operator.company)
-        self.buyer = ShareholderGenerator().generate(
-            company=self.operator.company)
-        self.seller = ShareholderGenerator().generate(
-            company=self.operator.company)
-        # initial position
+            company=company)
+        self.buyer = ShareholderGenerator().generate(company=company)
+        self.seller = ShareholderGenerator().generate(company=company)
+        self.seller2 = ShareholderGenerator().generate(company=company)
+        # initial position for each sec
         PositionGenerator().generate(
             buyer=self.seller,
             security=self.securities[1], number_segments=[u'0-9999'],
@@ -297,6 +297,65 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             self.assertEqual(len(app.get_position_row_data()), 8)
             self.assertTrue(app.is_no_errors_displayed())
             self.assertTrue('0, 1-2, 999-1001' in self.selenium.page_source)
+
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_add_numbered_segments_with_segment_lookup(self):
+        """
+        add position with numbered shares and lookup for a shareholder
+        what numbers are available
+        test  trigger:
+        * on change for seller, security, date
+        test result
+        * number segments, none
+        """
+        # position unsaved for data seeding
+        position = PositionGenerator().generate(
+            save=False, seller=self.seller, buyer=self.buyer,
+            security=self.securities[1], count=6)
+
+        # make one of two secs with number tracking
+        s = self.operator.company.security_set.get(title='C')
+        s.track_numbers = True
+        s.save()
+
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_add_position_form()
+
+            # test cycle: w/ date, seller, sec
+            app.enter_bought_at(position.bought_at)
+            self.assertFalse(app.has_available_segments_tooltip())
+            app.enter_seller(position.seller)
+            self.assertFalse(app.has_available_segments_tooltip())
+            app.enter_security(position.security)
+            time.sleep(2)
+            self.assertTrue(app.has_available_segments_tooltip())
+            self.assertEqual(app.get_segment_from_tooltip(), u'0,1-9999')
+
+            app.refresh()
+            app.click_open_add_position_form()
+            # test w/ sec + seller
+            self.assertFalse(app.has_available_segments_tooltip())
+            app.enter_seller(position.seller)
+            self.assertFalse(app.has_available_segments_tooltip())
+            app.enter_security(position.security)
+            self.assertTrue(app.has_available_segments_tooltip())
+
+            app.refresh()
+            app.click_open_add_position_form()
+            # test no segs avail
+            position.seller = self.seller2
+            app.enter_bought_at(position.bought_at)
+            self.assertFalse(app.has_available_segments_tooltip())
+            app.enter_seller(position.seller)
+            self.assertFalse(app.has_available_segments_tooltip())
+            app.enter_security(position.security)
+            self.assertTrue(app.has_available_segments_tooltip())
+            self.assertTrue(app.has_available_segments_tooltip_nothing_found())
 
         except Exception, e:
             self._handle_exception(e)

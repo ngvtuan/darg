@@ -10,182 +10,9 @@ import time
 
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.remote.webelement import WebElement
 
+from project.page import BasePage
 from shareholder.generators import DEFAULT_TEST_DATA
-
-
-class BasePage(object):
-    """Base class to initialize the base page that will be called
-    from all pages"""
-
-    def __init__(self, driver):
-        self.driver = driver
-        self.driver.implicitly_wait(10)
-
-    def _is_element_displayed(self, **kwargs):
-
-        time.sleep(3)
-
-        if kwargs.get('cls'):
-            el = self.driver.find_element_by_class_name(
-                kwargs.get('cls')
-            )
-        if kwargs.get('id'):
-            el = self.driver.find_element_by_id(
-                kwargs.get('id')
-            )
-
-        return el.is_displayed()
-
-    def login(self, username, password):
-        """ log the user in """
-        self.driver.get('%s%s' % (self.live_server_url, '/accounts/login/'))
-        self.driver.find_element_by_xpath(
-            '//*[@id="id_username"]').send_keys(username)
-        self.driver.find_element_by_xpath(
-            '//*[@id="id_password"]').send_keys(password)
-        self.driver.find_element_by_xpath(
-            '//*[@id="auth"]/form/button').click()
-        page_heading = self.driver.find_element_by_tag_name(
-            'h1').get_attribute('innerHTML')
-        assert page_heading == 'Willkommen {}!'.format(
-            username), 'failed to login. got {} page instead'.format(
-            page_heading)
-
-    def refresh(self):
-        """ reload page """
-        self.driver.get(self.driver.current_url)
-
-    def use_datepicker(self, class_name, date):
-        """
-        use default datepicker to select a date
-        """
-        self.click_open_datepicker(class_name)
-        self.click_date_in_datepicker(class_name)
-
-    def click_open_datepicker(self, class_name):
-        """
-        click to open the datepicker for element X
-        """
-        el = self.driver.find_element_by_class_name(class_name)
-        btns = el.find_elements_by_xpath(
-            '//*[contains(@class, "date-field")]//'
-            'span[@class="input-group-btn"]//button'
-        )
-        for btn in btns:
-            if btn.is_displayed():
-                btn.click()
-                return
-
-        raise Exception('Clickable button not found')
-
-    def click_date_in_datepicker(self, class_name):
-        """
-        select some date in datepicker
-
-        click first day of current month
-        """
-        el = self.driver.find_element_by_class_name(class_name)
-        dp_rows = el.find_elements_by_xpath(
-            '//table[@class="uib-daypicker"]//tr[@class="uib-weeks ng-scope"]')
-        # in case we have multiple dps
-        for dp_row in dp_rows:
-            if not dp_row.is_displayed():
-                continue
-
-            for td in dp_row.find_elements_by_tag_name('td'):
-                el2 = td.find_elements_by_tag_name('span')
-                if el2 and el2[0].text == '01':
-                    btn = td.find_element_by_tag_name('button')
-                    btn.click()
-                    return
-
-        raise Exception('Clickable button not found')
-
-    def is_no_errors_displayed(self):
-        """ MUST not find it, hence exception is True :) """
-        try:
-            self._is_element_displayed(cls='alert-danger')
-            return False
-        except:
-            return True
-
-    def scroll_to(self, Y=None, element=None):
-        """
-        scroll to element or coordinate
-        """
-        if element:
-            self.driver.execute_script(
-                "return arguments[0].scrollIntoView();", element)
-        else:
-            self.driver.execute_script("window.scrollTo(0, {})".format(Y))
-
-    def wait_until_clickable(self, element):
-        """
-        wait until element is clickable
-        """
-        wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.element_to_be_clickable(element))
-        return element
-
-    def wait_until_visible(self, element):
-        """
-        wait until element is clickable
-        """
-        wait = WebDriverWait(self.driver, 10)
-        if isinstance(element, WebElement):
-            element = wait.until(EC.visibility_of(element))
-        else:
-            element = wait.until(EC.visibility_of_element_located(element))
-        return element
-
-    def wait_until_invisible(self, element):
-        """
-        wait until element is clickable
-        """
-        wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.invisibility_of_element_located(element))
-        return element
-
-    def wait_unti_text_present(self, element, text):
-        """
-        wait until element is clickable
-        """
-        wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.text_to_be_present_in_element(element, text))
-        return element
-
-    def drag_n_drop(self, object, target):
-        """
-        used to simulate drag'n drop to move elemens
-        from
-        http://stackoverflow.com/questions/29381233/how-to-simulate-html5-drag-and-drop-in-selenium-webdriver/29381532#29381532
-        object, target : jquery identifiers
-        """
-
-        jquery_url = "http://code.jquery.com/jquery-1.11.2.min.js"
-
-        # load jQuery helper
-        with open("jquery_load_helper.js") as f:
-            load_jquery_js = f.read()
-
-        # load drag and drop helper
-        with open("drag_and_drop_helper.js") as f:
-            drag_and_drop_js = f.read()
-
-        # load jQuery
-        self.driver.execute_async_script(load_jquery_js, jquery_url)
-
-        # perform drag&drop
-        self.driver.execute_script(
-            drag_and_drop_js +
-            "$('{}').simulateDragDrop({ dropTarget: '{}'});".format(
-                object, target
-            )
-        )
 
 
 class ShareholderDetailPage(BasePage):
@@ -428,11 +255,8 @@ class PositionPage(BasePage):
         # select elements: seller, buyer, security - before inputs to have magic
         # working
         time.sleep(2)
-        # seller
-        name = '{} {}'.format(position.seller.user.first_name,
-                              position.seller.user.last_name)
-        select = Select(selects[0])
-        select.select_by_visible_text(name)
+
+        self.enter_seller(position.seller)
 
         # buyer
         name = '{} {}'.format(position.buyer.user.first_name,
@@ -440,30 +264,58 @@ class PositionPage(BasePage):
         select = Select(selects[1])
         select.select_by_visible_text(name)
 
-        # security
-        select = Select(selects[2])
-        select.select_by_index(1)
+        self.enter_Security(position.security)
+        self.enter_bought_at(position.date)
 
-        time.sleep(1)
-
-        # input #0 use datepicker
-        self.use_datepicker('add-position-form', None)
+        # count
         if position.count:
             inputs[1].clear()  # clear existing values
             inputs[1].send_keys(position.count)  # count
+
+        # value
         if position.value:
             inputs[2].clear()  # clear existing values
             inputs[2].send_keys(position.value)  # price
 
         # if numbered shares enter segment
         if position.security.track_numbers:
-            input = form.find_elements_by_tag_name('input')[3]
-            input.send_keys('0,1,2,999-1001')
+            inputs[3].clear()
+            inputs[3].send_keys('0,1,2,999-1001')
             inputs[4].clear()  # clear existing values
             inputs[4].send_keys(position.comment)  # comment
         else:
             inputs[4].clear()  # clear existing values
             inputs[4].send_keys(position.comment)  # comment
+
+    def enter_bought_at(self, date):
+        """
+        enter position.bought_at in form
+        """
+        time.sleep(1)
+
+        # input #0 use datepicker
+        self.use_datepicker('add-position-form', None)
+
+    def enter_security(self, security):
+        el = self.driver.find_element_by_id('add_position')
+        form = el.find_element_by_tag_name('form')
+        selects = form.find_elements_by_tag_name('select')
+
+        select = Select(selects[2])
+        select.select_by_visible_text(security.get_title_display())
+
+    def enter_seller(self, seller):
+        """
+        enter selling shareholder
+        """
+        el = self.driver.find_element_by_id('add_position')
+        form = el.find_element_by_tag_name('form')
+        selects = form.find_elements_by_tag_name('select')
+
+        name = '{} {}'.format(seller.user.first_name,
+                              seller.user.last_name)
+        select = Select(selects[0])
+        select.select_by_visible_text(name)
 
     def enter_new_cap_data(self, position):
 
@@ -521,9 +373,71 @@ class PositionPage(BasePage):
         trs = table.find_elements_by_tag_name('tr')
         return [tr.is_displayed() for tr in trs].count(True)
 
+    def get_segment_from_tooltip(self):
+        """
+        extract segment string from tooltip
+        """
+        el = self.driver.find_element_by_id('add_position')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+
+        els = self.driver.find_elements_by_xpath(
+            '//div[contains(@class, "popover-content")]')
+
+        if inputs[3].is_displayed() and not els:
+            inputs[3].click()
+            els = self.driver.find_elements_by_xpath(
+                '//div[contains(@class, "popover-content")]')
+
+        return els[0].text.split(':')[1].strip()
+
     def count_draft_mode_items(self):
         table = self.driver.find_element_by_tag_name('table')
         time.sleep(1)
         trs = table.find_elements_by_tag_name('tr')
         row = trs[2]
         return row.find_element_by_tag_name('td').text.count('Entwurf')
+
+    def has_available_segments_tooltip(self):
+        """
+        check of tooltip bubble on segment field is shown
+        shown only when number_segment fild is selected
+        """
+        el = self.driver.find_element_by_id('add_position')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+
+        els = self.driver.find_elements_by_xpath(
+            '//div[@class="add-position-form"]'
+            '//div[contains(@class,"popover")]')
+
+        # tooltip is active on click and stays like that. detect of open or
+        # attempt to set element active
+        if inputs[3].is_displayed() and not els:
+            inputs[3].click()
+
+            time.sleep(2)
+
+            els = self.driver.find_elements_by_xpath(
+                '//div[@class="add-position-form"]'
+                '//div[contains(@class,"popover")]')
+
+        return bool(els and els[0].is_displayed())
+
+    def has_available_segments_tooltip_nothing_found(self):
+        """
+        check if we show that no available segment was found
+        """
+        el = self.driver.find_element_by_id('add_position')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+
+        els = self.driver.find_elements_by_xpath(
+            '//div[contains(@class, "popover-content")]')
+
+        if inputs[3].is_displayed() and not els:
+            inputs[3].click()
+            els = self.driver.find_elements_by_xpath(
+                '//div[contains(@class, "popover-content")]')
+
+        return bool(els and 'keine Aktien' in els[0].text)

@@ -10,7 +10,7 @@ import time
 
 from django.core.urlresolvers import reverse
 
-from shareholder.page import BasePage
+from project.page import BasePage
 
 
 class CompanyPage(BasePage):

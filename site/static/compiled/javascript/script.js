@@ -578,6 +578,7 @@
       $scope.show_split = false;
       $scope.newPosition = new Position();
       $scope.newSplit = new Split();
+      $scope.numberSegmentsAvailable = '';
       $http.get('/services/rest/position').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
           return $scope.positions.push(item);
@@ -683,6 +684,24 @@
         $scope.show_add_capital = false;
         $scope.newSplit = new Split();
         return $scope.show_split = true;
+      };
+      $scope.show_available_number_segments = function() {
+        var url;
+        if ($scope.newPosition.security) {
+          if ($scope.newPosition.security.track_numbers && $scope.newPosition.seller) {
+            url = '/services/rest/shareholders/' + $scope.newPosition.seller.pk.toString() + '/number_segments';
+            if ($scope.newPosition.bought_at) {
+              url = url + '?date=' + $scope.newPosition.bought_at.toISOString();
+            }
+            return $http.get(url).then(function(result) {
+              if ($scope.newPosition.security.pk in result.data && result.data[$scope.newPosition.security.pk].length > 0) {
+                return $scope.numberSegmentsAvailable = gettext('Available security segments from this shareholder on selected date or now: ') + result.data[$scope.newPosition.security.pk];
+              } else {
+                return $scope.numberSegmentsAvailable = gettext('Available security segments from this shareholder on selected date or now: None');
+              }
+            });
+          }
+        }
       };
       $scope.datepicker = {
         opened: false

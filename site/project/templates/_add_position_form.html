@@ -34,7 +34,7 @@
         </select>
       </div>
       <div>
-        <select class="form-control" ng-model="newPosition.security" ng-options="security as security.readable_title for security in securities" translate translate-attr-placeholder="Security" ng-change="show_available_number_segments();">
+        <select class="form-control security" ng-model="newPosition.security" ng-options="security as security.readable_title for security in securities" translate translate-attr-placeholder="Security" ng-change="show_available_number_segments();">
           <option value='' disabled>{% endverbatim %}{% trans "Security" %}{% verbatim %}</option>
         </select>
         <input type="number" class="form-control" ng-model="newPosition.count" translate translate-attr-placeholder="Count" ng-maxlength="10">

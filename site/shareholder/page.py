@@ -264,7 +264,7 @@ class PositionPage(BasePage):
         select = Select(selects[1])
         select.select_by_visible_text(name)
 
-        self.enter_security(position.security)
+        self.enter_security(position.security, 'add-position-form')
         self.enter_bought_at(position.bought_at)
 
         # count
@@ -296,12 +296,12 @@ class PositionPage(BasePage):
         # input #0 use datepicker
         self.use_datepicker('add-position-form', None)
 
-    def enter_security(self, security):
-        el = self.driver.find_element_by_id('add_position')
+    def enter_security(self, security, class_name):
+        el = self.driver.find_element_by_class_name(class_name)
         form = el.find_element_by_tag_name('form')
-        selects = form.find_elements_by_tag_name('select')
+        select = form.find_element_by_class_name('security')
 
-        select = Select(selects[2])
+        select = Select(select)
         select.select_by_visible_text(security.get_title_display())
 
     def enter_seller(self, seller):
@@ -322,23 +322,22 @@ class PositionPage(BasePage):
         el = self.driver.find_element_by_id('add_capital')
         form = el.find_element_by_tag_name('form')
         inputs = form.find_elements_by_tag_name('input')
-        selects = form.find_elements_by_tag_name('select')
 
         # input #0 use datepicker
         self.use_datepicker('add-capital-form', None)
+        self.enter_security(position.security, 'add-capital-form')
+
         if position.count:
             inputs[1].clear()
             inputs[1].send_keys(position.count)  # count
         if position.value:
             inputs[2].clear()
             inputs[2].send_keys(position.value)  # price
-        inputs[3].clear()
-        inputs[3].send_keys(position.comment)  # comment
-
-        # select elements: seller, buyer, security
-        for select in selects:
-            select = Select(select)
-            select.select_by_index(1)
+        if inputs[3].is_displayed():
+            inputs[3].clear()
+            inputs[3].send_keys(position.number_segments)  # comment
+        inputs[4].clear()
+        inputs[4].send_keys(position.comment)  # comment
 
     def enter_new_split_data(self, *args):
         el = self.driver.find_element_by_id('split-shares')

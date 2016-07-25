@@ -408,10 +408,12 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
 
             security = Security.objects.get(id=security['pk'])
             segments = string_list_to_json(initial_data.get('number_segments'))
-            seller = Shareholder.objects.get(
-                pk=initial_data.get('seller')['pk'])
-            owning, failed_segments, owned_segments = seller.owns_segments(
-                segments, security)
+            # if we have seller (non capital increase)
+            if initial_data.get('seller'):
+                seller = Shareholder.objects.get(
+                    pk=initial_data.get('seller')['pk'])
+                owning, failed_segments, owned_segments = seller.owns_segments(
+                    segments, security)
 
             # we need number_segments if this is a security with .track_numbers
             if not segments:
@@ -420,12 +422,13 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
                         [_('Invalid security numbers segments.')]})
 
             # segments must be owned by seller
-            elif not owning:
+            elif initial_data.get('seller') and not owning:
                 raise serializers.ValidationError({
                     'number_segments':
                         [_('Segments "{}" must be owned by seller "{}". '
-                        'Available are {}').format(
-                            failed_segments, seller.user.last_name, owned_segments
+                           'Available are {}').format(
+                              failed_segments, seller.user.last_name,
+                              owned_segments
                         )]
                 })
 
@@ -452,6 +455,12 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
         user = self.context.get("request").user
         company = user.operator_set.all()[0].company
 
+        security = Security.objects.get(
+            company=company,
+            title=validated_data.get('security').get('title')
+        )
+
+        # regular security transaction
         if validated_data.get("seller") and validated_data.get("buyer"):
             buyer = Shareholder.objects.get(
                 company=company,
@@ -465,16 +474,19 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
             )
             kwargs.update({"seller": seller})
 
+        # capital increase
         else:
             buyer = company.get_company_shareholder()
             company.share_count = company.share_count + \
                 validated_data.get("count")
-            company.save()
 
-        security = Security.objects.get(
-            company=company,
-            title=validated_data.get('security').get('title')
-        )
+            # add new number segments to company register
+            if security.track_numbers:
+                segs = validated_data.get('number_segments')
+                security.number_segments.extend(segs)
+                security.save()
+
+            company.save()
 
         kwargs.update({
             "buyer": buyer,

@@ -12,6 +12,7 @@ from shareholder.generators import (
     OptionPlanGenerator
     )
 from shareholder import page
+from shareholder.models import Position
 
 
 # --- FUNCTIONAL TESTS
@@ -471,6 +472,36 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
 
             self.assertEqual(len(app.get_position_row_data()), 8)
             self.assertTrue(app.is_no_errors_displayed())
+
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_cap_increase_numbered_segments(self):
+        """
+        capital increase with numbered segments
+        """
+        position = PositionGenerator().generate(
+            save=False, security=self.securities[1], count=6,
+            number_segments='1, 2, 3, 5-7')
+
+        for s in self.securities:
+            s.track_numbers = True
+            s.save()
+
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_cap_increase_form()
+            app.enter_new_cap_data(position)
+            app.click_save_cap_increase()
+
+            self.assertEqual(len(app.get_position_row_data()), 8)
+            self.assertTrue(app.is_no_errors_displayed())
+            position2 = Position.objects.latest('id')
+            self.assertEqual([u'1-3', u'5-7'], position2.number_segments)
+            self.assertEqual([u'1-3', u'5-7'],
+                             position2.security.number_segments)
 
         except Exception, e:
             self._handle_exception(e)

@@ -824,7 +824,9 @@ class ShareholderTestCase(TestCase):
         res = self.client.get(reverse('shareholders-number-segments',
                                       kwargs={'pk': shs[1].pk}))
 
-        self.assertEqual(res.data[securities[1].pk], [u'1000-1200', 1666])
+        self.assertTrue(
+            res.data[securities[1].pk] == [u'1000-1200', 1666] or
+            res.data[securities[0].pk] == [u'1000-1200', 1666])
 
 
 class OptionTransactionTestCase(APITestCase):

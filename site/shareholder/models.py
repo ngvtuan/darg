@@ -66,8 +66,8 @@ class Company(models.Model):
         """ send email with partial share after split list """
         operators = self.get_operators().values_list('user__email', flat=True)
         subject = _(
-            "Your list of partials for the share split for "
-            "company '{}'").format(self.name)
+            u"Your list of partials for the share split for "
+            u"company '{}'").format(self.name)
         message = _(
             "Dear Operator,\n\n"
             "Your share split has been successful. Please find the list of "
@@ -77,14 +77,14 @@ class Company(models.Model):
         if len(partials) > 0:
             for id, part in partials.iteritems():
                 s = Shareholder.objects.get(id=id)
-                message = message + _("{}{}({}): {} shares\n").format(
+                message = message + _(u"{}{}({}): {} shares\n").format(
                     s.user.first_name,
                     s.user.last_name,
                     s.user.email,
                     part,
                 )
         else:
-            message = message + _("--- No partial shares during split --- \n")
+            message = message + _(u"--- No partial shares during split --- \n")
 
         message = message + _(
             "\nThese shareholders are eligible to either "

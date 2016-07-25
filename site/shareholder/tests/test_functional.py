@@ -343,7 +343,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             self.assertFalse(app.has_available_segments_tooltip())
             app.enter_seller(position.seller)
             self.assertFalse(app.has_available_segments_tooltip())
-            app.enter_security(position.security)
+            app.enter_security(position.security, 'add-position-form')
             self.assertTrue(app.has_available_segments_tooltip())
 
             app.refresh()
@@ -354,7 +354,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             self.assertFalse(app.has_available_segments_tooltip())
             app.enter_seller(position.seller)
             self.assertFalse(app.has_available_segments_tooltip())
-            app.enter_security(position.security)
+            app.enter_security(position.security, 'add-position-form')
             self.assertTrue(app.has_available_segments_tooltip())
             self.assertTrue(app.has_available_segments_tooltip_nothing_found())
 

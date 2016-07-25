@@ -19,6 +19,12 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
     $scope.newSplit = new Split()
 
     $scope.numberSegmentsAvailable = ''
+    $scope.hasSecurityWithTrackNumbers = () ->
+        s = $scope.securities.find((el) ->
+            return el.track_numbers==true
+        )
+        if s != undefined
+            return true
 
     $http.get('/services/rest/position').then (result) ->
         angular.forEach result.data.results, (item) ->

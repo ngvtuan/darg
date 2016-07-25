@@ -495,6 +495,32 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
         except Exception, e:
             self._handle_exception(e)
 
+    def test_split_warning_for_numbered_shares(self):
+
+        # initial pos
+        PositionGenerator().generate(
+            seller=self.seller, buyer=self.buyer,
+            security=self.securities[0])
+
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_split_form()
+            self.assertFalse(app.has_split_warning_for_numbered_shares())
+
+            s = self.operator.company.security_set.get(title='C')
+            s.track_numbers = True
+            s.save()
+
+            app.refresh()
+            app.click_open_split_form()
+            time.sleep(1)
+            self.assertTrue(app.has_split_warning_for_numbered_shares())
+
+        except Exception, e:
+            self._handle_exception(e)
+
     def test_delete(self):
 
         # initial pos

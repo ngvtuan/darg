@@ -441,3 +441,10 @@ class PositionPage(BasePage):
                 '//div[contains(@class, "popover-content")]')
 
         return bool(els and 'keine Aktien' in els[0].text)
+
+    def has_split_warning_for_numbered_shares(self):
+        """
+        number tracking is not built for split shares
+        """
+        el = self.driver.find_element_by_id('split-shares')
+        return el.find_element_by_class_name('alert-warning').is_displayed()

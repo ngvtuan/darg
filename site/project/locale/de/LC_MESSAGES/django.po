@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-24 09:36+0000\n"
-"PO-Revision-Date: 2016-07-20 21:42+0000\n"
+"POT-Creation-Date: 2016-07-25 11:52+0000\n"
+"PO-Revision-Date: 2016-07-25 11:54+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.11\n"
 
@@ -30,7 +30,7 @@ msgstr "Bitte geben Sie die Daten die Kapitalerhöhung an:"
 #: project/templates/_add_capital_form.html:26
 #: project/templates/_add_option_plan_form.html:26
 #: project/templates/_add_position_form.html:38
-#: project/templates/_split_shares_form.html:26
+#: project/templates/_split_shares_form.html:30
 msgid "Security"
 msgstr "Aktienart"
 
@@ -39,7 +39,7 @@ msgstr "Aktienart"
 #: project/templates/_add_option_transaction_form.html:37
 #: project/templates/_add_position_form.html:46
 #: project/templates/_add_shareholder_form.html:15
-#: project/templates/_split_shares_form.html:32
+#: project/templates/_split_shares_form.html:36
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -147,7 +147,16 @@ msgstr "Aktionär hinzufügen"
 msgid "Please enter your share split data"
 msgstr "Bitte geben Sie die Daten zum Split ein:"
 
-#: project/templates/_split_shares_form.html:29
+#: project/templates/_split_shares_form.html:7
+msgid ""
+"The split feature does not handle numbered shares. Please contact us for "
+"further details and advices."
+msgstr ""
+"Das Feature \"Aktiensplit\" unterstützt aktuell nicht den Split von Aktien "
+"mit Nachverfolgung der Aktiennummern. Bitte wenden Sie sich an unseren "
+"Support."
+
+#: project/templates/_split_shares_form.html:33
 msgid ""
 "Please note that the split will leave partial share rights unhandled. You "
 "must assign those options to the shareholders and either pay, trade or "
@@ -161,7 +170,7 @@ msgstr ""
 "Kompensation, Verkauf, Verfall der Anrechte nachträglich über Transaktionen "
 "ein."
 
-#: project/templates/_split_shares_form.html:33
+#: project/templates/_split_shares_form.html:37
 msgid "Add Share Split"
 msgstr "Aktiensplit hinzufügen"
 
@@ -297,12 +306,8 @@ msgid ""
 "Gesetzeskonformitaet. Das Online-Aktienbuch macht die Pflege schnell und "
 "effizient, damit Zeit frei wird fuer die wirklichen Herausforderungen"
 msgstr ""
-"Die Automatische Validierung verhindert Fehler und sichert maximale "
-"Gesetzeskonformität. Das Online-Aktienbuch macht die Pflege schnell und "
-"effizient, damit Zeit frei wird für die wirklichen Herausforderungen. <br/"
-"><br/>\n"
-"<strong>PLUS: der rechtlichen Verantwortung des Verwaltungsrates ist Sorge "
-"getragen.</strong>"
+"Die Automatische Validierung verhindert Fehler und sichert maximale Gesetzeskonformität. Das Online-Aktienbuch macht die Pflege schnell und effizient, damit Zeit frei wird für die wirklichen Herausforderungen. <br/><br/>\n"
+"<strong>PLUS: der rechtlichen Verantwortung des Verwaltungsrates ist Sorge getragen.</strong>"
 
 #: project/templates/index.html:77
 msgid "Do you know our Blog?"
@@ -467,11 +472,11 @@ msgstr "Sprache"
 #~ msgstr "Datenexport als CSV für Excel etc."
 
 #~ msgid ""
-#~ "We are currently in private Beta. Please leave your email address to "
-#~ "receive an invitation soon!"
+#~ "We are currently in private Beta. Please leave your email address to receive"
+#~ " an invitation soon!"
 #~ msgstr ""
-#~ "Wir sind aktuell in geschlossender Beta. Bitte hinterlassen Sie ihre "
-#~ "Email, um eine Einladung zu erhalten."
+#~ "Wir sind aktuell in geschlossender Beta. Bitte hinterlassen Sie ihre Email, "
+#~ "um eine Einladung zu erhalten."
 
 #~ msgid "Your Email"
 #~ msgstr "Email"
@@ -502,8 +507,8 @@ msgstr "Sprache"
 
 #~ msgid "GAFI Standard compliant"
 #~ msgstr ""
-#~ "Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" class="
-#~ "\"regular\">GAFI Standards</a>"
+#~ "Entspricht <a href=\"http://www.fatf-gafi.org/\" title=\"GAFI\" "
+#~ "class=\"regular\">GAFI Standards</a>"
 
 #~ msgid "Extensive data validation to ensure you cannot make a mistake"
 #~ msgstr "Umfangreiche Datenvalidierung  - Garantiert korrekte Daten"

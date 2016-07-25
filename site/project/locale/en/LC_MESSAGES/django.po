@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-24 09:36+0000\n"
+"POT-Creation-Date: 2016-07-25 11:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: project/templates/_add_capital_form.html:26
 #: project/templates/_add_option_plan_form.html:26
 #: project/templates/_add_position_form.html:38
-#: project/templates/_split_shares_form.html:26
+#: project/templates/_split_shares_form.html:30
 msgid "Security"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgstr ""
 #: project/templates/_add_option_transaction_form.html:37
 #: project/templates/_add_position_form.html:46
 #: project/templates/_add_shareholder_form.html:15
-#: project/templates/_split_shares_form.html:32
+#: project/templates/_split_shares_form.html:36
 msgid "Cancel"
 msgstr ""
 
@@ -139,7 +139,13 @@ msgstr ""
 msgid "Please enter your share split data"
 msgstr ""
 
-#: project/templates/_split_shares_form.html:29
+#: project/templates/_split_shares_form.html:7
+msgid ""
+"The split feature does not handle numbered shares. Please contact us for "
+"further details and advices."
+msgstr ""
+
+#: project/templates/_split_shares_form.html:33
 msgid ""
 "Please note that the split will leave partial share rights unhandled. You "
 "must assign those options to the shareholders and either pay, trade or "
@@ -148,7 +154,7 @@ msgid ""
 "for each shareholder."
 msgstr ""
 
-#: project/templates/_split_shares_form.html:33
+#: project/templates/_split_shares_form.html:37
 msgid "Add Share Split"
 msgstr ""
 

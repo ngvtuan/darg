@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-24 09:36+0000\n"
+"POT-Creation-Date: 2016-07-25 11:52+0000\n"
 "PO-Revision-Date: 2016-07-23 22:18+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,12 +110,12 @@ msgstr ""
 "Die Felder {field_names} müssen gemeinsam leer sein oder gleichzeitig Werte "
 "haben."
 
-#: services/rest/views.py:175 services/rest/views.py:177
-#: services/rest/views.py:179 services/rest/views.py:181
+#: services/rest/views.py:173 services/rest/views.py:175
+#: services/rest/views.py:177 services/rest/views.py:179
 msgid "Field may not be empty."
 msgstr "Das Feld darf nicht leer sein."
 
-#: services/rest/views.py:302 services/rest/views.py:384
+#: services/rest/views.py:300 services/rest/views.py:382
 msgid "Confirmed position cannot be deleted."
 msgstr ""
 "Festgeschriebene Transaktionen können nicht gelöscht werden. Verwenden Sie "

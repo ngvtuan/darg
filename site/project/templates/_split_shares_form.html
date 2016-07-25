@@ -2,6 +2,10 @@
 
 {% trans "Please enter your share split data" %}
 {% verbatim %}
+
+<!-- split feature incomplete for number segments warning -->
+<div class="alert alert-warning" ng-show="hasSecurityWithTrackNumbers();">{% endverbatim %}{% trans "The split feature does not handle numbered shares. Please contact us for further details and advices." %}{% verbatim %}</div>
+
 <div class="split-shares-form">
   <form class="form-inline">
     <div class="form-group block-level">

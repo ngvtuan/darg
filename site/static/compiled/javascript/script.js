@@ -579,6 +579,15 @@
       $scope.newPosition = new Position();
       $scope.newSplit = new Split();
       $scope.numberSegmentsAvailable = '';
+      $scope.hasSecurityWithTrackNumbers = function() {
+        var s;
+        s = $scope.securities.find(function(el) {
+          return el.track_numbers === true;
+        });
+        if (s !== void 0) {
+          return true;
+        }
+      };
       $http.get('/services/rest/position').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
           return $scope.positions.push(item);

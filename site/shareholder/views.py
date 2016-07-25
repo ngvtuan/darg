@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 from sendfile import sendfile
 
 from shareholder.models import Shareholder, OptionPlan
-from utils.formatters import humand_readable_segments
+from utils.formatters import human_readable_segments
 
 
 @login_required
@@ -40,7 +40,7 @@ def shareholder(request, shareholder_id):
     for sec in securities:
         if sec.track_numbers:
             if shareholder.current_segments(sec):
-                sec.segments = humand_readable_segments(
+                sec.segments = human_readable_segments(
                     shareholder.current_segments(sec))
                 sec.count = shareholder.share_count(security=sec)
     context = RequestContext(request, {

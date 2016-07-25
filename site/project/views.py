@@ -22,6 +22,7 @@ from project.tasks import send_initial_password_mail
 from services.instapage import InstapageSubmission as Instapage
 from shareholder.models import Company, Operator
 from utils.pdf import render_to_pdf
+from utils.formatters import human_readable_segments
 
 
 def index(request):
@@ -102,19 +103,28 @@ def captable_csv(request, company_id):
         return HttpResponseForbidden()
 
     company = get_object_or_404(Company, id=company_id)
+    track_numbers_secs = company.security_set.filter(track_numbers=True)
 
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = u'attachment; filename='
-    u'"{}_captable_{}.csv"'.format(
-        time.strftime("%Y-%m-%d"), slugify(company.name))
+    response['Content-Disposition'] = (
+        u'attachment; '
+        u'filename="{}_captable_{}.csv"'.format(
+            time.strftime("%Y-%m-%d"), slugify(company.name)
+        ))
 
     writer = csv.writer(response)
-    writer.writerow([
+
+    header = [
         _(u'shareholder number'), _(u'last name'), _(u'first name'),
         _(u'email'), _(u'share count'), _(u'votes share percent'),
-        _(u'language ISO'), _('language full')
-    ])
+        _(u'language ISO'), _('language full')]
+
+    if track_numbers_secs.exists():
+        header.append(_('Share IDs'))
+
+    writer.writerow(header)
+
     for shareholder in company.get_active_shareholders():
         row = [
             shareholder.number,
@@ -124,8 +134,17 @@ def captable_csv(request, company_id):
             shareholder.share_count(),
             shareholder.share_percent() or '--',
             shareholder.user.userprofile.language,
-            shareholder.user.userprofile.get_language_display()
+            shareholder.user.userprofile.get_language_display(),
         ]
+        if track_numbers_secs.exists():
+            text = ""
+            for sec in track_numbers_secs:
+                text += "{}: {} ".format(
+                    sec.get_title_display(),
+                    human_readable_segments(shareholder.current_segments(sec) or
+                                            _('None'))
+                )
+            row.append(text)
         writer.writerow([unicode(s).encode("utf-8") for s in row])
 
     return response
@@ -157,8 +176,10 @@ def captable_pdf(request, company_id):
     # Create the HttpResponse object with the appropriate PDF header.
     # if not DEBUG
     if not settings.DEBUG:
-        response['Content-Disposition'] = 'attachment; filename="'
-        '{}_captable_{}.pdf"'.format(
-            time.strftime("%Y-%m-%d"), company.name)
+        response['Content-Disposition'] = (
+            'attachment; filename="'
+            '{}_captable_{}.pdf"'.format(
+                time.strftime("%Y-%m-%d"), company.name)
+        )
 
     return response

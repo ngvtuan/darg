@@ -7,7 +7,7 @@ import re
 logger = logging.getLogger(__name__)
 
 
-def humand_readable_segments(segments):
+def human_readable_segments(segments):
     return u','.join([str(s) for s in segments])
 
 

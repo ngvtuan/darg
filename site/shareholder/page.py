@@ -264,7 +264,7 @@ class PositionPage(BasePage):
         select = Select(selects[1])
         select.select_by_visible_text(name)
 
-        self.enter_Security(position.security)
+        self.enter_security(position.security)
         self.enter_bought_at(position.date)
 
         # count

@@ -70,7 +70,7 @@ class ShareholderDetailFunctionalTestCase(BaseSeleniumTestCase):
             p.save_edit("birthday")
 
             today = datetime.datetime.now().date()
-            birthday = datetime.date(today.year, today.month, 1)
+            birthday = datetime.date(today.year, today.month, today.day)
             time.sleep(1)
             self.assertEqual(
                 p.get_birthday(),

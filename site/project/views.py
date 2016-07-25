@@ -166,10 +166,12 @@ def captable_pdf(request, company_id):
         {
             'pagesize': 'A4',
             'company': company,
-            'today': datetime.datetime.now().date,
-            'total_capital': company.get_total_capital,
+            'today': datetime.datetime.now().date(),
+            'total_capital': company.get_total_capital(),
             'currency': 'CHF',
             'provisioned_capital': company.get_provisioned_capital(),
+            'securities_with_track_numbers': company.security_set.filter(
+                track_numbers=True)
         }
     )
 

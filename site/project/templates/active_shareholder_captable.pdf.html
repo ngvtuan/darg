@@ -29,6 +29,10 @@
         font-size: 11pt;
     }
 
+    td, th {
+      margin-right: 10px
+    }
+
     .company-info {
         background-color: #f7f7f7;
         padding: 1em 1em 0em 1em;
@@ -42,8 +46,8 @@
         font-align: right;
     }
 
-    #footer_content {
-        font-size: 8pt
+    div#footer_content {
+        font-size: 8pt;
     }
 </style>
 {% endblock %}
@@ -89,7 +93,11 @@
           <th align="left">{% trans "Email" %}</th>
           <th align="right">{% trans "Shareholder Number" %}</th>
           <th align="right">{% trans "Shares (%)" %}</th>
-        </tr>
+          {% if securities_with_track_numbers.exists %}
+          <th align="left">
+            {% trans "Aktiennummern" %}
+          </th>
+          {% endif %}
       </thead>
     </table>
 
@@ -106,8 +114,13 @@
           {{ shareholder.number }}
         </td>
         <td align="right">
-          {{ shareholder.share_count|intcomma }} ({{shareholder.share_percent }})
+          {{ shareholder.share_count|intcomma }} {% if shareholder.share_percent %}({{shareholder.share_percent }}){% endif %}
         </td>
+        {% if securities_with_track_numbers.exists %}
+        <td align="">
+          {{ shareholder.get_number_segments_display }}
+        </td>
+        {% endif %}
       </tr>
     </table>
     {% endfor %}

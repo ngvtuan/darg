@@ -320,7 +320,7 @@ class DownloadTestCase(TestCase):
         # assert response code
         self.assertEqual(response.status_code, 403)
 
-    def test_pdf_download_(self):
+    def test_pdf_download(self):
         """ test download of captable pdf """
         company = CompanyGenerator().generate()
         # run test
@@ -335,6 +335,28 @@ class DownloadTestCase(TestCase):
         is_loggedin = self.client.login(username=user.username, password='test')
         self.assertTrue(is_loggedin)
         response = self.client.get(reverse('captable_pdf', kwargs={"company_id": company.id}))
+
+        # assert response code
+        self.assertEqual(response.status_code, 200)
+        # assert proper csv
+        self.assertTrue(response.content.startswith('%PDF-1.4\r\n'))
+        self.assertTrue(response.content.endswith('EOF\r\n'))
+
+    def test_pdf_download_with_number_segments(self):
+        """ test download of captable pdf """
+        company = CompanyGenerator().generate()
+        secs = TwoInitialSecuritiesGenerator().generate(company=company)
+        security = secs[1]
+        security.track_numbers = True
+        security.save()
+
+        # login and retest
+        user = UserGenerator().generate()
+        OperatorGenerator().generate(user=user, company=company)
+        is_loggedin = self.client.login(username=user.username, password='test')
+        self.assertTrue(is_loggedin)
+        response = self.client.get(reverse('captable_pdf',
+                                           kwargs={"company_id": company.id}))
 
         # assert response code
         self.assertEqual(response.status_code, 200)

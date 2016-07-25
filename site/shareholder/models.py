@@ -18,8 +18,8 @@ from django_languages import fields as language_fields
 from rest_framework.authtoken.models import Token
 from sorl.thumbnail import get_thumbnail
 
-from utils.formatters import (deflate_segments, inflate_segments,
-                              string_list_to_json)
+from utils.formatters import (deflate_segments, human_readable_segments,
+                              inflate_segments, string_list_to_json)
 
 logger = logging.getLogger(__name__)
 
@@ -294,6 +294,18 @@ class Shareholder(models.Model):
 
     def __str__(self):
         return u'{}'.format(self.id)
+
+    def get_number_segments_display(self):
+        """
+        returns string for date=today and all securities showing number segments
+        """
+        text = ""
+        for security in self.company.security_set.filter(track_numbers=True):
+            text += "{}: {} ".format(
+                security.get_title_display(),
+                human_readable_segments(self.current_segments(security))
+            )
+        return text
 
     def share_percent(self, date=None):
         """

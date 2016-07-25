@@ -265,7 +265,7 @@ class PositionPage(BasePage):
         select.select_by_visible_text(name)
 
         self.enter_security(position.security)
-        self.enter_bought_at(position.date)
+        self.enter_bought_at(position.bought_at)
 
         # count
         if position.count:

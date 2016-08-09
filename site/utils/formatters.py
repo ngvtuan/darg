@@ -49,7 +49,7 @@ def inflate_segments(segments):
     * no duplicates
     """
     def to_list(segment):
-        if isinstance(segment, unicode):
+        if isinstance(segment, unicode) and '-' in segment:
             start, end = segment.split('-')
             return range(int(start), int(end)+1)
 

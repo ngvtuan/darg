@@ -307,6 +307,12 @@ class Shareholder(models.Model):
             )
         return text
 
+    def is_company_shareholder(self):
+        """
+        returns bool if shareholder is ocmpany shareholder
+        """
+        return Shareholder.objects.earliest('id') == self.id
+
     def share_percent(self, date=None):
         """
         returns percentage of shares in the understanding of voting rights.
@@ -481,7 +487,7 @@ class Shareholder(models.Model):
 
     def owns_segments(self, segments, security):
         """
-        check if shareholder owns all those segments
+        check if shareholder owns all those segments either as share
         """
         if isinstance(segments, str):
             segments = string_list_to_json(segments)
@@ -490,11 +496,30 @@ class Shareholder(models.Model):
             security=security))
         failed_segments = []
         for segment in inflate_segments(segments):
+
+            # shareholder does not own this
             if segment not in segments_owning:
                 failed_segments.append(segment)
 
-        # exclude segments assigned to option plans
-        logger.warning('segment owning check does not check option plans')
+        return (len(failed_segments) == 0,
+                deflate_segments(failed_segments),
+                deflate_segments(segments_owning))
+
+    def owns_options_segments(self, segments, security):
+        """
+        check if shareholder owns all those segments either as share
+        """
+        if isinstance(segments, str):
+            segments = string_list_to_json(segments)
+
+        segments_owning = inflate_segments(self.current_options_segments(
+            security=security))
+        failed_segments = []
+        for segment in inflate_segments(segments):
+
+            # shareholder does not own this
+            if segment not in segments_owning:
+                failed_segments.append(segment)
 
         return (len(failed_segments) == 0,
                 deflate_segments(failed_segments),
@@ -502,7 +527,55 @@ class Shareholder(models.Model):
 
     def current_segments(self, security, date=None):
         """
-        returns qs of position objects which are owned by this shareholder
+        returns deflated segments which are owned by this shareholder.
+        includes segments blocked for options.
+        """
+        date = date or datetime.datetime.now()
+
+        # all pos before date
+        qs_bought = self.option_buyer.filter(bought_at__lte=date)
+        qs_sold = self.option_seller.filter(bought_at__lte=date)
+
+        qs_bought = qs_bought.filter(security=security)
+        qs_sold = qs_sold.filter(security=security)
+
+        # -- flat list of bought items
+        segments_bought = qs_bought.values_list(
+            'number_segments', flat=True)
+        # flatten, unsorted with duplicates
+        segments_bought = [
+            segment for sublist in segments_bought for segment in sublist]
+
+        # flat list of sold segments
+        segments_sold = qs_sold.values_list(
+            'number_segments', flat=True)
+        segments_sold = [
+            segment for sublist in segments_sold for segment in sublist]
+
+        segments_owning = []
+
+        # inflate to have int only
+        segments_bought = inflate_segments(segments_bought)
+        segments_sold = inflate_segments(segments_sold)
+        for segment in segments_bought:
+            # count times bought
+            buy_count = segments_bought.count(segment)
+            # count times sold
+            sell_count = segments_sold.count(segment)
+            # validate that count is either 0 or 1 (sold/bought)
+            delta = buy_count - sell_count
+            if delta == 1:
+                segments_owning.append(segment)
+            elif delta > 1 or delta < 0:
+                logger.error('segment {} was bought or sold {} times.'.format(
+                    segment, delta))
+
+        return deflate_segments(segments_owning)
+
+    def current_options_segments(self, security, date=None):
+        """
+        returns deflated segments which are owned by this shareholder.
+        includes segments blocked for options.
         """
         date = date or datetime.datetime.now()
 
@@ -564,8 +637,8 @@ class Operator(models.Model):
 
 class Security(models.Model):
     SECURITY_TITLES = (
-        ('P', 'Preferred Stock'),
-        ('C', 'Common Stock'),
+        ('P', _('Preferred Stock')),
+        ('C', _('Common Stock')),
         # ('O', 'Option'),
         # ('W', 'Warrant'),
         # ('V', 'Convertible Instrument'),

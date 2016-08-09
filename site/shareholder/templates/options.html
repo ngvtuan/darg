@@ -40,7 +40,12 @@
         <tr>
           <th>{% trans "Grant Date" %}</th>
           <th>{% trans "Receipient" %}</th>
-          <th class="text-right">{% trans "Share Count" %}</th>
+          <th class="text-right">
+            {% trans "Share Count" %}<br/>
+            {% verbatim %}<span class="note" ng-show="option_plan.security.track_numbers">{% endverbatim %}
+            ({% trans "Number Segments" %})
+            </span>
+          </th>
           <th class="text-right">{% trans "Exercise Price" %}</th>
           <th>{% trans "Issuer" %}</th>
           <th></th>
@@ -57,7 +62,12 @@
           </div>
         </td>
         <td>{{ option_transaction.buyer.user.first_name }} {{ option_transaction.buyer.user.last_name }}</td>
-        <td class="text-right">{{ option_transaction.count }}</td>
+        <td class="text-right">
+          {{ option_transaction.count }}
+          <span class="note" ng-show="option_plan.security.track_numbers && option_transaction.readable_number_segments">
+            (#{{ option_transaction.readable_number_segments }})
+          </span>
+        </td>
         <td class="text-right">{{ option_plan.exercise_price }}</td>
         <td>{{ option_transaction.seller.user.first_name }} {{ option_transaction.seller.user.last_name }}</td>
         <td>

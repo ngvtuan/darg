@@ -352,7 +352,7 @@
   ]);
 
   app.controller('OptionsController', [
-    '$scope', '$http', 'OptionPlan', 'OptionTransaction', function($scope, $http, OptionPlan, OptionTransaction) {
+    '$scope', '$http', '$filter', 'OptionPlan', 'OptionTransaction', function($scope, $http, $filter, OptionPlan, OptionTransaction) {
       $scope.option_plans = [];
       $scope.securities = [];
       $scope.shareholders = [];
@@ -363,6 +363,16 @@
       $scope.newOptionPlan.board_approved_at = new Date();
       $scope.newOptionTransaction = new OptionTransaction();
       $scope.newOptionTransaction.bought_at = new Date();
+      $scope.numberSegmentsAvailable = '';
+      $scope.hasSecurityWithTrackNumbers = function() {
+        var s;
+        s = $scope.securities.find(function(el) {
+          return el.track_numbers === true;
+        });
+        if (s !== void 0) {
+          return true;
+        }
+      };
       $http.get('/services/rest/optionplan').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
           return $scope.option_plans.push(item);
@@ -404,6 +414,7 @@
         });
       };
       $scope.add_option_transaction = function() {
+        $scope.newOptionTransaction.option_plan = $scope.newOptionTransaction.option_plan.url;
         return $scope.newOptionTransaction.$save().then(function(result) {
           return $scope._reload_option_plans();
         }).then(function() {
@@ -454,6 +465,44 @@
         $scope.show_add_option_transaction = false;
         $scope.newOptionPlan = new OptionPlan();
         return $scope.newOptionTransaction = new OptionTransaction();
+      };
+      $scope.show_available_number_segments_for_new_option_plan = function() {
+        var company_shareholder_id, url;
+        if ($scope.newOptionPlan.security) {
+          if ($scope.newOptionPlan.security.track_numbers) {
+            company_shareholder_id = $filter('filter')($scope.shareholders, {
+              is_company: true
+            }, true)[0].pk;
+            url = '/services/rest/shareholders/' + company_shareholder_id.toString() + '/number_segments';
+            if ($scope.newOptionPlan.board_approved_at) {
+              url = url + '?date=' + $scope.newOptionPlan.board_approved_at.toISOString();
+            }
+            return $http.get(url).then(function(result) {
+              if ($scope.newOptionPlan.security.pk in result.data && result.data[$scope.newOptionPlan.security.pk].length > 0) {
+                return $scope.numberSegmentsAvailable = gettext('Available security segments for option plan on selected date or now: ') + result.data[$scope.newOptionPlan.security.pk];
+              } else {
+                return $scope.numberSegmentsAvailable = gettext('Available security segments for option plan on selected date or now: None');
+              }
+            });
+          } else {
+            return $scope.numberSegmentsAvailable = '';
+          }
+        }
+      };
+      $scope.show_available_number_segments_for_new_option_transaction = function() {
+        var pk, url;
+        pk = $scope.newOptionTransaction.option_plan.pk.toString();
+        url = '/services/rest/optionplan/' + pk + '/number_segments';
+        if ($scope.newOptionTransaction.bought_at) {
+          url = url + '?date=' + $scope.newOptionTransaction.bought_at.toISOString();
+        }
+        return $http.get(url).then(function(result) {
+          if ($scope.newOptionTransaction.option_plan.security.pk in result.data && result.data[$scope.newOptionTransaction.option_plan.security.pk].length > 0) {
+            return $scope.numberSegmentsAvailable = gettext('Available security segments for option plan on selected date or now: ') + result.data[$scope.newOptionTransaction.option_plan.security.pk];
+          } else {
+            return $scope.numberSegmentsAvailable = gettext('Available security segments for option plan on selected date or now: None');
+          }
+        });
       };
       $scope.datepicker = {
         opened: false

@@ -12,7 +12,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 
 from project.page import BasePage
-from shareholder.generators import DEFAULT_TEST_DATA
+from project.generators import DEFAULT_TEST_DATA
 
 
 class ShareholderDetailPage(BasePage):

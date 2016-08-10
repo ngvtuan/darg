@@ -17,7 +17,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 # from locators import MainPageLocators (save all setter/getter here)
 
 # from selenium.webdriver.support.ui import Select
-# from shareholder.generators import DEFAULT_TEST_DATA
+# from project.generators import DEFAULT_TEST_DATA
 
 
 class BasePage(object):

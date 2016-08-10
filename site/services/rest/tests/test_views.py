@@ -9,7 +9,7 @@ from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
 from services.rest.serializers import SecuritySerializer
-from shareholder.generators import (CompanyGenerator,
+from project.generators import (CompanyGenerator,
                                     ComplexPositionsWithSegmentsGenerator,
                                     OperatorGenerator,
                                     OptionTransactionGenerator,

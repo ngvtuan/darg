@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.test import RequestFactory, TestCase
 
 from services.rest.serializers import PositionSerializer
-from shareholder.generators import (OperatorGenerator, PositionGenerator,
+from project.generators import (OperatorGenerator, PositionGenerator,
                                     TwoInitialSecuritiesGenerator)
 from utils.formatters import human_readable_segments
 

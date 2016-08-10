@@ -11,6 +11,14 @@ def human_readable_segments(segments):
     return u','.join([str(s) for s in segments])
 
 
+def flatten_list(nested_list):
+    """
+    flattens a list from [[a,b]. [c,d]] to [a,b,c,d]
+    from http://stackoverflow.com/questions/952914/making-a-flat-list-out-of-list-of-lists-in-python
+    """
+    return [item for sublist in nested_list for item in sublist]
+
+
 def string_list_to_json(string):
     """
     takes string and converts into list: "1,2,3,4-10"
@@ -49,7 +57,7 @@ def inflate_segments(segments):
     * no duplicates
     """
     def to_list(segment):
-        if isinstance(segment, unicode):
+        if isinstance(segment, unicode) and '-' in segment:
             start, end = segment.split('-')
             return range(int(start), int(end)+1)
 

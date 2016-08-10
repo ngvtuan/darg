@@ -1,11 +1,16 @@
 from django.test import TestCase
 
 from utils.formatters import (deflate_segments, inflate_segments,
-                              string_list_to_json)
+                              string_list_to_json, flatten_list)
 from utils.user import make_username
 
 
 class UtilsTestCase(TestCase):
+
+    def test_flatten_list(self):
+
+        l = [[1, 2], [3, 4, 5], [6, 7, 8, 9, 10]]
+        self.assertEqual(flatten_list(l), range(1, 11))
 
     def test_make_username(self):
 
@@ -46,7 +51,8 @@ class UtilsTestCase(TestCase):
         self.assertEqual(string_list_to_json('1,2,3,4-10'), [u'1-10'])
         self.assertEqual(string_list_to_json('1,2,3,,4-10'), [u'1-10'])
         # test removal of duplicates and that is ordered
-        self.assertEqual(string_list_to_json('0, 3,,, 3, 5-10, 9-12, 2'), [0, u'2-3', u'5-12'])
+        self.assertEqual(string_list_to_json('0, 3,,, 3, 5-10, 9-12, 2'),
+                         [0, u'2-3', u'5-12'])
 
     def test_inflate_segments(self):
         segments = [1, 2, 3, 4, u'9-14', 18]

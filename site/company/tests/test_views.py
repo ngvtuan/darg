@@ -5,7 +5,7 @@ from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.utils.translation import gettext as _
 
-from shareholder.generators import (
+from project.generators import (
     CompanyGenerator, SecurityGenerator,
     OperatorGenerator, DEFAULT_TEST_DATA)
 

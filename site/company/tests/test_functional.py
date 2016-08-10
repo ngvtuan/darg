@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 
 from company import page
 from project.base import BaseSeleniumTestCase
-from shareholder.generators import (OperatorGenerator, PositionGenerator,
+from project.generators import (OperatorGenerator, PositionGenerator,
                                     ShareholderGenerator,
                                     TwoInitialSecuritiesGenerator,
                                     UserGenerator)

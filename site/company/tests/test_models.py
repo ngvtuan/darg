@@ -5,7 +5,7 @@ import datetime
 
 from django.test import TestCase
 
-from shareholder.generators import (
+from project.generators import (
     CompanyGenerator, ShareholderGenerator, PositionGenerator,
     SecurityGenerator)
 

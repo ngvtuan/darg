@@ -246,6 +246,9 @@ class OptionPlanGenerator(object):
             count=3
         )
 
+        if kwargs.get('number_segments'):
+            kwargs2.update({'number_segments': kwargs.get('number_segments')})
+
         return OptionPlan.objects.create(**kwargs2)
 
 
@@ -276,6 +279,9 @@ class OptionTransactionGenerator(object):
         }
         if seller:
             kwargs2.update({"seller": seller})
+
+        if kwargs.get('number_segments'):
+            kwargs2.update({'number_segments': kwargs.get('number_segments')})
 
         position = OptionTransaction.objects.create(**kwargs2)
 
@@ -371,6 +377,62 @@ class ComplexPositionsWithSegmentsGenerator(object):
             p = PositionGenerator().generate(
                 company=company, security=s1, buyer=buyer,
                 seller=seller, number_segments=segments)
+            return p
+
+        positions.append(buy_segment([u'1000-1050'], s, cs))
+        positions.append(buy_segment([1050], cs, s))
+        positions.append(buy_segment([u'1050-1100'], s, cs))
+        positions.append(buy_segment([u'1101-1200', 1666], s, cs))
+        positions.append(buy_segment([1050], cs, s))
+        positions.append(buy_segment([1050], s, cs))
+
+        return positions, shareholders
+
+
+class ComplexOptionTransactionsWithSegmentsGenerator(object):
+
+    def generate(self, *args, **kwargs):
+        """
+        goal is to simulate for segmented shares the history of sales and buys
+        of the same stocks
+        """
+        company = kwargs.get('company') or CompanyGenerator().generate()
+
+        OperatorGenerator().generate(company=company)
+
+        # intial securities
+        s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
+        s1.track_numbers = True
+        s1.number_segments = [u'0001-2000']
+        s1.save()
+        s2.track_numbers = True
+        s2.number_segments = [u'2000-3000']
+        s2.save()
+
+        # initial company shareholder
+        company_shareholder_created_at = kwargs.get(
+            'company_shareholder_created_at'
+        ) or datetime.datetime.now()
+        cs = CompanyShareholderGenerator().generate(
+            company=company, security=s1,
+            company_shareholder_created_at=company_shareholder_created_at)
+        s = ShareholderGenerator().generate(company=company)
+        optionplan = OptionPlanGenerator().generate(
+            company=company, number_segments=[u'1000-2000'], security=s1)
+        # initial option grant to CompanyShareholder
+        OptionTransactionGenerator().generate(
+            company=company, security=s1, buyer=cs,
+            number_segments=[u'1000-2000'], option_plan=optionplan)
+
+        shareholders = [cs, s]
+        positions = []
+
+        # random shareholder generation
+        def buy_segment(segments, buyer, seller):
+            p = OptionTransactionGenerator().generate(
+                company=company, security=s1, buyer=buyer,
+                seller=seller, number_segments=segments,
+                option_plan=optionplan)
             return p
 
         positions.append(buy_segment([u'1000-1050'], s, cs))

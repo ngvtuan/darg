@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-24 09:36+0000\n"
-"PO-Revision-Date: 2016-07-24 09:38+0000\n"
+"POT-Creation-Date: 2016-08-10 10:16+0000\n"
+"PO-Revision-Date: 2016-08-10 10:18+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -179,12 +179,38 @@ msgstr "Ungültige Aktiennummern. Format: 1,2,3,4-7"
 msgid "number_segments"
 msgstr "Aktiennummern"
 
-#: static/compiled/javascript/script.js:698
+#: static/compiled/javascript/script.js:482
+#: static/compiled/javascript/script.js:503
+#| msgid ""
+#| "Available security segments from this shareholder on selected date or now: "
+msgid "Available security segments for option plan on selected date or now: "
+msgstr ""
+"Verfügbare Aktiennummern für Optionen vom Verkäufer zum ausgewählten Datum "
+"oder heute: "
+
+#: static/compiled/javascript/script.js:484
+#| msgid ""
+#| "Available security segments from this shareholder on selected date or now: "
+#| "None"
+msgid ""
+"Available security segments for option plan on selected date or now: None"
+msgstr "Aktionär hält aktuell keine Optionen."
+
+#: static/compiled/javascript/script.js:505
+#| msgid ""
+#| "Available security segments from this shareholder on selected date or now: "
+msgid ""
+"No security segments available for option plan on selected date or now."
+msgstr ""
+"Es sind aktuell keine Aktiennummern für den Optionsplan am ausgewählten "
+"Datum verfügbar."
+
+#: static/compiled/javascript/script.js:759
 msgid ""
 "Available security segments from this shareholder on selected date or now: "
 msgstr "Verfügbare Aktiennummern vom Verkäufer zum ausgewählten Datum: "
 
-#: static/compiled/javascript/script.js:700
+#: static/compiled/javascript/script.js:761
 msgid ""
 "Available security segments from this shareholder on selected date or now: "
 "None"

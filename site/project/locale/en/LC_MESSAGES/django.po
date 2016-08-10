@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-25 11:52+0000\n"
+"POT-Creation-Date: 2016-08-10 10:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,23 +25,28 @@ msgstr ""
 msgid "Please enter your capital increase data"
 msgstr ""
 
-#: project/templates/_add_capital_form.html:26
+#: project/templates/_add_capital_form.html:8
+#: project/templates/_add_position_form.html:9
+msgid "On (date)"
+msgstr ""
+
+#: project/templates/_add_capital_form.html:27
 #: project/templates/_add_option_plan_form.html:26
 #: project/templates/_add_position_form.html:38
 #: project/templates/_split_shares_form.html:30
 msgid "Security"
 msgstr ""
 
-#: project/templates/_add_capital_form.html:31
-#: project/templates/_add_option_plan_form.html:33
-#: project/templates/_add_option_transaction_form.html:37
+#: project/templates/_add_capital_form.html:33
+#: project/templates/_add_option_plan_form.html:34
+#: project/templates/_add_option_transaction_form.html:38
 #: project/templates/_add_position_form.html:46
 #: project/templates/_add_shareholder_form.html:15
 #: project/templates/_split_shares_form.html:36
 msgid "Cancel"
 msgstr ""
 
-#: project/templates/_add_capital_form.html:32
+#: project/templates/_add_capital_form.html:34
 #: project/templates/_add_position_form.html:47
 msgid "Add Position"
 msgstr ""
@@ -76,11 +81,11 @@ msgstr ""
 msgid "Board Approval Date"
 msgstr ""
 
-#: project/templates/_add_option_plan_form.html:34
+#: project/templates/_add_option_plan_form.html:35
 msgid "Add Option-Plan"
 msgstr ""
 
-#: project/templates/_add_option_plan_form.html:37
+#: project/templates/_add_option_plan_form.html:38
 msgid "Approved Option Plan PDF can be uploaded later in Plan's Edit Form"
 msgstr ""
 
@@ -106,16 +111,12 @@ msgstr ""
 msgid "Seller"
 msgstr ""
 
-#: project/templates/_add_option_transaction_form.html:38
+#: project/templates/_add_option_transaction_form.html:39
 msgid "Add Option"
 msgstr ""
 
 #: project/templates/_add_position_form.html:3
 msgid "Please enter your position data:"
-msgstr ""
-
-#: project/templates/_add_position_form.html:9
-msgid "On (date)"
 msgstr ""
 
 #: project/templates/_add_position_form.html:27
@@ -158,68 +159,72 @@ msgstr ""
 msgid "Add Share Split"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:56
+#: project/templates/active_shareholder_captable.pdf.html:60
 #: project/templates/start.html:25
 msgid "Your Shareholders for"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:70
+#: project/templates/active_shareholder_captable.pdf.html:74
 #: project/templates/index.html:14
 msgid "Das Aktienregister"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:70
+#: project/templates/active_shareholder_captable.pdf.html:74
 msgid "Page"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:71
+#: project/templates/active_shareholder_captable.pdf.html:75
 msgid "of"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:72
+#: project/templates/active_shareholder_captable.pdf.html:76
 msgid "Date generated"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:77
+#: project/templates/active_shareholder_captable.pdf.html:81
 msgid "Total company capital"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:79
+#: project/templates/active_shareholder_captable.pdf.html:83
 msgid "Provisioned Capital"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:82
+#: project/templates/active_shareholder_captable.pdf.html:86
 msgid "Founding Date"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:88
-#: project/templates/active_shareholder_captable.pdf.html:122
+#: project/templates/active_shareholder_captable.pdf.html:92
+#: project/templates/active_shareholder_captable.pdf.html:135
 #: project/templates/start.html:55
 msgid "Name"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:89
-#: project/templates/active_shareholder_captable.pdf.html:123
+#: project/templates/active_shareholder_captable.pdf.html:93
+#: project/templates/active_shareholder_captable.pdf.html:136
 #: project/templates/start.html:56
 msgid "Email"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:90
-#: project/templates/active_shareholder_captable.pdf.html:124
+#: project/templates/active_shareholder_captable.pdf.html:94
+#: project/templates/active_shareholder_captable.pdf.html:137
 #: project/templates/start.html:57
 msgid "Shareholder Number"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:91
+#: project/templates/active_shareholder_captable.pdf.html:95
 #, python-format
 msgid "Shares (%%)"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:117
+#: project/templates/active_shareholder_captable.pdf.html:98
+msgid "Aktiennummern"
+msgstr ""
+
+#: project/templates/active_shareholder_captable.pdf.html:130
 msgid "Options"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:125
+#: project/templates/active_shareholder_captable.pdf.html:138
 #, python-format
 msgid "Optionen (%%)"
 msgstr ""
@@ -386,34 +391,42 @@ msgstr ""
 msgid "CSV"
 msgstr ""
 
-#: project/views.py:114
+#: project/views.py:119
 msgid "shareholder number"
 msgstr ""
 
-#: project/views.py:114
+#: project/views.py:119
 msgid "last name"
 msgstr ""
 
-#: project/views.py:114
+#: project/views.py:119
 msgid "first name"
 msgstr ""
 
-#: project/views.py:115
+#: project/views.py:120
 msgid "email"
 msgstr ""
 
-#: project/views.py:115
+#: project/views.py:120
 msgid "share count"
 msgstr ""
 
-#: project/views.py:115
+#: project/views.py:120
 msgid "votes share percent"
 msgstr ""
 
-#: project/views.py:116
+#: project/views.py:121
 msgid "language ISO"
 msgstr ""
 
-#: project/views.py:116
+#: project/views.py:121
 msgid "language full"
+msgstr ""
+
+#: project/views.py:124
+msgid "Share IDs"
+msgstr ""
+
+#: project/views.py:145
+msgid "None"
 msgstr ""

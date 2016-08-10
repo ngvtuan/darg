@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-25 11:52+0000\n"
+"POT-Creation-Date: 2016-08-10 10:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: shareholder/models.py:50
+#: shareholder/models.py:51
 msgid "Headquarter location"
 msgstr ""
 
-#: shareholder/models.py:52
+#: shareholder/models.py:53
 msgid "Foundation date of the company"
 msgstr ""
 
-#: shareholder/models.py:69
+#: shareholder/models.py:70
 msgid "Your list of partials for the share split for company '{}'"
 msgstr ""
 
-#: shareholder/models.py:72
+#: shareholder/models.py:73
 msgid ""
 "Dear Operator,\n"
 "\n"
@@ -38,15 +38,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#: shareholder/models.py:80
+#: shareholder/models.py:81
 msgid "{}{}({}): {} shares\n"
 msgstr ""
 
-#: shareholder/models.py:87
+#: shareholder/models.py:88
 msgid "--- No partial shares during split --- \n"
 msgstr ""
 
-#: shareholder/models.py:90
+#: shareholder/models.py:91
 msgid ""
 "\n"
 "These shareholders are eligible to either sell their partial shares or get "
@@ -57,56 +57,66 @@ msgid ""
 "Your Share Register Team"
 msgstr ""
 
-#: shareholder/models.py:213
+#: shareholder/models.py:223
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
 msgstr ""
 
-#: shareholder/models.py:233
+#: shareholder/models.py:243
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr ""
 
-#: shareholder/models.py:389
+#: shareholder/models.py:418
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:396
+#: shareholder/models.py:425
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:400
+#: shareholder/models.py:429
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:404
+#: shareholder/models.py:433
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:413
+#: shareholder/models.py:442
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:563
+#: shareholder/models.py:655
+msgid "Preferred Stock"
+msgstr ""
+
+#: shareholder/models.py:656
+msgid "Common Stock"
+msgstr ""
+
+#: shareholder/models.py:663
 msgid "Nominal value of this asset"
 msgstr ""
 
-#: shareholder/models.py:569 shareholder/models.py:619
-#: shareholder/models.py:658 shareholder/models.py:706
+#: shareholder/models.py:669 shareholder/models.py:720
+#: shareholder/models.py:759 shareholder/models.py:807
 msgid "JSON list of segments of ids for securities. can be 1, 2, 3, 4-10"
 msgstr ""
 
-#: shareholder/models.py:574
-msgid "App needs to track IDs of shares"
+#: shareholder/models.py:674
+msgid ""
+"App needs to track IDs of shares. WARNING: update initial transaction with "
+"segments on enabling."
 msgstr ""
 
-#: shareholder/models.py:609
+#: shareholder/models.py:710
 msgid "Share Count transfered or created"
 msgstr ""
 
-#: shareholder/models.py:613
+#: shareholder/models.py:714
 msgid "Nominal value or payed price for the transaction"
 msgstr ""
 
-#: shareholder/models.py:652
+#: shareholder/models.py:753
 msgid "Number of shares approved"
 msgstr ""
 
@@ -138,36 +148,40 @@ msgstr ""
 msgid "Receipient"
 msgstr ""
 
-#: shareholder/templates/options.html:43
+#: shareholder/templates/options.html:44
 #: shareholder/templates/positions.html:39
 msgid "Share Count"
 msgstr ""
 
-#: shareholder/templates/options.html:44
-#: shareholder/templates/optionsplan.html:28
+#: shareholder/templates/options.html:46
+msgid "Number Segments"
+msgstr ""
+
+#: shareholder/templates/options.html:49
+#: shareholder/templates/optionsplan.html:26
 msgid "Exercise Price"
 msgstr ""
 
-#: shareholder/templates/options.html:45
+#: shareholder/templates/options.html:50
 msgid "Issuer"
 msgstr ""
 
-#: shareholder/templates/options.html:55
+#: shareholder/templates/options.html:60
 #: shareholder/templates/positions.html:65
 msgid "Draft"
 msgstr ""
 
-#: shareholder/templates/options.html:66
-#: shareholder/templates/positions.html:78
+#: shareholder/templates/options.html:76
+#: shareholder/templates/positions.html:83
 msgid "delete"
 msgstr ""
 
-#: shareholder/templates/options.html:71
-#: shareholder/templates/positions.html:83
+#: shareholder/templates/options.html:81
+#: shareholder/templates/positions.html:88
 msgid "confirm"
 msgstr ""
 
-#: shareholder/templates/options.html:81
+#: shareholder/templates/options.html:91
 msgid "No options yet."
 msgstr ""
 
@@ -183,24 +197,28 @@ msgstr ""
 msgid "Board approval date"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:32
+#: shareholder/templates/optionsplan.html:30
 msgid "Share count"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:36
+#: shareholder/templates/optionsplan.html:34
 #: shareholder/templates/positions.html:42
 msgid "Comment"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:40
+#: shareholder/templates/optionsplan.html:38
 msgid "Security Type"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:53
+#: shareholder/templates/optionsplan.html:46
+msgid "Reserved security numbers:"
+msgstr ""
+
+#: shareholder/templates/optionsplan.html:55
 msgid "PDF of approved option plan"
 msgstr ""
 
-#: shareholder/templates/optionsplan.html:70
+#: shareholder/templates/optionsplan.html:72
 msgid "Upload success"
 msgstr ""
 
@@ -258,11 +276,11 @@ msgstr ""
 msgid "Hide"
 msgstr ""
 
-#: shareholder/templates/positions.html:90
+#: shareholder/templates/positions.html:95
 msgid "--- End of split transactions ---"
 msgstr ""
 
-#: shareholder/templates/positions.html:98
+#: shareholder/templates/positions.html:103
 msgid "No Postions yet."
 msgstr ""
 
@@ -359,6 +377,6 @@ msgstr ""
 msgid "Delete shareholder"
 msgstr ""
 
-#: shareholder/views.py:66 shareholder/views.py:75
+#: shareholder/views.py:68 shareholder/views.py:77
 msgid "Permission denied"
 msgstr ""

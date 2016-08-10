@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-25 11:52+0000\n"
+"POT-Creation-Date: 2016-08-10 10:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,20 +69,41 @@ msgstr ""
 msgid "Shareholder Number must be unique"
 msgstr ""
 
-#: services/rest/serializers.py:420
+#: services/rest/serializers.py:422 services/rest/serializers.py:554
 msgid "Invalid security numbers segments."
 msgstr ""
 
-#: services/rest/serializers.py:426
+#: services/rest/serializers.py:428 services/rest/serializers.py:560
 msgid "Segments \"{}\" must be owned by seller \"{}\". Available are {}"
 msgstr ""
 
-#: services/rest/serializers.py:437
+#: services/rest/serializers.py:440 services/rest/serializers.py:572
+#: services/rest/serializers.py:748
 msgid "Number of shares in segments ({}) does not match count {}"
 msgstr ""
 
-#: services/rest/serializers.py:558
+#: services/rest/serializers.py:451
+msgid ""
+"Segment {} is blocked for options and cannot be transfered to a shareholder."
+msgstr ""
+
+#: services/rest/serializers.py:584
+msgid ""
+"Segment {} is not reserved for options inside a option plan and cannot be "
+"transfered to a option holder. Available are: {}"
+msgstr ""
+
+#: services/rest/serializers.py:655
 msgid "Not a pdf file."
+msgstr ""
+
+#: services/rest/serializers.py:730
+msgid "Invalid or empty security numbers segments."
+msgstr ""
+
+#: services/rest/serializers.py:736
+msgid ""
+"Segments \"{}\" must be owned by company shareholder \"{}\". Available are {}"
 msgstr ""
 
 #: services/rest/validators.py:9
@@ -90,11 +111,11 @@ msgstr ""
 msgid "The fields {field_names} must be empty together or contain values."
 msgstr ""
 
-#: services/rest/views.py:173 services/rest/views.py:175
-#: services/rest/views.py:177 services/rest/views.py:179
+#: services/rest/views.py:178 services/rest/views.py:180
+#: services/rest/views.py:182 services/rest/views.py:184
 msgid "Field may not be empty."
 msgstr ""
 
-#: services/rest/views.py:300 services/rest/views.py:382
+#: services/rest/views.py:328 services/rest/views.py:410
 msgid "Confirmed position cannot be deleted."
 msgstr ""

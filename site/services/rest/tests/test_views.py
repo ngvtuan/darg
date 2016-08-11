@@ -8,15 +8,14 @@ from django.test import RequestFactory, TestCase
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
-from services.rest.serializers import SecuritySerializer
 from project.generators import (CompanyGenerator,
-                                    ComplexPositionsWithSegmentsGenerator,
-                                    OperatorGenerator,
-                                    OptionTransactionGenerator,
-                                    PositionGenerator, SecurityGenerator,
-                                    ShareholderGenerator,
-                                    TwoInitialSecuritiesGenerator,
-                                    UserGenerator)
+                                ComplexOptionTransactionsWithSegmentsGenerator,
+                                ComplexPositionsWithSegmentsGenerator,
+                                OperatorGenerator, OptionTransactionGenerator,
+                                PositionGenerator, SecurityGenerator,
+                                ShareholderGenerator,
+                                TwoInitialSecuritiesGenerator, UserGenerator)
+from services.rest.serializers import SecuritySerializer
 from shareholder.models import (Operator, OptionTransaction, Position,
                                 Security, Shareholder)
 
@@ -48,6 +47,29 @@ class AddCompanyTestCase(APITestCase):
         self.assertEqual(res.status_code, 201)
         company = user.operator_set.all()[0].company
         self.assertEqual(company.security_set.all()[0].title, 'C')
+
+
+class AvailableOptionSegmentsViewTestCase(APITestCase):
+
+    def test_get(self):
+
+        option_transactions, shs = \
+            ComplexOptionTransactionsWithSegmentsGenerator().generate()
+        optionplan = option_transactions[0].option_plan
+
+        res = self.client.get(reverse('available_option_segments',
+                                      kwargs={'shareholder_id': shs[0].pk,
+                                              'optionsplan_id': optionplan.pk}))
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data, [u'1201-1665', u'1667-2000'])
+
+        res = self.client.get(reverse('available_option_segments',
+                                      kwargs={'shareholder_id': shs[1].pk,
+                                              'optionsplan_id': optionplan.pk}))
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data, [u'1000-1200', 1666])
 
 
 class CompanyViewSetTestCase(TestCase):

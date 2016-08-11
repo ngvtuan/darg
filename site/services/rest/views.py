@@ -2,6 +2,7 @@ import dateutil.parser
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
 from rest_framework import status, viewsets
 from rest_framework.decorators import detail_route
@@ -27,6 +28,8 @@ from shareholder.models import (Company, Country, Operator, OptionPlan,
 
 User = get_user_model()
 
+
+# --- VIEWSETS
 
 class ShareholderViewSet(viewsets.ModelViewSet):
     """
@@ -143,6 +146,8 @@ class CompanyViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+# --- VIEWS
+
 class AddCompanyView(APIView):
     """ view to initially setup a company """
 
@@ -206,6 +211,29 @@ class AddShareSplit(APIView):
                 status=status.HTTP_201_CREATED)
 
         return Response(errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AvailableOptionSegmentsView(APIView):
+
+    permission_classes = [UserIsOperatorPermission]
+
+    def get(self, request, optionsplan_id, shareholder_id):
+        """
+        returns available option segments from shareholder X and
+        optionplan Y
+        """
+        optionplan = get_object_or_404(OptionPlan, pk=optionsplan_id)
+        shareholder = get_object_or_404(Shareholder, pk=shareholder_id)
+
+        kwargs = {
+            'security': optionplan.security,
+            'optionplan': optionplan,
+        }
+
+        if request.GET.get('date'):
+            kwargs.update({'date': request.GET.get('date')[:10]})
+
+        return Response(shareholder.current_options_segments(**kwargs))
 
 
 class LanguageView(APIView):

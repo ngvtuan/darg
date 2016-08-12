@@ -9,16 +9,46 @@ from django.db.models import Q
 from django.test import TestCase, TransactionTestCase
 from django.test.client import Client, RequestFactory
 
-from shareholder.generators import (CompanyGenerator,
-                                    ComplexPositionsWithSegmentsGenerator,
-                                    ComplexShareholderConstellationGenerator,
-                                    OperatorGenerator, PositionGenerator,
-                                    SecurityGenerator, ShareholderGenerator,
-                                    UserGenerator)
+from project.generators import (CompanyGenerator, CompanyShareholderGenerator,
+                                ComplexOptionTransactionsWithSegmentsGenerator,
+                                ComplexPositionsWithSegmentsGenerator,
+                                ComplexShareholderConstellationGenerator,
+                                OperatorGenerator, OptionPlanGenerator,
+                                OptionTransactionGenerator, PositionGenerator,
+                                SecurityGenerator, ShareholderGenerator,
+                                TwoInitialSecuritiesGenerator, UserGenerator)
 from shareholder.models import Country, Position, Security, Shareholder
 
 
 # --- MODEL TESTS
+class CompanyTestCase(TestCase):
+
+    def test_get_all_option_plan_segments(self):
+        """
+        retrieve list of all segments blocked by option plans
+        """
+
+        optiontransaction, shs = \
+            ComplexOptionTransactionsWithSegmentsGenerator().generate()
+        company = shs[0].company
+        security = company.security_set.all()[0]
+
+        self.assertEqual(company.get_all_option_plan_segments(),
+                         [u'1000-2000'])
+
+        OptionPlanGenerator().generate(company=company, security=security,
+                                       number_segments=[2222, u'3000-4011'])
+
+        self.assertEqual(company.get_all_option_plan_segments(),
+                         [2222, u'3000-4011', u'1000-2000'])
+
+        OptionPlanGenerator().generate(security=security,
+                                       number_segments=[5555])
+
+        self.assertEqual(company.get_all_option_plan_segments(),
+                         [2222, u'3000-4011', u'1000-2000'])
+
+
 class CountryTestCase(TestCase):
 
     def test_model(self):
@@ -36,7 +66,8 @@ class CountryTestCase(TestCase):
 class PositionTestCase(TransactionTestCase):
 
     def test_split_shares(self):
-        """ share split leaves value, percent unchanged but
+        """
+        share split leaves value, percent unchanged but
         increases share count per shareholder
         """
         # test data
@@ -274,6 +305,15 @@ class ShareholderTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue("Das Akt" in response.content)
 
+    def test_is_company_shareholder(self):
+        """
+        is shareholder company shareholder?
+        """
+        s = ShareholderGenerator().generate()
+        s2 = ShareholderGenerator().generate(company=s.company)
+        self.assertTrue(s.is_company_shareholder())
+        self.assertFalse(s2.is_company_shareholder())
+
     def test_validate_gafi(self):
         """ test the gafi validation """
 
@@ -419,13 +459,125 @@ class ShareholderTestCase(TestCase):
             shs[1].owns_segments(segments, positions[0].security),
             (False, [1667], [u'1000-1200', 1666]))
 
+    def test_owns_options_segments(self):
+        """
+        does the user own this options segment?
+        """
+        positions, shs = \
+            ComplexOptionTransactionsWithSegmentsGenerator().generate()
+        security = positions[0].option_plan.security
+        segments = [1000, 1050, 1666, u'1103-1105']
+
+        self.assertEqual(
+            shs[1].owns_options_segments(segments, security),
+            (True, [], [u'1000-1200', 1666]))
+
+        segments = [1000, 1050, 1666, 1667]
+
+        self.assertEqual(
+            shs[1].owns_options_segments(segments, security),
+            (False, [1667], [u'1000-1200', 1666]))
+
+
     def test_current_segments(self):
         """
         get shareholders list of segments owned
         """
         positions, shs = ComplexPositionsWithSegmentsGenerator().generate()
 
-        self.assertEqual(shs[1].current_segments(positions[0].security), [u'1000-1200', 1666])
+        self.assertEqual(
+            shs[1].current_segments(positions[0].security),
+            [u'1000-1200', 1666])
+
+    def test_current_options_segments(self):
+        """
+        which segments does a shareholder own via options
+        """
+        positions, shs = ComplexOptionTransactionsWithSegmentsGenerator()\
+            .generate()
+
+        self.assertEqual(
+            shs[1].current_options_segments(positions[0].option_plan.security),
+            [u'1000-1200', 1666])
+
+        # test company shareholder
+        self.assertEqual(
+            shs[0].current_options_segments(positions[0].option_plan.security),
+            [u'1201-1665', u'1667-2000'])
+
+    def test_current_options_segments_same_day(self):
+        """
+        very simple scenario with one CS and one shareholder
+        """
+        company = CompanyGenerator().generate()
+        OperatorGenerator().generate(company=company)
+
+        # intial securities
+        s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
+        s1.track_numbers = True
+        s1.number_segments = [u'0001-2000']
+        s1.save()
+
+        # initial company shareholder
+        cs = CompanyShareholderGenerator().generate(
+            company=company, security=s1)
+        s = ShareholderGenerator().generate(company=company)
+        optionplan = OptionPlanGenerator().generate(
+            company=company, number_segments=[u'1000-2000'], security=s1)
+        # initial option grant to CompanyShareholder
+        OptionTransactionGenerator().generate(
+            company=company, security=s1, buyer=cs,
+            number_segments=[u'1000-2000'], option_plan=optionplan)
+        # single shareholder option grant
+        OptionTransactionGenerator().generate(
+            company=company, security=s1, buyer=s, seller=cs,
+            number_segments=[u'1500-2000'], option_plan=optionplan)
+
+        self.assertEqual(
+            s.current_options_segments(s1),
+            [u'1500-2000'])
+
+        # test company shareholder
+        self.assertEqual(
+            cs.current_options_segments(s1),
+            [u'1000-1499'])
+
+    def test_current_options_segments_same_day_single_digit(self):
+        """
+        very simple scenario with one CS and one shareholder
+        """
+        company = CompanyGenerator().generate()
+        OperatorGenerator().generate(company=company)
+
+        # intial securities
+        s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
+        s1.track_numbers = True
+        s1.number_segments = [1, 2, 3, 4]
+        s1.save()
+
+        # initial company shareholder
+        cs = CompanyShareholderGenerator().generate(
+            company=company, security=s1)
+        s = ShareholderGenerator().generate(company=company)
+        optionplan = OptionPlanGenerator().generate(
+            company=company, number_segments=[1, 2], security=s1)
+        # initial option grant to CompanyShareholder
+        OptionTransactionGenerator().generate(
+            company=company, security=s1, buyer=cs,
+            number_segments=[1, 2], option_plan=optionplan)
+        # single shareholder option grant
+        OptionTransactionGenerator().generate(
+            company=company, security=s1, buyer=s, seller=cs,
+            number_segments=[1], option_plan=optionplan)
+
+        self.assertEqual(
+            s.current_options_segments(s1),
+            [1])
+
+        # test company shareholder
+        self.assertEqual(
+            cs.current_options_segments(s1),
+            [2])
 
 
 class SecurityTestCase(TestCase):

@@ -56,14 +56,14 @@ class OptionPlanSerializerTestCase(TestCase):
         """
         position serializer handling numbered shares
         """
-        serializer, option_plan = self.__serialize([1, 3, 4, u'6-9', 33])
+        serializer, option_plan = self.__serialize('1, 3, 4, 6-9, 33')
         serializer.is_valid()
         sec = option_plan.security
         sec.track_numbers = True
         sec.save()
         res = serializer.create(serializer.initial_data)
         self.assertTrue(isinstance(res, OptionPlan))
-        self.assertEqual(res.number_segments, [1, 3, 4, u'6-9', 33])
+        self.assertEqual(res.number_segments, [1, u'3-4', u'6-9', 33])
         self.assertEqual(res.optiontransaction_set.count(), 1)
 
     def test_is_valid(self):
@@ -136,14 +136,14 @@ class OptionTransactionSerializerTestCase(TestCase):
         """
         position serializer handling numbered shares
         """
-        serializer, position = self.__serialize([1, 3, 4, u'6-9', 33])
+        serializer, position = self.__serialize('1, 3, 4, 6-9, 33')
         serializer.is_valid()
         sec = position.option_plan.security
         sec.track_numbers = True
         sec.save()
-        res = serializer.create(serializer.initial_data)
+        res = serializer.create(serializer.validated_data)
         self.assertTrue(isinstance(res, OptionTransaction))
-        self.assertEqual(res.number_segments, [1, 3, 4, u'6-9', 33])
+        self.assertEqual(res.number_segments, [1, u'3-4', u'6-9', 33])
 
 
 class PositionSerializerTestCase(TestCase):

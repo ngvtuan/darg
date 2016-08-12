@@ -552,10 +552,17 @@ class OptionTransactionSerializer(serializers.HyperlinkedModelSerializer):
         if not security.track_numbers:
             return res
 
-        if isinstance(initial_data.get('number_segments'), str):
+        if (isinstance(initial_data.get('number_segments'), str) or
+                isinstance(initial_data.get('number_segments'), unicode)):
             segments = string_list_to_json(initial_data.get('number_segments'))
         else:
             segments = initial_data.get('number_segments')
+
+        # we need number_segments if this is a security with .track_numbers
+        if not segments:
+            raise serializers.ValidationError(
+                {'number_segments':
+                    [_('Invalid security numbers segments.')]})
 
         # if we have seller (non capital increase)
         if initial_data.get('seller'):
@@ -564,14 +571,8 @@ class OptionTransactionSerializer(serializers.HyperlinkedModelSerializer):
             owning, failed_segments, owned_segments = seller.\
                 owns_options_segments(segments, security)
 
-        # we need number_segments if this is a security with .track_numbers
-        if not segments:
-            raise serializers.ValidationError(
-                {'number_segments':
-                    [_('Invalid security numbers segments.')]})
-
         # segments must be owned by seller
-        elif initial_data.get('seller') and not owning:
+        if initial_data.get('seller') and not owning:
             raise serializers.ValidationError({
                 'number_segments':
                     [_('Segments "{}" must be owned by seller "{}". '
@@ -612,8 +613,7 @@ class OptionTransactionSerializer(serializers.HyperlinkedModelSerializer):
         kwargs = {}
         user = self.context.get("request").user
         company = user.operator_set.all()[0].company
-        option_plan = OptionPlan.objects.get(id=int(
-            validated_data.get('option_plan').split('/')[-1]))
+        option_plan = validated_data.get('option_plan')
 
         buyer = Shareholder.objects.get(
             company=company,
@@ -640,7 +640,8 @@ class OptionTransactionSerializer(serializers.HyperlinkedModelSerializer):
                 validated_data.get("number_segments")):
 
             kwargs.update({
-                "number_segments": validated_data.get("number_segments")
+                "number_segments": string_list_to_json(
+                    validated_data.get("number_segments"))
             })
 
         option_transaction = OptionTransaction.objects.create(**kwargs)
@@ -685,7 +686,7 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
         company = user.operator_set.all()[0].company
         security = Security.objects.get(
             company=company,
-            pk=validated_data.get("security").get('pk'))
+            title=validated_data.get("security").get('title'))
 
         kwargs.update({
             "company": company,
@@ -700,7 +701,8 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
         # segments must be ordered, have no duplicates and must be list...
         if security.track_numbers and validated_data.get("number_segments"):
             kwargs.update({
-                "number_segments": validated_data.get("number_segments")
+                "number_segments": string_list_to_json(
+                    validated_data.get("number_segments"))
             })
 
         option_plan = OptionPlan.objects.create(**kwargs)
@@ -717,7 +719,8 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
         # segments must be ordered, have no duplicates and must be list...
         if security.track_numbers and validated_data.get("number_segments"):
             kwargs.update({
-                "number_segments": validated_data.get("number_segments")
+                "number_segments": string_list_to_json(
+                    validated_data.get("number_segments"))
             })
 
         OptionTransaction.objects.create(**kwargs)
@@ -734,7 +737,7 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
         """
         validate cross data relations
         """
-        res = super(OptionPlanSerializer, self).is_valid()
+        res = super(OptionPlanSerializer, self).is_valid(raise_exception)
 
         initial_data = self.initial_data
 
@@ -742,15 +745,12 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
         if security and Security.objects.get(id=security['pk']).track_numbers:
 
             security = Security.objects.get(id=security['pk'])
-            if isinstance(initial_data.get('number_segments'), str):
+            if (isinstance(initial_data.get('number_segments'), str) or
+                    isinstance(initial_data.get('number_segments'), unicode)):
                 segments = string_list_to_json(
                     initial_data.get('number_segments'))
             else:
                 segments = initial_data.get('number_segments')
-            # segments must be available by company shareholder
-            cs = security.company.get_company_shareholder()
-            owning, failed_segments, owned_segments = cs.owns_segments(
-                    segments, security)
 
             # we need number_segments if this is a security with .track_numbers
             if not segments:
@@ -758,8 +758,13 @@ class OptionPlanSerializer(serializers.HyperlinkedModelSerializer):
                     {'number_segments':
                         [_('Invalid or empty security numbers segments.')]})
 
+            # segments must be available by company shareholder
+            cs = security.company.get_company_shareholder()
+            owning, failed_segments, owned_segments = cs.owns_segments(
+                    segments, security)
+
             # segments must be owned by seller
-            elif not owning:
+            if not owning:
                 raise serializers.ValidationError({
                     'number_segments':
                         [_('Segments "{}" must be owned by company shareholder '

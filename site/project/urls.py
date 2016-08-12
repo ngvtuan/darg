@@ -15,8 +15,6 @@ from zinnia.sitemaps import AuthorSitemap
 from rest_framework import routers
 from rest_framework.authtoken import views
 
-from django_markdown import flatpages
-
 from registration.backends.simple.views import RegistrationView
 from registration.forms import RegistrationFormUniqueEmail
 
@@ -25,7 +23,7 @@ from services.rest.views import (
     PositionViewSet,
     InviteeUpdateView, AddCompanyView, CountryViewSet, OptionPlanViewSet,
     SecurityViewSet, OptionTransactionViewSet, OperatorViewSet, AddShareSplit,
-    LanguageView
+    LanguageView, AvailableOptionSegmentsView
 )
 
 router = routers.DefaultRouter(trailing_slash=False)
@@ -86,6 +84,9 @@ urlpatterns = [
     url(r'^services/rest/company/add', AddCompanyView.as_view(),
         name='add_company'),
     url(r'^services/rest/split', AddShareSplit.as_view(), name='split_shares'),
+    url(r'^services/rest/optionplan/(?P<optionsplan_id>[0-9]+)/number_segments/'
+        r'(?P<shareholder_id>[0-9]+)', AvailableOptionSegmentsView.as_view(),
+        name='available_option_segments'),  # before router!
     url(r'^services/rest/', include(router.urls)),
     url(r'^services/rest/invitee', InviteeUpdateView.as_view(),
         name='invitee'),

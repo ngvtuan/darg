@@ -264,6 +264,12 @@ class StartPage(BasePage):
         button = div.find_elements_by_tag_name('button')[1]
         button.click()
 
+    # --- GET
+    def get_row_by_shareholder(self, shareholder):
+        return self.driver.find_element_by_xpath(
+            '//tr[./td="{}" and contains(@class, "option-holders")]'.format(
+                shareholder.user.email))
+
     # --- CHECKS
     def has_shareholder_count(self, count):
         return len(self.driver.find_elements_by_tag_name('tr')) == count

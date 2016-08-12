@@ -1,21 +1,20 @@
 import time
 
-from django.core import mail
 from django.contrib.auth.models import User
+from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
-
 from rest_framework.test import APIClient
 
-from project.tasks import send_initial_password_mail
-from project.base import BaseSeleniumTestCase
 from project import page
-from shareholder.generators import (
-    UserGenerator, CompanyGenerator, ShareholderGenerator,
-    PositionGenerator, OperatorGenerator, TwoInitialSecuritiesGenerator,
-    CompanyShareholderGenerator
-    )
+from project.base import BaseSeleniumTestCase
+from project.generators import (CompanyGenerator, CompanyShareholderGenerator,
+                                ComplexOptionTransactionsWithSegmentsGenerator,
+                                OperatorGenerator, PositionGenerator,
+                                ShareholderGenerator,
+                                TwoInitialSecuritiesGenerator, UserGenerator)
+from project.tasks import send_initial_password_mail
 from shareholder.models import Security, Shareholder, UserProfile
 
 
@@ -302,11 +301,14 @@ class DownloadTestCase(TestCase):
             buyer=shareholder_list[1], count=10, value=10,
             seller=shareholder_list[0])
         # shareholder bought and sold
-        PositionGenerator().generate(buyer=shareholder_list[2], count=20, value=20, seller=shareholder_list[0])
-        PositionGenerator().generate(buyer=shareholder_list[0], count=20, value=20, seller=shareholder_list[2])
+        PositionGenerator().generate(buyer=shareholder_list[2], count=20,
+                                     value=20, seller=shareholder_list[0])
+        PositionGenerator().generate(buyer=shareholder_list[0], count=20,
+                                     value=20, seller=shareholder_list[2])
 
         # run test
-        response = self.client.get(reverse('captable_csv', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_csv', kwargs={"company_id": company.id}))
 
         # not logged in user
         self.assertEqual(response.status_code, 302)
@@ -315,7 +317,8 @@ class DownloadTestCase(TestCase):
         user = UserGenerator().generate()
         is_loggedin = self.client.login(username=user.username, password='test')
         self.assertTrue(is_loggedin)
-        response = self.client.get(reverse('captable_csv', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_csv', kwargs={"company_id": company.id}))
 
         # assert response code
         self.assertEqual(response.status_code, 403)
@@ -324,7 +327,8 @@ class DownloadTestCase(TestCase):
         """ test download of captable pdf """
         company = CompanyGenerator().generate()
         # run test
-        response = self.client.get(reverse('captable_pdf', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_pdf', kwargs={"company_id": company.id}))
 
         # not logged in user
         self.assertEqual(response.status_code, 302)
@@ -334,7 +338,8 @@ class DownloadTestCase(TestCase):
         OperatorGenerator().generate(user=user, company=company)
         is_loggedin = self.client.login(username=user.username, password='test')
         self.assertTrue(is_loggedin)
-        response = self.client.get(reverse('captable_pdf', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_pdf', kwargs={"company_id": company.id}))
 
         # assert response code
         self.assertEqual(response.status_code, 200)
@@ -368,7 +373,8 @@ class DownloadTestCase(TestCase):
         """ test download of captable pdf """
         company = CompanyGenerator().generate()
         # run test
-        response = self.client.get(reverse('captable_pdf', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_pdf', kwargs={"company_id": company.id}))
 
         # not logged in user
         self.assertEqual(response.status_code, 302)
@@ -377,7 +383,8 @@ class DownloadTestCase(TestCase):
         user = UserGenerator().generate()
         is_loggedin = self.client.login(username=user.username, password='test')
         self.assertTrue(is_loggedin)
-        response = self.client.get(reverse('captable_pdf', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_pdf', kwargs={"company_id": company.id}))
 
         # assert response code
         self.assertEqual(response.status_code, 403)
@@ -495,5 +502,27 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
                 ).text,
                 "{} ({})".format(share_count, share_count)
             )
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_options_with_segments_display(self):
+        """
+        test on start page that options with segments are show properly
+        """
+        optiontransactions, shs = \
+            ComplexOptionTransactionsWithSegmentsGenerator().generate()
+
+        try:
+            start = page.StartPage(
+                self.selenium, self.live_server_url,
+                shs[0].company.operator_set.first().user)
+            start.is_properly_displayed()
+            for shareholder in shs[1:]:  # not for company shareholder
+                row = start.get_row_by_shareholder(shareholder)
+                self.assertEqual(row.find_element_by_class_name('number').text,
+                                 shareholder.number)
+                self.assertEqual(row.find_element_by_class_name('share').text,
+                                 u'6 (200,0%)')
+
         except Exception, e:
             self._handle_exception(e)

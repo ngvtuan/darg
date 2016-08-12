@@ -237,13 +237,16 @@ class OptionPlanGenerator(object):
 
     def generate(self, **kwargs):
 
+        company = kwargs.get('company') or CompanyGenerator().generate()
+
         kwargs2 = dict(
-            company=kwargs.get('company') or CompanyGenerator().generate(),
+            company=company,
             board_approved_at=datetime.datetime.now().date(),
             title='some opt plan title',
-            security=kwargs.get('security') or SecurityGenerator().generate(),
+            security=kwargs.get('security') or SecurityGenerator().generate(
+                company=company),
             exercise_price=3,
-            count=3
+            count=kwargs.get('count') or 3
         )
 
         if kwargs.get('number_segments'):
@@ -265,7 +268,7 @@ class OptionTransactionGenerator(object):
 
         buyer = kwargs.get('buyer') or ShareholderGenerator().generate(
             company=company)
-        seller = kwargs.get('seller') or None
+        seller = kwargs.get('seller')
         count = kwargs.get('count') or 3
         kwargs.get('value') or 2
         bought_at = kwargs.get('bought_at') or datetime.datetime.now().date()
@@ -283,7 +286,10 @@ class OptionTransactionGenerator(object):
         if kwargs.get('number_segments'):
             kwargs2.update({'number_segments': kwargs.get('number_segments')})
 
-        position = OptionTransaction.objects.create(**kwargs2)
+        if kwargs.get('save', True):
+            position = OptionTransaction.objects.create(**kwargs2)
+        else:
+            position = OptionTransaction(**kwargs2)
 
         return position
 
@@ -398,7 +404,8 @@ class ComplexOptionTransactionsWithSegmentsGenerator(object):
         """
         company = kwargs.get('company') or CompanyGenerator().generate()
 
-        OperatorGenerator().generate(company=company)
+        if not company.operator_set.exists():
+            OperatorGenerator().generate(company=company)
 
         # intial securities
         s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)

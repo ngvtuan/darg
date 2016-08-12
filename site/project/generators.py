@@ -5,6 +5,7 @@ import random
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 from model_mommy import generators
+from django.utils.translation import gettext_lazy as __
 
 from shareholder.models import (Company, Country, Operator, OptionPlan,
                                 OptionTransaction, Position, Security,
@@ -21,9 +22,10 @@ DEFAULT_TEST_DATA = {
     'exercise_price': '2.05',
     'share_count': '156',
     'comment': '2345',
-    'security': 'Preferred Stock',
+    'security': __('Preferred Stock'),
     'count': '2222',
     'vesting_period': 3,
+    'number_segments': '2100, 2101, 2102-2255',
 }
 
 
@@ -422,7 +424,8 @@ class ComplexOptionTransactionsWithSegmentsGenerator(object):
         ) or datetime.datetime.now()
         cs = CompanyShareholderGenerator().generate(
             company=company, security=s1,
-            company_shareholder_created_at=company_shareholder_created_at)
+            company_shareholder_created_at=company_shareholder_created_at,
+            number_segments=kwargs.get('numbers_segments', [u'1-3000']))
         s = ShareholderGenerator().generate(company=company)
         optionplan = OptionPlanGenerator().generate(
             company=company, number_segments=[u'1000-2000'], security=s1)

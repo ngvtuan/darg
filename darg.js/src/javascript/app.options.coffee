@@ -45,6 +45,9 @@ app.controller 'OptionsController', ['$scope', '$http', '$filter', 'OptionPlan',
         $scope.loading = false
 
     $scope.add_option_plan = ->
+        if $scope.newOptionPlan.board_approved_at
+            d = $scope.newOptionPlan.board_approved_at
+            $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10)
         $scope.newOptionPlan.$save().then (result) ->
             $scope.option_plans.push result
         .then ->
@@ -60,10 +63,16 @@ app.controller 'OptionsController', ['$scope', '$http', '$filter', 'OptionPlan',
                 level: 'warning',
                 extra: { rejection: rejection },
             })
+            $scope.newOptionPlan.board_approved_at = d
 
     $scope.add_option_transaction = ->
         # replace optionplan obj by hyperlinked url
-        $scope.newOptionTransaction.option_plan = $scope.newOptionTransaction.option_plan.url
+        if $scope.newOptionTransaction.option_plan
+            p = $scope.newOptionTransaction.option_plan
+            $scope.newOptionTransaction.option_plan = $scope.newOptionTransaction.option_plan.url
+        if $scope.newOptionTransaction.bought_at
+            d = $scope.newOptionTransaction.bought_at
+            $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10)
         $scope.newOptionTransaction.$save().then (result) ->
             $scope._reload_option_plans()
         .then ->
@@ -79,6 +88,8 @@ app.controller 'OptionsController', ['$scope', '$http', '$filter', 'OptionPlan',
                 level: 'warning',
                 extra: { rejection: rejection },
             })
+            $scope.newOptionTransaction.bought_at = d
+            $scope.newOptionTransaction.option_plan = p
 
     $scope._reload_option_plans = () ->
         $scope.option_plans = []

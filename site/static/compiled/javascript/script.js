@@ -396,6 +396,11 @@
         };
       })(this));
       $scope.add_option_plan = function() {
+        var d;
+        if ($scope.newOptionPlan.board_approved_at) {
+          d = $scope.newOptionPlan.board_approved_at;
+          $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10);
+        }
         return $scope.newOptionPlan.$save().then(function(result) {
           return $scope.option_plans.push(result);
         }).then(function() {
@@ -405,16 +410,25 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error', {
+          Raven.captureMessage('form error', {
             level: 'warning',
             extra: {
               rejection: rejection
             }
           });
+          return $scope.newOptionPlan.board_approved_at = d;
         });
       };
       $scope.add_option_transaction = function() {
-        $scope.newOptionTransaction.option_plan = $scope.newOptionTransaction.option_plan.url;
+        var d, p;
+        if ($scope.newOptionTransaction.option_plan) {
+          p = $scope.newOptionTransaction.option_plan;
+          $scope.newOptionTransaction.option_plan = $scope.newOptionTransaction.option_plan.url;
+        }
+        if ($scope.newOptionTransaction.bought_at) {
+          d = $scope.newOptionTransaction.bought_at;
+          $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10);
+        }
         return $scope.newOptionTransaction.$save().then(function(result) {
           return $scope._reload_option_plans();
         }).then(function() {
@@ -424,12 +438,14 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error', {
+          Raven.captureMessage('form error', {
             level: 'warning',
             extra: {
               rejection: rejection
             }
           });
+          $scope.newOptionTransaction.bought_at = d;
+          return $scope.newOptionTransaction.option_plan = p;
         });
       };
       $scope._reload_option_plans = function() {

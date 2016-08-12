@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-10 10:16+0000\n"
+"POT-Creation-Date: 2016-08-12 16:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,27 +65,27 @@ msgstr ""
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr ""
 
-#: shareholder/models.py:418
+#: shareholder/models.py:416
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:425
+#: shareholder/models.py:423
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:429
+#: shareholder/models.py:427
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:433
+#: shareholder/models.py:431
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:442
+#: shareholder/models.py:440
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:655
+#: shareholder/models.py:655 shareholder/page.py:91 shareholder/page.py:106
 msgid "Preferred Stock"
 msgstr ""
 
@@ -166,22 +166,22 @@ msgstr ""
 msgid "Issuer"
 msgstr ""
 
-#: shareholder/templates/options.html:60
+#: shareholder/templates/options.html:63
 #: shareholder/templates/positions.html:65
 msgid "Draft"
 msgstr ""
 
-#: shareholder/templates/options.html:76
+#: shareholder/templates/options.html:79
 #: shareholder/templates/positions.html:83
 msgid "delete"
 msgstr ""
 
-#: shareholder/templates/options.html:81
+#: shareholder/templates/options.html:84
 #: shareholder/templates/positions.html:88
 msgid "confirm"
 msgstr ""
 
-#: shareholder/templates/options.html:91
+#: shareholder/templates/options.html:94
 msgid "No options yet."
 msgstr ""
 

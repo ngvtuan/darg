@@ -17,7 +17,7 @@ uWSGI
 wsgiref==0.1.2
 python-memcached
 ipython
-django-celery
+django-celery>=3.1.17
 pytz
 celery
 kombu

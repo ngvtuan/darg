@@ -89,7 +89,22 @@ class ShareholderDetailFunctionalTestCase(BaseSeleniumTestCase):
         """
         test that security with and without segments is properly displayed
         """
-        raise NotImplementedError()
+        positions, shs = ComplexPositionsWithSegmentsGenerator().generate()
+
+        try:
+
+            p = page.ShareholderDetailPage(
+                self.selenium, self.live_server_url, self.operator.user,
+                path=reverse(
+                    'shareholder',
+                    kwargs={'shareholder_id': shs[1]}
+                    )
+                )
+            self.assertEqual(p.get_securities(),
+                             [u'0', u'', u'6', u'1000-1200,1666'])
+
+        except Exception, e:
+            self._handle_exception(e)
 
 
 class OptionsFunctionalTestCase(BaseSeleniumTestCase):

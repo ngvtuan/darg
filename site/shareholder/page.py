@@ -58,6 +58,19 @@ class ShareholderDetailPage(BasePage):
             '//tr[@class="birthday active"]/td/span')
         return bday.text
 
+    def get_securities(self):
+        """
+        returns list of securities from page
+        """
+        secs = []
+        t = self.driver.find_element_by_xpath(
+            '//table[contains(@class, "stock")]')
+        for tr in t.find_elements_by_class_name('security'):
+            tds = tr.find_elements_by_tag_name('td')
+            secs.extend([tds[1].text, tds[2].text])
+
+        return secs
+
     # --- trigger buttons
     def save_edit(self, class_name):
         el = self.driver.find_element_by_class_name(class_name)

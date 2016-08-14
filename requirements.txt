@@ -1,6 +1,6 @@
-Django==1.8.9
+Django==1.9.8
 django-registration-redux
-djangorestframework==3.2.3
+djangorestframework==3.4.0
 django-nose>=1.4.3
 django-languages
 django-reversion==1.10.2
@@ -48,3 +48,6 @@ django-markdownx
 ipdbplugin
 wand
 nose-progressive
+
+# fix https://github.com/xhtml2pdf/xhtml2pdf/issues/318
+html5lib==1.0b8

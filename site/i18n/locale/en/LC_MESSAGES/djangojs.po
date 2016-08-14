@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-02 15:24+0000\n"
+"POT-Creation-Date: 2016-08-12 16:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,142 +17,187 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: static/compiled/javascript/i18n_noop.js:1
-#: static/compiled/javascript/i18n_noop.js:20
+#: static/compiled/javascript/i18n_noop.js:3
+#: static/compiled/javascript/i18n_noop.js:22
 msgid "First Name"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:2
-#: static/compiled/javascript/i18n_noop.js:21
+#: static/compiled/javascript/i18n_noop.js:4
+#: static/compiled/javascript/i18n_noop.js:23
 msgid "Last Name"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:3
-#: static/compiled/javascript/i18n_noop.js:22
+#: static/compiled/javascript/i18n_noop.js:5
+#: static/compiled/javascript/i18n_noop.js:24
 msgid "Shareholder Number"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:4
+#: static/compiled/javascript/i18n_noop.js:6
 msgid "Count"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:5
+#: static/compiled/javascript/i18n_noop.js:7
 msgid "Payed Price"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:6
+#: static/compiled/javascript/i18n_noop.js:8
 msgid "Comment"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:7
+#: static/compiled/javascript/i18n_noop.js:9
 msgid "Title"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:8
+#: static/compiled/javascript/i18n_noop.js:10
 msgid "Name"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:9
+#: static/compiled/javascript/i18n_noop.js:11
 msgid "Buyer"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:10
+#: static/compiled/javascript/i18n_noop.js:12
 msgid "Seller"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:11
+#: static/compiled/javascript/i18n_noop.js:13
 msgid "Date"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:12
+#: static/compiled/javascript/i18n_noop.js:14
 msgid "Security"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:13
 #: static/compiled/javascript/i18n_noop.js:15
+#: static/compiled/javascript/i18n_noop.js:17
 msgid "Share Count"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:14
+#: static/compiled/javascript/i18n_noop.js:16
 msgid "Option Plan"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:16
+#: static/compiled/javascript/i18n_noop.js:18
 msgid "Board Approval Date"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:17
+#: static/compiled/javascript/i18n_noop.js:19
 msgid "Underlying Asset"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:18
+#: static/compiled/javascript/i18n_noop.js:20
 msgid "Exercise Price"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:19
+#: static/compiled/javascript/i18n_noop.js:21
 msgid "Face Value"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:23
+#: static/compiled/javascript/i18n_noop.js:25
 msgid "Vesting Period (months)"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:24
+#: static/compiled/javascript/i18n_noop.js:26
 msgid "Ratio: Dividend"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:25
+#: static/compiled/javascript/i18n_noop.js:27
 msgid "Ratio: Divisor"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:26
+#: static/compiled/javascript/i18n_noop.js:28
 msgid "dividend"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:27
+#: static/compiled/javascript/i18n_noop.js:29
 msgid "security"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:28
+#: static/compiled/javascript/i18n_noop.js:30
 msgid "execute_at"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:29
+#: static/compiled/javascript/i18n_noop.js:31
 msgid "divisor"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:30
+#: static/compiled/javascript/i18n_noop.js:32
 msgid "count"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:31
+#: static/compiled/javascript/i18n_noop.js:33
 msgid "bought_at"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:32
+#: static/compiled/javascript/i18n_noop.js:34
 msgid "user"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:33
+#: static/compiled/javascript/i18n_noop.js:35
 msgid "number"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:34
+#: static/compiled/javascript/i18n_noop.js:36
 msgid "title"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:35
+#: static/compiled/javascript/i18n_noop.js:37
 msgid "board_approved_at"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:36
+#: static/compiled/javascript/i18n_noop.js:38
 msgid "option_plan"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:37
+#: static/compiled/javascript/i18n_noop.js:39
 msgid "seller"
 msgstr ""
 
-#: static/compiled/javascript/i18n_noop.js:38
+#: static/compiled/javascript/i18n_noop.js:40
 msgid "buyer"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:41
+msgid "Founding Date"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:42
+msgid "Company Name"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:43
+msgid "Share IDs"
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:44
+msgid "Invalid number segment. Please use 1, 2, 3, 4-10."
+msgstr ""
+
+#: static/compiled/javascript/i18n_noop.js:45
+msgid "number_segments"
+msgstr ""
+
+#: static/compiled/javascript/script.js:498
+#: static/compiled/javascript/script.js:519
+msgid "Available security segments for option plan on selected date or now: "
+msgstr ""
+
+#: static/compiled/javascript/script.js:500
+msgid ""
+"Available security segments for option plan on selected date or now: None"
+msgstr ""
+
+#: static/compiled/javascript/script.js:521
+msgid "No security segments available for option plan on selected date or now."
+msgstr ""
+
+#: static/compiled/javascript/script.js:775
+msgid ""
+"Available security segments from this shareholder on selected date or now: "
+msgstr ""
+
+#: static/compiled/javascript/script.js:777
+msgid ""
+"Available security segments from this shareholder on selected date or now: "
+"None"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-31 22:00+0000\n"
+"POT-Creation-Date: 2016-08-12 16:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,43 +57,49 @@ msgstr ""
 msgid "Company founding date"
 msgstr ""
 
-#: company/templates/company.html:84
+#: company/templates/company.html:95
 msgid "Provisioned Capital (Liberiertes Kapital)"
 msgstr ""
 
-#: company/templates/company.html:96
+#: company/templates/company.html:107
 msgid "Company Headquarter Country"
 msgstr ""
 
-#: company/templates/company.html:110
+#: company/templates/company.html:120
 msgid "Securities"
 msgstr ""
 
-#: company/templates/company.html:116
+#: company/templates/company.html:128 company/tests/test_views.py:33
+msgid "tracking security numbers for owners enabled. segments:"
+msgstr ""
+
+#: company/templates/company.html:139
 msgid "Please contact us at our"
 msgstr ""
 
-#: company/templates/company.html:118
-msgid "for getting more security types added"
+#: company/templates/company.html:141
+msgid ""
+"for getting more security types (common stock, preferred stock, numbered "
+"shares) added"
 msgstr ""
 
-#: company/templates/company.html:124
+#: company/templates/company.html:148
 msgid "Administrators"
 msgstr ""
 
-#: company/templates/company.html:125
+#: company/templates/company.html:149
 msgid "add operator"
 msgstr ""
 
-#: company/templates/company.html:154
+#: company/templates/company.html:178
 msgid "Option Plans"
 msgstr ""
 
-#: company/templates/company.html:158
+#: company/templates/company.html:182
 msgid "Options Plan Name"
 msgstr ""
 
-#: company/templates/company.html:158
+#: company/templates/company.html:182
 msgid "Edit Option Plan"
 msgstr ""
 
@@ -149,13 +155,17 @@ msgstr ""
 msgid "I18N"
 msgstr ""
 
-#: templates/menu.html:61 templates/registration/password_reset_form.html:4
+#: templates/menu.html:62 templates/menu.html:63
+msgid "Change Log"
+msgstr ""
+
+#: templates/menu.html:68 templates/registration/password_reset_form.html:4
 #: templates/registration/password_reset_form.html:14
 #: templates/registration/password_reset_form.html:34
 msgid "Reset password"
 msgstr ""
 
-#: templates/menu.html:62 templates/registration/password_change_form.html:4
+#: templates/menu.html:69 templates/registration/password_change_form.html:4
 #: templates/registration/password_change_form.html:13
 msgid "Change password"
 msgstr ""
@@ -361,8 +371,8 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: templates/zinnia/base.html:55 templates/zinnia/base.html.py:56
-#: templates/zinnia/skeleton.html:79 templates/zinnia/skeleton.html.py:80
+#: templates/zinnia/base.html:55 templates/zinnia/base.html:56
+#: templates/zinnia/skeleton.html:79 templates/zinnia/skeleton.html:80
 msgid "Sitemap"
 msgstr ""
 
@@ -378,15 +388,15 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#: templates/zinnia/base.html:71 templates/zinnia/base.html.py:73
+#: templates/zinnia/base.html:71 templates/zinnia/base.html:73
 msgid "Dashboard"
 msgstr ""
 
-#: templates/zinnia/base.html:79 templates/zinnia/base.html.py:81
+#: templates/zinnia/base.html:79 templates/zinnia/base.html:81
 msgid "Post an entry"
 msgstr ""
 
-#: templates/zinnia/base.html:88 templates/zinnia/base.html.py:90
+#: templates/zinnia/base.html:88 templates/zinnia/base.html:90
 msgid "Log out"
 msgstr ""
 
@@ -394,7 +404,7 @@ msgstr ""
 msgid "Alles ueber Aktienregister."
 msgstr ""
 
-#: templates/zinnia/skeleton.html:54 templates/zinnia/skeleton.html.py:86
+#: templates/zinnia/skeleton.html:54 templates/zinnia/skeleton.html:86
 msgid "Search"
 msgstr ""
 
@@ -402,6 +412,6 @@ msgstr ""
 msgid "Useful links"
 msgstr ""
 
-#: templates/zinnia/skeleton.html:74 templates/zinnia/skeleton.html.py:75
+#: templates/zinnia/skeleton.html:74 templates/zinnia/skeleton.html:75
 msgid "Weblog index"
 msgstr ""

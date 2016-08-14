@@ -24,13 +24,14 @@
       <select class="form-control" ng-model="newOptionTransaction.buyer" ng-options="shareholder as shareholder.user.email for shareholder in shareholders" translate translate-attr-placeholder="Buyer">
         <option value='' disabled>{% endverbatim %}{% trans "Buyer" %}{% verbatim %}</option>
       </select>
-      <select class="form-control" ng-model="newOptionTransaction.option_plan" ng-options="optionplan.url as optionplan.title for optionplan in option_plans" translate translate-attr-placeholder="Option Plan">
+      <select class="form-control" ng-model="newOptionTransaction.option_plan" ng-options="optionplan as optionplan.title for optionplan in option_plans" translate translate-attr-placeholder="Option Plan"  ng-change="show_available_number_segments_for_new_option_transaction();">
         <option value='' disabled>{% endverbatim %}{% trans "Option Plan" %}{% verbatim %}</option>
       </select>
       <input type="number" class="form-control" ng-model="newOptionTransaction.count" translate translate-attr-placeholder="Share Count" ng-maxlength="5">
-      <select type="email" class="form-control" ng-model="newOptionTransaction.seller" ng-options="shareholder as shareholder.user.email for shareholder in shareholders" translate translate-attr-placeholder="Seller">
+      <select type="email" class="form-control" ng-model="newOptionTransaction.seller" ng-options="shareholder as shareholder.user.email for shareholder in shareholders" translate translate-attr-placeholder="Seller" ng-change="show_available_number_segments_for_new_option_transaction();">
         <option value='' disabled>{% endverbatim %}{% trans "Seller" %}{% verbatim %}</option>
       </select>
+        <input type="text" class="form-control" ng-model="newOptionTransaction.number_segments" translate translate-attr-placeholder="Share IDs" ng-maxlength="255" ng-show="newOptionTransaction.option_plan.security.track_numbers" uib-popover="{{numberSegmentsAvailable}}" popover-placement="bottom">
       <input type="number" class="form-control" ng-model="newOptionTransaction.vesting_months" translate translate-attr-placeholder="Vesting Period (months)" ng-maxlength="5">
     </div>
     <div class="form-group">

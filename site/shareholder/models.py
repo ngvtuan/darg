@@ -1,23 +1,26 @@
-import os
-import time
 import datetime
 import logging
 import math
-
+import os
+import time
 from decimal import Decimal
-from sorl.thumbnail import get_thumbnail
 
+from django.conf import settings
+from django.contrib.postgres.fields import JSONField
+from django.core.mail import send_mail
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models import Sum
-from django.conf import settings
-from django.core.validators import MinValueValidator
-from django.core.mail import send_mail
-from django.utils.translation import ugettext as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
-from rest_framework.authtoken.models import Token
+from django.utils.translation import ugettext as _
 from django_languages import fields as language_fields
+from rest_framework.authtoken.models import Token
+from sorl.thumbnail import get_thumbnail
+
+from utils.formatters import (deflate_segments, flatten_list,
+                              human_readable_segments, inflate_segments,
+                              string_list_to_json)
 
 logger = logging.getLogger(__name__)
 
@@ -64,8 +67,8 @@ class Company(models.Model):
         """ send email with partial share after split list """
         operators = self.get_operators().values_list('user__email', flat=True)
         subject = _(
-            "Your list of partials for the share split for "
-            "company '{}'").format(self.name)
+            u"Your list of partials for the share split for "
+            u"company '{}'").format(self.name)
         message = _(
             "Dear Operator,\n\n"
             "Your share split has been successful. Please find the list of "
@@ -75,14 +78,14 @@ class Company(models.Model):
         if len(partials) > 0:
             for id, part in partials.iteritems():
                 s = Shareholder.objects.get(id=id)
-                message = message + _("{}{}({}): {} shares\n").format(
+                message = message + _(u"{}{}({}): {} shares\n").format(
                     s.user.first_name,
                     s.user.last_name,
                     s.user.email,
                     part,
                 )
         else:
-            message = message + _("--- No partial shares during split --- \n")
+            message = message + _(u"--- No partial shares during split --- \n")
 
         message = message + _(
             "\nThese shareholders are eligible to either "
@@ -137,6 +140,15 @@ class Company(models.Model):
                 logger.error('user sold more options then he got',
                              extra={'shareholder': sh})
         return oh_list
+
+    def get_all_option_plan_segments(self):
+        """
+        return list of number segments reserved for all option plans for
+        this company
+        """
+        segments = self.optionplan_set.all().values_list(
+            'number_segments', flat=True)
+        return flatten_list(segments)
 
     def get_company_shareholder(self):
         return self.shareholder_set.earliest('id')
@@ -293,6 +305,25 @@ class Shareholder(models.Model):
     def __str__(self):
         return u'{}'.format(self.id)
 
+    def get_number_segments_display(self):
+        """
+        returns string for date=today and all securities showing number segments
+        """
+        text = ""
+        for security in self.company.security_set.filter(track_numbers=True):
+            text += "{}: {} ".format(
+                security.get_title_display(),
+                human_readable_segments(self.current_segments(security))
+            )
+        return text
+
+    def is_company_shareholder(self):
+        """
+        returns bool if shareholder is ocmpany shareholder
+        """
+        return Shareholder.objects.filter(
+            company=self.company).earliest('id').id == self.id
+
     def share_percent(self, date=None):
         """
         returns percentage of shares in the understanding of voting rights.
@@ -351,10 +382,8 @@ class Shareholder(models.Model):
         # last payed price
         position = Position.objects.filter(
             buyer__company=self.company,
-            value__isnull=False
-        ).latest(
-            'bought_at'
-        )
+            value__gt=0
+        ).order_by('-bought_at', '-id').first()
         return share_count * position.value
 
     def last_traded_share_price(self, date=None, security=None):
@@ -465,6 +494,146 @@ class Shareholder(models.Model):
 
         return options_count * position.value
 
+    def owns_segments(self, segments, security):
+        """
+        check if shareholder owns all those segments either as share
+
+        does not check any kind of options. use owns_options_segments for this
+        """
+        if isinstance(segments, str):
+            segments = string_list_to_json(segments)
+
+        segments_owning = inflate_segments(self.current_segments(
+            security=security))
+        failed_segments = []
+        for segment in inflate_segments(segments):
+
+            # shareholder does not own this
+            if segment not in segments_owning:
+                failed_segments.append(segment)
+
+        return (len(failed_segments) == 0,
+                deflate_segments(failed_segments),
+                deflate_segments(segments_owning))
+
+    def owns_options_segments(self, segments, security):
+        """
+        check if shareholder owns all those segments either as share
+        """
+        if isinstance(segments, str):
+            segments = string_list_to_json(segments)
+
+        segments_owning = inflate_segments(self.current_options_segments(
+            security=security))
+        failed_segments = []
+        for segment in inflate_segments(segments):
+
+            # shareholder does not own this
+            if segment not in segments_owning:
+                failed_segments.append(segment)
+
+        return (len(failed_segments) == 0,
+                deflate_segments(failed_segments),
+                deflate_segments(segments_owning))
+
+    def current_segments(self, security, date=None):
+        """
+        returns deflated segments which are owned by this shareholder.
+        includes segments blocked for options.
+        """
+        date = date or datetime.datetime.now()
+
+        # all pos before date
+        qs_bought = self.buyer.filter(bought_at__lte=date)
+        qs_sold = self.seller.filter(bought_at__lte=date)
+
+        qs_bought = qs_bought.filter(security=security)
+        qs_sold = qs_sold.filter(security=security)
+
+        # -- flat list of bought items
+        segments_bought = qs_bought.values_list(
+            'number_segments', flat=True)
+        # flatten, unsorted with duplicates
+        segments_bought = [
+            segment for sublist in segments_bought for segment in sublist]
+
+        # flat list of sold segments
+        segments_sold = qs_sold.values_list(
+            'number_segments', flat=True)
+        segments_sold = [
+            segment for sublist in segments_sold for segment in sublist]
+
+        segments_owning = []
+
+        # inflate to have int only
+        segments_bought = inflate_segments(segments_bought)
+        segments_sold = inflate_segments(segments_sold)
+        for segment in segments_bought:
+            # count times bought
+            buy_count = segments_bought.count(segment)
+            # count times sold
+            sell_count = segments_sold.count(segment)
+            # validate that count is either 0 or 1 (sold/bought)
+            delta = buy_count - sell_count
+            if delta == 1:
+                segments_owning.append(segment)
+            elif delta > 1 or delta < 0:
+                logger.error('segment {} was bought or sold {} times.'.format(
+                    segment, delta))
+
+        return deflate_segments(segments_owning)
+
+    def current_options_segments(self, security, optionplan=None, date=None):
+        """
+        returns deflated segments which are owned by this shareholder.
+        includes segments blocked for options.
+        """
+        date = date or datetime.datetime.now().date()
+
+        if optionplan:
+            qs_bought = self.option_buyer.filter(option_plan=optionplan)
+            qs_sold = self.option_seller.filter(option_plan=optionplan)
+
+        # all pos before date
+        qs_bought = self.option_buyer.filter(bought_at__lte=date)
+        qs_sold = self.option_seller.filter(bought_at__lte=date)
+
+        qs_bought = qs_bought.filter(option_plan__security=security)
+        qs_sold = qs_sold.filter(option_plan__security=security)
+
+        # -- flat list of bought items
+        segments_bought = qs_bought.values_list(
+            'number_segments', flat=True)
+        # flatten, unsorted with duplicates
+        segments_bought = [
+            segment for sublist in segments_bought for segment in sublist]
+
+        # flat list of sold segments
+        segments_sold = qs_sold.values_list(
+            'number_segments', flat=True)
+        segments_sold = [
+            segment for sublist in segments_sold for segment in sublist]
+
+        segments_owning = []
+
+        # inflate to have int only
+        segments_bought = inflate_segments(segments_bought)
+        segments_sold = inflate_segments(segments_sold)
+        for segment in segments_bought:
+            # count times bought
+            buy_count = segments_bought.count(segment)
+            # count times sold
+            sell_count = segments_sold.count(segment)
+            # validate that count is either 0 or 1 (sold/bought)
+            delta = buy_count - sell_count
+            if delta == 1:
+                segments_owning.append(segment)
+            elif delta > 1 or delta < 0:
+                logger.error('segment {} was bought or sold {} times.'.format(
+                    segment, delta))
+
+        return deflate_segments(segments_owning)
+
 
 class Operator(models.Model):
 
@@ -483,18 +652,52 @@ class Operator(models.Model):
 
 class Security(models.Model):
     SECURITY_TITLES = (
-        ('P', 'Preferred Stock'),
-        ('C', 'Common Stock'),
+        ('P', _('Preferred Stock')),
+        ('C', _('Common Stock')),
         # ('O', 'Option'),
         # ('W', 'Warrant'),
         # ('V', 'Convertible Instrument'),
     )
     title = models.CharField(max_length=1, choices=SECURITY_TITLES)
+    face_value = models.DecimalField(
+        _('Nominal value of this asset'),
+        max_digits=16, decimal_places=8, blank=True,
+        null=True)
     company = models.ForeignKey(Company)
     count = models.PositiveIntegerField()
+    number_segments = JSONField(
+        _('JSON list of segments of ids for securities. can be 1, 2, 3, 4-10'),
+        default=list)
+
+    # settings
+    track_numbers = models.BooleanField(
+        _('App needs to track IDs of shares. WARNING: update initial '
+          'transaction with segments on enabling.'), default=False)
 
     def __str__(self):
-        return u"{}".format(self.get_title_display())
+        return u"{} ({})".format(self.get_title_display(), self.company)
+
+    def count_in_segments(self, segments=None):
+        """
+        returns number of shares contained in segments
+        """
+        if not segments:
+            segments = self.number_segments
+
+        if isinstance(segments, str) or isinstance(segments, unicode):
+            segments = string_list_to_json(segments)
+
+        count = 0
+        for segment in segments:
+            if isinstance(segment, int):
+                count += 1
+            else:
+                start, end = segment.split('-')
+                # 3-5 means 3,4,5 means 3 shares
+                delta = int(end) - int(start) + 1
+                count += delta
+
+        return count
 
 
 class Position(models.Model):
@@ -506,12 +709,16 @@ class Position(models.Model):
     security = models.ForeignKey(Security)
     count = models.PositiveIntegerField(_('Share Count transfered or created'))
     bought_at = models.DateField()
+    # needs at least 4 post comma digits to be precise (finanzial math standard)
     value = models.DecimalField(
         _('Nominal value or payed price for the transaction'),
-        max_digits=16, decimal_places=8, blank=True,
+        max_digits=16, decimal_places=4, blank=True,
         null=True)
     is_split = models.BooleanField(default=False)
     is_draft = models.BooleanField(default=True)
+    number_segments = JSONField(
+        _('JSON list of segments of ids for securities. can be 1, 2, 3, 4-10'),
+        default=list, blank=True, null=True)
     comment = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -548,6 +755,9 @@ class OptionPlan(models.Model):
     pdf_file = models.FileField(
         blank=True, null=True,
         upload_to=get_option_plan_upload_path,)
+    number_segments = JSONField(
+        _('JSON list of segments of ids for securities. can be 1, 2, 3, 4-10'),
+        default=list, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -593,9 +803,20 @@ class OptionTransaction(models.Model):
     seller = models.ForeignKey('Shareholder', blank=True, null=True,
                                related_name="option_seller")
     vesting_months = models.PositiveIntegerField(blank=True, null=True)
+    number_segments = JSONField(
+        _('JSON list of segments of ids for securities. can be 1, 2, 3, 4-10'),
+        default=list, blank=True, null=True)
     is_draft = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return u"OpTr {}->#{}->{} (OP:{})".format(
+            self.seller,
+            self.count,
+            self.buyer,
+            self.option_plan
+        )
 
 
 # --------- SIGNALS ----------

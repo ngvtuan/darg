@@ -1,3 +1,5 @@
+// record needed JS strings inside this file for django makemessages
+
 gettext('First Name');
 gettext('Last Name');
 gettext('Shareholder Number');
@@ -36,5 +38,11 @@ gettext('board_approved_at');
 gettext('option_plan');
 gettext('seller');
 gettext('buyer');
+gettext('Founding Date');
+gettext('Company Name');
+gettext('Share IDs');
+gettext('Invalid number segment. Please use 1, 2, 3, 4-10.');
+gettext('number_segments');
 
+// TEMPLATE
 // gettext('');

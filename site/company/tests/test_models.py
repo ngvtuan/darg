@@ -5,7 +5,7 @@ import datetime
 
 from django.test import TestCase
 
-from shareholder.generators import (
+from project.generators import (
     CompanyGenerator, ShareholderGenerator, PositionGenerator,
     SecurityGenerator)
 
@@ -23,7 +23,8 @@ class CompanyModelTestCase(TestCase):
         shareholder3 = ShareholderGenerator().generate(company=company)
         shareholder4 = ShareholderGenerator().generate(company=company)
         PositionGenerator().generate(
-            buyer=cshareholder, count=10000, value=1000, security=security)
+            buyer=cshareholder, count=10000, value=1000, security=security,
+            seller=None)
         p1 = PositionGenerator().generate(
             buyer=shareholder1, count=100, value=20, seller=cshareholder,
             security=security)
@@ -37,7 +38,8 @@ class CompanyModelTestCase(TestCase):
             buyer=cshareholder, count=600, value=80, seller=shareholder3,
             security=security)
         PositionGenerator().generate(
-            buyer=cshareholder, count=1000, value=1000, security=security)
+            buyer=cshareholder, count=1000, value=1000, security=security,
+            seller=None)
         company.share_count = 11000
         company.save()
 
@@ -132,5 +134,6 @@ class CompanyModelTestCase(TestCase):
         self.assertEqual(
             Shareholder.objects.get(id=shareholder3.id).share_count(), 3000000)
         self.assertEqual(
-            Shareholder.objects.get(id=cshareholder.id).share_count(), 104000000)
+            Shareholder.objects.get(id=cshareholder.id).share_count(),
+            104000000)
         self.assertEqual(company.share_count, 110000000)

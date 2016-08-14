@@ -4,17 +4,233 @@
 learned from here
 http://selenium-python.readthedocs.org/en/latest/page-objects.html
 """
-import time
 import random
+import time
+from datetime import datetime
+
+from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 # from element import BasePageElement (save all locators here)
 # from locators import MainPageLocators (save all setter/getter here)
 
 # from selenium.webdriver.support.ui import Select
+# from project.generators import DEFAULT_TEST_DATA
 
-from shareholder.page import BasePage
 
-# from shareholder.generators import DEFAULT_TEST_DATA
+class BasePage(object):
+    """Base class to initialize the base page that will be called
+    from all pages"""
+
+    def __init__(self, driver):
+        self.driver = driver
+        self.driver.implicitly_wait(10)
+
+    def _is_element_displayed(self, **kwargs):
+
+        time.sleep(3)
+
+        if kwargs.get('cls'):
+            el = self.driver.find_element_by_class_name(
+                kwargs.get('cls')
+            )
+        if kwargs.get('id'):
+            el = self.driver.find_element_by_id(
+                kwargs.get('id')
+            )
+
+        return el.is_displayed()
+
+    def login(self, username, password):
+        """ log the user in """
+        self.driver.get('%s%s' % (self.live_server_url, '/accounts/login/'))
+        self.driver.find_element_by_xpath(
+            '//*[@id="id_username"]').send_keys(username)
+        self.driver.find_element_by_xpath(
+            '//*[@id="id_password"]').send_keys(password)
+        self.driver.find_element_by_xpath(
+            '//*[@id="auth"]/form/button').click()
+        page_heading = self.driver.find_element_by_tag_name(
+            'h1').get_attribute('innerHTML')
+        assert page_heading == 'Willkommen {}!'.format(
+            username), 'failed to login. got {} page instead'.format(
+            page_heading)
+
+    def refresh(self):
+        """ reload page """
+        self.driver.get(self.driver.current_url)
+
+    def use_datepicker(self, class_name, date):
+        """
+        use default datepicker to select a date
+        """
+        self.click_open_datepicker(class_name)
+        self.click_date_in_datepicker(class_name, date)
+
+    def click_open_datepicker(self, class_name):
+        """
+        click to open the datepicker for element X
+        """
+        el = self.driver.find_element_by_class_name(class_name)
+        btns = el.find_elements_by_xpath(
+            '//*[contains(@class, "date-field")]//'
+            'span[@class="input-group-btn"]//button'
+        )
+        for btn in btns:
+            if btn.is_displayed():
+                btn.click()
+                return
+
+        raise Exception('Clickable button not found')
+
+    def click_datepicker_next_month(self):
+        # handle multiple datepickers
+        next_btns = self.driver.find_selement_by_xpath(
+            '//div[contains(@class, "uib-datepicker")]//thead//th[3]//button')
+        for next_btn in next_btns:
+            if next_btn.is_displayed():
+                next_btn.click()
+                return
+
+    def click_datepicker_previous_month(self):
+        # handle multiple datepickers
+        next_btns = self.driver.find_selement_by_xpath(
+            '//div[contains(@class, "uib-datepicker")]//thead//th[1]//button')
+        for next_btn in next_btns:
+            if next_btn.is_displayed():
+                next_btn.click()
+                return
+
+    def click_date_in_datepicker(self, class_name, date=None):
+        """
+        select some date in datepicker
+
+        click first day of current month
+        """
+        today = datetime.now().date()
+        if not date:
+            date = today
+
+        # future month
+        if date.month != today.month or date.year != today.year:
+            delta = date.month - today.month + 12 * (date.year - today.year)
+            for x in range(0, abs(delta)):
+                if delta > 0:
+                    self.click_datepicker_next_month()
+                    time.sleep(0.5)
+                else:
+                    self.click_datepicker_previous_month()
+                    time.sleep(0.5)
+
+        # get day rows
+        el = self.driver.find_element_by_class_name(class_name)
+        dp_rows = el.find_elements_by_xpath(
+            '//table[@class="uib-daypicker"]//tr[@class="uib-weeks ng-scope"]')
+
+        # in case we have multiple dps
+        for dp_row in dp_rows:
+            if not dp_row.is_displayed():
+                continue
+            # go through day tds and find the day to click
+            for td in dp_row.find_elements_by_tag_name('td'):
+                el2 = td.find_elements_by_tag_name('span')
+                if el2 and el2[0].text == datetime.strftime(date, '%d'):
+                    btn = td.find_element_by_tag_name('button')
+                    btn.click()
+                    return
+
+        raise Exception('Clickable button not found')
+
+    def get_form_errors(self):
+        """
+        finds elements with .form-error and returns contained string
+        """
+        els = self.driver.find_elements_by_class_name('form-error')
+        return [el.text for el in els if el.is_displayed()]
+
+    def is_no_errors_displayed(self):
+        """ MUST not find it, hence exception is True :) """
+        try:
+            self._is_element_displayed(cls='alert-danger')
+            return False
+        except:
+            return True
+
+    def scroll_to(self, Y=None, element=None):
+        """
+        scroll to element or coordinate
+        """
+        if element:
+            self.driver.execute_script(
+                "return arguments[0].scrollIntoView();", element)
+        else:
+            self.driver.execute_script("window.scrollTo(0, {})".format(Y))
+
+    def wait_until_clickable(self, element):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.element_to_be_clickable(element))
+        return element
+
+    def wait_until_visible(self, element):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        if isinstance(element, WebElement):
+            element = wait.until(EC.visibility_of(element))
+        else:
+            element = wait.until(EC.visibility_of_element_located(element))
+        return element
+
+    def wait_until_invisible(self, element):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.invisibility_of_element_located(element))
+        return element
+
+    def wait_unti_text_present(self, element, text):
+        """
+        wait until element is clickable
+        """
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.text_to_be_present_in_element(element, text))
+        return element
+
+    def drag_n_drop(self, object, target):
+        """
+        used to simulate drag'n drop to move elemens
+        from
+        http://stackoverflow.com/questions/29381233/how-to-simulate-html5-drag-and-drop-in-selenium-webdriver/29381532#29381532
+        object, target : jquery identifiers
+        """
+
+        jquery_url = "http://code.jquery.com/jquery-1.11.2.min.js"
+
+        # load jQuery helper
+        with open("jquery_load_helper.js") as f:
+            load_jquery_js = f.read()
+
+        # load drag and drop helper
+        with open("drag_and_drop_helper.js") as f:
+            drag_and_drop_js = f.read()
+
+        # load jQuery
+        self.driver.execute_async_script(load_jquery_js, jquery_url)
+
+        # perform drag&drop
+        self.driver.execute_script(
+            drag_and_drop_js +
+            "$('{}').simulateDragDrop({ dropTarget: '{}'});".format(
+                object, target
+            )
+        )
 
 
 class StartPage(BasePage):
@@ -54,6 +270,12 @@ class StartPage(BasePage):
         div = el.find_elements_by_class_name('form-group')[1]
         button = div.find_elements_by_tag_name('button')[1]
         button.click()
+
+    # --- GET
+    def get_row_by_shareholder(self, shareholder):
+        return self.driver.find_element_by_xpath(
+            '//tr[./td="{}" and contains(@class, "option-holders")]'.format(
+                shareholder.user.email))
 
     # --- CHECKS
     def has_shareholder_count(self, count):

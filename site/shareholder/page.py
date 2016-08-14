@@ -8,184 +8,14 @@ http://selenium-python.readthedocs.org/en/latest/page-objects.html
 
 import time
 
-from selenium.webdriver.support.ui import Select
+from django.utils.translation import gettext as _
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support.ui import Select
 
-from shareholder.generators import DEFAULT_TEST_DATA
+from project.generators import DEFAULT_TEST_DATA
+from project.page import BasePage
 
-
-class BasePage(object):
-    """Base class to initialize the base page that will be called
-    from all pages"""
-
-    def __init__(self, driver):
-        self.driver = driver
-        self.driver.implicitly_wait(10)
-
-    def _is_element_displayed(self, **kwargs):
-
-        time.sleep(3)
-
-        if kwargs.get('cls'):
-            el = self.driver.find_element_by_class_name(
-                kwargs.get('cls')
-            )
-        if kwargs.get('id'):
-            el = self.driver.find_element_by_id(
-                kwargs.get('id')
-            )
-
-        return el.is_displayed()
-
-    def login(self, username, password):
-        """ log the user in """
-        self.driver.get('%s%s' % (self.live_server_url, '/accounts/login/'))
-        self.driver.find_element_by_xpath(
-            '//*[@id="id_username"]').send_keys(username)
-        self.driver.find_element_by_xpath(
-            '//*[@id="id_password"]').send_keys(password)
-        self.driver.find_element_by_xpath(
-            '//*[@id="auth"]/form/button').click()
-        page_heading = self.driver.find_element_by_tag_name(
-            'h1').get_attribute('innerHTML')
-        assert page_heading == 'Willkommen {}!'.format(
-            username), 'failed to login. got {} page instead'.format(
-            page_heading)
-
-    def refresh(self):
-        """ reload page """
-        self.driver.get(self.driver.current_url)
-
-    def use_datepicker(self, class_name, date):
-        """
-        use default datepicker to select a date
-        """
-        self.click_open_datepicker(class_name)
-        self.click_date_in_datepicker(class_name)
-
-    def click_open_datepicker(self, class_name):
-        """
-        click to open the datepicker for element X
-        """
-        el = self.driver.find_element_by_class_name(class_name)
-        btns = el.find_elements_by_xpath(
-            '//*[contains(@class, "date-field")]//'
-            'span[@class="input-group-btn"]//button'
-        )
-        for btn in btns:
-            if btn.is_displayed():
-                btn.click()
-                return
-
-        raise Exception('Clickable button not found')
-
-    def click_date_in_datepicker(self, class_name):
-        """
-        select some date in datepicker
-
-        click first day of current month
-        """
-        el = self.driver.find_element_by_class_name(class_name)
-        dp_rows = el.find_elements_by_xpath(
-            '//table[@class="uib-daypicker"]//tr[@class="uib-weeks ng-scope"]')
-        # in case we have multiple dps
-        for dp_row in dp_rows:
-            if not dp_row.is_displayed():
-                continue
-
-            for td in dp_row.find_elements_by_tag_name('td'):
-                el2 = td.find_elements_by_tag_name('span')
-                if el2 and el2[0].text == '01':
-                    btn = td.find_element_by_tag_name('button')
-                    btn.click()
-                    return
-
-        raise Exception('Clickable button not found')
-
-    def is_no_errors_displayed(self):
-        """ MUST not find it, hence exception is True :) """
-        try:
-            self._is_element_displayed(cls='alert-danger')
-            return False
-        except:
-            return True
-
-    def scroll_to(self, Y=None, element=None):
-        """
-        scroll to element or coordinate
-        """
-        if element:
-            self.driver.execute_script(
-                "return arguments[0].scrollIntoView();", element)
-        else:
-            self.driver.execute_script("window.scrollTo(0, {})".format(Y))
-
-    def wait_until_clickable(self, element):
-        """
-        wait until element is clickable
-        """
-        wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.element_to_be_clickable(element))
-        return element
-
-    def wait_until_visible(self, element):
-        """
-        wait until element is clickable
-        """
-        wait = WebDriverWait(self.driver, 10)
-        if isinstance(element, WebElement):
-            element = wait.until(EC.visibility_of(element))
-        else:
-            element = wait.until(EC.visibility_of_element_located(element))
-        return element
-
-    def wait_until_invisible(self, element):
-        """
-        wait until element is clickable
-        """
-        wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.invisibility_of_element_located(element))
-        return element
-
-    def wait_unti_text_present(self, element, text):
-        """
-        wait until element is clickable
-        """
-        wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.text_to_be_present_in_element(element, text))
-        return element
-
-    def drag_n_drop(self, object, target):
-        """
-        used to simulate drag'n drop to move elemens
-        from
-        http://stackoverflow.com/questions/29381233/how-to-simulate-html5-drag-and-drop-in-selenium-webdriver/29381532#29381532
-        object, target : jquery identifiers
-        """
-
-        jquery_url = "http://code.jquery.com/jquery-1.11.2.min.js"
-
-        # load jQuery helper
-        with open("jquery_load_helper.js") as f:
-            load_jquery_js = f.read()
-
-        # load drag and drop helper
-        with open("drag_and_drop_helper.js") as f:
-            drag_and_drop_js = f.read()
-
-        # load jQuery
-        self.driver.execute_async_script(load_jquery_js, jquery_url)
-
-        # perform drag&drop
-        self.driver.execute_script(
-            drag_and_drop_js +
-            "$('{}').simulateDragDrop({ dropTarget: '{}'});".format(
-                object, target
-            )
-        )
+from utils.formatters import human_readable_segments
 
 
 class ShareholderDetailPage(BasePage):
@@ -228,6 +58,19 @@ class ShareholderDetailPage(BasePage):
             '//tr[@class="birthday active"]/td/span')
         return bday.text
 
+    def get_securities(self):
+        """
+        returns list of securities from page
+        """
+        secs = []
+        t = self.driver.find_element_by_xpath(
+            '//table[contains(@class, "stock")]')
+        for tr in t.find_elements_by_class_name('security'):
+            tds = tr.find_elements_by_tag_name('td')
+            secs.extend([tds[1].text, tds[2].text])
+
+        return secs
+
     # --- trigger buttons
     def save_edit(self, class_name):
         el = self.driver.find_element_by_class_name(class_name)
@@ -258,24 +101,38 @@ class OptionsPage(BasePage):
         selects = form.find_elements_by_tag_name('select')
 
         select = Select(selects[0])
-        select.select_by_visible_text('Preferred Stock')
+        select.select_by_visible_text(_('Preferred Stock'))
 
         inputs[0].send_keys(DEFAULT_TEST_DATA.get('date'))
         inputs[1].send_keys(DEFAULT_TEST_DATA.get('title'))
         inputs[2].send_keys(DEFAULT_TEST_DATA.get('exercise_price'))
         inputs[3].send_keys(DEFAULT_TEST_DATA.get('share_count'))
-        inputs[4].send_keys(DEFAULT_TEST_DATA.get('comment'))
+        inputs[5].send_keys(DEFAULT_TEST_DATA.get('comment'))
+
+    def enter_option_plan_form_data_with_segments(self, **kwargs):
+        el = self.driver.find_element_by_id('add_option_plan')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+        selects = form.find_elements_by_tag_name('select')
+
+        select = Select(selects[0])
+        select.select_by_visible_text(_('Preferred Stock'))
+
+        inputs[0].send_keys(DEFAULT_TEST_DATA.get('date'))
+        inputs[1].send_keys(DEFAULT_TEST_DATA.get('title'))
+        inputs[2].send_keys(DEFAULT_TEST_DATA.get('exercise_price'))
+        inputs[3].send_keys(kwargs.get('count',
+                                       DEFAULT_TEST_DATA.get('share_count')))
+        inputs[4].send_keys(kwargs.get('number_segments',
+                                       DEFAULT_TEST_DATA.get('number_segments'))
+                            )
+        inputs[5].send_keys(DEFAULT_TEST_DATA.get('comment'))
 
     def enter_transfer_option_data(self, **kwargs):
         el = self.driver.find_element_by_id('add_option_transaction')
         form = el.find_element_by_tag_name('form')
         inputs = form.find_elements_by_tag_name('input')
         selects = form.find_elements_by_tag_name('select')
-
-        inputs[0].send_keys(
-            kwargs.get('date') or DEFAULT_TEST_DATA.get('date'))
-        inputs[1].send_keys(DEFAULT_TEST_DATA.get('count'))
-        inputs[2].send_keys(DEFAULT_TEST_DATA.get('vesting_period'))
 
         buyer = kwargs.get('buyer')
         seller = kwargs.get('seller')
@@ -295,6 +152,44 @@ class OptionsPage(BasePage):
             select = Select(select)
             if key < len(select_input) and select_input[key] != '':
                 select.select_by_visible_text(select_input[key])
+
+        inputs[0].send_keys(
+            kwargs.get('date') or DEFAULT_TEST_DATA.get('date'))
+        inputs[1].send_keys(DEFAULT_TEST_DATA.get('count'))
+        inputs[3].send_keys(DEFAULT_TEST_DATA.get('vesting_period'))
+
+    def enter_transfer_option_with_segments_data(self, **kwargs):
+        el = self.driver.find_element_by_id('add_option_transaction')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+        selects = form.find_elements_by_tag_name('select')
+
+        buyer = kwargs.get('buyer')
+        seller = kwargs.get('seller')
+
+        select_input = []
+        if buyer:
+            select_input.extend([buyer.user.email])
+        else:
+            select_input.extend([''])
+        select_input.extend([
+            kwargs.get('title') or DEFAULT_TEST_DATA.get('title')
+        ])
+        if seller:
+            select_input.extend([seller.user.email])
+
+        for key, select in enumerate(selects):
+            select = Select(select)
+            if key < len(select_input) and select_input[key] != '':
+                select.select_by_visible_text(select_input[key])
+
+        inputs[0].send_keys(
+            kwargs.get('date') or DEFAULT_TEST_DATA.get('date'))
+        inputs[1].send_keys(kwargs.get('number_segments',
+                            DEFAULT_TEST_DATA.get('share_count')))
+        inputs[2].send_keys(kwargs.get('number_segments',
+                            DEFAULT_TEST_DATA.get('number_segments')))
+        inputs[3].send_keys(DEFAULT_TEST_DATA.get('vesting_period'))
 
     # -- CLICKs
     def click_open_create_option_plan(self):
@@ -343,6 +238,20 @@ class OptionsPage(BasePage):
                     return True
         return False
 
+    def is_transfer_option_with_segments_shown(self, **kwargs):
+        buyer = kwargs.get('buyer')
+        ot = buyer.option_buyer.latest('id')
+        s1 = u"{} {}".format(buyer.user.first_name, buyer.user.last_name)
+        s2 = u"{} (#{})".format(ot.count,
+                                human_readable_segments(ot.number_segments))
+        for table in self.driver.find_elements_by_class_name('table'):
+            tr = table.find_element_by_xpath('//tr[./td="{}"]'.format(s1))
+            buyer_td = tr.find_element_by_class_name('buyer')
+            count_td = tr.find_element_by_class_name('count')
+            if s1 == buyer_td.text and s2 == count_td.text:
+                return True
+        return False
+
     def is_option_date_equal(self, date):
         """
         return the date from the markup to the test for verification
@@ -363,6 +272,29 @@ class OptionsPage(BasePage):
 
         self.enter_option_plan_form_data()
         self.click_save_option_plan_form()
+
+
+class OptionsDetailPage(BasePage):
+    """Options Detail View"""
+
+    def __init__(self, driver, live_server_url, user, path):
+        """ load MainPage '/' """
+        self.live_server_url = live_server_url
+        # prepare driver
+        super(OptionsDetailPage, self).__init__(driver)
+
+        # load page
+        self.operator = user.operator_set.all()[0]
+        self.login(username=user.username, password='test')
+        self.driver.get('%s%s' % (live_server_url, path))
+
+    def get_security_text(self):
+        """
+        return text of security table element
+        """
+        el = self.driver.find_element_by_xpath(
+            '//tr[contains(@class, "security")]/td[contains(@class, "text")]')
+        return el.text
 
 
 class PositionPage(BasePage):
@@ -425,44 +357,92 @@ class PositionPage(BasePage):
         inputs = form.find_elements_by_tag_name('input')
         selects = form.find_elements_by_tag_name('select')
 
+        # select elements: seller, buyer, security - before inputs to have magic
+        # working
+        time.sleep(2)
+
+        self.enter_seller(position.seller)
+
+        # buyer
+        name = '{} {}'.format(position.buyer.user.first_name,
+                              position.buyer.user.last_name)
+        select = Select(selects[1])
+        select.select_by_visible_text(name)
+
+        self.enter_security(position.security, 'add-position-form')
+        self.enter_bought_at(position.bought_at)
+
+        # count
+        if position.count:
+            inputs[1].clear()  # clear existing values
+            inputs[1].send_keys(position.count)  # count
+
+        # value
+        if position.value:
+            inputs[2].clear()  # clear existing values
+            inputs[2].send_keys(position.value)  # price
+
+        # if numbered shares enter segment
+        if position.security.track_numbers:
+            inputs[3].clear()
+            inputs[3].send_keys('0,1,2,999-1001')
+            inputs[4].clear()  # clear existing values
+            inputs[4].send_keys(position.comment)  # comment
+        else:
+            inputs[4].clear()  # clear existing values
+            inputs[4].send_keys(position.comment)  # comment
+
+    def enter_bought_at(self, date):
+        """
+        enter position.bought_at in form
+        """
+        time.sleep(1)
+
         # input #0 use datepicker
         self.use_datepicker('add-position-form', None)
-        if position.count:
-            inputs[1].clear()
-            inputs[1].send_keys(position.count)  # count
-        if position.value:
-            inputs[2].clear()
-            inputs[2].send_keys(position.value)  # price
-        inputs[3].clear()
-        inputs[3].send_keys(position.comment)  # comment
 
-        # select elements: seller, buyer, security
-        for select in selects:
-            select = Select(select)
-            select.select_by_index(1)
+    def enter_security(self, security, class_name):
+        el = self.driver.find_element_by_class_name(class_name)
+        form = el.find_element_by_tag_name('form')
+        select = form.find_element_by_class_name('security')
+
+        select = Select(select)
+        select.select_by_visible_text(security.get_title_display())
+
+    def enter_seller(self, seller):
+        """
+        enter selling shareholder
+        """
+        el = self.driver.find_element_by_id('add_position')
+        form = el.find_element_by_tag_name('form')
+        selects = form.find_elements_by_tag_name('select')
+
+        name = u'{} {}'.format(seller.user.first_name,
+                              seller.user.last_name)
+        select = Select(selects[0])
+        select.select_by_visible_text(name)
 
     def enter_new_cap_data(self, position):
 
         el = self.driver.find_element_by_id('add_capital')
         form = el.find_element_by_tag_name('form')
         inputs = form.find_elements_by_tag_name('input')
-        selects = form.find_elements_by_tag_name('select')
 
         # input #0 use datepicker
         self.use_datepicker('add-capital-form', None)
+        self.enter_security(position.security, 'add-capital-form')
+
         if position.count:
             inputs[1].clear()
             inputs[1].send_keys(position.count)  # count
         if position.value:
             inputs[2].clear()
             inputs[2].send_keys(position.value)  # price
-        inputs[3].clear()
-        inputs[3].send_keys(position.comment)  # comment
-
-        # select elements: seller, buyer, security
-        for select in selects:
-            select = Select(select)
-            select.select_by_index(1)
+        if inputs[3].is_displayed():
+            inputs[3].clear()
+            inputs[3].send_keys(position.number_segments)  # comment
+        inputs[4].clear()
+        inputs[4].send_keys(position.comment)  # comment
 
     def enter_new_split_data(self, *args):
         el = self.driver.find_element_by_id('split-shares')
@@ -495,7 +475,25 @@ class PositionPage(BasePage):
         table = self.driver.find_element_by_tag_name('table')
         time.sleep(1)
         trs = table.find_elements_by_tag_name('tr')
-        return len(trs)
+        return [tr.is_displayed() for tr in trs].count(True)
+
+    def get_segment_from_tooltip(self):
+        """
+        extract segment string from tooltip
+        """
+        el = self.driver.find_element_by_id('add_position')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+
+        els = self.driver.find_elements_by_xpath(
+            '//div[contains(@class, "popover-content")]')
+
+        if inputs[3].is_displayed() and not els:
+            inputs[3].click()
+            els = self.driver.find_elements_by_xpath(
+                '//div[contains(@class, "popover-content")]')
+
+        return els[0].text.split(':')[1].strip()
 
     def count_draft_mode_items(self):
         table = self.driver.find_element_by_tag_name('table')
@@ -503,3 +501,54 @@ class PositionPage(BasePage):
         trs = table.find_elements_by_tag_name('tr')
         row = trs[2]
         return row.find_element_by_tag_name('td').text.count('Entwurf')
+
+    def has_available_segments_tooltip(self):
+        """
+        check of tooltip bubble on segment field is shown
+        shown only when number_segment fild is selected
+        """
+        el = self.driver.find_element_by_id('add_position')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+
+        els = self.driver.find_elements_by_xpath(
+            '//div[@class="add-position-form"]'
+            '//div[contains(@class,"popover")]')
+
+        # tooltip is active on click and stays like that. detect of open or
+        # attempt to set element active
+        if inputs[3].is_displayed() and not els:
+            inputs[3].click()
+
+            time.sleep(2)
+
+            els = self.driver.find_elements_by_xpath(
+                '//div[@class="add-position-form"]'
+                '//div[contains(@class,"popover")]')
+
+        return bool(els and els[0].is_displayed())
+
+    def has_available_segments_tooltip_nothing_found(self):
+        """
+        check if we show that no available segment was found
+        """
+        el = self.driver.find_element_by_id('add_position')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+
+        els = self.driver.find_elements_by_xpath(
+            '//div[contains(@class, "popover-content")]')
+
+        if inputs[3].is_displayed() and not els:
+            inputs[3].click()
+            els = self.driver.find_elements_by_xpath(
+                '//div[contains(@class, "popover-content")]')
+
+        return bool(els and 'keine Aktien' in els[0].text)
+
+    def has_split_warning_for_numbered_shares(self):
+        """
+        number tracking is not built for split shares
+        """
+        el = self.driver.find_element_by_id('split-shares')
+        return el.find_element_by_class_name('alert-warning').is_displayed()

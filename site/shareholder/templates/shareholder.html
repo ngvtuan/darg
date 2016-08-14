@@ -117,13 +117,23 @@
       </td>
     </tr>
     <tr>
-      <td>{% trans "Shares" %}:</td>
-      <td>{{ shareholder.share_count }} ({{ shareholder.share_percent }}%)</td>
-    </tr>
-    <tr>
       <td>{% trans "Value of all shares according to last transaction" %}:</td>
       <td>{{ shareholder.share_value }}</td>
     </tr>
+  </table>
+
+  <h2>{% trans "Owned Stock" %}</h2>
+  <p>{% trans "Count Shares Total" %}: {{ shareholder.share_count }}</p>
+  <p>{% trans "% Ownership" %}: {{ shareholder.share_percent }}% </p>
+  <table class="stock table table-striped">
+    <thead><tr>
+	  <th>{% trans "security" %}</th>
+      <th>{% trans "count" %}</th>
+      <th>{% trans "segments" %}</th>
+    </tr></thead>
+	{% for security in securities %}
+      <tr class="security"><td>{{ security }}</td><td>{{ security.count }}</td>{% if security.segments %}<td>{{ security.segments }}</td>{% else %}<td></td>{% endif %}</tr>
+	{% endfor %}
   </table>
 
   <!-- <a class="btn btn-focus btn-danger" title="{% trans "Delete shareholder" %}" >{% trans "Delete shareholder" %}</a> -->

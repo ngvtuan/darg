@@ -18,6 +18,14 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
     $scope.newPosition = new Position()
     $scope.newSplit = new Split()
 
+    $scope.numberSegmentsAvailable = ''
+    $scope.hasSecurityWithTrackNumbers = () ->
+        s = $scope.securities.find((el) ->
+            return el.track_numbers==true
+        )
+        if s != undefined
+            return true
+
     $http.get('/services/rest/position').then (result) ->
         angular.forEach result.data.results, (item) ->
             $scope.positions.push item
@@ -108,6 +116,18 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
         $scope.show_add_capital = false
         $scope.newSplit = new Split()
         $scope.show_split = true
+
+    $scope.show_available_number_segments = ->
+        if $scope.newPosition.security
+            if $scope.newPosition.security.track_numbers and $scope.newPosition.seller
+                url = '/services/rest/shareholders/' + $scope.newPosition.seller.pk.toString() + '/number_segments'
+                if $scope.newPosition.bought_at
+                    url = url + '?date=' + $scope.newPosition.bought_at.toISOString()
+                $http.get(url).then (result) ->
+                    if $scope.newPosition.security.pk of result.data and result.data[$scope.newPosition.security.pk].length > 0
+           	            $scope.numberSegmentsAvailable = gettext('Available security segments from this shareholder on selected date or now: ') + result.data[$scope.newPosition.security.pk]
+                    else
+                        $scope.numberSegmentsAvailable = gettext('Available security segments from this shareholder on selected date or now: None')
 
     # --- DATEPICKER
     $scope.datepicker = { opened: false }

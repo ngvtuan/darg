@@ -15,6 +15,18 @@
     }
   ]);
 
+  app.factory('Security', [
+    '$resource', function($resource) {
+      return $resource('/services/rest/security/:id', {
+        id: '@pk'
+      }, {
+        update: {
+          method: 'PUT'
+        }
+      });
+    }
+  ]);
+
   app.factory('CompanyAdd', [
     '$resource', function($resource) {
       return $resource('/services/rest/company/add/');
@@ -130,7 +142,7 @@
   ]);
 
   app.controller('CompanyController', [
-    '$scope', '$http', 'Company', 'Country', 'Operator', 'Upload', '$timeout', function($scope, $http, Company, Country, Operator, Upload, $timeout) {
+    '$scope', '$http', 'Company', 'Country', 'Operator', 'Upload', 'Security', '$timeout', function($scope, $http, Company, Country, Operator, Upload, Security, $timeout) {
       $scope.operators = [];
       $scope.company = null;
       $scope.errors = null;
@@ -143,7 +155,7 @@
       $http.get('/services/rest/company/' + company_id).then(function(result) {
         $scope.company = new Company(result.data);
         $scope.company.founded_at = new Date($scope.company.founded_at);
-        if ($scope.company.country.length > 0) {
+        if ($scope.company.country) {
           return $http.get($scope.company.country).then(function(result1) {
             return $scope.company.country = result1.data;
           });
@@ -187,6 +199,17 @@
               rejection: rejection
             }
           });
+        });
+      };
+      $scope.edit_security = function(security) {
+        var sec;
+        sec = new Security(security);
+        return sec.$update().then(function(result) {
+          var i;
+          i = $scope.company.security_set.indexOf(security);
+          return $scope.company.security_set[i] = result;
+        }, function(rejection) {
+          return rejection.data.number_segments[0];
         });
       };
       $scope.edit_company = function() {
@@ -329,7 +352,7 @@
   ]);
 
   app.controller('OptionsController', [
-    '$scope', '$http', 'OptionPlan', 'OptionTransaction', function($scope, $http, OptionPlan, OptionTransaction) {
+    '$scope', '$http', '$filter', 'OptionPlan', 'OptionTransaction', function($scope, $http, $filter, OptionPlan, OptionTransaction) {
       $scope.option_plans = [];
       $scope.securities = [];
       $scope.shareholders = [];
@@ -340,6 +363,16 @@
       $scope.newOptionPlan.board_approved_at = new Date();
       $scope.newOptionTransaction = new OptionTransaction();
       $scope.newOptionTransaction.bought_at = new Date();
+      $scope.numberSegmentsAvailable = '';
+      $scope.hasSecurityWithTrackNumbers = function() {
+        var s;
+        s = $scope.securities.find(function(el) {
+          return el.track_numbers === true;
+        });
+        if (s !== void 0) {
+          return true;
+        }
+      };
       $http.get('/services/rest/optionplan').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
           return $scope.option_plans.push(item);
@@ -363,6 +396,11 @@
         };
       })(this));
       $scope.add_option_plan = function() {
+        var d;
+        if ($scope.newOptionPlan.board_approved_at) {
+          d = $scope.newOptionPlan.board_approved_at;
+          $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10);
+        }
         return $scope.newOptionPlan.$save().then(function(result) {
           return $scope.option_plans.push(result);
         }).then(function() {
@@ -372,15 +410,25 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error', {
+          Raven.captureMessage('form error', {
             level: 'warning',
             extra: {
               rejection: rejection
             }
           });
+          return $scope.newOptionPlan.board_approved_at = d;
         });
       };
       $scope.add_option_transaction = function() {
+        var d, p;
+        if ($scope.newOptionTransaction.option_plan) {
+          p = $scope.newOptionTransaction.option_plan;
+          $scope.newOptionTransaction.option_plan = $scope.newOptionTransaction.option_plan.url;
+        }
+        if ($scope.newOptionTransaction.bought_at) {
+          d = $scope.newOptionTransaction.bought_at;
+          $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10);
+        }
         return $scope.newOptionTransaction.$save().then(function(result) {
           return $scope._reload_option_plans();
         }).then(function() {
@@ -390,12 +438,14 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error', {
+          Raven.captureMessage('form error', {
             level: 'warning',
             extra: {
               rejection: rejection
             }
           });
+          $scope.newOptionTransaction.bought_at = d;
+          return $scope.newOptionTransaction.option_plan = p;
         });
       };
       $scope._reload_option_plans = function() {
@@ -431,6 +481,47 @@
         $scope.show_add_option_transaction = false;
         $scope.newOptionPlan = new OptionPlan();
         return $scope.newOptionTransaction = new OptionTransaction();
+      };
+      $scope.show_available_number_segments_for_new_option_plan = function() {
+        var company_shareholder_id, url;
+        if ($scope.newOptionPlan.security) {
+          if ($scope.newOptionPlan.security.track_numbers) {
+            company_shareholder_id = $filter('filter')($scope.shareholders, {
+              is_company: true
+            }, true)[0].pk;
+            url = '/services/rest/shareholders/' + company_shareholder_id.toString() + '/number_segments';
+            if ($scope.newOptionPlan.board_approved_at) {
+              url = url + '?date=' + $scope.newOptionPlan.board_approved_at.toISOString();
+            }
+            return $http.get(url).then(function(result) {
+              if ($scope.newOptionPlan.security.pk in result.data && result.data[$scope.newOptionPlan.security.pk].length > 0) {
+                return $scope.numberSegmentsAvailable = gettext('Available security segments for option plan on selected date or now: ') + result.data[$scope.newOptionPlan.security.pk];
+              } else {
+                return $scope.numberSegmentsAvailable = gettext('Available security segments for option plan on selected date or now: None');
+              }
+            });
+          } else {
+            return $scope.numberSegmentsAvailable = '';
+          }
+        }
+      };
+      $scope.show_available_number_segments_for_new_option_transaction = function() {
+        var op_pk, sh_pk, url;
+        if ($scope.newOptionTransaction.seller && $scope.newOptionTransaction.option_plan) {
+          op_pk = $scope.newOptionTransaction.option_plan.pk.toString();
+          sh_pk = $scope.newOptionTransaction.seller.pk.toString();
+          url = '/services/rest/optionplan/' + op_pk + '/number_segments/' + sh_pk;
+          if ($scope.newOptionTransaction.bought_at) {
+            url = url + '?date=' + $scope.newOptionTransaction.bought_at.toISOString();
+          }
+          return $http.get(url).then(function(result) {
+            if (result.data && result.data.length > 0) {
+              return $scope.numberSegmentsAvailable = gettext('Available security segments for option plan on selected date or now: ') + result.data;
+            } else {
+              return $scope.numberSegmentsAvailable = gettext('No security segments available for option plan on selected date or now.');
+            }
+          });
+        }
       };
       $scope.datepicker = {
         opened: false
@@ -555,6 +646,16 @@
       $scope.show_split = false;
       $scope.newPosition = new Position();
       $scope.newSplit = new Split();
+      $scope.numberSegmentsAvailable = '';
+      $scope.hasSecurityWithTrackNumbers = function() {
+        var s;
+        s = $scope.securities.find(function(el) {
+          return el.track_numbers === true;
+        });
+        if (s !== void 0) {
+          return true;
+        }
+      };
       $http.get('/services/rest/position').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
           return $scope.positions.push(item);
@@ -660,6 +761,24 @@
         $scope.show_add_capital = false;
         $scope.newSplit = new Split();
         return $scope.show_split = true;
+      };
+      $scope.show_available_number_segments = function() {
+        var url;
+        if ($scope.newPosition.security) {
+          if ($scope.newPosition.security.track_numbers && $scope.newPosition.seller) {
+            url = '/services/rest/shareholders/' + $scope.newPosition.seller.pk.toString() + '/number_segments';
+            if ($scope.newPosition.bought_at) {
+              url = url + '?date=' + $scope.newPosition.bought_at.toISOString();
+            }
+            return $http.get(url).then(function(result) {
+              if ($scope.newPosition.security.pk in result.data && result.data[$scope.newPosition.security.pk].length > 0) {
+                return $scope.numberSegmentsAvailable = gettext('Available security segments from this shareholder on selected date or now: ') + result.data[$scope.newPosition.security.pk];
+              } else {
+                return $scope.numberSegmentsAvailable = gettext('Available security segments from this shareholder on selected date or now: None');
+              }
+            });
+          }
+        }
       };
       $scope.datepicker = {
         opened: false

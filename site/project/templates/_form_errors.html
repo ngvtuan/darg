@@ -1,5 +1,5 @@
 {% verbatim %}
-<p ng-repeat="(name, errmsgs) in errors" class="alert alert-danger" ng-cloak>
+<p ng-repeat="(name, errmsgs) in errors" class="alert alert-danger form-error" ng-cloak>
   <span class="capitalize"><strong>{{ name | translate }}</strong>:</span>
   <span ng-repeat="error in errmsgs">{{ error }} </span>
 </p>

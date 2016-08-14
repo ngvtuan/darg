@@ -6,7 +6,7 @@ app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.useSanitizeValueStrategy('escaped')
 ]
 
-app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'Operator', 'Upload', '$timeout', ($scope, $http, Company, Country, Operator, Upload, $timeout) ->
+app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'Operator', 'Upload', 'Security', '$timeout', ($scope, $http, Company, Country, Operator, Upload, Security, $timeout) ->
 
     $scope.operators = []
     $scope.company = null
@@ -23,7 +23,7 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
     $http.get('/services/rest/company/' + company_id).then (result) ->
         $scope.company = new Company(result.data)
         $scope.company.founded_at = new Date($scope.company.founded_at)
-        if $scope.company.country.length > 0
+        if $scope.company.country
             $http.get($scope.company.country).then (result1) ->
                 $scope.company.country = result1.data
 
@@ -38,6 +38,7 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
             $scope.show_add_operator_form = false
         else
             $scope.show_add_operator_form = true
+
     $scope.delete_operator = (pk) ->
         $http.delete('/services/rest/operators/'+pk)
         .then ->
@@ -60,6 +61,15 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
                 level: 'warning',
                 extra: { rejection: rejection },
             })
+
+    # save security. used esp. for its segments
+    $scope.edit_security = (security) ->
+        sec = new Security(security)
+        sec.$update().then (result) ->
+            i = $scope.company.security_set.indexOf(security)
+            $scope.company.security_set[i] = result
+        , (rejection) ->
+            return rejection.data.number_segments[0]
 
     # ATTENTION: django eats a url, angular eats an object.
     # hence needs conversion

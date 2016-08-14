@@ -1,33 +1,35 @@
 import dateutil.parser
-
 from django.contrib.auth import get_user_model
-from django.http import Http404
-from django.utils.translation import ugettext as _
 from django.db.models import Q
-
-from rest_framework import viewsets
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.permissions import AllowAny
+from django.http import Http404
+from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext as _
+from rest_framework import status, viewsets
 from rest_framework.decorators import detail_route
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from services.rest.serializers import (
-    ShareholderSerializer, CompanySerializer, UserSerializer,
-    PositionSerializer, AddCompanySerializer, UserWithEmailOnlySerializer,
-    CountrySerializer, OptionPlanSerializer, OptionTransactionSerializer,
-    SecuritySerializer, OperatorSerializer, OptionHolderSerializer)
-from services.rest.permissions import UserCanAddCompanyPermission, \
-    SafeMethodsOnlyPermission,\
-    UserCanEditCompanyPermission, \
-    UserIsOperatorPermission
-from shareholder.models import (
-    Shareholder, Company, Position, Country, OptionPlan,
-    OptionTransaction, Security, Operator
-    )
+from services.rest.permissions import (SafeMethodsOnlyPermission,
+                                       UserCanAddCompanyPermission,
+                                       UserCanEditCompanyPermission,
+                                       UserIsOperatorPermission)
+from services.rest.serializers import (AddCompanySerializer, CompanySerializer,
+                                       CountrySerializer, OperatorSerializer,
+                                       OptionHolderSerializer,
+                                       OptionPlanSerializer,
+                                       OptionTransactionSerializer,
+                                       PositionSerializer, SecuritySerializer,
+                                       ShareholderSerializer, UserSerializer,
+                                       UserWithEmailOnlySerializer)
+from shareholder.models import (Company, Country, Operator, OptionPlan,
+                                OptionTransaction, Position, Security,
+                                Shareholder)
 
 User = get_user_model()
 
+
+# --- VIEWSETS
 
 class ShareholderViewSet(viewsets.ModelViewSet):
     """
@@ -49,6 +51,23 @@ class ShareholderViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return Shareholder.objects.filter(company__operator__user=user)\
             .distinct()
+
+    @detail_route(methods=['get'])
+    def number_segments(self, request, pk=None):
+        shareholder = self.get_object()
+        kwargs = {}
+
+        if request.GET.get('date'):
+            kwargs.update({'date': request.GET.get('date')[:10]})
+
+        data = {}
+        for security in shareholder.company.security_set.all():
+            if security.track_numbers:
+                kwargs.update({'security': security})
+                data.update({
+                    security.pk: shareholder.current_segments(**kwargs)
+                })
+        return Response(data, status=status.HTTP_200_OK)
 
 
 class OperatorViewSet(viewsets.ModelViewSet):
@@ -127,6 +146,8 @@ class CompanyViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+# --- VIEWS
+
 class AddCompanyView(APIView):
     """ view to initially setup a company """
 
@@ -190,6 +211,29 @@ class AddShareSplit(APIView):
                 status=status.HTTP_201_CREATED)
 
         return Response(errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AvailableOptionSegmentsView(APIView):
+
+    permission_classes = [UserIsOperatorPermission]
+
+    def get(self, request, optionsplan_id, shareholder_id):
+        """
+        returns available option segments from shareholder X and
+        optionplan Y
+        """
+        optionplan = get_object_or_404(OptionPlan, pk=optionsplan_id)
+        shareholder = get_object_or_404(Shareholder, pk=shareholder_id)
+
+        kwargs = {
+            'security': optionplan.security,
+            'optionplan': optionplan,
+        }
+
+        if request.GET.get('date'):
+            kwargs.update({'date': request.GET.get('date')[:10]})
+
+        return Response(shareholder.current_options_segments(**kwargs))
 
 
 class LanguageView(APIView):
@@ -290,7 +334,7 @@ class SecurityViewSet(viewsets.ModelViewSet):
     """ API endpoint to get options """
     serializer_class = SecuritySerializer
     permission_classes = [
-        SafeMethodsOnlyPermission,
+        UserIsOperatorPermission,
     ]
 
     def get_queryset(self):

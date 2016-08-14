@@ -20,31 +20,33 @@
     <tr>
       <td>{% trans "Board approval date" %}:</td>
       <td>{% verbatim %}
-        <span editable-text="optionplan.board_approved_at"
-            onaftersave="edit_board_approved_at()">
-            {{ optionplan.board_approved_at }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
+        <span>{{ optionplan.board_approved_at }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
     </tr>
     <tr>
       <td>{% trans "Exercise Price" %}:</td>
-      <td>{% verbatim %}<span editable-text="optionplan.exercise_price" onaftersave="edit_exercise_price()()">{{ optionplan.exercise_price }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
+      <td>{% verbatim %}<span>{{ optionplan.exercise_price }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
     </tr>
     <tr>
       <td>{% trans "Share count" %}:</td>
-      <td>{% verbatim %}<span editable-text="optionplan.count" onaftersave="edit_county()">{{ optionplan.count }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
+      <td>{% verbatim %}<span>{{ optionplan.count }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
     </tr>
     <tr>
       <td>{% trans "Comment" %}:</td>
-      <td>{% verbatim %}<span editable-text="optionplan.comment" onaftersave="edit_comment()">{{ optionplan.comment }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
+      <td>{% verbatim %}<span>{{ optionplan.comment }} <!--<span class="el-icon-pencil"></span>--></span>{% endverbatim %}</td>
     </tr>
-    <tr>
-      <td>{% trans "Security Type" %}:</td>
-      <td>
-      {% verbatim %}
-        <span editable-select="optionplan.security" onaftersave="edit_security()" e-ng-options="c.title as c.readable_title for c in securities">
+    <tr class="security">
+      <td class="">{% trans "Security Type" %}:</td>
+      <td class="text">
+        {% verbatim %}
+        <span>
           {{ optionplan.security.readable_title || 'empty' }}
           <!--<span class="el-icon-pencil"></span>-->
         </span>
-      {% endverbatim %}
+        <span ng-show="optionplan.security.track_numbers">
+          ({% endverbatim %}{% trans "Reserved security numbers:" %}{% verbatim %}
+          {{ optionplan.readable_number_segments }})
+        </span>
+        {% endverbatim %}
       </td>
     </tr>
   </table>

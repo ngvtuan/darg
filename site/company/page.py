@@ -10,7 +10,7 @@ import time
 
 from django.core.urlresolvers import reverse
 
-from shareholder.page import BasePage
+from project.page import BasePage
 
 
 class CompanyPage(BasePage):
@@ -38,6 +38,11 @@ class CompanyPage(BasePage):
         field = form.find_element_by_tag_name('input')
 
         field.send_keys(email)
+
+    def enter_string(self, css_class, string):
+        el = self.driver.find_element_by_class_name(css_class)
+        el = el.find_element_by_tag_name('input')
+        el.send_keys(string)
 
     # -- CLICKs
     def click_save_new_operator(self):
@@ -75,6 +80,7 @@ class CompanyPage(BasePage):
     def click_to_edit(self, class_name):
         el = self.driver.find_element_by_class_name(class_name)
         el = el.find_element_by_class_name('editable-click')
+        # self.scroll_to(element=el)
         el.click()
 
     def click_open_datepicker(self, class_name):

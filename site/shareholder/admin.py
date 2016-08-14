@@ -60,7 +60,7 @@ class CountryAdmin(VersionAdmin):
 
 
 class SecurityAdmin(VersionAdmin):
-    list_display = ('title',)
+    list_display = ('title', 'company')
     pass
 
 

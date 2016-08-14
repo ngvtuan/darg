@@ -6,7 +6,7 @@ app.config ['$translateProvider', ($translateProvider) ->
     $translateProvider.useSanitizeValueStrategy('escaped')
 ]
 
-app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTransaction', ($scope, $http, OptionPlan, OptionTransaction) ->
+app.controller 'OptionsController', ['$scope', '$http', '$filter', 'OptionPlan', 'OptionTransaction', ($scope, $http, $filter, OptionPlan, OptionTransaction) ->
 
     $scope.option_plans = []
     $scope.securities = []
@@ -19,6 +19,14 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
     $scope.newOptionPlan.board_approved_at = new Date()
     $scope.newOptionTransaction = new OptionTransaction()
     $scope.newOptionTransaction.bought_at = new Date()
+
+    $scope.numberSegmentsAvailable = ''
+    $scope.hasSecurityWithTrackNumbers = () ->
+        s = $scope.securities.find((el) ->
+            return el.track_numbers==true
+        )
+        if s != undefined
+            return true
 
     $http.get('/services/rest/optionplan').then (result) ->
         angular.forEach result.data.results, (item) ->
@@ -37,6 +45,9 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
         $scope.loading = false
 
     $scope.add_option_plan = ->
+        if $scope.newOptionPlan.board_approved_at
+            d = $scope.newOptionPlan.board_approved_at
+            $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10)
         $scope.newOptionPlan.$save().then (result) ->
             $scope.option_plans.push result
         .then ->
@@ -52,8 +63,16 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
                 level: 'warning',
                 extra: { rejection: rejection },
             })
+            $scope.newOptionPlan.board_approved_at = d
 
     $scope.add_option_transaction = ->
+        # replace optionplan obj by hyperlinked url
+        if $scope.newOptionTransaction.option_plan
+            p = $scope.newOptionTransaction.option_plan
+            $scope.newOptionTransaction.option_plan = $scope.newOptionTransaction.option_plan.url
+        if $scope.newOptionTransaction.bought_at
+            d = $scope.newOptionTransaction.bought_at
+            $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10)
         $scope.newOptionTransaction.$save().then (result) ->
             $scope._reload_option_plans()
         .then ->
@@ -69,6 +88,8 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
                 level: 'warning',
                 extra: { rejection: rejection },
             })
+            $scope.newOptionTransaction.bought_at = d
+            $scope.newOptionTransaction.option_plan = p
 
     $scope._reload_option_plans = () ->
         $scope.option_plans = []
@@ -99,6 +120,34 @@ app.controller 'OptionsController', ['$scope', '$http', 'OptionPlan', 'OptionTra
         $scope.show_add_option_transaction = false
         $scope.newOptionPlan = new OptionPlan()
         $scope.newOptionTransaction = new OptionTransaction()
+
+    $scope.show_available_number_segments_for_new_option_plan = ->
+        if $scope.newOptionPlan.security
+            if $scope.newOptionPlan.security.track_numbers
+                company_shareholder_id = $filter('filter')($scope.shareholders, {is_company: true}, true)[0].pk
+                url = '/services/rest/shareholders/' + company_shareholder_id.toString() + '/number_segments'
+                if $scope.newOptionPlan.board_approved_at
+                    url = url + '?date=' + $scope.newOptionPlan.board_approved_at.toISOString()
+                $http.get(url).then (result) ->
+                    if $scope.newOptionPlan.security.pk of result.data and result.data[$scope.newOptionPlan.security.pk].length > 0
+           	            $scope.numberSegmentsAvailable = gettext('Available security segments for option plan on selected date or now: ') + result.data[$scope.newOptionPlan.security.pk]
+                    else
+                        $scope.numberSegmentsAvailable = gettext('Available security segments for option plan on selected date or now: None')
+            else
+                $scope.numberSegmentsAvailable = ''
+
+    $scope.show_available_number_segments_for_new_option_transaction = ->
+        if $scope.newOptionTransaction.seller && $scope.newOptionTransaction.option_plan
+            op_pk = $scope.newOptionTransaction.option_plan.pk.toString()
+            sh_pk = $scope.newOptionTransaction.seller.pk.toString()
+            url = '/services/rest/optionplan/' + op_pk + '/number_segments/' + sh_pk
+            if $scope.newOptionTransaction.bought_at
+                url = url + '?date=' + $scope.newOptionTransaction.bought_at.toISOString()
+            $http.get(url).then (result) ->
+                if result.data and result.data.length > 0
+                    $scope.numberSegmentsAvailable = gettext('Available security segments for option plan on selected date or now: ') + result.data
+                else
+                    $scope.numberSegmentsAvailable = gettext('No security segments available for option plan on selected date or now.')
 
     # --- DATEPICKER
     $scope.datepicker = { opened: false }

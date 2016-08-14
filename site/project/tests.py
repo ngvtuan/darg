@@ -1,21 +1,20 @@
 import time
 
-from django.core import mail
 from django.contrib.auth.models import User
+from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
-
 from rest_framework.test import APIClient
 
-from project.tasks import send_initial_password_mail
-from project.base import BaseSeleniumTestCase
 from project import page
-from shareholder.generators import (
-    UserGenerator, CompanyGenerator, ShareholderGenerator,
-    PositionGenerator, OperatorGenerator, TwoInitialSecuritiesGenerator,
-    CompanyShareholderGenerator
-    )
+from project.base import BaseSeleniumTestCase
+from project.generators import (CompanyGenerator, CompanyShareholderGenerator,
+                                ComplexOptionTransactionsWithSegmentsGenerator,
+                                OperatorGenerator, PositionGenerator,
+                                ShareholderGenerator,
+                                TwoInitialSecuritiesGenerator, UserGenerator)
+from project.tasks import send_initial_password_mail
 from shareholder.models import Security, Shareholder, UserProfile
 
 
@@ -90,7 +89,7 @@ class InstapageTestCase(TestCase):
                 ).exists())
         self.assertIn('_auth_user_id', self.client.session)
         self.assertEqual(
-            response.redirect_chain[0][0], 'http://testserver/start/')
+            response.redirect_chain[0][0], '/start/')
         self.assertTrue(UserProfile.objects.filter(
             user__email='jirka@tschitschereengreen.com',
             tnc_accepted=True, ip='79.168.182.174').exists())
@@ -210,7 +209,7 @@ class DownloadTestCase(TestCase):
         is_loggedin = self.client.login(username=user.username, password='test')
         self.assertTrue(is_loggedin)
         response = self.client.get(reverse('captable_csv',
-            kwargs={"company_id": company.id}))
+                                   kwargs={"company_id": company.id}))
 
         # assert response code
         self.assertEqual(response.status_code, 200)
@@ -231,6 +230,59 @@ class DownloadTestCase(TestCase):
         for line in lines:
             self.assertNotEqual(line[0], shareholder_list[2].number)
 
+    def test_csv_download_number_segments(self):
+        """ rest download of captable csv """
+
+        # data
+        company = CompanyGenerator().generate()
+        secs = TwoInitialSecuritiesGenerator().generate(company=company)
+        security = secs[1]
+        security.track_numbers = True
+        security.save()
+
+        shareholder_list = []
+        for x in range(1, 6):  # don't statt with 0, Generators 'if' will fail
+            shareholder_list.append(ShareholderGenerator().generate(
+                company=company, number=str(x)))
+
+        # initial share creation
+        PositionGenerator().generate(
+            buyer=shareholder_list[0], count=1000, value=10, security=security)
+        # single transaction
+        PositionGenerator().generate(
+            buyer=shareholder_list[1], count=10, value=10, security=security,
+            seller=shareholder_list[0])
+        # shareholder bought and sold
+        PositionGenerator().generate(
+            buyer=shareholder_list[2], count=20, value=20, security=security,
+            seller=shareholder_list[0])
+        PositionGenerator().generate(
+            buyer=shareholder_list[0], count=20, value=20, security=security,
+            seller=shareholder_list[2])
+
+        # login and retest
+        user = UserGenerator().generate()
+        OperatorGenerator().generate(user=user, company=company)
+        is_loggedin = self.client.login(username=user.username, password='test')
+        self.assertTrue(is_loggedin)
+        response = self.client.get(reverse('captable_csv',
+                                   kwargs={"company_id": company.id}))
+
+        # assert response code
+        self.assertEqual(response.status_code, 200)
+        # assert proper csv
+        lines = response.content.split('\r\n')
+        lines.pop()  # remove last element based on final '\r\n'
+        for row in lines:
+            if row == lines[0]:  # skip first row
+                continue
+            self.assertEqual(row.count(','), 8)
+            fields = row.split(',')
+            s = Shareholder.objects.get(company=company, number=fields[0])
+            text = s.current_segments(security)
+            if text:
+                self.assertTrue(text in fields[8])
+
     def test_csv_download_with_missing_operator(self):
         """ rest download of captable csv """
 
@@ -249,11 +301,14 @@ class DownloadTestCase(TestCase):
             buyer=shareholder_list[1], count=10, value=10,
             seller=shareholder_list[0])
         # shareholder bought and sold
-        PositionGenerator().generate(buyer=shareholder_list[2], count=20, value=20, seller=shareholder_list[0])
-        PositionGenerator().generate(buyer=shareholder_list[0], count=20, value=20, seller=shareholder_list[2])
+        PositionGenerator().generate(buyer=shareholder_list[2], count=20,
+                                     value=20, seller=shareholder_list[0])
+        PositionGenerator().generate(buyer=shareholder_list[0], count=20,
+                                     value=20, seller=shareholder_list[2])
 
         # run test
-        response = self.client.get(reverse('captable_csv', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_csv', kwargs={"company_id": company.id}))
 
         # not logged in user
         self.assertEqual(response.status_code, 302)
@@ -262,16 +317,18 @@ class DownloadTestCase(TestCase):
         user = UserGenerator().generate()
         is_loggedin = self.client.login(username=user.username, password='test')
         self.assertTrue(is_loggedin)
-        response = self.client.get(reverse('captable_csv', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_csv', kwargs={"company_id": company.id}))
 
         # assert response code
         self.assertEqual(response.status_code, 403)
 
-    def test_pdf_download_(self):
+    def test_pdf_download(self):
         """ test download of captable pdf """
         company = CompanyGenerator().generate()
         # run test
-        response = self.client.get(reverse('captable_pdf', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_pdf', kwargs={"company_id": company.id}))
 
         # not logged in user
         self.assertEqual(response.status_code, 302)
@@ -281,7 +338,30 @@ class DownloadTestCase(TestCase):
         OperatorGenerator().generate(user=user, company=company)
         is_loggedin = self.client.login(username=user.username, password='test')
         self.assertTrue(is_loggedin)
-        response = self.client.get(reverse('captable_pdf', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_pdf', kwargs={"company_id": company.id}))
+
+        # assert response code
+        self.assertEqual(response.status_code, 200)
+        # assert proper csv
+        self.assertTrue(response.content.startswith('%PDF-1.4\r\n'))
+        self.assertTrue(response.content.endswith('EOF\r\n'))
+
+    def test_pdf_download_with_number_segments(self):
+        """ test download of captable pdf """
+        company = CompanyGenerator().generate()
+        secs = TwoInitialSecuritiesGenerator().generate(company=company)
+        security = secs[1]
+        security.track_numbers = True
+        security.save()
+
+        # login and retest
+        user = UserGenerator().generate()
+        OperatorGenerator().generate(user=user, company=company)
+        is_loggedin = self.client.login(username=user.username, password='test')
+        self.assertTrue(is_loggedin)
+        response = self.client.get(reverse('captable_pdf',
+                                           kwargs={"company_id": company.id}))
 
         # assert response code
         self.assertEqual(response.status_code, 200)
@@ -293,7 +373,8 @@ class DownloadTestCase(TestCase):
         """ test download of captable pdf """
         company = CompanyGenerator().generate()
         # run test
-        response = self.client.get(reverse('captable_pdf', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_pdf', kwargs={"company_id": company.id}))
 
         # not logged in user
         self.assertEqual(response.status_code, 302)
@@ -302,7 +383,8 @@ class DownloadTestCase(TestCase):
         user = UserGenerator().generate()
         is_loggedin = self.client.login(username=user.username, password='test')
         self.assertTrue(is_loggedin)
-        response = self.client.get(reverse('captable_pdf', kwargs={"company_id": company.id}))
+        response = self.client.get(
+            reverse('captable_pdf', kwargs={"company_id": company.id}))
 
         # assert response code
         self.assertEqual(response.status_code, 403)
@@ -416,9 +498,31 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
             # totals
             self.assertEqual(
                 self.selenium.find_element_by_xpath(
-                    '//table/tbody/tr[5]/td[last()]'
+                    '//table/tbody/tr[6]/td[last()]'
                 ).text,
                 "{} ({})".format(share_count, share_count)
             )
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_options_with_segments_display(self):
+        """
+        test on start page that options with segments are show properly
+        """
+        optiontransactions, shs = \
+            ComplexOptionTransactionsWithSegmentsGenerator().generate()
+
+        try:
+            start = page.StartPage(
+                self.selenium, self.live_server_url,
+                shs[0].company.operator_set.first().user)
+            start.is_properly_displayed()
+            for shareholder in shs[1:]:  # not for company shareholder
+                row = start.get_row_by_shareholder(shareholder)
+                self.assertEqual(row.find_element_by_class_name('number').text,
+                                 shareholder.number)
+                self.assertEqual(row.find_element_by_class_name('share').text,
+                                 u'6 (200,0%)')
+
         except Exception, e:
             self._handle_exception(e)

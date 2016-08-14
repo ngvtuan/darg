@@ -1,6 +1,8 @@
 Requirements
 ==================
 
+! requires JSONField from Django1.9 along with PostgeSQL DB
+
 .. code-block :: shell
 
     aptitude install python-virtualenv

@@ -404,7 +404,7 @@ class PositionPage(BasePage):
         form = el.find_element_by_tag_name('form')
         selects = form.find_elements_by_tag_name('select')
 
-        name = '{} {}'.format(seller.user.first_name,
+        name = u'{} {}'.format(seller.user.first_name,
                               seller.user.last_name)
         select = Select(selects[0])
         select.select_by_visible_text(name)

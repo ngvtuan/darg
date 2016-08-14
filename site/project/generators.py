@@ -387,6 +387,7 @@ class ComplexPositionsWithSegmentsGenerator(object):
                 seller=seller, number_segments=segments)
             return p
 
+        positions.append(buy_segment([u'1000-2000'], cs, None))  # initial seed
         positions.append(buy_segment([u'1000-1050'], s, cs))
         positions.append(buy_segment([1050], cs, s))
         positions.append(buy_segment([u'1050-1100'], s, cs))
@@ -430,12 +431,12 @@ class ComplexOptionTransactionsWithSegmentsGenerator(object):
         optionplan = OptionPlanGenerator().generate(
             company=company, number_segments=[u'1000-2000'], security=s1)
         # initial option grant to CompanyShareholder
-        OptionTransactionGenerator().generate(
+        ot = OptionTransactionGenerator().generate(
             company=company, security=s1, buyer=cs,
             number_segments=[u'1000-2000'], option_plan=optionplan)
 
         shareholders = [cs, s]
-        positions = []
+        positions = [ot]
 
         # random shareholder generation
         def buy_segment(segments, buyer, seller):

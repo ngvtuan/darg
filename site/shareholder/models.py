@@ -321,7 +321,8 @@ class Shareholder(models.Model):
         """
         returns bool if shareholder is ocmpany shareholder
         """
-        return Shareholder.objects.earliest('id').id == self.id
+        return Shareholder.objects.filter(
+            company=self.company).earliest('id').id == self.id
 
     def share_percent(self, date=None):
         """
@@ -381,7 +382,7 @@ class Shareholder(models.Model):
         # last payed price
         position = Position.objects.filter(
             buyer__company=self.company,
-            value__isnull=False
+            value__gt=0
         ).order_by('-bought_at', '-id').first()
         return share_count * position.value
 

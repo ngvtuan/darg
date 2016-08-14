@@ -1,6 +1,7 @@
 import os
 import datetime
 import traceback
+import inspect
 
 from django.test import LiveServerTestCase
 from django.core.mail import EmailMessage, get_connection
@@ -15,10 +16,11 @@ class BaseSeleniumTestCase(LiveServerTestCase):
     def _screenshot(self):
         filename = 'screenshot_{}.png'.format(datetime.datetime.now())
         self.selenium.save_screenshot(filename)
+        caller = inspect.stack()[2][3]
 
         # in test env its using locmem backend
         email = EmailMessage(
-            '[darg] FE Test failed',
+            '[darg] FE Test failed w/ %s' % caller,
             'FE Test failed. See attached screenshot\n\n'
             'stacktrace:\n\n%s\n\nbrowser log:\n%s\n\nurl: %s' % (
                 traceback.format_exc(),

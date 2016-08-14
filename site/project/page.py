@@ -143,6 +143,13 @@ class BasePage(object):
 
         raise Exception('Clickable button not found')
 
+    def get_form_errors(self):
+        """
+        finds elements with .form-error and returns contained string
+        """
+        els = self.driver.find_elements_by_class_name('form-error')
+        return [el.text for el in els if el.is_displayed()]
+
     def is_no_errors_displayed(self):
         """ MUST not find it, hence exception is True :) """
         try:

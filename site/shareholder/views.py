@@ -37,12 +37,14 @@ def shareholder(request, shareholder_id):
     template = loader.get_template('shareholder.html')
     shareholder = get_object_or_404(Shareholder, id=int(shareholder_id))
     securities = shareholder.company.security_set.all()
+
+    # hack security props for shareholder spec data
     for sec in securities:
         if sec.track_numbers:
             if shareholder.current_segments(sec):
                 sec.segments = human_readable_segments(
                     shareholder.current_segments(sec))
-                sec.count = shareholder.share_count(security=sec)
+        sec.count = shareholder.share_count(security=sec) or 0
     context = RequestContext(request, {
                              'shareholder': shareholder,
                              'securities': securities})

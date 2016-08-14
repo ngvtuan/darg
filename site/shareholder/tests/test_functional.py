@@ -1,18 +1,19 @@
-import unittest
+# -*- coding: utf-8 -*-
+
 import datetime
 import time
+import unittest
 
 from django.core.urlresolvers import reverse
 
 from project.base import BaseSeleniumTestCase
-from shareholder.models import Shareholder, Security
-from shareholder.generators import (
-    ShareholderGenerator, PositionGenerator,
-    TwoInitialSecuritiesGenerator, OperatorGenerator,
-    OptionPlanGenerator
-    )
+from project.generators import (ComplexOptionTransactionsWithSegmentsGenerator,
+                                ComplexPositionsWithSegmentsGenerator,
+                                OperatorGenerator, OptionPlanGenerator,
+                                PositionGenerator, ShareholderGenerator,
+                                TwoInitialSecuritiesGenerator)
 from shareholder import page
-from shareholder.models import Position
+from shareholder.models import Position, Security, Shareholder
 
 
 # --- FUNCTIONAL TESTS
@@ -83,6 +84,12 @@ class ShareholderDetailFunctionalTestCase(BaseSeleniumTestCase):
         shareholder = Shareholder.objects.get(id=self.buyer.id)
         self.assertEqual(
             shareholder.user.userprofile.birthday, birthday)
+
+    def test_shareholder_detail_with_mixed_segments(self):
+        """
+        test that security with and without segments is properly displayed
+        """
+        raise NotImplementedError()
 
 
 class OptionsFunctionalTestCase(BaseSeleniumTestCase):
@@ -225,6 +232,209 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
             self.assertTrue(app.is_transfer_option_shown(buyer=self.buyer))
             self.assertTrue(app.is_option_date_equal('1.11.16'))
 
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_base_options_with_segments(self):
+        """
+        test with valid data: adding option plan, adding transaction
+        assert: initial transaction, all transactions with proper segments
+        """
+        optiontransactions, shs = \
+            ComplexOptionTransactionsWithSegmentsGenerator().generate()
+        operator = shs[0].company.operator_set.first()
+        for sec in operator.company.security_set.all():
+            sec.track_numbers = True
+            sec.save()
+
+        try:
+            app = page.OptionsPage(
+                self.selenium, self.live_server_url, operator.user)
+            app.click_open_create_option_plan()
+
+            self.assertTrue(app.is_option_plan_form_open())
+
+            app.enter_option_plan_form_data_with_segments()
+            app.click_save_option_plan_form()
+
+            self.assertTrue(app.is_no_errors_displayed())
+            self.assertTrue(app.is_option_plan_displayed())
+
+            app.click_open_transfer_option()
+            app.enter_transfer_option_with_segments_data(
+                buyer=shs[1], seller=shs[0])
+            app.click_save_transfer_option()
+
+            self.assertTrue(app.is_no_errors_displayed())
+            self.assertTrue(app.is_transfer_option_with_segments_shown(
+                buyer=shs[1], seller=shs[0]
+            ))
+
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_optionplan_detail_with_segments(self):
+        """
+        test numbered segments detail on option plan detail page
+        """
+        optiontransactions, shs = \
+            ComplexOptionTransactionsWithSegmentsGenerator().generate()
+        optionsplan = optiontransactions[0].option_plan
+        operator = shs[0].company.operator_set.first()
+        for sec in operator.company.security_set.all():
+            sec.track_numbers = True
+            sec.save()
+
+        try:
+            path = reverse('optionplan',
+                           kwargs={'optionsplan_id': optionsplan.pk})
+            app = page.OptionsDetailPage(
+                self.selenium, self.live_server_url, operator.user, path)
+
+            time.sleep(1)  # let angular load
+
+            self.assertEqual(
+                app.get_security_text(),
+                u'Vorzugsaktien (Reservierte Aktiennummern 1000-2000)')
+
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_add_optionplan_with_segments_bad_input(self):
+        """
+        test with invalid data: adding option plan, adding transaction
+        assert: initial transaction, all transactions with proper segments
+        """
+        positions, shs = \
+            ComplexPositionsWithSegmentsGenerator().generate()
+        operator = shs[0].company.operator_set.first()
+        for sec in operator.company.security_set.all():
+            sec.track_numbers = True
+            sec.save()
+
+        try:
+            app = page.OptionsPage(
+                self.selenium, self.live_server_url, operator.user)
+            app.click_open_create_option_plan()
+
+            self.assertTrue(app.is_option_plan_form_open())
+
+            # empty numbers segments field
+            app.enter_option_plan_form_data_with_segments(number_segments='')
+            app.click_save_option_plan_form()
+            self.assertEqual(
+                app.get_form_errors(),
+                [u'Aktiennummern: Ung\xfcltige Aktiennummern. Valide sind: '
+                 u'"1,2,3,4-9".'])
+
+            # not owned by company shareholder
+            app.refresh()
+            app.click_open_create_option_plan()
+            app.enter_option_plan_form_data_with_segments(
+                number_segments='1050', count=1)
+            app.click_save_option_plan_form()
+            self.assertEqual(
+                app.get_form_errors(),
+                [u'Aktiennummern: Aktiennummer "[1050]" geh\xf6rt nicht zu '
+                 u'Verk\xe4ufer "itself". Verf\xfcgbar sind '
+                 u'"[u\'1201-1665\', u\'1667-2000\']".'])
+
+            # wrong count vs. segment count
+            app.refresh()
+            app.click_open_create_option_plan()
+            app.enter_option_plan_form_data_with_segments(
+                number_segments='1667', count=2)
+            app.click_save_option_plan_form()
+            self.assertEqual(
+                app.get_form_errors(),
+                [u'Anzahl: Anzahl der Aktien in den Aktiennummern ist nicht '
+                 u'identisch mit der Anzahl der Aktien im Formular: 1'])
+
+            # successful
+            app.refresh()
+            app.click_open_create_option_plan()
+            app.enter_option_plan_form_data_with_segments(
+                number_segments='1667',
+                count=1)
+            app.click_save_option_plan_form()
+
+            self.assertTrue(app.is_no_errors_displayed())
+            self.assertTrue(app.is_option_plan_displayed())
+
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_add_optiontransaction_with_segments_bad_input(self):
+        """
+        test with invalid data: adding option plan, adding transaction
+        assert: initial transaction, all transactions with proper segments
+        """
+        optionstransactions, shs = \
+            ComplexOptionTransactionsWithSegmentsGenerator().generate()
+        operator = shs[0].company.operator_set.first()
+        for sec in operator.company.security_set.all():
+            sec.track_numbers = True
+            sec.save()
+
+        try:
+            app = page.OptionsPage(
+                self.selenium, self.live_server_url, operator.user)
+            app.click_open_create_option_plan()
+            self.assertTrue(app.is_option_plan_form_open())
+            app.enter_option_plan_form_data_with_segments()
+            app.click_save_option_plan_form()
+            self.assertTrue(app.is_no_errors_displayed())
+            self.assertTrue(app.is_option_plan_displayed())
+
+            # not owned by seller
+            app.click_open_transfer_option()
+            app.enter_transfer_option_with_segments_data(
+                buyer=shs[1], seller=shs[0], number_segments='1666',
+                share_count=1)
+            app.click_save_transfer_option()
+            self.assertEqual(
+                app.get_form_errors(),
+                [u'Aktiennummern: Aktiennummer "[1666]" geh\xf6rt nicht zu '
+                 u'Verk\xe4ufer "itself". Verf\xfcgbar sind '
+                 u'"[u\'1201-1665\', u\'1667-2000\', u\'2100-2255\']".'])
+
+            # no count match
+            app.refresh()
+            app.click_open_transfer_option()
+            app.enter_transfer_option_with_segments_data(
+                buyer=shs[1], seller=shs[0], number_segments='1667',
+                share_count=12)
+            app.click_save_transfer_option()
+            self.assertEqual(
+                app.get_form_errors(),
+                [u'Anzahl: Anzahl der Aktien in den Aktiennummern ist nicht '
+                 u'identisch mit der Anzahl der Aktien im Formular: 1'])
+
+            # not with option plan segments
+            """ NOT VALID
+            app.refresh()
+            app.click_open_transfer_option()
+            app.enter_transfer_option_with_segments_data(
+                buyer=shs[1], seller=shs[0], number_segments='3001',
+                share_count=1)
+            app.click_save_transfer_option()
+            self.assertEqual(
+                app.get_form_errors(),
+                [u'Anzahl: Anzahl der Aktien in den Aktiennummern ist nicht '
+                 u'identisch mit der Anzahl der Aktien im Formular: 1'])
+            """
+
+            # success
+            app.refresh()
+            app.click_open_transfer_option()
+            app.enter_transfer_option_with_segments_data(
+                buyer=shs[1], seller=shs[0])
+            app.click_save_transfer_option()
+
+            self.assertTrue(app.is_no_errors_displayed())
+            self.assertTrue(app.is_transfer_option_with_segments_shown(
+                buyer=shs[1], seller=shs[0]
+            ))
         except Exception, e:
             self._handle_exception(e)
 

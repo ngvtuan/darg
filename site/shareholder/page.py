@@ -8,11 +8,14 @@ http://selenium-python.readthedocs.org/en/latest/page-objects.html
 
 import time
 
-from selenium.webdriver.support.ui import Select
+from django.utils.translation import gettext as _
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
-from project.page import BasePage
 from project.generators import DEFAULT_TEST_DATA
+from project.page import BasePage
+
+from utils.formatters import human_readable_segments
 
 
 class ShareholderDetailPage(BasePage):
@@ -85,24 +88,38 @@ class OptionsPage(BasePage):
         selects = form.find_elements_by_tag_name('select')
 
         select = Select(selects[0])
-        select.select_by_visible_text('Preferred Stock')
+        select.select_by_visible_text(_('Preferred Stock'))
 
         inputs[0].send_keys(DEFAULT_TEST_DATA.get('date'))
         inputs[1].send_keys(DEFAULT_TEST_DATA.get('title'))
         inputs[2].send_keys(DEFAULT_TEST_DATA.get('exercise_price'))
         inputs[3].send_keys(DEFAULT_TEST_DATA.get('share_count'))
-        inputs[4].send_keys(DEFAULT_TEST_DATA.get('comment'))
+        inputs[5].send_keys(DEFAULT_TEST_DATA.get('comment'))
+
+    def enter_option_plan_form_data_with_segments(self, **kwargs):
+        el = self.driver.find_element_by_id('add_option_plan')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+        selects = form.find_elements_by_tag_name('select')
+
+        select = Select(selects[0])
+        select.select_by_visible_text(_('Preferred Stock'))
+
+        inputs[0].send_keys(DEFAULT_TEST_DATA.get('date'))
+        inputs[1].send_keys(DEFAULT_TEST_DATA.get('title'))
+        inputs[2].send_keys(DEFAULT_TEST_DATA.get('exercise_price'))
+        inputs[3].send_keys(kwargs.get('count',
+                                       DEFAULT_TEST_DATA.get('share_count')))
+        inputs[4].send_keys(kwargs.get('number_segments',
+                                       DEFAULT_TEST_DATA.get('number_segments'))
+                            )
+        inputs[5].send_keys(DEFAULT_TEST_DATA.get('comment'))
 
     def enter_transfer_option_data(self, **kwargs):
         el = self.driver.find_element_by_id('add_option_transaction')
         form = el.find_element_by_tag_name('form')
         inputs = form.find_elements_by_tag_name('input')
         selects = form.find_elements_by_tag_name('select')
-
-        inputs[0].send_keys(
-            kwargs.get('date') or DEFAULT_TEST_DATA.get('date'))
-        inputs[1].send_keys(DEFAULT_TEST_DATA.get('count'))
-        inputs[2].send_keys(DEFAULT_TEST_DATA.get('vesting_period'))
 
         buyer = kwargs.get('buyer')
         seller = kwargs.get('seller')
@@ -122,6 +139,44 @@ class OptionsPage(BasePage):
             select = Select(select)
             if key < len(select_input) and select_input[key] != '':
                 select.select_by_visible_text(select_input[key])
+
+        inputs[0].send_keys(
+            kwargs.get('date') or DEFAULT_TEST_DATA.get('date'))
+        inputs[1].send_keys(DEFAULT_TEST_DATA.get('count'))
+        inputs[3].send_keys(DEFAULT_TEST_DATA.get('vesting_period'))
+
+    def enter_transfer_option_with_segments_data(self, **kwargs):
+        el = self.driver.find_element_by_id('add_option_transaction')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+        selects = form.find_elements_by_tag_name('select')
+
+        buyer = kwargs.get('buyer')
+        seller = kwargs.get('seller')
+
+        select_input = []
+        if buyer:
+            select_input.extend([buyer.user.email])
+        else:
+            select_input.extend([''])
+        select_input.extend([
+            kwargs.get('title') or DEFAULT_TEST_DATA.get('title')
+        ])
+        if seller:
+            select_input.extend([seller.user.email])
+
+        for key, select in enumerate(selects):
+            select = Select(select)
+            if key < len(select_input) and select_input[key] != '':
+                select.select_by_visible_text(select_input[key])
+
+        inputs[0].send_keys(
+            kwargs.get('date') or DEFAULT_TEST_DATA.get('date'))
+        inputs[1].send_keys(kwargs.get('number_segments',
+                            DEFAULT_TEST_DATA.get('share_count')))
+        inputs[2].send_keys(kwargs.get('number_segments',
+                            DEFAULT_TEST_DATA.get('number_segments')))
+        inputs[3].send_keys(DEFAULT_TEST_DATA.get('vesting_period'))
 
     # -- CLICKs
     def click_open_create_option_plan(self):
@@ -170,6 +225,20 @@ class OptionsPage(BasePage):
                     return True
         return False
 
+    def is_transfer_option_with_segments_shown(self, **kwargs):
+        buyer = kwargs.get('buyer')
+        ot = buyer.option_buyer.latest('id')
+        s1 = u"{} {}".format(buyer.user.first_name, buyer.user.last_name)
+        s2 = u"{} (#{})".format(ot.count,
+                                human_readable_segments(ot.number_segments))
+        for table in self.driver.find_elements_by_class_name('table'):
+            tr = table.find_element_by_xpath('//tr[./td="{}"]'.format(s1))
+            buyer_td = tr.find_element_by_class_name('buyer')
+            count_td = tr.find_element_by_class_name('count')
+            if s1 == buyer_td.text and s2 == count_td.text:
+                return True
+        return False
+
     def is_option_date_equal(self, date):
         """
         return the date from the markup to the test for verification
@@ -190,6 +259,29 @@ class OptionsPage(BasePage):
 
         self.enter_option_plan_form_data()
         self.click_save_option_plan_form()
+
+
+class OptionsDetailPage(BasePage):
+    """Options Detail View"""
+
+    def __init__(self, driver, live_server_url, user, path):
+        """ load MainPage '/' """
+        self.live_server_url = live_server_url
+        # prepare driver
+        super(OptionsDetailPage, self).__init__(driver)
+
+        # load page
+        self.operator = user.operator_set.all()[0]
+        self.login(username=user.username, password='test')
+        self.driver.get('%s%s' % (live_server_url, path))
+
+    def get_security_text(self):
+        """
+        return text of security table element
+        """
+        el = self.driver.find_element_by_xpath(
+            '//tr[contains(@class, "security")]/td[contains(@class, "text")]')
+        return el.text
 
 
 class PositionPage(BasePage):

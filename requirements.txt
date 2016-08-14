@@ -29,7 +29,7 @@ model_mommy
 
 #-- zinnia reqs
 django-mptt>=0.8.5
-django-tagging>=0.3.6
+django-tagging>=0.4.3
 beautifulsoup4>=4.1.3
 mots-vides>=2015.2.6
 django-contrib-comments>=1.7.1

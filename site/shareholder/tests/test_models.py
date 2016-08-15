@@ -13,6 +13,7 @@ from project.generators import (CompanyGenerator, CompanyShareholderGenerator,
                                 ComplexOptionTransactionsWithSegmentsGenerator,
                                 ComplexPositionsWithSegmentsGenerator,
                                 ComplexShareholderConstellationGenerator,
+                                MassPositionsWithSegmentsGenerator,
                                 OperatorGenerator, OptionPlanGenerator,
                                 OptionTransactionGenerator, PositionGenerator,
                                 SecurityGenerator, ShareholderGenerator,
@@ -459,6 +460,17 @@ class ShareholderTestCase(TestCase):
             shs[1].owns_segments(segments, positions[0].security),
             (False, [1667], [u'1000-1200', 1666]))
 
+    def test_owns_segments_performance(self):
+        """
+        speed of segment owning check
+        """
+        poss, shs = MassPositionsWithSegmentsGenerator().generate()
+
+        start = datetime.datetime.now()
+        shs[0].owns_segments([10000-200000, 350000-800000], poss[0].security)
+        end = datetime.datetime.now()
+        self.assertTrue(end - start < datetime.timedelta(microseconds=1))
+
     def test_owns_options_segments(self):
         """
         does the user own this options segment?
@@ -478,7 +490,6 @@ class ShareholderTestCase(TestCase):
             shs[1].owns_options_segments(segments, security),
             (False, [1667], [u'1000-1200', 1666]))
 
-
     def test_current_segments(self):
         """
         get shareholders list of segments owned
@@ -488,6 +499,17 @@ class ShareholderTestCase(TestCase):
         self.assertEqual(
             shs[1].current_segments(positions[0].security),
             [u'1000-1200', 1666])
+
+    def test_current_segments_performance(self):
+        """
+        checks speed of method
+        """
+        poss, shs = MassPositionsWithSegmentsGenerator().generate()
+
+        start = datetime.datetime.now()
+        shs[0].current_segments(poss[0].security)
+        end = datetime.datetime.now()
+        self.assertTrue(end - start < datetime.timedelta(microseconds=1))
 
     def test_current_options_segments(self):
         """

@@ -10,6 +10,7 @@ from django.utils.translation import gettext_lazy as __
 from shareholder.models import (Company, Country, Operator, OptionPlan,
                                 OptionTransaction, Position, Security,
                                 Shareholder, UserProfile)
+from utils.formatters import inflate_segments
 from utils.user import make_username
 
 User = get_user_model()
@@ -181,12 +182,18 @@ class CompanyShareholderGenerator(object):
             company=company,
             number='0')
 
+        if kwargs.get('security').track_numbers:
+            number_segments = kwargs.get('security').number_segments
+        else:
+            number_segments = []
+
         pos_kwargs = kwargs.copy()
         pos_kwargs.update({
             'buyer': shareholder,
             'count': company.share_count,
             'bought_at': company_shareholder_created_at,
             'seller': None,
+            'number_segments': number_segments
         })
 
         PositionGenerator().generate(**pos_kwargs)
@@ -394,6 +401,61 @@ class ComplexPositionsWithSegmentsGenerator(object):
         positions.append(buy_segment([u'1101-1200', 1666], s, cs))
         positions.append(buy_segment([1050], cs, s))
         positions.append(buy_segment([1050], s, cs))
+
+        return positions, shareholders
+
+
+class MassPositionsWithSegmentsGenerator(object):
+
+    def generate(self, *args, **kwargs):
+        """
+        used for performance testing. adds 100 shareholders and 1.000.000 shares
+        """
+        company = kwargs.get('company') or CompanyGenerator().generate()
+
+        OperatorGenerator().generate(company=company)
+
+        # intial securities
+        s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
+        s1.track_numbers = True
+        s1.number_segments = [u'1-1000000']
+        s1.save()
+
+        # initial company shareholder
+        company_shareholder_created_at = kwargs.get(
+            'company_shareholder_created_at'
+        ) or datetime.datetime.now()
+        cs = CompanyShareholderGenerator().generate(
+            company=company, security=s1,
+            company_shareholder_created_at=company_shareholder_created_at)
+
+        # shareholders
+        shareholders = [ShareholderGenerator().generate(company=company) for i
+                        in range(0, 100)]
+        shareholders.append([cs])
+        shareholders.reverse()
+
+        positions = []
+
+        def buy_segment(buyer, seller):
+            if seller.share_count() == 0:
+                return
+            segments = random.choice(seller.current_segments(s1))
+            count = len(inflate_segments(segments))
+
+            p = PositionGenerator().generate(
+                company=company, security=s1, buyer=buyer,
+                seller=seller, number_segments=segments, count=count)
+            return p
+
+        # spread all shares amongst shareholders
+        for x in range(0, 100):
+            positions.append([buy_segment(random.choice(shareholders),
+                                          cs)])
+        # shs trade amongst each other
+        for x in range(0, 100):
+            positions.append([buy_segment(random.choice(shareholders),
+                                          random.choice(shareholders))])
 
         return positions, shareholders
 

@@ -3271,10 +3271,15 @@ div#optionplan .pdf_upload_preview {
   display: block;
 }
 /* line 484, ../../sass/screen.sass */
+.blog h3 {
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+/* line 487, ../../sass/screen.sass */
 .blog p {
   margin: 0 0 0 0;
 }
-/* line 486, ../../sass/screen.sass */
+/* line 489, ../../sass/screen.sass */
 .blog small {
   font-size: 40%;
 }

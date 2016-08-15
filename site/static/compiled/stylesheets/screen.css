@@ -3210,7 +3210,7 @@ div#optionplan .pdf_upload_preview {
   display: none;
 }
 /* line 449, ../../sass/screen.sass */
-.blog .entry-content > p, .blog .entry-content ul {
+.blog .entry-content > p, .blog .entry-content ul, .blog .entry-content ol {
   margin-bottom: 1em;
 }
 /* line 451, ../../sass/screen.sass */

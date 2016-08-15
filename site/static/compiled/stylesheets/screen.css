@@ -3214,63 +3214,67 @@ div#optionplan .pdf_upload_preview {
   margin-bottom: 1em;
 }
 /* line 451, ../../sass/screen.sass */
-.blog .entry-content ul {
+.blog .entry-content ul, .blog .entry-content ol {
   list-style: initial;
   margin-left: 1.1em;
 }
 /* line 454, ../../sass/screen.sass */
+.blog .entry-content ol {
+  list-style-type: decimal;
+}
+/* line 456, ../../sass/screen.sass */
 .blog .entry-content > h1 {
   font-size: 2em;
   margin: 1em 0 1em;
 }
-/* line 457, ../../sass/screen.sass */
+/* line 459, ../../sass/screen.sass */
 .blog .entry-content > h2 {
   font-size: 1.5em;
   margin: 1em 0 1em;
 }
-/* line 460, ../../sass/screen.sass */
+/* line 462, ../../sass/screen.sass */
 .blog .entry-content strong {
   font-weight: bold;
 }
-/* line 462, ../../sass/screen.sass */
+/* line 464, ../../sass/screen.sass */
 .blog .navbar-default {
   background-color: white;
 }
-/* line 464, ../../sass/screen.sass */
+/* line 466, ../../sass/screen.sass */
 .blog .navbar-brand {
   font-size: 2em;
 }
-/* line 466, ../../sass/screen.sass */
+/* line 468, ../../sass/screen.sass */
 .blog .navbar-header span {
   top: 0.3em;
   position: relative;
   left: -1em;
 }
-/* line 470, ../../sass/screen.sass */
+/* line 472, ../../sass/screen.sass */
 .blog a {
   border: none;
   font-size: 1em;
 }
-/* line 473, ../../sass/screen.sass */
+/* line 475, ../../sass/screen.sass */
 .blog a:active, .blog a:focus, .blog a:hover {
   color: #337ab7;
   text-decoration: none;
 }
-/* line 476, ../../sass/screen.sass */
+/* line 478, ../../sass/screen.sass */
 .blog pre {
   padding: 1em;
   margin-bottom: 1em;
 }
-/* line 479, ../../sass/screen.sass */
+/* line 481, ../../sass/screen.sass */
 .blog h2 > a {
   font-size: 2em;
   display: block;
 }
-/* line 482, ../../sass/screen.sass */
+/* line 484, ../../sass/screen.sass */
 .blog p {
   margin: 0 0 0 0;
 }
-/* line 484, ../../sass/screen.sass */
+/* line 486, ../../sass/screen.sass */
 .blog small {
   font-size: 40%;
 }

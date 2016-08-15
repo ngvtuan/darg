@@ -182,7 +182,7 @@ class CompanyShareholderGenerator(object):
             company=company,
             number='0')
 
-        if kwargs.get('security').track_numbers:
+        if kwargs.get('security') and kwargs.get('security').track_numbers:
             number_segments = kwargs.get('security').number_segments
         else:
             number_segments = []

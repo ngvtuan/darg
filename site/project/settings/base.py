@@ -15,7 +15,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 from kombu import Exchange, Queue
 
-VERSION = '0.3.25'
+VERSION = '0.3.26'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 

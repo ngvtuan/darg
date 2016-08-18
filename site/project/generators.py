@@ -372,11 +372,8 @@ class ComplexPositionsWithSegmentsGenerator(object):
         # intial securities
         s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
         s1.track_numbers = True
-        s1.number_segments = [u'0001-1000']
+        s1.number_segments = [u'1000-2000']
         s1.save()
-        s2.track_numbers = True
-        s2.number_segments = [u'2000-3000']
-        s2.save()
 
         # initial company shareholder
         company_shareholder_created_at = kwargs.get(
@@ -397,7 +394,6 @@ class ComplexPositionsWithSegmentsGenerator(object):
                 seller=seller, number_segments=segments)
             return p
 
-        positions.append(buy_segment([u'1000-2000'], cs, None))  # initial seed
         positions.append(buy_segment([u'1000-1050'], s, cs))
         positions.append(buy_segment([1050], cs, s))
         positions.append(buy_segment([u'1050-1100'], s, cs))
@@ -494,9 +490,6 @@ class ComplexOptionTransactionsWithSegmentsGenerator(object):
         s1.track_numbers = True
         s1.number_segments = [u'0001-2000']
         s1.save()
-        s2.track_numbers = True
-        s2.number_segments = [u'2000-3000']
-        s2.save()
 
         # initial company shareholder
         company_shareholder_created_at = kwargs.get(

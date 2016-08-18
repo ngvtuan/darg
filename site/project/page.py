@@ -83,7 +83,7 @@ class BasePage(object):
             if btn.is_displayed():
                 btn.click()
                 # wait until rendered
-                self.wait_until_visible((By.CLASS_NAME, 'uib-datepicker-popup'))
+                self.wait_until_present((By.CLASS_NAME, 'uib-datepicker-popup'))
                 return
 
         raise Exception('Clickable button not found')
@@ -139,7 +139,7 @@ class BasePage(object):
             # go through day tds and find the day to click
             for td in dp_row.find_elements_by_tag_name('td'):
                 el2 = td.find_elements_by_tag_name('span')
-                if el2 and el2[0].text == datetime.strftime(date, '%d'):
+                if el2 and el2[0].get_attribute('innerHTML') == datetime.strftime(date, '%d'):
                     el2[0].click()
                     return
 
@@ -197,7 +197,12 @@ class BasePage(object):
         element = wait.until(EC.invisibility_of_element_located(element))
         return element
 
-    def wait_unti_text_present(self, element, text):
+    def wait_until_present(self, element):
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.presence_of_element_located(element))
+        return element
+
+    def wait_until_text_present(self, element, text):
         """
         wait until element is clickable
         """

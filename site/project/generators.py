@@ -1,17 +1,20 @@
 import datetime
 import hashlib
+import logging
 import random
 
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
-from model_mommy import generators
 from django.utils.translation import gettext_lazy as __
+from model_mommy import generators
 
 from shareholder.models import (Company, Country, Operator, OptionPlan,
                                 OptionTransaction, Position, Security,
                                 Shareholder, UserProfile)
 from utils.formatters import inflate_segments
 from utils.user import make_username
+
+logger = logging.getLogger(__name__)
 
 User = get_user_model()
 
@@ -412,6 +415,7 @@ class MassPositionsWithSegmentsGenerator(object):
         used for performance testing. adds 100 shareholders and 1.000.000 shares
         """
         company = kwargs.get('company') or CompanyGenerator().generate()
+        sh_count = 100
 
         OperatorGenerator().generate(company=company)
 
@@ -429,34 +433,47 @@ class MassPositionsWithSegmentsGenerator(object):
             company=company, security=s1,
             company_shareholder_created_at=company_shareholder_created_at)
 
+        logger.info('start {} shareholder generation...'.format(sh_count))
         # shareholders
         shareholders = [ShareholderGenerator().generate(company=company) for i
-                        in range(0, 100)]
-        shareholders.append([cs])
+                        in range(0, sh_count)]
+        shareholders.append(cs)
         shareholders.reverse()
 
         positions = []
 
         def buy_segment(buyer, seller):
-            if seller.share_count() == 0:
-                return
-            segments = random.choice(seller.current_segments(s1))
+            logging.info('getting segment list from seller ...')
+            segments = [random.choice(seller.current_segments(s1))]
+            logging.info('inflating segments from seller...')
             count = len(inflate_segments(segments))
 
+            logging.info('running position generator for position')
             p = PositionGenerator().generate(
                 company=company, security=s1, buyer=buyer,
                 seller=seller, number_segments=segments, count=count)
+            logging.info('returning position')
             return p
 
+        logging.info('distribute shares from cs to shareholders...')
         # spread all shares amongst shareholders
-        for x in range(0, 100):
-            positions.append([buy_segment(random.choice(shareholders),
-                                          cs)])
-        # shs trade amongst each other
-        for x in range(0, 100):
-            positions.append([buy_segment(random.choice(shareholders),
-                                          random.choice(shareholders))])
+        for x in range(0, sh_count):
+            if cs.share_count() > 0:
+                positions.append(buy_segment(random.choice(shareholders),
+                                             cs))
+            else:
+                logging.info('seller has no shares. skipped')
 
+        logging.info('distribute shares amongst shareholders...')
+        # shs trade amongst each other
+        for x in range(0, sh_count):
+            seller = random.choice(shareholders)
+            if seller.share_count() > 0:
+                positions.append(buy_segment(
+                    random.choice(shareholders),
+                    seller))
+
+        logging.info('mass position generator finished')
         return positions, shareholders
 
 

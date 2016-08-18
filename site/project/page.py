@@ -8,6 +8,7 @@ import random
 import time
 from datetime import datetime
 
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -81,6 +82,8 @@ class BasePage(object):
         for btn in btns:
             if btn.is_displayed():
                 btn.click()
+                # wait until rendered
+                self.wait_until_visible((By.CLASS_NAME, 'uib-datepicker-popup'))
                 return
 
         raise Exception('Clickable button not found')
@@ -137,8 +140,7 @@ class BasePage(object):
             for td in dp_row.find_elements_by_tag_name('td'):
                 el2 = td.find_elements_by_tag_name('span')
                 if el2 and el2[0].text == datetime.strftime(date, '%d'):
-                    btn = td.find_element_by_tag_name('button')
-                    btn.click()
+                    el2[0].click()
                     return
 
         raise Exception('Clickable button not found')

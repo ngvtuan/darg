@@ -488,7 +488,7 @@ class ComplexOptionTransactionsWithSegmentsGenerator(object):
         # intial securities
         s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
         s1.track_numbers = True
-        s1.number_segments = [u'0001-2000']
+        s1.number_segments = [u'1-3000']
         s1.save()
 
         # initial company shareholder
@@ -497,8 +497,7 @@ class ComplexOptionTransactionsWithSegmentsGenerator(object):
         ) or datetime.datetime.now()
         cs = CompanyShareholderGenerator().generate(
             company=company, security=s1,
-            company_shareholder_created_at=company_shareholder_created_at,
-            number_segments=kwargs.get('numbers_segments', [u'1-3000']))
+            company_shareholder_created_at=company_shareholder_created_at)
         s = ShareholderGenerator().generate(company=company)
         optionplan = OptionPlanGenerator().generate(
             company=company, number_segments=[u'1000-2000'], security=s1)

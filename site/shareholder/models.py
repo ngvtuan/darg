@@ -3,6 +3,7 @@ import logging
 import math
 import os
 import time
+from collections import Counter
 from decimal import Decimal
 
 from django.conf import settings
@@ -541,6 +542,7 @@ class Shareholder(models.Model):
         returns deflated segments which are owned by this shareholder.
         includes segments blocked for options.
         """
+        logger.info('current items: starting')
         date = date or datetime.datetime.now()
 
         # all pos before date
@@ -550,6 +552,7 @@ class Shareholder(models.Model):
         qs_bought = qs_bought.filter(security=security)
         qs_sold = qs_sold.filter(security=security)
 
+        logger.info('current items: qs done')
         # -- flat list of bought items
         segments_bought = qs_bought.values_list(
             'number_segments', flat=True)
@@ -562,25 +565,20 @@ class Shareholder(models.Model):
             'number_segments', flat=True)
         segments_sold = [
             segment for sublist in segments_sold for segment in sublist]
+        logger.info('current items: flat lists done. inflating...')
 
         segments_owning = []
 
         # inflate to have int only
         segments_bought = inflate_segments(segments_bought)
         segments_sold = inflate_segments(segments_sold)
-        for segment in segments_bought:
-            # count times bought
-            buy_count = segments_bought.count(segment)
-            # count times sold
-            sell_count = segments_sold.count(segment)
-            # validate that count is either 0 or 1 (sold/bought)
-            delta = buy_count - sell_count
-            if delta == 1:
-                segments_owning.append(segment)
-            elif delta > 1 or delta < 0:
-                logger.error('segment {} was bought or sold {} times.'.format(
-                    segment, delta))
+        logger.info('current items: iterating through bought segments...')
 
+        counter_bought = Counter(segments_bought)
+        counter_sold = Counter(segments_sold)
+        # set as items can occur only once
+        segments_owning = set(counter_bought - counter_sold)
+        logger.info('current items: finished')
         return deflate_segments(segments_owning)
 
     def current_options_segments(self, security, optionplan=None, date=None):
@@ -619,19 +617,11 @@ class Shareholder(models.Model):
         # inflate to have int only
         segments_bought = inflate_segments(segments_bought)
         segments_sold = inflate_segments(segments_sold)
-        for segment in segments_bought:
-            # count times bought
-            buy_count = segments_bought.count(segment)
-            # count times sold
-            sell_count = segments_sold.count(segment)
-            # validate that count is either 0 or 1 (sold/bought)
-            delta = buy_count - sell_count
-            if delta == 1:
-                segments_owning.append(segment)
-            elif delta > 1 or delta < 0:
-                logger.error('segment {} was bought or sold {} times.'.format(
-                    segment, delta))
 
+        counter_bought = Counter(segments_bought)
+        counter_sold = Counter(segments_sold)
+        # set as items can occur only once
+        segments_owning = set(counter_bought - counter_sold)
         return deflate_segments(segments_owning)
 
 

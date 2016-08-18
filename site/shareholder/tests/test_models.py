@@ -469,7 +469,8 @@ class ShareholderTestCase(TestCase):
         start = datetime.datetime.now()
         shs[0].owns_segments([10000-200000, 350000-800000], poss[0].security)
         end = datetime.datetime.now()
-        self.assertTrue(end - start < datetime.timedelta(microseconds=1))
+        delta = end - start
+        self.assertLess(delta, datetime.timedelta(seconds=4))
 
     def test_owns_options_segments(self):
         """
@@ -509,7 +510,8 @@ class ShareholderTestCase(TestCase):
         start = datetime.datetime.now()
         shs[0].current_segments(poss[0].security)
         end = datetime.datetime.now()
-        self.assertTrue(end - start < datetime.timedelta(microseconds=1))
+        delta = end-start
+        self.assertLess(delta, datetime.timedelta(seconds=4))
 
     def test_current_options_segments(self):
         """

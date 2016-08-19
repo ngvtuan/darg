@@ -191,7 +191,7 @@ class Company(models.Model):
         if not self.logo:
             return
 
-        kwargs = {'crop': 'center', 'quality': 99}
+        kwargs = {'crop': 'center', 'quality': 99, 'format': "PNG"}
         return get_thumbnail(self.logo.file, 'x40', **kwargs).url
 
     # --- LOGIC

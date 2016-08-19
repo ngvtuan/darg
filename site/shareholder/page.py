@@ -94,7 +94,7 @@ class OptionsPage(BasePage):
         self.driver.get('%s%s' % (live_server_url, '/options/'))
 
     # -- INPUT COMMANDs
-    def enter_option_plan_form_data(self):
+    def enter_option_plan_form_data(self, *args, **kwargs):
         el = self.driver.find_element_by_id('add_option_plan')
         form = el.find_element_by_tag_name('form')
         inputs = form.find_elements_by_tag_name('input')
@@ -105,8 +105,11 @@ class OptionsPage(BasePage):
 
         inputs[0].send_keys(DEFAULT_TEST_DATA.get('date'))
         inputs[1].send_keys(DEFAULT_TEST_DATA.get('title'))
-        inputs[2].send_keys(DEFAULT_TEST_DATA.get('exercise_price'))
-        inputs[3].send_keys(DEFAULT_TEST_DATA.get('share_count'))
+        inputs[2].send_keys(
+            str(kwargs.get('exercise_price',
+                           DEFAULT_TEST_DATA.get('exercise_price'))))
+        inputs[3].send_keys(str(
+            kwargs.get('count', DEFAULT_TEST_DATA.get('share_count'))))
         inputs[5].send_keys(DEFAULT_TEST_DATA.get('comment'))
 
     def enter_option_plan_form_data_with_segments(self, **kwargs):
@@ -155,7 +158,8 @@ class OptionsPage(BasePage):
 
         inputs[0].send_keys(
             kwargs.get('date') or DEFAULT_TEST_DATA.get('date'))
-        inputs[1].send_keys(DEFAULT_TEST_DATA.get('count'))
+        inputs[1].send_keys(str(
+            kwargs.get('count', DEFAULT_TEST_DATA.get('count'))))
         inputs[3].send_keys(DEFAULT_TEST_DATA.get('vesting_period'))
 
     def enter_transfer_option_with_segments_data(self, **kwargs):
@@ -375,12 +379,12 @@ class PositionPage(BasePage):
         # count
         if position.count:
             inputs[1].clear()  # clear existing values
-            inputs[1].send_keys(position.count)  # count
+            inputs[1].send_keys(str(position.count))  # count
 
         # value
         if position.value:
             inputs[2].clear()  # clear existing values
-            inputs[2].send_keys(position.value)  # price
+            inputs[2].send_keys(str(position.value))  # price
 
         # if numbered shares enter segment
         if position.security.track_numbers:
@@ -434,10 +438,10 @@ class PositionPage(BasePage):
 
         if position.count:
             inputs[1].clear()
-            inputs[1].send_keys(position.count)  # count
+            inputs[1].send_keys(str(position.count))  # count
         if position.value:
             inputs[2].clear()
-            inputs[2].send_keys(position.value)  # price
+            inputs[2].send_keys(str(position.value))  # price
         if inputs[3].is_displayed():
             inputs[3].clear()
             inputs[3].send_keys(position.number_segments)  # comment

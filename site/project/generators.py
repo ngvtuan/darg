@@ -30,6 +30,8 @@ DEFAULT_TEST_DATA = {
     'count': '2222',
     'vesting_period': 3,
     'number_segments': '2100, 2101, 2102-2255',
+    'company_name': 'SuperStart AG',
+    'value': '4.55',
 }
 
 
@@ -43,7 +45,9 @@ def _make_user():
 
     words = _make_wordlist()
     hash_user = hashlib.sha1()
-    hash_user.update(random.choice(words))
+    hash_user.update(
+        random.choice(words) + str(random.randint(0, 100000))
+    )
     username = hash_user.hexdigest()[0:25]
     email = "{}@{}".format(username, 'example.com')
 

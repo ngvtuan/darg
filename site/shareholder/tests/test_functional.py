@@ -3,6 +3,7 @@
 import datetime
 import time
 import unittest
+from decimal import Decimal
 
 from django.core.urlresolvers import reverse
 
@@ -13,7 +14,7 @@ from project.generators import (ComplexOptionTransactionsWithSegmentsGenerator,
                                 PositionGenerator, ShareholderGenerator,
                                 TwoInitialSecuritiesGenerator)
 from shareholder import page
-from shareholder.models import Position, Security, Shareholder
+from shareholder.models import Position, Security, Shareholder, OptionPlan
 
 
 # --- FUNCTIONAL TESTS
@@ -120,6 +121,30 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
 
     def tearDown(self):
         Security.objects.all().delete()
+
+    def test_add_optionplan_96(self):
+        """
+        test add option plan with large numbers and floating point price
+        """
+        try:
+            app = page.OptionsPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_create_option_plan()
+
+            self.assertTrue(app.is_option_plan_form_open())
+
+            app.enter_option_plan_form_data(count=15000000, exercise_price=4.55)
+            app.click_save_option_plan_form()
+
+            self.assertTrue(app.is_no_errors_displayed())
+            self.assertTrue(app.is_option_plan_displayed())
+
+            op = OptionPlan.objects.latest('pk')
+            self.assertEqual(op.exercise_price, Decimal('4.55'))
+            self.assertEqual(op.count, 15000000)
+
+        except Exception, e:
+            self._handle_exception(e)
 
     def test_base_use_case(self):
         """ means: create a option plan and move options for users """
@@ -500,6 +525,33 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
         except Exception, e:
             self._handle_exception(e)
 
+    def test_add_96(self):
+        """
+        add position with floating point value and large count
+        """
+        position = PositionGenerator().generate(
+            save=False, seller=self.seller, buyer=self.buyer,
+            security=self.securities[1])
+        position.value = 4.55
+        position.count = 15000000
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_add_position_form()
+            app.enter_new_position_data(position)
+            app.click_save_position()
+
+            self.assertEqual(len(app.get_position_row_data()), 8)
+            self.assertTrue(app.is_no_errors_displayed())
+
+            position = Position.objects.latest('pk')
+            self.assertEqual(position.value, Decimal('4.55'))
+            self.assertEqual(position.count, 15000000)
+
+        except Exception, e:
+            self._handle_exception(e)
+
     def test_add_numbered_segments(self):
         """
         add position with numbered shares
@@ -698,6 +750,30 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             self.assertEqual(len(app.get_position_row_data()), 8)
             self.assertTrue(app.is_no_errors_displayed())
 
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_cap_increase_96(self):
+        position = PositionGenerator().generate(
+            save=False, seller=self.seller, buyer=self.buyer,
+            security=self.securities[0])
+        position.value = 4.55
+        position.count = 15000000
+
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_cap_increase_form()
+            app.enter_new_cap_data(position)
+            app.click_save_cap_increase()
+
+            self.assertEqual(len(app.get_position_row_data()), 8)
+            self.assertTrue(app.is_no_errors_displayed())
+
+            position = Position.objects.latest('pk')
+            self.assertEqual(position.value, Decimal('4.55'))
+            self.assertEqual(position.count, 15000000)
         except Exception, e:
             self._handle_exception(e)
 

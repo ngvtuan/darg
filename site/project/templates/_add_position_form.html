@@ -38,7 +38,7 @@
           <option value='' disabled>{% endverbatim %}{% trans "Security" %}{% verbatim %}</option>
         </select>
         <input type="number" class="form-control" ng-model="newPosition.count" translate translate-attr-placeholder="Count" ng-maxlength="10">
-        <input type="number" class="form-control" ng-model="newPosition.value" translate translate-attr-placeholder="Payed Price" ng-maxlength="10">
+        <input type="number" class="form-control" ng-model="newPosition.value" translate translate-attr-placeholder="Payed Price" ng-maxlength="10" step=".01">
         <input type="text" class="form-control" ng-model="newPosition.number_segments" translate translate-attr-placeholder="Share IDs" ng-maxlength="255" ng-show="newPosition.security.track_numbers" uib-popover="{{numberSegmentsAvailable}}" popover-placement="bottom">
         <input type="text" class="form-control" ng-model="newPosition.comment" translate translate-attr-placeholder="Comment">
       </div>

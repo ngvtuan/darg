@@ -179,8 +179,8 @@ def captable_pdf(request, company_id):
     # if not DEBUG
     if not settings.DEBUG:
         response['Content-Disposition'] = (
-            'attachment; filename="'
-            '{}_captable_{}.pdf"'.format(
+            u'attachment; filename="'
+            u'{}_captable_{}.pdf"'.format(
                 time.strftime("%Y-%m-%d"), company.name)
         )
 

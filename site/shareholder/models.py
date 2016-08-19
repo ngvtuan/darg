@@ -22,6 +22,8 @@ from sorl.thumbnail import get_thumbnail
 from utils.formatters import (deflate_segments, flatten_list,
                               human_readable_segments, inflate_segments,
                               string_list_to_json)
+from utils.math import substract_list
+
 
 logger = logging.getLogger(__name__)
 
@@ -385,7 +387,10 @@ class Shareholder(models.Model):
             buyer__company=self.company,
             value__gt=0
         ).order_by('-bought_at', '-id').first()
-        return share_count * position.value
+        if position:
+            return share_count * position.value
+        else:
+            return 0
 
     def last_traded_share_price(self, date=None, security=None):
         qs = Position.objects.filter(buyer__company=self.company)
@@ -501,17 +506,24 @@ class Shareholder(models.Model):
 
         does not check any kind of options. use owns_options_segments for this
         """
+
+        logger.info('checking if {} owns {}'.format(self, segments))
+
         if isinstance(segments, str):
             segments = string_list_to_json(segments)
+            logger.info('converted string to json')
 
+        logger.info('getting current segments...')
         segments_owning = inflate_segments(self.current_segments(
             security=security))
         failed_segments = []
-        for segment in inflate_segments(segments):
 
-            # shareholder does not own this
-            if segment not in segments_owning:
-                failed_segments.append(segment)
+        logger.info('calculating segments not owning...')
+        # shareholder does not own this
+        failed_segments = substract_list(
+            inflate_segments(segments), segments_owning)
+
+        logger.info('check segment ownership done')
 
         return (len(failed_segments) == 0,
                 deflate_segments(failed_segments),
@@ -574,10 +586,7 @@ class Shareholder(models.Model):
         segments_sold = inflate_segments(segments_sold)
         logger.info('current items: iterating through bought segments...')
 
-        counter_bought = Counter(segments_bought)
-        counter_sold = Counter(segments_sold)
-        # set as items can occur only once
-        segments_owning = set(counter_bought - counter_sold)
+        segments_owning = substract_list(segments_bought, segments_sold)
         logger.info('current items: finished')
         return deflate_segments(segments_owning)
 

@@ -71,6 +71,7 @@ def inflate_segments(segments):
         if isinstance(to_list(segment), list):
             flattened_segments.extend(segment)
 
+    flattened_segments.sort()
     return flattened_segments
 
 
@@ -81,15 +82,21 @@ def deflate_segments(segments):
     * remove duplicates
     * sort
     """
+
+    if segments == []:
+        return []
+
     # --- standardize on deflate
     # remove dupes
     segments = list(set(segments))
     # sort
-    segments.sort()
+    segments.sort()  # mandatory, but perf wasting
 
     start = None
     advance = None
     deflated_segments = []
+    last_segment = segments[-1]
+
 
     # attention: writes to list backwards elements
     for segment in segments:
@@ -97,13 +104,13 @@ def deflate_segments(segments):
             start = segment
             advance = segment
             # if this is a one element list
-            if segment == segments[-1]:
+            if segment == last_segment:
                 deflated_segments.append(start)
             continue
         elif advance and segment == advance + 1:
             advance = segment
             # on last element write range before continue
-            if segment == segments[-1]:
+            if segment == last_segment:
                 deflated_segments.append(u'{}-{}'.format(start, advance))
             continue
 
@@ -114,7 +121,7 @@ def deflate_segments(segments):
             deflated_segments.append(u'{}-{}'.format(start, advance))
 
         # on last element detect and write lonely int
-        if segment == segments[-1] and segment > advance + 1:
+        if segment == last_segment and segment > advance + 1:
             deflated_segments.append(segment)
 
         # start over

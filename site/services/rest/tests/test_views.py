@@ -1,5 +1,7 @@
 # coding=utf-8
+import time
 import datetime
+import logging
 
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
@@ -8,7 +10,7 @@ from django.test import RequestFactory, TestCase
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
-from project.generators import (CompanyGenerator,
+from project.generators import (CompanyGenerator, CompanyShareholderGenerator,
                                 ComplexOptionTransactionsWithSegmentsGenerator,
                                 ComplexPositionsWithSegmentsGenerator,
                                 OperatorGenerator, OptionTransactionGenerator,
@@ -18,6 +20,8 @@ from project.generators import (CompanyGenerator,
 from services.rest.serializers import SecuritySerializer
 from shareholder.models import (Operator, OptionTransaction, Position,
                                 Security, Shareholder)
+
+logger = logging.getLogger()
 
 User = get_user_model()
 
@@ -456,6 +460,122 @@ class PositionTestCase(TestCase):
             position.bought_at.isoformat(), '2016-05-13')
         self.assertEqual(position.number_segments, [u'1-5'])
 
+    def test_add_position_with_number_segment_performance(self):
+        """
+        test that we can add a position with numbered shares
+        """
+
+        logger.info('preparing test...')
+        operator = OperatorGenerator().generate()
+        user = operator.user
+        sec1, sec2 = TwoInitialSecuritiesGenerator().generate(
+            company=operator.company)
+        sec1.track_numbers = True
+        sec1.number_segments = [u"1-10000000"]
+        sec1.save()
+
+        cs = CompanyShareholderGenerator().generate(
+            security=sec1, company=operator.company)
+        buyer = ShareholderGenerator().generate(company=operator.company)
+
+        logger.info('data preparation done.')
+        logged_in = self.client.login(username=user.username, password='test')
+        self.assertTrue(logged_in)
+
+        data = {
+            "bought_at": "2016-05-13T23:00:00.000Z",
+            "buyer": {
+                "pk": buyer.pk,
+                "user": {
+                    "first_name": buyer.user.first_name,
+                    "last_name": buyer.user.last_name,
+                    "email": buyer.user.email,
+                    "operator_set": [],
+                    "userprofile": None,
+                },
+                "number": "0",
+                "company": {
+                    "pk": operator.company.pk,
+                    "name": operator.company.name,
+                    "share_count": operator.company.share_count,
+                    "country": "",
+                    "url": "http://codingmachine:9000/services/rest/"
+                           "company/{}".format(operator.company.pk),
+                    "shareholder_count": 2
+                },
+                "share_percent": "99.90",
+                "share_count": 100002,
+                "share_value": 1000020,
+                "validate_gafi": {
+                    "is_valid": True,
+                    "errors": []
+                }
+            },
+            "security": {
+                "pk": sec1.pk,
+                "title": sec1.title,
+                "count": sec1.count,
+                "track_numbers": True,
+                "number_segments": sec1.number_segments
+            },
+            "count": 1000000,
+            "value": 0.5,
+            "seller": {
+                "pk": cs.pk,
+                "user": {
+                    "first_name": cs.user.first_name,
+                    "last_name": cs.user.last_name,
+                    "email": cs.user.email,
+                    "operator_set": [],
+                    "userprofile": None
+                },
+                "number": "0",
+                "company": {
+                    "pk": 5,
+                    "name": "LieblingzWaldCompany AG",
+                    "share_count": 100100,
+                    "country": "",
+                    "url": "http://codingmachine:9000/services/rest/company/5",
+                    "shareholder_count": 2
+                },
+                "share_percent": "99.90",
+                "share_count": 100000,
+                "share_value": 1000020,
+                "validate_gafi": {
+                    "is_valid": True,
+                    "errors": []
+                }
+            },
+            "number_segments": "1-1000000",
+            "comment": "Large Transaction"
+        }
+
+        logger.info('firing api call...')
+        t0 = time.clock()
+        response = self.client.post(
+            '/services/rest/position',
+            data,
+            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
+                user.auth_token.key), 'format': 'json'})
+        t1 = time.clock()
+        delta = t1 - t0
+
+        logger.info('api call done. evaluating result...')
+
+        self.assertEqual(response.status_code, 201)
+        self.assertTrue('Large Transaction' in response.content)
+        self.assertEqual(response.data['number_segments'], [u'1-1000000'])
+        self.assertLess(delta, 5)
+
+        position = Position.objects.latest('id')
+        self.assertEqual(position.count, 1000000)
+        self.assertEqual(position.value, 0.5)
+        self.assertEqual(position.buyer, buyer)
+        self.assertEqual(position.seller, cs)
+        self.assertEqual(
+            position.bought_at.isoformat(), '2016-05-13')
+        self.assertEqual(position.number_segments, [u'1-1000000'])
+
     def test_delete_position(self):
         """
         operator deletes position
@@ -880,7 +1000,7 @@ class ShareholderTestCase(TestCase):
         res = self.client.get(reverse('shareholders-number-segments',
                                       kwargs={'pk': shs[1].pk}))
 
-        self.assertTrue(res.data[security.pk] == [u'1000-1200', 1666])
+        self.assertEqual(res.data[security.pk], [u'1000-1200', 1666])
 
 
 class OptionTransactionTestCase(APITestCase):
@@ -1004,3 +1124,4 @@ class SecurityTestCase(APITestCase):
 
         security = Security.objects.get(id=security.id)
         self.assertEqual(security.number_segments, [u'1-4', u'8-10'])
+

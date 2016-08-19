@@ -387,7 +387,10 @@ class Shareholder(models.Model):
             buyer__company=self.company,
             value__gt=0
         ).order_by('-bought_at', '-id').first()
-        return share_count * position.value
+        if position:
+            return share_count * position.value
+        else:
+            return 0
 
     def last_traded_share_price(self, date=None, security=None):
         qs = Position.objects.filter(buyer__company=self.company)

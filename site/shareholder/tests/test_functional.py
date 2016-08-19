@@ -3,6 +3,7 @@
 import datetime
 import time
 import unittest
+from decimal import Decimal
 
 from django.core.urlresolvers import reverse
 
@@ -496,6 +497,33 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
 
             self.assertEqual(len(app.get_position_row_data()), 8)
             self.assertTrue(app.is_no_errors_displayed())
+
+        except Exception, e:
+            self._handle_exception(e)
+
+    def test_add_96(self):
+        """
+        add position with floating point value and large count
+        """
+        position = PositionGenerator().generate(
+            save=False, seller=self.seller, buyer=self.buyer,
+            security=self.securities[1])
+        position.value = 4.55
+        position.count = 15000000
+        try:
+
+            app = page.PositionPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_add_position_form()
+            app.enter_new_position_data(position)
+            app.click_save_position()
+
+            self.assertEqual(len(app.get_position_row_data()), 8)
+            self.assertTrue(app.is_no_errors_displayed())
+
+            position = Position.objects.latest('pk')
+            self.assertEqual(position.value, Decimal('4.55'))
+            self.assertEqual(position.count, 15000000)
 
         except Exception, e:
             self._handle_exception(e)

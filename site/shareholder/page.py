@@ -375,12 +375,12 @@ class PositionPage(BasePage):
         # count
         if position.count:
             inputs[1].clear()  # clear existing values
-            inputs[1].send_keys(position.count)  # count
+            inputs[1].send_keys(str(position.count))  # count
 
         # value
         if position.value:
             inputs[2].clear()  # clear existing values
-            inputs[2].send_keys(position.value)  # price
+            inputs[2].send_keys(str(position.value))  # price
 
         # if numbered shares enter segment
         if position.security.track_numbers:

@@ -95,7 +95,7 @@ class UtilsTestCase(TestCase):
         self.assertEqual(
             res,
             [u'1-1000000', 1500000, 1600000, u'2000000-8000000', 9000000])
-        self.assertLess(t1 - t0, 1)
+        self.assertLess(t1 - t0, 1.1)
 
     def test_substract_list_performance(self):
         """

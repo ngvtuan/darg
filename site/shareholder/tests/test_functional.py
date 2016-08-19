@@ -14,7 +14,7 @@ from project.generators import (ComplexOptionTransactionsWithSegmentsGenerator,
                                 PositionGenerator, ShareholderGenerator,
                                 TwoInitialSecuritiesGenerator)
 from shareholder import page
-from shareholder.models import Position, Security, Shareholder
+from shareholder.models import Position, Security, Shareholder, OptionPlan
 
 
 # --- FUNCTIONAL TESTS
@@ -121,6 +121,30 @@ class OptionsFunctionalTestCase(BaseSeleniumTestCase):
 
     def tearDown(self):
         Security.objects.all().delete()
+
+    def test_add_optionplan_96(self):
+        """
+        test add option plan with large numbers and floating point price
+        """
+        try:
+            app = page.OptionsPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            app.click_open_create_option_plan()
+
+            self.assertTrue(app.is_option_plan_form_open())
+
+            app.enter_option_plan_form_data(count=15000000, exercise_price=4.55)
+            app.click_save_option_plan_form()
+
+            self.assertTrue(app.is_no_errors_displayed())
+            self.assertTrue(app.is_option_plan_displayed())
+
+            op = OptionPlan.objects.latest('pk')
+            self.assertEqual(op.exercise_price, Decimal('4.55'))
+            self.assertEqual(op.count, 15000000)
+
+        except Exception, e:
+            self._handle_exception(e)
 
     def test_base_use_case(self):
         """ means: create a option plan and move options for users """

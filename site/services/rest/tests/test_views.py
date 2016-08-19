@@ -48,6 +48,40 @@ class AddCompanyTestCase(APITestCase):
         company = user.operator_set.all()[0].company
         self.assertEqual(company.security_set.all()[0].title, 'C')
 
+    def test_add_company_saving_twice(self):
+        """
+        confirm that we add all properly
+        #54: common stock as default security
+        """
+        user = UserGenerator().generate()
+        kwargs = {
+            "name": "Pariatur Rerum est voluptates ipsa in officia libero "
+                    "soluta omnis saepe voluptates omnis quidem autem veniam "
+                    "rerum molestiae incidunt",
+            "count": 36,
+            "face_value": 18,
+            "founded_at": "2016-05-31T23:00:00.000Z"
+        }
+
+        self.client.force_authenticate(user=user)
+        res = self.client.post(reverse('add_company'), kwargs)
+
+        self.assertEqual(res.status_code, 201)
+        company = user.operator_set.all()[0].company
+        username1 = company.get_company_shareholder().user.username
+        self.assertEqual(company.security_set.all()[0].title, 'C')
+
+        # second user
+        user = UserGenerator().generate()
+        self.client.force_authenticate(user=user)
+        res = self.client.post(reverse('add_company'), kwargs)
+
+        self.assertEqual(res.status_code, 201)
+        company = user.operator_set.all()[0].company
+        self.assertEqual(company.security_set.all()[0].title, 'C')
+        username2 = company.get_company_shareholder().user.username
+        self.assertEqual(username1[:25], username2[:-5])
+
 
 class AvailableOptionSegmentsViewTestCase(APITestCase):
 

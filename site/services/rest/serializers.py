@@ -15,6 +15,7 @@ from shareholder.models import (Company, Country, Operator, OptionPlan,
                                 OptionTransaction, Position, Security,
                                 Shareholder, UserProfile)
 from utils.formatters import string_list_to_json, inflate_segments
+from utils.hashers import random_hash
 from utils.user import make_username
 
 User = get_user_model()
@@ -115,8 +116,15 @@ class AddCompanySerializer(serializers.Serializer):
             count=validated_data.get("count"),
             company=company,
         )
+
+        username = make_username('Company', 'itself', company.name)
+        # user tried to add company already
+        if User.objects.filter(username=username).exists():
+            username = username[:25] + u'-' + random_hash(digits=4)
+
+        # create company user
         companyuser = User.objects.create(
-            username=make_username('Company', 'itself', company.name),
+            username=username,
             first_name='Unternehmen:', last_name=company.name[:30],
             email='info+{}@darg.ch'.format(slugify(company.name))
         )

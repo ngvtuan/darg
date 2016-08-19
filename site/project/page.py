@@ -18,7 +18,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 # from locators import MainPageLocators (save all setter/getter here)
 
 # from selenium.webdriver.support.ui import Select
-# from project.generators import DEFAULT_TEST_DATA
+from project.generators import DEFAULT_TEST_DATA
 
 
 class BasePage(object):
@@ -63,7 +63,7 @@ class BasePage(object):
         """ reload page """
         self.driver.get(self.driver.current_url)
 
-    def use_datepicker(self, class_name, date):
+    def use_datepicker(self, class_name, date=None):
         """
         use default datepicker to select a date
         """
@@ -133,13 +133,17 @@ class BasePage(object):
             '//table[@class="uib-daypicker"]//tr[@class="uib-weeks ng-scope"]')
 
         # in case we have multiple dps
+        time.sleep(1)
         for dp_row in dp_rows:
             if not dp_row.is_displayed():
                 continue
             # go through day tds and find the day to click
             for td in dp_row.find_elements_by_tag_name('td'):
                 el2 = td.find_elements_by_tag_name('span')
-                if el2 and el2[0].get_attribute('innerHTML') == datetime.strftime(date, '%d'):
+                if (el2 and
+                        el2[0].get_attribute('innerHTML') ==
+                        datetime.strftime(date, '%d')
+                ):
                     el2[0].click()
                     return
 
@@ -250,7 +254,8 @@ class StartPage(BasePage):
         super(StartPage, self).__init__(driver)
 
         # load page
-        self.operator = user.operator_set.all()[0]
+        if user.operator_set.exists():
+            self.operator = user.operator_set.all()[0]
         self.login(username=user.username, password='test')
         self.driver.get('%s%s' % (live_server_url, '/start/'))
 
@@ -265,7 +270,22 @@ class StartPage(BasePage):
         inputs[2].send_keys(user.email)
         inputs[3].send_keys(random.randint(1, 6000))
 
+    def enter_add_company_data(self, *args, **kwargs):
+        el = self.driver.find_element_by_id('add_company')
+        form = el.find_element_by_tag_name('form')
+        inputs = form.find_elements_by_tag_name('input')
+
+        inputs[0].send_keys(DEFAULT_TEST_DATA.get('company_name'))
+        self.use_datepicker('add-company')
+        inputs[2].send_keys(kwargs.get('count', DEFAULT_TEST_DATA.get('count')))
+        inputs[3].send_keys(kwargs.get('value', DEFAULT_TEST_DATA.get('value')))
+
     # -- CLICKs
+    def click_save_add_company(self):
+        el = self.driver.find_element_by_id('add_company')
+        el = el.find_element_by_class_name('btn-add-company')
+        el.click()
+
     def click_open_add_shareholder(self):
         time.sleep(2)
         el = self.driver.find_element_by_link_text(
@@ -287,6 +307,10 @@ class StartPage(BasePage):
     # --- CHECKS
     def has_shareholder_count(self, count):
         return len(self.driver.find_elements_by_tag_name('tr')) == count
+
+    def is_add_company_form_displayed(self):
+        el = self.driver.find_element_by_id('add_company')
+        return el.is_displayed()
 
     def is_properly_displayed(self):
         try:

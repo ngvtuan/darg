@@ -30,6 +30,8 @@ DEFAULT_TEST_DATA = {
     'count': '2222',
     'vesting_period': 3,
     'number_segments': '2100, 2101, 2102-2255',
+    'company_name': 'SuperStart AG',
+    'value': '4.55',
 }
 
 

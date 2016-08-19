@@ -58,7 +58,7 @@
           <th class="text-right">{% endverbatim %}{% trans "Shares (Voting-%%)" %}{% verbatim %}</th>
       </thead
       <tbody>
-        <tr class="panel" ng-repeat="shareholder in shareholders  | orderBy:'-share_count'" ng-click="goto_shareholder(shareholder.pk)" ng-mouseover="">
+        <tr class="panel" ng-repeat="shareholder in shareholders  | orderBy:['-share_count', '-last_name']" ng-click="goto_shareholder(shareholder.pk)" ng-mouseover="">
           <td><span class="el-icon-exclamation-sign" ng-hide="shareholder.validate_gafi.is_valid" data-toggle="tooltip" title="{% endverbatim %}{% trans "Gafi Validation failed" %}{% verbatim %}"></span>
             {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
           </td>

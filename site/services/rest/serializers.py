@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -16,9 +17,11 @@ from shareholder.models import (Company, Country, Operator, OptionPlan,
                                 Shareholder, UserProfile)
 from utils.formatters import string_list_to_json, inflate_segments
 from utils.hashers import random_hash
+from utils.math import substract_list
 from utils.user import make_username
 
 User = get_user_model()
+logger = logging.getLogger(__name__)
 
 
 class CountrySerializer(serializers.HyperlinkedModelSerializer):
@@ -409,6 +412,9 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
         """
         validate cross data relations
         """
+
+        logger.info('position create validation...')
+
         res = super(PositionSerializer, self).is_valid(raise_exception)
 
         initial_data = self.initial_data
@@ -416,6 +422,7 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
         security = initial_data.get('security')
         if security and Security.objects.get(id=security['pk']).track_numbers:
 
+            logger.info('validation: prepare data...')
             security = Security.objects.get(id=security['pk'])
             if (isinstance(initial_data.get('number_segments'), str) or
                     isinstance(initial_data.get('number_segments'), unicode)):
@@ -425,10 +432,14 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
                 segments = initial_data.get('number_segments')
             # if we have seller (non capital increase)
             if initial_data.get('seller'):
+                logger.info('validation: get seller segments...')
                 seller = Shareholder.objects.get(
                     pk=initial_data.get('seller')['pk'])
                 owning, failed_segments, owned_segments = seller.owns_segments(
                     segments, security)
+                logger.info(
+                    'validation: seller segs {} for security {} done'.format(
+                        segments, security))
 
             # we need number_segments if this is a security with .track_numbers
             if not segments:
@@ -450,6 +461,7 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
             # validate segment count == share count
             elif (security.count_in_segments(segments) !=
                     initial_data.get('count')):
+                logger.info('validation: checking count...')
                 raise serializers.ValidationError({
                     'count':
                         [_('Number of shares in segments ({}) '
@@ -460,21 +472,26 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
                 })
 
             # segment must not be used by option plan
-            for segment in inflate_segments(segments):
-                if segment in inflate_segments(
-                        security.company.get_all_option_plan_segments()
-                ):
-                    raise serializers.ValidationError({
-                        'number_segments':
-                            [_('Segment {} is blocked for options and cannot be'
-                               ' transfered to a shareholder.').format(segment)]
-                    })
+            logger.info('validation: option plan validation...')
+            inflated_segments = inflate_segments(segments)
+            oplan_segments = inflate_segments(
+                security.company.get_all_option_plan_segments())
+            if substract_list(
+                inflated_segments, oplan_segments
+            ) != inflated_segments:
+                raise serializers.ValidationError({
+                    'number_segments':
+                        [_('Segment {} is blocked for options and cannot be'
+                           ' transfered to a shareholder.').format(segments)]
+                })
 
         return res
 
     def create(self, validated_data):
         """ adding a new position and handling nested data for buyer
         and seller """
+
+        logger.info('position create ...')
 
         # prepare data
         kwargs = {}

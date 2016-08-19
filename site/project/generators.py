@@ -416,13 +416,14 @@ class MassPositionsWithSegmentsGenerator(object):
         """
         company = kwargs.get('company') or CompanyGenerator().generate()
         sh_count = 100
+        segments = kwargs.get('segments', [u'1-1000000'])
 
         OperatorGenerator().generate(company=company)
 
         # intial securities
         s1, s2 = TwoInitialSecuritiesGenerator().generate(company=company)
         s1.track_numbers = True
-        s1.number_segments = [u'1-1000000']
+        s1.number_segments = segments
         s1.save()
 
         # initial company shareholder

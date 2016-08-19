@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 from decimal import Decimal
+import logging
 
 from django.core import mail
 from django.core.urlresolvers import reverse
@@ -19,6 +20,8 @@ from project.generators import (CompanyGenerator, CompanyShareholderGenerator,
                                 SecurityGenerator, ShareholderGenerator,
                                 TwoInitialSecuritiesGenerator, UserGenerator)
 from shareholder.models import Country, Position, Security, Shareholder
+
+logger = logging.getLogger(__name__)
 
 
 # --- MODEL TESTS
@@ -470,6 +473,30 @@ class ShareholderTestCase(TestCase):
         shs[0].owns_segments([10000-200000, 350000-800000], poss[0].security)
         end = datetime.datetime.now()
         delta = end - start
+        self.assertLess(delta, datetime.timedelta(seconds=4))
+
+    def test_owns_segments_rma_performance(self):
+        """
+        speed of segment owning check to meet RMA data
+        """
+        logger.info('preparing test...')
+        operator = OperatorGenerator().generate()
+        sec1, sec2 = TwoInitialSecuritiesGenerator().generate(
+            company=operator.company)
+        sec1.track_numbers = True
+        sec1.number_segments = [u"1-10000000"]
+        sec1.save()
+
+        cs = CompanyShareholderGenerator().generate(
+            security=sec1, company=operator.company)
+
+        logger.info('data preparation done.')
+
+        start = datetime.datetime.now()
+        res = cs.owns_segments([u'1-582912'], sec1)
+        end = datetime.datetime.now()
+        delta = end - start
+        self.assertTrue(res[0])
         self.assertLess(delta, datetime.timedelta(seconds=4))
 
     def test_owns_options_segments(self):

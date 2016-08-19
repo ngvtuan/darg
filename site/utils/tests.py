@@ -1,7 +1,10 @@
+import time
+
 from django.test import TestCase
 
-from utils.formatters import (deflate_segments, inflate_segments,
-                              string_list_to_json, flatten_list)
+from utils.formatters import (deflate_segments, flatten_list, inflate_segments,
+                              string_list_to_json)
+from utils.math import substract_list
 from utils.user import make_username
 
 
@@ -75,3 +78,52 @@ class UtilsTestCase(TestCase):
         segments = [1, 2, 3, 4, 6, 9, 10, 11, 12, 13, 14]
         res = deflate_segments(segments)
         self.assertEqual(res, [u'1-4', 6, u'9-14'])
+
+    def test_deflate_segments_performance(self):
+        """
+        watch the end of deflation logic!
+        """
+        segments = []
+        segments.extend(range(1, 1000001))
+        segments.extend([1500000, 1600000])
+        segments.extend(range(2000000, 8000001))
+        segments.extend([9000000])
+        t0 = time.clock()
+        res = deflate_segments(segments)
+        t1 = time.clock()
+        print("deflate list took {0:.4f} seconds.".format(t1 - t0))
+        self.assertEqual(
+            res,
+            [u'1-1000000', 1500000, 1600000, u'2000000-8000000', 9000000])
+        self.assertLess(t1 - t0, 1)
+
+    def test_substract_list_performance(self):
+        """
+        test performance and result
+        """
+        l1 = range(0, 10000000)
+        l2 = range(0, 1000000)
+        t0 = time.clock()
+        res = substract_list(l1, l2)
+        t1 = time.clock()
+        delta = t1 - t0
+        print("substract list took {0:.4f} seconds.".format(delta))
+
+        self.assertEqual(res, range(1000000, 10000000))
+        self.assertLess(delta, 0.3)
+
+    def test_substract_list_logic(self):
+        """
+        test performance and result
+        """
+        l1 = [5, 7, 11, 11, 11, 12, 13]
+        l2 = [7, 8, 11]
+        res = substract_list(l1, l2)
+
+        self.assertEqual(res, [5, 11, 11, 12, 13])
+
+        l1 = [5]
+        l2 = [5]
+        res = substract_list(l1, l2)
+
+        self.assertEqual(res, [])

@@ -57,7 +57,7 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
-            Raven.captureMessage('form error', {
+            Raven.captureMessage('form error' + rejection.statusText, {
                 level: 'warning',
                 extra: { rejection: rejection },
             })
@@ -93,7 +93,7 @@ app.controller 'CompanyController', ['$scope', '$http', 'Company', 'Country', 'O
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
-            Raven.captureMessage('form error', {
+            Raven.captureMessage('form error' + rejection.statusText, {
                 level: 'warning',
                 extra: { rejection: rejection },
             })

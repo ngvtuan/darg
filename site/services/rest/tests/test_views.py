@@ -838,7 +838,7 @@ class ShareholderTestCase(TestCase):
         detailview to return owned segments for shareholder for all securities
         """
         positions, shs = ComplexPositionsWithSegmentsGenerator().generate()
-        securities = shs[0].company.security_set.all()
+        security = positions[0].security
 
         self.client.force_authenticate(
             shs[0].company.operator_set.all()[0].user.username)
@@ -846,9 +846,7 @@ class ShareholderTestCase(TestCase):
         res = self.client.get(reverse('shareholders-number-segments',
                                       kwargs={'pk': shs[1].pk}))
 
-        self.assertTrue(
-            res.data[securities[1].pk] == [u'1000-1200', 1666] or
-            res.data[securities[0].pk] == [u'1000-1200', 1666])
+        self.assertTrue(res.data[security.pk] == [u'1000-1200', 1666])
 
 
 class OptionTransactionTestCase(APITestCase):

@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def human_readable_segments(segments):
-    return u','.join([str(s) for s in segments])
+    return u', '.join([str(s) for s in segments])
 
 
 def flatten_list(nested_list):

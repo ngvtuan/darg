@@ -49,6 +49,12 @@
     div#footer_content {
         font-size: 8pt;
     }
+
+	tr .even td {
+      background-color: #f7f7f7;
+	  padding-top: 5px;
+	  padding-bottom: 5px;
+	}
 </style>
 {% endblock %}
 
@@ -103,7 +109,7 @@
 
     {% for shareholder in company.get_active_shareholders %}
     <table>
-      <tr class="panel">
+      <tr class="panel {% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
         <td>
           {{ shareholder.user.first_name }} {{ shareholder.user.last_name }}
         </td>

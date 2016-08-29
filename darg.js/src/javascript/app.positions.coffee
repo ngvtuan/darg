@@ -60,7 +60,7 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
-            Raven.captureMessage('form error' + rejection.statusText, {
+            Raven.captureMessage('form error: ' + rejection.statusText, {
                 level: 'warning',
                 extra: { rejection: rejection },
             })
@@ -98,7 +98,7 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $scope.show_split = false
         , (rejection) ->
             $scope.errors = rejection.data
-            Raven.captureMessage('form error' + rejection.statusText, {
+            Raven.captureMessage('form error: ' + rejection.statusText, {
                 level: 'warning',
                 extra: { rejection: rejection },
             })

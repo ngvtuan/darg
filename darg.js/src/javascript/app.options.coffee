@@ -61,7 +61,7 @@ app.controller 'OptionsController', ['$scope', '$http', '$filter', 'OptionPlan',
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
-            Raven.captureMessage('form error' + rejection.statusText, {
+            Raven.captureMessage('form error: ' + rejection.statusText, {
                 level: 'warning',
                 extra: { rejection: rejection },
             })
@@ -87,7 +87,7 @@ app.controller 'OptionsController', ['$scope', '$http', '$filter', 'OptionPlan',
             $scope.errors = null
         , (rejection) ->
             $scope.errors = rejection.data
-            Raven.captureMessage('form error' + rejection.statusText, {
+            Raven.captureMessage('form error: ' + rejection.statusText, {
                 level: 'warning',
                 extra: { rejection: rejection },
             })

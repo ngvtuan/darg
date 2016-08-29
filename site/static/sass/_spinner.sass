@@ -1,0 +1,23 @@
+.loading
+  -webkit-animation: spin 2s linear infinite
+  -moz-animation: spin 2s linear infinite
+  animation: spin 2s linear infinite
+
+.btn .loading
+  width: 13px
+  vertical-align: inherit
+
+@-moz-keyframes spin
+  100%
+    -moz-transform: rotate(360deg)
+
+
+@-webkit-keyframes spin
+  100%
+    -webkit-transform: rotate(360deg)
+
+
+@keyframes spin
+  100%
+    -webkit-transform: rotate(360deg)
+    transform: rotate(360deg)

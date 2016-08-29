@@ -104,7 +104,7 @@
     </div>
   </div> <!-- END Positions -->
 
-  <div class="empty" ng-hide="positions.length">
+  <div class="empty" ng-hide="positions.length || positionsLoading">
     {% endverbatim %}{% trans "No positions" %}{% verbatim %}
   </div>
   {% endverbatim %}

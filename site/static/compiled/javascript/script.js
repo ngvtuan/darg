@@ -659,12 +659,12 @@
         }
       };
       $scope.positionsLoading = true;
+      $scope.addPositionLoading = false;
       $http.get('/services/rest/position').then(function(result) {
-        return angular.forEach(result.data.results, function(item) {
+        angular.forEach(result.data.results, function(item) {
           return $scope.positions.push(item);
-        }).then(function() {
-          return $scope.positionsLoading = false;
         });
+        return $scope.positionsLoading = false;
       });
       $http.get('/services/rest/shareholders').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
@@ -681,9 +681,12 @@
       });
       $scope.add_position = function() {
         var bought_at;
-        bought_at = $scope.newPosition.bought_at;
-        bought_at.setHours(bought_at.getHours() - bought_at.getTimezoneOffset() / 60);
-        $scope.newPosition.bought_at = bought_at;
+        $scope.addPositionLoading = true;
+        if ($scope.newPosition.bought_at) {
+          bought_at = $scope.newPosition.bought_at;
+          bought_at.setHours(bought_at.getHours() - bought_at.getTimezoneOffset() / 60);
+          $scope.newPosition.bought_at = bought_at;
+        }
         return $scope.newPosition.$save().then(function(result) {
           return $scope.positions.push(result);
         }).then(function() {
@@ -691,27 +694,28 @@
           $scope.show_add_capital = false;
           return $scope.newPosition = new Position();
         }).then(function() {
-          return $scope.errors = null;
+          $scope.errors = null;
+          return $scope.addPositionLoading = false;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error: ' + rejection.statusText, {
+          Raven.captureMessage('form error: ' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
             }
           });
+          return $scope.addPositionLoading = false;
         });
       };
       $scope.delete_position = function(position) {
         $scope.positionsLoading = true;
         return $http["delete"]('/services/rest/position/' + position.pk).then(function(result) {
           $scope.positions = [];
-          return $http.get('/services/rest/position').then(function(result1) {
+          $http.get('/services/rest/position').then(function(result1) {
             return angular.forEach(result1.data.results, function(item) {
               return $scope.positions.push(item);
             });
           });
-        }).then(function() {
           return $scope.positionsLoading = false;
         });
       };
@@ -719,10 +723,9 @@
         return $http.post('/services/rest/position/' + position.pk + '/confirm').then(function(result) {
           $scope.positions = [];
           return $http.get('/services/rest/position').then(function(result1) {
-            return angular.forEach(result1.data.results, function(item) {
+            angular.forEach(result1.data.results, function(item) {
               return $scope.positions.push(item);
             });
-          }).then(function() {
             return $scope.positionsLoading = false;
           });
         });

@@ -8,19 +8,19 @@
         size: a4 landscape;
         @frame header_frame {           /* Static Frame */
             -pdf-frame-content: header_content;
-            left: 50pt; top: 50pt; height: 60pt; margin-right:50pt
+            left: 50pt; top: 50pt; height: 60pt; margin-right:50pt;
         }
         @frame header_frame {           /* Static Frame */
             -pdf-frame-content: header_content2;
-            left: 700pt; top: 50pt; height: 60pt; margin-right:50pt; float: right; text-align: right
+            left: 700pt; top: 50pt; height: 60pt; margin-right:50pt; float: right; text-align: right;
         }
 
         @frame content_frame {          /* Content Frame */
-            left: 50pt; top: 121pt; height: 430pt; width:100%; margin-right:50pt; position: relative
+            left: 50pt; top: 121pt; height: 430pt; width:100%; margin-right:50pt; position: relative;
         }
         @frame footer_frame {           /* Another static Frame */
             -pdf-frame-content: footer_content;
-            left: 50pt; top: 552pt; height: 20pt; margin-right:50pt
+            left: 50pt; top: 552pt; height: 20pt; margin-right:50pt;
         }
 
     }
@@ -123,7 +123,7 @@
           {{ shareholder.share_count|intcomma }} {% if shareholder.share_percent %}({{shareholder.share_percent }}){% endif %}
         </td>
         {% if securities_with_track_numbers.exists %}
-        <td align="">
+        <td>
           {{ shareholder.get_number_segments_display }}
         </td>
         {% endif %}

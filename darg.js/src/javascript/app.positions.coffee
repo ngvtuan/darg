@@ -26,12 +26,12 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
         if s != undefined
             return true
     $scope.positionsLoading = true
+    $scope.addPositionLoading = false
     
     $http.get('/services/rest/position').then (result) ->
         angular.forEach result.data.results, (item) ->
             $scope.positions.push item
-        .then ->
-            $scope.positionsLoading = false
+        $scope.positionsLoading = false
 
     $http.get('/services/rest/shareholders').then (result) ->
         angular.forEach result.data.results, (item) ->
@@ -44,10 +44,12 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $scope.securities.push item
 
     $scope.add_position = ->
-        # http://stackoverflow.com/questions/1486476/json-stringify-changes-time-of-date-because-of-utc
-        bought_at = $scope.newPosition.bought_at
-        bought_at.setHours(bought_at.getHours() - bought_at.getTimezoneOffset() / 60)
-        $scope.newPosition.bought_at = bought_at
+        $scope.addPositionLoading = true
+        if $scope.newPosition.bought_at
+            # http://stackoverflow.com/questions/1486476/json-stringify-changes-time-of-date-because-of-utc
+            bought_at = $scope.newPosition.bought_at
+            bought_at.setHours(bought_at.getHours() - bought_at.getTimezoneOffset() / 60)
+            $scope.newPosition.bought_at = bought_at
         $scope.newPosition.$save().then (result) ->
             $scope.positions.push result
         .then ->
@@ -58,12 +60,14 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
         .then ->
             # Clear any errors
             $scope.errors = null
+            $scope.addPositionLoading = false
         , (rejection) ->
             $scope.errors = rejection.data
             Raven.captureMessage('form error: ' + rejection.statusText, {
                 level: 'warning',
                 extra: { rejection: rejection },
             })
+            $scope.addPositionLoading = false
 
     $scope.delete_position = (position) ->
         $scope.positionsLoading = true
@@ -72,7 +76,6 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $http.get('/services/rest/position').then (result1) ->
                 angular.forEach result1.data.results, (item) ->
                     $scope.positions.push item
-        .then ->
             $scope.positionsLoading = false
 
     $scope.confirm_position = (position) ->
@@ -81,7 +84,6 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $http.get('/services/rest/position').then (result1) ->
                 angular.forEach result1.data.results, (item) ->
                     $scope.positions.push item
-            .then ->
                 $scope.positionsLoading = false
 
     $scope.add_split = ->

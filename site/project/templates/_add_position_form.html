@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n static %}
 
 <!-- {% trans "Please enter your position data:" %} -->
 {% verbatim %}
@@ -44,7 +44,10 @@
       </div>
 
       <button class="btn btn-default cancel" ng-click="hide_form()">{% endverbatim %}{% trans "Cancel" %}{% verbatim %}</button>
-      <button class="btn btn-focus save-position" ng-click="add_position()">{% endverbatim %}{% trans "Add Position" %}{% verbatim %}</button>
+      <button class="btn btn-focus save-position" ng-click="add_position()">
+		<img src="{% endverbatim %}{% static "compiled/images/loading_spinner1_white.png" %}{% verbatim %}" class="loading no-style" ng-show="addPositionLoading">
+	    {% endverbatim %}{% trans "Add Position" %}{% verbatim %}
+	  </button>
     </div>
 
   </form>

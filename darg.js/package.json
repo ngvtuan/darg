@@ -1,9 +1,9 @@
 {
-    "name": "darg.js",
-    "devDependencies": {
-        "coffee-script": "",
-        "grunt": "",
-        "grunt-contrib-coffee": "",
-        "grunt-contrib-watch": ""
-    }
+  "name": "darg.js",
+  "devDependencies": {
+    "coffee-script": "",
+    "grunt": "^1.0.1",
+    "grunt-contrib-coffee": "",
+    "grunt-contrib-watch": ""
+  }
 }

@@ -46,8 +46,10 @@ app.controller 'OptionsController', ['$scope', '$http', '$filter', 'OptionPlan',
 
     $scope.add_option_plan = ->
         if $scope.newOptionPlan.board_approved_at
-            d = $scope.newOptionPlan.board_approved_at
-            $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10)
+            date = $scope.newOptionPlan.board_approved_at
+            # http://stackoverflow.com/questions/1486476/json-stringify-changes-time-of-date-because-of-utc
+            date.setHours(date.getHours() - date.getTimezoneOffset() / 60)
+            $scope.newOptionPlan.board_approved_at = date.toISOString().substring(0, 10)
         $scope.newOptionPlan.$save().then (result) ->
             $scope.option_plans.push result
         .then ->
@@ -71,8 +73,9 @@ app.controller 'OptionsController', ['$scope', '$http', '$filter', 'OptionPlan',
             p = $scope.newOptionTransaction.option_plan
             $scope.newOptionTransaction.option_plan = $scope.newOptionTransaction.option_plan.url
         if $scope.newOptionTransaction.bought_at
-            d = $scope.newOptionTransaction.bought_at
-            $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10)
+            date = $scope.newOptionTransaction.bought_at
+            date.setHours(date.getHours() - date.getTimezoneOffset() / 60)
+            $scope.newOptionTransaction.bought_at = date.toISOString().substring(0, 10)
         $scope.newOptionTransaction.$save().then (result) ->
             $scope._reload_option_plans()
         .then ->

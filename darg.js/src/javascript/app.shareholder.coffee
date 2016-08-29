@@ -30,6 +30,11 @@ app.controller 'ShareholderController', ['$scope', '$http', 'Shareholder', ($sco
     # ATTENTION: django eats a url, angular eats an object.
     # hence needs conversion
     $scope.edit_shareholder = () ->
+        if $scope.shareholder.user.userprofile.birthday
+            # http://stackoverflow.com/questions/1486476/json-stringify-changes-time-of-date-because-of-utc
+            date = $scope.shareholder.user.userprofile.birthday
+            date.setHours(date.getHours() - date.getTimezoneOffset() / 60)
+            $scope.shareholder.user.userprofile.birthday = date
         if $scope.shareholder.user.userprofile.country
             $scope.shareholder.user.userprofile.country = $scope.shareholder.user.userprofile.country.url
         if $scope.shareholder.user.userprofile.language

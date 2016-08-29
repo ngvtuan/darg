@@ -193,7 +193,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error', {
+          return Raven.captureMessage('form error' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -229,7 +229,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error', {
+          return Raven.captureMessage('form error' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -396,10 +396,11 @@
         };
       })(this));
       $scope.add_option_plan = function() {
-        var d;
+        var date;
         if ($scope.newOptionPlan.board_approved_at) {
-          d = $scope.newOptionPlan.board_approved_at;
-          $scope.newOptionPlan.board_approved_at = $scope.newOptionPlan.board_approved_at.toISOString().substring(0, 10);
+          date = $scope.newOptionPlan.board_approved_at;
+          date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
+          $scope.newOptionPlan.board_approved_at = date.toISOString().substring(0, 10);
         }
         return $scope.newOptionPlan.$save().then(function(result) {
           return $scope.option_plans.push(result);
@@ -410,7 +411,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          Raven.captureMessage('form error', {
+          Raven.captureMessage('form error' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -420,14 +421,15 @@
         });
       };
       $scope.add_option_transaction = function() {
-        var d, p;
+        var date, p;
         if ($scope.newOptionTransaction.option_plan) {
           p = $scope.newOptionTransaction.option_plan;
           $scope.newOptionTransaction.option_plan = $scope.newOptionTransaction.option_plan.url;
         }
         if ($scope.newOptionTransaction.bought_at) {
-          d = $scope.newOptionTransaction.bought_at;
-          $scope.newOptionTransaction.bought_at = $scope.newOptionTransaction.bought_at.toISOString().substring(0, 10);
+          date = $scope.newOptionTransaction.bought_at;
+          date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
+          $scope.newOptionTransaction.bought_at = date.toISOString().substring(0, 10);
         }
         return $scope.newOptionTransaction.$save().then(function(result) {
           return $scope._reload_option_plans();
@@ -438,7 +440,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          Raven.captureMessage('form error', {
+          Raven.captureMessage('form error' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -656,9 +658,12 @@
           return true;
         }
       };
+      $scope.positionsLoading = true;
       $http.get('/services/rest/position').then(function(result) {
         return angular.forEach(result.data.results, function(item) {
           return $scope.positions.push(item);
+        }).then(function() {
+          return $scope.positionsLoading = false;
         });
       });
       $http.get('/services/rest/shareholders').then(function(result) {
@@ -675,6 +680,10 @@
         });
       });
       $scope.add_position = function() {
+        var bought_at;
+        bought_at = $scope.newPosition.bought_at;
+        bought_at.setHours(bought_at.getHours() - bought_at.getTimezoneOffset() / 60);
+        $scope.newPosition.bought_at = bought_at;
         return $scope.newPosition.$save().then(function(result) {
           return $scope.positions.push(result);
         }).then(function() {
@@ -685,7 +694,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error', {
+          return Raven.captureMessage('form error' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -694,6 +703,7 @@
         });
       };
       $scope.delete_position = function(position) {
+        $scope.positionsLoading = true;
         return $http["delete"]('/services/rest/position/' + position.pk).then(function(result) {
           $scope.positions = [];
           return $http.get('/services/rest/position').then(function(result1) {
@@ -701,6 +711,8 @@
               return $scope.positions.push(item);
             });
           });
+        }).then(function() {
+          return $scope.positionsLoading = false;
         });
       };
       $scope.confirm_position = function(position) {
@@ -710,10 +722,16 @@
             return angular.forEach(result1.data.results, function(item) {
               return $scope.positions.push(item);
             });
+          }).then(function() {
+            return $scope.positionsLoading = false;
           });
         });
       };
       $scope.add_split = function() {
+        var execute_at;
+        execute_at = $scope.newSplit.execute_at;
+        execute_at.setHours(execute_at.getHours() - execute_at.getTimezoneOffset() / 60);
+        $scope.newSplit.execute_at = execute_at;
         return $scope.newSplit.$save().then(function(result) {
           return $scope.positions = result.data;
         }).then(function() {
@@ -723,7 +741,7 @@
           return $scope.show_split = false;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error', {
+          return Raven.captureMessage('form error' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -834,6 +852,12 @@
         return $scope.languages = result.data;
       });
       $scope.edit_shareholder = function() {
+        var date;
+        if ($scope.shareholder.user.userprofile.birthday) {
+          date = $scope.shareholder.user.userprofile.birthday;
+          date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
+          $scope.shareholder.user.userprofile.birthday = date;
+        }
         if ($scope.shareholder.user.userprofile.country) {
           $scope.shareholder.user.userprofile.country = $scope.shareholder.user.userprofile.country.url;
         }
@@ -856,7 +880,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error', {
+          return Raven.captureMessage('form error' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -961,7 +985,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error', {
+          return Raven.captureMessage('form error' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -982,7 +1006,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error', {
+          return Raven.captureMessage('form error ' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection

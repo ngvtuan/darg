@@ -44,6 +44,10 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $scope.securities.push item
 
     $scope.add_position = ->
+        # http://stackoverflow.com/questions/1486476/json-stringify-changes-time-of-date-because-of-utc
+        bought_at = $scope.newPosition.bought_at
+        bought_at.setHours(bought_at.getHours() - bought_at.getTimezoneOffset() / 60)
+        $scope.newPosition.bought_at = bought_at
         $scope.newPosition.$save().then (result) ->
             $scope.positions.push result
         .then ->
@@ -81,6 +85,10 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
                 $scope.positionsLoading = false
 
     $scope.add_split = ->
+        # http://stackoverflow.com/questions/1486476/json-stringify-changes-time-of-date-because-of-utc
+        execute_at = $scope.newSplit.execute_at
+        execute_at.setHours(execute_at.getHours() - execute_at.getTimezoneOffset() / 60)
+        $scope.newSplit.execute_at = execute_at
         $scope.newSplit.$save().then (result) ->
             $scope.positions = result.data
         .then ->

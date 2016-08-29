@@ -1,28 +1,30 @@
 import csv
-import time
 import datetime
+import logging
+import time
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.flatpages.models import FlatPage
 from django.core.urlresolvers import reverse
-from django.http import (
-    HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
-    )
+from django.http import (HttpResponse, HttpResponseBadRequest,
+                         HttpResponseForbidden)
 from django.shortcuts import get_object_or_404, redirect
 from django.template import RequestContext, loader
-from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from django.utils.translation import ugettext as _
-from django.contrib.flatpages.models import FlatPage
-
 from zinnia.models.entry import Entry
 
 from project.tasks import send_initial_password_mail
 from services.instapage import InstapageSubmission as Instapage
 from shareholder.models import Company, Operator
-from utils.pdf import render_to_pdf
 from utils.formatters import human_readable_segments
+from utils.pdf import render_to_pdf
+
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -72,7 +74,18 @@ def instapage(request):
         )
 
     # save data
-    user = User.objects.create(**kwargs)
+    user, created = User.objects.get_or_create(
+        email=kwargs.get('email'), defaults=kwargs)
+
+    # user existing
+    if not created:
+        logger.warning('instapage user signed up twice', extra=kwargs)
+        msg = _(u'You have already an existing user account. '
+                'Please login or reset your password.')
+        messages.add_message(request, messages.INFO, msg)
+        return redirect(reverse('auth_login'))
+
+    # new user
     user.set_password(password)
     user.save()
     profile = user.userprofile
@@ -86,8 +99,11 @@ def instapage(request):
         if user.is_active:
             login(request, user)
 
-    # send password email
-    send_initial_password_mail.delay(user=user, password=password)
+        # send password email
+        send_initial_password_mail.delay(user=user, password=password)
+    else:
+        logger.error('failed to authenticate new user',
+                     extra={'user': user, 'kwargs': kwargs})
 
     return redirect(reverse('start'))
 
@@ -185,3 +201,4 @@ def captable_pdf(request, company_id):
         )
 
     return response
+

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-12 16:16+0000\n"
+"POT-Creation-Date: 2016-08-29 21:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,6 +103,10 @@ msgstr ""
 msgid "Edit Option Plan"
 msgstr ""
 
+#: templates/_messages.html:7
+msgid "Important:"
+msgstr ""
+
 #: templates/base_auth.html:15
 msgid "The Share Register, 2016"
 msgstr ""
@@ -135,7 +139,7 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: templates/menu.html:47 templates/registration/login.html:21
+#: templates/menu.html:47 templates/registration/login.html:22
 msgid "Register"
 msgstr ""
 
@@ -170,28 +174,28 @@ msgstr ""
 msgid "Change password"
 msgstr ""
 
-#: templates/registration/login.html:16
+#: templates/registration/login.html:17
 msgid "Log in"
 msgstr ""
 
-#: templates/registration/login.html:20
+#: templates/registration/login.html:21
 msgid "Not  a member?"
 msgstr ""
 
-#: templates/registration/login.html:24
+#: templates/registration/login.html:25
 msgid "Password lost?"
 msgstr ""
 
-#: templates/registration/login.html:25
+#: templates/registration/login.html:26
 msgid "Reset Password"
 msgstr ""
 
-#: templates/registration/login.html:28
+#: templates/registration/login.html:29
 #: templates/registration/registration_form.html:25
 msgid "Do you know our "
 msgstr ""
 
-#: templates/registration/login.html:29
+#: templates/registration/login.html:30
 #: templates/registration/registration_form.html:25
 msgid "Blog"
 msgstr ""
@@ -265,11 +269,11 @@ msgid ""
 "    "
 msgstr ""
 
-#: templates/registration/password_reset_email.html:4
+#: templates/registration/password_reset_email.html:3
 msgid "Greetings"
 msgstr ""
 
-#: templates/registration/password_reset_email.html:6
+#: templates/registration/password_reset_email.html:5
 #, python-format
 msgid ""
 "\n"
@@ -279,7 +283,7 @@ msgid ""
 "wish to reset your password, please ignore this message.\n"
 msgstr ""
 
-#: templates/registration/password_reset_email.html:12
+#: templates/registration/password_reset_email.html:11
 msgid ""
 "\n"
 "To reset your password, please click the following link, or copy and paste "
@@ -287,15 +291,15 @@ msgid ""
 "into your web browser:\n"
 msgstr ""
 
-#: templates/registration/password_reset_email.html:19
+#: templates/registration/password_reset_email.html:18
 msgid "Your username, in case you've forgotten:"
 msgstr ""
 
-#: templates/registration/password_reset_email.html:22
+#: templates/registration/password_reset_email.html:21
 msgid "Best regards"
 msgstr ""
 
-#: templates/registration/password_reset_email.html:23
+#: templates/registration/password_reset_email.html:22
 msgid "Management"
 msgstr ""
 

@@ -8,26 +8,27 @@
   {% endblock %}
 
 <div class="container">
-<div class="centered" id="auth">
-  <h1>Login</h1>
-  <form method="post" action=".">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button>{% trans "Log in" %}</button>
-    <input type="hidden" name="next" value="{{ next }}" />
-  </form>
-  <p class="comment">
-    {% trans "Not  a member?" %}
-    <a href="{% url 'registration_register' %}"  class="btn-inline">{% trans "Register" %}</a>
-    <br />
-    <br/>
-    {% trans "Password lost?" %}
-    <a href="{% url 'auth_password_reset' %}" class="btn-inline">{% trans "Reset Password" %}</a>
-    <br />
-    <br />
-    {% trans "Do you know our " %}
-    <a href="/blog/" class="btn-inline">{% trans "Blog" %}</a>?
-  </p>
-</div>
+  <div class="centered" id="auth">
+	{% include "_messages.html" %}
+    <h1>Login</h1>
+    <form method="post" action=".">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button>{% trans "Log in" %}</button>
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <p class="comment">
+      {% trans "Not  a member?" %}
+      <a href="{% url 'registration_register' %}"  class="btn-inline">{% trans "Register" %}</a>
+      <br />
+      <br/>
+      {% trans "Password lost?" %}
+      <a href="{% url 'auth_password_reset' %}" class="btn-inline">{% trans "Reset Password" %}</a>
+      <br />
+      <br />
+      {% trans "Do you know our " %}
+      <a href="/blog/" class="btn-inline">{% trans "Blog" %}</a>?
+    </p>
+  </div>
 </div>
 {% endblock %}

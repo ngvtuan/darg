@@ -102,7 +102,7 @@ class ShareholderDetailFunctionalTestCase(BaseSeleniumTestCase):
                     )
                 )
             self.assertEqual(p.get_securities(),
-                             [u'0', u'', u'6', u'1000-1200,1666'])
+                             [u'0', u'', u'6', u'1000-1200, 1666'])
 
         except Exception, e:
             self._handle_exception(e)

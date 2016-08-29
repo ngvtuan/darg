@@ -86,13 +86,55 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 #flatpage p {
   line-height: 1.5em;
   margin-top: 1.5em;
+  clear: both;
 }
-/* line 7, ../../sass/_flatpages.sass */
+/* line 8, ../../sass/_flatpages.sass */
 #flatpage p img {
   display: inline;
   margin: 0.5em;
   height: 10em;
   border: 1px solid #aaa;
+}
+
+/* line 14, ../../sass/_flatpages.sass */
+#pricing {
+  margin-bottom: 1.5em;
+  float: left;
+}
+/* line 18, ../../sass/_flatpages.sass */
+#pricing .box {
+  border: 1px solid #aaa;
+  width: 31%;
+  float: left;
+  margin-right: 1em;
+}
+/* line 23, ../../sass/_flatpages.sass */
+#pricing .box div {
+  text-align: center;
+  padding: 1em;
+}
+/* line 26, ../../sass/_flatpages.sass */
+#pricing .box hr {
+  margin: 0 1em;
+}
+/* line 28, ../../sass/_flatpages.sass */
+#pricing .box .heading {
+  background-color: #337ab7;
+  color: #fff;
+}
+/* line 31, ../../sass/_flatpages.sass */
+#pricing .box .price {
+  font-size: 1.5em;
+}
+/* line 33, ../../sass/_flatpages.sass */
+#pricing .box .price .note {
+  margin: 0;
+  padding: 0;
+  font-size: 0.5em;
+}
+/* line 37, ../../sass/_flatpages.sass */
+#pricing .box .features {
+  text-align: left;
 }
 
 @media only screen and (max-width: 960px) {
@@ -2987,8 +3029,8 @@ div#auth .registration-teaser img {
 /* line 292, ../../sass/screen.sass */
 .intro header.home .container .menu {
   float: left;
-  width: 62.5%;
-  margin-left: 37.5%;
+  width: 75%;
+  margin-left: 25%;
   margin-right: -100%;
   padding-left: 10px;
   padding-right: 10px;

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-29 21:08+0000\n"
-"PO-Revision-Date: 2016-08-29 21:09+0000\n"
+"POT-Creation-Date: 2016-08-29 23:43+0000\n"
+"PO-Revision-Date: 2016-08-29 23:44+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -299,10 +299,9 @@ msgid "--- End of split transactions ---"
 msgstr "--- Ende der Split-Transaktionen ---"
 
 #: shareholder/templates/positions.html:108
-#, fuzzy
 #| msgid "Your Positions"
 msgid "No positions"
-msgstr "Ihre Transaktionen"
+msgstr "Keine Positionen"
 
 #: shareholder/templates/shareholder.html:15
 msgid "Shareholder Details"

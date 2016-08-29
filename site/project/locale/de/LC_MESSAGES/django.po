@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-29 21:08+0000\n"
-"PO-Revision-Date: 2016-08-29 21:09+0000\n"
+"POT-Creation-Date: 2016-08-29 23:43+0000\n"
+"PO-Revision-Date: 2016-08-29 23:43+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -254,58 +254,62 @@ msgid "Login"
 msgstr "Login"
 
 #: project/templates/index.html:22
+msgid "prices and plans"
+msgstr "Preise und Pakete"
+
+#: project/templates/index.html:23
 msgid "Blog"
 msgstr "Blog"
 
-#: project/templates/index.html:24 project/templates/index.html:25
-#: project/templates/index.html:33 project/templates/index.html:34
-#: project/templates/index.html:59 project/templates/index.html:60
+#: project/templates/index.html:25 project/templates/index.html:26
+#: project/templates/index.html:34 project/templates/index.html:35
+#: project/templates/index.html:60 project/templates/index.html:61
 msgid "Try for free"
 msgstr "Kostenlos testen"
 
-#: project/templates/index.html:31
+#: project/templates/index.html:32
 msgid "Das Online-Aktienbuch"
 msgstr "Das Online-Aktienbuch"
 
-#: project/templates/index.html:32
+#: project/templates/index.html:33
 msgid "Mit Sicherheit gesetzeskonform durch automatische Validierung."
 msgstr "Mit Sicherheit gesetzeskonform durch automatische Validierung."
 
-#: project/templates/index.html:46
+#: project/templates/index.html:47
 msgid "Jetzt ab"
 msgstr "Jetzt ab"
 
-#: project/templates/index.html:47
+#: project/templates/index.html:48
 msgid "4,99"
 msgstr "4,99"
 
-#: project/templates/index.html:48
+#: project/templates/index.html:49
 msgid "CHF/mtl."
 msgstr "CHF/mtl."
 
-#: project/templates/index.html:53
+#: project/templates/index.html:54
 msgid "Eingabe alle Daten mit maximaler Effizienz."
 msgstr "☑ Eingabe alle Daten mit maximaler Effizienz."
 
-#: project/templates/index.html:54
+#: project/templates/index.html:55
 msgid "Revisionssichere Ablage."
 msgstr "☑ Revisionssichere Ablage."
 
-#: project/templates/index.html:55
+#: project/templates/index.html:56
 msgid "Automatische Validierung der Daten."
 msgstr ""
 "☑ Automatische Validierung der Daten auf Vollständigkeit und "
 "Gesetzeskonformität (inkl. GAFI-FATF)"
 
-#: project/templates/index.html:56
+#: project/templates/index.html:57
 msgid "10 Jahre Datengarantie."
 msgstr "☑ 10 Jahre Datengarantie."
 
-#: project/templates/index.html:57
+#: project/templates/index.html:58
 msgid "Aktienbuch als PDF herunterladen."
 msgstr "☑ Aktienbuch als PDF herunterladen."
 
-#: project/templates/index.html:68
+#: project/templates/index.html:69
 msgid ""
 "Die Automatische Validierung verhindert Fehler und sichert maximale "
 "Gesetzeskonformitaet. Das Online-Aktienbuch macht die Pflege schnell und "
@@ -314,41 +318,41 @@ msgstr ""
 "Die Automatische Validierung verhindert Fehler und sichert maximale Gesetzeskonformität. Das Online-Aktienbuch macht die Pflege schnell und effizient, damit Zeit frei wird für die wirklichen Herausforderungen. <br/><br/>\n"
 "<strong>PLUS: der rechtlichen Verantwortung des Verwaltungsrates ist Sorge getragen.</strong>"
 
-#: project/templates/index.html:77
+#: project/templates/index.html:78
 msgid "Do you know our Blog?"
 msgstr "Kennen Sie unser Blog?"
 
-#: project/templates/index.html:82 project/templates/index.html:83
+#: project/templates/index.html:83 project/templates/index.html:84
 msgid "Read our Blog"
 msgstr "Blog jetzt lesen"
 
-#: project/templates/index.html:90
+#: project/templates/index.html:91
 msgid "Subscribe to our newsletter!"
 msgstr "Abonnieren Sie unseren Newsletter!"
 
-#: project/templates/index.html:91
+#: project/templates/index.html:92
 msgid "Stay up to date about our work and latest share register industry news"
 msgstr ""
 "Bleiben Sie auf dem neuesten Stand über unsere Arbeit und aktuelle "
 "Entwickungen der Branche."
 
-#: project/templates/index.html:98
+#: project/templates/index.html:99
 msgid "Geben Sie Ihre Email-Adresse ein"
 msgstr "Geben Sie Ihre Email-Adresse ein"
 
-#: project/templates/index.html:127 project/templates/index.html:128
+#: project/templates/index.html:128 project/templates/index.html:129
 msgid "Read our blog"
 msgstr "Lesen Sie unser Blog"
 
-#: project/templates/index.html:132 project/templates/index.html:133
+#: project/templates/index.html:133 project/templates/index.html:134
 msgid "Service Status"
 msgstr "Service Status"
 
-#: project/templates/index.html:137 project/templates/index.html:138
+#: project/templates/index.html:138 project/templates/index.html:139
 msgid "AGB"
 msgstr "AGB"
 
-#: project/templates/index.html:142 project/templates/index.html:143
+#: project/templates/index.html:143 project/templates/index.html:144
 msgid "A service provided by KKD Komm. GmbH"
 msgstr "A service provided by KKD Komm. GmbH"
 

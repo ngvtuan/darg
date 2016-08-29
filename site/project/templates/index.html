@@ -19,6 +19,7 @@
           {% trans "Gratis Aktienbuch-Muster" %}
         </a>
         <a href="{% url "auth_login" %}" title="Login" class="btn-inline">{% trans "Login" %}</a>
+        <a href="{% url "django.contrib.flatpages.views.flatpage" url="/preisliste/" %}" title="Preise" class="btn-inline">{% trans "prices and plans" %}</a>
         <a href="/blog/" title="Blog" class="btn-inline">{% trans "Blog" %}</a>
         |
         <a href="{% url "registration_register" %}" title="{% trans "Try for free" %}" class="btn btn-default btn-white">

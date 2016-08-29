@@ -193,7 +193,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error' + rejection.statusText, {
+          return Raven.captureMessage('form error: ' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -229,7 +229,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error' + rejection.statusText, {
+          return Raven.captureMessage('form error: ' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -411,7 +411,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          Raven.captureMessage('form error' + rejection.statusText, {
+          Raven.captureMessage('form error: ' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -440,7 +440,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          Raven.captureMessage('form error' + rejection.statusText, {
+          Raven.captureMessage('form error: ' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -694,7 +694,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error' + rejection.statusText, {
+          return Raven.captureMessage('form error: ' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -741,7 +741,7 @@
           return $scope.show_split = false;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error' + rejection.statusText, {
+          return Raven.captureMessage('form error: ' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -880,7 +880,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error' + rejection.statusText, {
+          return Raven.captureMessage('form error: ' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -985,7 +985,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error' + rejection.statusText, {
+          return Raven.captureMessage('form error: ' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection
@@ -1006,7 +1006,7 @@
           return $scope.errors = null;
         }, function(rejection) {
           $scope.errors = rejection.data;
-          return Raven.captureMessage('form error ' + rejection.statusText, {
+          return Raven.captureMessage('form error: ' + rejection.statusText, {
             level: 'warning',
             extra: {
               rejection: rejection

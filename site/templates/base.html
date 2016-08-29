@@ -64,5 +64,8 @@
 
   {% include "_tracking.html" %}
 
+  <!-- must be after tracking -->
+  <script src="{% static "compiled/javascript/global.js" %}?v={{VERSION}}"></script>
+
 </body>
 </html>

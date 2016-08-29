@@ -3214,113 +3214,118 @@ div#optionplan .pdf_upload_preview {
   cursor: pointer;
 }
 
-/* line 438, ../../sass/screen.sass */
+/* line 437, ../../sass/screen.sass */
+.alert-gafi {
+  line-height: initial;
+}
+
+/* line 442, ../../sass/screen.sass */
 .blog .lead {
   font-size: 1em;
 }
-/* line 440, ../../sass/screen.sass */
+/* line 444, ../../sass/screen.sass */
 .blog .well {
   background-color: transparent;
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 445, ../../sass/screen.sass */
+/* line 449, ../../sass/screen.sass */
 .blog .btn-primary {
   background-color: transparent;
   border: 1px solid #666;
   color: #337ab7;
 }
-/* line 449, ../../sass/screen.sass */
+/* line 453, ../../sass/screen.sass */
 .blog .row {
   margin-top: 4em;
 }
-/* line 451, ../../sass/screen.sass */
+/* line 455, ../../sass/screen.sass */
 .blog .entry-tags {
   display: none;
 }
-/* line 453, ../../sass/screen.sass */
+/* line 457, ../../sass/screen.sass */
 .blog .entry-shorturl {
   display: none;
 }
-/* line 455, ../../sass/screen.sass */
+/* line 459, ../../sass/screen.sass */
 .blog .entry-image {
   margin-bottom: 2em;
 }
-/* line 457, ../../sass/screen.sass */
+/* line 461, ../../sass/screen.sass */
 .blog .entry-footer {
   padding-left: 0px;
 }
-/* line 459, ../../sass/screen.sass */
+/* line 463, ../../sass/screen.sass */
 .blog .entry-footer span {
   display: none;
 }
-/* line 462, ../../sass/screen.sass */
+/* line 466, ../../sass/screen.sass */
 .blog .entry-content > p, .blog .entry-content ul, .blog .entry-content ol {
   margin-bottom: 1em;
 }
-/* line 464, ../../sass/screen.sass */
+/* line 468, ../../sass/screen.sass */
 .blog .entry-content ul, .blog .entry-content ol {
   list-style: initial;
   margin-left: 1.1em;
 }
-/* line 467, ../../sass/screen.sass */
+/* line 471, ../../sass/screen.sass */
 .blog .entry-content ol {
   list-style-type: decimal;
 }
-/* line 469, ../../sass/screen.sass */
+/* line 473, ../../sass/screen.sass */
 .blog .entry-content > h1 {
   font-size: 2em;
   margin: 1em 0 1em;
 }
-/* line 472, ../../sass/screen.sass */
+/* line 476, ../../sass/screen.sass */
 .blog .entry-content > h2 {
   font-size: 1.5em;
   margin: 1em 0 1em;
 }
-/* line 475, ../../sass/screen.sass */
+/* line 479, ../../sass/screen.sass */
 .blog .entry-content strong {
   font-weight: bold;
 }
-/* line 477, ../../sass/screen.sass */
+/* line 481, ../../sass/screen.sass */
 .blog .navbar-default {
   background-color: white;
 }
-/* line 479, ../../sass/screen.sass */
+/* line 483, ../../sass/screen.sass */
 .blog .navbar-brand {
   font-size: 2em;
 }
-/* line 481, ../../sass/screen.sass */
+/* line 485, ../../sass/screen.sass */
 .blog .navbar-header span {
   top: 0.3em;
   position: relative;
   left: -1em;
 }
-/* line 485, ../../sass/screen.sass */
+/* line 489, ../../sass/screen.sass */
 .blog a {
   border: none;
   font-size: 1em;
 }
-/* line 488, ../../sass/screen.sass */
+/* line 492, ../../sass/screen.sass */
 .blog a:active, .blog a:focus, .blog a:hover {
   color: #337ab7;
   text-decoration: none;
 }
-/* line 491, ../../sass/screen.sass */
+/* line 495, ../../sass/screen.sass */
 .blog h2 > a {
   font-size: 2em;
   display: block;
 }
-/* line 494, ../../sass/screen.sass */
+/* line 498, ../../sass/screen.sass */
 .blog h3 {
   margin-bottom: 0.5em;
   font-weight: bold;
 }
-/* line 497, ../../sass/screen.sass */
+/* line 501, ../../sass/screen.sass */
 .blog p {
   margin: 0 0 0 0;
 }
-/* line 499, ../../sass/screen.sass */
+/* line 503, ../../sass/screen.sass */
 .blog small {
   font-size: 40%;
 }

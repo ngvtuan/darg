@@ -20,7 +20,8 @@
 
   {# gafi warning #}
   {% if not shareholder.validate_gafi.is_valid %}
-  <div class="alert alert-warning alert-dismissible"  role="alert">
+  <div class="alert alert-warning alert-dismissible alert-gafi"  role="alert">
+    <div> <strong>{% trans "GAFI Validierung:" %}</strong></div>
     {% for error in shareholder.validate_gafi.errors %}
     <div>{{ error }}</div>
     {% endfor %}

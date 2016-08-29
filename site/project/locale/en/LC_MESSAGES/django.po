@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-12 16:16+0000\n"
+"POT-Creation-Date: 2016-08-29 21:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgid "Cancel"
 msgstr ""
 
 #: project/templates/_add_capital_form.html:34
-#: project/templates/_add_position_form.html:47
+#: project/templates/_add_position_form.html:49
 msgid "Add Position"
 msgstr ""
 
@@ -159,72 +159,72 @@ msgstr ""
 msgid "Add Share Split"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:60
+#: project/templates/active_shareholder_captable.pdf.html:66
 #: project/templates/start.html:25
 msgid "Your Shareholders for"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:74
+#: project/templates/active_shareholder_captable.pdf.html:80
 #: project/templates/index.html:14
 msgid "Das Aktienregister"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:74
+#: project/templates/active_shareholder_captable.pdf.html:80
 msgid "Page"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:75
+#: project/templates/active_shareholder_captable.pdf.html:81
 msgid "of"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:76
+#: project/templates/active_shareholder_captable.pdf.html:82
 msgid "Date generated"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:81
+#: project/templates/active_shareholder_captable.pdf.html:87
 msgid "Total company capital"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:83
+#: project/templates/active_shareholder_captable.pdf.html:89
 msgid "Provisioned Capital"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:86
+#: project/templates/active_shareholder_captable.pdf.html:92
 msgid "Founding Date"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:92
-#: project/templates/active_shareholder_captable.pdf.html:135
+#: project/templates/active_shareholder_captable.pdf.html:98
+#: project/templates/active_shareholder_captable.pdf.html:141
 #: project/templates/start.html:55
 msgid "Name"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:93
-#: project/templates/active_shareholder_captable.pdf.html:136
+#: project/templates/active_shareholder_captable.pdf.html:99
+#: project/templates/active_shareholder_captable.pdf.html:142
 #: project/templates/start.html:56
 msgid "Email"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:94
-#: project/templates/active_shareholder_captable.pdf.html:137
+#: project/templates/active_shareholder_captable.pdf.html:100
+#: project/templates/active_shareholder_captable.pdf.html:143
 #: project/templates/start.html:57
 msgid "Shareholder Number"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:95
+#: project/templates/active_shareholder_captable.pdf.html:101
 #, python-format
 msgid "Shares (%%)"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:98
+#: project/templates/active_shareholder_captable.pdf.html:104
 msgid "Aktiennummern"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:130
+#: project/templates/active_shareholder_captable.pdf.html:136
 msgid "Options"
 msgstr ""
 
-#: project/templates/active_shareholder_captable.pdf.html:138
+#: project/templates/active_shareholder_captable.pdf.html:144
 #, python-format
 msgid "Optionen (%%)"
 msgstr ""
@@ -391,42 +391,48 @@ msgstr ""
 msgid "CSV"
 msgstr ""
 
-#: project/views.py:119
+#: project/tests/test_views.py:109 project/views.py:83
+msgid ""
+"You have already an existing user account. Please login or reset your "
+"password."
+msgstr ""
+
+#: project/views.py:135
 msgid "shareholder number"
 msgstr ""
 
-#: project/views.py:119
+#: project/views.py:135
 msgid "last name"
 msgstr ""
 
-#: project/views.py:119
+#: project/views.py:135
 msgid "first name"
 msgstr ""
 
-#: project/views.py:120
+#: project/views.py:136
 msgid "email"
 msgstr ""
 
-#: project/views.py:120
+#: project/views.py:136
 msgid "share count"
 msgstr ""
 
-#: project/views.py:120
+#: project/views.py:136
 msgid "votes share percent"
 msgstr ""
 
-#: project/views.py:121
+#: project/views.py:137
 msgid "language ISO"
 msgstr ""
 
-#: project/views.py:121
+#: project/views.py:137
 msgid "language full"
 msgstr ""
 
-#: project/views.py:124
+#: project/views.py:140
 msgid "Share IDs"
 msgstr ""
 
-#: project/views.py:145
+#: project/views.py:161
 msgid "None"
 msgstr ""

@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
+from django.utils.translation import ugettext as _
 from rest_framework.test import APIClient
 
-from project.generators import (CompanyGenerator,
-                                OperatorGenerator, PositionGenerator,
-                                ShareholderGenerator,
+from project.generators import (CompanyGenerator, OperatorGenerator,
+                                PositionGenerator, ShareholderGenerator,
                                 TwoInitialSecuritiesGenerator, UserGenerator)
 from shareholder.models import Shareholder, UserProfile
 
@@ -92,6 +92,24 @@ class InstapageTestCase(TestCase):
         # FIXME
         # self.assertEqual(len(mail.outbox), 1)
 
+    def test_get_existing(self):
+        """
+        user arriving from instapage must be imported, logged in and redirected
+        """
+        response = self.client.get(reverse('instapage'), follow=True)
+
+        self.assertEqual(response.status_code, 400)
+
+        # call twice
+        response = self.client.get(
+            reverse('instapage') + '?submission=30122798', follow=True)
+        response = self.client.get(
+            reverse('instapage') + '?submission=30122798', follow=True)
+
+        msg = _(u'You have already an existing user account. '
+                'Please login or reset your password.')
+        self.assertRedirects(response, reverse('auth_login'))
+        self.assertContains(response, msg)
 
 class TrackingTestCase(TestCase):
 

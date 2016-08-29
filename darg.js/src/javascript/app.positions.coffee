@@ -25,10 +25,13 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
         )
         if s != undefined
             return true
-
+    $scope.positionsLoading = true
+    
     $http.get('/services/rest/position').then (result) ->
         angular.forEach result.data.results, (item) ->
             $scope.positions.push item
+        .then ->
+            $scope.positionsLoading = false
 
     $http.get('/services/rest/shareholders').then (result) ->
         angular.forEach result.data.results, (item) ->
@@ -59,11 +62,14 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             })
 
     $scope.delete_position = (position) ->
+        $scope.positionsLoading = true
         $http.delete('/services/rest/position/'+position.pk).then (result) ->
             $scope.positions = []
             $http.get('/services/rest/position').then (result1) ->
                 angular.forEach result1.data.results, (item) ->
                     $scope.positions.push item
+        .then ->
+            $scope.positionsLoading = false
 
     $scope.confirm_position = (position) ->
         $http.post('/services/rest/position/'+position.pk+'/confirm').then (result) ->
@@ -71,6 +77,8 @@ app.controller 'PositionsController', ['$scope', '$http', 'Position', 'Split', (
             $http.get('/services/rest/position').then (result1) ->
                 angular.forEach result1.data.results, (item) ->
                     $scope.positions.push item
+            .then ->
+                $scope.positionsLoading = false
 
     $scope.add_split = ->
         $scope.newSplit.$save().then (result) ->

@@ -505,7 +505,7 @@ class ShareholderTestCase(TestCase):
             logger.error(
                 'BUILD performance error: test_owns_segments_rma_performance',
                 extra={'delta': delta})
-        self.assertLess(delta, datetime.timedelta(seconds=5))
+        self.assertLess(delta, datetime.timedelta(seconds=7))
 
     def test_owns_options_segments(self):
         """

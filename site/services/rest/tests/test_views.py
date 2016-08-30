@@ -553,10 +553,10 @@ class PositionTestCase(TestCase):
         logger.info('firing api call...')
         t0 = time.clock()
         response = self.client.post(
-            '/services/rest/position',
+            u'/services/rest/position',
             data,
-            **{'HTTP_AUTHORIZATION': 'Token {}'.format(
-                user.auth_token.key), 'format': 'json'})
+            **{u'HTTP_AUTHORIZATION': u'Token {}'.format(
+                user.auth_token.key), u'format': u'json'})
         t1 = time.clock()
         delta = t1 - t0
 

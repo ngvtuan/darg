@@ -418,9 +418,12 @@ class PositionSerializer(serializers.HyperlinkedModelSerializer,
         res = super(PositionSerializer, self).is_valid(raise_exception)
 
         initial_data = self.initial_data
-
         security = initial_data.get('security')
-        if security and Security.objects.get(id=security['pk']).track_numbers:
+        user = self.context.get("request").user
+        company = user.operator_set.all()[0].company
+
+        if security and Security.objects.get(
+                company=company, title=security.get('title')).track_numbers:
 
             logger.info('validation: prepare data...')
             security = Security.objects.get(id=security['pk'])

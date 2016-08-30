@@ -153,6 +153,9 @@ class PositionSerializerTestCase(TestCase):
                                                 count=8)
         url = reverse('position-detail', kwargs={'pk': position.id})
         request = self.factory.get(url)
+        # authenticated request
+        request.user = OperatorGenerator().generate(
+            company=position.buyer.company).user
         # prepare data
         data = PositionSerializer(
             position, context={'request': request}).data

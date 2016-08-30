@@ -1,4 +1,5 @@
 import time
+import logging
 
 from django.test import TestCase
 
@@ -6,6 +7,8 @@ from utils.formatters import (deflate_segments, flatten_list, inflate_segments,
                               string_list_to_json)
 from utils.math import substract_list
 from utils.user import make_username
+
+logger = logging.getLogger(__name__)
 
 
 class UtilsTestCase(TestCase):
@@ -91,11 +94,16 @@ class UtilsTestCase(TestCase):
         t0 = time.clock()
         res = deflate_segments(segments)
         t1 = time.clock()
+        delta = t1 - t0
         print("deflate list took {0:.4f} seconds.".format(t1 - t0))
         self.assertEqual(
             res,
             [u'1-1000000', 1500000, 1600000, u'2000000-8000000', 9000000])
-        self.assertLess(t1 - t0, 1.1)
+        if delta > 1.1:
+            logger.error(
+                'BUILD performance error: test_substract_list_performance',
+                extra={'delta': delta})
+        self.assertLess(delta, 1.5)
 
     def test_substract_list_performance(self):
         """
@@ -110,7 +118,11 @@ class UtilsTestCase(TestCase):
         print("substract list took {0:.4f} seconds.".format(delta))
 
         self.assertEqual(res, range(1000000, 10000000))
-        self.assertLess(delta, 0.3)
+        if delta > 0.3:
+            logger.error(
+                'BUILD performance error: test_substract_list_performance',
+                extra={'delta': delta})
+        self.assertLess(delta, 0.4)
 
     def test_substract_list_logic(self):
         """

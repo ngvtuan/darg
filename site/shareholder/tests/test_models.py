@@ -473,7 +473,11 @@ class ShareholderTestCase(TestCase):
         shs[0].owns_segments([10000-200000, 350000-800000], poss[0].security)
         end = datetime.datetime.now()
         delta = end - start
-        self.assertLess(delta, datetime.timedelta(seconds=4))
+        if delta > datetime.timedelta(seconds=4):
+            logger.error(
+                'BUILD performance error: test_owns_segments_performance',
+                extra={'delta': delta})
+        self.assertLess(delta, datetime.timedelta(seconds=5))
 
     def test_owns_segments_rma_performance(self):
         """
@@ -497,7 +501,11 @@ class ShareholderTestCase(TestCase):
         end = datetime.datetime.now()
         delta = end - start
         self.assertTrue(res[0])
-        self.assertLess(delta, datetime.timedelta(seconds=4))
+        if delta > datetime.timedelta(seconds=4):
+            logger.error(
+                'BUILD performance error: test_owns_segments_rma_performance',
+                extra={'delta': delta})
+        self.assertLess(delta, datetime.timedelta(seconds=5))
 
     def test_owns_options_segments(self):
         """

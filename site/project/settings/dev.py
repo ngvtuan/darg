@@ -40,6 +40,12 @@ INSTPAGE_ENABLED = True
 
 CELERY_ALWAYS_EAGER = True
 
+# -- RAVEN
+RAVEN_CONFIG = {
+    'dsn': get_env_variable('RAVEN_DSN'),
+    'dsn_public': get_env_variable('RAVEN_DSN_PUBLIC'),
+}
+
 try:
     from .dev_local import *
 except ImportError:

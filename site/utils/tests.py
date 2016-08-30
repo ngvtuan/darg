@@ -122,7 +122,7 @@ class UtilsTestCase(TestCase):
             logger.error(
                 'BUILD performance error: test_substract_list_performance',
                 extra={'delta': delta})
-        self.assertLess(delta, 0.4)
+        self.assertLess(delta, 0.5)
 
     def test_substract_list_logic(self):
         """

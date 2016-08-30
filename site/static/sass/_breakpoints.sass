@@ -1,7 +1,7 @@
 
 @media only screen and (max-width: 960px)
 
-  body
+  body.core
     .container
       width: 780px
 
@@ -15,9 +15,9 @@
 
 @media only screen and (max-width: 800px)
 
-  body
+  body.core
     .container
-      width: 620px
+      width: 100%
 
     header
       .container
@@ -43,12 +43,13 @@
             .map
               padding-top: 2em
 
+  #flatpage
+    +zen-new-row()
+    +zen-grid-item(8, 1)
+
 @media only screen and (max-width: 640px)
 
   body
-    .container
-      width: 480px
-
     header
       height: 180px
       text-align: center
@@ -64,10 +65,15 @@
             top: 156px  // FIXME
             width: +zen-grid-item-width(6)
 
-@media only screen and (max-width: 500px)
+@media only screen and (max-width: 400px)
 
-  body .container
-    width: 400px
+  body
+    #flatpage
+      .pricing
+        .box
+          float: none
+          width: 98%
+          margin-top: 1em
 
 @media screen and (orientation:portrait)
   // ipad rotation adjustments

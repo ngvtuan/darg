@@ -1,14 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import datetime
-from decimal import Decimal
 import logging
+from decimal import Decimal
 
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.test import TestCase, TransactionTestCase
 from django.test.client import Client, RequestFactory
+from django.utils.encoding import force_text
 
 from project.generators import (CompanyGenerator, CompanyShareholderGenerator,
                                 ComplexOptionTransactionsWithSegmentsGenerator,
@@ -26,6 +27,16 @@ logger = logging.getLogger(__name__)
 
 # --- MODEL TESTS
 class CompanyTestCase(TestCase):
+
+    def test_text_repr(self):
+
+        optiontransaction, shs = \
+            ComplexOptionTransactionsWithSegmentsGenerator().generate()
+        company = shs[0].company
+        company.name = u'Mühleggbahn AG'
+        company.save()
+        security = company.security_set.all()[0]
+        force_text(security)  # must not raise exception
 
     def test_get_all_option_plan_segments(self):
         """

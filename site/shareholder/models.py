@@ -60,9 +60,6 @@ class Company(models.Model):
         blank=True, null=True,
         upload_to=get_company_logo_upload_path,)
 
-    def __str__(self):
-        return u"{}".format(self.name)
-
     def __unicode__(self):
         return u"{}".format(self.name)
 
@@ -292,7 +289,7 @@ class UserProfile(models.Model):
     tnc_accepted = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return "%s, %s %s" % (self.city, self.province,
+        return u"%s, %s %s" % (self.city, self.province,
                               str(self.country))
 
     class Meta:
@@ -305,7 +302,7 @@ class Shareholder(models.Model):
     company = models.ForeignKey('Company', verbose_name="Shareholders Company")
     number = models.CharField(max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return u'{}'.format(self.id)
 
     def get_number_segments_display(self):
@@ -640,10 +637,6 @@ class Operator(models.Model):
     company = models.ForeignKey('Company', verbose_name="Operators Company")
     share_count = models.PositiveIntegerField(blank=True, null=True)
 
-    def __str__(self):
-        return u"{} {} ({})".format(
-            self.user.first_name, self.user.last_name, self.user.email)
-
     def __unicode__(self):
         return u"{} {} ({})".format(
             self.user.first_name, self.user.last_name, self.user.email)
@@ -673,7 +666,7 @@ class Security(models.Model):
         _('App needs to track IDs of shares. WARNING: update initial '
           'transaction with segments on enabling.'), default=False)
 
-    def __str__(self):
+    def __unicode__(self):
         return u"{} ({})".format(self.get_title_display(), self.company)
 
     def count_in_segments(self, segments=None):
@@ -722,7 +715,7 @@ class Position(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return u"Pos {}->#{}@{}->{}".format(
             self.seller,
             self.count,
@@ -760,7 +753,7 @@ class OptionPlan(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return u"{}".format(self.title)
 
     def generate_pdf_file_preview(self):
@@ -809,7 +802,7 @@ class OptionTransaction(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return u"OpTr {}->#{}->{} (OP:{})".format(
             self.seller,
             self.count,

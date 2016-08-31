@@ -160,3 +160,31 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
 
         except Exception, e:
             self._handle_exception(e)
+
+    def test_operator_same_email_as_shareholder(self):
+        """
+        user signs up and adds himself as shareholder
+        """
+        try:
+            self.assertEqual(
+                self.operator.user.shareholder_set.filter(
+                    company=self.operator.company
+                ).count(), 0)
+
+            start = page.StartPage(
+                self.selenium, self.live_server_url, self.operator.user)
+            start.is_properly_displayed()
+            start.click_open_add_shareholder()
+            start.add_shareholder(self.operator.user)
+            start.click_save_add_shareholder()
+            start.has_shareholder_count(Shareholder.objects.filter(
+                company=self.operator.company).count())
+
+            time.sleep(2)
+            self.assertEqual(
+                self.operator.user.shareholder_set.filter(
+                    company=self.operator.company
+                ).count(), 1)
+
+        except Exception, e:
+            self._handle_exception(e)

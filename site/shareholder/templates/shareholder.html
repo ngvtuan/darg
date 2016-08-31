@@ -46,7 +46,7 @@
         {% verbatim %}<span editable-text="shareholder.user.last_name" onaftersave="edit_shareholder()">{{ shareholder.user.last_name || '' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}
       </td>
     </tr>
-    <tr>
+    <tr class="user-email">
       <td>{% trans "Shareholder Email" %}:</td>
       <td>
         {% verbatim %}<span editable-text="shareholder.user.email" onaftersave="edit_shareholder()">{{ shareholder.user.email || '' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}
@@ -133,7 +133,7 @@
       <th>{% trans "segments" %}</th>
     </tr></thead>
 	{% for security in securities %}
-      <tr class="security"><td>{{ security }}</td><td>{{ security.count }}</td>{% if security.segments %}<td>{{ security.segments }}</td>{% else %}<td></td>{% endif %}</tr>
+      <tr class="security"><td>{{ security.get_title_display }}</td><td>{{ security.count }}</td>{% if security.segments %}<td>{{ security.segments }}</td>{% else %}<td></td>{% endif %}</tr>
 	{% endfor %}
   </table>
 

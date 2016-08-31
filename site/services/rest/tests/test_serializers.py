@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import datetime
 
 from django.core.urlresolvers import reverse
 from django.test import RequestFactory, TestCase
@@ -7,14 +8,32 @@ from rest_framework.exceptions import ValidationError
 
 from project.generators import (OperatorGenerator, OptionPlanGenerator,
                                 OptionTransactionGenerator, PositionGenerator,
-                                ShareholderGenerator,
+                                ShareholderGenerator, UserGenerator,
                                 TwoInitialSecuritiesGenerator)
-from services.rest.serializers import (OptionPlanSerializer,
+from services.rest.serializers import (AddCompanySerializer,
+                                       OptionPlanSerializer,
                                        OptionTransactionSerializer,
                                        PositionSerializer,
                                        ShareholderSerializer)
-from shareholder.models import OptionTransaction, OptionPlan
+from shareholder.models import OptionPlan, OptionTransaction
 from utils.formatters import human_readable_segments
+
+
+class AddCompanySerializerTestCase(TestCase):
+
+    def setUp(self):
+        self.serializer = AddCompanySerializer()
+
+    def test_create(self):
+        validated_data = {
+            'user': UserGenerator().generate(),
+            'count': 33,
+            'founded_at': datetime.datetime.now().date(),
+            'name': u'Mühleggbahn AG',
+            'face_value': 22,
+        }
+        res = self.serializer.create(validated_data)
+        self.assertEqual(res, validated_data)
 
 
 class OptionPlanSerializerTestCase(TestCase):

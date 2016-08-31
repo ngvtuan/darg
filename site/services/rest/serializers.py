@@ -143,8 +143,8 @@ class AddCompanySerializer(serializers.Serializer):
         Operator.objects.create(user=user, company=company)
 
         mail_managers(
-            'new user signed up',
-            'user {} signed up for company {}'.format(user, company)
+            u'new user signed up',
+            u'user {} signed up for company {}'.format(user, company)
         )
 
         return validated_data
@@ -348,6 +348,10 @@ class ShareholderSerializer(serializers.HyperlinkedModelSerializer):
 
         shareholder = instance
         user = shareholder.user
+
+        # don't create duplicate users with same email
+        if User.objects.get(email=validated_data['user']['email']) != user:
+            raise ValidationError({'email': [_('This email is already taken by another user/shareholder.')]})
 
         user.email = validated_data['user']['email']
         user.first_name = validated_data['user']['first_name']

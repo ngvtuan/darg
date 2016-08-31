@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-29 23:43+0000\n"
+"POT-Creation-Date: 2016-08-31 01:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,11 +25,11 @@ msgstr ""
 msgid "Foundation date of the company"
 msgstr ""
 
-#: shareholder/models.py:73
+#: shareholder/models.py:70
 msgid "Your list of partials for the share split for company '{}'"
 msgstr ""
 
-#: shareholder/models.py:76
+#: shareholder/models.py:73
 msgid ""
 "Dear Operator,\n"
 "\n"
@@ -38,15 +38,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#: shareholder/models.py:84
+#: shareholder/models.py:81
 msgid "{}{}({}): {} shares\n"
 msgstr ""
 
-#: shareholder/models.py:91
+#: shareholder/models.py:88
 msgid "--- No partial shares during split --- \n"
 msgstr ""
 
-#: shareholder/models.py:94
+#: shareholder/models.py:91
 msgid ""
 "\n"
 "These shareholders are eligible to either sell their partial shares or get "
@@ -57,66 +57,66 @@ msgid ""
 "Your Share Register Team"
 msgstr ""
 
-#: shareholder/models.py:226
+#: shareholder/models.py:223
 msgid "Share split of {} on {} with ratio {}:{}. Return of old shares."
 msgstr ""
 
-#: shareholder/models.py:246
+#: shareholder/models.py:243
 msgid "Share split of {} on {} with ratio {}:{}. Provisioning of new shares."
 msgstr ""
 
-#: shareholder/models.py:422
+#: shareholder/models.py:419
 msgid "Missing all data required for #GAFI."
 msgstr ""
 
-#: shareholder/models.py:429
+#: shareholder/models.py:426
 msgid "Shareholder first name, last name or company name missing."
 msgstr ""
 
-#: shareholder/models.py:433
+#: shareholder/models.py:430
 msgid "Shareholder birthday missing."
 msgstr ""
 
-#: shareholder/models.py:437
+#: shareholder/models.py:434
 msgid "Shareholder origin/country missing."
 msgstr ""
 
-#: shareholder/models.py:446
+#: shareholder/models.py:443
 msgid "Shareholder address or address details missing."
 msgstr ""
 
-#: shareholder/models.py:654 shareholder/page.py:104 shareholder/page.py:122
+#: shareholder/models.py:647 shareholder/page.py:104 shareholder/page.py:122
 msgid "Preferred Stock"
 msgstr ""
 
-#: shareholder/models.py:655
+#: shareholder/models.py:648
 msgid "Common Stock"
 msgstr ""
 
-#: shareholder/models.py:662
+#: shareholder/models.py:655
 msgid "Nominal value of this asset"
 msgstr ""
 
-#: shareholder/models.py:668 shareholder/models.py:719
-#: shareholder/models.py:758 shareholder/models.py:806
+#: shareholder/models.py:661 shareholder/models.py:712
+#: shareholder/models.py:751 shareholder/models.py:799
 msgid "JSON list of segments of ids for securities. can be 1, 2, 3, 4-10"
 msgstr ""
 
-#: shareholder/models.py:673
+#: shareholder/models.py:666
 msgid ""
 "App needs to track IDs of shares. WARNING: update initial transaction with "
 "segments on enabling."
 msgstr ""
 
-#: shareholder/models.py:709
+#: shareholder/models.py:702
 msgid "Share Count transfered or created"
 msgstr ""
 
-#: shareholder/models.py:713
+#: shareholder/models.py:706
 msgid "Nominal value or payed price for the transaction"
 msgstr ""
 
-#: shareholder/models.py:752
+#: shareholder/models.py:745
 msgid "Number of shares approved"
 msgstr ""
 
@@ -379,6 +379,10 @@ msgstr ""
 
 #: shareholder/templates/shareholder.html:140
 msgid "Delete shareholder"
+msgstr ""
+
+#: shareholder/tests/test_functional.py:138
+msgid "This email is already taken by another user/shareholder."
 msgstr ""
 
 #: shareholder/views.py:68 shareholder/views.py:77

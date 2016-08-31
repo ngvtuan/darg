@@ -46,7 +46,7 @@
         {% verbatim %}<span editable-text="shareholder.user.last_name" onaftersave="edit_shareholder()">{{ shareholder.user.last_name || '' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}
       </td>
     </tr>
-    <tr>
+    <tr class="user-email">
       <td>{% trans "Shareholder Email" %}:</td>
       <td>
         {% verbatim %}<span editable-text="shareholder.user.email" onaftersave="edit_shareholder()">{{ shareholder.user.email || '' }} <span class="el-icon-pencil"></span></span>{% endverbatim %}

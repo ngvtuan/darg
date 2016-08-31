@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-29 23:43+0000\n"
+"POT-Creation-Date: 2016-08-31 01:24+0000\n"
 "PO-Revision-Date: 2016-08-29 21:08+0000\n"
 "Last-Translator:   <jirka@tschitschereengreen.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,60 +125,60 @@ msgstr "Kennen Sie unseren"
 msgid "our blog"
 msgstr "Blog"
 
-#: templates/menu.html:29
+#: templates/menu.html:30
 msgid "Start"
 msgstr "Start"
 
-#: templates/menu.html:32
+#: templates/menu.html:33
 msgid "Positions"
 msgstr "Transaktionen"
 
-#: templates/menu.html:35
+#: templates/menu.html:36
 msgid "Options"
 msgstr "Optionen"
 
-#: templates/menu.html:41
-msgid "Logged in as"
-msgstr "Eingeloggt als "
-
-#: templates/menu.html:43
-msgid "Logout"
-msgstr "Logout"
-
-#: templates/menu.html:47 templates/registration/login.html:22
-msgid "Register"
-msgstr "Registrieren"
-
-#: templates/menu.html:50 templates/registration/registration_form.html:22
-msgid "Login"
-msgstr "Login"
-
-#: templates/menu.html:54
+#: templates/menu.html:42
 msgid "Other"
 msgstr "Mehr"
 
-#: templates/menu.html:57
+#: templates/menu.html:45
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/menu.html:58
+#: templates/menu.html:46
 msgid "I18N"
 msgstr "I18N"
 
-#: templates/menu.html:62 templates/menu.html:63
+#: templates/menu.html:50 templates/menu.html:51
 msgid "Change Log"
 msgstr "Änderungslog"
 
-#: templates/menu.html:68 templates/registration/password_reset_form.html:4
+#: templates/menu.html:56 templates/registration/password_reset_form.html:4
 #: templates/registration/password_reset_form.html:14
 #: templates/registration/password_reset_form.html:34
 msgid "Reset password"
 msgstr "Passwort zurücksetzen"
 
-#: templates/menu.html:69 templates/registration/password_change_form.html:4
+#: templates/menu.html:57 templates/registration/password_change_form.html:4
 #: templates/registration/password_change_form.html:13
 msgid "Change password"
 msgstr "Passwort ändern"
+
+#: templates/menu.html:63
+msgid "Logged in as"
+msgstr "Eingeloggt als "
+
+#: templates/menu.html:65
+msgid "Logout"
+msgstr "Logout"
+
+#: templates/menu.html:69 templates/registration/login.html:22
+msgid "Register"
+msgstr "Registrieren"
+
+#: templates/menu.html:72 templates/registration/registration_form.html:22
+msgid "Login"
+msgstr "Login"
 
 #: templates/registration/login.html:17
 msgid "Log in"

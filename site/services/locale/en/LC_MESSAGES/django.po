@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-29 23:43+0000\n"
+"POT-Creation-Date: 2016-08-31 01:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,39 +69,43 @@ msgstr ""
 msgid "Shareholder Number must be unique"
 msgstr ""
 
-#: services/rest/serializers.py:448 services/rest/serializers.py:590
+#: services/rest/serializers.py:354
+msgid "This email is already taken by another user/shareholder."
+msgstr ""
+
+#: services/rest/serializers.py:455 services/rest/serializers.py:597
 msgid "Invalid security numbers segments."
 msgstr ""
 
-#: services/rest/serializers.py:454 services/rest/serializers.py:603
+#: services/rest/serializers.py:461 services/rest/serializers.py:610
 msgid "Segments \"{}\" must be owned by seller \"{}\". Available are {}"
 msgstr ""
 
-#: services/rest/serializers.py:467 services/rest/serializers.py:615
-#: services/rest/serializers.py:807
+#: services/rest/serializers.py:474 services/rest/serializers.py:622
+#: services/rest/serializers.py:814
 msgid "Number of shares in segments ({}) does not match count {}"
 msgstr ""
 
-#: services/rest/serializers.py:484
+#: services/rest/serializers.py:491
 msgid ""
 "Segment {} is blocked for options and cannot be transfered to a shareholder."
 msgstr ""
 
-#: services/rest/serializers.py:627
+#: services/rest/serializers.py:634
 msgid ""
 "Segment {} is not reserved for options inside a option plan and cannot be "
 "transfered to a option holder. Available are: {}"
 msgstr ""
 
-#: services/rest/serializers.py:704
+#: services/rest/serializers.py:711
 msgid "Not a pdf file."
 msgstr ""
 
-#: services/rest/serializers.py:784
+#: services/rest/serializers.py:791
 msgid "Invalid or empty security numbers segments."
 msgstr ""
 
-#: services/rest/serializers.py:795
+#: services/rest/serializers.py:802
 msgid ""
 "Segments \"{}\" must be owned by company shareholder \"{}\". Available are {}"
 msgstr ""

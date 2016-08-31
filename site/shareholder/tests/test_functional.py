@@ -5,7 +5,9 @@ import time
 import unittest
 from decimal import Decimal
 
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
 
 from project.base import BaseSeleniumTestCase
 from project.generators import (ComplexOptionTransactionsWithSegmentsGenerator,
@@ -106,6 +108,39 @@ class ShareholderDetailFunctionalTestCase(BaseSeleniumTestCase):
 
         except Exception, e:
             self._handle_exception(e)
+
+    def test_change_email_to_operator(self):
+        """
+        operator changes other shareholders email to his own ones. make sure he
+        cannot have two users with the same email
+        """
+        try:
+
+            p = page.ShareholderDetailPage(
+                self.selenium, self.live_server_url, self.operator.user,
+                path=reverse(
+                    'shareholder',
+                    kwargs={'shareholder_id': self.buyer.id}
+                    )
+                )
+            time.sleep(1)
+            p.click_to_edit("user-email")
+            p.edit_shareholder_number(self.operator.user.email, "user-email")
+            p.save_edit("user-email")
+            time.sleep(1)
+
+            self.assertEqual(
+                User.objects.filter(email=self.operator.user.email).count(),
+                1)
+            self.assertTrue(self.selenium.find_element_by_class_name(
+                'form-error').is_displayed())
+            self.assertIn(
+                _('This email is already taken by another user/shareholder.'),
+                self.selenium.page_source)
+
+        except Exception, e:
+            self._handle_exception(e)
+
 
 
 class OptionsFunctionalTestCase(BaseSeleniumTestCase):

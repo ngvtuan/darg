@@ -14,3 +14,4 @@ src/*
 site/project/settings/dev_local.py
 site/project/settings/local.py
 site/.sass-cache/
+site/chromedriver

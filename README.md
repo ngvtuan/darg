@@ -90,6 +90,8 @@ using plugins `python-mode`, `pathogen`, `vim-isort`.
 
 Please note that `Isort` must handle the import formatting.
 
+For debugging we replaced `pdb` with `pdb++` and also provide `FunctionalTestCase._screenshot()` and `FunctionalTestCase._handle_exception()` for Selenium Test debugging/failure handling.
+
 
 Licence
 -------------------------

@@ -52,6 +52,44 @@ Please work with pull requests (fork before). Every Pull request must contain:
 Collab guidelines:
 * ask before you code, if you don't you will fail and your pull request will be rejected
 
+Recommended `.vimrc` for coding is:
+```
+" Pathogen load
+filetype off
+
+call pathogen#infect()
+call pathogen#helptags()
+
+filetype plugin indent on
+syntax on
+
+" http://stackoverflow.com/questions/1523482/vimrc-configuration-for-python
+autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+set smartindent
+syntax on
+set listchars=tab:>-
+set listchars+=trail:.
+set ignorecase
+set smartcase
+
+" disable rope
+let g:pymode_rope = 0
+" ignore pep 8 errors
+let g:pep8_ignore="E401"
+let g:pymode_lint_config = '$HOME/pylint.rc'
+
+" shortcuts
+nmap j <Esc>:tabprev<CR>
+nmap k <Esc>:tabnext<CR>
+```
+using plugins `python-mode`, `pathogen`, `vim-isort`.
+
+Please note that `Isort` must handle the import formatting.
+
 
 Licence
 -------------------------

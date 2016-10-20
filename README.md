@@ -10,7 +10,7 @@ This app provides an easy to user interface to have a simple CapTable (no option
 SetUp
 ===========================
 
-For setup here is a copy of the build commands:
+For setup here is a copy of the build commands for latest `Ubuntu LTS`:
 ```
 export DEBIAN_FRONTEND=noninteractive
 export INSTAPAGE_TOKEN='REPLACEME'

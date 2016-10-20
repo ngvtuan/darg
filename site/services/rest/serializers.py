@@ -143,8 +143,8 @@ class AddCompanySerializer(serializers.Serializer):
         Operator.objects.create(user=user, company=company)
 
         mail_managers(
-            'new user signed up',
-            'user {} signed up for company {}'.format(user, company)
+            u'new user signed up',
+            u'user {} signed up for company {}'.format(user, company)
         )
 
         return validated_data

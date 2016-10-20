@@ -5,7 +5,7 @@ Develop: [![Build Status](https://semaphoreci.com/api/v1/projects/e5b958e0-838d-
 
 CapTable
 ===========================
-This app provides an easy to user interface to have a simple CapTable (no options, ESOP etc for now). Means enter company data, enter shareholders, have transactions for shareholders, print CapTable, edit company core data, enter capital increases. Supports a single asset type for now (named/registered share OR bearer share).
+This app provides an easy to user interface to have a simple CapTable (incl. options, ESOP etc.). Means enter company data, enter shareholders, have transactions for shareholders, print CapTable, edit company core data, enter capital increases. Supports a mulitple asset types for a company (named/registered share OR bearer share).
 
 SetUp
 ===========================

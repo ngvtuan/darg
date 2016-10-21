@@ -49,6 +49,9 @@ Please work with pull requests (fork before). Every Pull request must contain:
 * tests (prefer fast unittests but make sure you cover the risk added by your code, in case of doubt add selenium based test).
 * proper commit message (read http://chris.beams.io/posts/git-commit/)
 
+Debugging:
+* if a ticket reports a bug, write a failing test to reproduce the issue. then fix the issue and commit working test and fix at once.
+
 Collab guidelines:
 * ask before you code, if you don't you will fail and your pull request will be rejected
 

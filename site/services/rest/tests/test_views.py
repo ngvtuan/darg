@@ -922,11 +922,11 @@ class ShareholderTestCase(TestCase):
         self.assertTrue(logged_in)
 
         data = {
-            "pk": 8,
+            "pk": shareholder.user.pk,
             "user": {
                 "first_name": "Mutter1Editable",
                 "last_name": "KutterEditable",
-                "email": "mutter@demo.ch",
+                "email": shareholder.user.email,
                 "operator_set": [],
                 "userprofile": {
                     "street": "SomeStreet",
@@ -989,7 +989,7 @@ class ShareholderTestCase(TestCase):
 
         # check proper db status
         user = s.user
-        self.assertEqual(user.email, "mutter@demo.ch")
+        self.assertEqual(user.email, shareholder.user.email)
 
     def test_get_number_segments(self):
         """

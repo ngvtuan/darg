@@ -46,6 +46,7 @@ Please work with pull requests (fork before). Every Pull request must contain:
   * must be production ready, there is no QA, we expect your code to work out of the box with all technical risk handled
   * don't add any technical debt. deliver perfect. do it now.
   * work with linting for all languages. if you improve existing code, make a separate commit for it
+  * we currently target clients with the following structure: Minimum Case: 2 shareholders, one operator, 1000 shares, no options => the app must be VERY simple and easy to use for them (Challenge: simplicity); Maximum Case: 10000 shareholders, 5 operators, 10.000.000 shares, 1.000.000 options => app must provide professional configurable interface reacting very fast on any click (challenge: performance)
 * tests (prefer fast unittests but make sure you cover the risk added by your code, in case of doubt add selenium based test).
 * proper commit message (read http://chris.beams.io/posts/git-commit/)
 

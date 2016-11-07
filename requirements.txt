@@ -21,7 +21,7 @@ django-celery>=3.1.17
 pytz
 # see https://github.com/celery/django-celery/blob/master/requirements/default.txt
 celery>=3.1.15,<4.0
-kombu
+kombu<=2.5.16
 git+https://github.com/xhtml2pdf/xhtml2pdf.git@master#egg=xhtml2pdf
 sorl-thumbnail
 djrill

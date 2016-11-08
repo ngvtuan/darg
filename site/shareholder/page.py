@@ -473,7 +473,7 @@ class PositionPage(BasePage):
         time.sleep(1)
         trs = table.find_elements_by_tag_name('tr')
         row = trs[2]
-        return [td.text.strip() for td in row.find_elements_by_tag_name('td')]
+        return [td.text.rstrip() for td in row.find_elements_by_tag_name('td')]
 
     def get_position_row_count(self):
         table = self.driver.find_element_by_tag_name('table')

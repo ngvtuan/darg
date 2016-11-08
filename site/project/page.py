@@ -182,7 +182,7 @@ class BasePage(object):
         """
         wait until element is clickable
         """
-        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_IMPLICIT_WAIT)
+        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_WAIT_TIMEOUT)
         element = wait.until(EC.element_to_be_clickable(element))
         return element
 
@@ -190,7 +190,7 @@ class BasePage(object):
         """
         wait until element is clickable
         """
-        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_IMPLICIT_WAIT)
+        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_WAIT_TIMEOUT)
         if isinstance(element, WebElement):
             element = wait.until(EC.visibility_of(element))
         else:
@@ -201,12 +201,12 @@ class BasePage(object):
         """
         wait until element is clickable
         """
-        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_IMPLICIT_WAIT)
+        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_WAIT_TIMEOUT)
         element = wait.until(EC.invisibility_of_element_located(element))
         return element
 
     def wait_until_present(self, element):
-        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_IMPLICIT_WAIT)
+        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_WAIT_TIMEOUT)
         element = wait.until(EC.presence_of_element_located(element))
         return element
 
@@ -214,7 +214,7 @@ class BasePage(object):
         """
         wait until element is clickable
         """
-        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_IMPLICIT_WAIT)
+        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_WAIT_TIMEOUT)
         element = wait.until(EC.text_to_be_present_in_element(element, text))
         return element
 

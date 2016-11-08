@@ -318,7 +318,8 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
 ]
 
 # Media path
-MARKDOWNX_MEDIA_PATH = 'f/'  # Path, where images will be stored in MEDIA_ROOT folder
+# Path, where images will be stored in MEDIA_ROOT folder
+MARKDOWNX_MEDIA_PATH = 'f/'
 
 # TESTING
 TEST_ERROR_SEND_EMAIL = bool(
@@ -331,6 +332,7 @@ TEST_ERROR_KEEP_SCREENSHOTS = bool(os.environ.get(
     'DJANGO_TEST_ERROR_KEEP_SCREENSHOTS', False))
 TEST_ERROR_SCREENSHOTS_DIR = '.'
 TEST_WEBDRIVER_IMPLICIT_WAIT = 10
+TEST_WEBDRIVER_WAIT_TIMEOUT = 10
 TEST_WEBDRIVER_PAGE_LOAD_TIMEOUT = 5
 
 # chromedriver
@@ -338,8 +340,7 @@ TEST_CHROMEDRIVER_EXECUTABLE = os.environ.get(
     'DJANGO_TEST_CHROMEDRIVER_EXECUTABLE', './chromedriver')
 
 
-
 try:
-    from project.settings.local import *
+    from project.settings.local import *  # noqa
 except ImportError:
     print "no local conf"

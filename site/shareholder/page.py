@@ -277,6 +277,9 @@ class OptionsPage(BasePage):
         self.enter_option_plan_form_data()
         self.click_save_option_plan_form()
 
+        # wait for form to disappear
+        self.wait_until_invisible((By.CSS_SELECTOR, '#add_option_plan'))
+
 
 class OptionsDetailPage(BasePage):
     """Options Detail View"""
@@ -470,14 +473,14 @@ class PositionPage(BasePage):
         return list of data from position in single row of table
         """
         table = self.driver.find_element_by_tag_name('table')
-        time.sleep(1)
+        time.sleep(1)  # FIXME
         trs = table.find_elements_by_tag_name('tr')
         row = trs[2]
         return [td.text.strip() for td in row.find_elements_by_tag_name('td')]
 
     def get_position_row_count(self):
         table = self.driver.find_element_by_tag_name('table')
-        time.sleep(1)
+        time.sleep(1)  # FIXME
         trs = table.find_elements_by_tag_name('tr')
         return [tr.is_displayed() for tr in trs].count(True)
 

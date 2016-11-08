@@ -559,7 +559,7 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
                           app.get_position_row_data()[0].split('\n')[0])
 
             app.refresh()
-            self.assertEqual(app.get_position_row_data()[0][:8],
+            self.assertEqual(app.get_position_row_data()[0].split('\n')[0],
                              datetime.datetime.today().strftime('%-d.%-m.%y'))
 
         except Exception, e:

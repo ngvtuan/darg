@@ -53,6 +53,7 @@ class BasePage(object):
             '//*[@id="id_password"]').send_keys(password)
         self.driver.find_element_by_xpath(
             '//*[@id="auth"]/form/button').click()
+        time.sleep(1)  # wait for page reload
         page_heading = self.driver.find_element_by_tag_name(
             'h1').get_attribute('innerHTML')
         assert page_heading == 'Willkommen {}!'.format(

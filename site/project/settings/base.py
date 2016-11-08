@@ -95,7 +95,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         # 'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -198,6 +198,10 @@ LOGGING = {
             'level': 'INFO',
             'handlers': ['console'],
         },
+        'tests': {
+            'level': 'DEBUG',
+            'handlers': ['console']
+        }
     },
 }
 
@@ -256,9 +260,12 @@ APPEND_SLASH = False
 # --- I18N
 # add here for app module dirs to show up under 'project' filter in rosetta
 LOCALE_PATHS = (
-    './i18n/locale/',
-    './shareholder/locale/',
-    './services/locale/',
+    # './i18n/locale/',
+    # './shareholder/locale/',
+    # './services/locale/',
+    os.path.join(BASE_DIR, 'i18n', 'locale'),
+    os.path.join(BASE_DIR, 'shareholder', 'locale'),
+    os.path.join(BASE_DIR, 'services', 'locale')
 )
 
 # --- Sentry
@@ -312,6 +319,25 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
 
 # Media path
 MARKDOWNX_MEDIA_PATH = 'f/'  # Path, where images will be stored in MEDIA_ROOT folder
+
+# TESTING
+TEST_ERROR_SEND_EMAIL = bool(
+    os.environ.get('DJANGO_TEST_ERROR_SEND_EMAIL', True))
+TEST_ERROR_FROM_EMAIL = 'no-reply@das-aktienregister.ch'
+TEST_ERROR_EMAIL_RECIPIENTS = os.environ.get(
+    'DJANGO_TEST_ERROR_EMAIL_RECIPIENTS',
+    'jirka.schaefer@tschitschereengreen.com').split(',')
+TEST_ERROR_KEEP_SCREENSHOTS = bool(os.environ.get(
+    'DJANGO_TEST_ERROR_KEEP_SCREENSHOTS', False))
+TEST_ERROR_SCREENSHOTS_DIR = '.'
+TEST_WEBDRIVER_IMPLICIT_WAIT = 10
+TEST_WEBDRIVER_PAGE_LOAD_TIMEOUT = 5
+
+# chromedriver
+TEST_CHROMEDRIVER_EXECUTABLE = os.environ.get(
+    'DJANGO_TEST_CHROMEDRIVER_EXECUTABLE', './chromedriver')
+
+
 
 try:
     from project.settings.local import *

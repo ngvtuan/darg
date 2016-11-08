@@ -66,7 +66,8 @@ class BaseSeleniumTestCase(LiveServerTestCase):
         chrome_options = Options()
         chrome_options.add_argument("--start-maximized")
         cls.selenium = WebDriver(
-            './chromedriver', chrome_options=chrome_options)
+            os.path.join(os.getcwd(), 'site/chromedriver'),
+            chrome_options=chrome_options)
 
         cls.selenium.implicitly_wait(10)
         super(BaseSeleniumTestCase, cls).setUpClass()

@@ -35,6 +35,7 @@ class BaseSeleniumTestCase(LiveServerTestCase):
                     self.selenium.get_log('browser'),
                     self.selenium.current_url
                 )
+            )
             email = EmailMessage(
                 subject='[darg] FE Test failed w/ %s' % caller,
                 body=message,

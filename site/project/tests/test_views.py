@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
@@ -68,6 +69,10 @@ class InstapageTestCase(TestCase):
         """
         user arriving from instapage must be imported, logged in and redirected
         """
+
+        if not settings.INSTPAGE_ENABLED:
+            return
+
         response = self.client.get(reverse('instapage'), follow=True)
 
         self.assertEqual(response.status_code, 400)
@@ -96,6 +101,10 @@ class InstapageTestCase(TestCase):
         """
         user arriving from instapage must be imported, logged in and redirected
         """
+
+        if not settings.INSTPAGE_ENABLED:
+            return
+
         response = self.client.get(reverse('instapage'), follow=True)
 
         self.assertEqual(response.status_code, 400)
@@ -110,6 +119,7 @@ class InstapageTestCase(TestCase):
                 'Please login or reset your password.')
         self.assertRedirects(response, reverse('auth_login'))
         self.assertContains(response, msg)
+
 
 class TrackingTestCase(TestCase):
 
@@ -402,4 +412,3 @@ class DownloadTestCase(TestCase):
 
         # assert response code
         self.assertEqual(response.status_code, 403)
-

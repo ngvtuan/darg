@@ -8,6 +8,8 @@ import random
 import time
 from datetime import datetime
 
+from django.conf import settings
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
@@ -27,7 +29,9 @@ class BasePage(object):
 
     def __init__(self, driver):
         self.driver = driver
-        self.driver.implicitly_wait(10)
+        # self.driver.implicitly_wait(settings.TEST_WEBDRIVER_IMPLICIT_WAIT)
+        self.driver.set_page_load_timeout(
+            settings.TEST_WEBDRIVER_PAGE_LOAD_TIMEOUT)
 
     def _is_element_displayed(self, **kwargs):
 
@@ -179,7 +183,7 @@ class BasePage(object):
         """
         wait until element is clickable
         """
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_WAIT_TIMEOUT)
         element = wait.until(EC.element_to_be_clickable(element))
         return element
 
@@ -187,7 +191,7 @@ class BasePage(object):
         """
         wait until element is clickable
         """
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_WAIT_TIMEOUT)
         if isinstance(element, WebElement):
             element = wait.until(EC.visibility_of(element))
         else:
@@ -198,12 +202,12 @@ class BasePage(object):
         """
         wait until element is clickable
         """
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_WAIT_TIMEOUT)
         element = wait.until(EC.invisibility_of_element_located(element))
         return element
 
     def wait_until_present(self, element):
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_WAIT_TIMEOUT)
         element = wait.until(EC.presence_of_element_located(element))
         return element
 
@@ -211,7 +215,7 @@ class BasePage(object):
         """
         wait until element is clickable
         """
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, settings.TEST_WEBDRIVER_WAIT_TIMEOUT)
         element = wait.until(EC.text_to_be_present_in_element(element, text))
         return element
 

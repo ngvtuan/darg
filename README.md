@@ -45,6 +45,11 @@ python manage.py runserver 0.0.0.0:8000
 
 access `localhost:8000` on your local machine to open the app. Run dev commands as documented inside `/dev_commands.md` to compile sass files into css. Refresh your browser to see latest code changes. Follow file structure for sass files under `site/static/sass` to place your changes. main file is `screen.sass` with all imports. see `_breakpoints.sass` for media queries and `_settings.sass` for constant definition. integrate your code with identical look and feel of the existing code.
 
+Browser compatibility: respect our user base:
+
+<img width="458" alt="screenshot 2016-11-07 17 12 00" src="https://cloud.githubusercontent.com/assets/2073086/20130732/1f4f942e-a659-11e6-84f8-52554f8b8144.png">
+
+
 Tests
 =======
 

@@ -38,8 +38,8 @@ class ShareholderDetailPage(BasePage):
     def click_to_edit(self, class_name):
         el = self.wait_until_visible((
             By.XPATH,
-            '//tr[contains(@class, "{}")]//'
-            'span[contains(@class, "editable-click")]'.format(class_name)
+            u'//tr[contains(@class, "{}")]//'
+            u'span[contains(@class, "editable-click")]'.format(class_name)
         ))
         el.click()
 
@@ -249,7 +249,7 @@ class OptionsPage(BasePage):
         s2 = u"{} (#{})".format(ot.count,
                                 human_readable_segments(ot.number_segments))
         for table in self.driver.find_elements_by_class_name('table'):
-            tr = table.find_element_by_xpath('//tr[./td="{}"]'.format(s1))
+            tr = table.find_element_by_xpath(u'//tr[./td="{}"]'.format(s1))
             buyer_td = tr.find_element_by_class_name('buyer')
             count_td = tr.find_element_by_class_name('count')
             if s1 == buyer_td.text and s2 == count_td.text:
@@ -371,8 +371,8 @@ class PositionPage(BasePage):
         self.enter_seller(position.seller)
 
         # buyer
-        name = '{} {}'.format(position.buyer.user.first_name,
-                              position.buyer.user.last_name)
+        name = u'{} {}'.format(position.buyer.user.first_name,
+                               position.buyer.user.last_name)
         select = Select(selects[1])
         select.select_by_visible_text(name)
 

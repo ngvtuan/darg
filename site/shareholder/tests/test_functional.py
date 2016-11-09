@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-import time
 import unittest
 from decimal import Decimal
 
@@ -727,6 +726,8 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
 
             app = page.PositionPage(
                 self.selenium, self.live_server_url, self.operator.user)
+            # wait for table
+            app.wait_until_visible((By.CSS_SELECTOR, '#positions table tr'))
             app.click_open_add_position_form()
 
             # test cycle: w/ date, seller, sec
@@ -735,11 +736,12 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             app.enter_seller(position.seller)
             self.assertFalse(app.has_available_segments_tooltip())
             app.enter_security(position.security, 'add-position-form')
-            time.sleep(2)  # FIXME
             self.assertTrue(app.has_available_segments_tooltip())
             self.assertEqual(app.get_segment_from_tooltip(), u'0,1-9999')
 
             app.refresh()
+            # wait for table
+            app.wait_until_visible((By.CSS_SELECTOR, '#positions table tr'))
             app.click_open_add_position_form()
             # test w/ sec + seller
             self.assertFalse(app.has_available_segments_tooltip())
@@ -749,6 +751,8 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             self.assertTrue(app.has_available_segments_tooltip())
 
             app.refresh()
+            # wait for table
+            app.wait_until_visible((By.CSS_SELECTOR, '#positions table tr'))
             app.click_open_add_position_form()
             # test no segs avail
             position.seller = self.seller2
@@ -779,6 +783,8 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
 
             app = page.PositionPage(
                 self.selenium, self.live_server_url, self.operator.user)
+            # wait for table
+            app.wait_until_visible((By.CSS_SELECTOR, '#positions table tr'))
             app.click_open_add_position_form()
             app.enter_new_position_data(position)
 
@@ -789,6 +795,9 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             input.clear()
 
             app.click_save_position()
+
+            # wait for error
+            app.wait_until_visible((By.CSS_SELECTOR, '.form-error'))
 
             self.assertFalse(app.is_no_errors_displayed())
 
@@ -810,6 +819,9 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             input.send_keys('1,2,3')
 
             app.click_save_position()
+
+            # wait for form to disappear
+            app.wait_until_invisible((By.CSS_SELECTOR, '#add_position'))
 
             self.assertEqual(len(app.get_position_row_data()), 8)
             self.assertTrue(app.is_no_errors_displayed())
@@ -837,6 +849,9 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             app.enter_new_position_data(position)
             app.click_save_position()
 
+            # wait for error
+            app.wait_until_visible((By.CSS_SELECTOR, '.form-error'))
+
             self.assertFalse(app.is_no_errors_displayed())
 
             # enter data too large
@@ -852,6 +867,9 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             position.value = 11111111
             app.enter_new_position_data(position)
             app.click_save_position()
+
+            # wait for form to disappear
+            app.wait_until_invisible((By.CSS_SELECTOR, '#add_position'))
 
             self.assertEqual(len(app.get_position_row_data()), 8)
             self.assertTrue(app.is_no_errors_displayed())
@@ -871,6 +889,9 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             app.click_open_cap_increase_form()
             app.enter_new_cap_data(position)
             app.click_save_cap_increase()
+
+            # wait for form to disappear
+            app.wait_until_invisible((By.CSS_SELECTOR, '#add_capital'))
 
             self.assertEqual(len(app.get_position_row_data()), 8)
             self.assertTrue(app.is_no_errors_displayed())
@@ -892,6 +913,9 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             app.click_open_cap_increase_form()
             app.enter_new_cap_data(position)
             app.click_save_cap_increase()
+
+            # wait for form to disappear
+            app.wait_until_invisible((By.CSS_SELECTOR, '#add_capital'))
 
             self.assertEqual(len(app.get_position_row_data()), 8)
             self.assertTrue(app.is_no_errors_displayed())
@@ -922,6 +946,9 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             app.enter_new_cap_data(position)
             app.click_save_cap_increase()
 
+            # wait for form to disappear
+            app.wait_until_invisible((By.CSS_SELECTOR, '#add_capital'))
+
             self.assertEqual(len(app.get_position_row_data()), 8)
             self.assertTrue(app.is_no_errors_displayed())
             position2 = Position.objects.latest('id')
@@ -945,6 +972,9 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             app.click_open_split_form()
             app.enter_new_split_data(2, 3, 'test comment')
             app.click_save_split()
+
+            # wait for form to disappear
+            app.wait_until_invisible((By.CSS_SELECTOR, '#split-shares'))
 
             self.assertEqual(len(app.get_position_row_data()), 8)
             self.assertTrue(app.is_no_errors_displayed())
@@ -971,8 +1001,10 @@ class PositionFunctionalTestCase(BaseSeleniumTestCase):
             s.save()
 
             app.refresh()
+            # wait for table
+            app.wait_until_visible(
+                (By.CSS_SELECTOR, '#positions table tr.panel'))
             app.click_open_split_form()
-            time.sleep(1)  # FIXME
             self.assertTrue(app.has_split_warning_for_numbered_shares())
 
         except Exception, e:

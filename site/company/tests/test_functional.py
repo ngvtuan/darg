@@ -1,7 +1,8 @@
 import datetime
-import time
 
 from django.contrib.auth import get_user_model
+
+from selenium.webdriver.common.by import By
 
 from company import page
 from project.base import BaseSeleniumTestCase
@@ -63,6 +64,8 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
             p.click_open_add_new_operator_form()
             p.enter_new_operator_email('a@a.de')
             p.click_save_new_operator()
+            # wait for error
+            p.wait_until_visible((By.CSS_SELECTOR, '.form-error'))
             self.assertFalse(
                 p.is_operator_displayed('a@a.de')
             )
@@ -106,9 +109,12 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
             p.click_date_in_datepicker("founding-date")
             p.save_edit("founding-date")
 
+            # wait for form to disappear
+            p.wait_until_invisible((By.CSS_SELECTOR, 'tr.founding-date form'))
+
             today = datetime.datetime.now().date()
             founding_date = datetime.date(today.year, today.month, 1)
-            time.sleep(1)
+
             self.assertEqual(
                 p.get_founding_date(),
                 founding_date.strftime('%d.%m.%y'))
@@ -137,10 +143,11 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
             p.enter_string("security", "88, 99-100")
             p.save_edit("security")
 
+            # wait for form to disappear
+            p.wait_until_invisible((By.CSS_SELECTOR, 'tr.security form'))
+
         except Exception, e:
             self._handle_exception(e)
-
-        time.sleep(1)
 
         self.assertTrue(
             [88, u'99-100'] in
@@ -165,10 +172,11 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
             p.enter_string("security", ", 88, 99-100")
             p.save_edit("security")
 
+            # wait for form to disappear
+            p.wait_until_invisible((By.CSS_SELECTOR, 'tr.security form'))
+
         except Exception, e:
             self._handle_exception(e)
-
-        time.sleep(1)
 
         self.assertTrue(
             [u'1-2', 88, u'99-100'] in
@@ -192,6 +200,10 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
             p.click_to_edit("security")
             p.enter_string("security", ";X, 88, 99-100")
             p.save_edit("security")
+
+            # wait for error
+            # NOTE: this is kind of duplicate to the assertTrue below
+            p.wait_until_visible((By.CSS_SELECTOR, '.editable-error'))
 
         except Exception, e:
             self._handle_exception(e)

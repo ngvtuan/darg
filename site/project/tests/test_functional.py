@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import time
+
+from selenium.webdriver.common.by import By
 
 from project import page
 from project.base import BaseSeleniumTestCase
@@ -35,6 +36,8 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
         try:
             start = page.StartPage(
                 self.selenium, self.live_server_url, self.operator.user)
+            # wait for list
+            start.wait_until_visible((By.CSS_SELECTOR, '#shareholder_list'))
             start.is_properly_displayed()
             start.has_shareholder_count(Shareholder.objects.count())
 
@@ -60,12 +63,22 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
             for op in ops:
                 start = page.StartPage(
                     self.selenium, self.live_server_url, op.user)
+                # wait for list
+                start.wait_until_visible(
+                    (By.CSS_SELECTOR, '#shareholder_list'))
                 start.is_properly_displayed()
                 start.has_shareholder_count(Shareholder.objects.filter(
                     company=op.company).count())
                 start.click_open_add_shareholder()
                 start.add_shareholder(user)
                 start.click_save_add_shareholder()
+                # wait for list entry
+                xpath = (
+                    u'//div[@id="shareholder_list"]//table'
+                    u'//tbody//tr[contains(@class, "panel")]'
+                    u'//td[text()="{}"]'.format(user.email)
+                )
+                start.wait_until_visible((By.XPATH, xpath))
                 start.has_shareholder_count(Shareholder.objects.filter(
                     company=op.company).count())
 
@@ -74,7 +87,6 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
             #    self.selenium, self.live_server_url, user)
             # start.is_properly_displayed()
 
-            time.sleep(2)
             self.assertEqual(user.shareholder_set.count(), 3)
             for op in ops:
                 self.assertEqual(
@@ -92,6 +104,8 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
         try:
             start = page.StartPage(
                 self.selenium, self.live_server_url, self.operator.user)
+            # wait for list
+            start.wait_until_visible((By.CSS_SELECTOR, '#shareholder_list'))
             start.is_properly_displayed()
             start.has_shareholder_count(Shareholder.objects.count())
 
@@ -124,10 +138,15 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
         try:
             p = page.StartPage(
                 self.selenium, self.live_server_url, user)
+            # wait for form
+            p.wait_until_visible((By.CSS_SELECTOR, '#add_company'))
             self.assertTrue(p.is_add_company_form_displayed())
 
             p.enter_add_company_data(value=value, count=count)
             p.click_save_add_company()
+
+            # wait for form to disappear
+            p.wait_until_invisible((By.CSS_SELECTOR, '#add_company'))
 
             self.assertEqual(p.get_form_errors(), [])
             self.assertFalse(p.is_add_company_form_displayed())
@@ -150,6 +169,8 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
             start = page.StartPage(
                 self.selenium, self.live_server_url,
                 shs[0].company.operator_set.first().user)
+            # wait for list
+            start.wait_until_visible((By.CSS_SELECTOR, '#shareholder_list'))
             start.is_properly_displayed()
             for shareholder in shs[1:]:  # not for company shareholder
                 row = start.get_row_by_shareholder(shareholder)
@@ -173,14 +194,22 @@ class StartFunctionalTestCase(BaseSeleniumTestCase):
 
             start = page.StartPage(
                 self.selenium, self.live_server_url, self.operator.user)
+            # wait for list
+            start.wait_until_visible((By.CSS_SELECTOR, '#shareholder_list'))
             start.is_properly_displayed()
             start.click_open_add_shareholder()
             start.add_shareholder(self.operator.user)
             start.click_save_add_shareholder()
+            # wait for list entry
+            xpath = (
+                u'//div[@id="shareholder_list"]//table'
+                u'//tbody//tr[contains(@class, "panel")]'
+                u'//td[text()="{}"]'.format(self.operator.user.email)
+            )
+            start.wait_until_visible((By.XPATH, xpath))
             start.has_shareholder_count(Shareholder.objects.filter(
                 company=self.operator.company).count())
 
-            time.sleep(2)
             self.assertEqual(
                 self.operator.user.shareholder_set.filter(
                     company=self.operator.company

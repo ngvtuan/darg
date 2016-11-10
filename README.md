@@ -49,6 +49,9 @@ Browser compatibility: respect our user base:
 
 <img width="458" alt="screenshot 2016-11-07 17 12 00" src="https://cloud.githubusercontent.com/assets/2073086/20130732/1f4f942e-a659-11e6-84f8-52554f8b8144.png">
 
+For Sass install please follow these dependencies:
+
+<img width="369" alt="screenshot 2016-11-10 13 39 24" src="https://cloud.githubusercontent.com/assets/2073086/20177090/3ace0508-a74b-11e6-9a66-e751092c00d4.png">
 
 Tests
 =======

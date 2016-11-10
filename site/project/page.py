@@ -35,7 +35,7 @@ class BasePage(object):
 
     def _is_element_displayed(self, **kwargs):
 
-        time.sleep(3)
+        time.sleep(3)  # FIXME
 
         if kwargs.get('cls'):
             el = self.driver.find_element_by_class_name(
@@ -57,7 +57,7 @@ class BasePage(object):
             '//*[@id="id_password"]').send_keys(password)
         self.driver.find_element_by_xpath(
             '//*[@id="auth"]/form/button').click()
-        time.sleep(1)  # wait for page reload
+        time.sleep(1)  # wait for page reload  # FIXME
         page_heading = self.driver.find_element_by_tag_name(
             'h1').get_attribute('innerHTML')
         assert page_heading == 'Willkommen {}!'.format(
@@ -127,10 +127,10 @@ class BasePage(object):
             for x in range(0, abs(delta)):
                 if delta > 0:
                     self.click_datepicker_next_month()
-                    time.sleep(0.5)
+                    time.sleep(0.5)  # FIXME
                 else:
                     self.click_datepicker_previous_month()
-                    time.sleep(0.5)
+                    time.sleep(0.5)  # FIXME
 
         # get day rows
         el = self.driver.find_element_by_class_name(class_name)
@@ -138,7 +138,7 @@ class BasePage(object):
             '//table[@class="uib-daypicker"]//tr[@class="uib-weeks ng-scope"]')
 
         # in case we have multiple dps
-        time.sleep(1)
+        time.sleep(1)  # FIXME
         for dp_row in dp_rows:
             if not dp_row.is_displayed():
                 continue
@@ -292,7 +292,7 @@ class StartPage(BasePage):
         el.click()
 
     def click_open_add_shareholder(self):
-        time.sleep(2)
+        time.sleep(2)  # FIXME
         el = self.driver.find_element_by_link_text(
             "Aktionär hinzufügen")
         el.click()

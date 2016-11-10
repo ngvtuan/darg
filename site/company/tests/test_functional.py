@@ -42,9 +42,12 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
             p.click_open_add_new_operator_form()
             p.enter_new_operator_email(user.email)
             p.click_save_new_operator()
-            self.assertTrue(
-                p.is_operator_displayed(user.email)
+            p.wait_until_visible(
+                (By.XPATH,
+                 u'//div[@id="company"]//table[contains(@class, "operators")]'
+                 u'//tbody//tr//td[contains(text(), "{}")]'.format(user.email))
             )
+            self.assertTrue(p.is_operator_displayed(user.email))
             self.assertTrue(user.operator_set.filter(
                 company=self.operator.company).exists()
             )
@@ -62,14 +65,13 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
                 self.operator.company
             )
             p.click_open_add_new_operator_form()
-            p.enter_new_operator_email('a@a.de')
+            email = 'a@a.de'
+            p.enter_new_operator_email(email)
             p.click_save_new_operator()
             # wait for error
             p.wait_until_visible((By.CSS_SELECTOR, '.form-error'))
-            self.assertFalse(
-                p.is_operator_displayed('a@a.de')
-            )
-            self.assertFalse(User.objects.filter(email='a@a.de').exists())
+            self.assertFalse(email in p.driver.page_source)
+            self.assertFalse(User.objects.filter(email=email).exists())
         except Exception, e:
             self._handle_exception(e)
 
@@ -84,6 +86,12 @@ class CompanyFunctionalTestCase(BaseSeleniumTestCase):
                 self.operator.company
             )
             p.click_remove_operator(operator)
+            p.wait_until_invisible(
+                (By.XPATH,
+                 u'//div[@id="company"]//table[contains(@class, "operators")]'
+                 u'//tbody//tr//td[contains(text(), "{}")]'.format(
+                     operator.user.email))
+            )
             self.assertFalse(
                 p.is_operator_displayed(operator.user.email)
             )

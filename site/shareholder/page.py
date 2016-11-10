@@ -320,7 +320,7 @@ class PositionPage(BasePage):
 
     def click_confirm_position(self):
         table = self.driver.find_element_by_tag_name('table')
-        time.sleep(1)
+        time.sleep(1)  # FIXME
         trs = table.find_elements_by_tag_name('tr')
         row = trs[2]
         td = row.find_elements_by_tag_name('td')[-1]
@@ -328,7 +328,7 @@ class PositionPage(BasePage):
 
     def click_delete_position(self):
         table = self.driver.find_element_by_tag_name('table')
-        time.sleep(1)
+        time.sleep(1)  # FIXME
         trs = table.find_elements_by_tag_name('tr')
         row = trs[2]
         td = row.find_elements_by_tag_name('td')[-1]
@@ -366,7 +366,7 @@ class PositionPage(BasePage):
 
         # select elements: seller, buyer, security - before inputs to have magic
         # working
-        time.sleep(2)
+        time.sleep(2)  # FIXME
 
         self.enter_seller(position.seller)
 
@@ -403,7 +403,7 @@ class PositionPage(BasePage):
         """
         enter position.bought_at in form
         """
-        time.sleep(1)
+        time.sleep(1)  # FIXME
 
         # input #0 use datepicker
         self.use_datepicker('add-position-form', None)

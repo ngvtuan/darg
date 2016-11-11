@@ -34,6 +34,8 @@ cp project/settings/dev_local.dist.py project/settings/dev_local.py
 python manage.py collectstatic --noinput --settings=project.settings.dev
 ```
 
+For a build shortcut feel free to call `./scripts/build.sh` from projects home directory.
+
 Please also put latest chromedriver into `site` directory as executable. App should then be up and running.
 
 See https://github.com/patroqueeet/darg/blob/develop/dev_commands.md for details about compiling etc. Make sure `bower` and `npm` installs in `darg.js` are being run befor development start.

@@ -15,6 +15,8 @@ For setup here is a copy of the build commands for latest `Ubuntu LTS`:
 export DEBIAN_FRONTEND=noninteractive
 export INSTAPAGE_TOKEN='REPLACEME'
 export INSTAPAGE_ACCESS_TOKEN='REPLACEME'
+export RAVEN_DSN=''
+export RAVEN_DSN_PUBLIC=''
 export LC_ALL=en_US.UTF-8
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1397BC53640DB551
 sudo apt-get update

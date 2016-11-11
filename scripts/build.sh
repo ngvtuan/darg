@@ -38,3 +38,4 @@ python ./minify_static.py
 cd site
 cp project/settings/dev_local.dist.py project/settings/dev_local.py
 python manage.py collectstatic --noinput --settings=project.settings.dev
+python manage.py migrate --settings=project.settings.dev

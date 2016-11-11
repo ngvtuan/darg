@@ -60,6 +60,8 @@ For Sass install please follow these dependencies:
 
 <img width="369" alt="screenshot 2016-11-10 13 39 24" src="https://cloud.githubusercontent.com/assets/2073086/20177090/3ace0508-a74b-11e6-9a66-e751092c00d4.png">
 
+** IMORTANT ** For any shell you are using to run a python command you must activate your virtualenv first 'source .ve/bin/activate' befor running the command.
+
 Tests
 =======
 

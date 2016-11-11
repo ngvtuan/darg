@@ -38,6 +38,8 @@ Please also put latest chromedriver into `site` directory as executable. App sho
 
 See https://github.com/patroqueeet/darg/blob/develop/dev_commands.md for details about compiling etc. Make sure `bower` and `npm` installs in `darg.js` are being run befor development start.
 
+Finally add Secret Key to Django settings. Use http://www.miniwebtool.com/django-secret-key-generator/ for generation and add to your `site/project/settings/dev_local.py`. Although we have provided a default one into `dev_local.dist.py`.
+
 Frontend Development
 ====================
 follow above instructions for setup. to run the app run:

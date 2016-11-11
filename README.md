@@ -44,7 +44,7 @@ Frontend Development
 ====================
 follow above instructions for setup. to run the app run:
 ```
-python manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:8000 --settings=project.settings.dev
 ```
 
 access `localhost:8000` on your local machine to open the app. Run dev commands as documented inside `/dev_commands.md` to compile sass files into css. Refresh your browser to see latest code changes. Follow file structure for sass files under `site/static/sass` to place your changes. main file is `screen.sass` with all imports. see `_breakpoints.sass` for media queries and `_settings.sass` for constant definition. integrate your code with identical look and feel of the existing code.

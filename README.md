@@ -10,7 +10,20 @@ This app provides an easy to user interface to have a simple CapTable (incl. opt
 SetUp
 ===========================
 
-For setup here is a copy of the build commands for latest `Ubuntu LTS`:
+First: current version requires PostgreSQL 9.3 (because of `jsonb` fiel implementation. Get that first! An exemplary setup could look like this:
+```
+echo "installing psql 9.3..."
+# sudo apt-get purge -y postgresql-client-* postgresql-* postgresql-contrib-* postgresql-server-dev-* libpq-dev
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
+wget https://gist.githubusercontent.com/mimimalizam/2cbd11bdb061e1fe4ec33e1f763cb802/raw/pg-setup.sh && bash pg-setup.sh 9.3
+
+echo "Available PostgreSQL clusters:\n $(pg_lsclusters)"
+# required for psycopg2
+sudo aptitude install libpq-dev -y
+```
+
+For general setup here is a copy of the build commands for latest `Ubuntu LTS`:
 ```
 export DEBIAN_FRONTEND=noninteractive
 export INSTAPAGE_TOKEN='REPLACEME'

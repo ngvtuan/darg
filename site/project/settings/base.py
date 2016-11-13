@@ -78,6 +78,8 @@ INSTALLED_APPS = (
     'reversion',
     'storages',
     'dbbackup',
+    'django_celery_results',
+    'django_celery_beat',
 
     # -- zinnia
     'django_comments',
@@ -318,8 +320,7 @@ CELERY_DEFAULT_QUEUE = 'darg'
 CELERY_QUEUES = (
     Queue('darg', Exchange('darg'), routing_key='darg'),
 )
-CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
-CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+CELERY_RESULT_BACKEND = 'django-db'
 BROKER_URL = 'amqp://darg:darg@localhost:5672/darg'
 
 # --- MARKDOWN X

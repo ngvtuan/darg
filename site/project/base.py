@@ -28,7 +28,6 @@ class BaseSeleniumTestCase(LiveServerTestCase):
         if settings.TEST_ERROR_SEND_EMAIL:
             caller = inspect.stack()[2][3]
             message = (
-                u'[darg] FE Test failed w/ %s' % caller,
                 u'FE Test failed. See attached screenshot\n\n'
                 u'stacktrace:\n\n%s\n\nbrowser log:\n%s\n\nurl: %s' % (
                     traceback.format_exc(),
